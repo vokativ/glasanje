@@ -4,6 +4,9 @@
 /dist
 /tmp
 /out-tsc
+
+# compiled output for firebase functions
+/functions/lib
 /.firebase
 # Only exists if Bazel was run
 /bazel-out
