@@ -153,6 +153,8 @@ const AppContent: React.FC = () => {
         : 'Korak do glasa | Prijava za glasanje iz inostranstva',
     );
   }, [isStatusPage, script, t]);
+  const activeStep = STEPS[currentStep - 1];
+
 
   return (
     <div className="container">
@@ -179,31 +181,36 @@ const AppContent: React.FC = () => {
 
 
           {/* Stepper Navigation */}
-          <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
-            {STEPS.map((s) => {
-              const isCompleted = s.id < currentStep;
-              const isActive = s.id === currentStep;
-              return (
-                <button
-                  key={s.id}
-                  type="button"
-                  className={`step-indicator ${isActive ? 'active' : ''} ${
-                    isCompleted ? 'completed' : ''
-                  }`}
-                  onClick={() => {
-                    if (s.id < currentStep) {
-                      setCurrentStep(s.id);
-                    }
-                  }}
-                  disabled={s.id > currentStep}
-                  aria-current={isActive ? 'step' : undefined}
-                >
-                  <div className="step-dot">{isCompleted ? '✓' : s.id}</div>
-                  <div className="step-label">{t(s.label)}</div>
-                </button>
-              );
-            })}
-          </nav>
+          <div className="stepper-context">
+            <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
+              {STEPS.map((s) => {
+                const isCompleted = s.id < currentStep;
+                const isActive = s.id === currentStep;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    className={`step-indicator ${isActive ? 'active' : ''} ${
+                      isCompleted ? 'completed' : ''
+                    }`}
+                    onClick={() => {
+                      if (s.id < currentStep) {
+                        setCurrentStep(s.id);
+                      }
+                    }}
+                    disabled={s.id > currentStep}
+                    aria-current={isActive ? 'step' : undefined}
+                  >
+                    <div className="step-dot">{isCompleted ? '✓' : s.id}</div>
+                    <div className="step-label">{t(s.label)}</div>
+                  </button>
+                );
+              })}
+            </nav>
+            <p className="current-step-context" aria-live="polite">
+              {t('Korak')} {currentStep} {t('od')} {STEPS.length}: <strong>{t(activeStep.label)}</strong>
+            </p>
+          </div>
 
           <main>
             {currentStep === 1 && <StepVoterRegistry onProceed={handleStep1Complete} />}

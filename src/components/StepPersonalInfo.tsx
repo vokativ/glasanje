@@ -141,13 +141,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
             data-lpignore="true"
             data-bwignore="true"
             maxLength={13}
-            className={`form-control ${
-              touched.jmbg
-                ? errors.jmbg
-                  ? 'is-invalid'
-                  : 'is-valid'
-                : ''
-            }`}
+            className={`form-control ${touched.jmbg && errors.jmbg ? 'is-invalid' : ''}`}
             placeholder={t('13 cifara sa lične karte / pasoša')}
             value={data.jmbg}
             onChange={(e) => handleChange('jmbg', e.target.value.replace(/\D/g, ''))}
@@ -167,8 +161,8 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
           </div>
           {touched.jmbg && errors.jmbg && <span className="form-error">{errors.jmbg}</span>}
           {touched.jmbg && !errors.jmbg && data.jmbg.length === 13 && (
-            <span className="validation-status validation-status-success">
-              ✓ {t('Kontrolni zbir JMBG-a je ispravan. Ovo nije potvrda identiteta ili registracije birača.')}
+            <span className="validation-status-checksum">
+              {t('Lokalna matematička provera kontrolnog zbira je uspešna.')}
             </span>
           )}
         </div>

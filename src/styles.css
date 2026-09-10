@@ -46,7 +46,7 @@ body {
 .container {
   max-width: 760px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem 1rem max(2rem, env(safe-area-inset-bottom));
 }
 
 /* Header */
@@ -142,10 +142,17 @@ body {
 }
 
 /* Stepper Progress */
+.stepper-context {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .stepper-nav {
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
   position: relative;
 }
 
@@ -209,6 +216,20 @@ body {
 
 .step-indicator.active .step-label {
   color: var(--color-action);
+}
+
+.current-step-context {
+  flex: 0 0 auto;
+  margin: 0.15rem 0 0;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid #86efac;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-success-bg);
+  color: #166534;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
 /* Card */
@@ -297,6 +318,11 @@ body {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
+.form-control::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
 .form-control:focus-visible {
   outline: 3px solid rgb(29 78 216 / 0.3);
   outline-offset: 1px;
@@ -308,20 +334,9 @@ body {
   border-color: var(--color-danger);
 }
 
-.form-control.is-valid {
-  border-color: var(--color-success);
-}
-
-.form-error {
-  font-size: 0.8rem;
-  color: var(--color-error);
-  margin-top: 0.35rem;
-  display: block;
-  font-weight: 500;
-}
-
 .form-warning,
-.validation-status {
+.validation-status,
+.validation-status-checksum {
   display: block;
   margin-top: 0.35rem;
   font-size: 0.8rem;
@@ -332,8 +347,8 @@ body {
   color: var(--color-warning);
 }
 
-.validation-status-success {
-  color: var(--color-success);
+.validation-status-checksum {
+  color: var(--color-text-muted);
 }
 
 .validation-trust {
@@ -467,7 +482,7 @@ body {
 .mission-coverage-badge {
   display: inline-block;
   background-color: #e0f2fe;
-  color: #0369a1;
+  color: #075985;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-sm);
   font-size: 0.75rem;
@@ -475,16 +490,40 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.mission-card--unconfirmed {
+  background-color: var(--color-warning-bg);
+  border-color: #f59e0b;
+}
+
+.mission-warning {
+  margin: 0.75rem 0;
+  padding: 0.65rem 0.75rem;
+  border-left: 3px solid #d97706;
+  border-radius: var(--radius-sm);
+  background-color: #fef3c7;
+  color: #78350f;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
 .mission-detail {
   font-size: 0.85rem;
   color: var(--color-text);
   margin-bottom: 0.25rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 0.35rem;
 }
 
 .mission-detail strong {
   color: var(--color-text-muted);
+}
+
+.mission-detail span,
+.mission-detail a {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 /* Signature Pad */
@@ -641,7 +680,7 @@ body {
 /* Responsive */
 @media (max-width: 640px) {
   .container {
-    padding: 0.75rem;
+    padding: 0.75rem 0.75rem max(1.5rem, env(safe-area-inset-bottom));
   }
   .countdown-num {
     font-size: 1.3rem;
@@ -649,7 +688,39 @@ body {
   .card {
     padding: 1.1rem;
   }
+  .stepper-context {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+  }
+  .stepper-nav {
+    flex-basis: 100%;
+  }
   .step-label {
     display: none;
+  }
+  .current-step-context {
+    margin: 0 auto;
+  }
+  .mission-card {
+    padding: 0.85rem;
+  }
+  .mission-title {
+    font-size: 0.95rem;
+  }
+  .mission-detail {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    margin-bottom: 0.65rem;
+  }
+  .mission-detail a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    width: fit-content;
+  }
+  .mission-warning {
+    margin: 0.65rem 0;
   }
 }

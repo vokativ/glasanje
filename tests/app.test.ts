@@ -62,6 +62,31 @@ describe('Personal information', () => {
     expect(markup).toContain('id="parentName"');
     expect(markup).not.toContain('Mesto rođenja');
   });
+
+  test('keeps the local JMBG explanation limited to a mathematical checksum', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        null,
+        React.createElement(StepPersonalInfo, {
+          initialData: {
+            fullName: '',
+            parentName: '',
+            jmbg: '',
+            serbianAddress: '',
+            phone: '',
+            email: '',
+          },
+          onBack: () => undefined,
+          onNext: () => undefined,
+        }),
+      ),
+    );
+
+    expect(markup).toContain('математичким контролним збиром');
+    expect(markup).toContain('не шаље се ниједном регистру');
+    expect(markup).toContain('не доказује идентитет нити упис у бирачки списак');
+  });
 });
 
 describe('Interface script', () => {
@@ -87,6 +112,13 @@ describe('Interface script', () => {
     expect(headerMarkup).toContain('Писмо интерфејса');
     expect(headerMarkup).toContain('aria-pressed="false">Латиница');
     expect(headerMarkup).not.toContain('Korak do glasa');
+  });
+
+  test('renders the active step in compact context alongside the stepper', () => {
+    const appMarkup = renderToStaticMarkup(React.createElement(App));
+
+    expect(appMarkup).toContain('class="current-step-context"');
+    expect(appMarkup).toMatch(/Корак.*1.*од.*5: <strong>Провера<\/strong>/);
   });
 
   test('renders Latin static text only after a Latin script opt-in', () => {
@@ -384,10 +416,27 @@ describe('Missions and Coverage Dataset', () => {
     expect(canadaMarkup).toContain('За ову државу има више представништава');
     expect(canadaMarkup).toContain('Амбасада Републике Србије (Канада)');
     expect(canadaMarkup).not.toContain('Џакарта');
-    expect(canadaMarkup).toContain(
-      'placeholder="npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore"',
-    );
+    expect(canadaMarkup).toContain('placeholder="Улица, број, град и држава"');
+    expect(canadaMarkup).toContain('placeholder="нпр. Сан Франциско"');
     expect(singaporeMarkup).not.toContain('За ову државу има више представништава');
+  });
+
+  test('prominently marks an unconfirmed mission contact in static markup', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        null,
+        React.createElement(StepVotingDestination, {
+          initialData: { countryCode: 'SG' },
+          onBack: () => undefined,
+          onNext: () => undefined,
+        }),
+      ),
+    );
+
+    expect(markup).toContain('class="mission-card mission-card--unconfirmed"');
+    expect(markup).toContain('class="mission-warning" role="alert"');
+    expect(markup).toContain('Прихватање захтева на ову адресу није потврђено.');
   });
 
   test('United States retains bilingual discovery aliases', () => {

@@ -348,15 +348,9 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
 
         {currentCountry && currentStation && (
           <div
-            className="mission-card"
-            style={
-              currentStation.isElectionContactConfirmed
-                ? undefined
-                : {
-                    backgroundColor: 'var(--color-error-bg)',
-                    border: '1px solid var(--color-danger)',
-                  }
-            }
+            className={`mission-card${
+              currentStation.isElectionContactConfirmed ? '' : ' mission-card--unconfirmed'
+            }`}
           >
             <div className="mission-title">
               🏛️ {script === 'cyrillic' ? currentStation.embassyCyr : currentStation.embassy}
@@ -364,8 +358,9 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
 
             {!currentStation.isResident && (
               <span className="mission-coverage-badge">
-                {t('Pokriva na nerezidencijalnoj osnovi državu ')}
-                {script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}
+                {t('Ovo predstavništvo je nadležno za birače u državi ')}
+                <strong>{script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}</strong>
+                {t(' na nerezidencijalnoj osnovi.')}
               </span>
             )}
 
@@ -382,11 +377,16 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
                 {currentStation.email}
               </span>
             </div>
-            <p className="form-hint" style={{ margin: '0.5rem 0 0' }}>
-              {t(
-                'Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na zvaničnom sajtu ispod; prihvatanje zahteva na ovu adresu nije potvrđeno.'
-              )}
-            </p>
+            {currentStation.isElectionContactConfirmed ? (
+              <p className="form-hint">{t('Kontakt za prijavu za glasanje je potvrđen.')}</p>
+            ) : (
+              <p className="mission-warning" role="alert">
+                {t(
+                  'Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na zvaničnom sajtu ispod. '
+                )}
+                <strong>{t('Prihvatanje zahteva na ovu adresu nije potvrđeno.')}</strong>
+              </p>
+            )}
 
             {currentStation.website && (
               <div className="mission-detail">
@@ -416,7 +416,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             className={`form-control ${
               touched.foreignAddress && !isForeignAddressValid ? 'is-invalid' : ''
             }`}
-            placeholder="npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore"
+            placeholder={t('Ulica, broj, grad i država')}
             value={foreignAddress}
             onChange={(e) => setForeignAddress(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, foreignAddress: true }))}
@@ -440,7 +440,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             type="text"
             autoComplete="off"
             className="form-control"
-            placeholder={t('npr. San Francisko (ako ambasada nije u vašem gradu)')}
+            placeholder={t('npr. San Francisko')}
             value={desiredLocation}
             onChange={(e) => setDesiredLocation(e.target.value)}
           />
