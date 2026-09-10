@@ -1,7 +1,7 @@
 
 export interface ApplicationFormData {
   fullName: string;
-  placeOfBirth: string;
+  parentName: string;
   jmbg: string;
   serbianAddress: string;
   foreignAddress: string;
@@ -14,7 +14,7 @@ export interface ApplicationFormData {
   idDocumentDataUrl?: string; // Optional Page 2 passport/ID copy
 }
 
-const TEMPLATE_URL = '/assets/Zahtev-za-glasanje-u-inostranstvu-2022.pdf';
+const TEMPLATE_URL = '/assets/Zahtev-za-glasanje-u-inostranstvu-2026-09-10.pdf';
 const FONT_URL = '/assets/Roboto-Regular.ttf';
 
 let cachedTemplateBytes: ArrayBuffer | null = null;
@@ -88,10 +88,10 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
 
 
   // 1. Име и презиме
-  writeWrappedText(page1, data.fullName, 285, 640, robotoFont, 10, 270);
+  writeWrappedText(page1, data.fullName, 286, 617, robotoFont, 10, 270);
 
-  // 2. Место рођења
-  writeWrappedText(page1, data.placeOfBirth, 285, 610, robotoFont, 10, 270);
+  // 2. Име једног родитеља
+  writeWrappedText(page1, data.parentName, 286, 590, robotoFont, 10, 270);
 
   // 3. ЈМБГ (13 цифара исписаних са фиксним кораком)
   const jmbgDigits = data.jmbg.replace(/\D/g, '').split('');
@@ -99,30 +99,30 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
   for (const digit of jmbgDigits) {
     page1.drawText(digit, {
       x: jmbgX,
-      y: 550,
+      y: 538,
       size: 10,
       font: robotoFont,
       color: rgb(0, 0, 0),
     });
-    jmbgX += 18;
+    jmbgX += 21;
   }
 
   // 4. Адреса пребивалишта у Р. Србији
-  writeWrappedText(page1, data.serbianAddress, 290, 500, robotoFont, 9, 270, 12);
+  writeWrappedText(page1, data.serbianAddress, 286, 510, robotoFont, 9, 270, 12);
 
   // 5. Адреса боравка у иностранству
-  writeWrappedText(page1, data.foreignAddress, 290, 460, robotoFont, 9, 270, 12);
+  writeWrappedText(page1, data.foreignAddress, 286, 477, robotoFont, 9, 270, 12);
 
   // 6. Град, држава - где желим да гласам у иностранству
   const votingTarget = data.desiredLocation
     ? `${data.desiredLocation} (${data.stationName})`
     : data.stationName;
-  writeWrappedText(page1, votingTarget, 290, 425, robotoFont, 9, 270, 12);
+  writeWrappedText(page1, votingTarget, 286, 443, robotoFont, 9, 270, 12);
 
   // Датум
   page1.drawText(data.signingDate, {
-    x: 140,
-    y: 320,
+    x: 105,
+    y: 310,
     size: 10,
     font: robotoFont,
     color: rgb(0, 0, 0),
@@ -147,8 +147,8 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
         h = maxH;
       }
       page1.drawImage(signatureImage, {
-        x: 350,
-        y: 280,
+        x: 345,
+        y: 282,
         width: w,
         height: h,
       });
@@ -159,8 +159,8 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
 
   // Контакт телефон
   page1.drawText(data.phone, {
-    x: 340,
-    y: 240,
+    x: 345,
+    y: 230,
     size: 10,
     font: robotoFont,
     color: rgb(0, 0, 0),
@@ -168,8 +168,8 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
 
   // И-мејл
   page1.drawText(data.email, {
-    x: 340,
-    y: 185,
+    x: 345,
+    y: 176,
     size: 10,
     font: robotoFont,
     color: rgb(0, 0, 0),

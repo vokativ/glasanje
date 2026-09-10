@@ -4,7 +4,7 @@ import { hasInternationalPhoneFormat, validateEmail, validateJmbg } from '../lib
 
 export interface PersonalInfoData {
   fullName: string;
-  placeOfBirth: string;
+  parentName: string;
   jmbg: string;
   serbianAddress: string;
   phone: string;
@@ -35,7 +35,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
   const errors: Record<string, string | undefined> = {
     fullName: !data.fullName.trim() ? t('Ime i prezime je obavezno') : undefined,
-    placeOfBirth: !data.placeOfBirth.trim() ? t('Mesto rođenja je obavezno') : undefined,
+    parentName: !data.parentName.trim() ? t('Ime jednog roditelja je obavezno') : undefined,
     jmbg: !jmbgValidation.valid ? jmbgValidation.error : undefined,
     serbianAddress: !data.serbianAddress.trim() ? t('Adresa u Srbiji je obavezna') : undefined,
     phone: !data.phone.trim() ? t('Kontakt telefon je obavezan') : undefined,
@@ -64,7 +64,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
       // Mark all fields as touched to show errors
       setTouched({
         fullName: true,
-        placeOfBirth: true,
+        parentName: true,
         jmbg: true,
         serbianAddress: true,
         phone: true,
@@ -105,24 +105,24 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="placeOfBirth">
-            {t('Mesto rođenja')} *
+          <label className="form-label" htmlFor="parentName">
+            {t('Ime jednog roditelja')} *
           </label>
           <input
-            id="placeOfBirth"
-            name="placeOfBirth"
+            id="parentName"
+            name="parentName"
             type="text"
             autoComplete="off"
-            className={`form-control ${touched.placeOfBirth && errors.placeOfBirth ? 'is-invalid' : ''}`}
-            placeholder={t('npr. Beograd ili Čačak')}
-            value={data.placeOfBirth}
-            onChange={(e) => handleChange('placeOfBirth', e.target.value)}
-            onBlur={() => handleBlur('placeOfBirth')}
+            className={`form-control ${touched.parentName && errors.parentName ? 'is-invalid' : ''}`}
+            placeholder={t('npr. Milorad')}
+            value={data.parentName}
+            onChange={(e) => handleChange('parentName', e.target.value)}
+            onBlur={() => handleBlur('parentName')}
             required
           />
-          <span className="form-hint">{t('Opština ili grad rođenja kao u pasošu')}</span>
-          {touched.placeOfBirth && errors.placeOfBirth && (
-            <span className="form-error">{errors.placeOfBirth}</span>
+          <span className="form-hint">{t('Unesite ime jednog roditelja')}</span>
+          {touched.parentName && errors.parentName && (
+            <span className="form-error">{errors.parentName}</span>
           )}
         </div>
 

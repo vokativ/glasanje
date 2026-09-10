@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
+import { RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
 import { Countdown } from './components/Countdown';
 import { StepVoterRegistry } from './components/StepVoterRegistry';
 import { StepPersonalInfo, PersonalInfoData } from './components/StepPersonalInfo';
@@ -49,11 +50,12 @@ const AppContent: React.FC = () => {
   const { script, t } = useScript();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
+  const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
 
   // Form state
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>({
     fullName: '',
-    placeOfBirth: '',
+    parentName: '',
     jmbg: '',
     serbianAddress: '',
     phone: '',
@@ -97,7 +99,7 @@ const AppContent: React.FC = () => {
       setCurrentStep(1);
       setPersonalInfo({
         fullName: '',
-        placeOfBirth: '',
+        parentName: '',
         jmbg: '',
         serbianAddress: '',
         phone: '',
@@ -128,7 +130,7 @@ const AppContent: React.FC = () => {
   // Compile full application data for PDF generator. A station must be resolved before export renders.
   const compiledApplicationData: ApplicationFormData = {
     fullName: personalInfo.fullName,
-    placeOfBirth: personalInfo.placeOfBirth,
+    parentName: personalInfo.parentName,
     jmbg: personalInfo.jmbg,
     serbianAddress: personalInfo.serbianAddress,
     foreignAddress: votingDestination.foreignAddress,
@@ -143,86 +145,94 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     document.documentElement.lang = script === 'cyrillic' ? 'sr-Cyrl' : 'sr-Latn';
-    document.title = t('Korak do glasa | Prijava za glasanje iz inostranstva');
-  }, [script, t]);
+    document.title = t(
+      isStatusPage
+        ? 'Status izbornih i-mejl adresa | Korak do glasa'
+        : 'Korak do glasa | Prijava za glasanje iz inostranstva',
+    );
+  }, [isStatusPage, script, t]);
 
   return (
     <div className="container">
       <Header onOpenPrivacy={() => setIsPrivacyOpen(true)} />
-      <Countdown />
+      {isStatusPage ? (
+        <RegistrationEmailStatusPage />
+      ) : (
+        <>
+          <Countdown />
 
-      {/* Stepper Navigation */}
-      <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
-        {STEPS.map((s) => {
-          const isCompleted = s.id < currentStep;
-          const isActive = s.id === currentStep;
-          return (
-            <button
-              key={s.id}
-              type="button"
-              className={`step-indicator ${isActive ? 'active' : ''} ${
-                isCompleted ? 'completed' : ''
-              }`}
-              onClick={() => {
-                // Allow clicking back to completed steps
-                if (s.id < currentStep) {
-                  setCurrentStep(s.id);
-                }
-              }}
-              disabled={s.id > currentStep}
-              aria-current={isActive ? 'step' : undefined}
-            >
-              <div className="step-dot">{isCompleted ? '✓' : s.id}</div>
-              <div className="step-label">{t(s.label)}</div>
-            </button>
-          );
-        })}
-      </nav>
+          {/* Stepper Navigation */}
+          <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
+            {STEPS.map((s) => {
+              const isCompleted = s.id < currentStep;
+              const isActive = s.id === currentStep;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  className={`step-indicator ${isActive ? 'active' : ''} ${
+                    isCompleted ? 'completed' : ''
+                  }`}
+                  onClick={() => {
+                    if (s.id < currentStep) {
+                      setCurrentStep(s.id);
+                    }
+                  }}
+                  disabled={s.id > currentStep}
+                  aria-current={isActive ? 'step' : undefined}
+                >
+                  <div className="step-dot">{isCompleted ? '✓' : s.id}</div>
+                  <div className="step-label">{t(s.label)}</div>
+                </button>
+              );
+            })}
+          </nav>
 
-      {/* Step Views */}
-      <main>
-        {currentStep === 1 && <StepVoterRegistry onProceed={handleStep1Complete} />}
+          <main>
+            {currentStep === 1 && <StepVoterRegistry onProceed={handleStep1Complete} />}
 
-        {currentStep === 2 && (
-          <StepPersonalInfo
-            initialData={personalInfo}
-            onBack={() => setCurrentStep(1)}
-            onNext={handleStep2Complete}
-          />
-        )}
+            {currentStep === 2 && (
+              <StepPersonalInfo
+                initialData={personalInfo}
+                onBack={() => setCurrentStep(1)}
+                onNext={handleStep2Complete}
+              />
+            )}
 
-        {currentStep === 3 && (
-          <StepVotingDestination
-            initialData={votingDestination}
-            onBack={() => setCurrentStep(2)}
-            onNext={handleStep3Complete}
-          />
-        )}
+            {currentStep === 3 && (
+              <StepVotingDestination
+                initialData={votingDestination}
+                onBack={() => setCurrentStep(2)}
+                onNext={handleStep3Complete}
+              />
+            )}
 
-        {currentStep === 4 && (
-          <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje potpisa i dokumenta…')}</p>}>
-            <StepSignatureAndDocument
-              initialData={signatureAndDoc}
-              onBack={() => setCurrentStep(3)}
-              onNext={handleStep4Complete}
-            />
-          </React.Suspense>
-        )}
+            {currentStep === 4 && (
+              <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje potpisa i dokumenta…')}</p>}>
+                <StepSignatureAndDocument
+                  initialData={signatureAndDoc}
+                  onBack={() => setCurrentStep(3)}
+                  onNext={handleStep4Complete}
+                />
+              </React.Suspense>
+            )}
 
-        {currentStep === 5 && currentStation && (
-          <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje izvoza prijave…')}</p>}>
-            <StepExportAndSubmit
-              formData={compiledApplicationData}
-              station={currentStation}
-              countryName={countryDisplayName}
-              countryNameCyr={countryNameCyr}
-              isWetInkSignature={signatureAndDoc.isWetInkSignature}
-              onBack={() => setCurrentStep(4)}
-              onReset={handleReset}
-            />
-          </React.Suspense>
-        )}
-      </main>
+            {currentStep === 5 && currentStation && (
+              <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje izvoza prijave…')}</p>}>
+                <StepExportAndSubmit
+                  formData={compiledApplicationData}
+                  station={currentStation}
+                  countryName={countryDisplayName}
+                  countryNameCyr={countryNameCyr}
+                  isWetInkSignature={signatureAndDoc.isWetInkSignature}
+                  onBack={() => setCurrentStep(4)}
+                  onReset={handleReset}
+                />
+              </React.Suspense>
+            )}
+          </main>
+        </>
+      )}
 
       {/* Footer */}
       <footer style={{ textAlign: 'center', margin: '2rem 0', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>

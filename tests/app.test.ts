@@ -10,6 +10,7 @@ import {
   resolveVotingDestinationSelection,
   StepVotingDestination,
 } from '../src/components/StepVotingDestination';
+import { StepPersonalInfo } from '../src/components/StepPersonalInfo';
 import { generateApplicationPdf, ApplicationFormData } from '../src/lib/pdf';
 import fs from 'fs';
 import { buildRecipientPayloads, getWebmailLinks } from '../src/lib/share';
@@ -26,10 +27,41 @@ import {
 import App from '../src/App';
 import { Header } from '../src/components/Header';
 import {
+  getElectionEmailCoverage,
+  RegistrationEmailStatusPage,
+} from '../src/components/RegistrationEmailStatusPage';
+import {
   ScriptProvider,
   latinToCyrillic,
   translateStaticText,
 } from '../src/lib/script';
+
+describe('Personal information', () => {
+  test('asks for one parent’s name instead of place of birth', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        { initialScript: 'latin' },
+        React.createElement(StepPersonalInfo, {
+          initialData: {
+            fullName: '',
+            parentName: '',
+            jmbg: '',
+            serbianAddress: '',
+            phone: '',
+            email: '',
+          },
+          onBack: () => undefined,
+          onNext: () => undefined,
+        }),
+      ),
+    );
+
+    expect(markup).toContain('Ime jednog roditelja');
+    expect(markup).toContain('id="parentName"');
+    expect(markup).not.toContain('Mesto rođenja');
+  });
+});
 
 describe('Interface script', () => {
   test('converts Serbian Latin letters and digraphs in every supported case', () => {
@@ -46,6 +78,7 @@ describe('Interface script', () => {
     const headerMarkup = renderToStaticMarkup(
       React.createElement(Header, { onOpenPrivacy: () => undefined }),
     );
+    expect(appMarkup).toContain('href="/status"');
 
     expect(appMarkup).toContain('Корак до гласа');
     expect(appMarkup).toContain('Провера');
@@ -471,6 +504,29 @@ describe('Missions and Coverage Dataset', () => {
   });
 });
 
+describe('Registration Email Status', () => {
+  test('derives confirmed mission coverage from station records', () => {
+    const coverage = getElectionEmailCoverage();
+
+    expect(coverage.confirmed).toBe(15);
+    expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
+  });
+
+  test('renders the residency selector and flow links', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        null,
+        React.createElement(RegistrationEmailStatusPage),
+      ),
+    );
+
+    expect(markup).toContain('id="statusCountrySelect"');
+    expect(markup).toContain('href="/"');
+    expect(markup).toContain('15/');
+  });
+});
+
 describe('Date Formatter', () => {
   test('formats date in DD.MM.YYYY. format', () => {
     const d = new Date(2026, 8, 9); // Sept 9, 2026
@@ -492,8 +548,7 @@ describe('PDF Generator', () => {
     };
 
     const sampleData: ApplicationFormData = {
-      fullName: 'Петар Петровић',
-      placeOfBirth: 'Чачак',
+      parentName: 'Милорад',
       jmbg: '1207985710055',
       serbianAddress: 'Немањина 11, Београд',
       foreignAddress: '7500E Beach Road, Singapore 199595',
@@ -517,8 +572,7 @@ describe('PDF Generator', () => {
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
 
     const sampleData: ApplicationFormData = {
-      fullName: 'Петар Петровић',
-      placeOfBirth: 'Чачак',
+      parentName: 'Милорад',
       jmbg: '1207985710055',
       serbianAddress: 'Немањина 11, Београд',
       foreignAddress: '7500E Beach Road, Singapore 199595',
