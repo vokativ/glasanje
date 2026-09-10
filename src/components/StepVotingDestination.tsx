@@ -347,7 +347,17 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
         )}
 
         {currentCountry && currentStation && (
-          <div className="mission-card">
+          <div
+            className="mission-card"
+            style={
+              currentStation.isElectionContactConfirmed
+                ? undefined
+                : {
+                    backgroundColor: 'var(--color-error-bg)',
+                    border: '1px solid var(--color-danger)',
+                  }
+            }
+          >
             <div className="mission-title">
               🏛️ {script === 'cyrillic' ? currentStation.embassyCyr : currentStation.embassy}
             </div>

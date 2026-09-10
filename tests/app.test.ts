@@ -15,6 +15,7 @@ import { generateApplicationPdf, ApplicationFormData } from '../src/lib/pdf';
 import fs from 'fs';
 import { buildRecipientPayloads, getWebmailLinks } from '../src/lib/share';
 import { canSubmitSignature } from '../src/components/StepSignatureAndDocument';
+import { StepExportAndSubmit } from '../src/components/StepExportAndSubmit';
 import {
   buildInvitationCopyText,
   shareInvitation,
@@ -282,7 +283,7 @@ describe('Invitation links', () => {
     expect(buildInvitationUrl('https://glasanje.example', '/prijava?country=SG#summary', 'Singapur'))
       .toBe('https://glasanje.example/prijava?destination=Singapur');
     expect(invitation).toEqual({
-      title: 'Glasanje u inostranstvu',
+      title: 'Podelite sa prijateljima',
       text: 'Popuni i ti prijavu za glasanje u inostranstvu za željeno mesto: Singapur.\n\nUkupno vreme za ceo proces: 1 minut.',
       url: 'https://glasanje.example/prijava?destination=Singapur',
       closing: 'Živela Srbija!',
@@ -294,6 +295,7 @@ describe('Invitation links', () => {
 
   test('copies the exact Cyrillic invitation when native sharing is unavailable', async () => {
     const invitation = buildInvitationInfo('https://glasanje.example', '/', 'Singapur', 'cyrillic');
+    expect(invitation.title).toBe('Поделите са пријатељима');
     let copiedText = '';
     const result = await shareInvitation(invitation, 'cyrillic', async (text) => {
       copiedText = text;
@@ -512,8 +514,28 @@ describe('Registration Email Status', () => {
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 
-  test('renders the residency selector and flow links', () => {
-    const markup = renderToStaticMarkup(
+  test('recalculates coverage when confirmation records change', () => {
+    const sampledCountries = COUNTRIES.slice(0, 2).map((country) => ({
+      ...country,
+      stations: country.stations.map((station, index) => ({
+        ...station,
+        isElectionContactConfirmed: index === 0,
+      })),
+    }));
+
+    const coverage = getElectionEmailCoverage(sampledCountries);
+
+    expect(coverage).toEqual({
+      confirmed: sampledCountries.length,
+      total: sampledCountries.flatMap((country) => country.stations).length,
+    });
+  });
+
+  test('shows the current coverage on both the home and status surfaces', () => {
+    const coverage = getElectionEmailCoverage();
+    const coverageSummary = `${coverage.confirmed}/${coverage.total}`;
+    const homeMarkup = renderToStaticMarkup(React.createElement(App));
+    const statusMarkup = renderToStaticMarkup(
       React.createElement(
         ScriptProvider,
         null,
@@ -521,9 +543,53 @@ describe('Registration Email Status', () => {
       ),
     );
 
-    expect(markup).toContain('id="statusCountrySelect"');
-    expect(markup).toContain('href="/"');
-    expect(markup).toContain('15/');
+    expect(homeMarkup).toContain('href="/status"');
+    expect(homeMarkup).toContain(coverageSummary);
+    expect(statusMarkup).toContain('id="statusCountrySelect"');
+    expect(statusMarkup).toContain('href="/"');
+    expect(statusMarkup).toContain(coverageSummary);
+    expect(statusMarkup).toContain('Ако за мисију нема потврде');
+  });
+
+  test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {
+    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        null,
+        React.createElement(StepExportAndSubmit, {
+          formData: {
+            fullName: 'Петар Петровић',
+            parentName: 'Милош',
+            jmbg: '0101990710006',
+            serbianAddress: 'Београд',
+            foreignAddress: 'Singapore',
+            stationName: station.embassyCyr,
+            desiredLocation: 'Singapur',
+            signingDate: '10.09.2026.',
+            phone: '+381601234567',
+            email: 'petar@example.com',
+            signaturePngDataUrl: '',
+          },
+          station,
+          countryName: 'Singapur',
+          countryNameCyr: 'Сингапур',
+          isWetInkSignature: false,
+          onBack: () => undefined,
+          onReset: () => undefined,
+        }),
+      ),
+    );
+
+    expect(station.isElectionContactConfirmed).toBe(false);
+    expect(markup).toContain('role="alert"');
+    expect(markup).toContain('Адреса за изборе није потврђена.');
+    expect(markup).toContain('Gmail');
+    expect(markup).toContain('Outlook');
+    expect(markup).toContain('Yahoo Mail');
+    expect(markup).not.toContain('Гмаил');
+    expect(markup).not.toContain('Аутлук');
+    expect(markup).not.toContain('Јаху');
   });
 });
 

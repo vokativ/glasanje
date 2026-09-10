@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Header } from './components/Header';
-import { RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
+import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
 import { Countdown } from './components/Countdown';
 import { StepVoterRegistry } from './components/StepVoterRegistry';
 import { StepPersonalInfo, PersonalInfoData } from './components/StepPersonalInfo';
@@ -51,6 +51,8 @@ const AppContent: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
   const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
+  const emailCoverage = useMemo(() => getElectionEmailCoverage(), []);
+
 
   // Form state
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>({
@@ -160,6 +162,21 @@ const AppContent: React.FC = () => {
       ) : (
         <>
           <Countdown />
+          <a
+            href="/status"
+            className="btn btn-sm btn-navy"
+            style={{
+              marginBottom: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <span>{t('Status izbornih i-mejl adresa')}</span>
+            <strong>{emailCoverage.confirmed}/{emailCoverage.total}</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+
 
           {/* Stepper Navigation */}
           <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>

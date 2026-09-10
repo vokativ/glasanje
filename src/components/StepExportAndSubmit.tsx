@@ -250,6 +250,47 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         </div>
       </div>
 
+      {mobileSharingAvailable && (
+        <section
+          aria-labelledby="mobile-handoff-title"
+          style={{
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-md)',
+            padding: '1rem',
+            marginBottom: '1.5rem',
+          }}
+        >
+          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>{t('Na telefonu: podeli PDF (Web Share)')}</h3>
+          <p>
+            {t('Otvorite deljenje i izaberite ')}Gmail, Apple Mail, Outlook {t('ili ')}Yahoo Mail{t(' da prenesete PDF. U izabranoj aplikaciji ručno unesite adresu primaoca prema uputstvu u tekstu poruke, pa uklonite to privremeno uputstvo pre slanja.')}
+          </p>
+          <button
+            type="button"
+            onClick={handleNativeShare}
+            disabled={isGenerating || !pdfBytes}
+            className="btn btn-primary btn-lg btn-block"
+          >
+            {pdfBytes
+              ? t('✉️➕📄 Podeli PDF u svoju aplikaciju za e-poštu →')
+              : isGenerating || !pdfError
+                ? t('⏳ Pripremanje PDF-a...')
+                : t('PDF nije pripremljen')}
+          </button>
+          <p className="form-hint" style={{ textAlign: 'center' }}>
+            {t('Deljenje prenosi PDF i isti naslov i tekst poruke, ali ne unosi primaoca, ne dodaje adresu i ne šalje poruku.')}
+          </p>
+          {pdfError && (
+            <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
+              {pdfError}
+            </div>
+          )}
+          {shareError && (
+            <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
+              {shareError}
+            </div>
+          )}
+        </section>
+      )}
       {desiredLocation && (
         <section
           aria-labelledby="invitation-title"
@@ -261,10 +302,11 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           }}
         >
           <h3 id="invitation-title" style={{ marginTop: 0 }}>
-            {t('Podelite poziv za glasanje u')} {desiredLocation}
+            {t('Podelite sa prijateljima')}
           </h3>
           <p>
-            {t('Pošaljite drugima vezu koja unapred popunjava njihovo željeno mesto glasanja.')}
+            {t('Pošaljite drugima vezu koja unapred popunjava njihovo željeno mesto glasanja: ')}
+            <strong>{desiredLocation}</strong>.
           </p>
           <button
             type="button"
@@ -296,47 +338,6 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         </div>
       )}
 
-      {mobileSharingAvailable && (
-        <section
-          aria-labelledby="mobile-handoff-title"
-          style={{
-            border: '1px solid var(--color-border)',
-            borderRadius: 'var(--radius-md)',
-            padding: '1rem',
-            marginBottom: '1.5rem',
-          }}
-        >
-          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>{t('Na telefonu: podeli PDF (Web Share)')}</h3>
-          <p>
-            {t('Otvorite deljenje i izaberite Gmail, Apple Mail, Outlook ili Yahoo Mail da prenesete PDF. U izabranoj aplikaciji ručno unesite adresu primaoca prema uputstvu u tekstu poruke, pa uklonite to privremeno uputstvo pre slanja.')}
-          </p>
-          <button
-            type="button"
-            onClick={handleNativeShare}
-            disabled={isGenerating || !pdfBytes}
-            className="btn btn-primary btn-lg btn-block"
-          >
-            {pdfBytes
-              ? t('✉️➕📄 Podeli PDF u svoju aplikaciju za e-poštu →')
-              : isGenerating || !pdfError
-                ? t('⏳ Pripremanje PDF-a...')
-                : t('PDF nije pripremljen')}
-          </button>
-          <p className="form-hint" style={{ textAlign: 'center' }}>
-            {t('Deljenje prenosi PDF i isti naslov i tekst poruke, ali ne unosi primaoca, ne dodaje adresu i ne šalje poruku.')}
-          </p>
-          {pdfError && (
-            <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
-              {pdfError}
-            </div>
-          )}
-          {shareError && (
-            <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
-              {shareError}
-            </div>
-          )}
-        </section>
-      )}
 
       <section
         aria-labelledby="desktop-handoff-title"
@@ -390,13 +391,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           {!hideProviderLinks && (
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
               <a href={webmailLinks.gmail} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                {t('Nastavi u Gmail-u ↗')}
+                {t('Nastavi u ')}Gmail{t('-u ↗')}
               </a>
               <a href={webmailLinks.outlook} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                {t('Nastavi u Outlook-u ↗')}
+                {t('Nastavi u ')}Outlook{t('-u ↗')}
               </a>
               <a href={webmailLinks.yahoo} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                {t('Nastavi u Yahoo-u ↗')}
+                {t('Nastavi u ')}Yahoo Mail{t('-u ↗')}
               </a>
             </div>
           )}

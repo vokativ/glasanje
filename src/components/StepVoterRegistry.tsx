@@ -34,10 +34,6 @@ export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed 
         </div>
       </details>
 
-      <a href="/status" className="btn btn-sm btn-navy" style={{ marginTop: '1rem' }}>
-        {t('Pregledajte status izbornih i-mejl adresa po predstavništvu')} →
-      </a>
-
       <div style={{ margin: '1.25rem 0' }}>
         <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
           {t('Izaberite svoj status:')}

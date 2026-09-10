@@ -70,7 +70,19 @@ export const RegistrationEmailStatusPage: React.FC = () => {
               {script === 'cyrillic' ? country.labelCyr : country.label}
             </h3>
             {country.stations.map((station) => (
-              <article key={station.id} className="mission-card" style={{ marginBottom: '0.75rem' }}>
+              <article
+                key={station.id}
+                className="mission-card"
+                style={{
+                  marginBottom: '0.75rem',
+                  ...(station.isElectionContactConfirmed
+                    ? {}
+                    : {
+                        backgroundColor: 'var(--color-error-bg)',
+                        borderColor: '#fecaca',
+                      }),
+                }}
+              >
                 <div className="mission-title">
                   {script === 'cyrillic' ? station.embassyCyr : station.embassy}
                 </div>
@@ -90,7 +102,10 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                     </div>
                   </>
                 ) : (
-                  <p className="form-hint" style={{ marginTop: '0.5rem' }}>
+                  <p
+                    className="form-hint"
+                    style={{ marginTop: '0.5rem', color: 'var(--color-danger)' }}
+                  >
                     {t('Izborna i-mejl adresa još nije potvrđena u aktuelnom zvaničnom obaveštenju.')}
                   </p>
                 )}

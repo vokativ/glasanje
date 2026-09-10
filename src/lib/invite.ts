@@ -31,7 +31,7 @@ export function buildInvitationInfo(
   const destination = desiredLocation.trim();
 
   return {
-    title: translateStaticText(script, 'Glasanje u inostranstvu'),
+    title: translateStaticText(script, 'Podelite sa prijateljima'),
     text: `${translateStaticText(script, 'Popuni i ti prijavu za glasanje u inostranstvu za željeno mesto:')} ${destination}.\n\n${translateStaticText(script, 'Ukupno vreme za ceo proces: 1 minut.')}`,
     url: buildInvitationUrl(origin, pathname, destination),
     closing: translateStaticText(script, 'Živela Srbija!'),
