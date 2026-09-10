@@ -182,6 +182,7 @@ export interface InvitationShareInfo {
   title: string;
   text: string;
   url: string;
+  closing: string;
 }
 
 export type InvitationShareResult =
@@ -189,7 +190,7 @@ export type InvitationShareResult =
   | { success: false; error: string };
 
 export function buildInvitationCopyText(info: InvitationShareInfo): string {
-  return `${info.text}\n\n${info.url}`;
+  return `${info.text}\n\n${info.url}\n\n${info.closing}`;
 }
 
 export async function shareInvitation(
@@ -199,7 +200,7 @@ export async function shareInvitation(
 ): Promise<InvitationShareResult> {
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
     try {
-      await navigator.share({ title: info.title, text: info.text, url: info.url });
+      await navigator.share({ title: info.title, text: buildInvitationCopyText(info) });
       return { success: true, method: 'native' };
     } catch (error: unknown) {
       if (error instanceof Error && error.name === 'AbortError') {

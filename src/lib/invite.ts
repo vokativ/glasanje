@@ -4,6 +4,7 @@ export interface InvitationInfo {
   title: string;
   text: string;
   url: string;
+  closing: string;
 }
 
 export function getInitialDesiredLocation(search: string): string {
@@ -31,7 +32,8 @@ export function buildInvitationInfo(
 
   return {
     title: translateStaticText(script, 'Glasanje u inostranstvu'),
-    text: `${translateStaticText(script, 'Popunite prijavu za glasanje u inostranstvu za željeno mesto:')} ${destination}.`,
+    text: `${translateStaticText(script, 'Popuni i ti prijavu za glasanje u inostranstvu za željeno mesto:')} ${destination}.\n\n${translateStaticText(script, 'Ukupno vreme za ceo proces: 1 minut.')}`,
     url: buildInvitationUrl(origin, pathname, destination),
+    closing: translateStaticText(script, 'Živela Srbija!'),
   };
 }

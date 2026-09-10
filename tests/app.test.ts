@@ -72,7 +72,7 @@ describe('Interface script', () => {
     expect(translateStaticText('latin', destination)).toBe(destination);
     expect(
       buildInvitationInfo('https://glasanje.example', '/', 'Čačak', 'cyrillic').text,
-    ).toBe('Попуните пријаву за гласање у иностранству за жељено место: Čačak.');
+    ).toBe('Попуни и ти пријаву за гласање у иностранству за жељено место: Čačak.\n\nУкупно време за цео процес: 1 минут.');
     expect(latinHeader).not.toContain('Корак до гласа');
   });
 });
@@ -238,7 +238,7 @@ describe('Invitation links', () => {
     expect(getInitialDesiredLocation('?destination=Singapur&destination=Jakarta')).toBe('');
   });
 
-  test('builds a clean destination-only invitation URL and Latin share payload', () => {
+  test('builds the exact collaborative invitation in the selected script', () => {
     const invitation = buildInvitationInfo(
       'https://glasanje.example',
       '/prijava?country=SG#summary',
@@ -250,12 +250,16 @@ describe('Invitation links', () => {
       .toBe('https://glasanje.example/prijava?destination=Singapur');
     expect(invitation).toEqual({
       title: 'Glasanje u inostranstvu',
-      text: 'Popunite prijavu za glasanje u inostranstvu za željeno mesto: Singapur.',
+      text: 'Popuni i ti prijavu za glasanje u inostranstvu za željeno mesto: Singapur.\n\nUkupno vreme za ceo proces: 1 minut.',
       url: 'https://glasanje.example/prijava?destination=Singapur',
+      closing: 'Živela Srbija!',
     });
+    expect(buildInvitationCopyText(invitation)).toBe(
+      'Popuni i ti prijavu za glasanje u inostranstvu za željeno mesto: Singapur.\n\nUkupno vreme za ceo proces: 1 minut.\n\nhttps://glasanje.example/prijava?destination=Singapur\n\nŽivela Srbija!',
+    );
   });
 
-  test('copies the complete invitation text and URL when native sharing is unavailable', async () => {
+  test('copies the exact Cyrillic invitation when native sharing is unavailable', async () => {
     const invitation = buildInvitationInfo('https://glasanje.example', '/', 'Singapur', 'cyrillic');
     let copiedText = '';
     const result = await shareInvitation(invitation, 'cyrillic', async (text) => {
@@ -264,7 +268,9 @@ describe('Invitation links', () => {
     });
 
     expect(result).toEqual({ success: true, method: 'clipboard' });
-    expect(copiedText).toBe(buildInvitationCopyText(invitation));
+    expect(copiedText).toBe(
+      'Попуни и ти пријаву за гласање у иностранству за жељено место: Singapur.\n\nУкупно време за цео процес: 1 минут.\n\nhttps://glasanje.example/?destination=Singapur\n\nЖивела Србија!',
+    );
   });
 });
 
