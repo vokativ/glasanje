@@ -1,0 +1,11 @@
+{
+  "_description": "Manual overrides for diplomatic missions. Use an official, non-empty electionEmail to replace a station's published email recipient.",
+  "_schemaVersion": 1,
+  "missionOverrides": {
+    "_template": {
+      "_note": "Add a station ID key only after an official election-specific address is published.",
+      "electionEmail": ""
+    }
+  },
+  "countryOverrides": {}
+}

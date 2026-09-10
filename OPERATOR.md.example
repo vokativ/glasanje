@@ -1,0 +1,9 @@
+# Private hosting operator notes (example)
+
+Keep the real hosting project, credentials, domains, and deployment procedure in an ignored local `OPERATOR.md`.
+
+1. Build the static site output with the project's documented build command.
+2. In the hosting provider's private configuration, choose the hosting project and credentials for this deployment.
+3. Copy `.firebaserc.example` to the ignored `.firebaserc` and replace `YOUR_FIREBASE_PROJECT_ID` with that private project ID.
+4. Deploy the generated static output using the provider's CLI. When using Firebase Hosting, explicitly select the project: `firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID`.
+5. If preview access needs an additional host, add `PREVIEW_ALLOWED_HOST=your-private-preview-host.example` to ignored `.env.local` before starting the preview server.

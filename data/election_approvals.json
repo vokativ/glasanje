@@ -1,0 +1,13 @@
+{
+  "_description": "Human approvals for election-contact promotions. This file is inert until exactly two distinct people explicitly approve the same candidate.",
+  "schemaVersion": 1,
+  "approvals": [],
+  "_recordSchema": {
+    "candidateId": "Candidate ID from data/election_candidates.json",
+    "electionId": "Matching election ID from the candidate",
+    "reviewerId": "Stable identifier for the approving person",
+    "reviewerType": "human",
+    "decision": "approve",
+    "approvedAt": "2026-09-09T00:00:00Z"
+  }
+}

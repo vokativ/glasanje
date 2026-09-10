@@ -1,0 +1,5 @@
+{
+  "_description": "Reviewed allow-list of stable human reviewer IDs for election-contact promotions. Add an ID only through protected two-person repository review.",
+  "schemaVersion": 1,
+  "reviewerIds": []
+}

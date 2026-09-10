@@ -7,7 +7,43 @@
 
 # compiled output for firebase functions
 /functions/lib
-/.firebase
+
+# local Firebase and deployment configuration
+/.firebaserc
+/.firebase/
+/.runtimeconfig.json
+/firebase-export/
+/firebase-export-*
+/firebase-exports/
+/firebase-exports-*/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+*-debug.log
+*.export
+*.firebase-export
+
+# private operator notes and local environment settings
+/OPERATOR.md
+/operator-notes/
+.env*
+!.env.example
+
+# credentials and certificates
+*service-account*.json
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*-firebase-adminsdk-*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# Python cache
+__pycache__/
+*.py[cod]
 # Only exists if Bazel was run
 /bazel-out
 
