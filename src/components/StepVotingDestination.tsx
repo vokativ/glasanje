@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { latinToCyrillic, type Script, useScript } from '../lib/script';
 import { COUNTRY_BY_CODE, COUNTRIES, type VotingCountry } from '../data/missions';
 
 export interface VotingDestinationData {
@@ -32,7 +33,10 @@ const getEnglishCountryName = (countryCode: string) => {
 
 const TAIWAN_SEARCH_ALIASES = ['Тајван', 'Tajvan', 'Taiwan', 'Taiwanese passports'];
 
-export const getTaiwanSearchNotice = (searchFilter: string) => {
+export const getTaiwanSearchNotice = (
+  searchFilter: string,
+  translate: (value: string) => string = latinToCyrillic
+) => {
   const normalizedTerm = normalizeCountrySearchTerm(searchFilter.trim());
   if (
     !normalizedTerm ||
@@ -43,9 +47,9 @@ export const getTaiwanSearchNotice = (searchFilter: string) => {
     return null;
   }
 
-  return (
+  return translate(
     'Za Tajvan u priloženim podacima MSP nije potvrđena nadležnost za upis u birački spisak. ' +
-    'Ručno proverite aktuelna zvanična uputstva MSP ili nadležnog predstavništva; ova pretraga ne bira predstavništvo.'
+      'Ručno proverite aktuelna zvanična uputstva MSP ili nadležnog predstavništva; ova pretraga ne bira predstavništvo.'
   );
 };
 
@@ -94,14 +98,15 @@ export const resolveVotingDestinationSelection = (
   return { countryCode, stationId: selectedStationId };
 };
 
-const formatCountryOptionLabel = (country: VotingCountry) => {
+const formatCountryOptionLabel = (country: VotingCountry, script: Script) => {
+  const label = script === 'cyrillic' ? country.labelCyr : country.label;
   const englishName = getEnglishCountryName(country.countryCode);
 
   if (country.countryCode === 'US') {
-    return `${country.label} (SAD) [${country.countryCode}]`;
+    return `${label} (${script === 'cyrillic' ? 'САД' : 'SAD'}) [${country.countryCode}]`;
   }
 
-  return `${country.label}${englishName && englishName !== country.label ? ` / ${englishName}` : ''} [${country.countryCode}]`;
+  return `${label}${englishName && englishName !== country.label ? ` / ${englishName}` : ''} [${country.countryCode}]`;
 };
 
 
@@ -122,6 +127,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
       initialData?.stationId ?? null
     )
   );
+  const { script, t } = useScript();
   const [foreignAddress, setForeignAddress] = useState<string>(initialData?.foreignAddress ?? '');
   const [desiredLocation, setDesiredLocation] = useState<string>(initialData?.desiredLocation ?? '');
   const [searchFilter, setSearchFilter] = useState<string>('');
@@ -138,14 +144,17 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
   }, [currentCountry, selection.stationId]);
   const countryResults = useMemo(() => getCountryTypeaheadResults(searchFilter), [searchFilter]);
 
-  const taiwanSearchNotice = useMemo(() => getTaiwanSearchNotice(searchFilter), [searchFilter]);
+  const taiwanSearchNotice = useMemo(
+    () => getTaiwanSearchNotice(searchFilter, t),
+    [searchFilter, t]
+  );
 
   const handleCountryChange = (countryCode: string) => {
     const country = COUNTRY_BY_CODE.get(countryCode);
     if (!country) return;
 
     setSelection(resolveVotingDestinationSelection(countryCode));
-    setSearchFilter(country.label);
+    setSearchFilter(script === 'cyrillic' ? country.labelCyr : country.label);
     setActiveCountryIndex(-1);
   };
 
@@ -195,16 +204,17 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
 
   return (
     <div className="card">
-      <h2 className="card-title">Korak 3: Država boravka i izborno mesto</h2>
+      <h2 className="card-title">{t('Korak 3: Država boravka i izborno mesto')}</h2>
       <p className="card-subtitle">
-        Izaberite državu u kojoj boravite u inostranstvu, a zatim potvrdite nadležnu ambasadu
-        ili generalni konzulat Republike Srbije.
+        {t(
+          'Izaberite državu u kojoj boravite u inostranstvu, a zatim potvrdite nadležnu ambasadu ili generalni konzulat Republike Srbije.'
+        )}
       </p>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label" htmlFor="countrySearch">
-            Pretraga države boravka
+            {t('Pretraga države boravka')}
           </label>
           <input
             id="countrySearch"
@@ -212,7 +222,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             type="text"
             autoComplete="off"
             className="form-control"
-            placeholder="Unesite naziv države (ćirilicom ili latinicom)..."
+            placeholder={t('Unesite naziv države (ćirilicom ili latinicom)...')}
             value={searchFilter}
             onInput={(e) => handleCountrySearchInput(e.currentTarget.value)}
             onKeyDown={handleCountrySearchKeyDown}
@@ -230,7 +240,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             <div
               id="countrySearchResults"
               role="listbox"
-              aria-label="Rezultati pretrage država"
+              aria-label={t('Rezultati pretrage država')}
               style={{
                 maxHeight: '15rem',
                 overflowY: 'auto',
@@ -280,13 +290,13 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
                       textAlign: 'left',
                     }}
                   >
-                    {formatCountryOptionLabel(country)}
+                    {formatCountryOptionLabel(country, script)}
                   </button>
                 ))
               ) : (
                 !taiwanSearchNotice && (
                   <div className="form-hint" style={{ margin: '0.65rem 0.85rem' }}>
-                    Nema država koje odgovaraju pretrazi.
+                    {t('Nema država koje odgovaraju pretrazi.')}
                   </div>
                 )
               )}
@@ -294,11 +304,11 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
           )}
           {currentCountry && (
             <span className="form-hint" aria-live="polite">
-              Izabrana država: {formatCountryOptionLabel(currentCountry)}
+              {t('Izabrana država: ')}{formatCountryOptionLabel(currentCountry, script)}
             </span>
           )}
           <span className="form-hint">
-            Ukupno obuhvaćeno 195 država prema zvaničnoj evidenciji Ministarstva spoljnih poslova
+            {t('Ukupno obuhvaćeno 195 država prema zvaničnoj evidenciji Ministarstva spoljnih poslova')}
           </span>
         </div>
 
@@ -306,12 +316,13 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
         {currentCountry && (
           <div className="form-group">
             <label className="form-label" htmlFor="stationSelect">
-              Diplomatsko-konzularno predstavništvo u ovoj državi *
+              {t('Diplomatsko-konzularno predstavništvo u ovoj državi *')}
             </label>
             {currentCountry.stations.length > 1 && (
               <span className="mission-selection-hint">
-                Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam
-                je najbliže.
+                {t(
+                  'Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam je najbliže.'
+                )}
               </span>
             )}
             <select
@@ -325,10 +336,10 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
               }
               required
             >
-              <option value="">Izaberite diplomatsko-konzularno predstavništvo…</option>
+              <option value="">{t('Izaberite diplomatsko-konzularno predstavništvo…')}</option>
               {currentCountry.stations.map((station) => (
                 <option key={station.id} value={station.id}>
-                  {station.embassy}
+                  {script === 'cyrillic' ? station.embassyCyr : station.embassy}
                 </option>
               ))}
             </select>
@@ -338,36 +349,38 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
         {currentCountry && currentStation && (
           <div className="mission-card">
             <div className="mission-title">
-              🏛️ {currentStation.embassy}
+              🏛️ {script === 'cyrillic' ? currentStation.embassyCyr : currentStation.embassy}
             </div>
 
             {!currentStation.isResident && (
               <span className="mission-coverage-badge">
-                Pokriva na nerezidencijalnoj osnovi državu {currentCountry.label}
+                {t('Pokriva na nerezidencijalnoj osnovi državu ')}
+                {script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}
               </span>
             )}
 
             {currentStation.address && (
               <div className="mission-detail">
-                <strong>Adresa:</strong>
+                <strong>{t('Adresa:')}</strong>
                 <span>{currentStation.address}</span>
               </div>
             )}
 
             <div className="mission-detail">
-              <strong>Objavljeni kontakt misije/konzulata:</strong>
+              <strong>{t('Objavljeni kontakt misije/konzulata:')}</strong>
               <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
                 {currentStation.email}
               </span>
             </div>
             <p className="form-hint" style={{ margin: '0.5rem 0 0' }}>
-              Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na
-              zvaničnom sajtu ispod; prihvatanje zahteva na ovu adresu nije potvrđeno.
+              {t(
+                'Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na zvaničnom sajtu ispod; prihvatanje zahteva na ovu adresu nije potvrđeno.'
+              )}
             </p>
 
             {currentStation.website && (
               <div className="mission-detail">
-                <strong>Zvanični sajt:</strong>
+                <strong>{t('Zvanični sajt:')}</strong>
                 <a
                   href={currentStation.website}
                   target="_blank"
@@ -383,7 +396,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
 
         <div className="form-group" style={{ marginTop: '1.25rem' }}>
           <label className="form-label" htmlFor="foreignAddress">
-            Adresa boravka u inostranstvu *
+            {t('Adresa boravka u inostranstvu *')}
           </label>
           <input
             id="foreignAddress"
@@ -393,23 +406,23 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             className={`form-control ${
               touched.foreignAddress && !isForeignAddressValid ? 'is-invalid' : ''
             }`}
-            placeholder="npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore"
+            placeholder={t('npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore')}
             value={foreignAddress}
             onChange={(e) => setForeignAddress(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, foreignAddress: true }))}
             required
           />
           <span className="form-hint">
-            Unesite vašu tačnu adresu u inostranstvu (ulica, broj, poštanski broj, grad, država)
+            {t('Unesite vašu tačnu adresu u inostranstvu (ulica, broj, poštanski broj, grad, država)')}
           </span>
           {touched.foreignAddress && !isForeignAddressValid && (
-            <span className="form-error">Adresa u inostranstvu je obavezna</span>
+            <span className="form-error">{t('Adresa u inostranstvu je obavezna')}</span>
           )}
         </div>
 
         <div className="form-group">
           <label className="form-label" htmlFor="desiredLocation">
-            Željeno mesto glasanja (opciono)
+            {t('Željeno mesto glasanja (opciono)')}
           </label>
           <input
             id="desiredLocation"
@@ -417,32 +430,32 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             type="text"
             autoComplete="off"
             className="form-control"
-            placeholder="npr. San Francisko (ako ambasada nije u vašem gradu)"
+            placeholder={t('npr. San Francisko (ako ambasada nije u vašem gradu)')}
             value={desiredLocation}
             onChange={(e) => setDesiredLocation(e.target.value)}
           />
           <span className="form-hint">
-            Ako ne možete da putujete do sedišta ambasade ili konzulata, unesite željeni grad.
-            Pravilo o najmanje 100 birača je opšti prag, uz zakonom predviđene izuzetke; Republička
-            izborna komisija utvrđuje da li će biti otvoreno posebno biračko mesto.{' '}
+            {t(
+              'Ako ne možete da putujete do sedišta ambasade ili konzulata, unesite željeni grad. Pravilo o najmanje 100 birača je opšti prag, uz zakonom predviđene izuzetke; Republička izborna komisija utvrđuje da li će biti otvoreno posebno biračko mesto. '
+            )}
             <a
               href="https://www.pravno-informacioni-sistem.rs/SlGlasnikPortal/eli/rep/sgrs/skupstina/zakon/2022/14/2/reg"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
             >
-              Član 57
+              {t('Član 57')}
             </a>{' '}
-            (zvanična PIS stranica može sporije da se učita).
+            {t('(zvanična PIS stranica može sporije da se učita).')}
           </span>
         </div>
 
         <div className="btn-row">
           <button type="button" onClick={onBack} className="btn btn-secondary">
-            ← Nazad
+            {t('← Nazad')}
           </button>
           <button type="submit" className="btn btn-primary" disabled={!isFormValid}>
-            Nastavi na potpis i dokumenta →
+            {t('Nastavi na potpis i dokumenta →')}
           </button>
         </div>
       </form>

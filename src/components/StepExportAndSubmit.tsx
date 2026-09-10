@@ -12,6 +12,8 @@ import {
   shareInvitation,
 } from '../lib/share';
 import { PollingStation } from '../data/missions';
+import { useScript } from '../lib/script';
+
 
 interface StepExportAndSubmitProps {
   formData: ApplicationFormData;
@@ -32,6 +34,10 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   onBack,
   onReset,
 }) => {
+  const { script, t } = useScript();
+  const selectedCountryName = script === 'cyrillic' ? countryNameCyr : countryName;
+  const selectedEmbassy = script === 'cyrillic' ? station.embassyCyr : station.embassy;
+
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const pdfBytesRef = useRef<Uint8Array | null>(null);
@@ -98,7 +104,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         return generated;
       })
       .catch((err) => {
-        setPdfError(`Greška pri generisanju PDF dokumenta: ${String(err)}`);
+        setPdfError(`${t('Greška pri generisanju PDF dokumenta:')} ${String(err)}`);
         throw err;
       })
       .finally(() => {
@@ -108,7 +114,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
     pdfGenerationRef.current = generation;
     return generation;
-  }, [formData]);
+  }, [formData, t]);
 
   useEffect(() => {
     if (!isWetInkSignature) {
@@ -134,7 +140,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
       type: 'application/pdf',
     });
 
-    void shareFileWithNativeApp(file, webShareInfo).then((result) => {
+    void shareFileWithNativeApp(file, webShareInfo, script).then((result) => {
       if (!result.success && result.error) {
         setShareError(result.error);
       }
@@ -163,17 +169,22 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
     setInvitationStatus(null);
     setIsSharingInvitation(true);
-    const invitation = buildInvitationInfo(window.location.origin, window.location.pathname, desiredLocation);
+    const invitation = buildInvitationInfo(
+      window.location.origin,
+      window.location.pathname,
+      desiredLocation,
+      script,
+    );
 
-    void shareInvitation(invitation).then((result) => {
+    void shareInvitation(invitation, script).then((result) => {
       setIsSharingInvitation(false);
       setInvitationStatus(
         result.success
           ? {
               success: true,
               message: result.method === 'native'
-                ? 'Poziv je podeljen.'
-                : 'Poziv i veza su kopirani u privremenu memoriju.',
+                ? t('Poziv je podeljen.')
+                : t('Poziv i veza su kopirani u privremenu memoriju.'),
             }
           : { success: false, message: result.error },
       );
@@ -181,15 +192,14 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   };
 
   const downloadLabel = isWetInkSignature
-    ? '🖨️ Preuzmi PDF za štampu i potpis →'
-    : '📥 Preuzmi potpisan PDF formular →';
+    ? t('🖨️ Preuzmi PDF za štampu i potpis →')
+    : t('📥 Preuzmi potpisan PDF formular →');
 
   return (
     <div className="card">
-      <h2 className="card-title">Korak 5: Preuzimanje i predaja prijave</h2>
+      <h2 className="card-title">{t('Korak 5: Preuzimanje i predaja prijave')}</h2>
       <p className="card-subtitle">
-        Preuzmite PDF, zatim ga sami priložite u poruku ili ga prenesite u izabranu aplikaciju.
-        Ova stranica samo priprema PDF i ne obavlja predaju.
+        {t('Preuzmite PDF, zatim ga sami priložite u poruku ili ga prenesite u izabranu aplikaciju. Ova stranica samo priprema PDF i ne obavlja predaju.')}
       </p>
 
       {!station.isElectionContactConfirmed && (
@@ -205,9 +215,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             padding: '1rem',
           }}
         >
-          <strong>Adresa za izbore nije potvrđena.</strong> Ovo je opšti kontakt misije, a ne
-          potvrđeno elektronsko sanduče za upis u birački spisak. Možete sačekati potvrđeno
-          zvanično obaveštenje ili sami proveriti sajt misije u odeljku za kontakt na dnu stranice.
+          {t('Adresa za izbore nije potvrđena. Ovo je opšti kontakt misije, a ne potvrđeno elektronsko sanduče za upis u birački spisak. Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti sajt misije u odeljku za kontakt na dnu stranice.')}
         </div>
       )}
 
@@ -221,7 +229,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         }}
       >
         <div style={{ fontWeight: 700, color: 'var(--color-primary)', marginBottom: '0.5rem' }}>
-          📋 Sažetak prijave
+          {t('📋 Sažetak prijave')}
         </div>
         <div
           style={{
@@ -231,11 +239,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             fontSize: '0.85rem',
           }}
         >
-          <div><strong>Država:</strong> {countryName}</div>
-          <div><strong>Predstavništvo:</strong> {station.embassy}</div>
+          <div><strong>{t('Država:')}</strong> {selectedCountryName}</div>
+          <div><strong>{t('Predstavništvo:')}</strong> {selectedEmbassy}</div>
           <div>
-            <strong>Prilog pasoša:</strong>{' '}
-            {formData.idDocumentDataUrl ? 'Ugrađen kao strana 2 u PDF' : 'Nije učitan; priložite ga zasebno'}
+            <strong>{t('Prilog pasoša:')}</strong>{' '}
+            {formData.idDocumentDataUrl
+              ? t('Ugrađen kao strana 2 u PDF')
+              : t('Nije učitan; priložite ga zasebno')}
           </div>
         </div>
       </div>
@@ -251,10 +261,10 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           }}
         >
           <h3 id="invitation-title" style={{ marginTop: 0 }}>
-            Podelite poziv za glasanje u {desiredLocation}
+            {t('Podelite poziv za glasanje u')} {desiredLocation}
           </h3>
           <p>
-            Pošaljite drugima vezu koja unapred popunjava njihovo željeno mesto glasanja.
+            {t('Pošaljite drugima vezu koja unapred popunjava njihovo željeno mesto glasanja.')}
           </p>
           <button
             type="button"
@@ -262,7 +272,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             disabled={isSharingInvitation}
             className="btn btn-outline"
           >
-            {isSharingInvitation ? 'Deljenje poziva...' : 'Podeli poziv i vezu'}
+            {isSharingInvitation ? t('Deljenje poziva...') : t('Podeli poziv i vezu')}
           </button>
           {invitationStatus && (
             <div
@@ -282,9 +292,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
       {isWetInkSignature && (
         <div className="alert alert-warning" style={{ marginBottom: '1.5rem' }}>
-          <strong>Potreban je svojeručni potpis.</strong> Ovaj PDF nije potpisan za slanje: odštampajte
-          ga, potpišite, pa napravite sken ili jasnu fotografiju. U poruku se ručno prilaže tek
-          skenirani/fotografisani potpisani obrazac.
+          {t('Potreban je svojeručni potpis. Ovaj PDF nije potpisan za slanje: odštampajte ga, potpišite, pa napravite sken ili jasnu fotografiju. U poruku se ručno prilaže tek skenirani/fotografisani potpisani obrazac.')}
         </div>
       )}
 
@@ -298,11 +306,9 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             marginBottom: '1.5rem',
           }}
         >
-          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>Na telefonu: podeli PDF (Web Share)</h3>
+          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>{t('Na telefonu: podeli PDF (Web Share)')}</h3>
           <p>
-            Otvorite deljenje i izaberite Gmail, Apple Mail, Outlook ili Yahoo Mail da prenesete PDF.
-            U izabranoj aplikaciji ručno unesite adresu primaoca prema uputstvu u tekstu poruke,
-            pa uklonite to privremeno uputstvo pre slanja.
+            {t('Otvorite deljenje i izaberite Gmail, Apple Mail, Outlook ili Yahoo Mail da prenesete PDF. U izabranoj aplikaciji ručno unesite adresu primaoca prema uputstvu u tekstu poruke, pa uklonite to privremeno uputstvo pre slanja.')}
           </p>
           <button
             type="button"
@@ -311,14 +317,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             className="btn btn-primary btn-lg btn-block"
           >
             {pdfBytes
-              ? '✉️➕📄 Podeli PDF u svoju aplikaciju za e-poštu →'
+              ? t('✉️➕📄 Podeli PDF u svoju aplikaciju za e-poštu →')
               : isGenerating || !pdfError
-                ? '⏳ Pripremanje PDF-a...'
-                : 'PDF nije pripremljen'}
+                ? t('⏳ Pripremanje PDF-a...')
+                : t('PDF nije pripremljen')}
           </button>
           <p className="form-hint" style={{ textAlign: 'center' }}>
-            Deljenje prenosi PDF i isti naslov i tekst poruke, ali ne unosi primaoca, ne dodaje
-            adresu i ne šalje poruku.
+            {t('Deljenje prenosi PDF i isti naslov i tekst poruke, ali ne unosi primaoca, ne dodaje adresu i ne šalje poruku.')}
           </p>
           {pdfError && (
             <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
@@ -342,15 +347,15 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           marginBottom: '1.5rem',
         }}
       >
-        <h3 id="desktop-handoff-title" style={{ marginTop: 0 }}>Ručno: preuzimanje i prilaganje PDF-a</h3>
-        <p><strong>1.</strong> Preuzmite PDF na uređaj.</p>
+        <h3 id="desktop-handoff-title" style={{ marginTop: 0 }}>{t('Ručno: preuzimanje i prilaganje PDF-a')}</h3>
+        <p><strong>1.</strong> {t('Preuzmite PDF na uređaj.')}</p>
         <button
           type="button"
           onClick={handleDownload}
           disabled={isGenerating}
           className="btn btn-secondary btn-lg btn-block"
         >
-          {isGenerating ? '⏳ Generisanje PDF-a...' : downloadLabel}
+          {isGenerating ? t('⏳ Generisanje PDF-a...') : downloadLabel}
         </button>
         {!mobileSharingAvailable && pdfError && (
           <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
@@ -368,79 +373,77 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             }}
           >
             {isWetInkSignature
-              ? '✓ PDF je preuzet. Slede štampanje, potpis i skeniranje ili fotografisanje.'
-              : '✓ PDF je preuzet na vaš uređaj.'}
+              ? t('✓ PDF je preuzet. Slede štampanje, potpis i skeniranje ili fotografisanje.')
+              : t('✓ PDF je preuzet na vaš uređaj.')}
           </div>
         )}
 
         <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
-          <p><strong>2.</strong> Otvorite pripremljenu poruku, ručno priložite PDF i sami je pošaljite.</p>
+          <p><strong>2.</strong> {t('Otvorite pripremljenu poruku, ručno priložite PDF i sami je pošaljite.')}</p>
           <a href={webmailLinks.mailto} className="btn btn-primary btn-lg btn-block">
-            ✉️ Otvori pripremljenu e-poštu →
+            {t('✉️ Otvori pripremljenu e-poštu →')}
           </a>
           <p className="form-hint">
-            Veza otvara podrazumevani program za e-poštu sa pripremljenim primaocem, naslovom i
-            tekstom, ali ne može da priloži PDF niti da pošalje poruku. Ako tekst na početku traži
-            dodatni prilog, priložite ga, pa uklonite to privremeno uputstvo pre slanja.
+            {t('Veza otvara podrazumevani program za e-poštu sa pripremljenim primaocem, naslovom i tekstom, ali ne može da priloži PDF niti da pošalje poruku. Ako tekst na početku traži dodatni prilog, priložite ga, pa uklonite to privremeno uputstvo pre slanja.')}
           </p>
 
           {!hideProviderLinks && (
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
               <a href={webmailLinks.gmail} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                Nastavi u Gmail-u ↗
+                {t('Nastavi u Gmail-u ↗')}
               </a>
               <a href={webmailLinks.outlook} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                Nastavi u Outlook-u ↗
+                {t('Nastavi u Outlook-u ↗')}
               </a>
               <a href={webmailLinks.yahoo} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                Nastavi u Yahoo-u ↗
+                {t('Nastavi u Yahoo-u ↗')}
               </a>
             </div>
           )}
 
           <div style={{ marginTop: '1rem' }}>
             <p className="form-hint">
-              <strong>Potpuno ručna alternativa:</strong> ako ne možete da otvorite pripremljenu
-              poruku, kopirajte adresu, naslov i tekst u svoju aplikaciju za e-poštu. Kopirani
-              tekst počinje privremenim uputstvima: postupite po njima, pa ih uklonite pre slanja.
+              {t('Potpuno ručna alternativa: ako ne možete da otvorite pripremljenu poruku, kopirajte adresu, naslov i tekst u svoju aplikaciju za e-poštu. Kopirani tekst počinje privremenim uputstvima: postupite po njima, pa ih uklonite pre slanja.')}
             </p>
             <button type="button" onClick={handleCopyBody} className="btn btn-sm btn-outline">
-              {copiedBody ? '✓ Adresa, naslov i tekst su kopirani' : '📝 Kopiraj adresu, naslov i tekst poruke'}
+              {copiedBody
+                ? t('✓ Adresa, naslov i tekst su kopirani')
+                : t('📝 Kopiraj adresu, naslov i tekst poruke')}
             </button>
           </div>
         </div>
 
         <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
-          <p><strong>3.</strong> Ručno priložite i proverite pre predaje.</p>
+          <p><strong>3.</strong> {t('Ručno priložite i proverite pre predaje.')}</p>
           <ul className="checklist">
             <li className="checklist-item">
               <span className="checklist-icon">📎</span>
               <span>
-                <strong>Priložite PDF:</strong>{' '}
+                <strong>{t('Priložite PDF:')}</strong>{' '}
                 {isWetInkSignature
-                  ? 'priložite skenirani ili fotografisani potpisani obrazac, ne nepotpisani PDF za štampu.'
-                  : 'priložite preuzeti PDF formular.'}
+                  ? t('priložite skenirani ili fotografisani potpisani obrazac, ne nepotpisani PDF za štampu.')
+                  : t('priložite preuzeti PDF formular.')}
               </span>
             </li>
             <li className="checklist-item">
               <span className="checklist-icon">📸</span>
               <span>
-                <strong>Kopija pasoša / lične karte:</strong>{' '}
+                <strong>{t('Kopija pasoša / lične karte:')}</strong>{' '}
                 {isIdDocumentEmbedded
-                  ? 'već je ugrađena kao strana 2 PDF-a.'
-                  : 'ručno priložite sliku prve strane srpskog pasoša ili lične karte.'}
+                  ? t('već je ugrađena kao strana 2 PDF-a.')
+                  : t('ručno priložite sliku prve strane srpskog pasoša ili lične karte.')}
               </span>
             </li>
             <li className="checklist-item">
               <span className="checklist-icon">✓</span>
-              <span><strong>Proverite:</strong> adresu primaoca, naslov, priloge i čitljivost potpisa pre nego što sami predate poruku.</span>
+              <span>{t('Proverite: adresu primaoca, naslov, priloge i čitljivost potpisa pre nego što sami predate poruku.')}</span>
             </li>
           </ul>
         </div>
       </section>
       <div className="hub-card" style={{ padding: '1.25rem', borderRadius: 'var(--radius-lg)', marginBottom: '1.5rem' }}>
         <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '1.05rem' }}>
-          ✉️ Javno objavljeni kontakt misije/konzulata
+          {t('✉️ Javno objavljeni kontakt misije/konzulata')}
         </div>
         <p
           style={{
@@ -451,13 +454,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           }}
         >
           {station.isElectionContactConfirmed
-            ? '✓ Potvrđena adresa za izbore 2026.'
-            : 'Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.'}
+            ? t('✓ Potvrđena adresa za izbore 2026.')
+            : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
         <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
           {station.isElectionContactConfirmed
-            ? 'Adresa je preuzeta iz aktuelnog, odobrenog izbornog obaveštenja.'
-            : 'Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.'}
+            ? t('Adresa je preuzeta iz aktuelnog, odobrenog izbornog obaveštenja.')
+            : t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
         </p>
         <div className="hub-email-box">
           <span className="hub-email-text">{station.email}</span>
@@ -466,7 +469,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             onClick={handleCopyEmail}
             className="btn btn-sm btn-outline"
           >
-            {copiedEmail ? '✓ Adresa je kopirana' : '📋 Kopiraj adresu primaoca'}
+            {copiedEmail ? t('✓ Adresa je kopirana') : t('📋 Kopiraj adresu primaoca')}
           </button>
         </div>
         <a
@@ -476,13 +479,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           className="btn btn-sm btn-outline"
           style={{ marginTop: '0.75rem' }}
         >
-          🌐 Zvanični sajt misije ↗
+          {t('🌐 Zvanični sajt misije ↗')}
         </a>
       </div>
 
       <div className="btn-row">
         <button type="button" onClick={onBack} className="btn btn-secondary">
-          ← Nazad na pregled podataka
+          {t('← Nazad na pregled podataka')}
         </button>
         <button
           type="button"
@@ -490,7 +493,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           className="btn btn-outline"
           style={{ color: 'var(--color-text-muted)' }}
         >
-          Započni novu prijavu
+          {t('Započni novu prijavu')}
         </button>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { Script, translateStaticText } from './script';
+
 export interface InvitationInfo {
   title: string;
   text: string;
@@ -19,12 +21,17 @@ export function buildInvitationUrl(origin: string, pathname: string, desiredLoca
   return url.toString();
 }
 
-export function buildInvitationInfo(origin: string, pathname: string, desiredLocation: string): InvitationInfo {
+export function buildInvitationInfo(
+  origin: string,
+  pathname: string,
+  desiredLocation: string,
+  script: Script,
+): InvitationInfo {
   const destination = desiredLocation.trim();
 
   return {
-    title: 'Glasanje u inostranstvu',
-    text: `Popunite prijavu za glasanje u inostranstvu za željeno mesto: ${destination}.`,
+    title: translateStaticText(script, 'Glasanje u inostranstvu'),
+    text: `${translateStaticText(script, 'Popunite prijavu za glasanje u inostranstvu za željeno mesto:')} ${destination}.`,
     url: buildInvitationUrl(origin, pathname, destination),
   };
 }

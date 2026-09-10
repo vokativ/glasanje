@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Countdown } from './components/Countdown';
 import { StepVoterRegistry } from './components/StepVoterRegistry';
@@ -9,6 +9,7 @@ import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { COUNTRY_BY_CODE } from './data/missions';
 import { ApplicationFormData } from './lib/pdf';
 import { getInitialDesiredLocation } from './lib/invite';
+import { ScriptProvider, useScript } from './lib/script';
 import { formatSerbianDate } from './lib/validators';
 
 const StepSignatureAndDocument = React.lazy(() =>
@@ -44,7 +45,8 @@ const STEPS = [
   { id: 5, label: 'Slanje' },
 ];
 
-export const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { script, t } = useScript();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
 
@@ -91,7 +93,7 @@ export const App: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (window.confirm('Da li ste sigurni da želite da započnete novu prijavu?')) {
+    if (window.confirm(t('Da li ste sigurni da želite da započnete novu prijavu?'))) {
       setCurrentStep(1);
       setPersonalInfo({
         fullName: '',
@@ -119,7 +121,8 @@ export const App: React.FC = () => {
   const currentStation = votingDestination.stationId
     ? currentCountry?.stations.find((station) => station.id === votingDestination.stationId) ?? null
     : null;
-  const countryDisplayName = currentCountry?.label ?? '';
+  const countryDisplayName =
+    script === 'cyrillic' ? currentCountry?.labelCyr ?? '' : currentCountry?.label ?? '';
   const countryNameCyr = currentCountry?.labelCyr ?? '';
 
   // Compile full application data for PDF generator. A station must be resolved before export renders.
@@ -138,13 +141,18 @@ export const App: React.FC = () => {
     idDocumentDataUrl: signatureAndDoc.idDocumentDataUrl,
   };
 
+  useEffect(() => {
+    document.documentElement.lang = script === 'cyrillic' ? 'sr-Cyrl' : 'sr-Latn';
+    document.title = t('Korak do glasa | Prijava za glasanje iz inostranstva');
+  }, [script, t]);
+
   return (
     <div className="container">
       <Header onOpenPrivacy={() => setIsPrivacyOpen(true)} />
       <Countdown />
 
       {/* Stepper Navigation */}
-      <nav className="stepper-nav" aria-label="Faze popunjavanja">
+      <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
         {STEPS.map((s) => {
           const isCompleted = s.id < currentStep;
           const isActive = s.id === currentStep;
@@ -165,7 +173,7 @@ export const App: React.FC = () => {
               aria-current={isActive ? 'step' : undefined}
             >
               <div className="step-dot">{isCompleted ? '✓' : s.id}</div>
-              <div className="step-label">{s.label}</div>
+              <div className="step-label">{t(s.label)}</div>
             </button>
           );
         })}
@@ -192,7 +200,7 @@ export const App: React.FC = () => {
         )}
 
         {currentStep === 4 && (
-          <React.Suspense fallback={<p aria-live="polite">Učitavanje potpisa i dokumenta…</p>}>
+          <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje potpisa i dokumenta…')}</p>}>
             <StepSignatureAndDocument
               initialData={signatureAndDoc}
               onBack={() => setCurrentStep(3)}
@@ -202,7 +210,7 @@ export const App: React.FC = () => {
         )}
 
         {currentStep === 5 && currentStation && (
-          <React.Suspense fallback={<p aria-live="polite">Učitavanje izvoza prijave…</p>}>
+          <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje izvoza prijave…')}</p>}>
             <StepExportAndSubmit
               formData={compiledApplicationData}
               station={currentStation}
@@ -219,24 +227,24 @@ export const App: React.FC = () => {
       {/* Footer */}
       <footer style={{ textAlign: 'center', margin: '2rem 0', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
         <p>
-          Ovaj sajt je nezavisan volonterski alat za građane Srbije u dijaspori.{' '}
+          {t('Ovaj sajt je nezavisan volonterski alat za građane Srbije u dijaspori. ')}
           <button
             type="button"
             onClick={() => setIsPrivacyOpen(true)}
             style={{ background: 'none', border: 'none', color: 'var(--color-primary)', textDecoration: 'underline', cursor: 'pointer' }}
           >
-            Politika privatnosti
+            {t('Politika privatnosti')}
           </button>
         </p>
         <p style={{ marginTop: '0.35rem' }}>
-          Izvorni kod je otvoren i dostupan na{' '}
+          {t('Izvorni kod je otvoren i dostupan na ')}
           <a
             href="https://github.com/vokativ/glasanje"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: 'var(--color-primary)' }}
           >
-            GitHub-u
+            {t('GitHub-u')}
           </a>
           .
         </p>
@@ -247,4 +255,11 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
+export const App: React.FC = () => (
+  <ScriptProvider>
+    <AppContent />
+  </ScriptProvider>
+);
+
 export default App;

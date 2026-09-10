@@ -1,30 +1,53 @@
 import React from 'react';
+import { useScript } from '../lib/script';
 
 interface HeaderProps {
   onOpenPrivacy: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenPrivacy }) => {
+  const { script, setScript, t } = useScript();
+
   return (
     <header className="header">
       <img
         src="/assets/rotunda-serbica-envelope.webp"
-        alt="Rotunda Serbika i koverta"
+        alt={t('Rotunda Serbika i koverta')}
         className="header-logo"
       />
-      <h1 className="header-title">Korak do glasa</h1>
+      <h1 className="header-title">{t('Korak do glasa')}</h1>
       <p className="header-subtitle">
-        Alat za pripremu prijave za glasanje iz inostranstva • Izbori 2026.
+        {t('Alat za pripremu prijave za glasanje iz inostranstva • Izbori 2026.')}
       </p>
+      <div
+        role="group"
+        aria-label={t('Pismo interfejsa')}
+        style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}
+      >
+        <button
+          type="button"
+          onClick={() => setScript('cyrillic')}
+          aria-pressed={script === 'cyrillic'}
+        >
+          {t('Ćirilica')}
+        </button>
+        <button
+          type="button"
+          onClick={() => setScript('latin')}
+          aria-pressed={script === 'latin'}
+        >
+          {t('Latinica')}
+        </button>
+      </div>
       <div>
         <button
           type="button"
           onClick={onOpenPrivacy}
           className="header-badge"
-          title="Kliknite za detalje o privatnosti podataka"
+          title={t('Kliknite za detalje o privatnosti podataka')}
         >
           <span>🔒</span>
-          <span>100% na vašem uređaju • Podaci se ne šalju na server</span>
+          <span>{t('100% na vašem uređaju • Podaci se ne šalju na server')}</span>
         </button>
       </div>
     </header>

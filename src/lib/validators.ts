@@ -1,14 +1,22 @@
+import { type Script, translateStaticText } from './script';
+
 /**
  * Validates Serbian JMBG (Jedinstveni matični broj građana)
  * using the official modulo 11 checksum algorithm.
  */
-export function validateJmbg(jmbg: string): { valid: boolean; error?: string } {
+export function validateJmbg(
+  jmbg: string,
+  script: Script = 'cyrillic',
+): { valid: boolean; error?: string } {
   if (!jmbg) {
-    return { valid: false, error: 'JMBG je obavezan' };
+    return { valid: false, error: translateStaticText(script, 'JMBG je obavezan') };
   }
   const clean = jmbg.trim();
   if (!/^\d{13}$/.test(clean)) {
-    return { valid: false, error: 'JMBG mora sadržati tačno 13 cifara' };
+    return {
+      valid: false,
+      error: translateStaticText(script, 'JMBG mora sadržati tačno 13 cifara'),
+    };
   }
 
   const d = clean.split('').map(Number);
@@ -24,11 +32,17 @@ export function validateJmbg(jmbg: string): { valid: boolean; error?: string } {
   let checkDigit = 11 - mod;
   if (checkDigit === 11) checkDigit = 0;
   if (checkDigit === 10) {
-    return { valid: false, error: 'Neispravan kontrolni broj JMBG-a' };
+    return {
+      valid: false,
+      error: translateStaticText(script, 'Neispravan kontrolni broj JMBG-a'),
+    };
   }
 
   if (checkDigit !== d[12]) {
-    return { valid: false, error: 'Kontrolna cifra JMBG-a se ne poklapa' };
+    return {
+      valid: false,
+      error: translateStaticText(script, 'Kontrolna cifra JMBG-a se ne poklapa'),
+    };
   }
 
   return { valid: true };

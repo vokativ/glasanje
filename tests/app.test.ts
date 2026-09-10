@@ -23,6 +23,59 @@ import {
   buildInvitationUrl,
   getInitialDesiredLocation,
 } from '../src/lib/invite';
+import App from '../src/App';
+import { Header } from '../src/components/Header';
+import {
+  ScriptProvider,
+  latinToCyrillic,
+  translateStaticText,
+} from '../src/lib/script';
+
+describe('Interface script', () => {
+  test('converts Serbian Latin letters and digraphs in every supported case', () => {
+    expect(latinToCyrillic('Čačak, Ćuprija, Šid, Žabalj, Đak.')).toBe(
+      'Чачак, Ћуприја, Шид, Жабаљ, Ђак.',
+    );
+    expect(latinToCyrillic('džep, Džep, DŽEP; ljiljan, Ljiljan, LJILJAN; njen, Njen, NJEN')).toBe(
+      'џеп, Џеп, ЏЕП; љиљан, Љиљан, ЉИЉАН; њен, Њен, ЊЕН',
+    );
+  });
+
+  test('uses Cyrillic for fresh app and standalone component rendering', () => {
+    const appMarkup = renderToStaticMarkup(React.createElement(App));
+    const headerMarkup = renderToStaticMarkup(
+      React.createElement(Header, { onOpenPrivacy: () => undefined }),
+    );
+
+    expect(appMarkup).toContain('Корак до гласа');
+    expect(appMarkup).toContain('Провера');
+    expect(headerMarkup).toContain('aria-pressed="true">Ћирилица');
+    expect(headerMarkup).toContain('Писмо интерфејса');
+    expect(headerMarkup).toContain('aria-pressed="false">Латиница');
+    expect(headerMarkup).not.toContain('Korak do glasa');
+  });
+
+  test('renders Latin static text only after a Latin script opt-in', () => {
+    const latinHeader = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        { initialScript: 'latin' },
+        React.createElement(Header, { onOpenPrivacy: () => undefined }),
+      ),
+    );
+    const destination = 'Чачак';
+
+    expect(latinHeader).toContain('Korak do glasa');
+    expect(latinHeader).toContain('aria-pressed="true">Latinica');
+    expect(latinHeader).not.toContain('Корак до гласа');
+    expect(latinHeader).toContain('aria-pressed="false">Ćirilica');
+    expect(translateStaticText('latin', destination)).toBe(destination);
+    expect(
+      buildInvitationInfo('https://glasanje.example', '/', 'Čačak', 'cyrillic').text,
+    ).toBe('Попуните пријаву за гласање у иностранству за жељено место: Čačak.');
+    expect(latinHeader).not.toContain('Корак до гласа');
+  });
+});
 
 describe('JMBG Validator', () => {
   test('validates correct JMBG', () => {
@@ -45,7 +98,7 @@ describe('JMBG Validator', () => {
     const invalidJmbg = '1207985710059';
     const res = validateJmbg(invalidJmbg);
     expect(res.valid).toBe(false);
-    expect(res.error).toContain('Kontrolna cifra');
+    expect(res.error).toContain('Контролна цифра');
   });
 
   test('rejects JMBG with wrong length', () => {
@@ -190,6 +243,7 @@ describe('Invitation links', () => {
       'https://glasanje.example',
       '/prijava?country=SG#summary',
       ' Singapur ',
+      'latin',
     );
 
     expect(buildInvitationUrl('https://glasanje.example', '/prijava?country=SG#summary', 'Singapur'))
@@ -202,9 +256,9 @@ describe('Invitation links', () => {
   });
 
   test('copies the complete invitation text and URL when native sharing is unavailable', async () => {
-    const invitation = buildInvitationInfo('https://glasanje.example', '/', 'Singapur');
+    const invitation = buildInvitationInfo('https://glasanje.example', '/', 'Singapur', 'cyrillic');
     let copiedText = '';
-    const result = await shareInvitation(invitation, async (text) => {
+    const result = await shareInvitation(invitation, 'cyrillic', async (text) => {
       copiedText = text;
       return true;
     });
@@ -263,8 +317,8 @@ describe('Missions and Coverage Dataset', () => {
   test('Taiwan aliases show an unassigned guidance notice without selecting a mission', () => {
     for (const alias of ['Тајван', 'Tajvan', 'Taiwan', 'Taiwanese passports']) {
       expect(getCountryTypeaheadResults(alias)).toEqual([]);
-      expect(getTaiwanSearchNotice(alias)).toContain('nije potvrđena nadležnost');
-      expect(getTaiwanSearchNotice(alias)).toContain('ne bira predstavništvo');
+      expect(getTaiwanSearchNotice(alias)).toContain('није потврђена надлежност');
+      expect(getTaiwanSearchNotice(alias)).toContain('не бира представништво');
     }
 
     expect(resolveVotingDestinationSelection('TW')).toEqual({ countryCode: '', stationId: null });
@@ -286,10 +340,10 @@ describe('Missions and Coverage Dataset', () => {
       }),
     );
 
-    expect(canadaMarkup).toContain('Za ovu državu ima više predstavništava');
-    expect(canadaMarkup).toContain('Ambasada Republike Srbije (Kanada)');
-    expect(canadaMarkup).not.toContain('Džakarta');
-    expect(singaporeMarkup).not.toContain('Za ovu državu ima više predstavništava');
+    expect(canadaMarkup).toContain('За ову државу има више представништава');
+    expect(canadaMarkup).toContain('Амбасада Републике Србије (Канада)');
+    expect(canadaMarkup).not.toContain('Џакарта');
+    expect(singaporeMarkup).not.toContain('За ову државу има више представништава');
   });
 
   test('United States retains bilingual discovery aliases', () => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useScript } from '../lib/script';
 
 // Expected deadline: ~22 days before October 25, 2026 election
 // Target: October 3, 2026 23:59:59 CET (Belgrade UTC+2 in summer/early autumn)
@@ -28,6 +29,7 @@ function calculateRemaining(targetMs: number): TimeRemaining {
 
 export const Countdown: React.FC = () => {
   const [time, setTime] = useState<TimeRemaining>(() => calculateRemaining(TARGET_DEADLINE_MS));
+  const { t } = useScript();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -39,38 +41,37 @@ export const Countdown: React.FC = () => {
   return (
     <div className="countdown-card">
       <div className="countdown-header">
-        Rok za prijavu za glasanje iz inostranstva (očekivano)
+        {t('Rok za prijavu za glasanje iz inostranstva (očekivano)')}
       </div>
 
       {!time.isExpired ? (
         <div className="countdown-grid">
           <div className="countdown-box">
             <div className="countdown-num">{time.days}</div>
-            <div className="countdown-lbl">dana</div>
+            <div className="countdown-lbl">{t('dana')}</div>
           </div>
           <div className="countdown-box">
             <div className="countdown-num">{time.hours}</div>
-            <div className="countdown-lbl">sati</div>
+            <div className="countdown-lbl">{t('sati')}</div>
           </div>
           <div className="countdown-box">
             <div className="countdown-num">{time.minutes}</div>
-            <div className="countdown-lbl">minuta</div>
+            <div className="countdown-lbl">{t('minuta')}</div>
           </div>
           <div className="countdown-box">
             <div className="countdown-num">{time.seconds}</div>
-            <div className="countdown-lbl">sekundi</div>
+            <div className="countdown-lbl">{t('sekundi')}</div>
           </div>
         </div>
       ) : (
         <div style={{ padding: '0.75rem 0', fontWeight: 'bold', color: '#fca5a5' }}>
-          Zvanični rok za prijavu je istekao ili je u toku zaključenje biračkog spiska.
+          {t('Zvanični rok za prijavu je istekao ili je u toku zaključenje biračkog spiska.')}
         </div>
       )}
 
       <div className="countdown-note">
-        📢 <strong>Izbori su raspisani za 25. oktobar 2026. godine.</strong> Zahtev za glasanje u
-        inostranstvu podnosi se najkasnije 5 dana pre zaključenja biračkog spiska (član 16. Zakona).
-        Preporučujemo da prijavu pošaljete što pre kako bi nadležna ambasada stigla da je obradi.
+        📢 <strong>{t('Izbori su raspisani za 25. oktobar 2026. godine.')}</strong>{' '}
+        {t('Zahtev za glasanje u inostranstvu podnosi se najkasnije 5 dana pre zaključenja biračkog spiska (član 16. Zakona). Preporučujemo da prijavu pošaljete što pre kako bi nadležna ambasada stigla da je obradi.')}
       </div>
     </div>
   );

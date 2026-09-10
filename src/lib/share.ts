@@ -1,3 +1,5 @@
+import { Script, translateStaticText } from './script';
+
 /**
  * Local download, transfer, clipboard, and public email-field helpers.
  */
@@ -111,10 +113,11 @@ export function canSharePdfFile(): boolean {
 
 export async function shareFileWithNativeApp(
   file: File,
-  info: WebShareInfo
+  info: WebShareInfo,
+  script: Script,
 ): Promise<{ success: boolean; error?: string }> {
   if (!canShareFile(file)) {
-    return { success: false, error: 'Пренос PDF-а није подржан на овом прегледачу' };
+    return { success: false, error: translateStaticText(script, 'Prenos PDF-a nije podržan na ovom pregledaču') };
   }
 
   try {
@@ -126,9 +129,9 @@ export async function shareFileWithNativeApp(
     return { success: true };
   } catch (err: unknown) {
     if (err instanceof Error && err.name === 'AbortError') {
-      return { success: false, error: 'Пренос PDF-а је отказан' };
+      return { success: false, error: translateStaticText(script, 'Prenos PDF-a je otkazan') };
     }
-    return { success: false, error: 'Пренос PDF-а није успео' };
+    return { success: false, error: translateStaticText(script, 'Prenos PDF-a nije uspeo') };
   }
 }
 
@@ -191,6 +194,7 @@ export function buildInvitationCopyText(info: InvitationShareInfo): string {
 
 export async function shareInvitation(
   info: InvitationShareInfo,
+  script: Script,
   copy = copyTextToClipboard,
 ): Promise<InvitationShareResult> {
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
@@ -199,18 +203,18 @@ export async function shareInvitation(
       return { success: true, method: 'native' };
     } catch (error: unknown) {
       if (error instanceof Error && error.name === 'AbortError') {
-        return { success: false, error: 'Deljenje poziva je otkazano.' };
+        return { success: false, error: translateStaticText(script, 'Deljenje poziva je otkazano.') };
       }
-      return { success: false, error: 'Deljenje poziva nije uspelo.' };
+      return { success: false, error: translateStaticText(script, 'Deljenje poziva nije uspelo.') };
     }
   }
 
   try {
     return (await copy(buildInvitationCopyText(info)))
       ? { success: true, method: 'clipboard' }
-      : { success: false, error: 'Kopiranje poziva nije uspelo.' };
+      : { success: false, error: translateStaticText(script, 'Kopiranje poziva nije uspelo.') };
   } catch {
-    return { success: false, error: 'Kopiranje poziva nije uspelo.' };
+    return { success: false, error: translateStaticText(script, 'Kopiranje poziva nije uspelo.') };
   }
 }
 
