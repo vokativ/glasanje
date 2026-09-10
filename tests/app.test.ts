@@ -349,6 +349,9 @@ describe('Missions and Coverage Dataset', () => {
     expect(canadaMarkup).toContain('За ову државу има више представништава');
     expect(canadaMarkup).toContain('Амбасада Републике Србије (Канада)');
     expect(canadaMarkup).not.toContain('Џакарта');
+    expect(canadaMarkup).toContain(
+      'placeholder="npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore"',
+    );
     expect(singaporeMarkup).not.toContain('За ову државу има више представништава');
   });
 

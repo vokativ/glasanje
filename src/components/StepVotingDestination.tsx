@@ -406,7 +406,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             className={`form-control ${
               touched.foreignAddress && !isForeignAddressValid ? 'is-invalid' : ''
             }`}
-            placeholder={t('npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore')}
+            placeholder="npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore"
             value={foreignAddress}
             onChange={(e) => setForeignAddress(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, foreignAddress: true }))}
