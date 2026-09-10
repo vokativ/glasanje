@@ -311,17 +311,17 @@ def validate_approvals(
         decision = require_string(approval, "decision", label)
         approved_at = require_string(approval, "approvedAt", label)
         require_timestamp(approved_at, label)
-        candidate = candidates.get(candidate_id)
-        if candidate is None:
-            fail(f"{label} references an unknown candidate")
-        if election_id != candidate["electionId"]:
-            fail(f"{label} electionId does not match candidate {candidate_id}")
         if approval.get("reviewerType") != "human":
             fail(f"{label} is not an explicit human approval record")
         if reviewer_id not in allowed_reviewer_ids:
             fail(f"{label} reviewerId is not in the reviewed allow-list")
         if decision not in {APPROVAL_DECISION, "reject"}:
             fail(f"{label} has an unknown decision")
+        candidate = candidates.get(candidate_id)
+        if candidate is None:
+            continue
+        if election_id != candidate["electionId"]:
+            fail(f"{label} electionId does not match candidate {candidate_id}")
         approvals[candidate_id].append(
             {"reviewerId": reviewer_id, "decision": decision, "approvedAt": approved_at}
         )

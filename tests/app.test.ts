@@ -443,18 +443,34 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.email).toBe('srb.emb.australia@mfa.rs');
     expect(station.website).toBe('https://canberra.mfa.gov.rs');
   });
+  test('Antigua and Barbuda uses the confirmed U.S. Embassy election recipient', () => {
+    const station = COUNTRY_BY_CODE.get('AG')!.stations.find(
+      (candidate) => candidate.id === 'st-nonres-ag',
+    );
+
+    expect(station).toMatchObject({
+      email: 'izbori@serbiaembusa.org',
+      isElectionContactConfirmed: true,
+    });
+  });
+
 
   test('Germany has 6 resident stations', () => {
     const de = COUNTRY_BY_CODE.get('DE');
     expect(de).toBeDefined();
     expect(de?.stations.length).toBe(6);
     const emails = de!.stations.map((s) => s.email);
+    const hamburg = de!.stations.find((station) => station.id === 'st-de-cons-hamburg');
+    expect(hamburg).toBeDefined();
+    expect(hamburg?.email).toBe('izbori@gkrshamburg.de');
+    expect(hamburg?.isElectionContactConfirmed).toBe(true);
+
     expect(emails).toContain('izbori@botschaft-serbien.de');
     expect(emails).toContain('gk-stutgart@t-online.de');
     expect(emails).toContain('izbori@gksrbfra.de');
     expect(emails).toContain('gk.muenchen@mfa.rs');
     expect(emails).toContain('info.dusseldorf@mfa.rs');
-    expect(emails).toContain('info@gkrshamburg.de');
+    expect(emails).toContain('izbori@gkrshamburg.de');
   });
 
   test('Austria embassy is distinct from Salzburg consulate', () => {
@@ -481,7 +497,7 @@ describe('Missions and Coverage Dataset', () => {
     const confirmed = COUNTRIES.flatMap((country) => country.stations)
       .filter((station) => station.isElectionContactConfirmed);
 
-    expect(confirmed).toHaveLength(15);
+    expect(confirmed).toHaveLength(31);
     expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
       (station) => station.id === 'st-it-emb-main',
     )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
@@ -510,7 +526,7 @@ describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
 
-    expect(coverage.confirmed).toBe(15);
+    expect(coverage.confirmed).toBe(31);
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 

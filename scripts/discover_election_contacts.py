@@ -23,7 +23,7 @@ from io import BytesIO
 from pathlib import Path
 from typing import Iterable
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.parse import unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from bs4 import BeautifulSoup
@@ -46,10 +46,6 @@ ELECTION_RE = re.compile(
     r"\b(?:izbor\w*|glasanj\w*|birac\w*|election\w*|vot(?:e|ing)\w*|electoral\w*)\b",
     re.IGNORECASE,
 )
-SOURCE_ELECTION_RE = re.compile(
-    r"\b(?:izbor\w*|glasanj\w*|bira[čc]\w*|election\w*|vot(?:e|ing)\w*|electoral\w*)\b|(?:избор\w*|гласањ\w*|бирач\w*)",
-    re.IGNORECASE,
-)
 ACTIVITY_RE = re.compile(
     r"(?:aktuelnost\w*|vesti?|obavestenj\w*|news|activit\w*|announcement\w*|saopstenj\w*|izbor\w*|glasanj\w*|birac\w*|election\w*|vot(?:e|ing)\w*)",
     re.IGNORECASE,
@@ -69,7 +65,7 @@ class Station:
     country_code: str
     station_id: str
     website_host: str
-
+    email: str = ""
 
 @dataclass(frozen=True)
 class PageTask:
@@ -86,6 +82,16 @@ class Response:
     content_type: str
     body: bytes
 
+@dataclass(frozen=True)
+class ElectionEvidence:
+    email: str
+    quote: str
+    context: str
+
+
+EVIDENCE_BLOCK_SELECTOR = "article, main, [role='main'], section, p, li, td, blockquote"
+CONTEXTUAL_CONTAINER_TAGS = frozenset({"article", "section", "li", "td", "blockquote"})
+GROUPED_NOTICE_CONTAINER_TAGS = CONTEXTUAL_CONTAINER_TAGS | frozenset({"div"})
 
 class RestrictedRedirectHandler(HTTPRedirectHandler):
     """Permit HTTPS redirects only to a pre-approved official host."""
@@ -141,6 +147,16 @@ def visible_text(element) -> str:
         hidden.decompose()
     return " ".join(copy.get_text(" ", strip=True).split())
 
+def extract_visible_emails(text: str) -> list[str]:
+    return sorted({match.group(0).lower() for match in EMAIL_RE.finditer(text)})
+
+
+def quote_for(text: str, email: str) -> str:
+    match = re.search(re.escape(email), text, re.IGNORECASE)
+    if match is None:
+        return ""
+    return text[max(0, match.start() - 240):min(len(text), match.end() + 360)].strip()
+
 
 
 def has_election_context(text: str) -> bool:
@@ -158,75 +174,169 @@ def derive_election_year(election_id: str) -> str | None:
     return years.pop() if years else None
 
 
-def election_context_for(title: str, quote: str, election_year: str) -> str:
-    if has_election_context(title) and has_election_year(title, election_year):
-        return title
-    return quote
-
-
-
-def extract_visible_emails(text: str) -> list[str]:
-    return sorted({match.group(0).lower() for match in EMAIL_RE.finditer(text)})
-
-
-def quote_for(text: str, email: str) -> str | None:
-    """Return one exact, bounded visible-text excerpt containing context and email."""
-    compact = " ".join(text.split())
-    email_match = re.search(
-        rf"(?<![\w.+%-]){re.escape(email)}(?![\w-]|\.[\w-])",
-        compact,
-        re.IGNORECASE,
+def has_target_election_context(text: str, election_year: str) -> bool:
+    return (
+        has_election_context(text)
+        and has_election_year(text, election_year)
+        and {match.group(1) for match in YEAR_RE.finditer(text)} == {election_year}
     )
-    if email_match is None or not has_election_context(compact):
-        return None
-    context_matches = list(SOURCE_ELECTION_RE.finditer(compact))
-    if not context_matches:
-        return compact if len(compact) <= 1800 else None
-    context = min(
-        context_matches,
-        key=lambda match: min(abs(email_match.start() - match.end()), abs(match.start() - email_match.end())),
+
+
+def notice_context_excerpt(container, email: str) -> str:
+    text = visible_text(container)
+    match = re.search(re.escape(email), text, re.IGNORECASE)
+    if match is None:
+        return ""
+    return text[max(0, match.start() - 600):min(len(text), match.end() + 360)].strip()
+
+
+def local_context_for(block, email: str, election_year: str | None) -> str | None:
+    """Return evidence from the mailbox's smallest enclosing grouped notice."""
+    block_text = visible_text(block)
+    fallback = notice_context_excerpt(block, email) if (
+        has_election_context(block_text)
+        and (
+            election_year is None
+            or has_target_election_context(block_text, election_year)
+        )
+    ) else ""
+    for parent in block.parents:
+        if parent.name == "main" or str(parent.get("role", "")).strip().casefold() == "main":
+            break
+        if parent.name not in GROUPED_NOTICE_CONTAINER_TAGS:
+            continue
+        text = visible_text(parent)
+        context = notice_context_excerpt(parent, email)
+        if not context:
+            continue
+        if election_year is None:
+            if has_election_context(text):
+                return context
+            continue
+        if has_target_election_context(text, election_year):
+            return context
+        if has_election_context(text) and YEAR_RE.search(text):
+            return None
+    return fallback
+
+
+def main_context_for(block, email: str, election_year: str | None) -> str:
+    """Return a main-level context only when it unambiguously names the election."""
+    if election_year is None or not has_election_context(visible_text(block)):
+        return ""
+    for parent in block.parents:
+        if parent.name != "main" and str(parent.get("role", "")).strip().casefold() != "main":
+            continue
+        text = visible_text(parent)
+        return (
+            notice_context_excerpt(parent, email)
+            if has_target_election_context(text, election_year)
+            else ""
+        )
+    return ""
+
+
+def is_notice_boundary(block) -> bool:
+    """Keep sibling traversal within one ungrouped page-local notice."""
+    return (
+        block.name in GROUPED_NOTICE_CONTAINER_TAGS
+        or str(block.get("role", "")).strip().casefold() == "main"
+        or bool(block.select(EVIDENCE_BLOCK_SELECTOR))
     )
-    start = min(email_match.start(), context.start())
-    end = max(email_match.end(), context.end())
-    if end - start > 1200:
-        return None
-    quote = compact[max(0, start - 240):min(len(compact), end + 360)].strip()
-    return quote if has_election_context(quote) and email.lower() in quote.lower() else None
 
 
-def extract_html_evidence(html: bytes) -> tuple[str, list[tuple[str, str]]]:
+def sibling_notice_context_for(block, email: str) -> str:
+    """Bind a mailbox to a nearby preceding notice, without scanning the page."""
+    block_text = visible_text(block)
+    for sibling in block.find_previous_siblings(limit=3):
+        if is_notice_boundary(sibling):
+            return ""
+        sibling_text = visible_text(sibling)
+        if not has_election_context(sibling_text) or not YEAR_RE.search(sibling_text):
+            continue
+        context = f"{sibling_text} {block_text}".strip()
+        return context if re.search(re.escape(email), context, re.IGNORECASE) else ""
+    return ""
+
+
+def evidence_context_for(block, email: str, election_year: str | None) -> str:
+    """Return the narrowest visible notice context associated with a mailbox."""
+    local_context = local_context_for(block, email, election_year)
+    if local_context is None:
+        return ""
+    return local_context or sibling_notice_context_for(block, email) or main_context_for(
+        block, email, election_year
+    )
+
+
+def election_context_for(quote: str, local_context: str, election_year: str) -> str | None:
+    """Accept only evidence bound to the mailbox's own quote or semantic container."""
+    for context in (quote, local_context):
+        if has_target_election_context(context, election_year):
+            return context
+    return None
+
+
+
+def mailto_target_matches_visible_email(block, email: str) -> bool:
+    """Reject a visible mailbox when its mailto destination names another one."""
+    for anchor in block.find_all("a", href=True):
+        if email not in extract_visible_emails(visible_text(anchor)):
+            continue
+        target = urlsplit(str(anchor["href"]).strip())
+        if target.scheme.casefold() != "mailto":
+            continue
+        if target.netloc or unquote(target.path).casefold() != email.casefold():
+            return False
+    return True
+
+
+def extract_html_evidence(
+    html: bytes, election_year: str | None = None
+) -> tuple[str, str, list[ElectionEvidence]]:
     soup = BeautifulSoup(html, "html.parser")
     title_node = soup.find("h1") or soup.find("title")
     title = visible_text(title_node) if title_node else ""
-    blocks = soup.select("article, main, [role='main'], section, p, li, td, blockquote")
-    evidence: set[tuple[str, str]] = set()
+    page_text = visible_text(soup)
+    blocks = soup.select(EVIDENCE_BLOCK_SELECTOR)
+    evidence: set[ElectionEvidence] = set()
     for block in blocks:
         text = visible_text(block)
-        if not text or not has_election_context(text):
+        if not text:
             continue
         for email in extract_visible_emails(text):
+            context = evidence_context_for(block, email, election_year)
+            if not context:
+                continue
+            if any(
+                email in extract_visible_emails(visible_text(child))
+                for child in block.select(EVIDENCE_BLOCK_SELECTOR)
+            ):
+                continue
+            if not mailto_target_matches_visible_email(block, email):
+                continue
             quote = quote_for(text, email)
             if quote:
-                evidence.add((email, quote))
-    return title, sorted(evidence)
+                evidence.add(ElectionEvidence(email, quote, context))
+    return title, page_text, sorted(evidence, key=lambda item: (item.email, item.quote, item.context))
 
 
-def extract_pdf_evidence(pdf: bytes, title_hint: str) -> tuple[str, list[tuple[str, str]]]:
+def extract_pdf_evidence(pdf: bytes, title_hint: str) -> tuple[str, str, list[ElectionEvidence]]:
     try:
         from pypdf import PdfReader
         reader = PdfReader(BytesIO(pdf))
         text = "\n".join((page.extract_text() or "") for page in reader.pages)
     except Exception:
-        return title_hint, []
+        return title_hint, "", []
     compact = " ".join(text.split())
     if not has_election_context(compact):
-        return title_hint, []
+        return title_hint, compact, []
     evidence = []
     for email in extract_visible_emails(compact):
         quote = quote_for(compact, email)
         if quote:
-            evidence.append((email, quote))
-    return title_hint, sorted(set(evidence))
+            evidence.append(ElectionEvidence(email, quote, quote))
+    return title_hint, compact, sorted(set(evidence), key=lambda item: (item.email, item.quote, item.context))
 
 
 def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: int) -> Response | None:
@@ -286,9 +396,11 @@ def load_stations(path: Path) -> tuple[dict[str, str], dict[str, tuple[Station, 
             website = station.get("website")
             if not isinstance(station_id, str) or not isinstance(website, str):
                 continue
+            email = station.get("email")
             official_url = absolute_https_url(website)
             if official_url is not None:
-                stations_by_country[code].append(Station(code, station_id, url_host(official_url)))
+                canonical_email = email.lower() if isinstance(email, str) and EMAIL_RE.fullmatch(email) else ""
+                stations_by_country[code].append(Station(code, station_id, url_host(official_url), canonical_email))
     return country_names, {
         code: tuple(sorted(set(entries), key=lambda station: station.station_id))
         for code, entries in stations_by_country.items()
@@ -350,6 +462,20 @@ def mission_links(html: bytes, task: PageTask) -> list[PageTask]:
         next_tasks[target] = PageTask(target, task.country_code, task.stations, task.depth + 1, anchor_text)
     return [next_tasks[url] for url in sorted(next_tasks)]
 
+def attributed_stations(
+    email: str,
+    source_url: str,
+    fallback_stations: tuple[Station, ...],
+    stations_by_host: dict[str, tuple[Station, ...]],
+) -> tuple[Station, ...]:
+    """Use an exact canonical mailbox match to attribute shared mission-site evidence."""
+    matching_stations = tuple(
+        station
+        for station in stations_by_host.get(url_host(source_url), ())
+        if station.email == email
+    )
+    return matching_stations or fallback_stations
+
 
 def candidate_record(
     election_id: str,
@@ -357,6 +483,7 @@ def candidate_record(
     station: Station,
     email: str,
     title: str,
+    election_context: str,
     quote: str,
     source_url: str,
     observed_at: str,
@@ -371,7 +498,7 @@ def candidate_record(
         "stationId": station.station_id,
         "email": email,
         "title": title,
-        "electionContext": election_context_for(title, quote, election_year),
+        "electionContext": election_context,
         "sourceQuote": quote,
         "sourceUrl": source_url,
         "sourceHost": url_host(source_url),
@@ -434,6 +561,14 @@ def main() -> int:
     args = parse_args()
     observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     country_names, stations_by_country = load_stations(args.missions)
+    stations_by_host_lists: dict[str, list[Station]] = defaultdict(list)
+    for stations in stations_by_country.values():
+        for station in stations:
+            stations_by_host_lists[station.website_host].append(station)
+    stations_by_host = {
+        host: tuple(sorted(stations, key=lambda station: (station.country_code, station.station_id)))
+        for host, stations in stations_by_host_lists.items()
+    }
     candidates: dict[str, dict[str, str]] = {}
     fetched_pages = 0
 
@@ -498,10 +633,10 @@ def main() -> int:
                     continue
                 is_pdf = task.url.lower().split("?", 1)[0].endswith(".pdf") or "pdf" in response.content_type
                 if is_pdf:
-                    title, evidence = extract_pdf_evidence(response.body, task.title_hint)
+                    title, _, evidence = extract_pdf_evidence(response.body, task.title_hint)
                     evidence_type = "pdf"
                 elif "html" in response.content_type:
-                    title, evidence = extract_html_evidence(response.body)
+                    title, _, evidence = extract_html_evidence(response.body, args.election_year)
                     evidence_type = "html"
                     if task.depth < args.max_depth:
                         for next_task in mission_links(response.body, task):
@@ -510,21 +645,19 @@ def main() -> int:
                                 next_tasks[key] = next_task
                 else:
                     continue
-                for email, quote in evidence:
-                    election_context = election_context_for(title, quote, args.election_year)
-                    if not (
-                        has_election_year(election_context, args.election_year)
-                        or has_election_year(quote, args.election_year)
-                    ):
+                for item in evidence:
+                    election_context = election_context_for(item.quote, item.context, args.election_year)
+                    if election_context is None:
                         continue
-                    for station in task.stations:
+                    for station in attributed_stations(item.email, response.url, task.stations, stations_by_host):
                         candidate = candidate_record(
                             args.election_id,
                             args.election_year,
                             station,
-                            email,
+                            item.email,
                             title,
-                            quote,
+                            election_context,
+                            item.quote,
                             response.url,
                             observed_at,
                             evidence_type,
