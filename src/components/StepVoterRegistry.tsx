@@ -7,19 +7,19 @@ interface StepVoterRegistryProps {
 export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed }) => {
   return (
     <div className="card">
-      <h2 className="card-title">Корак 1: Провера уписа у бирачки списак</h2>
+      <h2 className="card-title">Korak 1: Provera upisa u birački spisak</h2>
       <p className="card-subtitle">
-        Пре подношења захтева за гласање у иностранству, неопходно је да проверите да ли сте већ
-        уписани у Јединствени бирачки списак (ЈБС) Републике Србије.
+        Pre podnošenja zahteva za glasanje u inostranstvu, neophodno je da proverite da li ste već
+        upisani u Jedinstveni birački spisak (JBS) Republike Srbije.
       </p>
 
       <details className="alert alert-info">
         <summary style={{ cursor: 'pointer', fontWeight: 700 }}>
-          Како да проверите упис у бирачки списак?
+          Kako da proverite upis u birački spisak?
         </summary>
         <p style={{ marginTop: '0.5rem' }}>
-          Отворите званични портал Министарства државне управе и локалне самоуправе и унесите свој
-          ЈМБГ и број важеће личне карте или пасоша.
+          Otvorite zvanični portal Ministarstva državne uprave i lokalne samouprave i unesite svoj
+          JMBG i broj važeće lične karte ili pasoša.
         </p>
         <div style={{ marginTop: '0.75rem' }}>
           <a
@@ -28,14 +28,14 @@ export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed 
             rel="noopener noreferrer"
             className="btn btn-sm btn-navy"
           >
-            ↗ Отвори проверу бирачког списка (upit.birackispisak.gov.rs)
+            ↗ Otvori proveru biračkog spiska (upit.birackispisak.gov.rs)
           </a>
         </div>
       </details>
 
       <div style={{ margin: '1.25rem 0' }}>
         <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-          Изаберите свој статус:
+          Izaberite svoj status:
         </h3>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -46,9 +46,9 @@ export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed 
             style={{ justifyContent: 'flex-start', textAlign: 'left', padding: '1rem' }}
           >
             <div>
-              <div style={{ fontWeight: 700 }}>✓ Уписан/а сам у бирачки списак</div>
+              <div style={{ fontWeight: 700 }}>✓ Upisan/a sam u birački spisak</div>
               <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>
-                Наставите поступак попуњавања захтева за гласање у иностранству
+                Nastavite postupak popunjavanja zahteva za glasanje u inostranstvu
               </div>
             </div>
             <span aria-hidden="true">→</span>
@@ -56,21 +56,21 @@ export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed 
 
           <details style={{ background: '#f8fafc', padding: '0.75rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid #cbd5e1' }}>
             <summary style={{ fontWeight: 600, cursor: 'pointer', color: 'var(--color-primary)' }}>
-              Шта ако нисам уписан/а у бирачки списак?
+              Šta ako nisam upisan/a u birački spisak?
             </summary>
             <div style={{ fontSize: '0.85rem', marginTop: '0.5rem', lineHeight: 1.5, color: '#475569' }}>
               <p>
-                Уколико нисте уписани у Јединствени бирачки списак (на пример, ако сте пунолетство
-                стекли у иностранству или раније нисте вадили личну карту у Србији), неопходно је да
-                дипломатско-конзуларном представништву поднесете <strong>два захтева истовремено</strong>:
+                Ukoliko niste upisani u Jedinstveni birački spisak (na primer, ako ste punoletstvo
+                stekli u inostranstvu ili ranije niste vadili ličnu kartu u Srbiji), neophodno je da
+                diplomatsko-konzularnom predstavništvu podnesete <strong>dva zahteva istovremeno</strong>:
               </p>
               <ol style={{ marginLeft: '1.25rem', marginTop: '0.35rem' }}>
-                <li>Захтев за упис у Јединствени бирачки списак</li>
-                <li>Захтев за упис податка да ћете гласати у иностранству</li>
+                <li>Zahtev za upis u Jedinstveni birački spisak</li>
+                <li>Zahtev za upis podatka da ćete glasati u inostranstvu</li>
               </ol>
               <p style={{ marginTop: '0.5rem' }}>
-                Овај алат попуњава образац под бројем 2. Након што попуните овај захтев, можете
-                на контактима амбасаде затражити и образац за упис у бирачки списак.
+                Ovaj alat popunjava obrazac pod brojem 2. Nakon što popunite ovaj zahtev, možete
+                na kontaktima ambasade zatražiti i obrazac za upis u birački spisak.
               </p>
               <button
                 type="button"
@@ -78,7 +78,7 @@ export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed 
                 className="btn btn-sm btn-primary"
                 style={{ marginTop: '0.75rem' }}
               >
-                Настави са попуњавањем овог захтева →
+                Nastavi sa popunjavanjem ovog zahteva →
               </button>
             </div>
           </details>

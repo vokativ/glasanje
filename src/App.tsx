@@ -8,6 +8,7 @@ import type { SignatureAndDocumentData } from './components/StepSignatureAndDocu
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { COUNTRY_BY_CODE } from './data/missions';
 import { ApplicationFormData } from './lib/pdf';
+import { getInitialDesiredLocation } from './lib/invite';
 import { formatSerbianDate } from './lib/validators';
 
 const StepSignatureAndDocument = React.lazy(() =>
@@ -32,12 +33,15 @@ const getInitialCountryCode = (): string => {
   return COUNTRY_BY_CODE.has(countryCode) ? countryCode : '';
 };
 
+const getInitialDesiredLocationFromUrl = (): string =>
+  typeof window === 'undefined' ? '' : getInitialDesiredLocation(window.location.search);
+
 const STEPS = [
-  { id: 1, label: 'Провера' },
-  { id: 2, label: 'Подаци' },
-  { id: 3, label: 'Место' },
-  { id: 4, label: 'Потпис' },
-  { id: 5, label: 'Слање' },
+  { id: 1, label: 'Provera' },
+  { id: 2, label: 'Podaci' },
+  { id: 3, label: 'Mesto' },
+  { id: 4, label: 'Potpis' },
+  { id: 5, label: 'Slanje' },
 ];
 
 export const App: React.FC = () => {
@@ -58,7 +62,7 @@ export const App: React.FC = () => {
     countryCode: getInitialCountryCode(),
     stationId: null,
     foreignAddress: '',
-    desiredLocation: '',
+    desiredLocation: getInitialDesiredLocationFromUrl(),
   }));
 
   const [signatureAndDoc, setSignatureAndDoc] = useState<SignatureAndDocumentData>({
@@ -87,7 +91,7 @@ export const App: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (window.confirm('Да ли сте сигурни да желите да започнете нову пријаву?')) {
+    if (window.confirm('Da li ste sigurni da želite da započnete novu prijavu?')) {
       setCurrentStep(1);
       setPersonalInfo({
         fullName: '',
@@ -115,7 +119,8 @@ export const App: React.FC = () => {
   const currentStation = votingDestination.stationId
     ? currentCountry?.stations.find((station) => station.id === votingDestination.stationId) ?? null
     : null;
-  const countryDisplayName = currentCountry?.labelCyr ?? '';
+  const countryDisplayName = currentCountry?.label ?? '';
+  const countryNameCyr = currentCountry?.labelCyr ?? '';
 
   // Compile full application data for PDF generator. A station must be resolved before export renders.
   const compiledApplicationData: ApplicationFormData = {
@@ -139,7 +144,7 @@ export const App: React.FC = () => {
       <Countdown />
 
       {/* Stepper Navigation */}
-      <nav className="stepper-nav" aria-label="Фазе попуњавања">
+      <nav className="stepper-nav" aria-label="Faze popunjavanja">
         {STEPS.map((s) => {
           const isCompleted = s.id < currentStep;
           const isActive = s.id === currentStep;
@@ -187,7 +192,7 @@ export const App: React.FC = () => {
         )}
 
         {currentStep === 4 && (
-          <React.Suspense fallback={<p aria-live="polite">Учитавање потписа и документа…</p>}>
+          <React.Suspense fallback={<p aria-live="polite">Učitavanje potpisa i dokumenta…</p>}>
             <StepSignatureAndDocument
               initialData={signatureAndDoc}
               onBack={() => setCurrentStep(3)}
@@ -197,11 +202,12 @@ export const App: React.FC = () => {
         )}
 
         {currentStep === 5 && currentStation && (
-          <React.Suspense fallback={<p aria-live="polite">Учитавање извоза пријаве…</p>}>
+          <React.Suspense fallback={<p aria-live="polite">Učitavanje izvoza prijave…</p>}>
             <StepExportAndSubmit
               formData={compiledApplicationData}
               station={currentStation}
               countryName={countryDisplayName}
+              countryNameCyr={countryNameCyr}
               isWetInkSignature={signatureAndDoc.isWetInkSignature}
               onBack={() => setCurrentStep(4)}
               onReset={handleReset}
@@ -213,24 +219,24 @@ export const App: React.FC = () => {
       {/* Footer */}
       <footer style={{ textAlign: 'center', margin: '2rem 0', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
         <p>
-          Овај сајт је независан волонтерски алат за грађане Србије у дијаспори.{' '}
+          Ovaj sajt je nezavisan volonterski alat za građane Srbije u dijaspori.{' '}
           <button
             type="button"
             onClick={() => setIsPrivacyOpen(true)}
             style={{ background: 'none', border: 'none', color: 'var(--color-primary)', textDecoration: 'underline', cursor: 'pointer' }}
           >
-            Полиса приватности
+            Politika privatnosti
           </button>
         </p>
         <p style={{ marginTop: '0.35rem' }}>
-          Изворни код је отворен и доступан на{' '}
+          Izvorni kod je otvoren i dostupan na{' '}
           <a
             href="https://github.com/vokativ/glasanje"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: 'var(--color-primary)' }}
           >
-            GitHub-у
+            GitHub-u
           </a>
           .
         </p>

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ApplicationFormData, generateApplicationPdf } from '../lib/pdf';
+import { buildInvitationInfo } from '../lib/invite';
 import {
   canSharePdfFile,
   shareFileWithNativeApp,
@@ -8,6 +9,7 @@ import {
   getWebmailLinks,
   buildRecipientPayloads,
   isNarrowMobileBrowser,
+  shareInvitation,
 } from '../lib/share';
 import { PollingStation } from '../data/missions';
 
@@ -15,6 +17,7 @@ interface StepExportAndSubmitProps {
   formData: ApplicationFormData;
   station: PollingStation;
   countryName: string;
+  countryNameCyr: string;
   isWetInkSignature: boolean;
   onBack: () => void;
   onReset: () => void;
@@ -24,6 +27,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   formData,
   station,
   countryName,
+  countryNameCyr,
   isWetInkSignature,
   onBack,
   onReset,
@@ -37,8 +41,14 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
   const [copiedBody, setCopiedBody] = useState<boolean>(false);
   const [shareError, setShareError] = useState<string | null>(null);
+  const [invitationStatus, setInvitationStatus] = useState<{
+    success: boolean;
+    message: string;
+  } | null>(null);
+  const [isSharingInvitation, setIsSharingInvitation] = useState<boolean>(false);
   const mobileSharingAvailable = !isWetInkSignature && canSharePdfFile();
   const hideProviderLinks = isNarrowMobileBrowser();
+  const desiredLocation = formData.desiredLocation?.trim() ?? '';
 
   const subject = 'Пријава за гласање из иностранства — избори 2026.';
   const isIdDocumentEmbedded = Boolean(formData.idDocumentDataUrl);
@@ -50,7 +60,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
 Након штампања и својеручног потписивања, у прилогу достављам скенирану или фотографисану пријаву за гласање у иностранству за изборе 2026. године. ${idDocumentSentence}
 
-Држава боравка: ${countryName}
+Држава боравка: ${countryNameCyr}
 Дипломатско представништво: ${station.embassyCyr}
 
 Молим за потврду пријема захтева.`
@@ -58,7 +68,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
 У прилогу достављам попуњен и потписан Захтев за упис у бирачки списак податка да ћу гласати у иностранству на предстојећим изборима 2026. године. ${idDocumentSentence}
 
-Држава боравка: ${countryName}
+Држава боравка: ${countryNameCyr}
 Дипломатско представништво: ${station.embassyCyr}
 
 Молим за потврду пријема захтева.`;
@@ -88,7 +98,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         return generated;
       })
       .catch((err) => {
-        setPdfError(`Грешка при генерисању PDF документа: ${String(err)}`);
+        setPdfError(`Greška pri generisanju PDF dokumenta: ${String(err)}`);
         throw err;
       })
       .finally(() => {
@@ -147,16 +157,39 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
     }
   };
 
+  const handleInvitationShare = () => {
+    const desiredLocation = formData.desiredLocation?.trim();
+    if (!desiredLocation || typeof window === 'undefined') return;
+
+    setInvitationStatus(null);
+    setIsSharingInvitation(true);
+    const invitation = buildInvitationInfo(window.location.origin, window.location.pathname, desiredLocation);
+
+    void shareInvitation(invitation).then((result) => {
+      setIsSharingInvitation(false);
+      setInvitationStatus(
+        result.success
+          ? {
+              success: true,
+              message: result.method === 'native'
+                ? 'Poziv je podeljen.'
+                : 'Poziv i veza su kopirani u privremenu memoriju.',
+            }
+          : { success: false, message: result.error },
+      );
+    });
+  };
+
   const downloadLabel = isWetInkSignature
-    ? '🖨️ Преузми PDF за штампу и потпис →'
-    : '📥 Преузми потписан PDF формулар →';
+    ? '🖨️ Preuzmi PDF za štampu i potpis →'
+    : '📥 Preuzmi potpisan PDF formular →';
 
   return (
     <div className="card">
-      <h2 className="card-title">Корак 5: Преузимање и предаја пријаве</h2>
+      <h2 className="card-title">Korak 5: Preuzimanje i predaja prijave</h2>
       <p className="card-subtitle">
-        Преузмите PDF, затим га сами приложите у поруку или га пренесите у изабрану апликацију.
-        Ова страница само припрема PDF и не обавља предају.
+        Preuzmite PDF, zatim ga sami priložite u poruku ili ga prenesite u izabranu aplikaciju.
+        Ova stranica samo priprema PDF i ne obavlja predaju.
       </p>
 
       {!station.isElectionContactConfirmed && (
@@ -172,9 +205,9 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             padding: '1rem',
           }}
         >
-          <strong>Адреса за изборе није потврђена.</strong> Ово је општи контакт мисије, а не
-          потврђено електронско сандуче за упис у бирачки списак. Можете сачекати потврђено
-          званично обавештење или сами проверити сајт мисије у одељку за контакт на дну странице.
+          <strong>Adresa za izbore nije potvrđena.</strong> Ovo je opšti kontakt misije, a ne
+          potvrđeno elektronsko sanduče za upis u birački spisak. Možete sačekati potvrđeno
+          zvanično obaveštenje ili sami proveriti sajt misije u odeljku za kontakt na dnu stranice.
         </div>
       )}
 
@@ -188,7 +221,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         }}
       >
         <div style={{ fontWeight: 700, color: 'var(--color-primary)', marginBottom: '0.5rem' }}>
-          📋 Сажетак пријаве
+          📋 Sažetak prijave
         </div>
         <div
           style={{
@@ -198,21 +231,60 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             fontSize: '0.85rem',
           }}
         >
-          <div><strong>Држава:</strong> {countryName}</div>
-          <div><strong>Представништво:</strong> {station.embassyCyr}</div>
+          <div><strong>Država:</strong> {countryName}</div>
+          <div><strong>Predstavništvo:</strong> {station.embassy}</div>
           <div>
-            <strong>Прилог пасоша:</strong>{' '}
-            {formData.idDocumentDataUrl ? 'Уграђен као страна 2 у PDF' : 'Није учитан; приложите га засебно'}
+            <strong>Prilog pasoša:</strong>{' '}
+            {formData.idDocumentDataUrl ? 'Ugrađen kao strana 2 u PDF' : 'Nije učitan; priložite ga zasebno'}
           </div>
         </div>
       </div>
 
+      {desiredLocation && (
+        <section
+          aria-labelledby="invitation-title"
+          style={{
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-md)',
+            padding: '1rem',
+            marginBottom: '1.5rem',
+          }}
+        >
+          <h3 id="invitation-title" style={{ marginTop: 0 }}>
+            Podelite poziv za glasanje u {desiredLocation}
+          </h3>
+          <p>
+            Pošaljite drugima vezu koja unapred popunjava njihovo željeno mesto glasanja.
+          </p>
+          <button
+            type="button"
+            onClick={handleInvitationShare}
+            disabled={isSharingInvitation}
+            className="btn btn-outline"
+          >
+            {isSharingInvitation ? 'Deljenje poziva...' : 'Podeli poziv i vezu'}
+          </button>
+          {invitationStatus && (
+            <div
+              role={invitationStatus.success ? 'status' : 'alert'}
+              style={{
+                color: invitationStatus.success ? 'var(--color-success)' : 'var(--color-danger)',
+                fontWeight: 600,
+                marginTop: '0.75rem',
+              }}
+            >
+              {invitationStatus.message}
+            </div>
+          )}
+        </section>
+      )}
+
 
       {isWetInkSignature && (
         <div className="alert alert-warning" style={{ marginBottom: '1.5rem' }}>
-          <strong>Потребан је својеручни потпис.</strong> Овај PDF није потписан за слање: одштампајте
-          га, потпишите, па направите скен или јасну фотографију. У поруку се ручно прилаже тек
-          скенирани/фотографисани потписани образац.
+          <strong>Potreban je svojeručni potpis.</strong> Ovaj PDF nije potpisan za slanje: odštampajte
+          ga, potpišite, pa napravite sken ili jasnu fotografiju. U poruku se ručno prilaže tek
+          skenirani/fotografisani potpisani obrazac.
         </div>
       )}
 
@@ -226,11 +298,11 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             marginBottom: '1.5rem',
           }}
         >
-          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>На телефону: подели PDF (Web Share)</h3>
+          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>Na telefonu: podeli PDF (Web Share)</h3>
           <p>
-            Отворите дељење и изаберите Gmail, Apple Mail, Outlook или Yahoo Mail да пренесете PDF.
-            У изабраној апликацији ручно унесите адресу примаоца према упутству у тексту поруке,
-            па уклоните то привремено упутство пре слања.
+            Otvorite deljenje i izaberite Gmail, Apple Mail, Outlook ili Yahoo Mail da prenesete PDF.
+            U izabranoj aplikaciji ručno unesite adresu primaoca prema uputstvu u tekstu poruke,
+            pa uklonite to privremeno uputstvo pre slanja.
           </p>
           <button
             type="button"
@@ -239,14 +311,14 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             className="btn btn-primary btn-lg btn-block"
           >
             {pdfBytes
-              ? '✉️➕📄 Подели PDF у своју апликацију за е-пошту →'
+              ? '✉️➕📄 Podeli PDF u svoju aplikaciju za e-poštu →'
               : isGenerating || !pdfError
-                ? '⏳ Припремање PDF-а...'
-                : 'PDF није припремљен'}
+                ? '⏳ Pripremanje PDF-a...'
+                : 'PDF nije pripremljen'}
           </button>
           <p className="form-hint" style={{ textAlign: 'center' }}>
-            Дељење преноси PDF и исти наслов и текст поруке, али не уноси примаоца, не додаје
-            адресу и не шаље поруку.
+            Deljenje prenosi PDF i isti naslov i tekst poruke, ali ne unosi primaoca, ne dodaje
+            adresu i ne šalje poruku.
           </p>
           {pdfError && (
             <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
@@ -270,15 +342,15 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           marginBottom: '1.5rem',
         }}
       >
-        <h3 id="desktop-handoff-title" style={{ marginTop: 0 }}>Ручно: преузимање и прилагање PDF-а</h3>
-        <p><strong>1.</strong> Преузмите PDF на уређај.</p>
+        <h3 id="desktop-handoff-title" style={{ marginTop: 0 }}>Ručno: preuzimanje i prilaganje PDF-a</h3>
+        <p><strong>1.</strong> Preuzmite PDF na uređaj.</p>
         <button
           type="button"
           onClick={handleDownload}
           disabled={isGenerating}
           className="btn btn-secondary btn-lg btn-block"
         >
-          {isGenerating ? '⏳ Генерисање PDF-а...' : downloadLabel}
+          {isGenerating ? '⏳ Generisanje PDF-a...' : downloadLabel}
         </button>
         {!mobileSharingAvailable && pdfError && (
           <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
@@ -296,79 +368,79 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             }}
           >
             {isWetInkSignature
-              ? '✓ PDF је преузет. Следе штампање, потпис и скенирање или фотографисање.'
-              : '✓ PDF је преузет на ваш уређај.'}
+              ? '✓ PDF je preuzet. Slede štampanje, potpis i skeniranje ili fotografisanje.'
+              : '✓ PDF je preuzet na vaš uređaj.'}
           </div>
         )}
 
         <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
-          <p><strong>2.</strong> Отворите припремљену поруку, ручно приложите PDF и сами је пошаљите.</p>
+          <p><strong>2.</strong> Otvorite pripremljenu poruku, ručno priložite PDF i sami je pošaljite.</p>
           <a href={webmailLinks.mailto} className="btn btn-primary btn-lg btn-block">
-            ✉️ Отвори припремљену е-пошту →
+            ✉️ Otvori pripremljenu e-poštu →
           </a>
           <p className="form-hint">
-            Веза отвара подразумевани програм за е-пошту са припремљеним примаоцем, насловом и
-            текстом, али не може да приложи PDF нити да пошаље поруку. Ако текст на почетку тражи
-            додатни прилог, приложите га, па уклоните то привремено упутство пре слања.
+            Veza otvara podrazumevani program za e-poštu sa pripremljenim primaocem, naslovom i
+            tekstom, ali ne može da priloži PDF niti da pošalje poruku. Ako tekst na početku traži
+            dodatni prilog, priložite ga, pa uklonite to privremeno uputstvo pre slanja.
           </p>
 
           {!hideProviderLinks && (
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
               <a href={webmailLinks.gmail} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                Настави у Gmail-у ↗
+                Nastavi u Gmail-u ↗
               </a>
               <a href={webmailLinks.outlook} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                Настави у Outlook-у ↗
+                Nastavi u Outlook-u ↗
               </a>
               <a href={webmailLinks.yahoo} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
-                Настави у Yahoo-у ↗
+                Nastavi u Yahoo-u ↗
               </a>
             </div>
           )}
 
           <div style={{ marginTop: '1rem' }}>
             <p className="form-hint">
-              <strong>Потпуно ручна алтернатива:</strong> ако не можете да отворите припремљену
-              поруку, копирајте адресу, наслов и текст у своју апликацију за е-пошту. Копирани
-              текст почиње привременим упутствима: поступите по њима, па их уклоните пре слања.
+              <strong>Potpuno ručna alternativa:</strong> ako ne možete da otvorite pripremljenu
+              poruku, kopirajte adresu, naslov i tekst u svoju aplikaciju za e-poštu. Kopirani
+              tekst počinje privremenim uputstvima: postupite po njima, pa ih uklonite pre slanja.
             </p>
             <button type="button" onClick={handleCopyBody} className="btn btn-sm btn-outline">
-              {copiedBody ? '✓ Адреса, наслов и текст су копирани' : '📝 Копирај адресу, наслов и текст поруке'}
+              {copiedBody ? '✓ Adresa, naslov i tekst su kopirani' : '📝 Kopiraj adresu, naslov i tekst poruke'}
             </button>
           </div>
         </div>
 
         <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
-          <p><strong>3.</strong> Ручно приложите и проверите пре предаје.</p>
+          <p><strong>3.</strong> Ručno priložite i proverite pre predaje.</p>
           <ul className="checklist">
             <li className="checklist-item">
               <span className="checklist-icon">📎</span>
               <span>
-                <strong>Приложите PDF:</strong>{' '}
+                <strong>Priložite PDF:</strong>{' '}
                 {isWetInkSignature
-                  ? 'приложите скенирани или фотографисани потписани образац, не непотписани PDF за штампу.'
-                  : 'приложите преузети PDF формулар.'}
+                  ? 'priložite skenirani ili fotografisani potpisani obrazac, ne nepotpisani PDF za štampu.'
+                  : 'priložite preuzeti PDF formular.'}
               </span>
             </li>
             <li className="checklist-item">
               <span className="checklist-icon">📸</span>
               <span>
-                <strong>Копија пасоша / личне карте:</strong>{' '}
+                <strong>Kopija pasoša / lične karte:</strong>{' '}
                 {isIdDocumentEmbedded
-                  ? 'већ је уграђена као страна 2 PDF-а.'
-                  : 'ручно приложите слику прве стране српског пасоша или личне карте.'}
+                  ? 'već je ugrađena kao strana 2 PDF-a.'
+                  : 'ručno priložite sliku prve strane srpskog pasoša ili lične karte.'}
               </span>
             </li>
             <li className="checklist-item">
               <span className="checklist-icon">✓</span>
-              <span><strong>Проверите:</strong> адресу примаоца, наслов, прилоге и читљивост потписа пре него што сами предате поруку.</span>
+              <span><strong>Proverite:</strong> adresu primaoca, naslov, priloge i čitljivost potpisa pre nego što sami predate poruku.</span>
             </li>
           </ul>
         </div>
       </section>
       <div className="hub-card" style={{ padding: '1.25rem', borderRadius: 'var(--radius-lg)', marginBottom: '1.5rem' }}>
         <div style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '1.05rem' }}>
-          ✉️ Јавно објављени контакт мисије/конзулата
+          ✉️ Javno objavljeni kontakt misije/konzulata
         </div>
         <p
           style={{
@@ -379,13 +451,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           }}
         >
           {station.isElectionContactConfirmed
-            ? '✓ Потврђена адреса за изборе 2026.'
-            : 'Није потврђена адреса за изборе — ово је само општи контакт мисије.'}
+            ? '✓ Potvrđena adresa za izbore 2026.'
+            : 'Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.'}
         </p>
         <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
           {station.isElectionContactConfirmed
-            ? 'Адреса је преузета из актуелног, одобреног изборног обавештења.'
-            : 'Можете сачекати потврђено званично обавештење или сами проверити овај сајт мисије пре предаје.'}
+            ? 'Adresa je preuzeta iz aktuelnog, odobrenog izbornog obaveštenja.'
+            : 'Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.'}
         </p>
         <div className="hub-email-box">
           <span className="hub-email-text">{station.email}</span>
@@ -394,7 +466,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             onClick={handleCopyEmail}
             className="btn btn-sm btn-outline"
           >
-            {copiedEmail ? '✓ Адреса је копирана' : '📋 Копирај адресу примаоца'}
+            {copiedEmail ? '✓ Adresa je kopirana' : '📋 Kopiraj adresu primaoca'}
           </button>
         </div>
         <a
@@ -404,13 +476,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           className="btn btn-sm btn-outline"
           style={{ marginTop: '0.75rem' }}
         >
-          🌐 Званични сајт мисије ↗
+          🌐 Zvanični sajt misije ↗
         </a>
       </div>
 
       <div className="btn-row">
         <button type="button" onClick={onBack} className="btn btn-secondary">
-          ← Назад на преглед података
+          ← Nazad na pregled podataka
         </button>
         <button
           type="button"
@@ -418,7 +490,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           className="btn btn-outline"
           style={{ color: 'var(--color-text-muted)' }}
         >
-          Започни нову пријаву
+          Započni novu prijavu
         </button>
       </div>
     </div>

@@ -14,6 +14,15 @@ import { generateApplicationPdf, ApplicationFormData } from '../src/lib/pdf';
 import fs from 'fs';
 import { buildRecipientPayloads, getWebmailLinks } from '../src/lib/share';
 import { canSubmitSignature } from '../src/components/StepSignatureAndDocument';
+import {
+  buildInvitationCopyText,
+  shareInvitation,
+} from '../src/lib/share';
+import {
+  buildInvitationInfo,
+  buildInvitationUrl,
+  getInitialDesiredLocation,
+} from '../src/lib/invite';
 
 describe('JMBG Validator', () => {
   test('validates correct JMBG', () => {
@@ -36,7 +45,7 @@ describe('JMBG Validator', () => {
     const invalidJmbg = '1207985710059';
     const res = validateJmbg(invalidJmbg);
     expect(res.valid).toBe(false);
-    expect(res.error).toContain('Контролна цифра');
+    expect(res.error).toContain('Kontrolna cifra');
   });
 
   test('rejects JMBG with wrong length', () => {
@@ -168,6 +177,43 @@ describe('Recipient Payloads', () => {
   });
 });
 
+describe('Invitation links', () => {
+  test('accepts exactly one non-empty trimmed destination parameter', () => {
+    expect(getInitialDesiredLocation('?destination=%20Singapur%20')).toBe('Singapur');
+    expect(getInitialDesiredLocation('')).toBe('');
+    expect(getInitialDesiredLocation('?destination=%20%20')).toBe('');
+    expect(getInitialDesiredLocation('?destination=Singapur&destination=Jakarta')).toBe('');
+  });
+
+  test('builds a clean destination-only invitation URL and Latin share payload', () => {
+    const invitation = buildInvitationInfo(
+      'https://glasanje.example',
+      '/prijava?country=SG#summary',
+      ' Singapur ',
+    );
+
+    expect(buildInvitationUrl('https://glasanje.example', '/prijava?country=SG#summary', 'Singapur'))
+      .toBe('https://glasanje.example/prijava?destination=Singapur');
+    expect(invitation).toEqual({
+      title: 'Glasanje u inostranstvu',
+      text: 'Popunite prijavu za glasanje u inostranstvu za željeno mesto: Singapur.',
+      url: 'https://glasanje.example/prijava?destination=Singapur',
+    });
+  });
+
+  test('copies the complete invitation text and URL when native sharing is unavailable', async () => {
+    const invitation = buildInvitationInfo('https://glasanje.example', '/', 'Singapur');
+    let copiedText = '';
+    const result = await shareInvitation(invitation, async (text) => {
+      copiedText = text;
+      return true;
+    });
+
+    expect(result).toEqual({ success: true, method: 'clipboard' });
+    expect(copiedText).toBe(buildInvitationCopyText(invitation));
+  });
+});
+
 describe('Missions and Coverage Dataset', () => {
   test('contains 195 countries', () => {
     expect(COUNTRIES.length).toBe(195);
@@ -217,8 +263,8 @@ describe('Missions and Coverage Dataset', () => {
   test('Taiwan aliases show an unassigned guidance notice without selecting a mission', () => {
     for (const alias of ['Тајван', 'Tajvan', 'Taiwan', 'Taiwanese passports']) {
       expect(getCountryTypeaheadResults(alias)).toEqual([]);
-      expect(getTaiwanSearchNotice(alias)).toContain('није потврђена надлежност');
-      expect(getTaiwanSearchNotice(alias)).toContain('не бира представништво');
+      expect(getTaiwanSearchNotice(alias)).toContain('nije potvrđena nadležnost');
+      expect(getTaiwanSearchNotice(alias)).toContain('ne bira predstavništvo');
     }
 
     expect(resolveVotingDestinationSelection('TW')).toEqual({ countryCode: '', stationId: null });
@@ -240,10 +286,10 @@ describe('Missions and Coverage Dataset', () => {
       }),
     );
 
-    expect(canadaMarkup).toContain('За ову државу има више представништава');
-    expect(canadaMarkup).toContain('Амбасада Републике Србије (Канада)');
-    expect(canadaMarkup).not.toContain('Џакарта');
-    expect(singaporeMarkup).not.toContain('За ову државу има више представништава');
+    expect(canadaMarkup).toContain('Za ovu državu ima više predstavništava');
+    expect(canadaMarkup).toContain('Ambasada Republike Srbije (Kanada)');
+    expect(canadaMarkup).not.toContain('Džakarta');
+    expect(singaporeMarkup).not.toContain('Za ovu državu ima više predstavništava');
   });
 
   test('United States retains bilingual discovery aliases', () => {

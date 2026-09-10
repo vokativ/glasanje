@@ -84,20 +84,20 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
 
     const supportedTypes = ['image/jpeg', 'image/png'];
     if (!supportedTypes.includes(file.type)) {
-      setIdDocumentError('Изаберите JPG или PNG слику. Остали формати не могу поуздано да се уграде у PDF.');
+      setIdDocumentError('Izaberite JPG ili PNG sliku. Ostali formati ne mogu pouzdano da se ugrade u PDF.');
       input.value = '';
       return;
     }
 
     if (file.size > 15 * 1024 * 1024) {
-      setIdDocumentError('Слика је превелика. Молимо изаберите слику мању од 15 MB.');
+      setIdDocumentError('Slika je prevelika. Molimo izaberite sliku manju od 15 MB.');
       input.value = '';
       return;
     }
 
     const reader = new FileReader();
     reader.onerror = () => {
-      setIdDocumentError('Слика не може да се прочита на овом уређају. Изаберите другу JPG или PNG слику.');
+      setIdDocumentError('Slika ne može da se pročita na ovom uređaju. Izaberite drugu JPG ili PNG sliku.');
       input.value = '';
     };
     reader.onload = () => {
@@ -106,14 +106,14 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
         typeof result !== 'string' ||
         !/^data:image\/(?:jpeg|png);base64,/.test(result)
       ) {
-        setIdDocumentError('Слика није у важећем JPG или PNG формату. Изаберите другу слику.');
+        setIdDocumentError('Slika nije u važećem JPG ili PNG formatu. Izaberite drugu sliku.');
         input.value = '';
         return;
       }
 
       const image = new Image();
       image.onerror = () => {
-        setIdDocumentError('Слика не може да се обради. Изаберите другу JPG или PNG слику.');
+        setIdDocumentError('Slika ne može da se obradi. Izaberite drugu JPG ili PNG sliku.');
         input.value = '';
       };
       image.onload = () => {
@@ -151,10 +151,10 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
 
   return (
     <div className="card">
-      <h2 className="card-title">Корак 4: Потпис и лични документ</h2>
+      <h2 className="card-title">Korak 4: Potpis i lični dokument</h2>
       <p className="card-subtitle">
-        Захтев мора бити потписан према члану 16. Закона о јединственом бирачком списку. Можете се
-        потписати директно на екрану или одштампати документ и потписати оловком.
+        Zahtev mora biti potpisan prema članu 16. Zakona o jedinstvenom biračkom spisku. Možete se
+        potpisati direktno na ekranu ili odštampati dokument i potpisati olovkom.
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -168,7 +168,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                 checked={!isWetInk}
                 onChange={() => setIsWetInk(false)}
               />
-              Потпиши на екрану (прстом / мишем, мање корака)
+              Potpiši na ekranu (prstom / mišem, manje koraka)
             </label>
             <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer', fontWeight: 600 }}>
               <input
@@ -177,7 +177,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                 checked={isWetInk}
                 onChange={() => setIsWetInk(true)}
               />
-              Потписаћу ручно на папиру
+              Potpisaću ručno na papiru
             </label>
           </div>
 
@@ -186,28 +186,28 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
               <canvas ref={canvasRef} className="signature-canvas" />
               <div className="signature-actions">
                 <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-                  Потпишите се унутар оквира
+                  Potpišite se unutar okvira
                 </span>
                 <button
                   type="button"
                   onClick={handleClearSignature}
                   className="btn btn-sm btn-outline"
                 >
-                  Обриши потпис
+                  Obriši potpis
                 </button>
               </div>
             </div>
           ) : (
             <div className="alert alert-info">
-              <strong>За ручни потпис вам је неопходан штампач.</strong>
+              <strong>Za ručni potpis vam je neophodan štampač.</strong>
               <ol style={{ margin: '0.75rem 0', paddingLeft: '1.25rem' }}>
-                <li>Преузмите PDF и одштампајте га.</li>
-                <li>Својеручно га потпишите хемијском оловком.</li>
-                <li>Скенирајте или фотографишите потписан документ.</li>
-                <li>Сами га приложите и пошаљите уз поруку ван ове апликације.</li>
+                <li>Preuzmite PDF i odštampajte ga.</li>
+                <li>Svojeručno ga potpišite hemijskom olovkom.</li>
+                <li>Skenirajte ili fotografišite potpisan dokument.</li>
+                <li>Sami ga priložite i pošaljite uz poruku van ove aplikacije.</li>
               </ol>
-              Генерисани PDF са празним пољем за потпис није спреман за слање.{' '}
-              <strong>Потпис на екрану је практичнија алтернатива са мање корака.</strong>
+              Generisani PDF sa praznim poljem za potpis nije spreman za slanje.{' '}
+              <strong>Potpis na ekranu je praktičnija alternativa sa manje koraka.</strong>
             </div>
           )}
         </div>
@@ -215,12 +215,12 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
         {/* Passport / ID Copy Attachment */}
         <div className="form-group" style={{ marginTop: '1.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border)' }}>
           <label className="form-label">
-            📸 Прилог: Фотографија пасоша или личне карте (опционо)
+            📸 Prilog: Fotografija pasoša ili lične karte (opciono)
           </label>
           <p className="form-hint" style={{ marginBottom: '0.75rem' }}>
-            Уз захтев је <strong>законски обавезно</strong> доставити копију прве стране важећег српског
-            пасоша или обе стране личне карте. Можете је фотографисати камером или изабрати постојећу JPG/PNG
-            слику; обрада и спајање у PDF дешавају се искључиво локално у вашем прегледачу.
+            Uz zahtev je <strong>zakonski obavezno</strong> dostaviti kopiju prve strane važećeg srpskog
+            pasoša ili obe strane lične karte. Možete je fotografisati kamerom ili izabrati postojeću JPG/PNG
+            sliku; obrada i spajanje u PDF dešavaju se isključivo lokalno u vašem pregledaču.
           </p>
 
           {!idDocumentUrl ? (
@@ -249,7 +249,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                     className="btn btn-secondary file-input-trigger"
                     style={{ cursor: 'pointer' }}
                   >
-                    Сними камером
+                    Snimi kamerom
                   </label>
                 </div>
                 <div className="file-input-option">
@@ -267,12 +267,12 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                     className="btn btn-outline file-input-trigger"
                     style={{ cursor: 'pointer' }}
                   >
-                    Изаберите постојећу слику
+                    Izaberite postojeću sliku
                   </label>
                 </div>
               </div>
               <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>
-                Прихватају се JPG и PNG до 15 MB. Избор камере или датотеке и обрада остају само на вашем уређају.
+                Prihvataju se JPG i PNG do 15 MB. Izbor kamere ili datoteke i obrada ostaju samo na vašem uređaju.
               </div>
               {idDocumentError && (
                 <div className="form-error" role="alert" style={{ marginTop: '0.75rem' }}>
@@ -284,15 +284,15 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: '#f8fafc', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid #cbd5e1' }}>
               <img
                 src={idDocumentUrl}
-                alt="Преглед документа"
+                alt="Pregled dokumenta"
                 style={{ height: '70px', borderRadius: 'var(--radius-sm)', objectFit: 'contain' }}
               />
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-success)' }}>
-                  ✓ Документ је успешно учитан
+                  ✓ Dokument je uspešno učitan
                 </div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-                  Биће аутоматски уграђен као 2. страна у ваш PDF пријаве
+                  Biće automatski ugrađen kao 2. strana u vaš PDF prijave
                 </div>
               </div>
               <button
@@ -301,7 +301,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                 className="btn btn-sm btn-outline"
                 style={{ color: 'var(--color-error)' }}
               >
-                Уклони
+                Ukloni
               </button>
             </div>
           )}
@@ -309,10 +309,10 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
 
         <div className="btn-row">
           <button type="button" onClick={onBack} className="btn btn-secondary">
-            ← Назад
+            ← Nazad
           </button>
           <button type="submit" className="btn btn-primary" disabled={!canProceed}>
-            Пређи на преузимање и слање →
+            Pređi na preuzimanje i slanje →
           </button>
         </div>
       </form>

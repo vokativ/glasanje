@@ -4,11 +4,11 @@
  */
 export function validateJmbg(jmbg: string): { valid: boolean; error?: string } {
   if (!jmbg) {
-    return { valid: false, error: 'ЈМБГ је обавезан' };
+    return { valid: false, error: 'JMBG je obavezan' };
   }
   const clean = jmbg.trim();
   if (!/^\d{13}$/.test(clean)) {
-    return { valid: false, error: 'ЈМБГ мора садржати тачно 13 цифара' };
+    return { valid: false, error: 'JMBG mora sadržati tačno 13 cifara' };
   }
 
   const d = clean.split('').map(Number);
@@ -24,11 +24,11 @@ export function validateJmbg(jmbg: string): { valid: boolean; error?: string } {
   let checkDigit = 11 - mod;
   if (checkDigit === 11) checkDigit = 0;
   if (checkDigit === 10) {
-    return { valid: false, error: 'Неисправан контролни број ЈМБГ-а' };
+    return { valid: false, error: 'Neispravan kontrolni broj JMBG-a' };
   }
 
   if (checkDigit !== d[12]) {
-    return { valid: false, error: 'Контролна цифра ЈМБГ-а се не поклапа' };
+    return { valid: false, error: 'Kontrolna cifra JMBG-a se ne poklapa' };
   }
 
   return { valid: true };

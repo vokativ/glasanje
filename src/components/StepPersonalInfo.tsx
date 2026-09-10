@@ -28,19 +28,19 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
   const emailValid = validateEmail(data.email);
   const phoneFormatWarning =
     data.phone.trim() && !hasInternationalPhoneFormat(data.phone)
-      ? 'За лакши контакт, препоручујемо цео међународни број који почиње знаком + (нпр. +49 151 12345678).'
+      ? 'Za lakši kontakt, preporučujemo ceo međunarodni broj koji počinje znakom + (npr. +49 151 12345678).'
       : undefined;
 
   const errors: Record<string, string | undefined> = {
-    fullName: !data.fullName.trim() ? 'Име и презиме је обавезно' : undefined,
-    placeOfBirth: !data.placeOfBirth.trim() ? 'Место рођења је обавезно' : undefined,
+    fullName: !data.fullName.trim() ? 'Ime i prezime je obavezno' : undefined,
+    placeOfBirth: !data.placeOfBirth.trim() ? 'Mesto rođenja je obavezno' : undefined,
     jmbg: !jmbgValidation.valid ? jmbgValidation.error : undefined,
-    serbianAddress: !data.serbianAddress.trim() ? 'Адреса у Србији је обавезна' : undefined,
-    phone: !data.phone.trim() ? 'Контакт телефон је обавезан' : undefined,
+    serbianAddress: !data.serbianAddress.trim() ? 'Adresa u Srbiji je obavezna' : undefined,
+    phone: !data.phone.trim() ? 'Kontakt telefon je obavezan' : undefined,
     email: !data.email.trim()
-      ? 'И-мејл адреса је обавезна'
+      ? 'I-mejl adresa je obavezna'
       : !emailValid
-        ? 'Унесите исправну и-мејл адресу'
+        ? 'Unesite ispravnu i-mejl adresu'
         : undefined,
   };
 
@@ -73,15 +73,15 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
   return (
     <div className="card">
-      <h2 className="card-title">Корак 2: Лични подаци</h2>
+      <h2 className="card-title">Korak 2: Lični podaci</h2>
       <p className="card-subtitle">
-        Унесите ваше личне податке тачно онако како су уписани у вашем српском пасошу или личној карти.
+        Unesite vaše lične podatke tačno onako kako su upisani u vašem srpskom pasošu ili ličnoj karti.
       </p>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label" htmlFor="fullName">
-            Име и презиме *
+            Ime i prezime *
           </label>
           <input
             id="fullName"
@@ -90,13 +90,13 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
             autoComplete="name"
             spellCheck={false}
             className={`form-control ${touched.fullName && errors.fullName ? 'is-invalid' : ''}`}
-            placeholder="нпр. Петар Петровић"
+            placeholder="npr. Petar Petrović"
             value={data.fullName}
             onChange={(e) => handleChange('fullName', e.target.value)}
             onBlur={() => handleBlur('fullName')}
             required
           />
-          <span className="form-hint">Унесите пуно име и презиме из пасоша</span>
+          <span className="form-hint">Unesite puno ime i prezime iz pasoša</span>
           {touched.fullName && errors.fullName && (
             <span className="form-error">{errors.fullName}</span>
           )}
@@ -104,7 +104,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
         <div className="form-group">
           <label className="form-label" htmlFor="placeOfBirth">
-            Место рођења *
+            Mesto rođenja *
           </label>
           <input
             id="placeOfBirth"
@@ -112,13 +112,13 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
             type="text"
             autoComplete="off"
             className={`form-control ${touched.placeOfBirth && errors.placeOfBirth ? 'is-invalid' : ''}`}
-            placeholder="нпр. Београд или Чачак"
+            placeholder="npr. Beograd ili Čačak"
             value={data.placeOfBirth}
             onChange={(e) => handleChange('placeOfBirth', e.target.value)}
             onBlur={() => handleBlur('placeOfBirth')}
             required
           />
-          <span className="form-hint">Општина или град рођења као у пасошу</span>
+          <span className="form-hint">Opština ili grad rođenja kao u pasošu</span>
           {touched.placeOfBirth && errors.placeOfBirth && (
             <span className="form-error">{errors.placeOfBirth}</span>
           )}
@@ -126,7 +126,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
         <div className="form-group">
           <label className="form-label" htmlFor="jmbg">
-            Јединствени матични број грађана (ЈМБГ) *
+            Jedinstveni matični broj građana (JMBG) *
           </label>
           <input
             id="jmbg"
@@ -146,36 +146,36 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
                   : 'is-valid'
                 : ''
             }`}
-            placeholder="13 цифара са личне карте / пасоша"
+            placeholder="13 cifara sa lične karte / pasoša"
             value={data.jmbg}
             onChange={(e) => handleChange('jmbg', e.target.value.replace(/\D/g, ''))}
             onBlur={() => handleBlur('jmbg')}
             required
           />
           <div className="validation-trust">
-            Провера се израчунава само локално, математичким контролним збиром (модул 11); не шаље се
-            ниједном регистру и не доказује идентитет нити упис у бирачки списак.{' '}
+            Provera se izračunava samo lokalno, matematičkim kontrolnim zbirom (modul 11); ne šalje se
+            nijednom registru i ne dokazuje identitet niti upis u birački spisak.{' '}
             <a
               href="https://sr.wikipedia.org/wiki/Јединствени_матични_број_грађана"
               target="_blank"
               rel="noreferrer"
             >
-              Сазнајте више о ЈМБГ-у
+              Saznajte više o JMBG-u
             </a>
             .
           </div>
           {touched.jmbg && errors.jmbg && <span className="form-error">{errors.jmbg}</span>}
           {touched.jmbg && !errors.jmbg && data.jmbg.length === 13 && (
             <span className="validation-status validation-status-success">
-              ✓ Контролни збир ЈМБГ-а је исправан. Ово није потврда идентитета или регистрације
-              бирача.
+              ✓ Kontrolni zbir JMBG-a je ispravan. Ovo nije potvrda identiteta ili registracije
+              birača.
             </span>
           )}
         </div>
 
         <div className="form-group">
           <label className="form-label" htmlFor="serbianAddress">
-            Адреса пребивалишта у Републици Србији *
+            Adresa prebivališta u Republici Srbiji *
           </label>
           <input
             id="serbianAddress"
@@ -183,14 +183,14 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
             type="text"
             autoComplete="section-serbian street-address"
             className={`form-control ${touched.serbianAddress && errors.serbianAddress ? 'is-invalid' : ''}`}
-            placeholder="нпр. Немањина 11, 11000 Београд"
+            placeholder="npr. Nemanjina 11, 11000 Beograd"
             value={data.serbianAddress}
             onChange={(e) => handleChange('serbianAddress', e.target.value)}
             onBlur={() => handleBlur('serbianAddress')}
             required
           />
           <span className="form-hint">
-            Адреса у Србији према којој сте уписани у бирачки списак (улица, број, место)
+            Adresa u Srbiji prema kojoj ste upisani u birački spisak (ulica, broj, mesto)
           </span>
           {touched.serbianAddress && errors.serbianAddress && (
             <span className="form-error">{errors.serbianAddress}</span>
@@ -199,7 +199,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
         <div className="form-group">
           <label className="form-label" htmlFor="email">
-            Адреса електронске поште (и-мејл) *
+            Adresa elektronske pošte (i-mejl) *
           </label>
           <input
             id="email"
@@ -218,7 +218,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
             required
           />
           <span className="form-hint">
-            Амбасада/конзулат ће вас контактирати преко овог и-мејла са потврдом
+            Ambasada/konzulat će vas kontaktirati preko ovog i-mejla sa potvrdom
           </span>
           {touched.email && errors.email && (
             <span className="form-error">{errors.email}</span>
@@ -227,7 +227,7 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
         <div className="form-group">
           <label className="form-label" htmlFor="phone">
-            Контакт телефон *
+            Kontakt telefon *
           </label>
           <input
             id="phone"
@@ -236,15 +236,15 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
             autoComplete="tel"
             inputMode="tel"
             className={`form-control ${touched.phone && errors.phone ? 'is-invalid' : ''}`}
-            placeholder="нпр. +65 9123 4567 или +49 151 12345678"
+            placeholder="npr. +65 9123 4567 ili +49 151 12345678"
             value={data.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             onBlur={() => handleBlur('phone')}
             required
           />
           <span className="form-hint">
-            Унесите цео број на којем сте доступни, по могућству у међународном облику са знаком +.
-            Број остаје независан од изабране земље.
+            Unesite ceo broj na kojem ste dostupni, po mogućstvu u međunarodnom obliku sa znakom +.
+            Broj ostaje nezavisan od izabrane zemlje.
           </span>
           {touched.phone && errors.phone && (
             <span className="form-error">{errors.phone}</span>
@@ -256,10 +256,10 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
 
         <div className="btn-row">
           <button type="button" onClick={onBack} className="btn btn-secondary">
-            ← Назад
+            ← Nazad
           </button>
           <button type="submit" className="btn btn-primary">
-            Настави на избор места гласања →
+            Nastavi na izbor mesta glasanja →
           </button>
         </div>
       </form>

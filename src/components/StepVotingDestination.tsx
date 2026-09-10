@@ -44,8 +44,8 @@ export const getTaiwanSearchNotice = (searchFilter: string) => {
   }
 
   return (
-    'За Тајван у приложеним подацима МСП није потврђена надлежност за упис у бирачки списак. ' +
-    'Ручно проверите актуелна званична упутства МСП или надлежног представништва; ова претрага не бира представништво.'
+    'Za Tajvan u priloženim podacima MSP nije potvrđena nadležnost za upis u birački spisak. ' +
+    'Ručno proverite aktuelna zvanična uputstva MSP ili nadležnog predstavništva; ova pretraga ne bira predstavništvo.'
   );
 };
 
@@ -98,12 +98,10 @@ const formatCountryOptionLabel = (country: VotingCountry) => {
   const englishName = getEnglishCountryName(country.countryCode);
 
   if (country.countryCode === 'US') {
-    return `${country.labelCyr} (САД) / Sjedinjene Američke Države (SAD) [${country.countryCode}]`;
+    return `${country.label} (SAD) [${country.countryCode}]`;
   }
 
-  return `${country.labelCyr} (${country.label}${
-    englishName && englishName !== country.label ? ` / ${englishName}` : ''
-  }) [${country.countryCode}]`;
+  return `${country.label}${englishName && englishName !== country.label ? ` / ${englishName}` : ''} [${country.countryCode}]`;
 };
 
 
@@ -197,16 +195,16 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
 
   return (
     <div className="card">
-      <h2 className="card-title">Корак 3: Држава боравка и изборно место</h2>
+      <h2 className="card-title">Korak 3: Država boravka i izborno mesto</h2>
       <p className="card-subtitle">
-        Изаберите државу у којој боравите у иностранству, а затим потврдите надлежну амбасаду
-        или генерални конзулат Републике Србије.
+        Izaberite državu u kojoj boravite u inostranstvu, a zatim potvrdite nadležnu ambasadu
+        ili generalni konzulat Republike Srbije.
       </p>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label" htmlFor="countrySearch">
-            Претрага државе боравка
+            Pretraga države boravka
           </label>
           <input
             id="countrySearch"
@@ -214,7 +212,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             type="text"
             autoComplete="off"
             className="form-control"
-            placeholder="Унесите назив државе (ћирилицом или латиницом)..."
+            placeholder="Unesite naziv države (ćirilicom ili latinicom)..."
             value={searchFilter}
             onInput={(e) => handleCountrySearchInput(e.currentTarget.value)}
             onKeyDown={handleCountrySearchKeyDown}
@@ -232,7 +230,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             <div
               id="countrySearchResults"
               role="listbox"
-              aria-label="Резултати претраге држава"
+              aria-label="Rezultati pretrage država"
               style={{
                 maxHeight: '15rem',
                 overflowY: 'auto',
@@ -288,7 +286,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
               ) : (
                 !taiwanSearchNotice && (
                   <div className="form-hint" style={{ margin: '0.65rem 0.85rem' }}>
-                    Нема држава које одговарају претрази.
+                    Nema država koje odgovaraju pretrazi.
                   </div>
                 )
               )}
@@ -296,11 +294,11 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
           )}
           {currentCountry && (
             <span className="form-hint" aria-live="polite">
-              Изабрана држава: {formatCountryOptionLabel(currentCountry)}
+              Izabrana država: {formatCountryOptionLabel(currentCountry)}
             </span>
           )}
           <span className="form-hint">
-            Укупно обухваћено 195 држава према званичној евиденцији Министарства спољних послова
+            Ukupno obuhvaćeno 195 država prema zvaničnoj evidenciji Ministarstva spoljnih poslova
           </span>
         </div>
 
@@ -308,12 +306,12 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
         {currentCountry && (
           <div className="form-group">
             <label className="form-label" htmlFor="stationSelect">
-              Дипломатско-конзуларно представништво у овој држави *
+              Diplomatsko-konzularno predstavništvo u ovoj državi *
             </label>
             {currentCountry.stations.length > 1 && (
               <span className="mission-selection-hint">
-                За ову државу има више представништава: изаберите оно које је надлежно за вас или вам
-                је најближе.
+                Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam
+                je najbliže.
               </span>
             )}
             <select
@@ -327,10 +325,10 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
               }
               required
             >
-              <option value="">Изаберите дипломатско-конзуларно представништво…</option>
+              <option value="">Izaberite diplomatsko-konzularno predstavništvo…</option>
               {currentCountry.stations.map((station) => (
                 <option key={station.id} value={station.id}>
-                  {station.embassyCyr}
+                  {station.embassy}
                 </option>
               ))}
             </select>
@@ -340,36 +338,36 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
         {currentCountry && currentStation && (
           <div className="mission-card">
             <div className="mission-title">
-              🏛️ {currentStation.embassyCyr}
+              🏛️ {currentStation.embassy}
             </div>
 
             {!currentStation.isResident && (
               <span className="mission-coverage-badge">
-                Покрива на нерезиденцијалној основи државу {currentCountry.labelCyr}
+                Pokriva na nerezidencijalnoj osnovi državu {currentCountry.label}
               </span>
             )}
 
             {currentStation.address && (
               <div className="mission-detail">
-                <strong>Адреса:</strong>
+                <strong>Adresa:</strong>
                 <span>{currentStation.address}</span>
               </div>
             )}
 
             <div className="mission-detail">
-              <strong>Објављени контакт мисије/конзулата:</strong>
+              <strong>Objavljeni kontakt misije/konzulata:</strong>
               <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
                 {currentStation.email}
               </span>
             </div>
             <p className="form-hint" style={{ margin: '0.5rem 0 0' }}>
-              Контакт је објавила мисија/МСП. Пре слања проверите обавештење за изборе 2026. на
-              званичном сајту испод; прихватање захтева на ову адресу није потврђено.
+              Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na
+              zvaničnom sajtu ispod; prihvatanje zahteva na ovu adresu nije potvrđeno.
             </p>
 
             {currentStation.website && (
               <div className="mission-detail">
-                <strong>Званични сајт:</strong>
+                <strong>Zvanični sajt:</strong>
                 <a
                   href={currentStation.website}
                   target="_blank"
@@ -385,7 +383,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
 
         <div className="form-group" style={{ marginTop: '1.25rem' }}>
           <label className="form-label" htmlFor="foreignAddress">
-            Адреса боравка у иностранству *
+            Adresa boravka u inostranstvu *
           </label>
           <input
             id="foreignAddress"
@@ -395,23 +393,23 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             className={`form-control ${
               touched.foreignAddress && !isForeignAddressValid ? 'is-invalid' : ''
             }`}
-            placeholder="нпр. 15 Happy St, San Francisco 94040 CA или 7500E Beach Road, Singapore"
+            placeholder="npr. 15 Happy St, San Francisco 94040 CA ili 7500E Beach Road, Singapore"
             value={foreignAddress}
             onChange={(e) => setForeignAddress(e.target.value)}
             onBlur={() => setTouched((prev) => ({ ...prev, foreignAddress: true }))}
             required
           />
           <span className="form-hint">
-            Унесите вашу тачну адресу у иностранству (улица, број, поштански број, град, држава)
+            Unesite vašu tačnu adresu u inostranstvu (ulica, broj, poštanski broj, grad, država)
           </span>
           {touched.foreignAddress && !isForeignAddressValid && (
-            <span className="form-error">Адреса у иностранству је обавезна</span>
+            <span className="form-error">Adresa u inostranstvu je obavezna</span>
           )}
         </div>
 
         <div className="form-group">
           <label className="form-label" htmlFor="desiredLocation">
-            Жељено место гласања (опционо)
+            Željeno mesto glasanja (opciono)
           </label>
           <input
             id="desiredLocation"
@@ -419,32 +417,32 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             type="text"
             autoComplete="off"
             className="form-control"
-            placeholder="нпр. Сан Франциско (ако амбасада није у вашем граду)"
+            placeholder="npr. San Francisko (ako ambasada nije u vašem gradu)"
             value={desiredLocation}
             onChange={(e) => setDesiredLocation(e.target.value)}
           />
           <span className="form-hint">
-            Ако не можете да путујете до седишта амбасаде или конзулата, унесите жељени град.
-            Правило о најмање 100 бирача је општи праг, уз законом предвиђене изузетке; Републичка
-            изборна комисија утврђује да ли ће бити отворено посебно бирачко место.{' '}
+            Ako ne možete da putujete do sedišta ambasade ili konzulata, unesite željeni grad.
+            Pravilo o najmanje 100 birača je opšti prag, uz zakonom predviđene izuzetke; Republička
+            izborna komisija utvrđuje da li će biti otvoreno posebno biračko mesto.{' '}
             <a
               href="https://www.pravno-informacioni-sistem.rs/SlGlasnikPortal/eli/rep/sgrs/skupstina/zakon/2022/14/2/reg"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
             >
-              Члан 57
+              Član 57
             </a>{' '}
-            (званична PIS страница може спорије да се учита).
+            (zvanična PIS stranica može sporije da se učita).
           </span>
         </div>
 
         <div className="btn-row">
           <button type="button" onClick={onBack} className="btn btn-secondary">
-            ← Назад
+            ← Nazad
           </button>
           <button type="submit" className="btn btn-primary" disabled={!isFormValid}>
-            Настави на потпис и документа →
+            Nastavi na potpis i dokumenta →
           </button>
         </div>
       </form>

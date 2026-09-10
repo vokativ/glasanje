@@ -9,22 +9,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenPrivacy }) => {
     <header className="header">
       <img
         src="/assets/rotunda-serbica-envelope.webp"
-        alt="Ротунда Сербика и коверта"
+        alt="Rotunda Serbika i koverta"
         className="header-logo"
       />
-      <h1 className="header-title">Корак до гласа</h1>
+      <h1 className="header-title">Korak do glasa</h1>
       <p className="header-subtitle">
-        Алат за припрему пријаве за гласање из иностранства • Избори 2026.
+        Alat za pripremu prijave za glasanje iz inostranstva • Izbori 2026.
       </p>
       <div>
         <button
           type="button"
           onClick={onOpenPrivacy}
           className="header-badge"
-          title="Кликните за детаље о приватности података"
+          title="Kliknite za detalje o privatnosti podataka"
         >
           <span>🔒</span>
-          <span>100% на вашем уређају • Подаци се не шаљу на сервер</span>
+          <span>100% na vašem uređaju • Podaci se ne šalju na server</span>
         </button>
       </div>
     </header>

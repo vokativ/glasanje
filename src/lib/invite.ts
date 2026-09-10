@@ -1,0 +1,30 @@
+export interface InvitationInfo {
+  title: string;
+  text: string;
+  url: string;
+}
+
+export function getInitialDesiredLocation(search: string): string {
+  const destinationParameters = new URLSearchParams(search).getAll('destination');
+  if (destinationParameters.length !== 1) return '';
+
+  return destinationParameters[0].trim();
+}
+
+export function buildInvitationUrl(origin: string, pathname: string, desiredLocation: string): string {
+  const url = new URL(pathname, origin);
+  url.search = '';
+  url.hash = '';
+  url.searchParams.set('destination', desiredLocation.trim());
+  return url.toString();
+}
+
+export function buildInvitationInfo(origin: string, pathname: string, desiredLocation: string): InvitationInfo {
+  const destination = desiredLocation.trim();
+
+  return {
+    title: 'Glasanje u inostranstvu',
+    text: `Popunite prijavu za glasanje u inostranstvu za željeno mesto: ${destination}.`,
+    url: buildInvitationUrl(origin, pathname, destination),
+  };
+}

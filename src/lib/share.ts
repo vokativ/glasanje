@@ -175,6 +175,45 @@ export async function copyTextToClipboard(text: string): Promise<boolean> {
   }
 }
 
+export interface InvitationShareInfo {
+  title: string;
+  text: string;
+  url: string;
+}
+
+export type InvitationShareResult =
+  | { success: true; method: 'native' | 'clipboard' }
+  | { success: false; error: string };
+
+export function buildInvitationCopyText(info: InvitationShareInfo): string {
+  return `${info.text}\n\n${info.url}`;
+}
+
+export async function shareInvitation(
+  info: InvitationShareInfo,
+  copy = copyTextToClipboard,
+): Promise<InvitationShareResult> {
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title: info.title, text: info.text, url: info.url });
+      return { success: true, method: 'native' };
+    } catch (error: unknown) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        return { success: false, error: 'Deljenje poziva je otkazano.' };
+      }
+      return { success: false, error: 'Deljenje poziva nije uspelo.' };
+    }
+  }
+
+  try {
+    return (await copy(buildInvitationCopyText(info)))
+      ? { success: true, method: 'clipboard' }
+      : { success: false, error: 'Kopiranje poziva nije uspelo.' };
+  } catch {
+    return { success: false, error: 'Kopiranje poziva nije uspelo.' };
+  }
+}
+
 export function getWebmailLinks(info: EmailDispatchInfo) {
   const encTo = encodeURIComponent(info.toEmail);
   const encSu = encodeURIComponent(info.subject);
