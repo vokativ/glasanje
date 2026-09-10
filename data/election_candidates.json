@@ -61,6 +61,21 @@
       "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ"
     },
     {
+      "candidateId": "633869b0445737d453015f29ad6366533ed63526712ba854fc8b1167725793db",
+      "countryCode": "MT",
+      "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "srb.office.valletta@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-10T10:22:19Z",
+      "sourceHost": "roma.mfa.gov.rs",
+      "sourceQuote": "ша или личне карте Републике Србије) Амбасади Републике Србије у Риму може се доставити: • лично, доласком у Амбасаду - Via dei Monti Parioli 20, 00197 Roma • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: izbori.rim@mfa.rs Држављани који имају боравиште на Малти, попуњен и потписан образац Захтева, са копијом важећег личног документа (пасоша или личне карте Републике Србије), Канцеларију Амбасаде Републике Србије на Малти могу се доставити: • лично, доласком у Канцеларију Амбасаде Републике Србије на Малти - EUROPA CENTRE, level III, office 18/a, Floriana, FRN 1400, Malta • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: srb.office.valletta@mfa.rs Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "sourceUrl": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+      "stationId": "st-mt-emb-main",
+      "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ"
+    },
+    {
       "candidateId": "7b5cc89e4bd0d5cc5ce76967d27c61fb81dff88f0601227fe4d1f903428761e0",
       "countryCode": "ES",
       "electionContext": "Избори за народне посланике 2026 - ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
@@ -194,21 +209,6 @@
       "sourceUrl": "https://milano.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-parlamentarnim-izborima-25-oktobra-2026-godine",
       "stationId": "st-it-cons-milano",
       "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ"
-    },
-    {
-      "candidateId": "eac8c166441ab1ce96bfbddf2d9c998bf9189825ab9c993888ffe88e1ddb0fa4",
-      "countryCode": "IT",
-      "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
-      "electionId": "2026-parliamentary",
-      "electionYear": "2026",
-      "email": "srb.office.valletta@mfa.rs",
-      "evidenceType": "html",
-      "observedAt": "2026-09-10T10:22:19Z",
-      "sourceHost": "roma.mfa.gov.rs",
-      "sourceQuote": "ша или личне карте Републике Србије) Амбасади Републике Србије у Риму може се доставити: • лично, доласком у Амбасаду - Via dei Monti Parioli 20, 00197 Roma • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: izbori.rim@mfa.rs Држављани који имају боравиште на Малти, попуњен и потписан образац Захтева, са копијом важећег личног документа (пасоша или личне карте Републике Србије), Канцеларију Амбасаде Републике Србије на Малти могу се доставити: • лично, доласком у Канцеларију Амбасаде Републике Србије на Малти - EUROPA CENTRE, level III, office 18/a, Floriana, FRN 1400, Malta • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: srb.office.valletta@mfa.rs Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
-      "sourceUrl": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
-      "stationId": "st-it-emb-main",
-      "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ"
     },
     {
       "candidateId": "fd43c216c134bf714a41ad7c8a3dec93421dc2982afba7e20b4c7f2e8e4b5b3b",

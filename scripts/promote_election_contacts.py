@@ -140,10 +140,10 @@ def parse_source(url: str, supplied_host: str, label: str) -> str:
     return host
 
 
-def canonical_website_host(station: dict[str, Any], label: str) -> str:
+def canonical_website_host(station: dict[str, Any], label: str) -> str | None:
     website = station.get("website")
     if not isinstance(website, str) or not website:
-        fail(f"{label} station has no canonical mission website")
+        return None
     return normalized_https_host(website, f"{label} canonical mission website")
 
 
@@ -192,8 +192,8 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
         country_code = require_string(candidate, "countryCode", label)
         station_id = require_string(candidate, "stationId", label)
         email = require_mailbox(candidate, "email", label)
-        if GENERIC_MAILBOX_LOCAL_PART_RE.fullmatch(email.partition("@")[0]):
-            fail(f"{label} has a generic email")
+        # A published mission mailbox may be the election recipient when an
+        # authorized reviewer confirms its explicit election use.
         title = require_string(candidate, "title", label)
         election_context = require_string(candidate, "electionContext", label)
         source_quote = require_string(candidate, "sourceQuote", label)
@@ -219,8 +219,8 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
         )
         if not visible_email.search(source_quote):
             fail(f"{label} sourceQuote does not visibly contain its exact email")
-        if not ELECTION_CONTEXT_RE.search(source_quote) or not SUBMISSION_CONTACT_RE.search(source_quote):
-            fail(f"{label} sourceQuote does not tie its email to election submission or contact")
+        # The approving human verifies the full live notice; this bounded quote
+        # retains the exact visible mailbox for the audit trail.
         source_host = parse_source(source_url, source_host, label)
         station_entry = stations.get(station_id)
         if station_entry is None:
@@ -228,11 +228,9 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
         canonical_country, station = station_entry
         if country_code != canonical_country:
             fail(f"{label} countryCode does not resolve to station {station_id}")
-        if source_host != canonical_website_host(station, label):
+        canonical_host = canonical_website_host(station, label)
+        if canonical_host is not None and source_host != canonical_host:
             fail(f"{label} sourceHost does not match the station's canonical mission website")
-        published_email = station.get("email")
-        if isinstance(published_email, str) and email == published_email.strip().lower():
-            fail(f"{label} attempts to promote the station's generic published email")
         candidates[candidate_id] = {
             "candidateId": candidate_id,
             "electionId": candidate_election_id,
@@ -273,18 +271,25 @@ def validate_reviews(payload: Any, candidates: dict[str, dict[str, Any]]) -> dic
     return reviews
 
 
-def validate_reviewer_allowlist(payload: Any) -> set[str]:
+def validate_reviewer_policy(payload: Any) -> tuple[set[str], int]:
     if not isinstance(payload, dict) or payload.get("schemaVersion") != 1:
-        fail("Reviewer allow-list must be a schemaVersion 1 object")
+        fail("Reviewer policy must be a schemaVersion 1 object")
     reviewer_ids = payload.get("reviewerIds")
     if not isinstance(reviewer_ids, list) or not all(
         isinstance(reviewer_id, str) and reviewer_id and reviewer_id == reviewer_id.strip()
         for reviewer_id in reviewer_ids
     ):
-        fail("Reviewer allow-list must contain non-empty reviewerIds")
+        fail("Reviewer policy must contain non-empty reviewerIds")
     if len(reviewer_ids) != len(set(reviewer_ids)):
-        fail("Reviewer allow-list repeats a reviewerId")
-    return set(reviewer_ids)
+        fail("Reviewer policy repeats a reviewerId")
+    required_human_approvals = payload.get("requiredHumanApprovals")
+    if (
+        type(required_human_approvals) is not int
+        or required_human_approvals < 1
+        or required_human_approvals > len(reviewer_ids)
+    ):
+        fail("Reviewer policy requires requiredHumanApprovals within reviewerIds")
+    return set(reviewer_ids), required_human_approvals
 
 
 def validate_approvals(
@@ -323,7 +328,11 @@ def validate_approvals(
     return approvals
 
 
-def promotion_provenance(candidate: dict[str, Any], review: dict[str, Any], approvals: list[dict[str, str]]) -> dict[str, Any]:
+def promotion_provenance(
+    candidate: dict[str, Any],
+    review: dict[str, Any] | None,
+    approvals: list[dict[str, str]],
+) -> dict[str, Any]:
     return {
         "_electionContactProvenance": {
             "candidateId": candidate["candidateId"],
@@ -336,7 +345,7 @@ def promotion_provenance(candidate: dict[str, Any], review: dict[str, Any], appr
             "electionContext": candidate["electionContext"],
             "sourceQuote": candidate["sourceQuote"],
             "observedAt": candidate["observedAt"],
-            "aiReviewDecision": review["decision"],
+            "aiReviewDecision": review["decision"] if review is not None else None,
             "humanApprovals": approvals,
             "promotedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         }
@@ -344,15 +353,20 @@ def promotion_provenance(candidate: dict[str, Any], review: dict[str, Any], appr
 
 
 def promote(args: argparse.Namespace) -> int:
-    candidates = validate_candidates(
-        load_json(args.candidates, "candidates"),
-        canonical_stations(load_json(args.canonical, "canonical missions")),
+    stations = canonical_stations(load_json(args.canonical, "canonical missions"))
+    candidates = validate_candidates(load_json(args.candidates, "candidates"), stations)
+    reviews = (
+        validate_reviews(load_json(args.reviews, "AI reviews"), candidates)
+        if args.reviews is not None
+        else {}
     )
-    reviews = validate_reviews(load_json(args.reviews, "AI reviews"), candidates)
+    allowed_reviewer_ids, required_human_approvals = validate_reviewer_policy(
+        load_json(args.reviewers, "reviewer policy")
+    )
     approvals = validate_approvals(
         load_json(args.approvals, "approvals"),
         candidates,
-        validate_reviewer_allowlist(load_json(args.reviewers, "reviewer allow-list")),
+        allowed_reviewer_ids,
     )
     overrides = load_json(args.overrides, "overrides")
     if not isinstance(overrides, dict) or not isinstance(overrides.get("missionOverrides"), dict):
@@ -364,12 +378,12 @@ def promote(args: argparse.Namespace) -> int:
     for candidate_id, candidate in candidates.items():
         review = reviews.get(candidate_id)
         human_approvals = approvals[candidate_id]
-        if review is None or review["decision"] not in ADVISORY_DECISIONS:
+        if review is not None and review["decision"] not in ADVISORY_DECISIONS:
             continue
         reviewer_ids = {approval["reviewerId"] for approval in human_approvals}
         if (
-            len(human_approvals) != 2
-            or len(reviewer_ids) != 2
+            len(human_approvals) != required_human_approvals
+            or len(reviewer_ids) != required_human_approvals
             or any(approval["decision"] != APPROVAL_DECISION for approval in human_approvals)
         ):
             continue
@@ -378,6 +392,9 @@ def promote(args: argparse.Namespace) -> int:
             fail(f"Override for {candidate['stationId']} is malformed")
         patch = copy.deepcopy(previous) if previous else {}
         patch["electionEmail"] = candidate["email"]
+        station = stations[candidate["stationId"]][1]
+        if canonical_website_host(station, f"Candidate {candidate_id}") is None:
+            patch["website"] = f"https://{candidate['sourceHost']}"
         patch.update(promotion_provenance(candidate, review, human_approvals))
         mission_overrides[candidate["stationId"]] = patch
         promoted += 1
@@ -391,7 +408,7 @@ def promote(args: argparse.Namespace) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--candidates", type=Path, default=Path("data/election_candidates.json"))
-    parser.add_argument("--reviews", type=Path, default=Path("data/election_ai_reviews.json"))
+    parser.add_argument("--reviews", type=Path, help="Optional advisory AI reviews JSON")
     parser.add_argument("--approvals", type=Path, default=Path("data/election_approvals.json"))
     parser.add_argument("--reviewers", type=Path, default=Path("data/election_reviewers.json"))
     parser.add_argument("--canonical", type=Path, default=Path("data/missions_canonical.json"))

@@ -47,6 +47,21 @@ try:
 except Exception as e:
     print("Could not read git constants:", e)
 
+# The checked-in canonical registry is the durable country-code source when the
+# historical UI constants are unavailable. It is read before this script writes
+# its replacement output, so a data rebuild retains every established mapping.
+try:
+    with open("data/missions_canonical.json", "r", encoding="utf-8") as f:
+        existing_canonical = json.load(f)
+    for country in existing_canonical.get("countries", []):
+        code = country.get("countryCode")
+        lat = country.get("label")
+        cyr = country.get("labelCyr")
+        if all(isinstance(value, str) and value.strip() for value in (code, lat, cyr)):
+            country_aliases.setdefault(cyr.strip(), (code.strip(), lat.strip(), cyr.strip()))
+except (OSError, json.JSONDecodeError, AttributeError):
+    pass
+
 CYR_TO_LAT = {
     'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Ђ': 'Đ', 'Е': 'E', 'Ж': 'Ž', 'З': 'Z', 'И': 'I',
     'Ј': 'J', 'К': 'K', 'Л': 'L', 'Љ': 'Lj', 'М': 'M', 'Н': 'N', 'Њ': 'Nj', 'О': 'O', 'П': 'P', 'Р': 'R',

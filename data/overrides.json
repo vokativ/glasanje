@@ -5,6 +5,367 @@
     "_template": {
       "_note": "Add a station ID key only after an official election-specific address is published.",
       "electionEmail": ""
+    },
+    "st-nonres-ad": {
+      "electionEmail": "konz.madrid@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "283dfc75058022670593203337fc0f188434231513ad52305170212cabb091ed",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "AD",
+        "sourceUrl": "https://madrid.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026-obavestenje-za-birace-koji-imaju-boraviste-u-k-spaniji-o-ostvarivanju-birackog-prava-na-izborima-za-narodne-poslanike",
+        "sourceHost": "madrid.mfa.gov.rs",
+        "title": "Избори за народне посланике 2026 - ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+        "electionContext": "Избори за народне посланике 2026 - ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+        "sourceQuote": "односилац захтева приложи копију очитане личне карте, уколико је поседује. Попуњен и потписан образац Захтева, са копијом важећег личног документа, Амбасади Републике Србије у Краљевини Шпанији може се доставити: • путем електронске поште: konz.madrid@mfa.rs • лично, доласком у Амбасаду 📍 Calle de Velázquez 3, 2ª, 28001 Madrid • путем поште, на наведену адресу Амбасаде Формулар Захтева за гласање у иностранству (Zahtev-za-glasanje-u-inostranstvu15.doc ) можете преузети кликом на линк. Формулар Захтева за упис у ЈБС ( Zahtev-za-upis-u-JBS15.doc ) можете преузети кликом на линк. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-de-cons-minhen": {
+      "electionEmail": "gk.muenchen@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "29e155b50cb583fd745fce11a2363a7a10b1894e7b2ff69ce5c342568ada245b",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "DE",
+        "sourceUrl": "https://munich.mfa.gov.rs/mediji/aktivnosti/prijava-za-izbore-25-10-2026",
+        "sourceHost": "munich.mfa.gov.rs",
+        "title": "Пријава за изборе 25.10.2026. године",
+        "electionContext": "Пријава за изборе 25.10.2026. године",
+        "sourceQuote": "лико је поседује. Без обзира на врсту боравка у иностранству, грађани се могу пријавити да своје бирачко право остваре гласањем у иностранству. Напомињемо да и лица која туристички бораве на дан гласања у иностранству могу да се пријаве за гласање. Скениране захтеве заједно за копијом личне карте/путне исправе можете слати на мејл адресу: gk.muenchen@mfa.rs . Још једном апелујемо на грађане да захтеве шаљу НАЈКАСНИЈЕ ДО 03. ОКТОБРА 2026. У ПОНОЋ јер после наведеног времена није могуће процесуирати достављене захтеве!!! Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-de-emb-main": {
+      "electionEmail": "izbori@botschaft-serbien.de",
+      "_electionContactProvenance": {
+        "candidateId": "38fbf7651fe17a6dd35a0f7bba40de41514dae9ca310e9fb81d7045585528eae",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "DE",
+        "sourceUrl": "https://berlin.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+        "sourceHost": "berlin.mfa.gov.rs",
+        "title": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+        "electionContext": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+        "sourceQuote": "путем мејла: izbori@botschaft-serbien.de",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-nonres-ml": {
+      "electionEmail": "consulat@ambserbie-alger.com",
+      "_electionContactProvenance": {
+        "candidateId": "4c40ae2184905955da832bfc47a6bab8e89423503fe1af9d3f1f0f7497fd0b2d",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "ML",
+        "sourceUrl": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "sourceHost": "alger.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "sourceQuote": "26. године (поноћ према локалном времену у Републици Србији). Након наведеног времена захтеви неће моћи да се процесуирају, због чега апелујемо на заинтересоване грађане да захтеве поднесу благовремено, односно што раније. Право пријаве за гласање у иностранству имају сви држављани Републике Србије, који су уписани у ЈБС, без обзира по ком основу и колико дуго бораве у иностранству. Захтеви се достављају Амбасади Републике Србије у Алжиру на е-маил: consulat@ambserbie-alger.com (алтернативно се могу доставити лично или препорученом поштом). Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-mt-emb-main": {
+      "electionEmail": "srb.office.valletta@mfa.rs",
+      "website": "https://roma.mfa.gov.rs",
+      "_electionContactProvenance": {
+        "candidateId": "633869b0445737d453015f29ad6366533ed63526712ba854fc8b1167725793db",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MT",
+        "sourceUrl": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+        "sourceHost": "roma.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "sourceQuote": "ша или личне карте Републике Србије) Амбасади Републике Србије у Риму може се доставити: • лично, доласком у Амбасаду - Via dei Monti Parioli 20, 00197 Roma • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: izbori.rim@mfa.rs Држављани који имају боравиште на Малти, попуњен и потписан образац Захтева, са копијом важећег личног документа (пасоша или личне карте Републике Србије), Канцеларију Амбасаде Републике Србије на Малти могу се доставити: • лично, доласком у Канцеларију Амбасаде Републике Србије на Малти - EUROPA CENTRE, level III, office 18/a, Floriana, FRN 1400, Malta • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: srb.office.valletta@mfa.rs Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-es-emb-main": {
+      "electionEmail": "konz.madrid@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "7b5cc89e4bd0d5cc5ce76967d27c61fb81dff88f0601227fe4d1f903428761e0",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "ES",
+        "sourceUrl": "https://madrid.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026-obavestenje-za-birace-koji-imaju-boraviste-u-k-spaniji-o-ostvarivanju-birackog-prava-na-izborima-za-narodne-poslanike",
+        "sourceHost": "madrid.mfa.gov.rs",
+        "title": "Избори за народне посланике 2026 - ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+        "electionContext": "Избори за народне посланике 2026 - ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+        "sourceQuote": "односилац захтева приложи копију очитане личне карте, уколико је поседује. Попуњен и потписан образац Захтева, са копијом важећег личног документа, Амбасади Републике Србије у Краљевини Шпанији може се доставити: • путем електронске поште: konz.madrid@mfa.rs • лично, доласком у Амбасаду 📍 Calle de Velázquez 3, 2ª, 28001 Madrid • путем поште, на наведену адресу Амбасаде Формулар Захтева за гласање у иностранству (Zahtev-za-glasanje-u-inostranstvu15.doc ) можете преузети кликом на линк. Формулар Захтева за упис у ЈБС ( Zahtev-za-upis-u-JBS15.doc ) можете преузети кликом на линк. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-de-cons-frankfurt": {
+      "electionEmail": "izbori@gksrbfra.de",
+      "_electionContactProvenance": {
+        "candidateId": "911ef12fa84c4fe59ee267ce1db11518b3a03422b289ffa0025d948dda33154f",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "DE",
+        "sourceUrl": "https://frankfurt.mfa.gov.rs/mediji/najave-i-obavestenja/obavestavaju-se-biraci-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "sourceHost": "frankfurt.mfa.gov.rs",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ (локално време y Р. Србији). Поменути захтев се подноси на прописаном обрасцу . Уз захтев који је могуће доставити мејлом на мејл адресу: izbori@gksrbfra.de , редовном поштом или лично у просторијама Генералног конзулата (сваког радног дана у периоду 09,00 – 13,00 часова), потребно је доставити и копију важећег пасоша или личне карте, односно очитане личне карте Републике Србије ). Лице које има бирачко право, а није уписано у Јединствени бирачки списак, истовремено са горе поменутим захтевом подноси и Захтев з",
+        "sourceQuote": "пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ (локално време y Р. Србији). Поменути захтев се подноси на прописаном обрасцу . Уз захтев који је могуће доставити мејлом на мејл адресу: izbori@gksrbfra.de , редовном поштом или лично у просторијама Генералног конзулата (сваког радног дана у периоду 09,00 – 13,00 часова), потребно је доставити и копију важећег пасоша или личне карте, односно очитане личне карте Републике Србије ). Лице које има бирачко право, а није уписано у Јединствени бирачки списак, истовремено са горе поменутим захтевом подноси и Захтев з",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-fi-emb-main": {
+      "electionEmail": "info@serbianembassy.fi",
+      "_electionContactProvenance": {
+        "candidateId": "b87a1a7dc0cbed82c90b4bfdf3142a7fa38bec192ae5cf3f2a44581e67a0eb51",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "FI",
+        "sourceUrl": "https://helsinki.mfa.gov.rs/mediji/najave-i-obavestenja/vazno-obavestenje-izbori-2026",
+        "sourceHost": "helsinki.mfa.gov.rs",
+        "title": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+        "electionContext": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+        "sourceQuote": "у јединствени бирачки списак и за упис податка о гласању у иностранству, заједно са скенираном важећом личном исправом Републике Србије (пасош, лична карта – пожељно да буде очитана уколико је са чипом), доставите на мејл адресу Амбасаде: info@serbianembassy.fi најкасније до 4. октобра 2026.г. у 01.00 час после поноћи по финском времену. Увид у јединствени бирачки списак: https://upit.birackispisak.gov.rs/ ФОРМУЛАРИ: Захтев за упис у јединствени бирачки списак: Zahtev za upis u JBS.pdf Захтев за упис податка да ће бирач гласати у иностранству: Zahtev za glasanje u inostranstvu.pdf Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-dz-emb-main": {
+      "electionEmail": "consulat@ambserbie-alger.com",
+      "_electionContactProvenance": {
+        "candidateId": "b9238bafd11c8fa881921667e8abb3ba583846fd4e98b05ec571c8ca3bcf7e4b",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "DZ",
+        "sourceUrl": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "sourceHost": "alger.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "sourceQuote": "26. године (поноћ према локалном времену у Републици Србији). Након наведеног времена захтеви неће моћи да се процесуирају, због чега апелујемо на заинтересоване грађане да захтеве поднесу благовремено, односно што раније. Право пријаве за гласање у иностранству имају сви држављани Републике Србије, који су уписани у ЈБС, без обзира по ком основу и колико дуго бораве у иностранству. Захтеви се достављају Амбасади Републике Србије у Алжиру на е-маил: consulat@ambserbie-alger.com (алтернативно се могу доставити лично или препорученом поштом). Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-nonres-ee": {
+      "electionEmail": "info@serbianembassy.fi",
+      "_electionContactProvenance": {
+        "candidateId": "b994eb461049596e625612f42f3bc6bba82ac30110e1a5d8adff262fd665b09e",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "EE",
+        "sourceUrl": "https://helsinki.mfa.gov.rs/mediji/najave-i-obavestenja/vazno-obavestenje-izbori-2026",
+        "sourceHost": "helsinki.mfa.gov.rs",
+        "title": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+        "electionContext": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+        "sourceQuote": "у јединствени бирачки списак и за упис податка о гласању у иностранству, заједно са скенираном важећом личном исправом Републике Србије (пасош, лична карта – пожељно да буде очитана уколико је са чипом), доставите на мејл адресу Амбасаде: info@serbianembassy.fi најкасније до 4. октобра 2026.г. у 01.00 час после поноћи по финском времену. Увид у јединствени бирачки списак: https://upit.birackispisak.gov.rs/ ФОРМУЛАРИ: Захтев за упис у јединствени бирачки списак: Zahtev za upis u JBS.pdf Захтев за упис податка да ће бирач гласати у иностранству: Zahtev za glasanje u inostranstvu.pdf Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-nonres-gw": {
+      "electionEmail": "consulat@ambserbie-alger.com",
+      "_electionContactProvenance": {
+        "candidateId": "cf56b96f18b2a9690dd1c4913481838c2d42468126c6fa6a22a4376fb0654342",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "GW",
+        "sourceUrl": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "sourceHost": "alger.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "sourceQuote": "26. године (поноћ према локалном времену у Републици Србији). Након наведеног времена захтеви неће моћи да се процесуирају, због чега апелујемо на заинтересоване грађане да захтеве поднесу благовремено, односно што раније. Право пријаве за гласање у иностранству имају сви држављани Републике Србије, који су уписани у ЈБС, без обзира по ком основу и колико дуго бораве у иностранству. Захтеви се достављају Амбасади Републике Србије у Алжиру на е-маил: consulat@ambserbie-alger.com (алтернативно се могу доставити лично или препорученом поштом). Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-ca-cons-toronto": {
+      "electionEmail": "izbori@rogers.com",
+      "_electionContactProvenance": {
+        "candidateId": "d48d0f072220811d1afaa327d13ea56dbbcf7b57b1160cf04102022eedc2edb3",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "CA",
+        "sourceUrl": "https://toronto.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+        "sourceHost": "toronto.mfa.gov.rs",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+        "electionContext": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+        "sourceQuote": "и списак података да ће бирач гласати у иностранству, заједно са копијом пасоша, личне карте или очитане личне карте (битно је да се на истим јасно види ЈМБГ грађанина). Захтев можете доставити Генералном конзулату путем и-мејла на адресу: izbori@rogers.com путем поште или непосредно у просторијама, сваког радног дана у периоду од 10 до 14 часова. Линк са кога можете преузети образац Захтев за упис у бирачки списак података да ће бирач гласати у иностранству: Zahtev-za-glasanje-u-inostranstvu.doc Линк са кога можете преузети образац Захтева за упис у Јединствени бирачки списак у Р. Србији: Zahtev-za-upis-u-JBS",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-it-emb-main": {
+      "electionEmail": "izbori.rim@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "e628343516088980335348fa9060511a77ea776c3f4cb51542d6c94c26395f70",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "IT",
+        "sourceUrl": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+        "sourceHost": "roma.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "sourceQuote": "• путем електронске поште: izbori.rim@mfa.rs",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-it-cons-milano": {
+      "electionEmail": "pi@gkrsmi.it",
+      "_electionContactProvenance": {
+        "candidateId": "e8fb7bdec2f744bb46be120f4f1a4d5d80b56dfdc3fce41c65aef2cd73a7098b",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "IT",
+        "sourceUrl": "https://milano.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-parlamentarnim-izborima-25-oktobra-2026-godine",
+        "sourceHost": "milano.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "sourceQuote": "скупштине Републике Србије, који су заказани за 25. октобар 2026. године, потребно поднети пријаву, без обзира на то да ли сте се пријављивали за гласање на ранијим изборима . Захтев могу поднети и држављани Републике Србије који се на дан избора привремено налазе у иностранству, укључујући лица која у Италији бораве туристички . Попуњен и потписан образац Захтева, са копијом важећег личног документа (пасоша или личне карте Републике Србије) Генералном конзулату Републике Србије у Милану може се доставити: • лично, доласком у Генерални конзулат Републике Србије у Милану - ул. Via Pantano 2, 20122 Milano • путем поште, препорученом пошиљком на наведену адресу • путем електронске поште: pi@gkrsmi.it Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
+    },
+    "st-mk-emb-main": {
+      "electionEmail": "consulate.skopje@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "fd43c216c134bf714a41ad7c8a3dec93421dc2982afba7e20b4c7f2e8e4b5b3b",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MK",
+        "sourceUrl": "https://skopje.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026",
+        "sourceHost": "skopje.mfa.gov.rs",
+        "title": "Парламентарни избори 2026",
+        "electionContext": "Парламентарни избори 2026",
+        "sourceQuote": "дно је да Амбасади Републике Србије у Скопљу поднесе истовремено оба захтева, односно и захтев за упис у Јединствени бирачки списак и захтев за упис у бирачки списак података да ће бирач гласати у иностранству. Захтев за упис у јединствени бирачки списак у Р. Србији можете преузети ОВДЕ Попуњен и потписан захтев, заједно са копијом важећег пасоша или личне карте, односно очитану личну карту (за личне карте са чипом), потребно је доставити Амбасади Републике Србије у Скопљу: е-mail consulate.skopje@mfa.rs или лично у периоду од 08:30 до 16:30 часова, најкасније до поноћи 3. октобра 2026. године. Адреса: Амбасада Републике Србије, Самоилова бр. 34, 1000 Скопје, Република Северна Македонија. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+        "observedAt": "2026-09-10T10:22:19Z",
+        "aiReviewDecision": null,
+        "humanApprovals": [
+          {
+            "reviewerId": "vokativ",
+            "decision": "approve",
+            "approvedAt": "2026-09-10T11:39:01Z"
+          }
+        ],
+        "promotedAt": "2026-09-10T11:41:03Z"
+      }
     }
   },
   "countryOverrides": {}

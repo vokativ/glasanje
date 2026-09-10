@@ -12,7 +12,7 @@ Početak svakog pretraživanja su isključivo ove tri zvanične indeks-stranice 
 
 Od njih se smeju pratiti samo stranice država i sajtovi misija na koje MSP izričito vodi. Ne pretražuju se i ne prikupljaju proizvoljni sajtovi trećih strana, društvene mreže, imenici, keširane kopije niti rezultati pretraživača.
 
-U ovoj proceduri dozvoljeni su samo javno objavljeni institucionalni podaci: naziv misije, država/stanica, javno vidljiva izborna adresa, URL, javni tekst obaveštenja i vreme opažanja. **Nikada ne unositi, slati AI-u, čuvati ili obrađivati podatke građana, sadržaj obrazaca, priloge, prijave ili poruke birača.** Adresa se nikada ne sme zaključivati iz domena niti zamenjivati generičkim kontaktom misije.
+U ovoj proceduri dozvoljeni su samo javno objavljeni institucionalni podaci: naziv misije, država/stanica, javno vidljiva izborna adresa, URL, javni tekst obaveštenja i vreme opažanja. **Nikada ne unositi, slati AI-u, čuvati ili obrađivati podatke građana, sadržaj obrazaca, priloge, prijave ili poruke birača.** Adresa se nikada ne sme zaključivati iz domena niti se generički kontakt misije sme označiti izbornim bez eksplicitne izborne namene.
 
 ## Dokaz koji kandidat mora da ima
 
@@ -24,9 +24,9 @@ Kandidat je prihvatljiv samo ako zapis sadrži sve sledeće:
 - jasan izborni kontekst (`electionContext`);
 - vreme opažanja (`observedAt`);
 - identitet države i stanice/misije (`countryCode` i `stationId`);
-- host izvora (`sourceHost`), identičan normalizovanom hostu `website` polja te stanice u `data/missions_canonical.json`.
+- host izvora (`sourceHost`), identičan normalizovanom hostu `website` polja te stanice kada ono postoji u `data/missions_canonical.json`.
 
-Važeći izborni dokaz je, na primer, aktuelno obaveštenje MSP ili eksplicitno povezane misije koje pominje izbore, glasanje iz inostranstva, birački spisak ili podnošenje izborne prijave i uz to navodi adresu za tu svrhu. `sourceQuote` sam mora doslovno sadržati tu adresu, izborni kontekst i radnju podnošenja ili kontakta; naslov stranice, odvojeni tekst na istoj stranici i naziv lokalnog dela adrese nisu dokaz veze. Citat mora pokazati vezu između adrese i izborne radnje; sama adresa na istoj stranici nije dovoljna.
+Važeći izborni dokaz je, na primer, aktuelno obaveštenje MSP ili eksplicitno povezane misije koje pominje izbore, glasanje iz inostranstva, birački spisak ili podnošenje izborne prijave i uz to navodi adresu za tu svrhu. `sourceQuote` mora doslovno sadržati adresu; ljudski odobravalac proverava punu živu objavu za izbornu vezu i identitet stanice. Generičko sanduče može biti izabrano samo kada ga aktuelna objava izričito navodi za tu izbornu radnju.
 
 Nevažeći su: opšta stranica „Kontakt“, centrala ili prijem, `info@`/`office@` i sličan generički kontakt bez izborne namene, adresa izvedena iz domena, stara vest bez važećeg izbornog roka, adresar treće strane i sadržaj koji nije eksplicitno povezan sa jednim od dozvoljenih MSP lanaca izvora. Odbaciti adresu koja nije jednostavno oblikovano sanduče ili sadrži parametre, zaglavlja ili kontrolne znake. Posebno: stare adrese oblika `izbori*` iz 2022. godine **nikada se ne prenose** u novi ciklus bez novog, aktuelnog zvaničnog dokaza.
 
@@ -44,11 +44,11 @@ python3 scripts/discover_election_contacts.py --election-id 2026-parliamentary -
 
 Faza čita dozvoljene javne izvore i upisuje predloge u `data/election_candidates.json`.
 
-Pre pokretanja proveriti da je radni skup ograničen na MSP indeks → njegovu stranicu države → eksplicitno povezani sajt misije. Pregledati da svaki kandidat ima svih sedam obaveznih polja iz prethodnog odeljka. Kandidat sa nedostajućim poljem, ne-HTTPS URL-om, nejasnim izbornim kontekstom ili generičkom adresom odbaciti; ne dopunjavati ga nagađanjem.
+Pre pokretanja proveriti da je radni skup ograničen na MSP indeks → njegovu stranicu države → eksplicitno povezani sajt misije. Pregledati da svaki kandidat ima svih sedam obaveznih polja iz prethodnog odeljka. Kandidat sa nedostajućim poljem, ne-HTTPS URL-om ili nejasnim izbornim kontekstom odbaciti; ne dopunjavati ga nagađanjem.
 
-### 2. AI pregled (samo savetodavan)
+### 2. AI pregled (opciono, savetodavan)
 
-Pokrenuti zasebnu AI CLI fazu nad `data/election_candidates.json`:
+Ako je AI krajnja tačka podešena, može se pokrenuti zasebna savetodavna faza nad `data/election_candidates.json`:
 
 ```bash
 ELECTION_AI_BASE_URL=... ELECTION_AI_API_KEY=... ELECTION_AI_MODEL=... \
@@ -63,11 +63,11 @@ AI-u se šalje isključivo javni dokaz kandidata: adresa, citat, zvanični URL, 
 
 ### 3. Ljudska promocija
 
-Dva različita poverljiva održavaoca nezavisno proveravaju isti kandidat u njegovom živom zvaničnom izvoru i u `data/missions_canonical.json`. Svako odobrenje beleži se u `data/election_approvals.json`. Fajl počinje sa `{"schemaVersion":1,"approvals":[]}`, a svaki zapis mora imati `candidateId`, `electionId`, stabilni ljudski `reviewerId`, `reviewerType:"human"`, `decision:"approve"` i `approvedAt` u ISO-8601 formatu.
+Poverljivi održavalac nezavisno proverava kandidata u njegovom živom zvaničnom izvoru i u `data/missions_canonical.json`. Svako odobrenje beleži se u `data/election_approvals.json`. Fajl počinje sa `{"schemaVersion":1,"approvals":[]}`, a svaki zapis mora imati `candidateId`, `electionId`, stabilni ljudski `reviewerId`, `reviewerType:"human"`, `decision:"approve"` i `approvedAt` u ISO-8601 formatu.
 
-`data/election_reviewers.json` je pregledana dozvoljena lista ljudskih identiteta (`reviewerIds`). U nju se unose samo stabilni identiteti poverljivih održavalaca; bilo koji `reviewerId` koji nije doslovno na listi odbacuje celu promociju. Menjanje te liste zahteva zaštićeni pregled repozitorijuma od **dve različite ovlašćene osobe**; pravila grane moraju zahtevati oba odobrenja pre spajanja. Dve odluke moraju pripadati dvema različitim osobama sa te liste; duplikat, nepotpuna odluka ili neslaganje se ne računa kao dva odobrenja.
+`data/election_reviewers.json` je pregledana politika: dozvoljeni stabilni ljudski identiteti (`reviewerIds`) i `requiredHumanApprovals`. Bilo koji `reviewerId` koji nije doslovno na listi odbacuje celu promociju. Broj različitih odluka mora tačno odgovarati `requiredHumanApprovals`; duplikat, nepotpuna odluka ili neslaganje se ne računa.
 
-Primer pre promocije (zameniti identifikatorima koji već postoje u `data/election_reviewers.json`, ne deliti isti `reviewerId`):
+Primer pre promocije (zameniti identifikatorom koji već postoji u `data/election_reviewers.json`):
 
 ```json
 {
@@ -77,49 +77,40 @@ Primer pre promocije (zameniti identifikatorima koji već postoje u `data/electi
       "candidateId": "kandidat-123",
       "electionId": "2026-parliamentary",
       "reviewerType": "human",
-      "reviewerId": "odrzavalac-a",
+      "reviewerId": "odrzavalac",
       "decision": "approve",
       "approvedAt": "2026-09-09T12:00:00Z"
-    },
-    {
-      "candidateId": "kandidat-123",
-      "electionId": "2026-parliamentary",
-      "reviewerType": "human",
-      "reviewerId": "odrzavalac-b",
-      "decision": "approve",
-      "approvedAt": "2026-09-09T12:15:00Z"
     }
   ]
 }
 ```
 
-Tek zatim pokrenuti:
+Zatim pokrenuti:
 
 ```bash
 python3 scripts/promote_election_contacts.py \
   --candidates data/election_candidates.json \
-  --reviews data/election_ai_reviews.json \
   --approvals data/election_approvals.json \
   --reviewers data/election_reviewers.json \
   --canonical data/missions_canonical.json \
   --overrides data/overrides.json
 ```
 
-Faza mora ponovo nezavisno da potvrdi da kandidat odgovara stanici i da `sourceHost` odgovara normalizovanom hostu njenog `website` polja u `data/missions_canonical.json` pre izmene primaoca u `data/overrides.json`. AI preporuka nije zamena ni za jedno ljudsko odobrenje.
+Ako postoji dovršen savetodavni AI pregled, dodati `--reviews data/election_ai_reviews.json`. Faza ponovo nezavisno potvrđuje identitet stanice, HTTPS izvor, javno vidljivu adresu i, kada stanica ima kanonski sajt, host izvora. AI preporuka nije zamena za ljudsko odobrenje.
 
 Promovisati samo adresu sa aktuelnim zvaničnim izvorom i jasnim rokom važenja. Svaki živi primalac mora imati takav aktuelni izvor i datum isteka; kada izvor istekne, ukloniti ili zameniti primaoca kroz isti postupak. Ne zadržavati primaoca zato što je bio ispravan u prethodnom ciklusu.
 
 ## Pregled, čuvanje i trag revizije
 
-Čuvati `election_candidates.json`, `election_ai_reviews.json`, korišćeni fajl odobrenja, verziju `election_reviewers.json` i promenjeni `overrides.json` kao trag ciklusa, uz datum pokretanja, verziju alata i identitete dva odobravaoca. Čuvati samo javne institucionalne dokaze i ne dodavati lične podatke ni tajne. Zadržati artefakte najmanje do isteka izbornog roka i završene naknadne provere; zatim ih obrisati prema važećoj politici zadržavanja, osim onoga što je potrebno za javni revizioni trag.
+Čuvati `election_candidates.json`, svaki korišćeni savetodavni pregled, korišćeni fajl odobrenja, verziju `election_reviewers.json` i promenjeni `overrides.json` kao trag ciklusa, uz datum pokretanja, verziju alata i identitet odobravaoca. Čuvati samo javne institucionalne dokaze i ne dodavati lične podatke ni tajne. Zadržati artefakte najmanje do isteka izbornog roka i završene naknadne provere; zatim ih obrisati prema važećoj politici zadržavanja, osim onoga što je potrebno za javni revizioni trag.
 
-Svaki pregled proverava: dozvoljeni lanac izvora, HTTPS URL, doslovni citat koji sam sadrži adresu i izbornu radnju, tačan kanonski host stanice, vreme opažanja, rok važenja i oba različita ljudska odobrenja sa dozvoljene liste. Ne menjati ručno rezultat AI pregleda niti preskakati proveru kanonske mape misija.
+Svaki pregled proverava: dozvoljeni lanac izvora, HTTPS URL, doslovno vidljivu adresu, tačan kanonski host stanice kada postoji, vreme opažanja, rok važenja i broj različitih ljudskih odobrenja iz politike. Ne menjati ručno rezultat AI pregleda niti preskakati proveru kanonske mape misija.
 
 ## Ritam rada i postupanje pri grešci
 
 Dok je MSP ili misija objavila aktivan izborni prozor, otkrivanje i pregled raditi **svakog dana**. Van objavljenog prozora proveravati **jednom nedeljno**. Dodatni prolaz uraditi odmah po novom zvaničnom obaveštenju, promeni roka ili povlačenju izvora.
 
-Ako indeks MSP-a, stranica države ili sajt misije nije dostupan, ako URL preusmerava van dozvoljenog lanca, ako nema vidljive izborne veze, ako AI krajnja tačka ne radi ili ako fajl odobrenja nije potpun: ne promovisati ništa. Sačuvati bezbednu poruku o grešci bez tajni i bez ličnih podataka, označiti ciklus za ponavljanje i pokušati ponovo pri sledećem ritmu ili nakon otklanjanja kvara. Kada izvor nestane ili istekne, postojeći živi primalac nije opravdan za dalje korišćenje dok se ne pribavi nov aktuelni dokaz.
+Ako indeks MSP-a, stranica države ili sajt misije nije dostupan, ako URL preusmerava van dozvoljenog lanca, ako nema vidljive izborne veze ili ako fajl odobrenja nije potpun: ne promovisati ništa. Sačuvati bezbednu poruku o grešci bez tajni i bez ličnih podataka, označiti ciklus za ponavljanje i pokušati ponovo pri sledećem ritmu ili nakon otklanjanja kvara. Kada izvor nestane ili istekne, postojeći živi primalac nije opravdan za dalje korišćenje dok se ne pribavi nov aktuelni dokaz.
 
 ## Izdavanje
 

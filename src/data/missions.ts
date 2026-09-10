@@ -96,8 +96,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-dz-emb-main",
         "embassy": "Ambasada Republike Srbije (Alžir)",
         "embassyCyr": "Амбасада Републике Србије (Алжир)",
-        "email": "ambasada@ambserbie-alger.com",
-        "isElectionContactConfirmed": false,
+        "email": "consulat@ambserbie-alger.com",
+        "isElectionContactConfirmed": true,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": true
@@ -139,7 +139,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Španija) (pokriva Andora)",
         "embassyCyr": "Амбасада Републике Србије (Шпанија) (покрива Андора)",
         "email": "konz.madrid@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "isElectionContactConfirmed": true,
         "website": "https://madrid.mfa.gov.rs",
         "address": "c/Velazquez 3, Piso 228001 МАДРИДШПАНИЈА",
         "isResident": false
@@ -871,8 +871,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-nonres-gw",
         "embassy": "Ambasada Republike Srbije (Alžir) (pokriva Gvineja Bisao)",
         "embassyCyr": "Амбасада Републике Србије (Алжир) (покрива Гвинеја Бисао)",
-        "email": "ambasada@ambserbie-alger.com",
-        "isElectionContactConfirmed": false,
+        "email": "consulat@ambserbie-alger.com",
+        "isElectionContactConfirmed": true,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": false
@@ -1175,8 +1175,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-nonres-ee",
         "embassy": "Ambasada Republike Srbije (Finska) (pokriva Estonija)",
         "embassyCyr": "Амбасада Републике Србије (Финска) (покрива Естонија)",
-        "email": "office@serbianembassy.fi",
-        "isElectionContactConfirmed": false,
+        "email": "info@serbianembassy.fi",
+        "isElectionContactConfirmed": true,
         "website": "https://helsinki.mfa.gov.rs",
         "address": "Kulosaarentie 3600570 ХЕЛСИНКИФИНСКА",
         "isResident": false
@@ -1448,8 +1448,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-it-emb-main",
         "embassy": "Ambasada Republike Srbije (Italija)",
         "embassyCyr": "Амбасада Републике Србије (Италија)",
-        "email": "srb.emb.italy@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "email": "izbori.rim@mfa.rs",
+        "isElectionContactConfirmed": true,
         "website": "https://roma.mfa.gov.rs",
         "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
         "isResident": true
@@ -1468,8 +1468,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-it-cons-milano",
         "embassy": "Generalni konzulat Republike Srbije (Milano)",
         "embassyCyr": "Генерални конзулат Републике Србије (Милано)",
-        "email": "info@gkrsmi.it",
-        "isElectionContactConfirmed": false,
+        "email": "pi@gkrsmi.it",
+        "isElectionContactConfirmed": true,
         "website": "https://milano.mfa.gov.rs",
         "address": "Via Pantano 220122 МИЛАНОИТАЛИЈА",
         "isResident": true
@@ -1730,8 +1730,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-ca-cons-toronto",
         "embassy": "Generalni konzulat Republike Srbije (Toronto)",
         "embassyCyr": "Генерални конзулат Републике Србије (Торонто)",
-        "email": "office.toronto@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "email": "izbori@rogers.com",
+        "isElectionContactConfirmed": true,
         "website": "https://toronto.mfa.gov.rs",
         "address": "40 Eglinton Avenue East, 7 floor,unit 701 M4P 3A2ТОРОНТО, ON M4P 3A2КАНАДА",
         "isResident": true
@@ -2276,8 +2276,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-nonres-ml",
         "embassy": "Ambasada Republike Srbije (Alžir) (pokriva Mali)",
         "embassyCyr": "Амбасада Републике Србије (Алжир) (покрива Мали)",
-        "email": "ambasada@ambserbie-alger.com",
-        "isElectionContactConfirmed": false,
+        "email": "consulat@ambserbie-alger.com",
+        "isElectionContactConfirmed": true,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": false
@@ -2298,8 +2298,8 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Malta)",
         "embassyCyr": "Амбасада Републике Србије (Малта)",
         "email": "srb.office.valletta@mfa.rs",
-        "isElectionContactConfirmed": false,
-        "website": "",
+        "isElectionContactConfirmed": true,
+        "website": "https://roma.mfa.gov.rs",
         "address": "Europa Centre, Level 3, Office 18/a, Triq Sant` Anna 58, Floriana, FRN,1400 Malta",
         "isResident": true
       }
@@ -2601,8 +2601,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-de-emb-main",
         "embassy": "Ambasada Republike Srbije (Nemačka)",
         "embassyCyr": "Амбасада Републике Србије (Немачка)",
-        "email": "info@botschaft-serbien.de",
-        "isElectionContactConfirmed": false,
+        "email": "izbori@botschaft-serbien.de",
+        "isElectionContactConfirmed": true,
         "website": "https://berlin.mfa.gov.rs",
         "address": "Taubert Strasse 18D-14193 БЕРЛИННЕМАЧКА",
         "isResident": true
@@ -2631,8 +2631,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-de-cons-frankfurt",
         "embassy": "Generalni konzulat Republike Srbije (Frankfurt)",
         "embassyCyr": "Генерални конзулат Републике Србије (Франкфурт)",
-        "email": "info@gksrbfra.de",
-        "isElectionContactConfirmed": false,
+        "email": "izbori@gksrbfra.de",
+        "isElectionContactConfirmed": true,
         "website": "https://frankfurt.mfa.gov.rs",
         "address": "Thueringer Strasse 3D-60316 ФРАНКФУРТНЕМАЧКА",
         "isResident": true
@@ -2642,7 +2642,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Minhen)",
         "embassyCyr": "Генерални конзулат Републике Србије (Минхен)",
         "email": "gk.muenchen@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "isElectionContactConfirmed": true,
         "website": "https://munich.mfa.gov.rs",
         "address": "Bohmerwaldplatz 2D-81679 МИНХЕННЕМАЧКА",
         "isResident": true
@@ -3270,8 +3270,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-mk-emb-main",
         "embassy": "Ambasada Republike Srbije (Severna Makedonija)",
         "embassyCyr": "Амбасада Републике Србије (Северна Македонија)",
-        "email": "srbamb@unet.com.mk",
-        "isElectionContactConfirmed": false,
+        "email": "consulate.skopje@mfa.rs",
+        "isElectionContactConfirmed": true,
         "website": "https://skopje.mfa.gov.rs",
         "address": "Самоилова бр. 34, СКОПЉЕСЕВЕРНА МАКЕДОНИЈА",
         "isResident": true
@@ -4003,8 +4003,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-fi-emb-main",
         "embassy": "Ambasada Republike Srbije (Finska)",
         "embassyCyr": "Амбасада Републике Србије (Финска)",
-        "email": "office@serbianembassy.fi",
-        "isElectionContactConfirmed": false,
+        "email": "info@serbianembassy.fi",
+        "isElectionContactConfirmed": true,
         "website": "https://helsinki.mfa.gov.rs",
         "address": "Kulosaarentie 3600570 ХЕЛСИНКИФИНСКА",
         "isResident": true
@@ -4379,7 +4379,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Španija)",
         "embassyCyr": "Амбасада Републике Србије (Шпанија)",
         "email": "konz.madrid@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "isElectionContactConfirmed": true,
         "website": "https://madrid.mfa.gov.rs",
         "address": "c/Velazquez 3, Piso 228001 МАДРИДШПАНИЈА",
         "isResident": true

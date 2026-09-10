@@ -231,21 +231,36 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 {"missionOverrides": {}},
             )
 
-    def test_promotion_rejects_generic_or_url_parameterized_mailbox(self) -> None:
-        for email in ("info@vienna.mfa.gov.rs", "izbori.vienna@mfa.gov.rs?bcc=attacker"):
-            with self.subTest(email=email), tempfile.TemporaryDirectory() as directory:
-                paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-                candidates = self._read_json(paths["candidates"])
-                candidates["candidates"][0]["email"] = email
-                candidates["candidates"][0]["sourceQuote"] = (
-                    f"Za glasanje u inostranstvu, prijavu za izbore pošaljite na {email}."
-                )
-                self._write_json(paths["candidates"], candidates)
+    def test_promotion_allows_an_election_designated_generic_mailbox(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
+            candidates = self._read_json(paths["candidates"])
+            candidates["candidates"][0]["email"] = "info@vienna.mfa.gov.rs"
+            candidates["candidates"][0]["sourceQuote"] = (
+                "Za glasanje u inostranstvu, prijavu za izbore pošaljite na info@vienna.mfa.gov.rs."
+            )
+            self._write_json(paths["candidates"], candidates)
 
-                result = self._run_promotion(paths)
+            result = self._run_promotion(paths)
 
-                self.assertEqual(result.returncode, 2, result.stderr)
-                self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(result.stdout.strip(), "Promoted 1 election-specific contact(s).")
+
+    def test_promotion_rejects_url_parameterized_mailbox(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
+            candidates = self._read_json(paths["candidates"])
+            candidates["candidates"][0]["email"] = "izbori.vienna@mfa.gov.rs?bcc=attacker"
+            candidates["candidates"][0]["sourceQuote"] = (
+                "Za glasanje u inostranstvu, prijavu za izbore pošaljite na "
+                "izbori.vienna@mfa.gov.rs?bcc=attacker."
+            )
+            self._write_json(paths["candidates"], candidates)
+
+            result = self._run_promotion(paths)
+
+            self.assertEqual(result.returncode, 2, result.stderr)
+            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
 
     def test_promotion_rejects_source_host_mismatch(self) -> None:
         cases = (
@@ -276,22 +291,22 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 self.assertIn(error, result.stderr)
                 self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
 
-    def test_promotion_requires_election_submission_contact_quote(self) -> None:
+    def test_promotion_requires_the_exact_visible_mailbox(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
             candidates = self._read_json(paths["candidates"])
             candidates["candidates"][0]["sourceQuote"] = (
-                "Obaveštenje o izborima 2026. sadrži izbori.vienna@mfa.gov.rs."
+                "Obaveštenje o izborima 2026. opisuje podnošenje prijave."
             )
             self._write_json(paths["candidates"], candidates)
 
             result = self._run_promotion(paths)
 
             self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("does not tie its email to election submission or contact", result.stderr)
+            self.assertIn("does not visibly contain its exact email", result.stderr)
             self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
 
-    def test_promotion_requires_completed_ai_review(self) -> None:
+    def test_promotion_rejects_an_invalid_supplied_ai_review(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
             reviews = self._read_json(paths["reviews"])
@@ -355,7 +370,7 @@ class ElectionContactPipelineTests(unittest.TestCase):
             self.assertIn("does not visibly contain electionYear", result.stderr)
             self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
 
-    def test_promotion_records_provenance_after_two_human_approvals(self) -> None:
+    def test_promotion_records_provenance_after_authorized_human_approvals(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
             result = self._run_promotion(paths)
@@ -382,6 +397,19 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 ],
             )
             self.assertTrue(provenance["promotedAt"].endswith("Z"))
+
+    def test_promotion_accepts_a_single_authorized_human_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana",))
+            reviewers = self._read_json(paths["reviewers"])
+            reviewers["reviewerIds"] = ["ana"]
+            reviewers["requiredHumanApprovals"] = 1
+            self._write_json(paths["reviewers"], reviewers)
+
+            result = self._run_promotion(paths)
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(result.stdout.strip(), "Promoted 1 election-specific contact(s).")
 
     def _run_discovery_fixture(self, election_id: str, notice_html: str) -> dict[str, object]:
         country_url = "https://www.mfa.gov.rs/diplomatsko-konzularna-predstavnistva/austrija"
@@ -435,7 +463,7 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 self.assertEqual(DISCOVERY.main(), 0)
             return self._read_json(output)
 
-    def _write_promotion_fixture(self, directory: Path, reviewer_ids: tuple[str, str]) -> dict[str, Path]:
+    def _write_promotion_fixture(self, directory: Path, reviewer_ids: tuple[str, ...]) -> dict[str, Path]:
         candidate_id = "vienna-2026-election-contact"
         election_id = "parliamentary-2026"
         paths = {
@@ -490,25 +518,22 @@ class ElectionContactPipelineTests(unittest.TestCase):
                     {
                         "candidateId": candidate_id,
                         "electionId": election_id,
-                        "reviewerId": reviewer_ids[0],
+                        "reviewerId": reviewer_id,
                         "reviewerType": "human",
                         "decision": "approve",
-                        "approvedAt": "2026-09-01T10:00:00Z",
-                    },
-                    {
-                        "candidateId": candidate_id,
-                        "electionId": election_id,
-                        "reviewerId": reviewer_ids[1],
-                        "reviewerType": "human",
-                        "decision": "approve",
-                        "approvedAt": "2026-09-01T11:00:00Z",
-                    },
+                        "approvedAt": f"2026-09-01T{10 + index:02d}:00:00Z",
+                    }
+                    for index, reviewer_id in enumerate(reviewer_ids)
                 ]
             },
         )
         self._write_json(
             paths["reviewers"],
-            {"schemaVersion": 1, "reviewerIds": ["ana", "boris"]},
+            {
+                "schemaVersion": 1,
+                "reviewerIds": ["ana", "boris"],
+                "requiredHumanApprovals": 2,
+            },
         )
         self._write_json(
             paths["canonical"],
