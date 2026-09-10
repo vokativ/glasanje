@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">Документ за гласање</title>
-  <desc id="desc">Неутрална икона листа документа са пољима за попуњавање</desc>
-  <path d="M15 6h24l10 10v42H15z" fill="#ffffff" stroke="#1d4e89" stroke-linejoin="round" stroke-width="4"/>
-  <path d="M39 6v10h10" fill="none" stroke="#1d4e89" stroke-linejoin="round" stroke-width="4"/>
-  <path d="M23 27h18M23 36h18M23 45h11" fill="none" stroke="#3b82c4" stroke-linecap="round" stroke-width="4"/>
-</svg>

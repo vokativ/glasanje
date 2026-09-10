@@ -7,8 +7,12 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onOpenPrivacy }) => {
   return (
     <header className="header">
-      <img src="/assets/vote-document.svg" alt="Неутрална икона документа за гласање" className="header-logo" />
-      <h1 className="header-title">Хоћу да гласам</h1>
+      <img
+        src="/assets/rotunda-serbica-envelope.webp"
+        alt="Ротунда Сербика и коверта"
+        className="header-logo"
+      />
+      <h1 className="header-title">Корак до гласа</h1>
       <p className="header-subtitle">
         Алат за припрему пријаве за гласање из иностранства • Избори 2026.
       </p>

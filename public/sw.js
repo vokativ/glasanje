@@ -1,13 +1,13 @@
 // Offline Service Worker for the application.
 // Caches the application shell, fonts, and form template for offline use.
 
-const CACHE_NAME = 'glasanje-offline-v2';
+const CACHE_NAME = 'glasanje-offline-v3';
 
 const ASSETS_TO_PRECACHE = [
   '/',
   '/index.html',
   '/favicon.ico',
-  '/assets/vote-document.svg',
+  '/assets/rotunda-serbica-envelope.webp',
   '/assets/Roboto-Regular.ttf',
   '/assets/Zahtev-za-glasanje-u-inostranstvu-2022.pdf',
 ];
