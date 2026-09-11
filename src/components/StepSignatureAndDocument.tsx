@@ -5,11 +5,12 @@ import SignaturePad from 'signature_pad';
 export interface SignatureAndDocumentData {
   signaturePngDataUrl: string;
   isWetInkSignature: boolean;
-  idDocumentDataUrl?: string;
 }
 
 interface StepSignatureAndDocumentProps {
   initialData?: Partial<SignatureAndDocumentData>;
+  idDocumentDataUrl?: string;
+  onIdDocumentChange: (dataUrl: string | undefined) => void;
   onBack: () => void;
   onNext: (data: SignatureAndDocumentData) => void;
 }
@@ -20,19 +21,29 @@ export const canSubmitSignature = (isWetInk: boolean, pad: SignaturePad | null):
 
 export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> = ({
   initialData,
+  idDocumentDataUrl,
+  onIdDocumentChange,
   onBack,
   onNext,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const signaturePadRef = useRef<SignaturePad | null>(null);
+  const idImageSelectionRef = useRef(0);
+  const isMountedRef = useRef(true);
 
   const [isWetInk, setIsWetInk] = useState<boolean>(initialData?.isWetInkSignature || false);
   const [hasSignature, setHasSignature] = useState(false);
-  const [idDocumentUrl, setIdDocumentUrl] = useState<string | undefined>(
-    initialData?.idDocumentDataUrl
-  );
+  const [isReadingIdImage, setIsReadingIdImage] = useState(false);
   const [idDocumentError, setIdDocumentError] = useState<string | null>(null);
   const { t } = useScript();
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      idImageSelectionRef.current += 1;
+    };
+  }, []);
 
   useEffect(() => {
     if (!canvasRef.current || isWetInk) return;
@@ -84,60 +95,84 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
     const file = input.files?.[0];
     if (!file) return;
 
+    const selection = idImageSelectionRef.current + 1;
+    idImageSelectionRef.current = selection;
+    const isCurrentSelection = () =>
+      isMountedRef.current && idImageSelectionRef.current === selection;
+    const rejectSelection = (message: string) => {
+      if (!isCurrentSelection()) return;
+      setIdDocumentError(message);
+      setIsReadingIdImage(false);
+      input.value = '';
+    };
+
     const supportedTypes = ['image/jpeg', 'image/png'];
     if (!supportedTypes.includes(file.type)) {
-      setIdDocumentError(
+      rejectSelection(
         'Izaberite JPG ili PNG sliku. Ostali formati ne mogu pouzdano da se ugrade u PDF.'
       );
-      input.value = '';
       return;
     }
 
     if (file.size > 15 * 1024 * 1024) {
-      setIdDocumentError('Slika je prevelika. Molimo izaberite sliku manju od 15 MB.');
-      input.value = '';
+      rejectSelection('Slika je prevelika. Molimo izaberite sliku manju od 15 MB.');
       return;
     }
 
+    setIdDocumentError(null);
+    setIsReadingIdImage(true);
     const reader = new FileReader();
     reader.onerror = () => {
-      setIdDocumentError(
+      rejectSelection(
         'Slika ne može da se pročita na ovom uređaju. Izaberite drugu JPG ili PNG sliku.'
       );
-      input.value = '';
     };
     reader.onload = () => {
+      if (!isCurrentSelection()) return;
+
       const result = reader.result;
       if (
         typeof result !== 'string' ||
-        !/^data:image\/(?:jpeg|png);base64,/.test(result)
+        !/^data:image\/(?:jpeg|png);base64,[A-Za-z0-9+/]+={0,2}$/.test(result)
       ) {
-        setIdDocumentError('Slika nije u važećem JPG ili PNG formatu. Izaberite drugu sliku.');
-        input.value = '';
+        rejectSelection('Slika nije u važećem JPG ili PNG formatu. Izaberite drugu sliku.');
         return;
       }
 
       const image = new Image();
       image.onerror = () => {
-        setIdDocumentError('Slika ne može da se obradi. Izaberite drugu JPG ili PNG sliku.');
-        input.value = '';
+        rejectSelection('Slika ne može da se obradi. Izaberite drugu JPG ili PNG sliku.');
       };
       image.onload = () => {
-        setIdDocumentUrl(result);
+        if (!isCurrentSelection()) return;
+        onIdDocumentChange(result);
         setIdDocumentError(null);
+        setIsReadingIdImage(false);
+        input.value = '';
       };
       image.src = result;
     };
-    reader.readAsDataURL(file);
+
+    try {
+      reader.readAsDataURL(file);
+    } catch {
+      rejectSelection(
+        'Slika ne može da se pročita na ovom uređaju. Izaberite drugu JPG ili PNG sliku.'
+      );
+    }
   };
 
   const handleRemoveIdImage = () => {
-    setIdDocumentUrl(undefined);
+    idImageSelectionRef.current += 1;
+    setIsReadingIdImage(false);
+    onIdDocumentChange(undefined);
     setIdDocumentError(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isReadingIdImage) return;
 
     const pad = signaturePadRef.current;
     if (!canSubmitSignature(isWetInk, pad)) {
@@ -149,11 +184,10 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
     onNext({
       signaturePngDataUrl: signaturePng,
       isWetInkSignature: isWetInk,
-      idDocumentDataUrl: idDocumentUrl,
     });
   };
 
-  const canProceed = isWetInk || hasSignature;
+  const canProceed = (isWetInk || hasSignature) && !isReadingIdImage;
 
   return (
     <div className="card">
@@ -231,7 +265,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
             )}
           </p>
 
-          {!idDocumentUrl ? (
+          {!idDocumentDataUrl ? (
             <div style={{ padding: '1rem', border: '2px dashed #cbd5e1', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
               <div
                 style={{
@@ -250,6 +284,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                     accept="image/jpeg,image/png"
                     capture="environment"
                     onChange={handleIdImageUpload}
+                    disabled={isReadingIdImage}
                     className="file-input-visually-hidden"
                   />
                   <label
@@ -268,6 +303,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                     autoComplete="off"
                     accept="image/jpeg,image/png"
                     onChange={handleIdImageUpload}
+                    disabled={isReadingIdImage}
                     className="file-input-visually-hidden"
                   />
                   <label
@@ -284,6 +320,11 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
                   'Prihvataju se JPG i PNG do 15 MB. Izbor kamere ili datoteke i obrada ostaju samo na vašem uređaju.'
                 )}
               </div>
+              {isReadingIdImage && (
+                <div role="status" aria-live="polite" className="form-hint" style={{ marginTop: '0.75rem' }}>
+                  {t('Provera i obrada slike dokumenta…')}
+                </div>
+              )}
               {idDocumentError && (
                 <div className="form-error" role="alert" style={{ marginTop: '0.75rem' }}>
                   {t(idDocumentError)}
@@ -293,7 +334,7 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: '#f8fafc', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid #cbd5e1' }}>
               <img
-                src={idDocumentUrl}
+                src={idDocumentDataUrl}
                 alt={t('Pregled dokumenta')}
                 style={{ height: '70px', borderRadius: 'var(--radius-sm)', objectFit: 'contain' }}
               />

@@ -27,6 +27,7 @@ from urllib.parse import unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from bs4 import BeautifulSoup
+from election_contact_contract import evidence_snapshot_hash
 
 
 INDEX_URLS = (
@@ -488,8 +489,21 @@ def candidate_record(
     source_url: str,
     observed_at: str,
     evidence_type: str,
-) -> dict[str, str]:
+) -> dict[str, object]:
     candidate_id_source = "\x1f".join((election_id, station.country_code, station.station_id, email, source_url))
+    source_host = url_host(source_url)
+    evidence_content = {
+        "sourceUrl": source_url,
+        "sourceHost": source_host,
+        "title": title,
+        "electionContext": election_context,
+        "sourceQuote": quote,
+        "email": email,
+    }
+    evidence_snapshot = {
+        "capturedAt": observed_at,
+        "content": evidence_content,
+    }
     return {
         "candidateId": hashlib.sha256(candidate_id_source.encode("utf-8")).hexdigest(),
         "electionId": election_id,
@@ -501,9 +515,14 @@ def candidate_record(
         "electionContext": election_context,
         "sourceQuote": quote,
         "sourceUrl": source_url,
-        "sourceHost": url_host(source_url),
+        "sourceHost": source_host,
         "observedAt": observed_at,
         "evidenceType": evidence_type,
+        "selectedForPromotion": False,
+        "evidenceSnapshot": {
+            **evidence_snapshot,
+            "sha256": evidence_snapshot_hash(evidence_snapshot),
+        },
     }
 
 
@@ -569,7 +588,7 @@ def main() -> int:
         host: tuple(sorted(stations, key=lambda station: (station.country_code, station.station_id)))
         for host, stations in stations_by_host_lists.items()
     }
-    candidates: dict[str, dict[str, str]] = {}
+    candidates: dict[str, dict[str, object]] = {}
     fetched_pages = 0
 
     # An unreadable canonical registry cannot safely be mapped to a station, so
@@ -666,7 +685,7 @@ def main() -> int:
             pending = [next_tasks[key] for key in sorted(next_tasks)]
 
     payload = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "electionId": args.election_id,
         "electionYear": args.election_year,
         "generatedAt": observed_at,

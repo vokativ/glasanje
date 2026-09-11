@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { latinToCyrillic, type Script, useScript } from '../lib/script';
 import { COUNTRY_BY_CODE, COUNTRIES, type VotingCountry } from '../data/missions';
+import { resolveCurrentElectionContact } from '../lib/electionContact';
+import { latinToCyrillic, type Script, useScript } from '../lib/script';
 
 export interface VotingDestinationData {
   countryCode: string;
@@ -65,6 +66,11 @@ const countrySearchTermsByCode: Record<string, string[]> = Object.fromEntries(
   ])
 );
 
+const COVERED_COUNTRY_COUNT = COUNTRIES.reduce(
+  (count, country) => count + Number(country.stations.length > 0),
+  0
+);
+
 export const filterCountries = (searchFilter: string): VotingCountry[] => {
   const term = searchFilter.trim();
   if (!term) return COUNTRIES;
@@ -112,12 +118,16 @@ const formatCountryOptionLabel = (country: VotingCountry, script: Script) => {
 
 interface StepVotingDestinationProps {
   initialData?: Partial<VotingDestinationData>;
+  now?: number;
+  onDraftChange: (data: VotingDestinationData) => void;
   onBack: () => void;
   onNext: (data: VotingDestinationData) => void;
 }
 
 export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
   initialData,
+  now,
+  onDraftChange,
   onBack,
   onNext,
 }) => {
@@ -142,6 +152,10 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
     if (!currentCountry || !selection.stationId) return null;
     return currentCountry.stations.find((station) => station.id === selection.stationId) ?? null;
   }, [currentCountry, selection.stationId]);
+  const electionContact = useMemo(
+    () => (currentStation ? resolveCurrentElectionContact(currentStation, now) : null),
+    [currentStation, now],
+  );
   const countryResults = useMemo(() => getCountryTypeaheadResults(searchFilter), [searchFilter]);
 
   const taiwanSearchNotice = useMemo(
@@ -153,7 +167,13 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
     const country = COUNTRY_BY_CODE.get(countryCode);
     if (!country) return;
 
-    setSelection(resolveVotingDestinationSelection(countryCode));
+    const nextSelection = resolveVotingDestinationSelection(countryCode);
+    setSelection(nextSelection);
+    onDraftChange({
+      ...nextSelection,
+      foreignAddress,
+      desiredLocation,
+    });
     setSearchFilter(script === 'cyrillic' ? country.labelCyr : country.label);
     setActiveCountryIndex(-1);
   };
@@ -308,48 +328,64 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             </span>
           )}
           <span className="form-hint">
-            {t('Ukupno obuhvaćeno 195 država prema zvaničnoj evidenciji Ministarstva spoljnih poslova')}
+            {t('Podaci sadrže predstavništva za ')}{COVERED_COUNTRY_COUNT} {t('država.')}
           </span>
         </div>
 
 
-        {currentCountry && (
-          <div className="form-group">
-            <label className="form-label" htmlFor="stationSelect">
-              {t('Diplomatsko-konzularno predstavništvo u ovoj državi *')}
-            </label>
-            {currentCountry.stations.length > 1 && (
-              <span className="mission-selection-hint">
+        {currentCountry &&
+          (currentCountry.stations.length === 0 ? (
+            <div className="form-group">
+              <div className="form-hint" role="status" aria-live="polite">
                 {t(
-                  'Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam je najbliže.'
+                  'Za izabranu državu nema navedenog diplomatsko-konzularnog predstavništva u priloženim podacima Ministarstva spoljnih poslova.'
                 )}
-              </span>
-            )}
-            <select
-              id="stationSelect"
-              name="stationSelect"
-              autoComplete="off"
-              className="form-control"
-              value={selection.stationId ?? ''}
-              onChange={(e) =>
-                setSelection((previous) => ({ ...previous, stationId: e.target.value || null }))
-              }
-              required
-            >
-              <option value="">{t('Izaberite diplomatsko-konzularno predstavništvo…')}</option>
-              {currentCountry.stations.map((station) => (
-                <option key={station.id} value={station.id}>
-                  {script === 'cyrillic' ? station.embassyCyr : station.embassy}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+              </div>
+            </div>
+          ) : (
+            <div className="form-group">
+              <label className="form-label" htmlFor="stationSelect">
+                {t('Diplomatsko-konzularno predstavništvo u ovoj državi *')}
+              </label>
+              {currentCountry.stations.length > 1 && (
+                <span className="mission-selection-hint">
+                  {t(
+                    'Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam je najbliže.'
+                  )}
+                </span>
+              )}
+              <select
+                id="stationSelect"
+                name="stationSelect"
+                autoComplete="off"
+                className="form-control"
+                value={selection.stationId ?? ''}
+                onChange={(event) => {
+                  const stationId = event.target.value || null;
+                  setSelection((previous) => ({ ...previous, stationId }));
+                  onDraftChange({
+                    ...selection,
+                    stationId,
+                    foreignAddress,
+                    desiredLocation,
+                  });
+                }}
+                required
+              >
+                <option value="">{t('Izaberite diplomatsko-konzularno predstavništvo…')}</option>
+                {currentCountry.stations.map((station) => (
+                  <option key={station.id} value={station.id}>
+                    {script === 'cyrillic' ? station.embassyCyr : station.embassy}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
 
-        {currentCountry && currentStation && (
+        {currentCountry && currentStation && electionContact && (
           <div
             className={`mission-card${
-              currentStation.isElectionContactConfirmed ? '' : ' mission-card--unconfirmed'
+              electionContact.electionAuthority ? '' : ' mission-card--unconfirmed'
             }`}
           >
             <div className="mission-title">
@@ -372,19 +408,37 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             )}
 
             <div className="mission-detail">
-              <strong>{t('Objavljeni kontakt misije/konzulata:')}</strong>
+              <strong>{t('Objavljeni opšti kontakt misije/konzulata:')}</strong>
               <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
-                {currentStation.email}
+                {electionContact.missionEmail}
               </span>
             </div>
-            {currentStation.isElectionContactConfirmed ? (
-              <p className="form-hint">{t('Kontakt za prijavu za glasanje je potvrđen.')}</p>
+            {electionContact.electionAuthority ? (
+              <>
+                <p className="form-hint">{t('Kontakt za prijavu za glasanje je potvrđen.')}</p>
+                <div className="mission-detail">
+                  <strong>{t('Adresa za prijavu za glasanje:')}</strong>
+                  <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
+                    {electionContact.electionAuthority.email}
+                  </span>
+                </div>
+                <div className="mission-detail">
+                  <strong>{t('Izvor potvrđene adrese:')}</strong>
+                  <a
+                    href={electionContact.electionAuthority.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
+                  >
+                    {t('Zvanično izborno obaveštenje')} ↗
+                  </a>
+                </div>
+              </>
             ) : (
               <p className="mission-warning" role="alert">
                 {t(
-                  'Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na zvaničnom sajtu ispod. '
+                  'Ovo je opšti kontakt misije. Nije potvrđen kao adresa za prijavu za glasanje; proverite aktuelno izborno obaveštenje na zvaničnom sajtu ispod.'
                 )}
-                <strong>{t('Prihvatanje zahteva na ovu adresu nije potvrđeno.')}</strong>
               </p>
             )}
 
@@ -408,17 +462,21 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
           <label className="form-label" htmlFor="foreignAddress">
             {t('Adresa boravka u inostranstvu *')}
           </label>
-          <input
+          <textarea
             id="foreignAddress"
             name="foreignAddress"
-            type="text"
             autoComplete="section-foreign street-address"
+            rows={3}
             className={`form-control ${
               touched.foreignAddress && !isForeignAddressValid ? 'is-invalid' : ''
             }`}
             placeholder={t('Ulica, broj, grad i država')}
             value={foreignAddress}
-            onChange={(e) => setForeignAddress(e.target.value)}
+            onChange={(event) => {
+              const value = event.target.value;
+              setForeignAddress(value);
+              onDraftChange({ ...selection, foreignAddress: value, desiredLocation });
+            }}
             onBlur={() => setTouched((prev) => ({ ...prev, foreignAddress: true }))}
             required
           />
@@ -442,7 +500,11 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             className="form-control"
             placeholder={t('npr. San Francisko')}
             value={desiredLocation}
-            onChange={(e) => setDesiredLocation(e.target.value)}
+            onChange={(event) => {
+              const value = event.target.value;
+              setDesiredLocation(value);
+              onDraftChange({ ...selection, foreignAddress, desiredLocation: value });
+            }}
           />
           <span className="form-hint">
             {t(

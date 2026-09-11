@@ -1,262 +1,269 @@
 {
-  "_description": "Recorded approval from the authorized sole human reviewer for election-contact promotions.",
-  "schemaVersion": 1,
-  "approvals": [
-    {
-      "candidateId": "283dfc75058022670593203337fc0f188434231513ad52305170212cabb091ed",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "29e155b50cb583fd745fce11a2363a7a10b1894e7b2ff69ce5c342568ada245b",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "38fbf7651fe17a6dd35a0f7bba40de41514dae9ca310e9fb81d7045585528eae",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "4c40ae2184905955da832bfc47a6bab8e89423503fe1af9d3f1f0f7497fd0b2d",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "633869b0445737d453015f29ad6366533ed63526712ba854fc8b1167725793db",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "7b5cc89e4bd0d5cc5ce76967d27c61fb81dff88f0601227fe4d1f903428761e0",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "911ef12fa84c4fe59ee267ce1db11518b3a03422b289ffa0025d948dda33154f",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "b87a1a7dc0cbed82c90b4bfdf3142a7fa38bec192ae5cf3f2a44581e67a0eb51",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "b9238bafd11c8fa881921667e8abb3ba583846fd4e98b05ec571c8ca3bcf7e4b",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "b994eb461049596e625612f42f3bc6bba82ac30110e1a5d8adff262fd665b09e",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "cf56b96f18b2a9690dd1c4913481838c2d42468126c6fa6a22a4376fb0654342",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "d48d0f072220811d1afaa327d13ea56dbbcf7b57b1160cf04102022eedc2edb3",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "e628343516088980335348fa9060511a77ea776c3f4cb51542d6c94c26395f70",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "e8fb7bdec2f744bb46be120f4f1a4d5d80b56dfdc3fce41c65aef2cd73a7098b",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "fd43c216c134bf714a41ad7c8a3dec93421dc2982afba7e20b4c7f2e8e4b5b3b",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T11:39:01Z"
-    },
-    {
-      "candidateId": "4fe3cec730f7432bf6be603910c3a935e00a3a0f3dd4796cb9a6c31d92a3b13c",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "38a17181f8c855283bb64f909b2146ae755b1cad828ebb96024ad24a5d679676",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "d01ade2c10614b1f79e6a16cdc1ac1eabfbb8d5aecfedfcf3041f4aa50429647",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "c8c0fe1e300c234eb6883934530e8eab99cfdac19f9506be3bdcbc3d149ee9a5",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "cc28e1af5d7c352504d60aa3300d939f91048bac042805aac50a9159aaf3ae04",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "4f89cb945ec0fbc556d6188aeb9f96de1a675fa70f157ccb31b7bb928684b4ea",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "fbbc15c179675ee12db62d38f5971b91d1b1d76cbfe3b8212093ec4d77d92abc",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "333b5c254df9402435428c0deed6f476890ca807ed8015192a386d58e114cd3c",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "bb6af7bcc651b7b0504595045d470f700cf4455501b5040fce8363fea3880219",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "d67072b94a5fa8d17e8d06702e730733da293e230c0d556c20fd99233db97871",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "67900467705dce3f205d92933886cd07ed928ce9b3752b6912bf2cb47083d08c",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "47c363ecce1d94e0ee8d093eb5feaa7315472634f533223fff07e3d1b6291b5f",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "0d059328513a881b63628d516758ee653ce4d8aee3e90fec68d6fb0285d921ee",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "95f81eda2cf04cf1ce81798216c29ad208f3a04244100b2d311c73158d82a650",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "7104b6f311bad9b0f8cca2c5d863d9a69c585758f5dfc0bbd155aa4fa5dbe272",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    },
-    {
-      "candidateId": "f672842d810f19f022f17739df19d4bcab22bf4ef65184712529ce14849f2121",
-      "electionId": "2026-parliamentary",
-      "reviewerId": "vokativ",
-      "reviewerType": "human",
-      "decision": "approve",
-      "approvedAt": "2026-09-10T14:53:20Z"
-    }
-  ],
+  "_description": "Time-bound, evidence-bound human approvals for active election contact authority. Legacy v1 approvals are retained only as inactive audit records.",
+  "schemaVersion": 2,
+  "approvals": [],
+  "legacyApprovalArchive": {
+    "status": "inactive",
+    "reason": "Legacy v1 approvals did not bind a cryptographic evidence snapshot or an expiry instant and cannot authorize a current election contact.",
+    "records": [
+      {
+        "candidateId": "283dfc75058022670593203337fc0f188434231513ad52305170212cabb091ed",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "29e155b50cb583fd745fce11a2363a7a10b1894e7b2ff69ce5c342568ada245b",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "38fbf7651fe17a6dd35a0f7bba40de41514dae9ca310e9fb81d7045585528eae",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "4c40ae2184905955da832bfc47a6bab8e89423503fe1af9d3f1f0f7497fd0b2d",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "633869b0445737d453015f29ad6366533ed63526712ba854fc8b1167725793db",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "7b5cc89e4bd0d5cc5ce76967d27c61fb81dff88f0601227fe4d1f903428761e0",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "911ef12fa84c4fe59ee267ce1db11518b3a03422b289ffa0025d948dda33154f",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "b87a1a7dc0cbed82c90b4bfdf3142a7fa38bec192ae5cf3f2a44581e67a0eb51",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "b9238bafd11c8fa881921667e8abb3ba583846fd4e98b05ec571c8ca3bcf7e4b",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "b994eb461049596e625612f42f3bc6bba82ac30110e1a5d8adff262fd665b09e",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "cf56b96f18b2a9690dd1c4913481838c2d42468126c6fa6a22a4376fb0654342",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "d48d0f072220811d1afaa327d13ea56dbbcf7b57b1160cf04102022eedc2edb3",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "e628343516088980335348fa9060511a77ea776c3f4cb51542d6c94c26395f70",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "e8fb7bdec2f744bb46be120f4f1a4d5d80b56dfdc3fce41c65aef2cd73a7098b",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "fd43c216c134bf714a41ad7c8a3dec93421dc2982afba7e20b4c7f2e8e4b5b3b",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T11:39:01Z"
+      },
+      {
+        "candidateId": "4fe3cec730f7432bf6be603910c3a935e00a3a0f3dd4796cb9a6c31d92a3b13c",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "38a17181f8c855283bb64f909b2146ae755b1cad828ebb96024ad24a5d679676",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "d01ade2c10614b1f79e6a16cdc1ac1eabfbb8d5aecfedfcf3041f4aa50429647",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "c8c0fe1e300c234eb6883934530e8eab99cfdac19f9506be3bdcbc3d149ee9a5",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "cc28e1af5d7c352504d60aa3300d939f91048bac042805aac50a9159aaf3ae04",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "4f89cb945ec0fbc556d6188aeb9f96de1a675fa70f157ccb31b7bb928684b4ea",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "fbbc15c179675ee12db62d38f5971b91d1b1d76cbfe3b8212093ec4d77d92abc",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "333b5c254df9402435428c0deed6f476890ca807ed8015192a386d58e114cd3c",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "bb6af7bcc651b7b0504595045d470f700cf4455501b5040fce8363fea3880219",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "d67072b94a5fa8d17e8d06702e730733da293e230c0d556c20fd99233db97871",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "67900467705dce3f205d92933886cd07ed928ce9b3752b6912bf2cb47083d08c",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "47c363ecce1d94e0ee8d093eb5feaa7315472634f533223fff07e3d1b6291b5f",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "0d059328513a881b63628d516758ee653ce4d8aee3e90fec68d6fb0285d921ee",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "95f81eda2cf04cf1ce81798216c29ad208f3a04244100b2d311c73158d82a650",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "7104b6f311bad9b0f8cca2c5d863d9a69c585758f5dfc0bbd155aa4fa5dbe272",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      },
+      {
+        "candidateId": "f672842d810f19f022f17739df19d4bcab22bf4ef65184712529ce14849f2121",
+        "electionId": "2026-parliamentary",
+        "reviewerId": "vokativ",
+        "reviewerType": "human",
+        "decision": "approve",
+        "approvedAt": "2026-09-10T14:53:20Z"
+      }
+    ]
+  },
   "_recordSchema": {
-    "candidateId": "Candidate ID from data/election_candidates.json",
+    "candidateId": "Candidate ID from a schemaVersion 2 election candidate record",
     "electionId": "Matching election ID from the candidate",
     "reviewerId": "Stable identifier for the approving person",
     "reviewerType": "human",
     "decision": "approve",
-    "approvedAt": "ISO-8601 approval timestamp"
+    "approvedAt": "ISO-8601 UTC approval timestamp",
+    "expiresAt": "ISO-8601 UTC expiry timestamp after approvedAt",
+    "evidenceSha256": "SHA-256 hash of the exact evidence snapshot approved by the reviewer"
   }
 }

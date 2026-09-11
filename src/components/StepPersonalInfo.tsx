@@ -13,12 +13,14 @@ export interface PersonalInfoData {
 
 interface StepPersonalInfoProps {
   initialData: PersonalInfoData;
+  onDraftChange: (data: PersonalInfoData) => void;
   onBack: () => void;
   onNext: (data: PersonalInfoData) => void;
 }
 
 export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
   initialData,
+  onDraftChange,
   onBack,
   onNext,
 }) => {
@@ -53,7 +55,11 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
   };
 
   const handleChange = (field: keyof PersonalInfoData, value: string) => {
-    setData((prev) => ({ ...prev, [field]: value }));
+    setData((previous) => {
+      const next = { ...previous, [field]: value };
+      onDraftChange(next);
+      return next;
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -171,11 +177,11 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
           <label className="form-label" htmlFor="serbianAddress">
             {t('Adresa prebivališta u Republici Srbiji')} *
           </label>
-          <input
+          <textarea
             id="serbianAddress"
             name="serbianAddress"
-            type="text"
             autoComplete="section-serbian street-address"
+            rows={3}
             className={`form-control ${touched.serbianAddress && errors.serbianAddress ? 'is-invalid' : ''}`}
             placeholder={t('npr. Nemanjina 11, 11000 Beograd')}
             value={data.serbianAddress}

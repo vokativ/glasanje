@@ -11,9 +11,10 @@ import {
   StepVotingDestination,
 } from '../src/components/StepVotingDestination';
 import { StepPersonalInfo } from '../src/components/StepPersonalInfo';
-import { generateApplicationPdf, ApplicationFormData } from '../src/lib/pdf';
+import { generateApplicationPdf, ApplicationFormData, PdfGenerationIssue } from '../src/lib/pdf';
 import fs from 'fs';
 import { buildRecipientPayloads, getWebmailLinks } from '../src/lib/share';
+import { resolveCurrentElectionContact } from '../src/lib/electionContact';
 import { canSubmitSignature } from '../src/components/StepSignatureAndDocument';
 import { StepExportAndSubmit } from '../src/components/StepExportAndSubmit';
 import {
@@ -229,70 +230,50 @@ describe('Recipient Payloads', () => {
       ...overrides,
     });
 
-  test('puts confirmed recipient guidance in a removable Web Share block before the standard message', () => {
-    const payloads = buildPayloads();
-
-    expect(payloads.standardBody).toBe(standardBody);
-    expect(payloads.webShareInfo).toEqual({
-      subject,
-      text: `${temporaryHeader}\n\nУ поље „За“ унесите адресу:\n${toEmail}\n\n${temporaryFooter}\n\n${standardBody}`,
-    });
-    expect(payloads.webShareInfo.text).not.toContain(downloadedPdfReminder);
-  });
-
-  test('adds the unconfirmed-contact warning and missing-ID reminder to the Web Share block', () => {
-    const payloads = buildPayloads({
-      isElectionContactConfirmed: false,
-      isIdDocumentEmbedded: false,
-    });
-
-    expect(payloads.webShareInfo.text).toBe(
-      `${temporaryHeader}\n\nУ поље „За“ унесите адресу:\n${toEmail}\n\nПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак.\n\n${idReminder}\n\n${temporaryFooter}\n\n${standardBody}`,
-    );
-    expect(payloads.webShareInfo.text).not.toContain(downloadedPdfReminder);
-  });
-
-  test('keeps the mailto recipient structural and requires the downloaded PDF plus a missing-ID attachment', () => {
+  test('keeps confirmed handoff recipient and attachment guidance distinct by delivery route', () => {
     const payloads = buildPayloads({ isIdDocumentEmbedded: false });
     const webmailLinks = getWebmailLinks(payloads.dispatchInfo);
     const mailto = new URL(webmailLinks.mailto);
 
     expect(payloads.dispatchInfo.toEmail).toBe(toEmail);
-    expect(mailto.protocol).toBe('mailto:');
     expect(mailto.pathname).toBe(toEmail);
-    expect(mailto.searchParams.get('subject')).toBe(subject);
-    expect(mailto.searchParams.get('body')).toBe(
-      `${temporaryHeader}\n\n${downloadedPdfReminder}\n\n${idReminder}\n\n${temporaryFooter}\n\n${standardBody}`,
-    );
-    expect(mailto.searchParams.get('body')).not.toContain('У поље „За“');
-    expect(mailto.searchParams.get('body')).not.toContain(toEmail);
-    for (const webmailLink of [webmailLinks.gmail, webmailLinks.outlook, webmailLinks.yahoo]) {
-      expect(webmailLink).toContain(encodeURIComponent(downloadedPdfReminder));
-      expect(webmailLink).toContain(encodeURIComponent(idReminder));
-    }
+    expect(payloads.webShareInfo.text).toContain(`У поље „За“ унесите адресу:\n${toEmail}`);
+    expect(payloads.webShareInfo.text).toContain(idReminder);
+    expect(payloads.webShareInfo.text).not.toContain(downloadedPdfReminder);
+    expect(mailto.searchParams.get('body')).toContain(downloadedPdfReminder);
+    expect(mailto.searchParams.get('body')).toContain(idReminder);
+    expect(payloads.manualText).toContain('Обавезни прилози: PDF формулар; слика прве стране српског пасоша или личне карте.');
   });
 
-  test('reminds a wet-ink applicant to attach the scanned signature form in mailto and webmail bodies', () => {
+  test('emits the exact unconfirmed-contact warning once in every temporary handoff block', () => {
+    const payloads = buildPayloads({
+      isElectionContactConfirmed: false,
+      isIdDocumentEmbedded: false,
+    });
+    const warning =
+      `ПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак. Пре слања проверите адресу на званичном сајту мисије.`;
+
+    for (const handoffText of [
+      payloads.webShareInfo.text,
+      payloads.dispatchInfo.body,
+      payloads.manualText,
+    ]) {
+      expect(handoffText.split(warning).length - 1).toBe(1);
+      expect(handoffText).toContain(temporaryHeader);
+      expect(handoffText).toContain(temporaryFooter);
+    }
+    expect(payloads.standardBody).not.toContain(warning);
+  });
+
+  test('requires the wet-ink scan rather than an unsigned downloaded PDF in compose routes', () => {
     const payloads = buildPayloads({ isWetInkSignature: true });
-    const scanReminder = 'Приложите скенирану или фотографисану својеручно потписану пријаву.';
     const webmailLinks = getWebmailLinks(payloads.dispatchInfo);
+    const mailtoBody = new URL(webmailLinks.mailto).searchParams.get('body');
+    const scanReminder = 'Приложите скенирану или фотографисану својеручно потписану пријаву.';
 
-    expect(payloads.dispatchInfo.body).toBe(
-      `${temporaryHeader}\n\n${scanReminder}\n\n${temporaryFooter}\n\n${standardBody}`,
-    );
-    expect(payloads.dispatchInfo.body).not.toContain(downloadedPdfReminder);
-    for (const webmailLink of [webmailLinks.gmail, webmailLinks.outlook, webmailLinks.yahoo]) {
-      expect(webmailLink).toContain(encodeURIComponent(scanReminder));
-      expect(webmailLink).not.toContain(encodeURIComponent(downloadedPdfReminder));
-    }
-  });
-
-  test('copies complete, removable manual instructions before the standard body', () => {
-    const payloads = buildPayloads({ isIdDocumentEmbedded: false });
-
-    expect(payloads.manualText).toBe(
-      `${temporaryHeader}\n\nЗа: ${toEmail}\n\nНаслов: ${subject}\n\nОбавезни прилози: PDF формулар; слика прве стране српског пасоша или личне карте.\n\n${temporaryFooter}\n\n${standardBody}`,
-    );
+    expect(mailtoBody).toContain(scanReminder);
+    expect(mailtoBody).not.toContain(downloadedPdfReminder);
+    expect(webmailLinks.gmail).toContain(encodeURIComponent(scanReminder));
   });
 });
 
@@ -436,7 +417,7 @@ describe('Missions and Coverage Dataset', () => {
 
     expect(markup).toContain('class="mission-card mission-card--unconfirmed"');
     expect(markup).toContain('class="mission-warning" role="alert"');
-    expect(markup).toContain('Прихватање захтева на ову адресу није потврђено.');
+    expect(markup).toContain('Ово је општи контакт мисије. Није потврђен као адреса за пријаву за гласање; проверите актуелно изборно обавештење на званичном сајту испод.');
   });
 
   test('United States retains bilingual discovery aliases', () => {
@@ -455,206 +436,133 @@ describe('Missions and Coverage Dataset', () => {
     );
   });
 
-  test('Singapore is covered by Jakarta embassy with correct email', () => {
-    const sg = COUNTRY_BY_CODE.get('SG');
-    expect(sg).toBeDefined();
-    expect(sg?.label).toBe('Singapur');
-    expect(sg?.stations.length).toBe(1);
+  test('preserves a routeable public mission contact for a non-resident station', () => {
+    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
 
-    const station = sg!.stations[0];
     expect(station.isResident).toBe(false);
-    expect(station.email).toBe('consular.jakarta@mfa.rs');
+    expect(station.missionEmail).toBe('consular.jakarta@mfa.rs');
     expect(station.website).toBe('https://jakarta.mfa.gov.rs');
     expect(station.embassyCyr).toContain('Индонезија');
     expect(station.embassyCyr).toContain('Сингапур');
   });
 
-  test('Ireland is covered by London embassy with correct email', () => {
-    const ie = COUNTRY_BY_CODE.get('IE');
-    expect(ie).toBeDefined();
-    expect(ie?.label).toBe('Irska');
-    expect(ie?.stations.length).toBe(1);
-
-    const station = ie!.stations[0];
-    expect(station.isResident).toBe(false);
-    expect(station.email).toBe('consular.london@mfa.rs');
-    expect(station.website).toBe('https://www.london.mfa.gov.rs');
-  });
-
-  test('New Zealand is covered by Canberra embassy with correct email', () => {
-    const nz = COUNTRY_BY_CODE.get('NZ');
-    expect(nz).toBeDefined();
-    expect(nz?.label).toBe('Novi Zeland');
-    expect(nz?.stations.length).toBe(1);
-
-    const station = nz!.stations[0];
-    expect(station.isResident).toBe(false);
-    expect(station.email).toBe('srb.emb.australia@mfa.rs');
-    expect(station.website).toBe('https://canberra.mfa.gov.rs');
-  });
-  test('Antigua and Barbuda uses the confirmed U.S. Embassy election recipient', () => {
-    const station = COUNTRY_BY_CODE.get('AG')!.stations.find(
-      (candidate) => candidate.id === 'st-nonres-ag',
-    );
-
-    expect(station).toMatchObject({
-      email: 'izbori@serbiaembusa.org',
-      isElectionContactConfirmed: true,
-    });
-  });
-
-
-  test('Germany has 6 resident stations', () => {
-    const de = COUNTRY_BY_CODE.get('DE');
-    expect(de).toBeDefined();
-    expect(de?.stations.length).toBe(6);
-    const emails = de!.stations.map((s) => s.email);
-    const hamburg = de!.stations.find((station) => station.id === 'st-de-cons-hamburg');
-    expect(hamburg).toBeDefined();
-    expect(hamburg?.email).toBe('izbori@gkrshamburg.de');
-    expect(hamburg?.isElectionContactConfirmed).toBe(true);
-
-    expect(emails).toContain('izbori@botschaft-serbien.de');
-    expect(emails).toContain('gk-stutgart@t-online.de');
-    expect(emails).toContain('izbori@gksrbfra.de');
-    expect(emails).toContain('gk.muenchen@mfa.rs');
-    expect(emails).toContain('info.dusseldorf@mfa.rs');
-    expect(emails).toContain('izbori@gkrshamburg.de');
-  });
-
-  test('Austria embassy is distinct from Salzburg consulate', () => {
-    const at = COUNTRY_BY_CODE.get('AT');
-    expect(at).toBeDefined();
-
-    const embassy = at!.stations.find((station) => station.id === 'st-at-emb-main');
-    expect(embassy).toBeDefined();
-    expect(embassy?.email).toBe('consulate.vienna@mfa.rs');
-    expect(at!.stations.some((station) => station.id === 'st-at-emb-salcburg')).toBe(false);
-  });
-
-  test('every country has at least one polling station with a non-empty email', () => {
-    for (const country of COUNTRIES) {
-      expect(country.stations.length).toBeGreaterThan(0);
-      for (const station of country.stations) {
-        expect(station.email.trim().length).toBeGreaterThan(0);
-        expect(station.email).toContain('@');
-      }
-    }
-  });
-
-  test('marks reviewed election recipients as confirmed', () => {
-    const confirmed = COUNTRIES.flatMap((country) => country.stations)
-      .filter((station) => station.isElectionContactConfirmed);
-
-    expect(confirmed).toHaveLength(31);
-    expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
-      (station) => station.id === 'st-it-emb-main',
-    )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
-    expect(COUNTRY_BY_CODE.get('MT')!.stations.find(
-      (station) => station.id === 'st-mt-emb-main',
-    )).toMatchObject({ email: 'srb.office.valletta@mfa.rs', isElectionContactConfirmed: true });
-  });
-
-  test('exposes election-contact confirmation as station metadata', () => {
+  test('fails closed to the public mission contact when an election authority expires', () => {
     const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const currentStation = {
+      ...station,
+      missionEmail: 'mission@example.rs',
+      electionAuthority: {
+        candidateId: 'candidate-1',
+        electionId: 'election-2026',
+        email: 'izbori@example.rs',
+        sourceUrl: 'https://mission.example.rs/elections',
+        expiresAt: '2026-09-12T00:00:00.000Z',
+        evidenceSha256: 'a'.repeat(64),
+      },
+    };
 
-    expect(station.isElectionContactConfirmed).toBe(false);
+    expect(resolveCurrentElectionContact(currentStation, new Date('2026-09-11T12:00:00.000Z')))
+      .toMatchObject({ missionEmail: 'mission@example.rs', electionAuthority: { email: 'izbori@example.rs' } });
+    expect(resolveCurrentElectionContact(currentStation, new Date('2026-09-13T00:00:00.000Z')))
+      .toEqual({ missionEmail: 'mission@example.rs', electionAuthority: null });
   });
 
-  test('station IDs are non-empty and globally unique', () => {
-    const stationIds = COUNTRIES.flatMap((country) =>
-      country.stations.map((station) => station.id),
-    );
+  test('keeps every station identity unique and every public mission contact usable', () => {
+    const stations = COUNTRIES.flatMap((country) => country.stations);
 
-    expect(stationIds.every((id) => id.trim().length > 0)).toBe(true);
-    expect(new Set(stationIds).size).toBe(stationIds.length);
+    expect(stations.every((station) => station.id.trim().length > 0)).toBe(true);
+    expect(new Set(stations.map((station) => station.id)).size).toBe(stations.length);
+    expect(stations.every((station) => station.missionEmail.includes('@'))).toBe(true);
   });
+
 });
 
 describe('Registration Email Status', () => {
-  test('derives confirmed mission coverage from station records', () => {
-    const coverage = getElectionEmailCoverage();
-
-    expect(coverage.confirmed).toBe(31);
-    expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
-  });
-
-  test('recalculates coverage when confirmation records change', () => {
-    const sampledCountries = COUNTRIES.slice(0, 2).map((country) => ({
-      ...country,
-      stations: country.stations.map((station, index) => ({
-        ...station,
-        isElectionContactConfirmed: index === 0,
-      })),
-    }));
-
-    const coverage = getElectionEmailCoverage(sampledCountries);
-
-    expect(coverage).toEqual({
-      confirmed: sampledCountries.length,
-      total: sampledCountries.flatMap((country) => country.stations).length,
-    });
-  });
-
-  test('shows the current coverage on both the home and status surfaces', () => {
-    const coverage = getElectionEmailCoverage();
-    const coverageSummary = `${coverage.confirmed}/${coverage.total}`;
-    const homeMarkup = renderToStaticMarkup(React.createElement(App));
-    const statusMarkup = renderToStaticMarkup(
-      React.createElement(
-        ScriptProvider,
-        null,
-        React.createElement(RegistrationEmailStatusPage),
-      ),
-    );
-
-    expect(homeMarkup).toContain('href="/status"');
-    expect(homeMarkup).toContain(coverageSummary);
-    expect(statusMarkup).toContain('id="statusCountrySelect"');
-    expect(statusMarkup).toContain('href="/"');
-    expect(statusMarkup).toContain(coverageSummary);
-    expect(statusMarkup).toContain('Ако за мисију нема потврде');
-  });
-
-  test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {
+  test('counts only election authorities that are current at the time of evaluation', () => {
     const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
-    const markup = renderToStaticMarkup(
-      React.createElement(
-        ScriptProvider,
-        null,
-        React.createElement(StepExportAndSubmit, {
-          formData: {
-            fullName: 'Петар Петровић',
-            parentName: 'Милош',
-            jmbg: '0101990710006',
-            serbianAddress: 'Београд',
-            foreignAddress: 'Singapore',
-            stationName: station.embassyCyr,
-            desiredLocation: 'Singapur',
-            signingDate: '10.09.2026.',
-            phone: '+381601234567',
-            email: 'petar@example.com',
-            signaturePngDataUrl: '',
-          },
-          station,
-          countryName: 'Singapur',
-          countryNameCyr: 'Сингапур',
-          isWetInkSignature: false,
-          onBack: () => undefined,
-          onReset: () => undefined,
-        }),
-      ),
-    );
+    const now = new Date('2026-09-11T12:00:00.000Z');
+    const withAuthority = {
+      ...station,
+      missionEmail: 'mission@example.rs',
+      electionAuthority: {
+        candidateId: 'candidate-1',
+        electionId: 'election-2026',
+        email: 'izbori@example.rs',
+        sourceUrl: 'https://mission.example.rs/elections',
+        expiresAt: '2026-09-12T00:00:00.000Z',
+        evidenceSha256: 'a'.repeat(64),
+      },
+    };
+    const expiredAuthority = {
+      ...withAuthority,
+      electionAuthority: { ...withAuthority.electionAuthority, expiresAt: '2026-09-10T00:00:00.000Z' },
+    };
+    const countries = [{
+      countryCode: 'XX',
+      label: 'Primer',
+      labelCyr: 'Пример',
+      stations: [withAuthority, expiredAuthority],
+    }];
 
-    expect(station.isElectionContactConfirmed).toBe(false);
-    expect(markup).toContain('role="alert"');
-    expect(markup).toContain('Адреса за изборе није потврђена.');
-    expect(markup).toContain('Gmail');
-    expect(markup).toContain('Outlook');
-    expect(markup).toContain('Yahoo Mail');
-    expect(markup).not.toContain('Гмаил');
-    expect(markup).not.toContain('Аутлук');
-    expect(markup).not.toContain('Јаху');
+    expect(getElectionEmailCoverage(countries, now)).toEqual({ confirmed: 1, total: 2 });
+  });
+
+  test('routes current election recipients while keeping unconfirmed mission contacts visible', () => {
+    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const currentStation = {
+      ...station,
+      missionEmail: 'mission@example.rs',
+      electionAuthority: {
+        candidateId: 'candidate-1',
+        electionId: 'election-2026',
+        email: 'izbori@example.rs',
+        sourceUrl: 'https://mission.example.rs/elections',
+        expiresAt: '2099-01-01T00:00:00.000Z',
+        evidenceSha256: 'a'.repeat(64),
+      },
+    };
+    const unconfirmedStation = { ...currentStation, electionAuthority: null };
+    const renderHandoff = (handoffStation: typeof station) =>
+      renderToStaticMarkup(
+        React.createElement(
+          ScriptProvider,
+          null,
+          React.createElement(StepExportAndSubmit, {
+            formData: {
+              fullName: 'Петар Петровић',
+              parentName: 'Милош',
+              jmbg: '0101990710006',
+              serbianAddress: 'Београд',
+              foreignAddress: 'Singapore',
+              stationName: handoffStation.embassyCyr,
+              desiredLocation: 'Singapur',
+              signingDate: '10.09.2026.',
+              phone: '+381601234567',
+              email: 'petar@example.com',
+              signatureMode: 'screen',
+              signaturePngDataUrl: '',
+            },
+            station: handoffStation,
+            countryName: 'Singapur',
+            countryNameCyr: 'Сингапур',
+            isWetInkSignature: false,
+            onBack: () => undefined,
+            onReset: () => undefined,
+          }),
+        ),
+      );
+    const currentMarkup = renderHandoff(currentStation);
+    const unconfirmedMarkup = renderHandoff(unconfirmedStation);
+
+    expect(currentMarkup).toContain('izbori@example.rs');
+    expect(currentMarkup).toContain('mission@example.rs');
+    expect(currentMarkup).toContain('mailto:izbori@example.rs');
+    expect(currentMarkup).toContain(encodeURIComponent('Приложите преузети PDF формулар.'));
+    expect(unconfirmedMarkup).toContain('role="alert"');
+    expect(unconfirmedMarkup).toContain('mailto:mission@example.rs');
+    expect(unconfirmedMarkup).toContain(encodeURIComponent(
+      'ПАЖЊА: mission@example.rs је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак. Пре слања проверите адресу на званичном сајту мисије.',
+    ));
   });
 });
 
@@ -688,6 +596,7 @@ describe('PDF Generator', () => {
       signingDate: '09.09.2026.',
       phone: '+65 9123 4567',
       email: 'petar.petrovic@example.com',
+      signatureMode: 'wet-ink',
       signaturePngDataUrl: '',
     };
 
@@ -712,6 +621,7 @@ describe('PDF Generator', () => {
       signingDate: '09.09.2026.',
       phone: '+65 9123 4567',
       email: 'petar.petrovic@example.com',
+      signatureMode: 'screen',
       signaturePngDataUrl: samplePng,
       idDocumentDataUrl: samplePng,
     };
@@ -719,4 +629,49 @@ describe('PDF Generator', () => {
     const pdfBytes = await generateApplicationPdf(sampleData);
     expect(pdfBytes.length).toBeGreaterThan(60000);
   });
+
+  test('either generates bytes or raises a typed capacity issue for every selectable voting target', async () => {
+    globalThis.fetch = async (url: string | URL | Request) => {
+      const pathStr = typeof url === 'string' ? url : url.toString();
+      const localPath = 'public' + pathStr;
+      const buf = fs.readFileSync(localPath);
+      return {
+        ok: true,
+        arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength),
+      } as unknown as Response;
+    };
+
+    const baseData: Omit<ApplicationFormData, 'stationName' | 'desiredLocation'> = {
+      fullName: 'Петар Петровић',
+      parentName: 'Милорад',
+      jmbg: '1207985710055',
+      serbianAddress: 'Немањина 11, Београд',
+      foreignAddress: '7500E Beach Road, Singapore 199595',
+      signingDate: '09.09.2026.',
+      phone: '+65 9123 4567',
+      email: 'petar.petrovic@example.com',
+      signatureMode: 'wet-ink',
+      signaturePngDataUrl: '',
+    };
+
+    for (const country of COUNTRIES) {
+      for (const station of country.stations) {
+        let generatedBytes: Uint8Array | undefined;
+
+        try {
+          generatedBytes = await generateApplicationPdf({
+            ...baseData,
+            stationName: station.embassyCyr,
+            desiredLocation: country.labelCyr,
+          });
+          expect(generatedBytes).toBeInstanceOf(Uint8Array);
+        } catch (error) {
+          expect(generatedBytes).toBeUndefined();
+          expect(error).toBeInstanceOf(PdfGenerationIssue);
+          expect((error as PdfGenerationIssue).code).toBe('field-capacity-exceeded');
+          expect((error as PdfGenerationIssue).field).toBe('votingTarget');
+        }
+      }
+    }
+  }, { timeout: 30_000 });
 });

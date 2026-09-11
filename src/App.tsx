@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { Header } from './components/Header';
 import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
 import { Countdown } from './components/Countdown';
@@ -8,7 +8,8 @@ import { StepVotingDestination, VotingDestinationData } from './components/StepV
 import type { SignatureAndDocumentData } from './components/StepSignatureAndDocument';
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { COUNTRY_BY_CODE } from './data/missions';
-import { ApplicationFormData } from './lib/pdf';
+import { getOfflineSnapshot, retryOfflinePreparation, subscribeOffline } from './lib/offline';
+import type { ApplicationFormData } from './lib/pdf';
 import { getInitialDesiredLocation } from './lib/invite';
 import { ScriptProvider, useScript } from './lib/script';
 import { formatSerbianDate } from './lib/validators';
@@ -38,6 +39,9 @@ const getInitialCountryCode = (): string => {
 const getInitialDesiredLocationFromUrl = (): string =>
   typeof window === 'undefined' ? '' : getInitialDesiredLocation(window.location.search);
 
+
+type AppRoute = 'form' | 'status';
+
 const STEPS = [
   { id: 1, label: 'Provera' },
   { id: 2, label: 'Podaci' },
@@ -50,9 +54,20 @@ const AppContent: React.FC = () => {
   const { script, t } = useScript();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
-  const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
-  const emailCoverage = useMemo(() => getElectionEmailCoverage(), []);
-
+  const [route, setRoute] = useState<AppRoute>(() =>
+    typeof window !== 'undefined' && window.location.pathname === '/status' ? 'status' : 'form',
+  );
+  const [currentTime, setCurrentTime] = useState(() => Date.now());
+  const offlineSnapshot = useSyncExternalStore(
+    subscribeOffline,
+    getOfflineSnapshot,
+    getOfflineSnapshot,
+  );
+  const isStatusPage = route === 'status';
+  const emailCoverage = useMemo(
+    () => getElectionEmailCoverage(undefined, currentTime),
+    [currentTime],
+  );
 
   // Form state
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>({
@@ -74,8 +89,8 @@ const AppContent: React.FC = () => {
   const [signatureAndDoc, setSignatureAndDoc] = useState<SignatureAndDocumentData>({
     signaturePngDataUrl: '',
     isWetInkSignature: false,
-    idDocumentDataUrl: undefined,
   });
+  const [idDocumentDataUrl, setIdDocumentDataUrl] = useState<string | undefined>();
 
   const handleStep1Complete = () => {
     setCurrentStep(2);
@@ -110,8 +125,8 @@ const AppContent: React.FC = () => {
       setSignatureAndDoc({
         signaturePngDataUrl: '',
         isWetInkSignature: false,
-        idDocumentDataUrl: undefined,
       });
+      setIdDocumentDataUrl(undefined);
       setVotingDestination({
         countryCode: '',
         stationId: null,
@@ -119,6 +134,34 @@ const AppContent: React.FC = () => {
         desiredLocation: '',
       });
     }
+  };
+
+  const navigateToStatus = () => {
+    window.history.pushState({ glasanjeRoute: 'status' }, '', '/status');
+    setRoute('status');
+  };
+
+  const navigateToForm = () => {
+    if (window.history.state?.glasanjeRoute === 'status') {
+      window.history.back();
+      return;
+    }
+
+    window.history.replaceState(null, '', '/');
+    setRoute('form');
+  };
+
+  const startApplicationForCountry = (countryCode: string) => {
+    const country = COUNTRY_BY_CODE.get(countryCode);
+    if (!country) return;
+
+    setVotingDestination((previous) => ({
+      ...previous,
+      countryCode,
+      stationId: country.stations[0]?.id ?? null,
+    }));
+    setCurrentStep(1);
+    navigateToForm();
   };
 
   const currentCountry = COUNTRY_BY_CODE.get(votingDestination.countryCode);
@@ -141,8 +184,9 @@ const AppContent: React.FC = () => {
     signingDate: formatSerbianDate(),
     phone: personalInfo.phone,
     email: personalInfo.email,
+    signatureMode: signatureAndDoc.isWetInkSignature ? 'wet-ink' : 'screen',
     signaturePngDataUrl: signatureAndDoc.signaturePngDataUrl,
-    idDocumentDataUrl: signatureAndDoc.idDocumentDataUrl,
+    idDocumentDataUrl,
   };
 
   useEffect(() => {
@@ -153,20 +197,81 @@ const AppContent: React.FC = () => {
         : 'Korak do glasa | Prijava za glasanje iz inostranstva',
     );
   }, [isStatusPage, script, t]);
+
+  useEffect(() => {
+    const updateRoute = () =>
+      setRoute(window.location.pathname === '/status' ? 'status' : 'form');
+    window.addEventListener('popstate', updateRoute);
+    return () => window.removeEventListener('popstate', updateRoute);
+  }, []);
+
+  useEffect(() => {
+    const refreshCurrentTime = () => setCurrentTime(Date.now());
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === 'visible') {
+        refreshCurrentTime();
+      }
+    };
+
+    window.addEventListener('focus', refreshCurrentTime);
+    window.addEventListener('pageshow', refreshCurrentTime);
+    document.addEventListener('visibilitychange', refreshWhenVisible);
+    return () => {
+      window.removeEventListener('focus', refreshCurrentTime);
+      window.removeEventListener('pageshow', refreshCurrentTime);
+      document.removeEventListener('visibilitychange', refreshWhenVisible);
+    };
+  }, []);
   const activeStep = STEPS[currentStep - 1];
 
 
   return (
     <div className="container">
       <Header onOpenPrivacy={() => setIsPrivacyOpen(true)} />
+      <div role="status" aria-live="polite" className="form-hint" style={{ marginBottom: '1.25rem' }}>
+        {offlineSnapshot.updateAvailable ? (
+          <>
+            <p>{t('Postoji novija verzija alata.')}</p>
+            <p>{t('Da biste je bezbedno preuzeli, završite ili zapišite prijavu, zatvorite sve kartice ovog alata, pa ga ponovo otvorite. Uneti podaci se ne čuvaju u pregledaču.')}</p>
+          </>
+        ) : offlineSnapshot.status === 'preparing' ? (
+          <p>{t('Priprema za rad bez interneta…')}</p>
+        ) : offlineSnapshot.status === 'ready' ? (
+          <>
+            <p>{t('Spremno za rad bez interneta na ovom uređaju.')}</p>
+            <p>{t('Prikazani podaci su od poslednjeg povezivanja.')}</p>
+          </>
+        ) : offlineSnapshot.status === 'unsupported' ? (
+          <p>{t('Ovaj pregledač ne čuva alat za rad bez interneta. Obrada podataka i dalje ostaje na vašem uređaju.')}</p>
+        ) : (
+          <>
+            <p>{t('Rad bez interneta nije spreman. Ostanite povezani dok se priprema ne završi.')}</p>
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              onClick={() => void retryOfflinePreparation()}
+            >
+              {t('Pokušaj ponovo pripremu za rad bez interneta')}
+            </button>
+          </>
+        )}
+      </div>
       {isStatusPage ? (
-        <RegistrationEmailStatusPage />
+        <RegistrationEmailStatusPage
+          now={currentTime}
+          onBack={navigateToForm}
+          onStart={startApplicationForCountry}
+        />
       ) : (
         <>
           <Countdown />
           <a
             href="/status"
             className="btn btn-sm btn-navy"
+            onClick={(event) => {
+              event.preventDefault();
+              navigateToStatus();
+            }}
             style={{
               marginBottom: '1.25rem',
               display: 'flex',
@@ -218,6 +323,7 @@ const AppContent: React.FC = () => {
             {currentStep === 2 && (
               <StepPersonalInfo
                 initialData={personalInfo}
+                onDraftChange={setPersonalInfo}
                 onBack={() => setCurrentStep(1)}
                 onNext={handleStep2Complete}
               />
@@ -226,6 +332,8 @@ const AppContent: React.FC = () => {
             {currentStep === 3 && (
               <StepVotingDestination
                 initialData={votingDestination}
+                now={currentTime}
+                onDraftChange={setVotingDestination}
                 onBack={() => setCurrentStep(2)}
                 onNext={handleStep3Complete}
               />
@@ -235,6 +343,8 @@ const AppContent: React.FC = () => {
               <React.Suspense fallback={<p aria-live="polite">{t('Učitavanje potpisa i dokumenta…')}</p>}>
                 <StepSignatureAndDocument
                   initialData={signatureAndDoc}
+                  idDocumentDataUrl={idDocumentDataUrl}
+                  onIdDocumentChange={setIdDocumentDataUrl}
                   onBack={() => setCurrentStep(3)}
                   onNext={handleStep4Complete}
                 />
@@ -250,6 +360,7 @@ const AppContent: React.FC = () => {
                   countryNameCyr={countryNameCyr}
                   isWetInkSignature={signatureAndDoc.isWetInkSignature}
                   onBack={() => setCurrentStep(4)}
+                  onEditStep={setCurrentStep}
                   onReset={handleReset}
                 />
               </React.Suspense>

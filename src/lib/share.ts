@@ -4,6 +4,10 @@ import { Script, translateStaticText } from './script';
  * Local download, transfer, clipboard, and public email-field helpers.
  */
 
+export type WebmailProvider = 'gmail' | 'outlook' | 'yahoo' | 'mailto';
+
+export type WebmailLinks = Record<WebmailProvider, string>;
+
 export interface EmailDispatchInfo {
   toEmail: string;
   subject: string;
@@ -48,8 +52,11 @@ export function buildRecipientPayloads({
   manualText: string;
 } {
   const standardBody = `${body}\n\nС поштовањем,\n${fullName}`;
+  const unconfirmedContactWarning =
+    `ПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак. Пре слања проверите адресу на званичном сајту мисије.`;
   const idDocumentInstruction = 'Приложите слику прве стране српског пасоша или личне карте.';
   const composeAttachmentInstructions = [
+    ...(!isElectionContactConfirmed ? [unconfirmedContactWarning] : []),
     isWetInkSignature
       ? 'Приложите скенирану или фотографисану својеручно потписану пријаву.'
       : 'Приложите преузети PDF формулар.',
@@ -58,9 +65,7 @@ export function buildRecipientPayloads({
   const mailtoBody = `${temporaryBlock(composeAttachmentInstructions)}\n\n${standardBody}`;
   const webShareInstructions = [
     `У поље „За“ унесите адресу:\n${toEmail}`,
-    ...(!isElectionContactConfirmed
-      ? [`ПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак.`]
-      : []),
+    ...(!isElectionContactConfirmed ? [unconfirmedContactWarning] : []),
     ...(!isIdDocumentEmbedded ? [idDocumentInstruction] : []),
   ];
   const requiredAttachments = [
@@ -82,6 +87,7 @@ export function buildRecipientPayloads({
     manualText: `${temporaryBlock([
       `За: ${toEmail}`,
       `Наслов: ${subject}`,
+      ...(!isElectionContactConfirmed ? [unconfirmedContactWarning] : []),
       `Обавезни прилози: ${requiredAttachments.join('; ')}.`,
     ])}\n\n${standardBody}`,
   };
@@ -219,7 +225,7 @@ export async function shareInvitation(
   }
 }
 
-export function getWebmailLinks(info: EmailDispatchInfo) {
+export function getWebmailLinks(info: EmailDispatchInfo): WebmailLinks {
   const encTo = encodeURIComponent(info.toEmail);
   const encSu = encodeURIComponent(info.subject);
   const encBody = encodeURIComponent(info.body);

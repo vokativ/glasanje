@@ -28,49 +28,48 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
 
         <div style={{ fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--color-text)' }}>
           <div className="alert alert-success" style={{ marginBottom: '1rem' }}>
-            <strong>{t('🔒 Vaši podaci nikada ne napuštaju vaš uređaj.')}</strong><br />
+            <strong>{t('🔒 Podaci koje unesete ostaju u vašem pregledaču.')}</strong><br />
             {t(
-              'Aplikacija radi 100% lokalno u vašem veb pregledaču. Nijedan podatak (ime, JMBG, adresa, potpis, slika pasoša) se ne šalje na server, niti se čuva u bilo kakvoj bazi podataka.'
+              'Ime, ime roditelja, JMBG, adresa, potpis i slika dokumenta koriste se samo da bi se na vašem uređaju napravio PDF. Ovaj sajt nema bazu podataka i ne šalje prijavu umesto vas.'
             )}
           </div>
 
           <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '1rem 0 0.5rem', color: 'var(--color-primary)' }}>
             {t('1. Kako možete sami da proverite ovu tvrdnju?')}
           </h3>
-          <p>{t('Ovo nije samo obećanje — možete sami tehnički proveriti da alat radi potpuno lokalno:')}</p>
+          <p>{t('Ne morate da verujete na reč — proveru možete uraditi sami:')}</p>
           <ol style={{ marginLeft: '1.25rem', marginTop: '0.5rem' }}>
-            <li>{t('Otvorite ovu stranicu i sačekajte da se učita.')}</li>
+            <li>{t('Popunite korake do kraja i preuzmite PDF.')}</li>
             <li>
               <strong>{t('Isključite internet')}</strong>{' '}
-              {t('(uključite avion-režim ili isključite Wi-Fi/mrežu).')}
+              {t('(avion-režim ili isključena mreža).')}
             </li>
-            <li>{t('Popunite formular, potpišite se i kliknite na „Preuzmi formular“.')}</li>
+            <li>{t('Vratite se korak nazad, izmenite neki podatak i ponovo preuzmite PDF.')}</li>
             <li>
-              {t('Videćete da alat i dalje ')}
-              <strong>{t('nesmetano funkcioniše i generiše kompletan PDF')}</strong>!
-              {' '}{t('Ovo dokazuje da se sva obrada i izrada dokumenta odvija isključivo na vašem računaru/telefonu.')}
+              {t('Novi PDF se pravi i ')}
+              <strong>{t('bez interneta')}</strong>
+              {t('. To znači da se priprema dokumenta odvija na vašem uređaju.')}
             </li>
           </ol>
 
           <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '1.25rem 0 0.5rem', color: 'var(--color-primary)' }}>
             {t('2. Zašto alat ne šalje mejl automatski umesto vas?')}
           </h3>
-          <p>{t('Alat namerno ne koristi server za automatsko slanje mejlova, iz dva ključna razloga:')}</p>
+          <p>{t('Alat nema server koji šalje mejlove umesto vas. To je namerno, iz dva razloga:')}</p>
           <ul style={{ marginLeft: '1.25rem', marginTop: '0.5rem' }}>
             <li>
               <strong>{t('Privatnost:')}</strong>{' '}
-              {t('Da bi server poslao mejl, morali bismo da primimo vaš JMBG i sliku pasoša na naš server, što odbijamo da radimo.')}
+              {t('Slanje sa servera bi značilo da vaš JMBG i slika dokumenta prvo stignu kod nas. To ne radimo.')}
             </li>
             <li>
-              <strong>{t('Pravni dokaz:')}</strong>{' '}
-              {t('Kada prijavu pošaljete direktno sa svoje lične adrese, u vašoj fascikli ')}
-              <em>{t('Sent (Poslato)')}</em>{' '}
-              {t('ostaje neosporiv pravni dokaz da ste prijavu blagovremeno uputili nadležnom diplomatsko-konzularnom predstavništvu.')}
+              <strong>{t('Vaša evidencija:')}</strong>{' '}
+              {t('Poruku šaljete sa svoje adrese, pa vam ostaje u fascikli poslatih poruka, sa datumom i prilozima. Potvrdu prijema tražite od predstavništva.')}
             </li>
           </ul>
+          <p>{t('Kada sami izaberete deljenje ili svoju aplikaciju za e-poštu, PDF i tekst poruke prelaze u tu aplikaciju. Slanje i dalje pokrećete vi.')}</p>
 
           <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '1.25rem 0 0.5rem', color: 'var(--color-primary)' }}>
-            {t('3. Otvoreni izvorni kod (Open Source)')}
+            {t('3. Otvoreni izvorni kod')}
           </h3>
           <p>
             {t('Kompletan izvorni kod ove aplikacije je javno dostupan svakome na uvid i reviziju. Svako može proveriti tačan kod koji se izvršava u pregledaču.')}

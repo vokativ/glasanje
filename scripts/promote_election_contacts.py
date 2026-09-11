@@ -12,36 +12,26 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-MAILBOX_RE = re.compile(
-    r"^(?=.{3,254}$)(?=.{1,64}@)[A-Za-z0-9](?:[A-Za-z0-9._%+-]{0,62}[A-Za-z0-9])?@"
-    r"(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$"
+from election_contact_contract import (
+    ContractError,
+    election_authority_is_expired,
+    parse_utc_timestamp,
+    require_mailbox,
+    validate_election_authority,
+    validate_evidence_snapshot,
+    validate_human_approval,
 )
-GENERIC_MAILBOX_LOCAL_PART_RE = re.compile(
-    r"^(?:admin|ambasada|embassy|contact|consular|general|hello|info|konzularno|mail|office|reception|support)$",
-    re.IGNORECASE,
-)
-APPROVAL_DECISION = "approve"
+
 ADVISORY_DECISIONS = {"accept", "needs_human"}
 REVIEW_DECISIONS = ADVISORY_DECISIONS | {"reject"}
 
-ELECTION_CONTEXT_RE = re.compile(
-    r"\b(?:election\w*|vot(?:e|ing)\w*|electoral\w*|izbor\w*|glasanj\w*|bira[čc]\w*)\b|"
-    r"(?:избор\w*|гласањ\w*|изјашњавањ\w*|бирач\w*)",
-    re.IGNORECASE,
-)
-SUBMISSION_CONTACT_RE = re.compile(
-    r"\b(?:apply|application|submit|submission|send|write|contact|email|e-mail|register|registration|"
-    r"prijav\w*|podnes\w*|dostav\w*|pošalj\w*|poslat\w*|piš\w*|pis\w*|kontakt\w*|adresa|obrazac|upis\w*)\b|"
-    r"(?:пријав\w*|поднес\w*|достав\w*|пошаљ\w*|послат\w*|пиш\w*|контакт\w*|адреса|образац|упис\w*)",
-    re.IGNORECASE,
-)
+
 ELECTION_YEAR_RE = re.compile(r"(?<!\d)((?:19|20)\d{2})(?!\d)")
 
 
 
 
-class ValidationError(ValueError):
-    """Raised when an untrusted pipeline input cannot be safely promoted."""
+ValidationError = ContractError
 
 
 def fail(message: str) -> None:
@@ -73,23 +63,17 @@ def write_json_atomically(path: Path, payload: Any) -> None:
 
 def require_string(record: dict[str, Any], field: str, label: str) -> str:
     value = record.get(field)
-    if not isinstance(value, str) or not value.strip():
-        fail(f"{label} requires non-empty {field}")
-    return value.strip()
+    if not isinstance(value, str) or not value or value != value.strip():
+        fail(f"{label} requires a non-empty {field} without surrounding whitespace")
+    return value
 
-def require_mailbox(record: dict[str, Any], field: str, label: str) -> str:
-    value = record.get(field)
-    if not isinstance(value, str) or not MAILBOX_RE.fullmatch(value) or ".." in value:
-        fail(f"{label} has an invalid email")
-    return value.lower()
+
+def require_candidate_mailbox(record: dict[str, Any], field: str, label: str) -> str:
+    return require_mailbox(record.get(field), label)
 
 
 def require_timestamp(value: str, label: str) -> None:
-    normalized = value.replace("Z", "+00:00")
-    try:
-        datetime.fromisoformat(normalized)
-    except ValueError:
-        fail(f"{label} has an invalid timestamp")
+    parse_utc_timestamp(value, label)
 
 
 def election_year_for(election_id: str, label: str) -> str:
@@ -169,14 +153,14 @@ def canonical_stations(payload: Any) -> dict[str, tuple[str, dict[str, Any]]]:
 
 
 def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, Any]]]) -> dict[str, dict[str, Any]]:
-    if not isinstance(payload, dict):
-        fail("Candidates must be an object")
+    if not isinstance(payload, dict) or payload.get("schemaVersion") != 2:
+        fail("Candidates must be a schemaVersion 2 object")
     election_id = require_string(payload, "electionId", "Candidates")
     election_year = election_year_for(election_id, "Candidates electionId")
     if require_string(payload, "electionYear", "Candidates") != election_year:
         fail("Candidates electionYear does not match candidates electionId")
     generated_at = require_string(payload, "generatedAt", "Candidates")
-    require_timestamp(generated_at, "Candidates")
+    require_timestamp(generated_at, "Candidates generatedAt")
     candidates: dict[str, dict[str, Any]] = {}
     for index, candidate in enumerate(records_from(payload, "candidates", "Candidates")):
         label = f"Candidate #{index + 1}"
@@ -191,9 +175,10 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
             fail(f"{label} electionYear does not match candidates electionId")
         country_code = require_string(candidate, "countryCode", label)
         station_id = require_string(candidate, "stationId", label)
-        email = require_mailbox(candidate, "email", label)
-        # A published mission mailbox may be the election recipient when an
-        # authorized reviewer confirms its explicit election use.
+        email = require_candidate_mailbox(candidate, "email", label)
+        selected_for_promotion = candidate.get("selectedForPromotion")
+        if type(selected_for_promotion) is not bool:
+            fail(f"{label} requires boolean selectedForPromotion")
         title = require_string(candidate, "title", label)
         election_context = require_string(candidate, "electionContext", label)
         source_quote = require_string(candidate, "sourceQuote", label)
@@ -210,18 +195,15 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
             or source_host_value != source_host_value.strip()
         ):
             fail(f"{label} requires a non-empty sourceHost without surrounding whitespace")
-        source_host = source_host_value
         observed_at = require_string(candidate, "observedAt", label)
-        require_timestamp(observed_at, label)
+        require_timestamp(observed_at, f"{label} observedAt")
         visible_email = re.compile(
             rf"(?<![A-Za-z0-9_.%+-]){re.escape(email)}(?![A-Za-z0-9-]|\.[A-Za-z0-9-])",
             re.IGNORECASE,
         )
         if not visible_email.search(source_quote):
             fail(f"{label} sourceQuote does not visibly contain its exact email")
-        # The approving human verifies the full live notice; this bounded quote
-        # retains the exact visible mailbox for the audit trail.
-        source_host = parse_source(source_url, source_host, label)
+        source_host = parse_source(source_url, source_host_value, label)
         station_entry = stations.get(station_id)
         if station_entry is None:
             fail(f"{label} references an unknown station")
@@ -231,6 +213,19 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
         canonical_host = canonical_website_host(station, label)
         if canonical_host is not None and source_host != canonical_host:
             fail(f"{label} sourceHost does not match the station's canonical mission website")
+        evidence_snapshot = validate_evidence_snapshot(
+            candidate.get("evidenceSnapshot"), f"{label} evidenceSnapshot"
+        )
+        expected_evidence = {
+            "sourceUrl": source_url,
+            "sourceHost": source_host,
+            "title": title,
+            "electionContext": election_context,
+            "sourceQuote": source_quote,
+            "email": email,
+        }
+        if evidence_snapshot["capturedAt"] != observed_at or evidence_snapshot["content"] != expected_evidence:
+            fail(f"{label} evidenceSnapshot must bind the exact candidate evidence")
         candidates[candidate_id] = {
             "candidateId": candidate_id,
             "electionId": candidate_election_id,
@@ -242,8 +237,12 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
             "electionContext": election_context,
             "sourceQuote": source_quote,
             "sourceUrl": source_url,
-            "sourceHost": source_host.lower().rstrip("."),
+            "sourceHost": source_host,
             "observedAt": observed_at,
+            "selectedForPromotion": selected_for_promotion,
+            "evidenceSnapshot": {
+                key: value for key, value in evidence_snapshot.items() if key != "_parsedCapturedAt"
+            },
         }
     return candidates
 
@@ -293,68 +292,93 @@ def validate_reviewer_policy(payload: Any) -> tuple[set[str], int]:
 
 
 def validate_approvals(
-    payload: Any, candidates: dict[str, dict[str, Any]], allowed_reviewer_ids: set[str]
+    payload: Any,
+    candidates: dict[str, dict[str, Any]],
+    allowed_reviewer_ids: set[str],
+    now: datetime,
 ) -> dict[str, list[dict[str, str]]]:
+    if not isinstance(payload, dict) or payload.get("schemaVersion") != 2:
+        fail("Approvals must be a schemaVersion 2 object")
     approvals: dict[str, list[dict[str, str]]] = {candidate_id: [] for candidate_id in candidates}
+    approval_fields = {
+        "candidateId",
+        "electionId",
+        "reviewerId",
+        "reviewerType",
+        "decision",
+        "approvedAt",
+        "expiresAt",
+        "evidenceSha256",
+    }
     for index, approval in enumerate(records_from(payload, "approvals", "Approvals")):
         label = f"Approval #{index + 1}"
+        if set(approval) != approval_fields:
+            fail(f"{label} must contain exactly {sorted(approval_fields)}")
         candidate_id = require_string(approval, "candidateId", label)
         election_id = require_string(approval, "electionId", label)
-        reviewer_id_value = approval.get("reviewerId")
-        if (
-            not isinstance(reviewer_id_value, str)
-            or not reviewer_id_value
-            or reviewer_id_value != reviewer_id_value.strip()
-        ):
-            fail(f"{label} requires a non-empty reviewerId without surrounding whitespace")
-        reviewer_id = reviewer_id_value
-        decision = require_string(approval, "decision", label)
-        approved_at = require_string(approval, "approvedAt", label)
-        require_timestamp(approved_at, label)
-        if approval.get("reviewerType") != "human":
-            fail(f"{label} is not an explicit human approval record")
-        if reviewer_id not in allowed_reviewer_ids:
-            fail(f"{label} reviewerId is not in the reviewed allow-list")
-        if decision not in {APPROVAL_DECISION, "reject"}:
-            fail(f"{label} has an unknown decision")
         candidate = candidates.get(candidate_id)
         if candidate is None:
-            continue
+            fail(f"{label} references an unknown candidate")
         if election_id != candidate["electionId"]:
             fail(f"{label} electionId does not match candidate {candidate_id}")
-        approvals[candidate_id].append(
-            {"reviewerId": reviewer_id, "decision": decision, "approvedAt": approved_at}
+        reviewer_id = require_string(approval, "reviewerId", label)
+        if reviewer_id not in allowed_reviewer_ids:
+            fail(f"{label} reviewerId is not in the reviewed allow-list")
+        validated = validate_human_approval(
+            {
+                key: approval[key]
+                for key in (
+                    "reviewerId",
+                    "reviewerType",
+                    "decision",
+                    "approvedAt",
+                    "expiresAt",
+                    "evidenceSha256",
+                )
+            },
+            label,
+            candidate["evidenceSnapshot"]["sha256"],
+            now,
+            allow_expired=True,
         )
+        approvals[candidate_id].append(validated)
     return approvals
 
 
-def promotion_provenance(
-    candidate: dict[str, Any],
-    review: dict[str, Any] | None,
-    approvals: list[dict[str, str]],
+def election_authority(
+    candidate: dict[str, Any], approvals: list[dict[str, str]]
 ) -> dict[str, Any]:
     return {
-        "_electionContactProvenance": {
-            "candidateId": candidate["candidateId"],
-            "electionId": candidate["electionId"],
-            "electionYear": candidate["electionYear"],
-            "countryCode": candidate["countryCode"],
-            "sourceUrl": candidate["sourceUrl"],
-            "sourceHost": candidate["sourceHost"],
-            "title": candidate["title"],
-            "electionContext": candidate["electionContext"],
-            "sourceQuote": candidate["sourceQuote"],
-            "observedAt": candidate["observedAt"],
-            "aiReviewDecision": review["decision"] if review is not None else None,
-            "humanApprovals": approvals,
-            "promotedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        }
+        "candidateId": candidate["candidateId"],
+        "electionId": candidate["electionId"],
+        "electionYear": candidate["electionYear"],
+        "countryCode": candidate["countryCode"],
+        "stationId": candidate["stationId"],
+        "email": candidate["email"],
+        "evidenceSnapshot": candidate["evidenceSnapshot"],
+        "approvals": approvals,
     }
 
 
 def promote(args: argparse.Namespace) -> int:
+    now = datetime.now(timezone.utc)
     stations = canonical_stations(load_json(args.canonical, "canonical missions"))
     candidates = validate_candidates(load_json(args.candidates, "candidates"), stations)
+    selected_by_station_election: dict[tuple[str, str], str] = {}
+    selected_by_station: dict[str, str] = {}
+    for candidate_id, candidate in candidates.items():
+        if not candidate["selectedForPromotion"]:
+            continue
+        key = (candidate["stationId"], candidate["electionId"])
+        previous_candidate = selected_by_station_election.setdefault(key, candidate_id)
+        if previous_candidate != candidate_id:
+            fail(
+                f"Ambiguous selected candidates for station {candidate['stationId']} "
+                f"and election {candidate['electionId']}"
+            )
+        previous_station_candidate = selected_by_station.setdefault(candidate["stationId"], candidate_id)
+        if previous_station_candidate != candidate_id:
+            fail(f"Ambiguous selected candidates for station {candidate['stationId']}")
     reviews = (
         validate_reviews(load_json(args.reviews, "AI reviews"), candidates)
         if args.reviews is not None
@@ -367,39 +391,85 @@ def promote(args: argparse.Namespace) -> int:
         load_json(args.approvals, "approvals"),
         candidates,
         allowed_reviewer_ids,
+        now,
     )
     overrides = load_json(args.overrides, "overrides")
-    if not isinstance(overrides, dict) or not isinstance(overrides.get("missionOverrides"), dict):
-        fail("Overrides must be an object with a missionOverrides object")
+    if (
+        not isinstance(overrides, dict)
+        or overrides.get("_schemaVersion") != 2
+        or not isinstance(overrides.get("missionOverrides"), dict)
+    ):
+        fail("Overrides must be a schemaVersion 2 object with missionOverrides")
 
     updated = copy.deepcopy(overrides)
     mission_overrides = updated["missionOverrides"]
     promoted = 0
     for candidate_id, candidate in candidates.items():
-        review = reviews.get(candidate_id)
-        human_approvals = approvals[candidate_id]
-        if review is not None and review["decision"] not in ADVISORY_DECISIONS:
+        if not candidate["selectedForPromotion"]:
             continue
+        review = reviews.get(candidate_id)
+        if review is not None and review["decision"] not in ADVISORY_DECISIONS:
+            fail(
+                f"Selected candidate {candidate_id} was skipped because its advisory "
+                f"review decision is {review['decision']}"
+            )
+        human_approvals = approvals[candidate_id]
+        if any(
+            parse_utc_timestamp(
+                approval["expiresAt"], f"Selected candidate {candidate_id} approval expiresAt"
+            )
+            <= now
+            for approval in human_approvals
+        ):
+            fail(f"Selected candidate {candidate_id} was skipped because an approval has expired")
         reviewer_ids = {approval["reviewerId"] for approval in human_approvals}
         if (
             len(human_approvals) != required_human_approvals
             or len(reviewer_ids) != required_human_approvals
-            or any(approval["decision"] != APPROVAL_DECISION for approval in human_approvals)
         ):
-            continue
+            fail(
+                f"Selected candidate {candidate_id} was skipped because it requires exactly "
+                f"{required_human_approvals} distinct current human approval(s)"
+            )
         previous = mission_overrides.get(candidate["stationId"])
         if previous is not None and not isinstance(previous, dict):
             fail(f"Override for {candidate['stationId']} is malformed")
         patch = copy.deepcopy(previous) if previous else {}
-        patch["electionEmail"] = candidate["email"]
-        station = stations[candidate["stationId"]][1]
-        if canonical_website_host(station, f"Candidate {candidate_id}") is None:
-            patch["website"] = f"https://{candidate['sourceHost']}"
-        patch.update(promotion_provenance(candidate, review, human_approvals))
+        previous_authority = patch.get("electionAuthority")
+        if previous_authority is not None:
+            validated_previous = validate_election_authority(
+                previous_authority,
+                f"Override for {candidate['stationId']} electionAuthority",
+                now,
+                allow_expired=True,
+            )
+            if (
+                validated_previous["stationId"] != candidate["stationId"]
+                or validated_previous["countryCode"] != candidate["countryCode"]
+            ):
+                fail(
+                    f"Override for {candidate['stationId']} electionAuthority is bound to "
+                    "another station or country"
+                )
+            if (
+                not election_authority_is_expired(validated_previous, now)
+                and validated_previous["electionId"] != candidate["electionId"]
+            ):
+                fail(
+                    f"Override for {candidate['stationId']} already has current authority "
+                    f"for election {validated_previous['electionId']}"
+                )
+        authority = election_authority(candidate, human_approvals)
+        patch["electionAuthority"] = validate_election_authority(
+            authority, f"Candidate {candidate_id} electionAuthority", now
+        )
         mission_overrides[candidate["stationId"]] = patch
-        promoted += 1
+        if mission_overrides[candidate["stationId"]] != overrides["missionOverrides"].get(
+            candidate["stationId"]
+        ):
+            promoted += 1
 
-    if promoted:
+    if updated != overrides:
         write_json_atomically(args.overrides, updated)
     print(f"Promoted {promoted} election-specific contact(s).")
     return 0

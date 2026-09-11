@@ -4,6 +4,14 @@ import re
 import subprocess
 from urllib.parse import urlsplit
 
+from election_contact_contract import (
+    ContractError,
+    election_authority_is_expired,
+    is_valid_mailbox,
+    parse_utc_timestamp,
+    validate_election_authority,
+)
+
 with open("data/mfa_representations.json", "r", encoding="utf-8") as f:
     raw_data = json.load(f)
 
@@ -126,8 +134,153 @@ def clean_address(addr):
         return ""
     return re.sub(r'\s+', ' ', addr).strip()
 
-def is_valid_email(value):
-    return isinstance(value, str) and bool(re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', value.strip()))
+
+
+def normalized_raw_email(value):
+    if not isinstance(value, str):
+        return ""
+    return value.split("?", 1)[0].strip()
+
+
+def select_mission_email(representation):
+    """Choose a syntactically valid listed mailbox without repairing source text."""
+    listed_emails = [
+        normalized_raw_email(email)
+        for email in representation.get("emails", [])
+        if isinstance(email, str)
+    ]
+    valid_listed_emails = [
+        email for email in listed_emails if is_valid_mailbox(email)
+    ]
+
+    def is_concatenated(email):
+        return any(
+            email != listed_email and email.startswith(listed_email)
+            for listed_email in valid_listed_emails
+        )
+
+    primary_email = normalized_raw_email(
+        representation.get("primary_consular_email")
+    )
+    if is_valid_mailbox(primary_email) and not is_concatenated(primary_email):
+        return primary_email
+    return next(
+        (
+            email
+            for email in valid_listed_emails
+            if not is_concatenated(email)
+        ),
+        "",
+    )
+
+
+PUBLIC_STATION_OVERRIDE_FIELDS = {"website", "address", "embassy", "embassyCyr"}
+
+
+def validate_overrides(override_data, countries):
+    if not isinstance(override_data, dict) or override_data.get("_schemaVersion") != 2:
+        raise ValueError("Overrides must be a schemaVersion 2 object")
+    mission_overrides = override_data.get("missionOverrides")
+    country_overrides = override_data.get("countryOverrides")
+    if not isinstance(mission_overrides, dict) or not isinstance(country_overrides, dict):
+        raise ValueError("Overrides must contain missionOverrides and countryOverrides objects")
+
+    station_countries = {
+        station["id"]: country["countryCode"]
+        for country in countries
+        for station in country["stations"]
+    }
+    station_ids = set(station_countries)
+    country_codes = set(station_countries.values())
+    for country_code, patch in country_overrides.items():
+        if country_code not in country_codes or not isinstance(patch, dict):
+            raise ValueError(f"Invalid country override for {country_code!r}")
+        if set(patch) - {"label", "labelCyr"} or not all(
+            isinstance(value, str) and value.strip() for value in patch.values()
+        ):
+            raise ValueError(f"Country override for {country_code} has unsupported fields")
+
+    for station_id, patch in mission_overrides.items():
+        if station_id == "_template":
+            if not isinstance(patch, dict):
+                raise ValueError("Override template must be an object")
+            continue
+        if station_id not in station_ids or not isinstance(patch, dict):
+            raise ValueError(f"Invalid mission override for {station_id!r}")
+        permitted_fields = PUBLIC_STATION_OVERRIDE_FIELDS | {
+            "electionAuthority",
+            "_legacyElectionContact",
+        }
+        if set(patch) - permitted_fields:
+            raise ValueError(f"Mission override for {station_id} has unsupported fields")
+        for field in PUBLIC_STATION_OVERRIDE_FIELDS & set(patch):
+            if not isinstance(patch[field], str):
+                raise ValueError(f"Mission override for {station_id} has invalid {field}")
+        if "_legacyElectionContact" in patch:
+            legacy = patch["_legacyElectionContact"]
+            if (
+                not isinstance(legacy, dict)
+                or legacy.get("status") != "inactive"
+                or not isinstance(legacy.get("reason"), str)
+                or not legacy["reason"].strip()
+                or not is_valid_mailbox(legacy.get("electionEmail"))
+                or not legacy["provenance"]
+            ):
+                raise ValueError(f"Mission override for {station_id} has invalid legacy election audit")
+        if "electionAuthority" in patch:
+            try:
+                authority = validate_election_authority(
+                    patch["electionAuthority"],
+                    f"Mission override for {station_id} electionAuthority",
+                    allow_expired=True,
+                )
+            except ContractError as error:
+                raise ValueError(str(error)) from error
+            if not is_valid_mailbox(authority["email"]):
+                raise ValueError(f"Mission override for {station_id} has invalid election authority email")
+            if authority["stationId"] != station_id:
+                raise ValueError(
+                    f"Mission override for {station_id} election authority is bound to "
+                    f"station {authority['stationId']}"
+                )
+            if authority["countryCode"] != station_countries[station_id]:
+                raise ValueError(
+                    f"Mission override for {station_id} election authority is bound to "
+                    f"country {authority['countryCode']}"
+                )
+    return mission_overrides, country_overrides
+
+def public_election_authority(authority, label):
+    """Project a validated authority into the public runtime contract."""
+    evidence_snapshot = authority["evidenceSnapshot"]
+    source_url = evidence_snapshot["content"].get("sourceUrl")
+    parsed_source = urlsplit(source_url) if isinstance(source_url, str) else None
+    source_host = parsed_source.hostname if parsed_source is not None else None
+    if (
+        not isinstance(source_url, str)
+        or not source_url
+        or parsed_source.scheme != "https"
+        or not source_host
+        or (source_host != "mfa.gov.rs" and not source_host.endswith(".mfa.gov.rs"))
+    ):
+        raise ValueError(f"{label} has no approved MFA source URL")
+
+    expires_at = min(
+        authority["approvals"],
+        key=lambda approval: parse_utc_timestamp(
+            approval["expiresAt"], f"{label} approval expiresAt"
+        ),
+    )["expiresAt"]
+    return {
+        "candidateId": authority["candidateId"],
+        "electionId": authority["electionId"],
+        "electionYear": authority["electionYear"],
+        "email": authority["email"],
+        "sourceUrl": source_url,
+        "expiresAt": expires_at,
+        "evidenceSha256": evidence_snapshot["sha256"],
+    }
+
 
 def station_email_suffix(email):
     local_part = email.split('@', 1)[0].lower()
@@ -147,7 +300,6 @@ def station_identity_suffix(website, email):
 
 # 1. Build mission registry
 missions_by_domain = {}
-all_resident_missions = []
 
 for item in raw_data:
     country_cyr = item.get('country')
@@ -159,12 +311,7 @@ for item in raw_data:
         sec = rep['section']
         if sec in ['Амбасада', 'Конзулат']:
             emails = rep.get('emails', [])
-            primary_email = rep.get('primary_consular_email') or (emails[0] if emails else "")
-            if '?' in primary_email:
-                primary_email = primary_email.split('?')[0]
-
-            if code == 'ET' and not primary_email:
-                primary_email = "serbambadis@yahoo.com"
+            primary_email = select_mission_email(rep)
 
             if not primary_email:
                 continue
@@ -196,10 +343,8 @@ for item in raw_data:
                 'cityCyr': city_cyr,
                 'address': addr,
                 'email': primary_email,
-                'isElectionContactConfirmed': False,
                 'backupEmails': [e for e in emails if e != primary_email],
             }
-            all_resident_missions.append(mission_obj)
 
             if website:
                 domain = re.sub(r'^https?://(www\.)?', '', website).rstrip('/')
@@ -216,16 +361,11 @@ for item in raw_data:
 
     stations = []
 
-    # Check resident missions with valid email
+    # Check resident missions with a valid general mailbox.
     for rep in item.get('representations', []):
         sec = rep['section']
         if sec in ['Амбасада', 'Конзулат']:
-            emails = rep.get('emails', [])
-            primary_email = rep.get('primary_consular_email') or (emails[0] if emails else "")
-            if '?' in primary_email:
-                primary_email = primary_email.split('?')[0]
-            if code == 'ET' and not primary_email:
-                primary_email = "serbambadis@yahoo.com"
+            primary_email = select_mission_email(rep)
 
             if not primary_email:
                 continue
@@ -249,8 +389,8 @@ for item in raw_data:
                 'id': station_id,
                 'embassy': name_lat,
                 'embassyCyr': name_cyr,
-                'email': primary_email,
-                'isElectionContactConfirmed': False,
+                'missionEmail': primary_email,
+                'electionAuthority': None,
                 'website': website,
                 'address': addr,
                 'isResident': True,
@@ -262,10 +402,7 @@ for item in raw_data:
             if rep['section'] in ['Покрива на нерезиденцијалној основи', 'Амбасада']:
                 website = rep.get('website') or ""
                 domain = re.sub(r'^https?://(www\.)?', '', website).rstrip('/') if website else ""
-                emails = rep.get('emails', [])
-                primary_email = rep.get('primary_consular_email') or (emails[0] if emails else "")
-                if '?' in primary_email:
-                    primary_email = primary_email.split('?')[0]
+                primary_email = select_mission_email(rep)
                 addr = clean_address(rep.get('data', {}).get('Адреса:', ''))
 
                 if not primary_email:
@@ -285,8 +422,8 @@ for item in raw_data:
                     'id': station_id,
                     'embassy': name_lat,
                     'embassyCyr': name_cyr,
-                    'email': primary_email,
-                    'isElectionContactConfirmed': False,
+                    'missionEmail': primary_email,
+                    'electionAuthority': None,
                     'website': website,
                     'address': addr,
                     'isResident': False,
@@ -312,7 +449,7 @@ for base_id, colliding_stations in stations_by_base_id.items():
 
     stations_by_candidate_id = {}
     for country_code, station in colliding_stations:
-        suffix = station_identity_suffix(station['website'], station['email'])
+        suffix = station_identity_suffix(station['website'], station['missionEmail'])
         if not suffix:
             raise ValueError(
                 f"Cannot construct deterministic station ID for {country_code} "
@@ -327,7 +464,7 @@ for base_id, colliding_stations in stations_by_base_id.items():
             continue
 
         for country_code, station in candidate_stations:
-            email_suffix = station_email_suffix(station['email'])
+            email_suffix = station_email_suffix(station['missionEmail'])
             if not email_suffix:
                 raise ValueError(
                     f"Cannot construct deterministic station ID for {country_code} "
@@ -335,31 +472,39 @@ for base_id, colliding_stations in stations_by_base_id.items():
                 )
             station['id'] = f"{candidate_id}-{email_suffix}"
 
-# Apply overrides if present
+# Apply complete, validated overrides. A general mission mailbox remains separate
+# from a current election authority; no malformed override can become confirmed.
 overrides_path = "data/overrides.json"
 if os.path.exists(overrides_path):
-    try:
-        with open(overrides_path, "r", encoding="utf-8") as of:
-            ov_data = json.load(of)
-            m_ov = ov_data.get("missionOverrides", {})
-            c_ov = ov_data.get("countryOverrides", {})
-            for country in countries_list:
-                if country["countryCode"] in c_ov:
-                    country.update(c_ov[country["countryCode"]])
-                for s in country["stations"]:
-                    patch = m_ov.get(s["id"])
-                    if not isinstance(patch, dict):
-                        continue
-                    for k, v in patch.items():
-                        if not k.startswith("_") and k != "electionEmail" and v is not None:
-                            s[k] = v
-                    election_email = patch.get("electionEmail")
-                    s["isElectionContactConfirmed"] = False
-                    if is_valid_email(election_email):
-                        s["email"] = election_email.strip()
-                        s["isElectionContactConfirmed"] = True
-    except Exception as e:
-        print("Warning: failed to apply overrides:", e)
+    with open(overrides_path, "r", encoding="utf-8") as of:
+        mission_overrides, country_overrides = validate_overrides(
+            json.load(of), countries_list
+        )
+    for country in countries_list:
+        country_patch = country_overrides.get(country["countryCode"])
+        if country_patch is not None:
+            country.update(country_patch)
+        for station in country["stations"]:
+            patch = mission_overrides.get(station["id"])
+            if patch is None:
+                continue
+            for field in PUBLIC_STATION_OVERRIDE_FIELDS:
+                if field in patch:
+                    station[field] = patch[field]
+            authority = patch.get("electionAuthority")
+            if authority is None:
+                continue
+            validated_authority = validate_election_authority(
+                authority,
+                f"Mission override for {station['id']} electionAuthority",
+                allow_expired=True,
+            )
+            if election_authority_is_expired(validated_authority):
+                continue
+            station["electionAuthority"] = public_election_authority(
+                validated_authority,
+                f"Mission override for {station['id']} electionAuthority",
+            )
 
 # Add catalog search aliases after overrides so search follows the names users see.
 # ISO codes intentionally remain outside aliases and are handled as exact matches
@@ -400,7 +545,7 @@ os.makedirs("src/data", exist_ok=True)
 
 with open("data/missions_canonical.json", "w", encoding="utf-8") as f:
     json.dump({
-        'schemaVersion': 1,
+        'schemaVersion': 2,
         'publishedAt': '2026-09-09T14:00:00Z',
         'totalCountries': len(countries_list),
         'countries': countries_list
@@ -412,12 +557,22 @@ ts_code = f"""/**
  * Date: 2026-09-09
  */
 
+export interface ElectionAuthority {{
+  candidateId: string;
+  electionId: string;
+  electionYear: string;
+  email: string;
+  sourceUrl: string;
+  expiresAt: string;
+  evidenceSha256: string;
+}}
+
 export interface PollingStation {{
   id: string;
   embassy: string;
   embassyCyr: string;
-  email: string;
-  isElectionContactConfirmed: boolean;
+  missionEmail: string;
+  electionAuthority: ElectionAuthority | null;
   website: string;
   address: string;
   isResident: boolean;

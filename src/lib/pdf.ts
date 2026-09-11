@@ -1,3 +1,6 @@
+import type { Color, PDFFont, PDFPage } from 'pdf-lib';
+
+export type SignatureMode = 'screen' | 'wet-ink';
 
 export interface ApplicationFormData {
   fullName: string;
@@ -10,8 +13,28 @@ export interface ApplicationFormData {
   signingDate: string;
   phone: string;
   email: string;
+  signatureMode: SignatureMode;
   signaturePngDataUrl: string;
-  idDocumentDataUrl?: string; // Optional Page 2 passport/ID copy
+  idDocumentDataUrl?: string;
+}
+
+export type PdfGenerationIssueCode =
+  | 'invalid-signature-mode'
+  | 'invalid-screen-signature'
+  | 'field-capacity-exceeded'
+  | 'invalid-id-document';
+
+/** A recoverable, user-data issue that prevents PDF bytes from being produced. */
+export class PdfGenerationIssue extends Error {
+  readonly code: PdfGenerationIssueCode;
+  readonly field?: string;
+
+  constructor(code: PdfGenerationIssueCode, message: string, field?: string) {
+    super(message);
+    this.name = 'PdfGenerationIssue';
+    this.code = code;
+    this.field = field;
+  }
 }
 
 const TEMPLATE_URL = '/assets/Zahtev-za-glasanje-u-inostranstvu-2026-09-10.pdf';
@@ -25,10 +48,7 @@ async function loadAssets(): Promise<{ template: ArrayBuffer; font: ArrayBuffer 
     return { template: cachedTemplateBytes, font: cachedFontBytes };
   }
 
-  const [tplRes, fontRes] = await Promise.all([
-    fetch(TEMPLATE_URL),
-    fetch(FONT_URL),
-  ]);
+  const [tplRes, fontRes] = await Promise.all([fetch(TEMPLATE_URL), fetch(FONT_URL)]);
 
   if (!tplRes.ok) throw new Error(`Неуспешно учитавање PDF шаблона: ${tplRes.statusText}`);
   if (!fontRes.ok) throw new Error(`Неуспешно учитавање фонта: ${fontRes.statusText}`);
@@ -39,8 +59,136 @@ async function loadAssets(): Promise<{ template: ArrayBuffer; font: ArrayBuffer 
   return { template: cachedTemplateBytes, font: cachedFontBytes };
 }
 
+type TextFieldName =
+  | 'fullName'
+  | 'parentName'
+  | 'serbianAddress'
+  | 'foreignAddress'
+  | 'votingTarget'
+  | 'signingDate'
+  | 'phone'
+  | 'email';
+
+interface MeasuredTextField {
+  x: number;
+  y: number;
+  width: number;
+  fontSize: number;
+  lineHeight: number;
+  maxLines: number;
+}
+
+/*
+ * Baselines are six points above each template rule, leaving the Roboto descender
+ * visibly clear of the printed line. Each ruled row accepts exactly one rendered
+ * line: adjacent rows provide no safe second-line area, so overflow is rejected
+ * rather than drawn across the next field.
+ */
+const TEMPLATE_TEXT_FIELDS: Record<TextFieldName, MeasuredTextField> = {
+  fullName: { x: 286, y: 623, width: 270, fontSize: 10, lineHeight: 12, maxLines: 1 },
+  parentName: { x: 286, y: 596, width: 270, fontSize: 10, lineHeight: 12, maxLines: 1 },
+  serbianAddress: { x: 286, y: 510, width: 270, fontSize: 9, lineHeight: 12, maxLines: 1 },
+  foreignAddress: { x: 286, y: 483, width: 270, fontSize: 9, lineHeight: 12, maxLines: 1 },
+  votingTarget: { x: 286, y: 449, width: 270, fontSize: 9, lineHeight: 12, maxLines: 1 },
+  signingDate: { x: 105, y: 316, width: 140, fontSize: 10, lineHeight: 12, maxLines: 1 },
+  phone: { x: 345, y: 236, width: 200, fontSize: 10, lineHeight: 12, maxLines: 1 },
+  email: { x: 345, y: 182, width: 200, fontSize: 10, lineHeight: 12, maxLines: 1 },
+};
+
+const TEMPLATE_FIXED_FIELDS = {
+  jmbg: { x: 290, y: 538, step: 21, maxDigits: 13, fontSize: 10 },
+  signature: { x: 345, y: 282, maxWidth: 150, maxHeight: 50 },
+  attachment: { pageWidth: 595.3, pageHeight: 841.9, headerX: 50, headerY: 800, maxWidth: 500, maxHeight: 700, imageTop: 760 },
+} as const;
+
+function measureTextForField(
+  field: TextFieldName,
+  text: string,
+  font: PDFFont,
+): string[] {
+  if (!text) return [];
+
+  const layout = TEMPLATE_TEXT_FIELDS[field];
+  const lines: string[] = [];
+  let line = '';
+
+  for (const character of text.replace(/\r\n?/g, '\n')) {
+    if (character === '\n') {
+      lines.push(line);
+      line = '';
+      continue;
+    }
+
+    const candidate = `${line}${character}`;
+    const candidateWidth = font.widthOfTextAtSize(candidate, layout.fontSize);
+    if (candidateWidth > layout.width) {
+      if (!line) {
+        throw new PdfGenerationIssue(
+          'field-capacity-exceeded',
+          `Polje „${field}” ne može čitljivo da stane u predviđeni prostor obrasca. PDF nije napravljen.`,
+          field,
+        );
+      }
+      lines.push(line);
+      line = character;
+    } else {
+      line = candidate;
+    }
+  }
+
+  if (line || lines.length) lines.push(line);
+
+  if (lines.length > layout.maxLines) {
+    throw new PdfGenerationIssue(
+      'field-capacity-exceeded',
+      `Polje „${field}” ne može čitljivo da stane u predviđeni prostor obrasca. PDF nije napravljen.`,
+      field,
+    );
+  }
+
+  return lines;
+}
+
+function drawMeasuredText(
+  page: PDFPage,
+  field: TextFieldName,
+  lines: string[],
+  font: PDFFont,
+  color: Color,
+): void {
+  const layout = TEMPLATE_TEXT_FIELDS[field];
+  lines.forEach((line, index) => {
+    if (!line) return;
+    page.drawText(line, {
+      x: layout.x,
+      y: layout.y - index * layout.lineHeight,
+      size: layout.fontSize,
+      font,
+      color,
+    });
+  });
+}
+
+function requireScreenSignatureDataUrl(data: ApplicationFormData): string | undefined {
+  if (data.signatureMode === 'wet-ink') return undefined;
+  if (data.signatureMode !== 'screen') {
+    throw new PdfGenerationIssue(
+      'invalid-signature-mode',
+      'Način potpisivanja nije važeći. Vratite se na korak za potpis i izaberite način potpisivanja.',
+    );
+  }
+  if (!/^data:image\/png;base64,[A-Za-z0-9+/]+={0,2}$/.test(data.signaturePngDataUrl)) {
+    throw new PdfGenerationIssue(
+      'invalid-screen-signature',
+      'Potpis na ekranu nedostaje ili nije u važećem PNG formatu. Vratite se na korak za potpis i potpišite obrazac ponovo.',
+    );
+  }
+
+  return data.signaturePngDataUrl;
+}
 
 export async function generateApplicationPdf(data: ApplicationFormData): Promise<Uint8Array> {
+  const screenSignatureDataUrl = requireScreenSignatureDataUrl(data);
   const [{ template, font }, { PDFDocument, rgb }, { default: fontkit }] = await Promise.all([
     loadAssets(),
     import('pdf-lib'),
@@ -50,137 +198,84 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
   const pdfDoc = await PDFDocument.load(template);
   pdfDoc.registerFontkit(fontkit);
   const robotoFont = await pdfDoc.embedFont(font);
-
-  const pages = pdfDoc.getPages();
-  const page1 = pages[0];
-  const writeWrappedText = (
-    page: typeof page1,
-    text: string,
-    x: number,
-    y: number,
-    font: typeof robotoFont,
-    fontSize: number = 10,
-    maxWidth: number = 260,
-    lineHeight: number = 13
-  ): void => {
-    if (!text) return;
-
-    const words = text.trim().split(/\s+/);
-    let currentLine = '';
-    let currentY = y;
-
-    for (const word of words) {
-      const testLine = currentLine ? `${currentLine} ${word}` : word;
-      const testWidth = font.widthOfTextAtSize(testLine, fontSize);
-      if (testWidth > maxWidth && currentLine) {
-        page.drawText(currentLine, { x, y: currentY, size: fontSize, font, color: rgb(0, 0, 0) });
-        currentLine = word;
-        currentY -= lineHeight;
-      } else {
-        currentLine = testLine;
-      }
-    }
-
-    if (currentLine) {
-      page.drawText(currentLine, { x, y: currentY, size: fontSize, font, color: rgb(0, 0, 0) });
-    }
-  };
-
-
-  // 1. Име и презиме
-  writeWrappedText(page1, data.fullName, 286, 617, robotoFont, 10, 270);
-
-  // 2. Име једног родитеља
-  writeWrappedText(page1, data.parentName, 286, 590, robotoFont, 10, 270);
-
-  // 3. ЈМБГ (13 цифара исписаних са фиксним кораком)
-  const jmbgDigits = data.jmbg.replace(/\D/g, '').split('');
-  let jmbgX = 290;
-  for (const digit of jmbgDigits) {
-    page1.drawText(digit, {
-      x: jmbgX,
-      y: 538,
-      size: 10,
-      font: robotoFont,
-      color: rgb(0, 0, 0),
-    });
-    jmbgX += 21;
-  }
-
-  // 4. Адреса пребивалишта у Р. Србији
-  writeWrappedText(page1, data.serbianAddress, 286, 510, robotoFont, 9, 270, 12);
-
-  // 5. Адреса боравка у иностранству
-  writeWrappedText(page1, data.foreignAddress, 286, 477, robotoFont, 9, 270, 12);
-
-  // 6. Град, држава - где желим да гласам у иностранству
+  const [page1] = pdfDoc.getPages();
   const votingTarget = data.desiredLocation
     ? `${data.desiredLocation} (${data.stationName})`
     : data.stationName;
-  writeWrappedText(page1, votingTarget, 286, 443, robotoFont, 9, 270, 12);
 
-  // Датум
-  page1.drawText(data.signingDate, {
-    x: 105,
-    y: 310,
-    size: 10,
-    font: robotoFont,
-    color: rgb(0, 0, 0),
+  const measuredText = {
+    fullName: measureTextForField('fullName', data.fullName, robotoFont),
+    parentName: measureTextForField('parentName', data.parentName, robotoFont),
+    serbianAddress: measureTextForField('serbianAddress', data.serbianAddress, robotoFont),
+    foreignAddress: measureTextForField('foreignAddress', data.foreignAddress, robotoFont),
+    votingTarget: measureTextForField('votingTarget', votingTarget, robotoFont),
+    signingDate: measureTextForField('signingDate', data.signingDate, robotoFont),
+    phone: measureTextForField('phone', data.phone, robotoFont),
+    email: measureTextForField('email', data.email, robotoFont),
+  };
+  const black = rgb(0, 0, 0);
+
+  drawMeasuredText(page1, 'fullName', measuredText.fullName, robotoFont, black);
+  drawMeasuredText(page1, 'parentName', measuredText.parentName, robotoFont, black);
+
+  const jmbgDigits = data.jmbg.replace(/\D/g, '').split('');
+  if (jmbgDigits.length > TEMPLATE_FIXED_FIELDS.jmbg.maxDigits) {
+    throw new PdfGenerationIssue(
+      'field-capacity-exceeded',
+      'Polje „jmbg” ne može da stane u predviđena polja obrasca. PDF nije napravljen.',
+      'jmbg',
+    );
+  }
+  jmbgDigits.forEach((digit, index) => {
+    page1.drawText(digit, {
+      x: TEMPLATE_FIXED_FIELDS.jmbg.x + index * TEMPLATE_FIXED_FIELDS.jmbg.step,
+      y: TEMPLATE_FIXED_FIELDS.jmbg.y,
+      size: TEMPLATE_FIXED_FIELDS.jmbg.fontSize,
+      font: robotoFont,
+      color: black,
+    });
   });
 
-  // Потпис (PNG са потписом)
-  if (data.signaturePngDataUrl && data.signaturePngDataUrl.startsWith('data:image/png;base64,')) {
+  drawMeasuredText(page1, 'serbianAddress', measuredText.serbianAddress, robotoFont, black);
+  drawMeasuredText(page1, 'foreignAddress', measuredText.foreignAddress, robotoFont, black);
+  drawMeasuredText(page1, 'votingTarget', measuredText.votingTarget, robotoFont, black);
+  drawMeasuredText(page1, 'signingDate', measuredText.signingDate, robotoFont, black);
+
+  if (screenSignatureDataUrl) {
+    let signatureImage;
     try {
-      const signatureImage = await pdfDoc.embedPng(data.signaturePngDataUrl);
-      const scaled = signatureImage.scale(0.24);
-      // Ограничи максималну ширину/висину потписа
-      const maxW = 150;
-      const maxH = 50;
-      let w = scaled.width;
-      let h = scaled.height;
-      if (w > maxW) {
-        h = h * (maxW / w);
-        w = maxW;
-      }
-      if (h > maxH) {
-        w = w * (maxH / h);
-        h = maxH;
-      }
-      page1.drawImage(signatureImage, {
-        x: 345,
-        y: 282,
-        width: w,
-        height: h,
-      });
-    } catch (err) {
-      console.warn('Грешка при уметању потписа у PDF:', err);
+      signatureImage = await pdfDoc.embedPng(screenSignatureDataUrl);
+    } catch {
+      throw new PdfGenerationIssue(
+        'invalid-screen-signature',
+        'Potpis na ekranu je oštećen i ne može da se ugradi u PDF. Vratite se na korak za potpis i potpišite obrazac ponovo.',
+      );
     }
+
+    const scale = Math.min(
+      TEMPLATE_FIXED_FIELDS.signature.maxWidth / signatureImage.width,
+      TEMPLATE_FIXED_FIELDS.signature.maxHeight / signatureImage.height,
+      1,
+    );
+    page1.drawImage(signatureImage, {
+      x: TEMPLATE_FIXED_FIELDS.signature.x,
+      y: TEMPLATE_FIXED_FIELDS.signature.y,
+      width: signatureImage.width * scale,
+      height: signatureImage.height * scale,
+    });
   }
 
-  // Контакт телефон
-  page1.drawText(data.phone, {
-    x: 345,
-    y: 230,
-    size: 10,
-    font: robotoFont,
-    color: rgb(0, 0, 0),
-  });
+  drawMeasuredText(page1, 'phone', measuredText.phone, robotoFont, black);
+  drawMeasuredText(page1, 'email', measuredText.email, robotoFont, black);
 
-  // И-мејл
-  page1.drawText(data.email, {
-    x: 345,
-    y: 176,
-    size: 10,
-    font: robotoFont,
-    color: rgb(0, 0, 0),
-  });
-
-  // Опциона страна 2: Копија пасоша / личне карте
   if (data.idDocumentDataUrl) {
     const isPng = data.idDocumentDataUrl.startsWith('data:image/png;base64,');
     const isJpeg = data.idDocumentDataUrl.startsWith('data:image/jpeg;base64,');
     if (!isPng && !isJpeg) {
-      throw new Error('Прилог личног документа мора бити JPG или PNG слика.');
+      throw new PdfGenerationIssue(
+        'invalid-id-document',
+        'Prilog ličnog dokumenta mora biti JPG ili PNG slika.',
+      );
     }
 
     let embeddedImage;
@@ -189,47 +284,43 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
         ? await pdfDoc.embedPng(data.idDocumentDataUrl)
         : await pdfDoc.embedJpg(data.idDocumentDataUrl);
     } catch {
-      throw new Error('Приложена слика документа не може да се угради у PDF. Изаберите другу JPG или PNG слику.');
+      throw new PdfGenerationIssue(
+        'invalid-id-document',
+        'Priložena slika dokumenta ne može da se ugradi u PDF. Izaberite drugu JPG ili PNG sliku.',
+      );
     }
 
-    const page2 = pdfDoc.addPage([595.3, 841.9]); // Standard A4
-
-    // Заглавље стране 2
+    const attachment = TEMPLATE_FIXED_FIELDS.attachment;
+    const page2 = pdfDoc.addPage([attachment.pageWidth, attachment.pageHeight]);
     page2.drawText('КОПИЈА ИДЕНТИФИКАЦИОНОГ ДОКУМЕНТА (ПАСОШ / ЛИЧНА КАРТА)', {
-      x: 50,
-      y: 800,
+      x: attachment.headerX,
+      y: attachment.headerY,
       size: 11,
       font: robotoFont,
       color: rgb(0.2, 0.2, 0.2),
     });
     page2.drawText('Прилог уз Захтев за упис у бирачки списак податка да ће бирач гласати у иностранству', {
-      x: 50,
-      y: 785,
+      x: attachment.headerX,
+      y: attachment.headerY - 15,
       size: 9,
       font: robotoFont,
       color: rgb(0.4, 0.4, 0.4),
     });
 
-    // Скалирај слику да уредно стане на А4 (макс ширина 500, макс висина 700)
-    const maxImgW = 500;
-    const maxImgH = 700;
-    let imgW = embeddedImage.width;
-    let imgH = embeddedImage.height;
-
-    const scale = Math.min(maxImgW / imgW, maxImgH / imgH, 1);
-    imgW = imgW * scale;
-    imgH = imgH * scale;
-
-    const imgX = (595.3 - imgW) / 2;
-    const imgY = 760 - imgH;
-
+    const scale = Math.min(
+      attachment.maxWidth / embeddedImage.width,
+      attachment.maxHeight / embeddedImage.height,
+      1,
+    );
+    const imageWidth = embeddedImage.width * scale;
+    const imageHeight = embeddedImage.height * scale;
     page2.drawImage(embeddedImage, {
-      x: imgX,
-      y: imgY,
-      width: imgW,
-      height: imgH,
+      x: (attachment.pageWidth - imageWidth) / 2,
+      y: attachment.imageTop - imageHeight,
+      width: imageWidth,
+      height: imageHeight,
     });
   }
 
-  return await pdfDoc.save();
+  return pdfDoc.save();
 }

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ApplicationFormData, generateApplicationPdf } from '../lib/pdf';
+import { ApplicationFormData, generateApplicationPdf, PdfGenerationIssue } from '../lib/pdf';
 import { buildInvitationInfo } from '../lib/invite';
 import {
   canSharePdfFile,
@@ -11,8 +11,15 @@ import {
   isNarrowMobileBrowser,
   shareInvitation,
 } from '../lib/share';
+import type { WebmailProvider } from '../lib/share';
 import { PollingStation } from '../data/missions';
+import { resolveCurrentElectionContact } from '../lib/electionContact';
 import { useScript } from '../lib/script';
+type PdfIssueRecovery = {
+  step: 2 | 3 | 4;
+  action: string;
+};
+
 
 
 interface StepExportAndSubmitProps {
@@ -22,6 +29,7 @@ interface StepExportAndSubmitProps {
   countryNameCyr: string;
   isWetInkSignature: boolean;
   onBack: () => void;
+  onEditStep: (step: 2 | 3 | 4) => void;
   onReset: () => void;
 }
 
@@ -32,6 +40,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   countryNameCyr,
   isWetInkSignature,
   onBack,
+  onEditStep,
   onReset,
 }) => {
   const { script, t } = useScript();
@@ -43,7 +52,9 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   const pdfBytesRef = useRef<Uint8Array | null>(null);
   const pdfGenerationRef = useRef<Promise<Uint8Array> | null>(null);
   const [pdfError, setPdfError] = useState<string | null>(null);
-  const [hasDownloaded, setHasDownloaded] = useState<boolean>(false);
+  const [pdfIssue, setPdfIssue] = useState<PdfGenerationIssue | null>(null);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [hasRequestedDownload, setHasRequestedDownload] = useState<boolean>(false);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
   const [copiedBody, setCopiedBody] = useState<boolean>(false);
   const [shareError, setShareError] = useState<string | null>(null);
@@ -55,6 +66,10 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   const mobileSharingAvailable = !isWetInkSignature && canSharePdfFile();
   const hideProviderLinks = isNarrowMobileBrowser();
   const desiredLocation = formData.desiredLocation?.trim() ?? '';
+  const electionContact = resolveCurrentElectionContact(station);
+  const electionAuthority = electionContact.electionAuthority;
+  const recipientEmail = electionAuthority?.email ?? electionContact.missionEmail;
+  const isElectionContactConfirmed = electionAuthority !== null;
 
   const subject = 'Пријава за гласање из иностранства — избори 2026.';
   const isIdDocumentEmbedded = Boolean(formData.idDocumentDataUrl);
@@ -79,16 +94,22 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
 Молим за потврду пријема захтева.`;
 
-  const { dispatchInfo, webShareInfo, manualText } = buildRecipientPayloads({
-    toEmail: station.email,
-    isElectionContactConfirmed: station.isElectionContactConfirmed,
-    isIdDocumentEmbedded,
-    isWetInkSignature,
-    subject,
-    body: messageBody,
-    fullName: formData.fullName,
-  });
+  const buildCurrentRecipientPayloads = () => {
+    const currentElectionContact = resolveCurrentElectionContact(station);
+    const currentElectionAuthority = currentElectionContact.electionAuthority;
 
+    return buildRecipientPayloads({
+      toEmail: currentElectionAuthority?.email ?? currentElectionContact.missionEmail,
+      isElectionContactConfirmed: currentElectionAuthority !== null,
+      isIdDocumentEmbedded,
+      isWetInkSignature,
+      subject,
+      body: messageBody,
+      fullName: formData.fullName,
+    });
+  };
+
+  const { dispatchInfo } = buildCurrentRecipientPayloads();
   const webmailLinks = getWebmailLinks(dispatchInfo);
 
   const ensurePdf = useCallback((): Promise<Uint8Array> => {
@@ -97,15 +118,22 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
     setIsGenerating(true);
     setPdfError(null);
+    setPdfIssue(null);
+    setDownloadError(null);
     const generation = generateApplicationPdf(formData)
       .then((generated) => {
         pdfBytesRef.current = generated;
         setPdfBytes(generated);
         return generated;
       })
-      .catch((err) => {
-        setPdfError(`${t('Greška pri generisanju PDF dokumenta:')} ${String(err)}`);
-        throw err;
+      .catch((error: unknown) => {
+        if (error instanceof PdfGenerationIssue) {
+          setPdfIssue(error);
+        } else {
+          console.error('PDF generation failed', error);
+          setPdfError(t('PDF dokument nije pripremljen. Pokušajte ponovo da ga preuzmete ili podelite.'));
+        }
+        throw error;
       })
       .finally(() => {
         pdfGenerationRef.current = null;
@@ -123,12 +151,24 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   }, [ensurePdf, isWetInkSignature]);
 
   const handleDownload = async () => {
+    if (pdfIssue) return;
+
+    let bytes: Uint8Array;
     try {
-      const bytes = await ensurePdf();
-      downloadFile(bytes, 'Zahtev-za-glasanje-2026.pdf');
-      setHasDownloaded(true);
+      bytes = await ensurePdf();
     } catch {
-      // The inline PDF error remains visible and this button allows another attempt.
+      return;
+    }
+
+    try {
+      downloadFile(bytes, 'Zahtev-za-glasanje-2026.pdf');
+      setDownloadError(null);
+      setHasRequestedDownload(true);
+    } catch (error) {
+      console.error('PDF download setup failed', error);
+      setDownloadError(
+        t('Preuzimanje PDF-a nije moglo da se pokrene na ovom uređaju. Pokušajte ponovo ili upotrebite deljenje PDF-a ako je dostupno.')
+      );
     }
   };
 
@@ -136,6 +176,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
     if (!pdfBytes) return;
 
     setShareError(null);
+    const { webShareInfo } = buildCurrentRecipientPayloads();
     const file = new File([pdfBytes.buffer as ArrayBuffer], 'Zahtev-za-glasanje-2026.pdf', {
       type: 'application/pdf',
     });
@@ -148,7 +189,10 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   };
 
   const handleCopyEmail = async () => {
-    const success = await copyTextToClipboard(station.email);
+    const currentElectionContact = resolveCurrentElectionContact(station);
+    const currentRecipientEmail =
+      currentElectionContact.electionAuthority?.email ?? currentElectionContact.missionEmail;
+    const success = await copyTextToClipboard(currentRecipientEmail);
     if (success) {
       setCopiedEmail(true);
       setTimeout(() => setCopiedEmail(false), 3000);
@@ -156,12 +200,19 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   };
 
   const handleCopyBody = async () => {
+    const { manualText } = buildCurrentRecipientPayloads();
     const success = await copyTextToClipboard(manualText);
     if (success) {
       setCopiedBody(true);
       setTimeout(() => setCopiedBody(false), 3000);
     }
   };
+
+  const handleCompose = (provider: WebmailProvider) =>
+    (event: React.MouseEvent<HTMLAnchorElement>) => {
+      const { dispatchInfo } = buildCurrentRecipientPayloads();
+      event.currentTarget.href = getWebmailLinks(dispatchInfo)[provider];
+    };
 
   const handleInvitationShare = () => {
     const desiredLocation = formData.desiredLocation?.trim();
@@ -194,6 +245,23 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   const downloadLabel = isWetInkSignature
     ? t('🖨️ Preuzmi PDF za štampu i potpis →')
     : t('📥 Preuzmi potpisan PDF formular →');
+  const pdfIssueRecovery: PdfIssueRecovery | null = pdfIssue
+    ? pdfIssue.code === 'invalid-id-document'
+      ? { step: 4, action: t('Vrati se na prilog ličnog dokumenta') }
+      : pdfIssue.code === 'invalid-signature-mode' || pdfIssue.code === 'invalid-screen-signature'
+        ? { step: 4, action: t('Vrati se na potpis') }
+        : {
+            step:
+              pdfIssue.field === 'foreignAddress' || pdfIssue.field === 'votingTarget'
+                ? 3
+                : 2,
+            action:
+              pdfIssue.field === 'foreignAddress' || pdfIssue.field === 'votingTarget'
+                ? t('Vrati se na mesto glasanja')
+                : t('Vrati se na lične podatke'),
+          }
+    : null;
+
 
   return (
     <div className="card">
@@ -201,8 +269,20 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
       <p className="card-subtitle">
         {t('Preuzmite PDF, zatim ga sami priložite u poruku ili ga prenesite u izabranu aplikaciju. Ova stranica samo priprema PDF i ne obavlja predaju.')}
       </p>
+      {pdfIssue && pdfIssueRecovery && (
+        <div className="alert alert-warning" role="alert" style={{ marginBottom: '1.5rem' }}>
+          <p style={{ marginTop: 0 }}>{t(pdfIssue.message)}</p>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => onEditStep(pdfIssueRecovery.step)}
+          >
+            {pdfIssueRecovery.action}
+          </button>
+        </div>
+      )}
 
-      {!station.isElectionContactConfirmed && (
+      {!isElectionContactConfirmed && (
         <div
           role="alert"
           style={{
@@ -272,9 +352,11 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           >
             {pdfBytes
               ? t('✉️➕📄 Podeli PDF u svoju aplikaciju za e-poštu →')
-              : isGenerating || !pdfError
-                ? t('⏳ Pripremanje PDF-a...')
-                : t('PDF nije pripremljen')}
+              : pdfIssue
+                ? t('Potrebna je izmena podataka')
+                : isGenerating || !pdfError
+                  ? t('⏳ Pripremanje PDF-a...')
+                  : t('PDF nije pripremljen')}
           </button>
           <p className="form-hint" style={{ textAlign: 'center' }}>
             {t('Deljenje prenosi PDF i isti naslov i tekst poruke, ali ne unosi primaoca, ne dodaje adresu i ne šalje poruku.')}
@@ -353,18 +435,24 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         <button
           type="button"
           onClick={handleDownload}
-          disabled={isGenerating}
+          disabled={isGenerating || Boolean(pdfIssue)}
           className="btn btn-secondary btn-lg btn-block"
         >
           {isGenerating ? t('⏳ Generisanje PDF-a...') : downloadLabel}
         </button>
+        {downloadError && (
+          <div className="alert alert-warning" role="alert" style={{ marginTop: '0.5rem' }}>
+            {downloadError}
+          </div>
+        )}
         {!mobileSharingAvailable && pdfError && (
           <div className="alert alert-warning" style={{ marginTop: '0.5rem' }}>
             {pdfError}
           </div>
         )}
-        {hasDownloaded && (
+        {hasRequestedDownload && (
           <div
+            role="status"
             style={{
               fontSize: '0.85rem',
               color: 'var(--color-success)',
@@ -374,14 +462,14 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             }}
           >
             {isWetInkSignature
-              ? t('✓ PDF je preuzet. Slede štampanje, potpis i skeniranje ili fotografisanje.')
-              : t('✓ PDF je preuzet na vaš uređaj.')}
+              ? t('Preuzimanje PDF-a je zatraženo. Proverite preuzimanja na uređaju, zatim odštampajte, potpišite i napravite sken ili fotografiju.')
+              : t('Preuzimanje PDF-a je zatraženo. Proverite preuzimanja na uređaju.')}
           </div>
         )}
 
         <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
           <p><strong>2.</strong> {t('Otvorite pripremljenu poruku, ručno priložite PDF i sami je pošaljite.')}</p>
-          <a href={webmailLinks.mailto} className="btn btn-primary btn-lg btn-block">
+          <a href={webmailLinks.mailto} onClick={handleCompose('mailto')} className="btn btn-primary btn-lg btn-block">
             {t('✉️ Otvori pripremljenu e-poštu →')}
           </a>
           <p className="form-hint">
@@ -390,13 +478,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
           {!hideProviderLinks && (
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
-              <a href={webmailLinks.gmail} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
+              <a href={webmailLinks.gmail} onClick={handleCompose('gmail')} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
                 {t('Nastavi u ')}Gmail{t('-u ↗')}
               </a>
-              <a href={webmailLinks.outlook} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
+              <a href={webmailLinks.outlook} onClick={handleCompose('outlook')} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
                 {t('Nastavi u ')}Outlook{t('-u ↗')}
               </a>
-              <a href={webmailLinks.yahoo} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
+              <a href={webmailLinks.yahoo} onClick={handleCompose('yahoo')} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-secondary">
                 {t('Nastavi u ')}Yahoo Mail{t('-u ↗')}
               </a>
             </div>
@@ -448,23 +536,37 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         </div>
         <p
           style={{
-            color: station.isElectionContactConfirmed ? 'var(--color-success)' : 'var(--color-danger)',
+            color: isElectionContactConfirmed ? 'var(--color-success)' : 'var(--color-danger)',
             fontSize: '0.9rem',
             fontWeight: 700,
             margin: '0.5rem 0',
           }}
         >
-          {station.isElectionContactConfirmed
+          {isElectionContactConfirmed
             ? t('✓ Potvrđena adresa za izbore 2026.')
             : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
         <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
-          {station.isElectionContactConfirmed
+          {isElectionContactConfirmed
             ? t('Adresa je preuzeta iz aktuelnog, odobrenog izbornog obaveštenja.')
             : t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
         </p>
+        {electionAuthority && (
+          <a
+            href={electionAuthority.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-sm btn-outline"
+          >
+            {t('Izvor potvrđene izborne adrese ↗')}
+          </a>
+        )}
+        <p style={{ fontSize: '0.85rem', margin: '0.75rem 0 0.25rem' }}>
+          <strong>{t('Javno objavljeni opšti kontakt misije:')}</strong>{' '}
+          {electionContact.missionEmail}
+        </p>
         <div className="hub-email-box">
-          <span className="hub-email-text">{station.email}</span>
+          <span className="hub-email-text">{recipientEmail}</span>
           <button
             type="button"
             onClick={handleCopyEmail}

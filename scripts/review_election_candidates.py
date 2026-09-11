@@ -14,6 +14,7 @@ from typing import Any, Mapping
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from urllib.parse import urlparse
+from election_contact_contract import ContractError, validate_evidence_snapshot
 
 
 DEFAULT_INPUT = Path("data/election_candidates.json")
@@ -143,8 +144,8 @@ def validate_output_path(path: Path) -> None:
 def read_candidates(path: Path) -> tuple[dict[str, Any], list[Any]]:
     with path.open("r", encoding="utf-8") as handle:
         document = json.load(handle)
-    if not isinstance(document, dict):
-        raise ValueError("Candidate input must be a JSON object")
+    if not isinstance(document, dict) or document.get("schemaVersion") != 2:
+        raise ValueError("Candidate input must be a schemaVersion 2 JSON object")
     candidates = document.get("candidates")
     if not isinstance(candidates, list):
         raise ValueError("Candidate input must contain a candidates array")
@@ -156,51 +157,51 @@ def string_field(candidate: Mapping[str, Any], name: str) -> str | None:
     return value.strip() if isinstance(value, str) and value.strip() else None
 
 
-def first_string_field(candidate: Mapping[str, Any], *names: str) -> str | None:
-    for name in names:
-        value = string_field(candidate, name)
-        if value is not None:
-            return value
-    return None
-
-
 def public_evidence(candidate: Mapping[str, Any]) -> tuple[dict[str, str] | None, str | None]:
-    """Select the only candidate fields that may be sent to the AI endpoint."""
+    """Select validated v2 public evidence for advisory review only."""
     evidence = {
         "candidateId": string_field(candidate, "candidateId"),
         "electionId": string_field(candidate, "electionId"),
         "email": string_field(candidate, "email"),
-        "sourceQuote": first_string_field(candidate, "sourceQuote", "quote"),
+        "sourceQuote": string_field(candidate, "sourceQuote"),
         "sourceUrl": string_field(candidate, "sourceUrl"),
-        "electionContext": first_string_field(candidate, "electionContext", "title"),
+        "electionContext": string_field(candidate, "electionContext"),
         "observedAt": string_field(candidate, "observedAt"),
         "countryCode": string_field(candidate, "countryCode"),
-        "country": string_field(candidate, "country"),
         "stationId": string_field(candidate, "stationId"),
-        "stationName": string_field(candidate, "stationName"),
         "sourceHost": string_field(candidate, "sourceHost"),
     }
-    required_fields = (
-        "candidateId",
-        "electionId",
-        "email",
-        "sourceQuote",
-        "sourceUrl",
-        "electionContext",
-        "observedAt",
-        "countryCode",
-        "stationId",
-        "sourceHost",
-    )
-    if any(evidence[name] is None for name in required_fields):
+    required_fields = tuple(evidence)
+    if (
+        any(evidence[name] is None for name in required_fields)
+        or type(candidate.get("selectedForPromotion")) is not bool
+    ):
         return None, "invalid_candidate_evidence"
 
     parsed_source = urlparse(evidence["sourceUrl"] or "")
-    if parsed_source.scheme != "https" or not parsed_source.netloc:
+    if (
+        parsed_source.scheme != "https"
+        or not parsed_source.netloc
+        or (evidence["sourceHost"] or "").lower() != (parsed_source.hostname or "").lower()
+        or (evidence["email"] or "").lower() not in (evidence["sourceQuote"] or "").lower()
+    ):
         return None, "invalid_candidate_evidence"
-    if (evidence["sourceHost"] or "").lower() != (parsed_source.hostname or "").lower():
+
+    expected_content = {
+        "sourceUrl": evidence["sourceUrl"],
+        "sourceHost": evidence["sourceHost"],
+        "title": string_field(candidate, "title"),
+        "electionContext": evidence["electionContext"],
+        "sourceQuote": evidence["sourceQuote"],
+        "email": evidence["email"],
+    }
+    if expected_content["title"] is None:
         return None, "invalid_candidate_evidence"
-    if (evidence["email"] or "").lower() not in (evidence["sourceQuote"] or "").lower():
+    try:
+        snapshot = validate_evidence_snapshot(candidate.get("evidenceSnapshot"), "Candidate evidenceSnapshot")
+    except ContractError:
+        return None, "invalid_candidate_evidence"
+    if snapshot["capturedAt"] != evidence["observedAt"] or snapshot["content"] != expected_content:
         return None, "invalid_candidate_evidence"
 
     return {name: value for name, value in evidence.items() if value is not None}, None
