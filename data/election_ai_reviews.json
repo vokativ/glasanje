@@ -1,0 +1,675 @@
+{
+  "asOf": "2026-09-11T07:01:01Z",
+  "canonicalDigest": "4ae6a5849817f803f4838ce28c7ef2a022d34a6e16dd02222f105e34595feae5",
+  "policyDigest": "39607ff4ce297719d81e7f4ee1f58b0b46cd3eb3110415a6cfefe26d8cd6fb59",
+  "reviews": [
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "248010f2baf9f89f79ea0fd55bc950e4222bc3bee2225139d780bd8940a4e89f",
+      "candidateSetDigest": "51003f898f255b46d302eec6b6b6cbb407e08cf28e69dd7fc840ec2e6f6c4881",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "supported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju vanrednih izbora za poslanike Narodne skupštine i da su izbori zakazani za 25. oktobar 2026. godine.",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        }
+      ],
+      "decision": "accept",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "cfe0916b2b45320d8029c525577c69e9487730819daf1549e5467116488ebdb1",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8eb253920",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The institutional Embassy of Serbia in the United Kingdom page expressly identifies the 25 October 2026 extraordinary National Assembly election, instructs that overseas-voting requests be sent to izbori.london@mfa.rs, and names the recipient station as the Embassy of the Republic of Serbia in London with its street address. All three checks are supported verbatim. The stated deadline is 23:00 UK local time on 3 October 2026; London is on UTC+01:00 on that date, yielding 2026-10-03T22:00:00Z.",
+      "resolvesReviewIds": [
+        "cmp-157b1ea8f2653922",
+        "cmp-157b1ea8f4653923"
+      ],
+      "reviewId": "cmp-157b1ea8eb253920",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-gb-emb-main",
+      "validity": {
+        "deadlineText": "najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji).",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "64d12daefa6c7af613b09ec97fe12cc0f61f91009de6a818412aa9bf97efeb84",
+      "candidateSetDigest": "51003f898f255b46d302eec6b6b6cbb407e08cf28e69dd7fc840ec2e6f6c4881",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "supported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ 09. сеп 2026. Обавештавамо да је председник Републике Србије Александар Вучић донео Oдлуку о расписивању ванредних избора за посланике Народне скупштине и да су избори заказани за 25. октобар 2026. године.",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "stationScope",
+          "quote": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ | Амбасада Републике Србије у Уједињеном Краљевству",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        }
+      ],
+      "decision": "accept",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "deed48c632c5885dc7422473618ae2b5594e055874ab3f79551f2b3509af3298",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8ede53921",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The institutional Embassy of Serbia in the United Kingdom page, published 9 September 2026 and current as of the packet timestamp, expressly identifies the parliamentary election scheduled for 25 October 2026. It explicitly directs overseas-voting requests to the Embassy of Serbia in London at izbori.london@mfa.rs, matching the canonical resident embassy station. The stated cutoff is 23:00 local UK/Ireland time on 3 October 2026; London is on BST (UTC+01:00) on that date, so the honest UTC conversion is 2026-10-03T22:00:00Z.",
+      "resolvesReviewIds": [
+        "cmp-157b1ea8f2653922",
+        "cmp-157b1ea8f4653923"
+      ],
+      "reviewId": "cmp-157b1ea8ede53921",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-gb-emb-main",
+      "validity": {
+        "deadlineText": "најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "acda23f9b3b0ee7d1fdc59b33033583c0b1f7ef2868ba1d1677841276909fee2",
+      "candidateSetDigest": "51003f898f255b46d302eec6b6b6cbb407e08cf28e69dd7fc840ec2e6f6c4881",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "unsupported",
+        "stationScope": "unsupported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Обавештавамо да је председник Републике Србије Александар Вучић донео Oдлуку о расписивању ванредних избора за посланике Народне скупштине и да су избори заказани за 25. октобар 2026. године.",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Пријављивање за ове конкурсе је искључиво путем веб платформе на адреси https://konkursi.dijaspora.gov.rs Организације и удружења су у обавези да ажурирају и допуне податке на постојећим налозима у оквиру веб платформе Управе за сарадњу с дијаспором и Србима у региону. Напомињемо да је приликом приступа платформи обавезна измена лозинке за налоге који већ постоје. Обавеза ажурирања и допуне података у оквиру нове веб платформе Ажурирање и допуна података у оквиру нове веб платформе врши се путем пријаве на адреси https://konkursi.dijaspora.gov.rs/login . Удружења и организације које до сада нису учествовале на конкурсима за суфинансијрање које расписује УСДСР МСП, потребно је да извше регистрацију на истом порталу. За сва додатна питања и нејасноће на располагању је електонска адреса konkursi@dijaspora.gov.rs .",
+          "sourceId": "40d7d06546b4c83b91b25685fe1b9f52d55e8e602f24c28d0eb06bbd8b4be6f4"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "stationScope",
+          "quote": "За сва додатна питања и нејасноће на располагању је електонска адреса konkursi@dijaspora.gov.rs .",
+          "sourceId": "40d7d06546b4c83b91b25685fe1b9f52d55e8e602f24c28d0eb06bbd8b4be6f4"
+        }
+      ],
+      "decision": "reject",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "eb815ecff2a5600f92723f2ab080f30a8c8251dc913b3b8804926fdac2bae441",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8f2653922",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The packet supports that the 25 October 2026 parliamentary election is current as of the packet timestamp, but it explicitly identifies izbori.london@mfa.rs—not the target address—as the email to which overseas-voting requests for the Serbian Embassy in London must be delivered. The target konkursi@dijaspora.gov.rs appears in a separate item about co-financing competitions and is offered only for additional questions and clarifications about that program. No source explicitly designates the target mailbox as a voter-registration recipient or gives it the exact London embassy/station scope. The explicit UK/Ireland deadline converts honestly to 2026-10-03T22:00:00Z because 23:00 local time on 3 October 2026 is UTC+1.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea8f2653922",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-gb-emb-main",
+      "validity": {
+        "deadlineText": "најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "f9ec25d5c37fb0e8c5f89098a13e7e534fa01cab9afc2a3b6841dd54999b0455",
+      "candidateSetDigest": "51003f898f255b46d302eec6b6b6cbb407e08cf28e69dd7fc840ec2e6f6c4881",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "unsupported",
+        "stationScope": "unsupported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju vanrednih izbora za poslanike Narodne skupštine i da su izbori zakazani za 25. oktobar 2026. godine.",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Prijavljivanje za ove konkurse je isključivo putem veb platforme na adresi https://konkursi.dijaspora.gov.rs Organizacije i udruženja su u obavezi da ažuriraju i dopune podatke na postojećim nalozima u okviru veb platforme Uprave za saradnju s dijasporom i Srbima u regionu. [...] Za sva dodatna pitanja i nejasnoće na raspolaganju je elektonska adresa konkursi@dijaspora.gov.rs .",
+          "sourceId": "b836270e7947d0034862052c4e470f49ca30650c310988242c5c09667c7efa2e"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Uprava za saradnju s dijasporom i Srbima u regionu raspisala je konkurse za sufinansiranje projekata za organizacije iz dijaspore i regiona",
+          "sourceId": "b836270e7947d0034862052c4e470f49ca30650c310988242c5c09667c7efa2e"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        }
+      ],
+      "decision": "reject",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "41f23f790ccba54fb7918908d70759e7aa63ab852f19971f30b9bb4e895aa4b5",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8f4653923",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The 25 October 2026 parliamentary election is explicitly supported and was current as of the packet timestamp. However, the target address konkursi@dijaspora.gov.rs is explicitly presented only as a contact for questions about diaspora project co-financing competitions and the associated web platform, not as a recipient for voter-registration requests. The election notice instead explicitly directs requests to izbori.london@mfa.rs at the Embassy of the Republic of Serbia in London. No source links the target mailbox to the London embassy/station for election registration, so both recipient purpose and exact station scope are unsupported. The stated UK deadline converts to 2026-10-03T22:00:00Z because 23:00 UK local time on 3 October 2026 is BST (UTC+01:00).",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea8f4653923",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-gb-emb-main",
+      "validity": {
+        "deadlineText": "do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "94de106e03c23c3ff0078f38143eb91c74e5ab62951f8c1d87afc5e4a9715b55",
+      "candidateSetDigest": "8ce21a717f6d6d51cdad6b4f4c41f397b91a054ba5b653e13eee2bc3300010b4",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "supported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ НАРОДНЕ СКУПШТИНЕ РЕПУБЛИКЕ СРБИЈЕ 2026 - пријем захтева за гласање у иностранству Председник Републике Србије Александар Вучић донео је Одлуку о расписивању избора за народне посланике, за 25. октобар 2026. године.",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Попуњен и потписан образац Захтева за упис у Једниствени борачки списак и попуњен и потписан Захтев за гласање у иностранству, држављани Р.Србије могу поднети на следећу имејл адресу: izbori.oslo2026@mfa.rs",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Држављани Републике Србије са бирачким правом, подносе захтев за гласање у иностранству преко Амбасаде Републике Србије у Ослу",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        },
+        {
+          "check": "stationScope",
+          "quote": "или лично – сваког радног дана у периоду од 10:00 до 15:00 часова, доласком у Конзуларну јединицу Амбасаде Р.Србије у Ослу, адреса Munkedamsveien 59B, 0270 Oslo.",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        }
+      ],
+      "decision": "accept",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "f8e2dd5bf26db9a765400260c208fe19731274047ce44b996f2cbd807f668a44",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8f6653924",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The official Embassy of Serbia in Norway page, published 10 September 2026 and current as of the packet timestamp, explicitly identifies the 2026 Serbian parliamentary election scheduled for 25 October 2026. It explicitly directs the completed voter-register and overseas-voting request forms to izbori.oslo2026@mfa.rs and identifies the responsible post as the Embassy of the Republic of Serbia in Oslo, including its consular unit and Oslo address. The deadline is preserved verbatim, but validUntil is null because “у поноћ” (at midnight) does not unambiguously establish whether the intended instant is the start or end of 3 October, so an honest timestamp conversion is not supported.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea8f6653924",
+      "reviewRole": "primary",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-no-emb-main",
+      "validity": {
+        "deadlineText": "најкасније пет дана пре дана закључивања Јединственог бирачког списка, односно до 03. октобра 2026. године у поноћ (локално време у Р.Србији).",
+        "validUntil": null
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "cf853a890a92aaba916ecc41ce1b04f11ee77a0959b9d7b7c8633d79fc140554",
+      "candidateSetDigest": "8ce21a717f6d6d51cdad6b4f4c41f397b91a054ba5b653e13eee2bc3300010b4",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "supported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "IZBORI ZA NARODNE POSLANIKE NARODNE SKUPŠTINE REPUBLIKE SRBIJE 2026 - prijem zahteva za glasanje u inostranstvu 10. sep 2026. IZBORI ZA NARODNE POSLANIKE NARODNE SKUPŠTINE REPUBLIKE SRBIJE 2026 - prijem zahteva za glasanje u inostranstvu Predsednik Republike Srbije Aleksandar Vučić doneo je Odluku o raspisivanju izbora za narodne poslanike, za 25. oktobar 2026. godine.",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Popunjen i potpisan obrazac Zahteva za upis u Jednistveni borački spisak i popunjen i potpisan Zahtev za glasanje u inostranstvu, državljani R.Srbije mogu podneti na sledeću imejl adresu: izbori.oslo2026@mfa.rs",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Državljani Republike Srbije sa biračkim pravom, podnose zahtev za glasanje u inostranstvu preko Ambasade Republike Srbije u Oslu, najkasnije pet dana pre dana zaključivanja Jedinstvenog biračkog spiska, odnosno do 03. oktobra 2026. godine u ponoć (lokalno vreme u R.Srbiji).",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Popunjen i potpisan obrazac Zahteva za upis u Jednistveni borački spisak i popunjen i potpisan Zahtev za glasanje u inostranstvu, državljani R.Srbije mogu podneti na sledeću imejl adresu: izbori.oslo2026@mfa.rs ili lično – svakog radnog dana u periodu od 10:00 do 15:00 časova, dolaskom u Konzularnu jedinicu Ambasade R.Srbije u Oslu, adresa Munkedamsveien 59B, 0270 Oslo.",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        }
+      ],
+      "decision": "accept",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "2146f530ff2358da10db0289c38cc63eafd22a9bf7634b263fb53808b46d5406",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8f8e53925",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The institutional Embassy of Serbia in Norway source, published 10 September 2026 and current as of the packet timestamp, expressly identifies the 2026 parliamentary election scheduled for 25 October 2026. It explicitly directs the completed voter-roll enrollment form and overseas-voting request to izbori.oslo2026@mfa.rs. It also expressly identifies the responsible station as the Embassy of the Republic of Serbia in Oslo and its consular unit at Munkedamsveien 59B, matching st-no-emb-main. The stated deadline is preserved verbatim. validUntil is null because “u ponoć” on the stated date does not unambiguously distinguish the beginning from the end of that date, so an exact timestamp conversion would not be honest despite the source specifying Serbian local time.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea8f8e53925",
+      "reviewRole": "primary",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-no-emb-main",
+      "validity": {
+        "deadlineText": "najkasnije pet dana pre dana zaključivanja Jedinstvenog biračkog spiska, odnosno do 03. oktobra 2026. godine u ponoć (lokalno vreme u R.Srbiji).",
+        "validUntil": null
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "56c0820996844b9460b7d9993cd75b4e53102d4f6759df0520286d79faee0dbb",
+      "candidateSetDigest": "b8d3d13d6bdc8bb47b445e3b9e755112d1e39d2b9dc26f5cabfffe80f5ed24b3",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "unsupported",
+        "stationScope": "unsupported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Обавештавамо да је председник Републике Србије Александар Вучић донео Oдлуку о расписивању ванредних избора за посланике Народне скупштине и да су избори заказани за 25. октобар 2026. године.",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Пријављивање за ове конкурсе је искључиво путем веб платформе на адреси https://konkursi.dijaspora.gov.rs Организације и удружења су у обавези да ажурирају и допуне податке на постојећим налозима у оквиру веб платформе Управе за сарадњу с дијаспором и Србима у региону. ... За сва додатна питања и нејасноће на располагању је електонска адреса konkursi@dijaspora.gov.rs .",
+          "sourceId": "40d7d06546b4c83b91b25685fe1b9f52d55e8e602f24c28d0eb06bbd8b4be6f4"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "stationScope",
+          "quote": "За сва додатна питања и нејасноће на располагању је електонска адреса konkursi@dijaspora.gov.rs .",
+          "sourceId": "40d7d06546b4c83b91b25685fe1b9f52d55e8e602f24c28d0eb06bbd8b4be6f4"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Држављани Републике Србије са бирачким правом подносе захтев за гласање у иностранству преко дипломатско-конзуларног представништва најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији). ... Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        }
+      ],
+      "decision": "reject",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "3018d9e44c585565a0ba8a28181cf783739029c6f6e9d8d5b07204e1dd0b1ec3",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8fb253926",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The 2026 parliamentary election is explicitly documented and was current as of the packet timestamp. However, the target address konkursi@dijaspora.gov.rs is expressly presented as a contact for questions and uncertainties concerning diaspora project co-financing competitions, not as a recipient for voter-registration requests. The election notice instead explicitly directs requests to izbori.london@mfa.rs. No verbatim evidence assigns the target mailbox to the London embassy’s Ireland/nonresident election scope; that scope cannot be inferred merely because the target address appears on the embassy’s news-listing page adjacent to an election item. The target is therefore not an election-registration email and is rejected. The stated UK/Ireland deadline converts to 2026-10-03T22:00:00Z because both jurisdictions are on UTC+01:00 at 23:00 local time on 3 October 2026.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea8fb253926",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-nonres-ie",
+      "validity": {
+        "deadlineText": "до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "6ca46bd82b5d9d68388bffb23acad26b3ba6a306fca290b72d54c28667ebf247",
+      "candidateSetDigest": "b8d3d13d6bdc8bb47b445e3b9e755112d1e39d2b9dc26f5cabfffe80f5ed24b3",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "unsupported",
+        "stationScope": "unsupported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju vanrednih izbora za poslanike Narodne skupštine i da su izbori zakazani za 25. oktobar 2026. godine.",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Prijavljivanje za ove konkurse je isključivo putem veb platforme na adresi https://konkursi.dijaspora.gov.rs Organizacije i udruženja su u obavezi da ažuriraju i dopune podatke na postojećim nalozima u okviru veb platforme Uprave za saradnju s dijasporom i Srbima u regionu. Napominjemo da je prilikom pristupa platformi obavezna izmena lozinke za naloge koji već postoje. Obaveza ažuriranja i dopune podataka u okviru nove veb platforme Ažuriranje i dopuna podataka u okviru nove veb platforme vrši se putem prijave na adresi https://konkursi.dijaspora.gov.rs/login . Udruženja i organizacije koje do sada nisu učestvovale na konkursima za sufinansijranje koje raspisuje USDSR MSP, potrebno je da izvše registraciju na istom portalu. Za sva dodatna pitanja i nejasnoće na raspolaganju je elektonska adresa konkursi@dijaspora.gov.rs .",
+          "sourceId": "b836270e7947d0034862052c4e470f49ca30650c310988242c5c09667c7efa2e"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Državljani Republike Srbije sa biračkim pravom podnose zahtev za glasanje u inostranstvu preko diplomatsko-konzularnog predstavništva najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        }
+      ],
+      "decision": "reject",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "da97af431fcf782482be5d9c1cdbfdded1f07053787935d556f636941305d92a",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8fd253927",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The packet supports a current 2026 parliamentary election scheduled for 25 October 2026 and gives an explicit registration deadline covering local time in the UK and Ireland. However, the target address konkursi@dijaspora.gov.rs is identified only as a contact for questions about diaspora project-funding competitions and their web platform, not as a recipient for voter-registration requests. The election notice explicitly directs requests to izbori.london@mfa.rs. No verbatim source scopes the target mailbox to the Ireland nonresident station; the Ireland-scoped election instructions instead name the different London election mailbox. Therefore the target is not an election-registration email and must be rejected.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea8fd253927",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-nonres-ie",
+      "validity": {
+        "deadlineText": "do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "a5a0eebd6c1dcdf7921111c9208737e02f451d26614ed1f232e98edf17e558d1",
+      "candidateSetDigest": "b8d3d13d6bdc8bb47b445e3b9e755112d1e39d2b9dc26f5cabfffe80f5ed24b3",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "supported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Обавештавамо да је председник Републике Србије Александар Вучић донео Oдлуку о расписивању ванредних избора за посланике Народне скупштине и да су избори заказани за 25. октобар 2026. године.",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Држављани Републике Србије са бирачким правом подносе захтев за гласање у иностранству преко дипломатско-конзуларног представништва најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији). Након наведеног времена захтеви неће моћи да се процесуирају, због чега апелујемо на заинтересоване грађане да захтеве поднесу благовремено, односно што раније. Право пријаве за гласање у иностранству имају сви држављани Републике Србије, који су уписани у ЈБС, без обзира по ком основу и колико дуго бораве у иностранству. Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9"
+        }
+      ],
+      "decision": "accept",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "eeae01ac0c6a41732742a77249e9c685f27c821792bca61708cf4dcb00f58960",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea8fee53928",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The institutional election notice expressly identifies the extraordinary National Assembly election scheduled for 25 October 2026, directs voting-abroad requests to the Embassy of Serbia in London at izbori.london@mfa.rs, and expressly includes Ireland together with the UK in the applicable local-time deadline. This directly supports the Ireland nonresident station scope without relying solely on the mailbox name or an inferred consular relationship. As of 2026-09-11T07:01:01Z, the stated deadline had not passed. On 3 October 2026, local time in both Ireland and the UK is UTC+01:00, so 23:00 local converts to 2026-10-03T22:00:00Z.",
+      "resolvesReviewIds": [
+        "cmp-157b1ea8fb253926",
+        "cmp-157b1ea8fd253927"
+      ],
+      "reviewId": "cmp-157b1ea8fee53928",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-nonres-ie",
+      "validity": {
+        "deadlineText": "до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "c9f33ee7862d04713230c4e7f3837a45a4f128ed6c672cbe4f0e48deba2e24c6",
+      "candidateSetDigest": "b8d3d13d6bdc8bb47b445e3b9e755112d1e39d2b9dc26f5cabfffe80f5ed24b3",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "supported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju vanrednih izbora za poslanike Narodne skupštine i da su izbori zakazani za 25. oktobar 2026. godine.",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Državljani Republike Srbije sa biračkim pravom podnose zahtev za glasanje u inostranstvu preko diplomatsko-konzularnog predstavništva najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji). Nakon navedenog vremena zahtevi neće moći da se procesuiraju, zbog čega apelujemo na zainteresovane građane da zahteve podnesu blagovremeno, odnosno što ranije. Pravo prijave za glasanje u inostranstvu imaju svi državljani Republike Srbije, koji su upisani u JBS, bez obzira po kom osnovu i koliko dugo borave u inostranstvu. Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
+          "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad"
+        }
+      ],
+      "decision": "accept",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "19fae7a48d9694c94f350bedd498b8aa2d0b782ee221ef650bdf9507687fd15a",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea901a53929",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The embassy notice, published 9 September 2026 and current as of 11 September 2026, expressly identifies the extraordinary National Assembly election scheduled for 25 October 2026. It explicitly directs overseas-voting requests to izbori.london@mfa.rs. The same operative passage expressly includes Ireland together with the UK and directs those requests to the Embassy of Serbia in London, supporting the exact nonresident-Ireland station scope without inferring scope from the mailbox alone. The stated deadline is 23:00 local time in both the UK and Ireland on 3 October 2026; both jurisdictions are on UTC+1 on that date, also corroborated by the notice's parenthetical Serbian-local-time midnight, yielding 2026-10-03T22:00:00Z.",
+      "resolvesReviewIds": [
+        "cmp-157b1ea8fb253926",
+        "cmp-157b1ea8fd253927"
+      ],
+      "reviewId": "cmp-157b1ea901a53929",
+      "reviewRole": "architect",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-nonres-ie",
+      "validity": {
+        "deadlineText": "najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji)",
+        "validUntil": "2026-10-03T22:00:00Z"
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "5630547fc8dbae598281fc6664c91c713033f22a9b2b7a7c1f6e17e4bb04e921",
+      "candidateSetDigest": "e23513492ae3b36a6d9abbebbb3b1f724a7cb1b3c6246d76dc2b43049197316d",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "uncertain"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Председник Републике Србије Александар Вучић донео је Одлуку о расписивању избора за народне посланике, за 25. октобар 2026. године.",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Попуњен и потписан образац Захтева за упис у Једниствени борачки списак и попуњен и потписан Захтев за гласање у иностранству, држављани Р.Србије могу поднети на следећу имејл адресу: izbori.oslo2026@mfa.rs или лично – сваког радног дана у периоду од 10:00 до 15:00 часова, доласком у Конзуларну јединицу Амбасаде Р.Србије у Ослу, адреса Munkedamsveien 59B, 0270 Oslo.",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Држављани Републике Србије са бирачким правом, подносе захтев за гласање у иностранству преко Амбасаде Републике Србије у Ослу, најкасније пет дана пре дана закључивања Јединственог бирачког списка, односно до 03. октобра 2026. године у поноћ (локално време у Р.Србији).",
+          "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6"
+        }
+      ],
+      "decision": "needs_review",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "df65080abc29d26014a460d36efa1bca63828df2386f6a9030eb166ea4cf8b0b",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea903e5392a",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The institutional embassy notice expressly identifies the 2026 Serbian parliamentary election, scheduled for 25 October 2026, and expressly directs completed voter-list and abroad-voting requests to izbori.oslo2026@mfa.rs. However, the quoted notice identifies only the Embassy/Consular Unit in Oslo and does not expressly state that the mailbox serves Iceland or the nonresident Iceland station. The packet's canonical-station metadata says the Oslo embassy covers Iceland, but that scope is not established by a verbatim passage from the supplied institutional source text and must not be inferred. The candidate therefore needs review for exact station scope. The deadline is preserved verbatim; validUntil is null because “at midnight” on 3 October is boundary-ambiguous despite specifying Serbian local time.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea903e5392a",
+      "reviewRole": "primary",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-nonres-is",
+      "validity": {
+        "deadlineText": "најкасније пет дана пре дана закључивања Јединственог бирачког списка, односно до 03. октобра 2026. године у поноћ (локално време у Р.Србији).",
+        "validUntil": null
+      }
+    },
+    {
+      "asOf": "2026-09-11T07:01:01Z",
+      "candidateId": "e348ae7db93e35896bbf180b6f75fb25c05c58bac2e34e7c6fe2bfc27b164276",
+      "candidateSetDigest": "e23513492ae3b36a6d9abbebbb3b1f724a7cb1b3c6246d76dc2b43049197316d",
+      "checks": {
+        "currentElection": "supported",
+        "registrationRecipient": "supported",
+        "stationScope": "unsupported"
+      },
+      "citations": [
+        {
+          "check": "currentElection",
+          "quote": "Predsednik Republike Srbije Aleksandar Vučić doneo je Odluku o raspisivanju izbora za narodne poslanike, za 25. oktobar 2026. godine.",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        },
+        {
+          "check": "registrationRecipient",
+          "quote": "Popunjen i potpisan obrazac Zahteva za upis u Jednistveni borački spisak i popunjen i potpisan Zahtev za glasanje u inostranstvu, državljani R.Srbije mogu podneti na sledeću imejl adresu: izbori.oslo2026@mfa.rs ili lično – svakog radnog dana u periodu od 10:00 do 15:00 časova, dolaskom u Konzularnu jedinicu Ambasade R.Srbije u Oslu, adresa Munkedamsveien 59B, 0270 Oslo.",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        },
+        {
+          "check": "stationScope",
+          "quote": "Državljani Republike Srbije sa biračkim pravom, podnose zahtev za glasanje u inostranstvu preko Ambasade Republike Srbije u Oslu, najkasnije pet dana pre dana zaključivanja Jedinstvenog biračkog spiska, odnosno do 03. oktobra 2026. godine u ponoć (lokalno vreme u R.Srbiji).",
+          "sourceId": "6bdf3957a8a4781aab1c112a163aa2dc7e23fcf17a53ea38b9e6be1655a7127f"
+        }
+      ],
+      "decision": "needs_review",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "evidenceDigest": "e6379b8760e6bc3da927c95ffa7ab555b7eeb1689987a0d506f0a19864dba0ed",
+      "invocation": {
+        "identitySource": "operator_attestation",
+        "invocationId": "cmp-157b1ea905e5392b",
+        "reportedModel": null,
+        "requestedModel": "slow",
+        "transport": "harness_import"
+      },
+      "rationale": "The institutional embassy source, published 10 September 2026 and fetched before the packet asOf, expressly identifies the 25 October 2026 parliamentary election and expressly directs completed voter-list and overseas-voting requests to izbori.oslo2026@mfa.rs. However, the supplied source text names only the Embassy of Serbia in Oslo and does not verbatim state that this election mailbox or submission procedure covers Iceland, the exact nonresident station st-nonres-is. The packet's canonical-station metadata and URL chain cannot substitute for an explicit source-text statement of Icelandic/nonresident scope. Review is therefore required. The deadline is recorded verbatim, but validUntil is null because “03. oktobra 2026. godine u ponoć” does not unambiguously establish whether midnight is the start or end of that date, so an honest UTC conversion cannot be made.",
+      "resolvesReviewIds": [],
+      "reviewId": "cmp-157b1ea905e5392b",
+      "reviewRole": "primary",
+      "reviewStatus": "completed",
+      "reviewedAt": "2026-09-11T07:01:56Z",
+      "reviewerType": "ai",
+      "stationId": "st-nonres-is",
+      "validity": {
+        "deadlineText": "najkasnije pet dana pre dana zaključivanja Jedinstvenog biračkog spiska, odnosno do 03. oktobra 2026. godine u ponoć (lokalno vreme u R.Srbiji)",
+        "validUntil": null
+      }
+    }
+  ],
+  "schemaVersion": 2
+}

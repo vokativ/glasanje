@@ -10,6 +10,26 @@
         }
       ]
     },
+    "AF": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/avganistan/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.tehran.mfa.gov.rs",
+          "url": "https://www.tehran.mfa.gov.rs/"
+        }
+      ]
+    },
+    "AL": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/albanija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "tirana.mfa.gov.rs",
+          "url": "https://tirana.mfa.gov.rs/"
+        }
+      ]
+    },
     "AO": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/angola/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
@@ -27,6 +47,16 @@
         {
           "host": "buenosaires.mfa.gov.rs",
           "url": "https://buenosaires.mfa.gov.rs/"
+        }
+      ]
+    },
+    "AT": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/austrija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "vienna.mfa.gov.rs",
+          "url": "https://vienna.mfa.gov.rs/"
         }
       ]
     },
@@ -99,6 +129,16 @@
         {
           "host": "abuja.mfa.gov.rs",
           "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "BG": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bugarska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.sofia.mfa.gov.rs",
+          "url": "https://www.sofia.mfa.gov.rs/"
         }
       ]
     },
@@ -274,6 +314,16 @@
         }
       ]
     },
+    "CZ": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/ceska-republika/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.prague.mfa.gov.rs",
+          "url": "https://www.prague.mfa.gov.rs/"
+        }
+      ]
+    },
     "DE": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/nemacka/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
@@ -384,6 +434,30 @@
         }
       ]
     },
+    "FM": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/mikronezija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.tokyo.mfa.gov.rs",
+          "url": "https://www.tokyo.mfa.gov.rs/"
+        }
+      ]
+    },
+    "FR": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/francuska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.paris.mfa.gov.rs",
+          "url": "https://www.paris.mfa.gov.rs/"
+        },
+        {
+          "host": "www.strasbourg.mfa.gov.rs",
+          "url": "https://www.strasbourg.mfa.gov.rs/"
+        }
+      ]
+    },
     "GA": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/gabon/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -391,6 +465,16 @@
         {
           "host": "luanda.mfa.gov.rs",
           "url": "https://luanda.mfa.gov.rs/"
+        }
+      ]
+    },
+    "GB": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/ujedinjeno-kraljevstvo/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.london.mfa.gov.rs",
+          "url": "https://www.london.mfa.gov.rs/"
         }
       ]
     },
@@ -448,6 +532,24 @@
         }
       ]
     },
+    "HR": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "rijeka.mfa.gov.rs",
+          "url": "https://rijeka.mfa.gov.rs/"
+        },
+        {
+          "host": "vukovar.mfa.gov.rs",
+          "url": "https://vukovar.mfa.gov.rs/"
+        },
+        {
+          "host": "zagreb.mfa.gov.rs",
+          "url": "https://zagreb.mfa.gov.rs/"
+        }
+      ]
+    },
     "HT": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/haiti/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -458,6 +560,16 @@
         }
       ]
     },
+    "HU": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/madjarska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.budapest.mfa.gov.rs",
+          "url": "https://www.budapest.mfa.gov.rs/"
+        }
+      ]
+    },
     "ID": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/indonezija/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
@@ -465,6 +577,26 @@
         {
           "host": "www.jakarta.mfa.gov.rs",
           "url": "https://www.jakarta.mfa.gov.rs/"
+        }
+      ]
+    },
+    "IE": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/irska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.london.mfa.gov.rs",
+          "url": "https://www.london.mfa.gov.rs/"
+        }
+      ]
+    },
+    "IL": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/izrael/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.telaviv.mfa.gov.rs",
+          "url": "https://www.telaviv.mfa.gov.rs/"
         }
       ]
     },
@@ -488,6 +620,44 @@
         }
       ]
     },
+    "IR": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/iran/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.tehran.mfa.gov.rs",
+          "url": "https://www.tehran.mfa.gov.rs/"
+        }
+      ]
+    },
+    "IS": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/island/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.oslo.mfa.gov.rs",
+          "url": "https://www.oslo.mfa.gov.rs/"
+        }
+      ]
+    },
+    "IT": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/italija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "milano.mfa.gov.rs",
+          "url": "https://milano.mfa.gov.rs/"
+        },
+        {
+          "host": "roma.mfa.gov.rs",
+          "url": "https://roma.mfa.gov.rs/"
+        },
+        {
+          "host": "trieste.mfa.gov.rs",
+          "url": "https://trieste.mfa.gov.rs/"
+        }
+      ]
+    },
     "JM": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/jamajka/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -505,6 +675,16 @@
         {
           "host": "www.damascus.mfa.gov.rs",
           "url": "https://www.damascus.mfa.gov.rs/"
+        }
+      ]
+    },
+    "JP": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/japan/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.tokyo.mfa.gov.rs",
+          "url": "https://www.tokyo.mfa.gov.rs/"
         }
       ]
     },
@@ -563,6 +743,16 @@
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
       "missionEntries": []
     },
+    "LA": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/laos/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "yangon.mfa.gov.rs",
+          "url": "https://yangon.mfa.gov.rs/"
+        }
+      ]
+    },
     "LB": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/liban/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
@@ -613,6 +803,16 @@
         }
       ]
     },
+    "LT": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/litvanija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "warsaw.mfa.gov.rs",
+          "url": "https://warsaw.mfa.gov.rs/"
+        }
+      ]
+    },
     "LU": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/luksemburg/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -623,6 +823,26 @@
         }
       ]
     },
+    "LV": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "stockholm.mfa.gov.rs",
+          "url": "https://stockholm.mfa.gov.rs/"
+        }
+      ]
+    },
+    "LY": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.tripoli.mfa.gov.rs",
+          "url": "https://www.tripoli.mfa.gov.rs/"
+        }
+      ]
+    },
     "MA": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/maroko/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
@@ -630,6 +850,16 @@
         {
           "host": "rabat.mfa.gov.rs",
           "url": "https://rabat.mfa.gov.rs/"
+        }
+      ]
+    },
+    "MC": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/monako/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.paris.mfa.gov.rs",
+          "url": "https://www.paris.mfa.gov.rs/"
         }
       ]
     },
@@ -660,6 +890,16 @@
         {
           "host": "www.pretoria.mfa.gov.rs",
           "url": "https://www.pretoria.mfa.gov.rs/"
+        }
+      ]
+    },
+    "MM": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/mjanmar/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "yangon.mfa.gov.rs",
+          "url": "https://yangon.mfa.gov.rs/"
         }
       ]
     },
@@ -783,6 +1023,16 @@
         }
       ]
     },
+    "NO": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/norveska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.oslo.mfa.gov.rs",
+          "url": "https://www.oslo.mfa.gov.rs/"
+        }
+      ]
+    },
     "NP": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/nepal/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -863,6 +1113,26 @@
         }
       ]
     },
+    "PK": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/pakistan/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.tehran.mfa.gov.rs",
+          "url": "https://www.tehran.mfa.gov.rs/"
+        }
+      ]
+    },
+    "PL": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/poljska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "warsaw.mfa.gov.rs",
+          "url": "https://warsaw.mfa.gov.rs/"
+        }
+      ]
+    },
     "PS": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/palestina/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -870,6 +1140,26 @@
         {
           "host": "www.cairo.mfa.gov.rs",
           "url": "https://www.cairo.mfa.gov.rs/"
+        }
+      ]
+    },
+    "PT": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/portugalija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.lisbon.mfa.gov.rs",
+          "url": "https://www.lisbon.mfa.gov.rs/"
+        }
+      ]
+    },
+    "PW": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/palau/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.tokyo.mfa.gov.rs",
+          "url": "https://www.tokyo.mfa.gov.rs/"
         }
       ]
     },
@@ -917,6 +1207,16 @@
         }
       ]
     },
+    "SA": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/saudijska-arabija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "riyadh.mfa.gov.rs",
+          "url": "https://riyadh.mfa.gov.rs/"
+        }
+      ]
+    },
     "SB": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/solomonska-ostrva/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -947,6 +1247,16 @@
         }
       ]
     },
+    "SE": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/svedska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "stockholm.mfa.gov.rs",
+          "url": "https://stockholm.mfa.gov.rs/"
+        }
+      ]
+    },
     "SG": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/singapur/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -967,6 +1277,16 @@
         }
       ]
     },
+    "SK": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/slovacka-republika/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.bratislava.mfa.gov.rs",
+          "url": "https://www.bratislava.mfa.gov.rs/"
+        }
+      ]
+    },
     "SL": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/sijera-leone/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -974,6 +1294,16 @@
         {
           "host": "abuja.mfa.gov.rs",
           "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "SM": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/san-marino/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "roma.mfa.gov.rs",
+          "url": "https://roma.mfa.gov.rs/"
         }
       ]
     },
@@ -1077,6 +1407,16 @@
         }
       ]
     },
+    "TJ": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tadzikistan-republika/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.moskva.mfa.gov.rs",
+          "url": "https://www.moskva.mfa.gov.rs/"
+        }
+      ]
+    },
     "TL": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/istocni-timor/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
@@ -1084,6 +1424,26 @@
         {
           "host": "www.jakarta.mfa.gov.rs",
           "url": "https://www.jakarta.mfa.gov.rs/"
+        }
+      ]
+    },
+    "TM": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turkmenistan/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "www.moskva.mfa.gov.rs",
+          "url": "https://www.moskva.mfa.gov.rs/"
+        }
+      ]
+    },
+    "TN": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.tunis.mfa.gov.rs",
+          "url": "https://www.tunis.mfa.gov.rs/"
         }
       ]
     },
@@ -1241,6 +1601,6 @@
     }
   },
   "electionId": "2026-parliamentary",
-  "hostCursor": 45,
+  "hostCursor": 38,
   "schemaVersion": 1
 }

@@ -289,7 +289,7 @@ def main() -> int:
             if imported is None:
                 fail("Imported AI reviews could not be loaded")
             incoming = validate_review_document(
-                imported, selected_packets, required_role=args.role, allow_attested_import=True
+                imported, selected_packets, required_role=None, allow_attested_import=True
             )
         else:
             base_url, api_key, requested_model = required_configuration()

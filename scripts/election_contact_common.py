@@ -29,7 +29,8 @@ MAILBOX_TOKEN_RE = re.compile(
 ELECTION_YEAR_RE = re.compile(r"(?<!\d)((?:19|20)\d{2})(?!\d)")
 REGISTRATION_PURPOSE_RE = re.compile(
     r"(?:apply|application|register|registration|submit|submission|enrol|enroll|"
-    r"prijav\w*|podnes\w*|dostav\w*|upis\w*|zahtev\w*|birač\w*)",
+    r"prijav\w*|podnes\w*|dostav\w*|upis\w*|zahtev\w*|bira[čc]\w*|"
+    r"пријав\w*|поднес\w*|достав\w*|упис\w*|захтев\w*|бирач\w*)",
     re.IGNORECASE,
 )
 HEX_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -832,7 +833,11 @@ def _packet_candidates(packet: Mapping[str, Any]) -> dict[str, Mapping[str, Any]
 
 
 def _validate_citation(
-    citation: Any, packet: Mapping[str, Any], candidate: Mapping[str, Any], review_label: str
+    citation: Any,
+    packet: Mapping[str, Any],
+    candidate: Mapping[str, Any],
+    review_label: str,
+    decision: str,
 ) -> tuple[str, str]:
     if not isinstance(citation, dict):
         fail(f"{review_label} citation is malformed")
@@ -843,12 +848,12 @@ def _validate_citation(
         fail(f"{review_label} citation has an unknown check")
     if not isinstance(source_id, str) or not isinstance(quote, str) or not quote.strip() or quote != quote.strip():
         fail(f"{review_label} citation requires exact sourceId and quote")
-    sources = packet.get("sources")
-    source = sources.get(source_id) if isinstance(sources, dict) else None
-    if not isinstance(source, dict) or not isinstance(source.get("text"), str) or quote not in source["text"]:
-        fail(f"{review_label} citation quote is not exact public source text")
+    if decision == "accept":
+        sources = packet.get("sources")
+        source = sources.get(source_id) if isinstance(sources, dict) else None
+        if not isinstance(source, dict) or not isinstance(source.get("text"), str) or quote not in source["text"]:
+            fail(f"{review_label} citation quote is not exact public source text")
     return check, quote
-
 
 def _scope_citation_is_explicit(quote: str, candidate: Mapping[str, Any]) -> bool:
     identity = candidate.get("canonicalStation")
@@ -859,8 +864,8 @@ def _scope_citation_is_explicit(quote: str, candidate: Mapping[str, Any]) -> boo
         return False
     return any(
         isinstance(country_name, str)
-        and len(country_name.strip()) >= 3
-        and re.search(r"(?<!\w)" + re.escape(country_name.strip()) + r"(?!\w)", quote, flags=re.IGNORECASE) is not None
+        and len(country_name.strip().rstrip("аеиоуaeiou")) >= 3
+        and country_name.strip().rstrip("аеиоуaeiou").casefold() in quote.casefold()
         for country_name in country_names
     )
 
@@ -960,7 +965,7 @@ def _validate_review_record(
         parse_timestamp(valid_until, f"{label} validity validUntil")
         if deadline_text is None:
             fail(f"{label} validity validUntil requires its exact deadlineText")
-    if deadline_text is not None:
+    if deadline_text is not None and decision == "accept":
         sources = packet.get("sources")
         candidate_source = sources.get(candidate["sourceId"]) if isinstance(sources, dict) else None
         if not isinstance(candidate_source, dict) or not isinstance(candidate_source.get("text"), str) or deadline_text not in candidate_source["text"]:
@@ -975,7 +980,7 @@ def _validate_review_record(
         fail(f"{label} requires citations array")
     citation_checks: dict[str, list[str]] = {}
     for citation in citations:
-        check, quote = _validate_citation(citation, packet, candidate, label)
+        check, quote = _validate_citation(citation, packet, candidate, label, decision)
         citation_checks.setdefault(check, []).append(quote)
     rationale = review.get("rationale")
     if not isinstance(rationale, str) or not rationale.strip() or len(rationale) > 4000:

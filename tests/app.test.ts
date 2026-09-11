@@ -477,7 +477,7 @@ describe('Missions and Coverage Dataset', () => {
 
     const station = ie!.stations[0];
     expect(station.isResident).toBe(false);
-    expect(station.email).toBe('consular.london@mfa.rs');
+    expect(station.email).toBe('izbori.london@mfa.rs');
     expect(station.website).toBe('https://www.london.mfa.gov.rs');
   });
 
@@ -546,7 +546,7 @@ describe('Missions and Coverage Dataset', () => {
     const confirmed = COUNTRIES.flatMap((country) => country.stations)
       .filter((station) => station.isElectionContactConfirmed);
 
-    expect(confirmed).toHaveLength(31);
+    expect(confirmed).toHaveLength(34);
     expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
       (station) => station.id === 'st-it-emb-main',
     )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
@@ -575,7 +575,7 @@ describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
 
-    expect(coverage.confirmed).toBe(31);
+    expect(coverage.confirmed).toBe(34);
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 

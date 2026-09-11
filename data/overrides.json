@@ -750,6 +750,225 @@
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
       }
+    },
+    "st-gb-emb-main": {
+      "electionEmail": "izbori.london@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "ai",
+          "reviewId": "cmp-157b1ea8eb253920",
+          "reviewRole": "architect"
+        },
+        "candidateId": "248010f2baf9f89f79ea0fd55bc950e4222bc3bee2225139d780bd8940a4e89f",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "GB",
+        "stationId": "st-gb-emb-main",
+        "email": "izbori.london@mfa.rs",
+        "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad",
+        "sourceUrl": "https://www.london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "finalUrl": "https://london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "sourceChain": [
+          "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+          "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/ujedinjeno-kraljevstvo/ambasade-konzulati",
+          "https://www.london.mfa.gov.rs/",
+          "https://www.london.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "https://www.london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "https://london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine"
+        ],
+        "candidateSetDigest": "51003f898f255b46d302eec6b6b6cbb407e08cf28e69dd7fc840ec2e6f6c4881",
+        "evidenceDigest": "cfe0916b2b45320d8029c525577c69e9487730819daf1549e5467116488ebdb1",
+        "citations": [
+          {
+            "check": "currentElection",
+            "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad",
+            "quote": "Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju vanrednih izbora za poslanike Narodne skupštine i da su izbori zakazani za 25. oktobar 2026. godine."
+          },
+          {
+            "check": "registrationRecipient",
+            "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad",
+            "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB)."
+          },
+          {
+            "check": "stationScope",
+            "sourceId": "cb4f5170a6e7d83d8b76654e1729515d2654245a751930f51280dccc76d470ad",
+            "quote": "Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB)."
+          }
+        ],
+        "review": {
+          "reviewedAt": "2026-09-11T07:01:56Z",
+          "asOf": "2026-09-11T07:01:01Z",
+          "validity": {
+            "deadlineText": "najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji).",
+            "validUntil": "2026-10-03T22:00:00Z"
+          },
+          "decision": "accept",
+          "checks": {
+            "currentElection": "supported",
+            "registrationRecipient": "supported",
+            "stationScope": "supported"
+          },
+          "invocation": {
+            "transport": "harness_import",
+            "invocationId": "cmp-157b1ea8eb253920",
+            "requestedModel": "slow",
+            "reportedModel": null,
+            "identitySource": "operator_attestation"
+          },
+          "resolvesReviewIds": [
+            "cmp-157b1ea8f2653922",
+            "cmp-157b1ea8f4653923"
+          ]
+        },
+        "promotedAt": "2026-09-11T07:10:44Z"
+      }
+    },
+    "st-no-emb-main": {
+      "electionEmail": "izbori.oslo2026@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "ai",
+          "reviewId": "cmp-157b1ea8f6653924",
+          "reviewRole": "primary"
+        },
+        "candidateId": "94de106e03c23c3ff0078f38143eb91c74e5ab62951f8c1d87afc5e4a9715b55",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "NO",
+        "stationId": "st-no-emb-main",
+        "email": "izbori.oslo2026@mfa.rs",
+        "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6",
+        "sourceUrl": "https://www.oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "finalUrl": "https://oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "sourceChain": [
+          "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+          "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/norveska/ambasade-konzulati",
+          "https://www.oslo.mfa.gov.rs/",
+          "https://www.oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+          "https://oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu"
+        ],
+        "candidateSetDigest": "8ce21a717f6d6d51cdad6b4f4c41f397b91a054ba5b653e13eee2bc3300010b4",
+        "evidenceDigest": "f8e2dd5bf26db9a765400260c208fe19731274047ce44b996f2cbd807f668a44",
+        "citations": [
+          {
+            "check": "currentElection",
+            "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6",
+            "quote": "ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ НАРОДНЕ СКУПШТИНЕ РЕПУБЛИКЕ СРБИЈЕ 2026 - пријем захтева за гласање у иностранству Председник Републике Србије Александар Вучић донео је Одлуку о расписивању избора за народне посланике, за 25. октобар 2026. године."
+          },
+          {
+            "check": "registrationRecipient",
+            "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6",
+            "quote": "Попуњен и потписан образац Захтева за упис у Једниствени борачки списак и попуњен и потписан Захтев за гласање у иностранству, држављани Р.Србије могу поднети на следећу имејл адресу: izbori.oslo2026@mfa.rs"
+          },
+          {
+            "check": "stationScope",
+            "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6",
+            "quote": "Држављани Републике Србије са бирачким правом, подносе захтев за гласање у иностранству преко Амбасаде Републике Србије у Ослу"
+          },
+          {
+            "check": "stationScope",
+            "sourceId": "c774b6b345b8a92a19572fbe15c7cdb934327d50a67ed937ee7496ad87a4c7e6",
+            "quote": "или лично – сваког радног дана у периоду од 10:00 до 15:00 часова, доласком у Конзуларну јединицу Амбасаде Р.Србије у Ослу, адреса Munkedamsveien 59B, 0270 Oslo."
+          }
+        ],
+        "review": {
+          "reviewedAt": "2026-09-11T07:01:56Z",
+          "asOf": "2026-09-11T07:01:01Z",
+          "validity": {
+            "deadlineText": "најкасније пет дана пре дана закључивања Јединственог бирачког списка, односно до 03. октобра 2026. године у поноћ (локално време у Р.Србији).",
+            "validUntil": null
+          },
+          "decision": "accept",
+          "checks": {
+            "currentElection": "supported",
+            "registrationRecipient": "supported",
+            "stationScope": "supported"
+          },
+          "invocation": {
+            "transport": "harness_import",
+            "invocationId": "cmp-157b1ea8f6653924",
+            "requestedModel": "slow",
+            "reportedModel": null,
+            "identitySource": "operator_attestation"
+          },
+          "resolvesReviewIds": []
+        },
+        "promotedAt": "2026-09-11T07:10:44Z"
+      }
+    },
+    "st-nonres-ie": {
+      "electionEmail": "izbori.london@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "ai",
+          "reviewId": "cmp-157b1ea8fee53928",
+          "reviewRole": "architect"
+        },
+        "candidateId": "a5a0eebd6c1dcdf7921111c9208737e02f451d26614ed1f232e98edf17e558d1",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "IE",
+        "stationId": "st-nonres-ie",
+        "email": "izbori.london@mfa.rs",
+        "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9",
+        "sourceUrl": "https://www.london.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "finalUrl": "https://london.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "sourceChain": [
+          "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+          "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/irska/ambasade-konzulati",
+          "https://www.london.mfa.gov.rs/",
+          "https://www.london.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "https://london.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine"
+        ],
+        "candidateSetDigest": "b8d3d13d6bdc8bb47b445e3b9e755112d1e39d2b9dc26f5cabfffe80f5ed24b3",
+        "evidenceDigest": "eeae01ac0c6a41732742a77249e9c685f27c821792bca61708cf4dcb00f58960",
+        "citations": [
+          {
+            "check": "currentElection",
+            "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9",
+            "quote": "Обавештавамо да је председник Републике Србије Александар Вучић донео Oдлуку о расписивању ванредних избора за посланике Народне скупштине и да су избори заказани за 25. октобар 2026. године."
+          },
+          {
+            "check": "registrationRecipient",
+            "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9",
+            "quote": "Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB)."
+          },
+          {
+            "check": "stationScope",
+            "sourceId": "a5b08a211fbbb3f65acad49d882c3a8d6080568563c087c19952330e911dbae9",
+            "quote": "Држављани Републике Србије са бирачким правом подносе захтев за гласање у иностранству преко дипломатско-конзуларног представништва најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији). Након наведеног времена захтеви неће моћи да се процесуирају, због чега апелујемо на заинтересоване грађане да захтеве поднесу благовремено, односно што раније. Право пријаве за гласање у иностранству имају сви држављани Републике Србије, који су уписани у ЈБС, без обзира по ком основу и колико дуго бораве у иностранству. Захтеви се достављају Амбасади Републике Србије у Лондону на е-маил: izbori.london@mfa.rs (алтернативно се могу доставити лично или препорученом поштом на адресу Амбасаде - 28 Belgrave Square, London, SW1X 8QB)."
+          }
+        ],
+        "review": {
+          "reviewedAt": "2026-09-11T07:01:56Z",
+          "asOf": "2026-09-11T07:01:01Z",
+          "validity": {
+            "deadlineText": "до 23 сата према локалном времену у УК и Ирској 3. октобра 2026. године (поноћ према локалном времену у Републици Србији)",
+            "validUntil": "2026-10-03T22:00:00Z"
+          },
+          "decision": "accept",
+          "checks": {
+            "currentElection": "supported",
+            "registrationRecipient": "supported",
+            "stationScope": "supported"
+          },
+          "invocation": {
+            "transport": "harness_import",
+            "invocationId": "cmp-157b1ea8fee53928",
+            "requestedModel": "slow",
+            "reportedModel": null,
+            "identitySource": "operator_attestation"
+          },
+          "resolvesReviewIds": [
+            "cmp-157b1ea8fb253926",
+            "cmp-157b1ea8fd253927"
+          ]
+        },
+        "promotedAt": "2026-09-11T07:10:44Z"
+      }
     }
   },
   "countryOverrides": {}

@@ -1385,8 +1385,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-nonres-ie",
         "embassy": "Ambasada Republike Srbije (Ujedinjeno Kraljevstvo) (pokriva Irska)",
         "embassyCyr": "Амбасада Републике Србије (Уједињено Краљевство) (покрива Ирска)",
-        "email": "consular.london@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "email": "izbori.london@mfa.rs",
+        "isElectionContactConfirmed": true,
         "website": "https://www.london.mfa.gov.rs",
         "address": "28 Belgrave Square ЛОНДОН SW1X 8QB ВЕЛИКА БРИТАНИЈА",
         "isResident": false
@@ -2777,8 +2777,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-no-emb-main",
         "embassy": "Ambasada Republike Srbije (Norveška)",
         "embassyCyr": "Амбасада Републике Србије (Норвешка)",
-        "email": "ambasada@serbianembassy.no",
-        "isElectionContactConfirmed": false,
+        "email": "izbori.oslo2026@mfa.rs",
+        "isElectionContactConfirmed": true,
         "website": "https://www.oslo.mfa.gov.rs",
         "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
         "isResident": true
@@ -3898,8 +3898,8 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-gb-emb-main",
         "embassy": "Ambasada Republike Srbije (Ujedinjeno Kraljevstvo)",
         "embassyCyr": "Амбасада Републике Србије (Уједињено Краљевство)",
-        "email": "consular.london@mfa.rs",
-        "isElectionContactConfirmed": false,
+        "email": "izbori.london@mfa.rs",
+        "isElectionContactConfirmed": true,
         "website": "https://www.london.mfa.gov.rs",
         "address": "28 Belgrave Square ЛОНДОН SW1X 8QB ВЕЛИКА БРИТАНИЈА",
         "isResident": true
