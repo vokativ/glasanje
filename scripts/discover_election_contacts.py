@@ -376,6 +376,16 @@ def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: in
                 continue
             return Response(url, "", b"", f"HTTP {error.code}")
         except (URLError, OSError) as error:
+            host = url_host(url)
+            if (
+                isinstance(error, URLError)
+                and "Hostname mismatch" in str(error.reason)
+                and host.startswith("www.")
+                and host.endswith(".mfa.gov.rs")
+            ):
+                bare_host = host[4:]
+                bare_url = url.replace(f"https://{host}", f"https://{bare_host}", 1)
+                return fetch(bare_url, allowed_hosts | {bare_host}, timeout, max_bytes, retries=retries)
             if attempt < retries:
                 time.sleep(0.5)
                 continue
