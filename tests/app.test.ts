@@ -36,6 +36,11 @@ import {
   latinToCyrillic,
   translateStaticText,
 } from '../src/lib/script';
+import {
+  Countdown,
+  TARGET_DEADLINE_MS,
+  calculateRemaining,
+} from '../src/components/Countdown';
 
 describe('Personal information', () => {
   test('asks for one parent’s name instead of place of birth', () => {
@@ -546,7 +551,7 @@ describe('Missions and Coverage Dataset', () => {
     const confirmed = COUNTRIES.flatMap((country) => country.stations)
       .filter((station) => station.isElectionContactConfirmed);
 
-    expect(confirmed).toHaveLength(34);
+    expect(confirmed).toHaveLength(41);
     expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
       (station) => station.id === 'st-it-emb-main',
     )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
@@ -575,7 +580,7 @@ describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
 
-    expect(coverage.confirmed).toBe(34);
+    expect(coverage.confirmed).toBe(41);
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 
@@ -759,4 +764,57 @@ describe('PDF Generator', () => {
       }
     },
   );
+});
+
+describe('Registration countdown', () => {
+  test('targets official deadline: 3 October 2026 at 24:00 Belgrade time (22:00 UTC)', () => {
+    const expectedIso = '2026-10-03T22:00:00.000Z';
+    expect(new Date(TARGET_DEADLINE_MS).toISOString()).toBe(expectedIso);
+  });
+
+  test('calculateRemaining calculates time difference correctly and handles expiration', () => {
+    const futureTarget = Date.now() + 1000 * 60 * 60 * 25 + 1000 * 65;
+    const remaining = calculateRemaining(futureTarget);
+    expect(remaining.isExpired).toBe(false);
+    expect(remaining.days).toBe(1);
+    expect(remaining.hours).toBe(1);
+    expect(remaining.minutes).toBe(1);
+
+    const pastRemaining = calculateRemaining(Date.now() - 1000);
+    expect(pastRemaining.isExpired).toBe(true);
+    expect(pastRemaining.days).toBe(0);
+    expect(pastRemaining.hours).toBe(0);
+    expect(pastRemaining.minutes).toBe(0);
+    expect(pastRemaining.seconds).toBe(0);
+  });
+
+  test('renders official registration deadline in Latin script without expected placeholder', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        { initialScript: 'latin' },
+        React.createElement(Countdown),
+      ),
+    );
+
+    expect(markup).toContain('Rok za prijavu za glasanje iz inostranstva');
+    expect(markup).not.toContain('(očekivano)');
+    expect(markup).toContain('3. oktobar 2026. u 24:00 (ponoć po vremenu u Srbiji)');
+    expect(markup).toContain('Zvanični rok za prijavu:');
+  });
+
+  test('renders official registration deadline in Cyrillic script without expected placeholder', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        { initialScript: 'cyrillic' },
+        React.createElement(Countdown),
+      ),
+    );
+
+    expect(markup).toContain('Рок за пријаву за гласање из иностранства');
+    expect(markup).not.toContain('(очекивано)');
+    expect(markup).toContain('3. октобар 2026. у 24:00 (поноћ по времену у Србији)');
+    expect(markup).toContain('Званични рок за пријаву:');
+  });
 });

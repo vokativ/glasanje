@@ -102,8 +102,15 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #93c5fd;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   font-weight: 700;
+}
+
+.countdown-deadline {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
 }
 
 .countdown-grid {

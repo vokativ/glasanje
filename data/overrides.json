@@ -969,6 +969,132 @@
         },
         "promotedAt": "2026-09-11T07:10:44Z"
       }
+    },
+    "st-be-emb-main": {
+      "electionEmail": "izbori.brisel@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "30a0f659d0372f774acca35a16f40ea453c76effffc787534c3cb99462be36eb",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "BE",
+        "stationId": "st-be-emb-main",
+        "email": "izbori.brisel@mfa.rs",
+        "sourceUrl": "https://brussels.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike",
+        "sourceHost": "brussels.mfa.gov.rs",
+        "title": "Рaсписивање избора за народне посланике",
+        "electionContext": "Захтев можете доставити Амбасади путем мејла на мејл адресу izbori.brisel@mfa.rs, путем поште или непосредно у Kонзуларном одељењу Амбасаде",
+        "sourceQuote": "Захтев можете доставити Амбасади путем мејла на мејл адресу izbori.brisel@mfa.rs",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
+    },
+    "st-nonres-lu": {
+      "electionEmail": "izbori.brisel@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "aa105e30f56f85038adb903d46050e054de1320ffc7b016f4a77e7d5407ae40a",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "LU",
+        "stationId": "st-nonres-lu",
+        "email": "izbori.brisel@mfa.rs",
+        "sourceUrl": "https://brussels.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike",
+        "sourceHost": "brussels.mfa.gov.rs",
+        "title": "Рaсписивање избора за народне посланике",
+        "electionContext": "Захтев можете доставити Амбасади путем мејла на мејл адресу izbori.brisel@mfa.rs (покрива Луксембург на нерезиденцијалној основи)",
+        "sourceQuote": "Захтев можете доставити Амбасади путем мејла на мејл адресу izbori.brisel@mfa.rs",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
+    },
+    "st-nonres-is": {
+      "electionEmail": "izbori.oslo2026@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "5630547fc8dbae598281fc6664c91c713033f22a9b2b7a7c1f6e17e4bb04e921",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "IS",
+        "stationId": "st-nonres-is",
+        "email": "izbori.oslo2026@mfa.rs",
+        "sourceUrl": "https://www.oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "sourceHost": "oslo.mfa.gov.rs",
+        "title": "ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ НАРОДНЕ СКУПШТИНЕ РЕПУБЛИКЕ СРБИЈЕ 2026",
+        "electionContext": "Попуњен и потписан формулар захтева за гласање у иностранству Амбасади се може доставити путем електронске поште на мејл адресу: izbori.oslo2026@mfa.rs (покрива Исланд на нерезиденцијалној основи)",
+        "sourceQuote": "Попуњен и потписан формулар захтева за гласање у иностранству Амбасади се може доставити путем електронске поште на мејл адресу: izbori.oslo2026@mfa.rs",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
+    },
+    "st-by-emb-main": {
+      "electionEmail": "embassy.minsk@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "c9a1572fdd0abdd27fead9947006469f09cba546c75c78a1adac7e735278e20f",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "BY",
+        "stationId": "st-by-emb-main",
+        "email": "embassy.minsk@mfa.rs",
+        "sourceUrl": "https://www.minsk.mfa.gov.rs/mediji/aktivnosti/raspisivanje-vanrednih-parlamentarnih-izbora-republike-srbije-koji-ce-se-odrzati-25-oktobra-2026-godine",
+        "sourceHost": "minsk.mfa.gov.rs",
+        "title": "Расписивање ванредних парламентарних избора Републике Србије који ће се одржати 25. октобра 2026. године",
+        "electionContext": "Држављани Републике Србије који желе да гласају у Републици Белорусији треба да поднесу захтев за гласање преко Амбасаде Републике Србије у Минску или електронском поштом искључиво на имејл адресу: embassy.minsk@mfa.rs",
+        "sourceQuote": "или електронском поштом искључиво на имејл адресу: embassy.minsk@mfa.rs",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
+    },
+    "st-ro-cons-temivar": {
+      "electionEmail": "srb.cons.timisoara@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "b05e287ffb0ac0328960b30a673c08534f29b93a05a9503cd3dd28ec1ee3d1d5",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "RO",
+        "stationId": "st-ro-cons-temivar",
+        "email": "srb.cons.timisoara@mfa.rs",
+        "sourceUrl": "https://timisoara.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+        "sourceHost": "timisoara.mfa.gov.rs",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+        "electionContext": "Захтев можете доставити Генералном конзулату путем мејла на следећу мејл адресу: srb.cons.timisoara@mfa.rs путем поште или непосредно у конзуларним просторијама",
+        "sourceQuote": "Захтев можете доставити Генералном конзулату путем мејла на следећу мејл адресу: srb.cons.timisoara@mfa.rs",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
+    },
+    "st-nonres-sm": {
+      "electionEmail": "izbori.rim@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "f13c4ce38bb4758a14875917f65679274c26fb7474fa343f2d93dae74780e22d",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "SM",
+        "stationId": "st-nonres-sm",
+        "email": "izbori.rim@mfa.rs",
+        "sourceUrl": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+        "sourceHost": "roma.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "Захтев за гласање у иностранству путем електронске поште на мејл адресу: izbori.rim@mfa.rs (Амбасада у Риму покрива Сан Марино на нерезиденцијалној основи)",
+        "sourceQuote": "путем електронске поште: izbori.rim@mfa.rs",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
+    },
+    "st-nonres-gn": {
+      "electionEmail": "consulat@ambserbie-alger.com",
+      "_electionContactProvenance": {
+        "candidateId": "ba6d299da75d2d833ff00952c7881f3c496f707a331516be85e15cd65c9fa6e1",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "GN",
+        "stationId": "st-nonres-gn",
+        "email": "consulat@ambserbie-alger.com",
+        "sourceUrl": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "sourceHost": "alger.mfa.gov.rs",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "Захтев за гласање у иностранству Амбасади у Алжиру на мејл адресу: consulat@ambserbie-alger.com (Амбасада у Алжиру покрива Гвинеју на нерезиденцијалној основи)",
+        "sourceQuote": "путем мејла на адресу: consulat@ambserbie-alger.com",
+        "observedAt": "2026-09-11T08:12:46Z",
+        "promotedAt": "2026-09-11T08:12:46Z"
+      }
     }
   },
   "countryOverrides": {}

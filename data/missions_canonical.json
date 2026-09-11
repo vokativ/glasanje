@@ -326,8 +326,8 @@
           "id": "st-be-emb-main",
           "embassy": "Ambasada Republike Srbije (Belgija)",
           "embassyCyr": "Амбасада Републике Србије (Белгија)",
-          "email": "konzularno.brisel@mfa.rs",
-          "isElectionContactConfirmed": false,
+          "email": "izbori.brisel@mfa.rs",
+          "isElectionContactConfirmed": true,
           "website": "https://brussels.mfa.gov.rs",
           "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
           "isResident": true
@@ -369,7 +369,7 @@
           "embassy": "Ambasada Republike Srbije (Belorusija)",
           "embassyCyr": "Амбасада Републике Србије (Белорусија)",
           "email": "embassy.minsk@mfa.rs",
-          "isElectionContactConfirmed": false,
+          "isElectionContactConfirmed": true,
           "website": "https://minsk.mfa.gov.rs",
           "address": "Rumjanceva 4220034 МИНСКРЕПУБЛИКА БЕЛОРУСИЈА",
           "isResident": true
@@ -829,8 +829,8 @@
           "id": "st-nonres-gn",
           "embassy": "Ambasada Republike Srbije (Alžir) (pokriva Gvineja)",
           "embassyCyr": "Амбасада Републике Србије (Алжир) (покрива Гвинеја)",
-          "email": "ambasada@ambserbie-alger.com",
-          "isElectionContactConfirmed": false,
+          "email": "consulat@ambserbie-alger.com",
+          "isElectionContactConfirmed": true,
           "website": "https://alger.mfa.gov.rs",
           "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
           "isResident": false
@@ -1385,8 +1385,8 @@
           "id": "st-nonres-is",
           "embassy": "Ambasada Republike Srbije (Norveška) (pokriva Island)",
           "embassyCyr": "Амбасада Републике Србије (Норвешка) (покрива Исланд)",
-          "email": "ambasada@serbianembassy.no",
-          "isElectionContactConfirmed": false,
+          "email": "izbori.oslo2026@mfa.rs",
+          "isElectionContactConfirmed": true,
           "website": "https://www.oslo.mfa.gov.rs",
           "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
           "isResident": false
@@ -2129,8 +2129,8 @@
           "id": "st-nonres-lu",
           "embassy": "Ambasada Republike Srbije (Belgija) (pokriva Luksemburg)",
           "embassyCyr": "Амбасада Републике Србије (Белгија) (покрива Луксембург)",
-          "email": "konzularno.brisel@mfa.rs",
-          "isElectionContactConfirmed": false,
+          "email": "izbori.brisel@mfa.rs",
+          "isElectionContactConfirmed": true,
           "website": "https://brussels.mfa.gov.rs",
           "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
           "isResident": false
@@ -3061,7 +3061,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Temišvar)",
           "embassyCyr": "Генерални конзулат Републике Србије (Темишвар)",
           "email": "srb.cons.timisoara@mfa.rs",
-          "isElectionContactConfirmed": false,
+          "isElectionContactConfirmed": true,
           "website": "https://timisoara.mfa.gov.rs",
           "address": "Str.Remus No 4ТЕМИШВАРРУМУНИЈА",
           "isResident": true
@@ -3123,8 +3123,8 @@
           "id": "st-nonres-sm",
           "embassy": "Ambasada Republike Srbije (Italija) (pokriva San Marino)",
           "embassyCyr": "Амбасада Републике Србије (Италија) (покрива Сан Марино)",
-          "email": "srb.emb.italy@mfa.rs",
-          "isElectionContactConfirmed": false,
+          "email": "izbori.rim@mfa.rs",
+          "isElectionContactConfirmed": true,
           "website": "https://roma.mfa.gov.rs",
           "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
           "isResident": false

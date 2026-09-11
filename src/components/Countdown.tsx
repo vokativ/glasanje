@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useScript } from '../lib/script';
 
-// Expected deadline: ~22 days before October 25, 2026 election
-// Target: October 3, 2026 23:59:59 CET (Belgrade UTC+2 in summer/early autumn)
-const TARGET_DEADLINE_MS = new Date('2026-10-03T23:59:59+02:00').getTime();
+// Official deadline: 5 days before the closing of the voter list
+// Confirmed by MDULS & MFA: October 3, 2026 at 24:00 (midnight) Belgrade local time (CEST, UTC+2)
+export const TARGET_DEADLINE_MS = new Date('2026-10-03T22:00:00Z').getTime();
 
 interface TimeRemaining {
   days: number;
@@ -13,7 +13,7 @@ interface TimeRemaining {
   isExpired: boolean;
 }
 
-function calculateRemaining(targetMs: number): TimeRemaining {
+export function calculateRemaining(targetMs: number): TimeRemaining {
   const diff = targetMs - Date.now();
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
@@ -41,7 +41,10 @@ export const Countdown: React.FC = () => {
   return (
     <div className="countdown-card">
       <div className="countdown-header">
-        {t('Rok za prijavu za glasanje iz inostranstva (očekivano)')}
+        {t('Rok za prijavu za glasanje iz inostranstva')}
+      </div>
+      <div className="countdown-deadline">
+        {t('3. oktobar 2026. u 24:00 (ponoć po vremenu u Srbiji)')}
       </div>
 
       {!time.isExpired ? (
@@ -70,8 +73,9 @@ export const Countdown: React.FC = () => {
       )}
 
       <div className="countdown-note">
-        📢 <strong>{t('Izbori su raspisani za 25. oktobar 2026. godine.')}</strong>{' '}
-        {t('Zahtev za glasanje u inostranstvu podnosi se najkasnije 5 dana pre zaključenja biračkog spiska (član 16. Zakona). Preporučujemo da prijavu pošaljete što pre kako bi nadležna ambasada stigla da je obradi.')}
+        📢 <strong>{t('Zvanični rok za prijavu:')}</strong>{' '}
+        {t('3. oktobar 2026. godine u 24:00 (ponoć po vremenu u Srbiji).')}{' '}
+        {t('Izbori su raspisani za 25. oktobar 2026. godine. Zahtev za glasanje u inostranstvu podnosi se najkasnije 5 dana pre zaključenja biračkog spiska (član 16. Zakona). Preporučujemo da prijavu pošaljete što pre kako bi nadležna ambasada stigla da je obradi.')}
       </div>
     </div>
   );
