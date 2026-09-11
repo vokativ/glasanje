@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useScript } from '../lib/script';
 
-// Official deadline: 5 days before the closing of the voter list
-// Confirmed by MDULS & MFA: October 3, 2026 at 24:00 (midnight) Belgrade local time (CEST, UTC+2)
+// Displays the published deadline as one UTC instant so the countdown cannot vary with a visitor's
+// browser time zone. Keep this conversion and the Serbian deadline copy below in sync when its source changes.
 export const TARGET_DEADLINE_MS = new Date('2026-10-03T22:00:00Z').getTime();
 
 interface TimeRemaining {

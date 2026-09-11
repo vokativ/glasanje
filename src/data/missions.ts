@@ -1,7 +1,10 @@
 /**
  * CANONICAL DIPLOMATIC MISSIONS DATASET
- * Generated from verified MFA Serbia official records (mfa.gov.rs).
- * Date: 2026-09-09
+ * Generated data — do not edit individual records here. Update the source
+ * records in `data/mfa_representations.json` or `data/overrides.json` (and
+ * generator mappings when needed), then run `scripts/build_canonical_dataset.py`.
+ * The generator retains established mappings from `data/missions_canonical.json`
+ * and writes this snapshot from MFA Serbia records (mfa.gov.rs), dated 2026-09-09.
  */
 
 export interface PollingStation {

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useScript } from '../lib/script';
 
+// The header owns only global presentation controls: script selection and the request to show the
+// privacy disclosure. Data handling remains the responsibility of the features that collect it.
+
 interface HeaderProps {
   onOpenPrivacy: () => void;
 }

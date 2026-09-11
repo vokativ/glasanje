@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Create or import source-checked AI election-contact reviews.
+"""Create source-bound AI review evidence without granting local substitutes.
 
-Review output is authorization evidence, not an advisory hint.  The CLI either
-exports immutable public packets, imports a specifically attested real-harness
-result, or calls the configured endpoint.  It never substitutes credentials,
-models, or a synthetic response.
+Packets contain only validated public evidence and immutable bindings.  A
+review is accepted only from the configured endpoint's reported invocation or
+from an explicitly attested real-harness artifact; neither a local response nor
+the attestation itself proves a decision.  Output is written only after all
+records bind the current packet, policy, and canonical mission snapshot.
 """
 
 from __future__ import annotations
@@ -88,6 +89,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def required_configuration() -> tuple[str, str, str]:
+    # Credentials stay in process environment and are never accepted from a
+    # packet or written into the durable review artifact.
     missing = [name for name in REQUIRED_ENVIRONMENT if not os.environ.get(name, "").strip()]
     if missing:
         fail("Missing required environment variables for configured endpoint: " + ", ".join(missing))
@@ -120,6 +123,8 @@ def request_review(
     base_url: str, api_key: str, model: str, packet: Mapping[str, Any], candidate_id: str, role: str, timeout: float
 ) -> tuple[dict[str, Any], str, str]:
     """Call a real configured endpoint and retain only its reported identity."""
+    # Source text may contain hostile instructions; the model receives it as
+    # evidence only and must return claims tied to the supplied packet.
     payload = {
         "model": model,
         "temperature": 0,
@@ -254,6 +259,8 @@ def main() -> int:
         policy_payload = load_json(args.reviewers, "reviewer policy")
         overrides_payload = load_json(args.overrides, "overrides")
         imported: Any | None = None
+        # Import is parsed before packets are built so its asOf context is
+        # preserved, but validation below still rejects stale or unbound records.
         imported_as_of: str | None = None
         if args.import_reviews is not None:
             imported = load_json(args.import_reviews, "imported AI reviews")
@@ -281,6 +288,8 @@ def main() -> int:
                 as_of=selected_packets["asOf"],
             )
         if args.export_packet is not None:
+            # Export is the offline handoff boundary: it produces evidence for a
+            # real review invocation and performs no model call or review merge.
             atomic_write(args.export_packet, selected_packets)
             print(f"Exported {len(selected_packets['packets'])} immutable election review packet(s).")
             return 0
@@ -327,6 +336,8 @@ def main() -> int:
                 required_role=args.role,
             )
         merged = merge_review_documents(existing, incoming, selected_packets)
+        # Merge validates immutable IDs and bindings before the atomic durable
+        # write, so a failed review leaves the prior artifact intact.
         if existing is not None and merged["reviews"] == existing["reviews"]:
             print(f"Recorded 0 source-checked {args.role} review(s); immutable evidence was already present.")
             return 0

@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Promote complete source-checked AI election-contact review groups to overrides."""
+"""Promote source-checked AI election-contact reviews into the override authority record.
+
+This is a guarded publication step, not source verification: freshness, packet binding,
+conflicts, suppression, and review roles must already satisfy the policy before a
+mailbox can become election-specific authority.
+"""
 
 from __future__ import annotations
 
@@ -89,6 +94,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def _deactivate(args: argparse.Namespace) -> int:
+    # Deactivation removes current authority and records a same-election suppression.
+    # It prevents an automated re-promotion from immediately undoing an explicit
+    # withdrawal; a later election or reviewed policy change is handled elsewhere.
     distinct_paths(canonical=args.canonical, overrides=args.overrides)
     stations = canonical_stations(load_json(args.canonical, "canonical missions"))
     overrides = validate_overrides(load_json(args.overrides, "overrides"))
@@ -124,6 +132,9 @@ def _deactivate(args: argparse.Namespace) -> int:
 def _reviews_by_station(
     reviews: Mapping[str, Any], packet_by_station: Mapping[str, Mapping[str, Any]]
 ) -> tuple[dict[str, list[dict[str, Any]]], set[str]]:
+    # Reviews authorize only the immutable packet they inspected. A review for the
+    # same election but a different packet is retained as stale evidence so callers
+    # hold it for renewed review instead of silently discarding that safety signal.
     grouped: dict[str, list[dict[str, Any]]] = {}
     stale_active_stations: set[str] = set()
     for review in reviews.get("reviews", []):
@@ -159,12 +170,19 @@ def _evaluate_station(
     policy: Mapping[str, Any],
     election_id: str,
 ) -> tuple[str, dict[str, Any] | None, dict[str, Any] | None]:
-    """Return eligible/unchanged/held with the exact authorization review."""
+    """Return eligibility without treating a candidate or review as current authority.
+
+    Fresh unambiguous evidence needs a primary acceptance. Competing mailboxes,
+    same-election changes, or contrary reviews require an architect acceptance that
+    resolves every contrary review before the override may change.
+    """
     if station_id in incomplete_station_ids:
         return "held", _hold(station_id, "selected candidate group has incomplete evidence and must be refetched"), None
     candidates = groups.get(station_id, [])
     if not candidates:
         return "held", _hold(station_id, "no source-bound candidate evidence for selected station"), None
+    # Suppression is checked before freshness or review quality: an explicit
+    # withdrawal is authoritative for this election until deliberately superseded.
     if station_is_suppressed(overrides, station_id, election_id):
         return "held", _hold(station_id, "station is explicitly suppressed from automatic same-election promotion"), None
     emails = {candidate["email"] for candidate in candidates}
@@ -377,6 +395,9 @@ def promote(args: argparse.Namespace) -> int:
     if not eligible:
         print("Promoted 0 election-specific contact(s); selected authority was already unchanged.")
         return 0
+    # Capture the exact input version before preparing the patch. atomic_write's
+    # expected digest protects this single overrides file from a concurrent update;
+    # it cannot make source fetches, candidate evidence, and reviews one transaction.
     baseline = sha256_json(overrides)
     updated = copy.deepcopy(overrides)
     mission_overrides = updated["missionOverrides"]
@@ -386,6 +407,8 @@ def promote(args: argparse.Namespace) -> int:
         if previous is not None and not isinstance(previous, dict):
             fail(f"Override for {station_id} must be an object")
         patch = copy.deepcopy(previous) if isinstance(previous, dict) else {}
+        # Preserve the prior provenance for later audit rather than overwriting the
+        # record that explains why the previous election-specific mailbox was chosen.
         old_provenance = patch.get("_electionContactProvenance")
         if isinstance(old_provenance, dict):
             patch["_previousElectionContactProvenance"] = copy.deepcopy(old_provenance)

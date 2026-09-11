@@ -1,6 +1,6 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+// Legacy Angular CLI environment definition retained for historical build
+// compatibility. The current Vite entry point does not consume this object;
+// keep the pair intact unless the old build path is deliberately removed.
 
 export const environment = {
   production: false

@@ -1,6 +1,15 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 
+/**
+ * Provides a presentation-only Serbian script preference. Transliteration is
+ * deliberately limited to application-owned static Latin text: names,
+ * addresses, identifiers, and other user-entered values must pass through
+ * unchanged so their supplied spelling is preserved.
+ */
+
 export type Script = 'cyrillic' | 'latin';
+
+// Long digraphs precede single letters so DŽ, LJ, and NJ remain one Serbian character.
 
 const LATIN_TO_CYRILLIC: Record<string, string> = {
   DŽ: 'Џ',
@@ -71,9 +80,18 @@ const LATIN_TO_CYRILLIC: Record<string, string> = {
 const LATIN_SERBIAN_LETTERS =
   /DŽ|Dž|dž|LJ|Lj|lj|NJ|Nj|nj|[ABCČĆDĐEFGHIJKLMNOPRSTUVZŠŽabcčćdđefghijklmnoprstuvzšž]/g;
 
-/** Converts Serbian Latin static text to Serbian Cyrillic without touching user-entered data. */
+/**
+ * Converts only recognized Serbian Latin letters in static copy. Characters
+ * outside the table are retained, so this is not general language translation
+ * or a safe transform for personal data.
+ */
 export const latinToCyrillic = (text: string): string =>
   text.replace(LATIN_SERBIAN_LETTERS, (letter) => LATIN_TO_CYRILLIC[letter]);
+
+/**
+ * Selects the static-copy representation; callers retain responsibility for
+ * keeping user-provided values outside this formatter.
+ */
 
 export const translateStaticText = (script: Script, latinText: string): string =>
   script === 'cyrillic' ? latinToCyrillic(latinText) : latinText;
@@ -84,6 +102,9 @@ export interface ScriptContextValue {
   t: (latinText: string) => string;
 }
 
+// A consumer rendered outside the provider still has readable Cyrillic copy;
+// its setter is intentionally inert because there is no shared UI state.
+
 const defaultContext: ScriptContextValue = {
   script: 'cyrillic',
   setScript: () => undefined,
@@ -91,6 +112,8 @@ const defaultContext: ScriptContextValue = {
 };
 
 const ScriptContext = createContext<ScriptContextValue>(defaultContext);
+
+/** Initial preference affects this provider instance only and is not persisted. */
 
 export interface ScriptProviderProps extends React.PropsWithChildren {
   initialScript?: Script;
@@ -112,5 +135,7 @@ export const ScriptProvider: React.FC<ScriptProviderProps> = ({
 
   return React.createElement(ScriptContext.Provider, { value }, children);
 };
+
+/** Reads the nearest script preference; no provider yields the safe default above. */
 
 export const useScript = (): ScriptContextValue => useContext(ScriptContext);

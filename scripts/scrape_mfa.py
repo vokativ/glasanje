@@ -1,3 +1,9 @@
+"""Fetch MFA representation pages into the raw input consumed by the canonical builder.
+
+This cache is a recoverable scrape artifact, not confirmation that a listed contact is
+current or election-authorized; downstream review and promotion establish that authority.
+"""
+
 import urllib.request
 import re
 from bs4 import BeautifulSoup
@@ -9,6 +15,9 @@ import sys
 
 base_url = "https://www.mfa.gov.rs"
 PARSER_REVISION = 1
+# Bound retries and increasing delays avoid both an unbounded stalled run and rapid
+# repeat requests to the external MFA service. The final failure is propagated so a
+# failed index page cannot be mistaken for an empty source list.
 
 
 def get_soup(url, retries=3):
@@ -40,6 +49,9 @@ for s in [ambasade_soup, konzulati_soup, nonres_soup]:
 print(f"Total unique bilateral representation URLs: {len(all_urls)}")
 
 cache_file = "data/mfa_representations.json"
+# Reuse only successful records produced by this parser revision. Parser changes,
+# malformed cache content, and per-page failures are retried on the next run rather
+# than being silently promoted into the canonical builder's input.
 cached_data = {}
 if os.path.exists(cache_file):
     try:
@@ -91,6 +103,8 @@ def parse_page(url_path):
     try:
         s = get_soup(url)
     except Exception as e:
+        # Preserve a per-page failure in the raw artifact. The cache filter excludes it,
+        # ensuring the next run retries this URL instead of treating omission as data.
         return {'url': url_path, 'error': str(e)}
 
     h1 = s.find('h1')
@@ -165,6 +179,9 @@ def parse_page(url_path):
         'representations': representations
     }
 
+# Checkpoint completed pages during concurrent work so an interrupted scrape retains
+# usable successes. These ordinary file writes protect progress only; they do not make
+# the remote fetch set or the whole scrape workflow atomic.
 results = list(cached_data.values())
 if to_fetch:
     print(f"Fetching {len(to_fetch)} pages with 3 workers and 20s timeout...")

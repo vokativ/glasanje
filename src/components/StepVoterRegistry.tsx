@@ -1,6 +1,9 @@
 import React from 'react';
 import { useScript } from '../lib/script';
 
+// This step explains the prerequisite but does not inspect the voter registry. The official lookup
+// runs on its separate site; choosing a status here only advances the local form flow.
+
 interface StepVoterRegistryProps {
   onProceed: () => void;
 }
@@ -23,6 +26,7 @@ export const StepVoterRegistry: React.FC<StepVoterRegistryProps> = ({ onProceed 
           {t('Otvorite zvanični portal Ministarstva državne uprave i lokalne samouprave i unesite svoj JMBG i broj važeće lične karte ili pasoša.')}
         </p>
         <div style={{ marginTop: '0.75rem' }}>
+          {/* The registry lookup is external; opening it separately avoids transferring identity details through this app. */}
           <a
             href="https://upit.birackispisak.gov.rs/"
             target="_blank"

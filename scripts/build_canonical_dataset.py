@@ -1,13 +1,23 @@
+"""Build the public canonical missions artifacts from the MFA scrape and maintained overrides.
+
+The scrape is the baseline source; overrides are the deliberate correction boundary. Both
+output files below are generated together and must be rebuilt rather than hand-edited.
+"""
+
 import json
 import os
 import re
 import subprocess
 from urllib.parse import urlsplit
 
+# Treat the scraper artifact as external-source input, not as a canonical dataset:
+# missing or malformed source fields must be rejected or normalized before publication.
 with open("data/mfa_representations.json", "r", encoding="utf-8") as f:
     raw_data = json.load(f)
 
-# Extract official country mapping from git history
+# Keep explicit aliases for raw MFA labels whose stable catalog identity cannot be
+# inferred mechanically. Historical and existing canonical records below preserve
+# established country codes when source wording changes.
 country_aliases = {
     'Руска Федерација': ('RU', 'Rusija', 'Русија'),
     'Сједињене Америчке Државе': ('US', 'SAD', 'Сједињене Америчке Државе'),
@@ -181,6 +191,8 @@ for item in raw_data:
                 name_cyr = f"Генерални конзулат Републике Србије ({city_label})"
                 name_lat = f"Generalni konzulat Republike Srbije ({to_latin(city_label)})"
 
+            # IDs are derived only from stable source fields so rerunning a scrape does
+            # not create anonymous replacements for missions already known to callers.
             mission_id = f"rs-{'emb' if sec == 'Амбасада' else 'cons'}-{code.lower()}-{to_latin(city_cyr).lower() or 'mission'}"
             mission_id = re.sub(r'[^a-z0-9-]+', '', mission_id)
 
@@ -299,8 +311,9 @@ for item in raw_data:
         'stations': stations
     })
 
-# Preserve established station IDs unless multiple missions produce the same
-# base ID. Colliding missions receive a readable, source-derived identity.
+# Preserve established station IDs unless multiple missions produce the same base ID.
+# Collision suffixes are derived from the public website, then the mailbox, rather
+# than iteration order; this keeps identifiers reproducible across rebuilds.
 stations_by_base_id = {}
 for country in countries_list:
     for station in country['stations']:
@@ -335,7 +348,9 @@ for base_id, colliding_stations in stations_by_base_id.items():
                 )
             station['id'] = f"{candidate_id}-{email_suffix}"
 
-# Apply overrides if present
+# Overrides are the maintained correction layer over the MFA baseline. Private
+# provenance fields stay out of stations, while a valid electionEmail intentionally
+# replaces the scraped mailbox for the generated public catalog.
 overrides_path = "data/overrides.json"
 if os.path.exists(overrides_path):
     try:
@@ -354,6 +369,8 @@ if os.path.exists(overrides_path):
                         if not k.startswith("_") and k != "electionEmail" and v is not None:
                             s[k] = v
                     election_email = patch.get("electionEmail")
+                    # This flag records that the override supplied the selected
+                    # mailbox; it is not evidence that the address remains current.
                     s["isElectionContactConfirmed"] = False
                     if is_valid_email(election_email):
                         s["email"] = election_email.strip()
@@ -397,6 +414,9 @@ if duplicate_station_ids:
 countries_list.sort(key=lambda country: serbian_cyrillic_collation_key(country['labelCyr']))
 
 os.makedirs("src/data", exist_ok=True)
+# These paired files are generated artifacts with different consumers: the JSON is
+# the durable canonical input and TypeScript is the application snapshot. Write both
+# from the same in-memory list so they cannot silently describe different stations.
 
 with open("data/missions_canonical.json", "w", encoding="utf-8") as f:
     json.dump({

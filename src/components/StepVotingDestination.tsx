@@ -1,6 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { latinToCyrillic, type Script, useScript } from '../lib/script';
 import { COUNTRY_BY_CODE, COUNTRIES, type VotingCountry } from '../data/missions';
+/**
+ * Resolves a voting destination from the bundled mission dataset. Search and selection are local:
+ * this step emits the chosen published station plus the applicant's address to the wizard, but
+ * neither discovers a live contact nor submits an application.
+ */
 
 export interface VotingDestinationData {
   countryCode: string;
@@ -19,6 +24,7 @@ export interface VotingDestinationCoverage {
   stationCount: number;
 }
 
+// Coverage describes the bundled dataset's inventory, not current jurisdiction or an eligibility decision.
 export const getVotingDestinationCoverage = (
   countries: VotingCountry[] = COUNTRIES
 ): VotingDestinationCoverage => ({
@@ -45,6 +51,8 @@ const getEnglishCountryName = (countryCode: string) => {
 
 const TAIWAN_SEARCH_ALIASES = ['Тајван', 'Tajvan', 'Taiwan', 'Taiwanese passports'];
 
+// The notice is deliberately tied to an omission in the static dataset; a search result must not
+// imply that the application has verified the relevant mission.
 export const getTaiwanSearchNotice = (
   searchFilter: string,
   translate: (value: string) => string = latinToCyrillic
@@ -96,6 +104,8 @@ export const filterCountries = (searchFilter: string): VotingCountry[] => {
 export const getCountryTypeaheadResults = (searchFilter: string): VotingCountry[] =>
   searchFilter.trim() ? filterCountries(searchFilter).slice(0, 12) : [];
 
+// Restore only a station that still belongs to the selected country. This prevents stale wizard
+// state from flowing into the generated application after the bundled data changes.
 export const resolveVotingDestinationSelection = (
   countryCode: string,
   stationId: string | null = null
@@ -148,6 +158,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
   const [activeCountryIndex, setActiveCountryIndex] = useState(-1);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
+  // Both values are looked up from the bundled data again rather than trusting restored IDs.
   const currentCountry = useMemo(
     () => COUNTRY_BY_CODE.get(selection.countryCode),
     [selection.countryCode]
@@ -199,6 +210,8 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
     }
   };
 
+  // Advancement requires a published station and a non-blank foreign address. Whether the shown
+  // contact is confirmed is an advisory warning handled in the display and export steps, not a gate.
   const isForeignAddressValid = foreignAddress.trim().length > 0;
   const isFormValid = Boolean(currentCountry && currentStation && isForeignAddressValid);
 

@@ -1,4 +1,8 @@
-"""Regression coverage for bounded, source-evidenced incremental discovery."""
+"""Regression contracts for safe, bounded, source-evidenced incremental discovery.
+
+The suite protects previously attributable contacts from crawl failures while ensuring
+each run makes measurable progress without assigning shared evidence too broadly.
+"""
 
 from __future__ import annotations
 
@@ -32,6 +36,9 @@ INDEX_URL = "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu
 
 
 class ElectionIncrementalDiscoveryTests(unittest.TestCase):
+    # A targeted recheck may fail, but that operational failure must retain prior
+    # election-scoped evidence rather than silently withdrawing a usable contact.
+
     def test_failed_explicit_recheck_keeps_prior_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._paths(Path(directory))
@@ -174,6 +181,9 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             self.assertEqual(second["pendingStationIds"], ["st-at"])
             self.assertEqual(self._coverage(self._read_json(paths["report"]), "st-at")["status"], "candidate")
 
+    # Confirmation and retained authority are election-scoped: a prior cycle cannot
+    # suppress the current cycle's crawl or turn an unreviewed candidate into approval.
+
     def test_old_election_confirmation_does_not_skip_new_cycle(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._paths(Path(directory))
@@ -241,6 +251,9 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
 
             self.assertEqual(result["pendingStationIds"], ["st-at"])
             self.assertEqual(self._coverage(self._read_json(paths["report"]), "st-no-site")["status"], "no-site")
+
+    # Host and page limits are operational bounds, not omissions: saved cursor state
+    # must resume at the next unvisited host so repeated runs eventually cover all work.
 
     def test_bounded_runs_rotate_missing_hosts(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -311,6 +324,9 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             )
             self.assertEqual(second_calls, [["https://beta.mfa.gov.rs/"]])
             self.assertEqual(self._coverage(self._read_json(paths["report"]), "st-beta")["status"], "scanned-no-evidence")
+
+    # Shared hosts require conservative attribution. An explicit crawl may produce a
+    # candidate only for its selected station; ambiguous evidence must never fan out.
 
     def test_explicit_shared_host_crawl_does_not_fan_out_canonical_email(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -409,6 +425,9 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             "stationIds": ["st-it-emb-main"],
         }])
 
+    # Fetching a shared host once avoids duplicate external requests while preserving
+    # ambiguity when its page cannot distinguish the stations it serves.
+
     def test_shared_host_is_fetched_once_per_run(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._paths(Path(directory))
@@ -449,6 +468,9 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             self.assertEqual(self._coverage(report, "st-nonres-b")["status"], "ambiguous")
             self.assertEqual(report["ambiguous"][0]["stationIds"], ["st-nonres-a", "st-nonres-b"])
 
+
+    # Parsing or transport failures are distinct from a readable page with no evidence:
+    # only the former retain the prior candidate and report a failure for follow-up.
 
     def test_unreadable_pdf_fails_without_erasing_prior_candidate(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -514,6 +536,9 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             report = self._read_json(paths["report"])
             self.assertEqual(self._coverage(report, "st-at")["status"], "scanned-no-evidence")
             self.assertFalse(report["failures"])
+
+    # Every pending candidate carries a reproducible source chain and extracted-text
+    # snapshot, so later review can inspect the evidence rather than trust a URL alone.
 
     def test_successful_cached_chain_records_source_snapshot_and_pending_station(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

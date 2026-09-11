@@ -1,9 +1,17 @@
 import { type Script, translateStaticText } from './script';
 
 /**
- * Validates Serbian JMBG (Jedinstveni matični broj građana)
- * using the official modulo 11 checksum algorithm.
+ * Local, format-level checks for form fields. They neither transmit values nor
+ * establish a person's identity, eligibility, residence, or the current
+ * acceptability of an external recipient.
  */
+
+/**
+ * Validates the 13-digit JMBG checksum locally using modulo 11. A valid result
+ * only detects this structural consistency condition; it is not verification
+ * of the identifier or of the person it names.
+ */
+
 export function validateJmbg(
   jmbg: string,
   script: Script = 'cyrillic',
@@ -49,9 +57,11 @@ export function validateJmbg(
 }
 
 /**
- * Checks whether a non-empty phone number resembles a full international number.
- * This is advisory only: a number is never rejected based on country or residence.
+ * Checks whether a non-empty phone value resembles an international number.
+ * This is deliberately advisory: country codes and residence are not inferred
+ * or rejected, and no number is sent during the check.
  */
+
 export function hasInternationalPhoneFormat(phone: string): boolean {
   const trimmed = phone.trim();
   const digits = trimmed.replace(/\D/g, '');
@@ -59,12 +69,17 @@ export function hasInternationalPhoneFormat(phone: string): boolean {
   return /^\+[\d\s().-]+$/.test(trimmed) && digits.length >= 7 && digits.length <= 15;
 }
 
-/** Validates email address format. */
+/**
+ * Applies a lightweight local syntax check, not mailbox existence or ownership
+ * verification. Delivery remains the responsibility of the chosen mail path.
+ */
+
 export function validateEmail(email: string): boolean {
   return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email.trim());
 }
 
-/** Formats current date in DD.MM.YYYY format. */
+/** Formats a local calendar date for the PDF's Serbian date field; no timezone conversion is applied. */
+
 export function formatSerbianDate(date: Date = new Date()): string {
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');

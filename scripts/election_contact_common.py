@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Source-bound validation and immutable artifacts for election contacts.
+"""Validate public election-contact evidence and bind it to review artifacts.
 
-This module deliberately accepts only the public candidate/source allowlist.  It is
-shared by the review and promotion CLIs; discovery remains independent so that a
-crawl cannot manufacture policy authorization.
+This shared boundary treats crawled text, candidate records, and AI output as
+untrusted until their exact source, canonical mission, policy, and digest
+bindings agree.  Review and promotion use the same checks so discovery cannot
+manufacture authorization, and an imported attestation is an entry condition,
+not fresh proof of the underlying review.
 """
 
 from __future__ import annotations
@@ -113,6 +115,8 @@ def distinct_paths(**paths: Path | None) -> None:
 
 def atomic_write(path: Path, payload: Any, *, expected_digest: str | None = None) -> None:
     """Atomically write canonical pretty JSON, optionally rejecting a stale baseline."""
+    # A promotion writes recipient overrides; reject a concurrent baseline
+    # change rather than accidentally replacing another operator's decision.
     if expected_digest is not None:
         current = load_json(path, "override baseline")
         if sha256_json(current) != expected_digest:
@@ -319,6 +323,8 @@ def _validate_source(
     source_chain: list[str],
     label: str,
 ) -> dict[str, Any]:
+    # Crawled pages are public evidence, not authority.  Retain only a complete
+    # source whose declared MFA-to-mission chain reaches the canonical station.
     if not isinstance(source, dict):
         fail(f"{label} source {source_id} must be an object")
     source_url = require_string(source, "sourceUrl", f"{label} source")
@@ -416,6 +422,8 @@ def validate_candidate_document(
     incomplete: dict[str, str] = {}
 
     def mark_incomplete(candidate: Mapping[str, Any], reason: str) -> None:
+        # Invalid evidence does not become a partially trusted candidate: retain
+        # the station as incomplete so a later crawl can recover it.
         station_id = candidate.get("stationId")
         if isinstance(station_id, str) and station_id in stations:
             incomplete.setdefault(station_id, reason)
@@ -692,6 +700,8 @@ def build_packets(
     as_of: str | None = None,
 ) -> dict[str, Any]:
     """Build the immutable public review packet document from current inputs."""
+    # Packets snapshot the exact policy, canonical data, sources, and current
+    # override authority that a review is allowed to evaluate.
     stations = canonical_stations(canonical_payload)
     policy = validate_policy(policy_payload)
     overrides = validate_overrides(overrides_payload)
@@ -931,6 +941,8 @@ def _validate_review_record(
     if decision not in REVIEW_DECISIONS:
         fail(f"{label} has an invalid decision")
     invocation = review.get("invocation")
+    # Only a configured endpoint or an explicitly attested harness artifact may
+    # supply AI provenance; a locally shaped response cannot self-authorize.
     if not isinstance(invocation, dict):
         fail(f"{label} requires invocation provenance")
     transport = invocation.get("transport")
@@ -1131,6 +1143,8 @@ def merge_review_documents(
     existing: Mapping[str, Any] | None, incoming: Mapping[str, Any], packet_document: Mapping[str, Any]
 ) -> dict[str, Any]:
     """Merge current reviews with immutable historical records."""
+    # Historical records remain auditable, but only incoming records bound to
+    # these packets can affect the current promotion decision.
     incoming_valid = validate_review_document(incoming, packet_document, allow_attested_import=True)
     existing_valid = (
         validate_review_document(existing, packet_document, allow_attested_import=True, allow_historical=True)

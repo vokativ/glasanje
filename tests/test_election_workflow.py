@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression coverage for the election-contact workflow owner."""
+"""Regression coverage for workflow ownership, station scope, and fail-closed phases."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ SPEC.loader.exec_module(runner)
 
 
 class ElectionWorkflowTests(unittest.TestCase):
+    # A competing process must not enter the workflow while the first owner can still write its artifacts.
     def test_competing_owner_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             lock_path = Path(temporary_directory) / ".election_contacts.lock"
@@ -91,6 +92,7 @@ class ElectionWorkflowTests(unittest.TestCase):
 
             self.assertEqual(runner.print_worklist(candidates), ["current-station"])
 
+    # A station request is a hard boundary: every downstream phase receives only that station.
     def test_station_scope_never_reviews_or_applies_other_pending_groups(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -157,6 +159,7 @@ class ElectionWorkflowTests(unittest.TestCase):
                 station_ids = [phase[index + 1] for index, value in enumerate(phase[:-1]) if value == "--station"]
                 self.assertEqual(station_ids, ["st-selected"])
 
+    # Selecting a station with no pending work must not fall back to reviewing unrelated stations.
     def test_selected_station_without_pending_work_skips_global_review(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -214,6 +217,7 @@ class ElectionWorkflowTests(unittest.TestCase):
             "reviews": [review],
         }
 
+    # Discovery is the first trust boundary; a failure must prevent later review or promotion from running.
     def test_discovery_failure_stops_review_and_promotion(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)

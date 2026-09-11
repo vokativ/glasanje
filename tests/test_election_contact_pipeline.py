@@ -1,4 +1,8 @@
-"""Local fixture tests for the election-contact discovery and promotion boundary."""
+"""Regression contracts for evidence extraction, source attribution, and promotion safety.
+
+These fixtures keep unverified, hidden, stale, or misattributed contact details from
+crossing the discovery-to-override boundary.
+"""
 
 from __future__ import annotations
 
@@ -34,6 +38,9 @@ DISCOVERY = load_script_module("election_contact_discovery_for_tests", DISCOVERY
 
 
 class ElectionContactPipelineTests(unittest.TestCase):
+    # Only an address visibly presented as an election-registration contact is evidence;
+    # hidden markup and mismatched mailto links must not create a public candidate.
+
     def test_generic_or_non_election_html_yields_no_candidate(self) -> None:
         title, _, evidence = DISCOVERY.extract_html_evidence(
             """
@@ -99,6 +106,9 @@ class ElectionContactPipelineTests(unittest.TestCase):
         )
 
         self.assertEqual(evidence, [])
+
+    # Election context is attached to the local notice group, so an archival notice on
+    # the same page cannot lend its mailbox or year to the current-election candidate.
 
     def test_discovery_binds_sibling_notice_context_without_crossing_notice_groups(self) -> None:
         payload = self._run_discovery_fixture(
@@ -278,6 +288,9 @@ class ElectionContactPipelineTests(unittest.TestCase):
         self.assertIn("2026", candidate["sourceQuote"])
 
 
+    # A shared mission page is fetched once, but each candidate retains the country
+    # chain that attributed that source to its particular station.
+
     def test_discovery_attributes_shared_roma_notice_mailboxes_to_their_stations(self) -> None:
         italy_country_url = "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/italija/ambasade-konzulati"
         malta_country_url = "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/malta/ambasade-konzulati"
@@ -420,6 +433,9 @@ class ElectionContactPipelineTests(unittest.TestCase):
         )
         self.assertEqual(sum(fetch_calls, []).count(notice_url), 1)
 
+    # Discovery artifacts must not overwrite crawler inputs: a failed invocation must
+    # leave the operator-owned override document intact.
+
     def test_discovery_refuses_overrides_as_output(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "overrides.json"
@@ -445,6 +461,10 @@ class ElectionContactPipelineTests(unittest.TestCase):
             self.assertEqual(result.returncode, 2)
             self.assertIn("must not alias a crawler input", result.stderr)
             self.assertEqual(self._read_json(output), baseline)
+
+    # Promotion is the trust boundary. A new override needs source-checked review tied
+    # to the selected evidence; historic approvals, incomplete packets, and partial
+    # batches cannot authorize a changed contact.
 
     def test_source_checked_primary_review_promotes_a_new_station_email(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

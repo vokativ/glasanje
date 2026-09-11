@@ -42,6 +42,8 @@ import {
   calculateRemaining,
 } from '../src/components/Countdown';
 
+// Personal-information fields and the JMBG explanation must collect only what this flow needs
+// without presenting the local checksum as identity or voter-roll verification.
 describe('Personal information', () => {
   test('asks for one parent’s name instead of place of birth', () => {
     const markup = renderToStaticMarkup(
@@ -94,6 +96,8 @@ describe('Personal information', () => {
   });
 });
 
+// Script selection is a visible accessibility contract: Cyrillic is the default, while Latin
+// text appears only after an explicit preference and must not transliterate user-provided places.
 describe('Interface script', () => {
   test('converts Serbian Latin letters and digraphs in every supported case', () => {
     expect(latinToCyrillic('Čačak, Ćuprija, Šid, Žabalj, Đak.')).toBe(
@@ -148,6 +152,7 @@ describe('Interface script', () => {
   });
 });
 
+// Input validation must reject malformed identifiers before an application can be produced.
 describe('JMBG Validator', () => {
   test('validates correct JMBG', () => {
     // Valid sample JMBG: 0101990710014
@@ -182,6 +187,7 @@ describe('JMBG Validator', () => {
   });
 });
 
+// Email validation protects the handoff flow from malformed recipient or applicant addresses.
 describe('Email Validator', () => {
   test('accepts valid emails', () => {
     expect(validateEmail('consular.jakarta@mfa.rs')).toBe(true);
@@ -195,6 +201,8 @@ describe('Email Validator', () => {
   });
 });
 
+// A stale signature image must never authorize a newly empty signature canvas; wet-ink users
+// follow a separate attachment-based path.
 describe('Signature submission guard', () => {
   test('rejects a newly empty draw canvas even when an earlier visit produced a signature PNG', () => {
     const staleSignaturePng = 'data:image/png;base64,previous-signature';
@@ -211,6 +219,8 @@ describe('Signature submission guard', () => {
   });
 });
 
+// Sharing guidance separates removable recipient instructions from the message body and warns
+// users when the selected mission contact has not been confirmed for election registration.
 describe('Recipient Payloads', () => {
   const toEmail = 'consular.jakarta@mfa.rs';
   const subject = 'Пријава за гласање из иностранства — избори 2026.';
@@ -301,6 +311,8 @@ describe('Recipient Payloads', () => {
   });
 });
 
+// Invitation URLs accept one intentional destination only, preserving a safe, shareable link
+// and its selected-script copy when native sharing is unavailable.
 describe('Invitation links', () => {
   test('accepts exactly one non-empty trimmed destination parameter', () => {
     expect(getInitialDesiredLocation('?destination=%20Singapur%20')).toBe('Singapur');
@@ -346,6 +358,8 @@ describe('Invitation links', () => {
   });
 });
 
+// This catalog drives destination selection and outgoing contacts. These checks preserve lookup
+// behavior, coverage relationships, stable station identity, and visible uncertainty warnings.
 describe('Missions and Coverage Dataset', () => {
   test('contains 195 countries', () => {
     expect(COUNTRIES.length).toBe(195);
@@ -577,6 +591,8 @@ describe('Missions and Coverage Dataset', () => {
   });
 });
 
+// Rendering derives contact-coverage status from the dataset so both public surfaces disclose
+// unconfirmed recipients rather than implying that an address is suitable for registration.
 describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
@@ -664,6 +680,7 @@ describe('Registration Email Status', () => {
   });
 });
 
+// Application dates use the Serbian document format expected by the generated form.
 describe('Date Formatter', () => {
   test('formats date in DD.MM.YYYY. format', () => {
     const d = new Date(2026, 8, 9); // Sept 9, 2026
@@ -671,6 +688,8 @@ describe('Date Formatter', () => {
   });
 });
 
+// Generated PDFs must remain valid for both ordinary and attachment-bearing applications across
+// every selectable destination; a broken artifact would block the user's submission.
 describe('PDF Generator', () => {
   test('generates valid 1-page application PDF', async () => {
     // Mock fetch for test runner
@@ -767,6 +786,8 @@ describe('PDF Generator', () => {
   );
 });
 
+// The deadline is user-facing and time-zone-sensitive, so both its instant and its script-specific
+// wording must remain unambiguous without presenting it as an expected or provisional date.
 describe('Registration countdown', () => {
   test('targets official deadline: 3 October 2026 at 24:00 Belgrade time (22:00 UTC)', () => {
     const expectedIso = '2026-10-03T22:00:00.000Z';

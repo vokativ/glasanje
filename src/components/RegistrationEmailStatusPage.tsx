@@ -2,6 +2,9 @@ import React, { useMemo, useState } from 'react';
 import { COUNTRIES, type VotingCountry } from '../data/missions';
 import { useScript } from '../lib/script';
 
+// This page reports the mission data's confirmation flag rather than discovering contact details at
+// runtime. An address is intentionally disclosed only for a station with an explicit election-contact flag.
+
 export interface ElectionEmailCoverage {
   confirmed: number;
   total: number;
@@ -11,6 +14,7 @@ export const getElectionEmailCoverage = (
   countries: VotingCountry[] = COUNTRIES,
 ): ElectionEmailCoverage => {
   const stations = countries.flatMap((country) => country.stations);
+  // Count the same flag that controls disclosure below, keeping the summary from overstating coverage.
   return {
     confirmed: stations.filter((station) => station.isElectionContactConfirmed).length,
     total: stations.length,
@@ -91,6 +95,7 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                     {t('Pokriva ovu državu na nerezidencijalnoj osnovi')}
                   </span>
                 )}
+                {/* Do not substitute a mission's general email here: it is not evidence of election routing. */}
                 {station.isElectionContactConfirmed ? (
                   <>
                     <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>

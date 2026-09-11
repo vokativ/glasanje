@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useScript } from '../lib/script';
 import { hasInternationalPhoneFormat, validateEmail, validateJmbg } from '../lib/validators';
+/**
+ * Collects the identifying details used by later wizard steps. This component keeps edits in
+ * React state and only passes them to its owner after the local checks below allow progression;
+ * it does not submit them to a registry or contact a mission.
+ */
 
 export interface PersonalInfoData {
   fullName: string;
@@ -26,8 +31,11 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
   const [data, setData] = useState<PersonalInfoData>(initialData);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
+  // These checks prevent incomplete or malformed data from advancing, but they are not an
+  // eligibility or identity lookup. In particular, a valid JMBG checksum is only arithmetic.
   const jmbgValidation = validateJmbg(data.jmbg, script);
   const emailValid = validateEmail(data.email);
+  // Telephone format is advisory: a non-empty number still satisfies the required-field gate.
   const phoneFormatWarning =
     data.phone.trim() && !hasInternationalPhoneFormat(data.phone)
       ? t('Za lakši kontakt, preporučujemo ceo međunarodni broj koji počinje znakom + (npr. +49 151 12345678).')
@@ -61,7 +69,8 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
     if (isFormValid) {
       onNext(data);
     } else {
-      // Mark all fields as touched to show errors
+      // Reveal every blocking error after a submit attempt so the user can correct the complete set.
+      // This changes presentation only; it retains the sensitive values in component state.
       setTouched({
         fullName: true,
         parentName: true,

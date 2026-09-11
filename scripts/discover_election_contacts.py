@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Discover election-notice contact evidence from MFA-linked mission sites.
+"""Discover bounded, source-bound election-contact evidence from mission sites.
 
-Default incremental mode performs a bounded rotating crawl of missing hosts,
-using verified cached MFA country-to-mission chains.  ``--mode full`` is the
-only explicit directory-chain refresh; the command never broadens itself into
-a full crawl or retries non-transient failures.  It is discovery only: it
-reads public pages, writes review candidates, never infers an address, and
-never changes recipient overrides.
+The crawler accepts only public pages reached through an official MFA-to-
+canonical-mission chain.  It records evidence for later review rather than
+authorizing recipients: ambiguous, stale, failed, or budget-limited work stays
+pending.  Incremental runs rotate a capped host workset; only ``--mode full``
+refreshes directory chains, and persisted cursor/report state makes partial
+runs recoverable without silently broadening the crawl.
 """
 
 from __future__ import annotations
@@ -104,6 +104,8 @@ CONTEXTUAL_CONTAINER_TAGS = frozenset({"article", "section", "li", "td", "blockq
 GROUPED_NOTICE_CONTAINER_TAGS = CONTEXTUAL_CONTAINER_TAGS | frozenset({"div"})
 
 class RestrictedRedirectHandler(HTTPRedirectHandler):
+    # Redirects are a trust boundary: a valid initial link cannot authorize a
+    # page that leaves the verified official host set.
     """Permit HTTPS redirects only to a pre-approved official host."""
 
     def __init__(self, allowed_hosts: frozenset[str]):
@@ -354,6 +356,8 @@ def extract_pdf_evidence(pdf: bytes, title_hint: str) -> tuple[str, str, list[El
 
 def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: int, retries: int = 1) -> Response:
     """Fetch an HTTPS resource once, retrying only transient transport/status failures."""
+    # Size, scheme, host, and retry limits contain untrusted remote responses;
+    # a rejected page is reported instead of being treated as empty evidence.
     for attempt in range(retries + 1):
         try:
             opener = build_opener(RestrictedRedirectHandler(allowed_hosts))
@@ -395,6 +399,8 @@ def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: in
     return Response(url, "", b"", "retry loop exhausted")
 
 def fetch_many(
+    # Select before dispatching so concurrency cannot exceed the remaining page
+    # budget when several remote requests complete at once.
     urls: Iterable[tuple[str, frozenset[str]]],
     concurrency: int,
     remaining_pages: int,
@@ -653,6 +659,8 @@ def load_registry(path: Path, country_names: dict[str, str]) -> dict[str, str]:
 
 
 def load_state(path: Path, election_id: str) -> dict:
+    # State is election-scoped.  Refusing a mismatched cursor prevents one
+    # election's partial crawl from steering another election's worklist.
     if not path.exists():
         return {"schemaVersion": 1, "electionId": election_id, "hostCursor": 0, "countryChains": {}}
     payload = read_mapping(path, "crawl state")
@@ -901,6 +909,8 @@ def main() -> int:
     overrides_by_station = overrides.get("missionOverrides", {})
 
     def candidate_station_state() -> tuple[set[str], set[str]]:
+        # Existing confirmation-like fields are not evidence for this run; only
+        # source-backed candidates and matching promoted authority affect reuse.
         source_backed_emails: dict[str, set[str]] = defaultdict(set)
         legacy_emails: dict[str, set[str]] = defaultdict(set)
         for candidate in prior_candidates.values():
@@ -969,6 +979,8 @@ def main() -> int:
             due_by_host[station.website_host].append(station)
 
     host_names = sorted(due_by_host)
+    # Rotation gives deferred hosts a future turn while max_hosts bounds both
+    # network exposure and the amount of work a single incremental run can add.
     cursor = state["hostCursor"] % len(host_names) if host_names else 0
     rotated_hosts = host_names[cursor:] + host_names[:cursor]
     host_limit = len(rotated_hosts) if args.max_hosts == 0 else min(args.max_hosts, len(rotated_hosts))
@@ -1070,6 +1082,8 @@ def main() -> int:
                 continue
             tasks = linked_mission_tasks(response.body, country_code, stations_by_country.get(country_code, ()), response.url)
             state["countryChains"][country_code] = {
+            # Cache only MFA-verified chains; incremental runs may reuse these,
+            # while full mode deliberately rebuilds them from public indexes.
                 "indexUrl": index_url,
                 "countryUrl": response.url,
                 "missionEntries": [{"host": url_host(task.url), "url": task.url} for task in tasks],
@@ -1152,6 +1166,8 @@ def main() -> int:
                     continue
                 accepted.append((item, stations, election_context))
             if not accepted:
+            # Evidence that cannot bind an email to this election/station never
+            # creates a candidate or source artifact.
                 continue
             text_sha256 = hashlib.sha256(page_text.encode("utf-8")).hexdigest()
             source_id = source_identifier(task.url, text_sha256)
@@ -1185,6 +1201,8 @@ def main() -> int:
         pending = next_tasks
 
     completed_hosts = attempted_hosts | failed_hosts | depth_hosts
+    # Advance only the completed prefix.  A failed or budget-limited host stays
+    # at the cursor for a later run instead of being silently skipped.
     completed_prefix = 0
     for host in scheduled_hosts:
         if host not in completed_hosts:
@@ -1276,6 +1294,9 @@ def main() -> int:
         "sources": {source_id: sources[source_id] for source_id in sorted(sources)},
     }
     write_output(args.output, payload)
+    # These are durable, separate artifacts: candidates preserve discovered
+    # evidence, state preserves recovery position, and the report explains any
+    # partial result to the next operator.
     write_output(args.state, state)
     write_output(args.report, report)
     print(

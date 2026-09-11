@@ -1,3 +1,9 @@
+/**
+ * Browser-only application shell for the registration wizard. It owns each
+ * in-progress application only in React state: nothing here persists personal
+ * details, signatures, or documents beyond the open page, and reset must clear
+ * every step's data together.
+ */
 import React, { useEffect, useMemo, useState } from 'react';
 import { Header } from './components/Header';
 import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
@@ -17,6 +23,8 @@ import { getInitialDesiredLocation } from './lib/invite';
 import { ScriptProvider, useScript } from './lib/script';
 import { formatSerbianDate } from './lib/validators';
 
+// Canvas and PDF/export code is deferred until its later wizard step so the
+// initial eligibility check does not load those browser-heavy dependencies.
 const StepSignatureAndDocument = React.lazy(() =>
   import('./components/StepSignatureAndDocument').then(({ StepSignatureAndDocument }) => ({
     default: StepSignatureAndDocument,
@@ -29,6 +37,8 @@ const StepExportAndSubmit = React.lazy(() =>
   }))
 );
 
+// URL values are hints for the first render, not retained wizard state. Accept
+// exactly one recognised country code to avoid treating ambiguous links as data.
 const getInitialCountryCode = (): string => {
   if (typeof window === 'undefined') return '';
 
@@ -39,6 +49,8 @@ const getInitialCountryCode = (): string => {
   return COUNTRY_BY_CODE.has(countryCode) ? countryCode : '';
 };
 
+// Keep desired-location parsing at the browser boundary; server rendering has
+// no location search string to resolve.
 const getInitialDesiredLocationFromUrl = (): string =>
   typeof window === 'undefined' ? '' : getInitialDesiredLocation(window.location.search);
 
@@ -54,11 +66,15 @@ const AppContent: React.FC = () => {
   const { script, t } = useScript();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
+  // This intentionally small route split avoids a routing dependency for the
+  // standalone status surface; all other paths stay in the registration flow.
   const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
   const emailCoverage = useMemo(() => getElectionEmailCoverage(), []);
   const votingDestinationCoverage = useMemo(() => getVotingDestinationCoverage(), []);
 
 
+  // The shell, rather than individual steps, owns data that must survive
+  // back-navigation. Sensitive fields remain memory-only until the user exports.
   // Form state
   const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>({
     fullName: '',
@@ -101,6 +117,8 @@ const AppContent: React.FC = () => {
     setCurrentStep(5);
   };
 
+  // Reset is an ownership boundary: confirmation only authorizes discarding the
+  // current in-memory application; it does not attest to any prior submission.
   const handleReset = () => {
     if (window.confirm(t('Da li ste sigurni da želite da započnete novu prijavu?'))) {
       setCurrentStep(1);
@@ -126,6 +144,8 @@ const AppContent: React.FC = () => {
     }
   };
 
+  // Resolve the selected station from the current country on each render rather
+  // than storing a duplicate object that could become inconsistent with its ID.
   const currentCountry = COUNTRY_BY_CODE.get(votingDestination.countryCode);
   const currentStation = votingDestination.stationId
     ? currentCountry?.stations.find((station) => station.id === votingDestination.stationId) ?? null
@@ -134,7 +154,8 @@ const AppContent: React.FC = () => {
     script === 'cyrillic' ? currentCountry?.labelCyr ?? '' : currentCountry?.label ?? '';
   const countryNameCyr = currentCountry?.labelCyr ?? '';
 
-  // Compile full application data for PDF generator. A station must be resolved before export renders.
+  // Compile the export model only after its dependent station has been resolved;
+  // the final step remains unavailable when that relationship is invalid.
   const compiledApplicationData: ApplicationFormData = {
     fullName: personalInfo.fullName,
     parentName: personalInfo.parentName,

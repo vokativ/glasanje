@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Run one bounded, source-evidenced election-contact workflow.
+"""Run one serialized, staged election-contact workflow with audit recovery.
 
-The default run discovers only the bounded incremental workset, exports public
-review packets, and writes a promotion dry-run.  It never needs AI credentials
-and never changes recipient overrides.  Passing --review or an explicitly
-attested --import-reviews supplies the only review route; --apply then promotes
-only stations found eligible by the immediately preceding dry-run.
+Discovery writes source evidence, review produces or imports only attested AI
+evidence, and promotion first writes a readiness dry-run.  The default run has
+durable discovery/report side effects but never changes recipient overrides;
+``--apply`` is a separate final phase limited to groups eligible in this run.
+Every phase is recorded in a per-run directory so an interrupted workflow can
+be inspected and safely resumed by a later run rather than guessed at.
 """
 
 from __future__ import annotations
@@ -92,6 +93,8 @@ def assert_distinct_paths(paths: dict[str, Path]) -> None:
 
 
 def acquire_lock(path: Path):
+    # One lock covers every durable artifact below; concurrent runs could
+    # otherwise copy stale candidates or overwrite review/audit state.
     path.parent.mkdir(parents=True, exist_ok=True)
     handle = path.open("a+", encoding="utf-8")
     try:
@@ -103,6 +106,8 @@ def acquire_lock(path: Path):
 
 
 def atomic_copy(source: Path, destination: Path) -> None:
+    # Replacing a completed temporary file keeps a crash from exposing a
+    # partially copied durable artifact.
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(dir=destination.parent, prefix=f".{destination.name}.", delete=False) as handle:
         temporary = Path(handle.name)
@@ -170,6 +175,8 @@ def review_records_by_id(document: dict[str, Any], label: str) -> dict[str, dict
 
 def merge_reviews(durable: Path, reviewed: Path) -> None:
     """Persist only review records sharing the current document binding."""
+    # Reviews are immutable evidence.  Refuse cross-snapshot merges rather than
+    # making a historical approval appear to apply to new candidates.
     if not reviewed.exists():
         raise RunnerError(f"Review phase did not create {reviewed}")
     current = read_json(reviewed, "run reviews")
@@ -272,6 +279,8 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
         "phases": [],
     }
     lock = acquire_lock(paths["workflow lock"])
+    # The run directory is a staged audit boundary.  Its creation under the
+    # workflow lock makes artifacts from overlapping runs distinguishable.
     try:
         run_dir.mkdir(parents=True, exist_ok=False)
         copy_if_present(paths["durable candidates"], paths["run candidates"])
@@ -295,6 +304,8 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
         for station_id in args.station:
             crawler.extend(("--station", station_id))
         run_phase("discovery", crawler, audit, root)
+        # Discovery succeeds only after its run-local artifacts exist; copying
+        # candidates here is the default workflow's deliberate durable update.
         if not paths["run candidates"].exists() or not paths["discovery report"].exists():
             raise RunnerError("Discovery succeeded without writing its required run artifacts")
         atomic_copy(paths["run candidates"], paths["durable candidates"])
@@ -333,6 +344,8 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
             review.extend(("--export-packet", str(paths["review packets"])))
         review.extend(("--timeout", str(args.timeout)))
         run_phase("review packet export" if not (args.review or args.import_reviews) else "review", review, audit, root)
+        # Packet export is an offline handoff, not a review.  Only the explicit
+        # review routes may add durable AI evidence.
         if not args.review and args.import_reviews is None and not paths["review packets"].exists():
             raise RunnerError("Packet export succeeded without writing the review packet artifact")
         if args.review or args.import_reviews is not None:
@@ -349,6 +362,8 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
         if args.review or args.import_reviews is not None:
             promotion.extend(("--reviews", str(paths["run reviews"])))
         dry_run = [
+        # Dry-run records current eligibility without changing overrides.  Apply
+        # is built separately below from this run's eligible station IDs.
             *promotion,
             *(argument for station_id in worklist for argument in ("--station", station_id)),
             "--dry-run",
@@ -373,6 +388,8 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
             print("Held stations: " + ", ".join(str(item.get("stationId", "unknown")) for item in held), flush=True)
 
         if args.apply and eligible:
+            # Promotion revalidates current inputs; the dry-run narrows scope
+            # but is not itself authorization to overwrite an override.
             apply_command = list(promotion)
             for station_id in eligible:
                 apply_command.extend(("--station", station_id))
@@ -389,6 +406,8 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
         print(f"Run artifacts: {run_dir}", flush=True)
         return run_dir
     except Exception as error:
+        # Preserve the completed phase list and failure reason so operators can
+        # distinguish a partial durable run from a clean completed one.
         audit["status"] = "failed"
         audit["failedAt"] = utc_now()
         audit["failure"] = str(error)

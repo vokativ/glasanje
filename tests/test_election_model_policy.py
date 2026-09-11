@@ -1,4 +1,4 @@
-"""Behavior regressions for source-checked AI election-contact authorization."""
+"""Behavior regressions for source-checked AI authorization, provenance, freshness, and conflicts."""
 
 from __future__ import annotations
 import importlib.util
@@ -204,6 +204,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             capture_output=True,
         )
 
+    # A qualifying AI review authorizes promotion without inventing human approval provenance.
     def test_zero_human_attested_import_promotes(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             paths = self.write_fixture(
@@ -217,6 +218,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             self.assertEqual(provenance["authorization"]["type"], "ai")
             self.assertNotIn("humanApprovals", provenance)
 
+    # A review bound to different candidate evidence must fail closed before it can write an override.
     def test_stale_digest_fails_closed_without_override_write(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             paths = self.write_fixture(Path(temporary), review=self.accepted_review)
@@ -227,6 +229,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(json.loads(paths[3].read_text(encoding="utf-8"))["missionOverrides"], {})
 
+    # A contrary primary conclusion is a conflict, not an authorization, until the escalation role resolves it.
     def test_contrary_primary_review_is_held_until_architect_resolves_it(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             paths = self.write_fixture(
@@ -265,6 +268,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
         document, _, _ = COMMON.validate_candidate_document(candidates, COMMON.canonical_stations(canonical))
         self.assertEqual(document["incompleteStationIds"], ["st-legacy"])
 
+    # Reusing the mailbox across elections still requires a new, election-bound authorization record.
     def test_new_election_same_email_requires_and_records_fresh_authorization(self) -> None:
         overrides = {
             "missionOverrides": {
@@ -283,6 +287,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             ]
             self.assertEqual(provenance["electionId"], "2026-parliamentary")
 
+    # An architect rejection remains effective until an explicit accepting review names it as resolved.
     def test_architect_rejection_blocks_until_an_accept_explicitly_resolves_it(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             paths = self.write_fixture(Path(temporary), review=self.accepted_review)
@@ -299,6 +304,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("architect", json.loads(report.read_text(encoding="utf-8"))["held"][0]["reason"])
 
+    # Provenance must identify the architect review that actually resolved the conflicting primary decision.
     def test_provenance_uses_the_architect_review_that_resolved_the_conflict(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             paths = self.write_fixture(
@@ -325,6 +331,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
                 "_electionContactProvenance"
             ]
             self.assertEqual(provenance["authorization"]["reviewId"], resolving["reviewId"])
+    # A stale duplicate cannot taint current evidence when the selected candidate has a fresh matching source.
     def test_fresh_same_email_evidence_is_not_blocked_by_a_stale_duplicate_page(self) -> None:
         canonical, policy, candidates, overrides = self.fixture_documents()
         stale_url = "https://vienna.mfa.gov.rs/elections/2026-english"
@@ -358,6 +365,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
 
+    # A stale but different mailbox remains a material conflict, so promotion stays held for resolution.
     def test_stale_distinct_email_competitor_holds_the_selected_group(self) -> None:
         canonical, policy, candidates, overrides = self.fixture_documents()
         stale_url = "https://vienna.mfa.gov.rs/elections/2026-conflict"
@@ -397,6 +405,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("competing candidate source", json.loads(report.read_text(encoding="utf-8"))["held"][0]["reason"])
 
+    # Fresh evidence-bound review history may authorize; stale bindings alone must keep the station held.
     def test_fresh_current_review_supersedes_stale_history_but_stale_only_holds(self) -> None:
         canonical, policy, candidates, overrides = self.fixture_documents()
         old_packet = COMMON.build_packets(candidates, canonical, policy, overrides)["packets"][0]
@@ -488,6 +497,7 @@ class ElectionModelPolicyTests(unittest.TestCase):
             COMMON.validate_review_document(review_document, packet_document, allow_attested_import=True)
 
 
+    # Importing an attested artifact preserves its original provenance timestamp rather than rewriting history.
     def test_delayed_import_replays_identical_authentic_review_artifact(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)

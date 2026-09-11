@@ -1,7 +1,13 @@
-// Offline Service Worker for the application.
-// Caches the application shell, fonts, and form template for offline use.
+// Offline service worker for a minimal application shell. Navigation is
+// network-first so HTML refreshes when connected; cached same-origin GET assets
+// are cache-first after their first successful fetch.
+// This is not a complete offline mirror: uncached or cross-origin requests still
+// need the network, and offline navigation can only fall back to `/index.html`.
 
 const CACHE_NAME = 'glasanje-offline-v5';
+
+// Cache contents have no age or size policy. Change this version deliberately
+// when a stale precached asset must be invalidated.
 
 const ASSETS_TO_PRECACHE = [
   '/',
@@ -20,6 +26,8 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// This worker owns the origin's Cache Storage: activating a new version deletes
+// every cache except `CACHE_NAME`, so unrelated caches must not share this origin.
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {

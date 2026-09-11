@@ -1,6 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useScript } from '../lib/script';
 import SignaturePad from 'signature_pad';
+/**
+ * Captures either a browser-drawn signature or the user's choice to sign after printing, plus an
+ * optional document image. The resulting data URLs are handed to the wizard for PDF creation;
+ * this step does not upload the signature or document.
+ */
 
 export interface SignatureAndDocumentData {
   signaturePngDataUrl: string;
@@ -14,6 +19,8 @@ interface StepSignatureAndDocumentProps {
   onNext: (data: SignatureAndDocumentData) => void;
 }
 
+// A drawn signature must contain a stroke. Selecting wet ink intentionally bypasses that check
+// because the user must complete the signing and scan/photo process after export.
 export const canSubmitSignature = (isWetInk: boolean, pad: SignaturePad | null): boolean =>
   isWetInk || Boolean(pad && !pad.isEmpty());
 
@@ -34,6 +41,8 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
   const [idDocumentError, setIdDocumentError] = useState<string | null>(null);
   const { t } = useScript();
 
+  // Recreate the canvas pad when its mode is visible so a wet-ink choice cannot leave a stale
+  // in-memory drawing available for submission.
   useEffect(() => {
     if (!canvasRef.current || isWetInk) return;
 
@@ -84,6 +93,8 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
     const file = input.files?.[0];
     if (!file) return;
 
+    // PDF embedding supports these raster formats; the size limit prevents a locally selected
+    // image from making the generated PDF impractically large.
     const supportedTypes = ['image/jpeg', 'image/png'];
     if (!supportedTypes.includes(file.type)) {
       setIdDocumentError(
@@ -106,6 +117,8 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
       );
       input.value = '';
     };
+    // File input metadata is not enough: validate the data URL and decode it before retaining it
+    // for later PDF generation.
     reader.onload = () => {
       const result = reader.result;
       if (
@@ -144,8 +157,11 @@ export const StepSignatureAndDocument: React.FC<StepSignatureAndDocumentProps> =
       setHasSignature(false);
       return;
     }
+    // Wet ink deliberately produces no digital signature image; export must require the user to
+    // print, sign, and attach a scan or photograph rather than treating this PDF as sendable.
     const signaturePng = isWetInk ? '' : pad!.toDataURL('image/png');
 
+    // These values stay in the wizard flow until the export step creates the PDF.
     onNext({
       signaturePngDataUrl: signaturePng,
       isWetInkSignature: isWetInk,

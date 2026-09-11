@@ -1,4 +1,10 @@
 
+/**
+ * Fills the bundled application-template PDF entirely in the browser. Form
+ * values and document images are embedded only in the returned bytes; this
+ * module does not submit or otherwise transmit them.
+ */
+
 export interface ApplicationFormData {
   fullName: string;
   parentName: string;
@@ -14,11 +20,24 @@ export interface ApplicationFormData {
   idDocumentDataUrl?: string; // Optional Page 2 passport/ID copy
 }
 
+// These static assets must remain compatible with the fixed field coordinates
+// below: the first template page is the application form and Roboto supplies
+// the Serbian glyphs that the generated entries require.
+
 const TEMPLATE_URL = '/assets/Zahtev-za-glasanje-u-inostranstvu-2026-09-10.pdf';
 const FONT_URL = '/assets/Roboto-Regular.ttf';
 
+// Cache immutable asset bytes only. Never cache ApplicationFormData, which can
+// contain identity and contact information.
+
 let cachedTemplateBytes: ArrayBuffer | null = null;
 let cachedFontBytes: ArrayBuffer | null = null;
+
+/**
+ * Loads the template and font together so generation fails before writing
+ * fields when either required asset is unavailable. Cached bytes are reused
+ * within this browser session; failed fetches are not cached.
+ */
 
 async function loadAssets(): Promise<{ template: ArrayBuffer; font: ArrayBuffer }> {
   if (cachedTemplateBytes && cachedFontBytes) {
@@ -40,6 +59,14 @@ async function loadAssets(): Promise<{ template: ArrayBuffer; font: ArrayBuffer 
 }
 
 
+/**
+ * Overlays supplied values onto the first page of the fixed template and
+ * returns a standalone PDF. Coordinates are PDF points measured from the
+ * lower-left; changing the template layout requires reviewing every placement.
+ * Missing page/font/template compatibility therefore fails generation rather
+ * than creating a plausibly incorrect official-looking form.
+ */
+
 export async function generateApplicationPdf(data: ApplicationFormData): Promise<Uint8Array> {
   const [{ template, font }, { PDFDocument, rgb }, { default: fontkit }] = await Promise.all([
     loadAssets(),
@@ -53,6 +80,9 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
 
   const pages = pdfDoc.getPages();
   const page1 = pages[0];
+  // Text wraps to stay inside each template field, but deliberately does not
+  // truncate or paginate: callers must keep field values within the form's space.
+
   const writeWrappedText = (
     page: typeof page1,
     text: string,
@@ -86,6 +116,9 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
     }
   };
 
+
+  // Fixed coordinates mirror the numbered fields in TEMPLATE_URL; they are not
+  // semantic layout rules and must move with a replacement template.
 
   // 1. Име и презиме
   writeWrappedText(page1, data.fullName, 286, 617, robotoFont, 10, 270);
@@ -127,6 +160,9 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
     font: robotoFont,
     color: rgb(0, 0, 0),
   });
+
+  // Only a PNG data URL can occupy the signature box. An unreadable signature is
+  // omitted after the embedding failure so one image does not prevent PDF export.
 
   // Потпис (PNG са потписом)
   if (data.signaturePngDataUrl && data.signaturePngDataUrl.startsWith('data:image/png;base64,')) {
@@ -175,11 +211,17 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
     color: rgb(0, 0, 0),
   });
 
+  // A supplied ID image becomes a new PDF page, keeping it separate from the
+  // application template rather than attempting to place it in a form field.
+
   // Опциона страна 2: Копија пасоша / личне карте
   if (data.idDocumentDataUrl) {
     const isPng = data.idDocumentDataUrl.startsWith('data:image/png;base64,');
     const isJpeg = data.idDocumentDataUrl.startsWith('data:image/jpeg;base64,');
     if (!isPng && !isJpeg) {
+      // MIME prefixes are an input-format boundary. Reject unsupported images
+      // before creating a document that merely appears to contain the attachment.
+
       throw new Error('Прилог личног документа мора бити JPG или PNG слика.');
     }
 
@@ -193,6 +235,8 @@ export async function generateApplicationPdf(data: ApplicationFormData): Promise
     }
 
     const page2 = pdfDoc.addPage([595.3, 841.9]); // Standard A4
+    // A4 points and margins are explicit so the copied document remains fully
+    // visible; the image is never enlarged beyond its source dimensions.
 
     // Заглавље стране 2
     page2.drawText('КОПИЈА ИДЕНТИФИКАЦИОНОГ ДОКУМЕНТА (ПАСОШ / ЛИЧНА КАРТА)', {

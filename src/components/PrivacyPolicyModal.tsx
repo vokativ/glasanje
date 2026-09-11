@@ -1,6 +1,9 @@
 import React from 'react';
 import { useScript } from '../lib/script';
 
+// This modal presents the application's privacy and independence disclosures. It is deliberately
+// mounted only while open, so hidden dialog controls do not remain in the accessibility tree.
+
 interface PrivacyPolicyModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,6 +16,7 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      {/* Backdrop clicks dismiss the dialog; stopping propagation keeps interaction inside it from closing it. */}
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 className="modal-title">{t('Polisa privatnosti i bezbednost podataka')}</h2>
@@ -27,6 +31,7 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
         </div>
 
         <div style={{ fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--color-text)' }}>
+          {/* These statements describe the current client-side data-flow boundary; update them with any data-flow change. */}
           <div className="alert alert-success" style={{ marginBottom: '1rem' }}>
             <strong>{t('🔒 Vaši podaci nikada ne napuštaju vaš uređaj.')}</strong><br />
             {t(
