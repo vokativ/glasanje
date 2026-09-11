@@ -1,133 +1,111 @@
 # Operativni postupak za izborne adrese misija
 
-Ovaj postupak je namenjen poverljivom održavaocu koji ažurira primaoce izbornih prijava. Svrha mu je da u `data/overrides.json` uđu samo trenutno objavljene, izričito izborne adrese zvaničnih diplomatsko-konzularnih predstavništava. Svaka faza se pokreće zasebno: nijedna faza ne pokreće narednu automatski.
+Ovaj postupak održava javno dokazive adrese za prijave za glasanje iz inostranstva. Ne prikuplja se niti se šalje bilo kakav podatak birača, obrazac, prilog ili poruka. Dopušten je samo javni institucionalni sadržaj iz lanca MSP → država → izričito povezana misija → aktuelno izborno obaveštenje.
 
-## Granice izvora i podataka
+Jedan pokretani postupak ima jednog vlasnika: zaključavanje `data/.election_contacts.lock` drži ceo tok. Ako je drugi tok aktivan, komanda se prekida; ne pokretati paralelnu kopiju. Svaki uspešan ili neuspešan prolaz ima sopstveni, nepromenljivi trag u `data/election_runs/<runId>/`.
 
-Početak svakog pretraživanja su isključivo ove tri zvanične indeks-stranice Ministarstva spoljnih poslova (MSP):
+## Uobičajeni ograničeni prolaz
 
-- <https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade>
-- <https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/konzulati>
-- <https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi>
-
-Od njih se smeju pratiti samo stranice država i sajtovi misija na koje MSP izričito vodi. Ne pretražuju se i ne prikupljaju proizvoljni sajtovi trećih strana, društvene mreže, imenici, keširane kopije niti rezultati pretraživača.
-
-U ovoj proceduri dozvoljeni su samo javno objavljeni institucionalni podaci: naziv misije, država/stanica, javno vidljiva izborna adresa, URL, javni tekst obaveštenja i vreme opažanja. **Nikada ne unositi, slati AI-u, čuvati ili obrađivati podatke građana, sadržaj obrazaca, priloge, prijave ili poruke birača.** Adresa se nikada ne sme zaključivati iz domena niti se generički kontakt misije sme označiti izbornim bez eksplicitne izborne namene.
-
-## Dokaz koji kandidat mora da ima
-
-Kandidat je prihvatljiv samo ako zapis sadrži sve sledeće:
-
-- javno vidljivu e-mail adresu (`email`);
-- tačan citat izvora u kome je adresa vidljiva (`sourceQuote`);
-- apsolutni HTTPS URL zvaničnog izvora (`sourceUrl`);
-- jasan izborni kontekst (`electionContext`);
-- vreme opažanja (`observedAt`);
-- identitet države i stanice/misije (`countryCode` i `stationId`);
-- host izvora (`sourceHost`), identičan normalizovanom hostu `website` polja te stanice kada ono postoji u `data/missions_canonical.json`.
-
-Važeći izborni dokaz je, na primer, aktuelno obaveštenje MSP ili eksplicitno povezane misije koje pominje izbore, glasanje iz inostranstva, birački spisak ili podnošenje izborne prijave i uz to navodi adresu za tu svrhu. `sourceQuote` mora doslovno sadržati adresu; ljudski odobravalac proverava punu živu objavu za izbornu vezu i identitet stanice. Generičko sanduče može biti izabrano samo kada ga aktuelna objava izričito navodi za tu izbornu radnju.
-
-Nevažeći su: opšta stranica „Kontakt“, centrala ili prijem, `info@`/`office@` i sličan generički kontakt bez izborne namene, adresa izvedena iz domena, stara vest bez važećeg izbornog roka, adresar treće strane i sadržaj koji nije eksplicitno povezan sa jednim od dozvoljenih MSP lanaca izvora. Odbaciti adresu koja nije jednostavno oblikovano sanduče ili sadrži parametre, zaglavlja ili kontrolne znake. Posebno: stare adrese oblika `izbori*` iz 2022. godine **nikada se ne prenose** u novi ciklus bez novog, aktuelnog zvaničnog dokaza.
-
-## Tri odvojene CLI faze
-
-Komande i opcije proveriti sa `--help`; zapisati tačnu komandu koja je korišćena uz svaki operativni ciklus.
-
-### 1. Otkrivanje
-
-Pokrenuti:
+Pokrenite samo ograničeno inkrementalno otkrivanje, izvoz paketa i proveru spremnosti:
 
 ```bash
-python3 scripts/discover_election_contacts.py --election-id 2026-parliamentary --output data/election_candidates.json
+bun run contacts:run -- --election-id 2026-parliamentary
 ```
 
-Faza čita dozvoljene javne izvore i upisuje predloge u `data/election_candidates.json`.
+Ovo je bezbedna podrazumevana komanda. Ona:
 
-Pre pokretanja proveriti da je radni skup ograničen na MSP indeks → njegovu stranicu države → eksplicitno povezani sajt misije. Pregledati da svaki kandidat ima svih sedam obaveznih polja iz prethodnog odeljka. Kandidat sa nedostajućim poljem, ne-HTTPS URL-om ili nejasnim izbornim kontekstom odbaciti; ne dopunjavati ga nagađanjem.
+1. pretražuje samo sledeći ograničeni skup domaćina i stranica (`--max-hosts 5`, `--max-pages 80`, rok 15 s), bez automatskog širenja na potpuni adresar;
+2. spaja nov javni dokaz sa trajnim `data/election_candidates.json`, a stanje inkrementalnog rada čuva u `data/election_crawl_state.json`;
+3. ispisuje vidljivu listu stanica kojima je potreban pregled i pravi `review-packets.json`;
+4. pravi `promotion-dry-run.json` sa `eligibleStationIds`, `held` i `unchangedStationIds`.
 
-### 2. AI pregled (opciono, savetodavan)
+Za ovu komandu nisu potrebne AI poverljive vrednosti i ona ne menja `data/overrides.json`. „Nema pronađenog dokaza“ nije isto što i uspešno pokrivena misija: pogledati `discovery-report.json` za neuspehe prenosa, odložene domaćine, budžetska/dubinska ograničenja i nejasne nalaze. Takav delimičan prolaz nije potvrda da je ceo adresar pregledan.
 
-Ako je AI krajnja tačka podešena, može se pokrenuti zasebna savetodavna faza nad `data/election_candidates.json`:
+Nasleđeni kandidat sa nepotpunim ili nevezanim dokazom nikada ne dobija paket ni autorizaciju: njegova stanica se pojavljuje kao `held` i mora se ciljano ponovo pribaviti javni izvor. Istorijski zapisi bez `sourceId` i stanice bez javnog sajta (`no-site`) ostaju evidentirani, ali ako nisu izričito izabrani ne zaustavljaju ceo prolaz niti se predstavljaju kao pokrivenost.
+
+Po potrebi ograničite prolaz na konkretne stanice ili budžet:
 
 ```bash
-ELECTION_AI_BASE_URL=... ELECTION_AI_API_KEY=... ELECTION_AI_MODEL=... \
-  python3 scripts/review_election_candidates.py \
-    --input data/election_candidates.json \
-    --output data/election_ai_reviews.json
+bun run contacts:run -- --election-id 2026-parliamentary \
+  --station st-de-emb-main --station st-de-cons-minhen --max-pages 120
 ```
 
-Ona piše preporuke u `data/election_ai_reviews.json`; ne menja kandidate niti `data/overrides.json`. Potrebne OpenAI-kompatibilne promenljive su `ELECTION_AI_BASE_URL`, `ELECTION_AI_API_KEY` i `ELECTION_AI_MODEL`; opcioni mrežni rok je `--timeout` (podrazumevano 30 sekundi). Tajne držati u lokalnom okruženju ili tajnom upravljaču, nikada u repozitorijumu, JSON artefaktima ili dnevniku izvršavanja.
+`--station` je ponovljiv. Izričito navedena stanica može se ponovo proveriti i kada je ranije potvrđena; rutinski prolaz je ne proverava samo zato što je već potvrđena.
 
-AI-u se šalje isključivo javni dokaz kandidata: adresa, citat, zvanični URL, host, izborni kontekst, vreme opažanja i identitet misije. AI samo rangira ili obrazlaže dokaz i može da preporuči odbacivanje. **AI ne može da objavi primaoca, ne može da promeni ljudska odobrenja i nikada ne sme da menja `data/overrides.json`.** Ne prihvatati AI nalaz kao dokaz bez nezavisne ljudske provere izvora.
+## AI pregled i autorizacija
 
-Ako je operativni artefakt `data/election_ai_reviews.json` prisutan ili je drugi artefakt pregleda priložen promociji, mora sadržati jedan dovršen zapis za **svakog** kandidata. Kandidat sa nalazom `reject` se ne sme zaobići: prisutan podrazumevani artefakt se mora proslediti kroz `--reviews`, a promocija se prekida uz naziv kandidata i razlog. Ako se savetodavni pregled zaista ne koristi, izostavljanje se mora izričito označiti opcijom `--omit-reviews`; ona se odbija dok je podrazumevani artefakt prisutan, pa samo odsustvo `--reviews` nije dovoljno.
+Kandidat može biti promovisan samo uz **jedan stvaran, dovršen primarni AI pregled** po politici `data/election_reviewers.json`. Prihvaćeni pregled mora vezati kandidata, skup kandidata za stanicu, izvor i tačne javne citate za tri stvari: aktuelni izbor, adresu za prijavu i identitet stanice. Paket i pregled sadrže stvarni identitet/odgovor poziva kada je dostupan; ne upisivati niti prepisivati ime modela koje nije stvarno prijavljeno.
 
-### 3. Ljudska promocija
+`asOf` u paketu i pregledu je informativni UTC kontekst procene; nije izvorna tvrdnja niti oslabljuje vezu dokaza. Neizmenljiva veza je hash-vezana za kandidata, skup kandidata stanice, kanonski identitet, URL izvora i hash punog vidljivog teksta izvora. Promocija proverava svežinu izvora prema politici i odbija prihvaćeni pregled kada izvor podržava rok čiji je `validUntil` već prošao.
 
-Poverljivi održavalac nezavisno proverava kandidata u njegovom živom zvaničnom izvoru i u `data/missions_canonical.json`. Svako odobrenje beleži se u `data/election_approvals.json`. Fajl počinje sa `{"schemaVersion":1,"approvals":[]}`, a svaki zapis mora imati `candidateId`, `electionId`, stabilni ljudski `reviewerId`, `reviewerType:"human"`, `decision:"approve"` i `approvedAt` u ISO-8601 formatu.
-
-`data/election_reviewers.json` je pregledana politika: dozvoljeni stabilni ljudski identiteti (`reviewerIds`) i `requiredHumanApprovals`. Bilo koji `reviewerId` koji nije doslovno na listi odbacuje celu promociju. Broj različitih odluka mora tačno odgovarati `requiredHumanApprovals`; duplikat, nepotpuna odluka ili neslaganje se ne računa.
-
-Primer pre promocije (zameniti identifikatorom koji već postoji u `data/election_reviewers.json`):
-
-```json
-{
-  "schemaVersion": 1,
-  "approvals": [
-    {
-      "candidateId": "kandidat-123",
-      "electionId": "2026-parliamentary",
-      "reviewerType": "human",
-      "reviewerId": "odrzavalac",
-      "decision": "approve",
-      "approvedAt": "2026-09-09T12:00:00Z"
-    }
-  ]
-}
-```
-
-Zatim pokrenuti:
+Za poziv podešene krajnje tačke koristite eksplicitno `--review`; poverljive vrednosti ostaju u lokalnom tajnom okruženju, nikada u repozitorijumu ili artefaktima:
 
 ```bash
-python3 scripts/promote_election_contacts.py \
-  --candidates data/election_candidates.json \
-  --omit-reviews \
-  --approvals data/election_approvals.json \
-  --reviewers data/election_reviewers.json \
-  --canonical data/missions_canonical.json \
-  --overrides data/overrides.json
+ELECTION_AI_BASE_URL=https://example.invalid/v1 \
+ELECTION_AI_API_KEY=... ELECTION_AI_MODEL=... \
+  bun run contacts:run -- --election-id 2026-parliamentary --review
 ```
 
-Kada postoji dovršen savetodavni pregled, `--omit-reviews` se zamenjuje sa `--reviews data/election_ai_reviews.json`; dve opcije se ne kombinuju. Faza ponovo nezavisno potvrđuje identitet stanice, HTTPS izvor, javno vidljivu adresu i, kada stanica ima kanonski sajt, host izvora. AI preporuka nije zamena za ljudsko odobrenje.
+Ako se koristi odvojeni AI/harness, najpre pokrenite podrazumevanu komandu i uzmite `review-packets.json` iz ispisanog direktorijuma prolaza. Harness mora pozvati stvarni model prema formalnoj šemi odgovora iz paketa; zatim se dobijeni artefakt uvozi samo uz izričitu lokalnu potvrdu njegovog porekla:
 
-Promocija se prekida bez menjanja `overrides.json` ako bilo koji izabrani kandidat nema tačno propisan broj različitih ljudskih odobrenja, ima ljudsko odbijanje, nema obavezni priloženi AI zapis ili ima `reject` nalaz. Dva kandidata za istu stanicu su dvosmislen izbor i takođe prekidaju promociju; alat nikada ne bira poslednji zapis. Promovisati samo adresu sa aktuelnim zvaničnim izvorom. Rok se ne zaključuje iz identifikatora izbora, vremena opažanja ili vremena pokretanja: poverljivi održavalac proverava živu objavu i izričito bira svaku stanicu.
+```bash
+bun run contacts:run -- --election-id 2026-parliamentary \
+  --import-reviews /bezbedna/putanja/stvarni-harness-reviews.json --attest-import
+```
 
-### Deaktivacija isteklog ovlašćenja
+`--attest-import` je namerna tvrdnja operatera da su pregledi prikupljeni iz stvarnih harness poziva. Nije zamena za poziv, nije način za ručno izmišljanje odobrenja i bez njega se uvoz odbija. Uvezena/pozvana evidencija se spaja sa trajnim `data/election_ai_reviews.json`; odbijeni i raniji suprotni pregledi ostaju u tragu.
 
-Kada ljudski pregled žive objave utvrdi da izborna adresa više nije ovlašćena, poverljivi održavalac eksplicitno bira stanicu sa ponovljenom opcijom `--deactivate-station STATION_ID`. Ovaj režim ne prima kandidate, odobrenja ni AI pregled i odbija ponovljen, nepoznat ili već neaktivan ID stanice. Alat uklanja samo `electionEmail` i `_electionContactProvenance`; sve ostale ključeve postojećeg override-a, uključujući nevezane podatke o misiji, zadržava. Ako posle toga ne ostane nijedan ključ, uklanja se samo taj prazan override.
+Arhitekta se ne poziva rutinski. Potreban je samo kada je kandidat `needs_review`, kada postoje konkurentne adrese, promena postojeće adrese za isti izbor ili suprotan primarni nalaz. Tada arhitekta razrešava sve ranije suprotne preglede u istom vezanom skupu dokaza; ne koristi se za nedostatak izvora, nejasan opšti kontakt ili za ubrzavanje prolaza. Istorijski ljudski ledger ostaje arhivski dokaz i ne autorizuje novog kandidata.
 
-Alat ne zaključuje datum isteka i ne deaktivira ništa automatski. Posle uspešne deaktivacije obavezno pokrenuti uobičajenu bezbednu regeneraciju skupa podataka i pregledati da je stanica ponovo nepotvrđena (`isElectionContactConfirmed:false`) pre izdavanja. Tako se kanonski kontakt vraća bez ručnog menjanja nepovezanih podataka misije.
+## Promocija je posebna, eksplicitna odluka
 
-## Pregled, čuvanje i trag revizije
+Tek nakon stvarnog pregleda pokrenite isti ograničeni tok sa `--apply`:
 
-Čuvati `election_candidates.json`, svaki korišćeni savetodavni pregled, korišćeni fajl odobrenja, verziju `election_reviewers.json` i promenjeni `overrides.json` kao trag ciklusa, uz datum pokretanja, verziju alata i identitet odobravaoca. Čuvati samo javne institucionalne dokaze i ne dodavati lične podatke ni tajne. Zadržati artefakte najmanje do isteka izbornog roka i završene naknadne provere; zatim ih obrisati prema važećoj politici zadržavanja, osim onoga što je potrebno za javni revizioni trag.
+```bash
+ELECTION_AI_BASE_URL=https://example.invalid/v1 \
+ELECTION_AI_API_KEY=... ELECTION_AI_MODEL=... \
+  bun run contacts:run -- --election-id 2026-parliamentary --review --apply
+```
 
-Svaki pregled proverava: dozvoljeni lanac izvora, HTTPS URL, doslovno vidljivu adresu, tačan kanonski host stanice kada postoji, vreme opažanja, rok važenja i broj različitih ljudskih odobrenja iz politike. Ne menjati ručno rezultat AI pregleda niti preskakati proveru kanonske mape misija.
+ili, za već stvarno prikupljeni i potvrđeni harness artefakt:
 
-## Ritam rada i postupanje pri grešci
+```bash
+bun run contacts:run -- --election-id 2026-parliamentary \
+  --import-reviews /bezbedna/putanja/stvarni-harness-reviews.json \
+  --attest-import --apply
+```
 
-Dok je MSP ili misija objavila aktivan izborni prozor, otkrivanje i pregled raditi **svakog dana**. Van objavljenog prozora proveravati **jednom nedeljno**. Dodatni prolaz uraditi odmah po novom zvaničnom obaveštenju, promeni roka ili povlačenju izvora.
+Pre pisanja, tok uvek pravi novi dry-run. Sa `--apply` bira **samo** `eligibleStationIds` iz tog dry-runa i šalje ih promociji kao eksplicitne stanice. Zadržane stanice (`held`) ostaju nepromenjene, a ako bilo koja izabrana grupa više nije validna promocija se prekida bez delimičnog upisa. `--apply` bez `--review` ili potvrđenog `--import-reviews` se odbija. Tok nikada ne izmišlja pregled, ne premošćava neuspelu raniju fazu i ne menja override pri samom izvozu paketa.
 
-Ako indeks MSP-a, stranica države ili sajt misije nije dostupan, ako URL preusmerava van dozvoljenog lanca, ako nema vidljive izborne veze ili ako fajl odobrenja nije potpun: ne promovisati ništa. Sačuvati bezbednu poruku o grešci bez tajni i bez ličnih podataka, označiti ciklus za ponavljanje i pokušati ponovo pri sledećem ritmu ili nakon otklanjanja kvara. Kada izvor nestane ili istekne, postojeći živi primalac nije opravdan za dalje korišćenje dok se ne pribavi nov aktuelni dokaz.
+Trajni override čuva postojeće, nevezane ključeve. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava.
 
-## Izdavanje
+## Izgradnja podataka i zasebno objavljivanje
 
-Nakon uspešne ljudske promocije i pregleda promene, pokrenuti proveru podataka i testove:
+Posle uspešnog `--apply`, u radnoj kopiji ponovo izgradite podatke koje koristi frontend, pa proverite i sastavite izdanje:
 
 ```bash
 bun run build:data
+bun run check
 bun test
+bun run build
 ```
 
-Produkcijsko izdavanje obavlja održavalac prema privatno čuvanom postupku, uz eksplicitno naveden ID projekta. Ne objavljivati ako `build:data` ili testovi ne uspeju. Pre izdavanja poslednji put potvrditi da svaki promenjeni živi primalac ima aktuelni zvanični izvor i datum isteka.
+Ovi koraci pripremaju i proveravaju lokalnu radnu kopiju; ne objavljuju ništa. Produkciono objavljivanje je zasebna, izričita odluka operatera prema važećoj OPERATOR politici, nakon pregleda promena i rezultata ovih koraka. Uspešan `--apply` ili `build:data` ne znači da je izmena već postavljena.
+
+## Potpuni ciklus je odvojen
+
+Potpuno osvežavanje je namerna, odvojena operacija; nikada nije automatski povratak iz inkrementalnog rada:
+
+```bash
+bun run contacts:full -- --election-id 2026-parliamentary
+```
+
+Ona koristi `--mode full --max-pages 3000 --max-hosts 0` i zato pravi nov `runId` i nov skup artefakata. Pregledati njegove pokazatelje pokrivenosti pre nego što se radi pregled ili promocija. Ne tumačiti raniji inkrementalni izveštaj kao dokaz potpunog ciklusa niti mešati njihove pakete i izveštaje.
+
+## Artefakti, greške i čuvanje
+
+Direktorijum jednog prolaza sadrži najmanje `candidates.json`, `discovery-report.json`, `review-packets.json` kada nema endpointa, `reviews.json` kada je pregled izvršen/uvezen, `promotion-dry-run.json` i `run.json`. `run.json` beleži izabrani režim, granice, faze, rezultat i putanje artefakata. Kandidati i pregledi se čuvaju u trajnim skladištima navedenim gore, dok se pojedinačni artefakti prolaza ne prepisuju.
+
+Ako u izričito izabranom skupu nema stanica koje čekaju pregled, tok čuva izveštaj sa praznom listom spremnosti i `run.json`, pa preskače pregled i promociju. Tada nema novog paketa ni AI odluke; nerešene stanice izvan tog skupa ostaju u trajnoj evidenciji za naredni prolaz.
+
+Ako otkrivanje, pregled, uvoz ili promocija vrati grešku, tok se zaustavlja i kasnije faze se ne izvršavaju. Pročitati `run.json` i odgovarajući izveštaj, ukloniti uzrok i pokrenuti nov prolaz; ne popravljati paket, kandidat ili AI odgovor ručno. Sačuvati samo javni institucionalni dokaz i ne unositi tajne u JSON ili zapis izvršavanja.

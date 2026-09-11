@@ -10,7 +10,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "scrape:mfa": "python3 scripts/scrape_mfa.py",
-    "build:data": "python3 scripts/build_canonical_dataset.py"
+    "build:data": "python3 scripts/build_canonical_dataset.py",
+    "contacts:run": "python3 scripts/run_election_contacts.py",
+    "contacts:full": "python3 scripts/run_election_contacts.py --mode full --max-pages 3000 --max-hosts 0"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",

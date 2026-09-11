@@ -318,6 +318,9 @@
   ],
   "electionId": "2026-parliamentary",
   "electionYear": "2026",
-  "generatedAt": "2026-09-11T05:02:34Z",
-  "schemaVersion": 1
+  "generatedAt": "2026-09-11T06:44:09Z",
+  "pendingStationIds": [],
+  "runId": "b8a39eaf091783bcf0b631b1",
+  "schemaVersion": 1,
+  "sources": {}
 }

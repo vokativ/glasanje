@@ -1,6 +1,9 @@
 {
-  "_description": "Authorization policy for election-contact promotions.",
-  "schemaVersion": 1,
-  "requiredHumanApprovals": 1,
-  "reviewerIds": ["vokativ"]
+  "_description": "Authorization policy for source-checked election-contact AI reviews.",
+  "schemaVersion": 2,
+  "mode": "source_checked_ai",
+  "requiredAiApprovals": 1,
+  "escalationRole": "architect",
+  "humanReviewerIds": ["vokativ"],
+  "maxSourceAgeHours": 24
 }

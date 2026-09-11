@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import contextlib
+from datetime import datetime, timezone
+import hashlib
 import importlib.util
-import io
 import json
-import os
 from pathlib import Path
 import subprocess
 import sys
@@ -19,11 +18,6 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 DISCOVERY_SCRIPT = REPOSITORY_ROOT / "scripts" / "discover_election_contacts.py"
 REVIEW_SCRIPT = REPOSITORY_ROOT / "scripts" / "review_election_candidates.py"
 PROMOTION_SCRIPT = REPOSITORY_ROOT / "scripts" / "promote_election_contacts.py"
-AI_ENVIRONMENT = (
-    "ELECTION_AI_BASE_URL",
-    "ELECTION_AI_API_KEY",
-    "ELECTION_AI_MODEL",
-)
 
 
 def load_script_module(name: str, path: Path):
@@ -37,8 +31,6 @@ def load_script_module(name: str, path: Path):
 
 
 DISCOVERY = load_script_module("election_contact_discovery_for_tests", DISCOVERY_SCRIPT)
-REVIEW = load_script_module("election_contact_review_for_tests", REVIEW_SCRIPT)
-PROMOTION = load_script_module("election_contact_promotion_for_tests", PROMOTION_SCRIPT)
 
 
 class ElectionContactPipelineTests(unittest.TestCase):
@@ -188,16 +180,9 @@ class ElectionContactPipelineTests(unittest.TestCase):
         self.assertNotIn("2026", candidate["title"])
         self.assertNotIn("2026", candidate["sourceQuote"])
         self.assertIn("2026", candidate["electionContext"])
-        validated = PROMOTION.validate_candidates(
-            payload,
-            {
-                "embassy-vienna": (
-                    "AT",
-                    {"website": "https://vienna.mfa.gov.rs"},
-                )
-            },
-        )
-        self.assertIn(candidate["candidateId"], validated)
+        source = payload["sources"][candidate["sourceId"]]
+        self.assertEqual(candidate["sourceChain"][-1], source["sourceUrl"])
+        self.assertIn(candidate["sourceQuote"], source["text"])
 
     def test_discovery_rejects_generic_contact_from_current_year_main(self) -> None:
         payload = self._run_discovery_fixture(
@@ -294,42 +279,67 @@ class ElectionContactPipelineTests(unittest.TestCase):
 
 
     def test_discovery_attributes_shared_roma_notice_mailboxes_to_their_stations(self) -> None:
-        country_url = "https://www.mfa.gov.rs/diplomatsko-konzularna-predstavnistva/italija"
+        italy_country_url = "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/italija/ambasade-konzulati"
+        malta_country_url = "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/malta/ambasade-konzulati"
         notice_url = "https://roma.mfa.gov.rs/konzularne-usluge/izbori"
         italy = DISCOVERY.Station("IT", "st-it-emb-main", "roma.mfa.gov.rs", "izbori.rim@mfa.rs")
         malta = DISCOVERY.Station("MT", "st-mt-emb-main", "roma.mfa.gov.rs", "srb.office.valletta@mfa.rs")
-        notice_task = DISCOVERY.PageTask(notice_url, "IT", (italy,), 0)
-        responses = iter(
-            (
-                lambda urls: [
-                    (url, DISCOVERY.Response(url, "text/html", b"<html></html>"))
-                    for url, _ in urls
-                ],
-                lambda urls: [
-                    (country_url, DISCOVERY.Response(country_url, "text/html", b"<h1>Italy</h1>"))
-                ],
-                lambda urls: [
-                    (
-                        notice_url,
-                        DISCOVERY.Response(
-                            notice_url,
-                            "text/html",
+        italy_task = DISCOVERY.PageTask(
+            notice_url,
+            "IT",
+            (italy,),
+            0,
+            source_chain=(DISCOVERY.INDEX_URLS[0], italy_country_url, notice_url),
+        )
+        malta_task = DISCOVERY.PageTask(
+            notice_url,
+            "MT",
+            (malta,),
+            0,
+            source_chain=(DISCOVERY.INDEX_URLS[0], malta_country_url, notice_url),
+        )
+        fetch_calls: list[list[str]] = []
+
+        def fetch_many(urls, *_args):
+            requested = list(urls)
+            fetch_calls.append([url for url, _ in requested])
+            return [
+                (
+                    url,
+                    DISCOVERY.Response(
+                        url,
+                        "text/html",
+                        (
                             b"""
                             <h1>Izbori 2026</h1>
                             <p>Za glasanje u Italiji 2026 prijavu posaljite na izbori.rim@mfa.rs.</p>
                             <p>Za glasanje na Malti 2026 prijavu posaljite na srb.office.valletta@mfa.rs.</p>
-                            """,
+                            """
+                            if url == notice_url
+                            else b"<html></html>"
                         ),
-                    )
-                ],
-            )
-        )
-
-        def fetch_many(urls, *_args):
-            return next(responses)(list(urls))
+                    ),
+                )
+                for url, _ in requested
+            ]
 
         with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory) / "candidates.json"
+            temporary_directory = Path(directory)
+            output = temporary_directory / "candidates.json"
+            missions = temporary_directory / "missions.json"
+            state = temporary_directory / "crawl-state.json"
+            report = temporary_directory / "crawl-report.json"
+            registry = temporary_directory / "registry.json"
+            overrides = temporary_directory / "overrides.json"
+            self._write_json(missions, {"countries": []})
+            self._write_json(
+                registry,
+                [
+                    {"country": "Italy", "url": "/spoljna-politika/bilateralna-saradnja/italija/ambasade-konzulati"},
+                    {"country": "Malta", "url": "/spoljna-politika/bilateralna-saradnja/malta/ambasade-konzulati"},
+                ],
+            )
+            self._write_json(overrides, {"missionOverrides": {}})
             with (
                 mock.patch.object(
                     DISCOVERY,
@@ -342,8 +352,22 @@ class ElectionContactPipelineTests(unittest.TestCase):
                         {"IT": (italy,), "MT": (malta,)},
                     ),
                 ),
-                mock.patch.object(DISCOVERY, "country_links", return_value={country_url: {"IT"}}),
-                mock.patch.object(DISCOVERY, "linked_mission_tasks", return_value=[notice_task]),
+                mock.patch.object(
+                    DISCOVERY,
+                    "country_links",
+                    side_effect=lambda _html, index_url, *_args: (
+                        {italy_country_url: {"IT"}, malta_country_url: {"MT"}}
+                        if index_url == DISCOVERY.INDEX_URLS[0]
+                        else {}
+                    ),
+                ),
+                mock.patch.object(
+                    DISCOVERY,
+                    "linked_mission_tasks",
+                    side_effect=lambda _html, country_code, *_args: [
+                        italy_task if country_code == "IT" else malta_task
+                    ],
+                ),
                 mock.patch.object(DISCOVERY, "mission_links", return_value=[]),
                 mock.patch.object(DISCOVERY, "fetch_many", side_effect=fetch_many),
                 mock.patch.object(
@@ -353,10 +377,26 @@ class ElectionContactPipelineTests(unittest.TestCase):
                         str(DISCOVERY_SCRIPT),
                         "--election-id",
                         "2026-parliamentary",
+                        "--election-year",
+                        "2026",
+                        "--mode",
+                        "full",
+                        "--missions",
+                        str(missions),
+                        "--registry",
+                        str(registry),
+                        "--state",
+                        str(state),
+                        "--report",
+                        str(report),
+                        "--overrides",
+                        str(overrides),
                         "--output",
                         str(output),
+                        "--max-hosts",
+                        "0",
                         "--max-pages",
-                        "5",
+                        "20",
                     ],
                 ),
             ):
@@ -371,336 +411,133 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 ("srb.office.valletta@mfa.rs", "MT", "st-mt-emb-main"),
             },
         )
+        self.assertEqual(
+            {candidate["stationId"]: candidate["sourceChain"] for candidate in candidates},
+            {
+                "st-it-emb-main": [DISCOVERY.INDEX_URLS[0], italy_country_url, notice_url],
+                "st-mt-emb-main": [DISCOVERY.INDEX_URLS[0], malta_country_url, notice_url],
+            },
+        )
+        self.assertEqual(sum(fetch_calls, []).count(notice_url), 1)
 
     def test_discovery_refuses_overrides_as_output(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "overrides.json"
-            stderr = io.StringIO()
-            with (
-                mock.patch.object(DISCOVERY, "OVERRIDES_PATH", output.resolve()),
-                mock.patch.object(
-                    DISCOVERY.sys,
-                    "argv",
-                    [str(DISCOVERY_SCRIPT), "--election-id", "parliamentary-2026", "--output", str(output)],
-                ),
-                contextlib.redirect_stderr(stderr),
-                self.assertRaisesRegex(SystemExit, "2"),
-            ):
-                DISCOVERY.parse_args()
+            baseline = {"missionOverrides": {"station": {"electionEmail": "preserve@example.test"}}}
+            self._write_json(output, baseline)
 
-        self.assertIn("--output must not resolve to data/overrides.json", stderr.getvalue())
-        self.assertFalse(output.exists())
-
-    def test_missing_ai_configuration_fails_before_any_request(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            temporary_directory = Path(directory)
-            missing_input = temporary_directory / "not-read-before-configuration.json"
-            output = temporary_directory / "reviews.json"
-            stderr = io.StringIO()
-
-            with (
-                mock.patch.dict(REVIEW.os.environ, {}, clear=True),
-                mock.patch.object(
-                    REVIEW.sys,
-                    "argv",
-                    [
-                        str(REVIEW_SCRIPT),
-                        "--input",
-                        str(missing_input),
-                        "--output",
-                        str(output),
-                    ],
-                ),
-                mock.patch.object(REVIEW, "request_review") as request_review,
-                contextlib.redirect_stderr(stderr),
-            ):
-                status = REVIEW.main()
-
-        self.assertEqual(status, 2)
-        self.assertIn("Missing required environment variables", stderr.getvalue())
-        request_review.assert_not_called()
-        self.assertFalse(output.exists())
-
-    def test_insecure_or_credentialed_ai_endpoint_fails_before_any_request(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            temporary_directory = Path(directory)
-            missing_input = temporary_directory / "not-read-before-endpoint-validation.json"
-            for base_url in ("http://review.example.test", "https://token@review.example.test"):
-                with self.subTest(base_url=base_url):
-                    output = temporary_directory / f"{base_url.split(':', 1)[0]}-reviews.json"
-                    stderr = io.StringIO()
-                    with (
-                        mock.patch.dict(
-                            REVIEW.os.environ,
-                            {
-                                "ELECTION_AI_BASE_URL": base_url,
-                                "ELECTION_AI_API_KEY": "local-test-key",
-                                "ELECTION_AI_MODEL": "local-test-model",
-                            },
-                            clear=True,
-                        ),
-                        mock.patch.object(
-                            REVIEW.sys,
-                            "argv",
-                            [
-                                str(REVIEW_SCRIPT),
-                                "--input",
-                                str(missing_input),
-                                "--output",
-                                str(output),
-                            ],
-                        ),
-                        mock.patch.object(REVIEW, "request_review") as request_review,
-                        contextlib.redirect_stderr(stderr),
-                    ):
-                        status = REVIEW.main()
-
-                    self.assertEqual(status, 2)
-                    self.assertIn("ELECTION_AI_BASE_URL", stderr.getvalue())
-                    request_review.assert_not_called()
-                    self.assertFalse(output.exists())
-
-    def test_promotion_ignores_valid_historical_approvals_for_absent_candidates(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            approvals = self._read_json(paths["approvals"])
-            approvals["approvals"].append(
-                {
-                    "candidateId": "vienna-2022-election-contact",
-                    "electionId": "parliamentary-2022",
-                    "reviewerId": "ana",
-                    "reviewerType": "human",
-                    "decision": "approve",
-                    "approvedAt": "2022-03-01T10:00:00Z",
-                }
-            )
-            self._write_json(paths["approvals"], approvals)
-
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(result.stdout.strip(), "Promoted 1 election-specific contact(s).")
-            provenance = self._read_json(paths["overrides"])["missionOverrides"]["embassy-vienna"][
-                "_electionContactProvenance"
-            ]
-            self.assertEqual(
-                provenance["humanApprovals"],
+            result = subprocess.run(
                 [
-                    {"reviewerId": "ana", "decision": "approve", "approvedAt": "2026-09-01T10:00:00Z"},
-                    {"reviewerId": "boris", "decision": "approve", "approvedAt": "2026-09-01T11:00:00Z"},
+                    sys.executable,
+                    str(DISCOVERY_SCRIPT),
+                    "--election-id",
+                    "parliamentary-2026",
+                    "--output",
+                    str(output),
+                    "--overrides",
+                    str(output),
                 ],
+                check=False,
+                capture_output=True,
+                text=True,
             )
 
-    def test_promotion_rejects_mismatched_election_id_for_present_candidate_approval(self) -> None:
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("must not alias a crawler input", result.stderr)
+            self.assertEqual(self._read_json(output), baseline)
+
+    def test_source_checked_primary_review_promotes_a_new_station_email(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            approvals = self._read_json(paths["approvals"])
-            approvals["approvals"][0]["electionId"] = "parliamentary-2022"
-            self._write_json(paths["approvals"], approvals)
+            paths = self._write_v2_promotion_fixture(Path(directory))
+            self._import_primary_accept(paths, "embassy-vienna")
 
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("electionId does not match candidate", result.stderr)
-            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_fails_closed_for_duplicate_human_approver(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "ana"))
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("not from distinct reviewers", result.stderr)
-            self.assertEqual(
-                self._read_json(paths["overrides"]),
-                {"missionOverrides": {}},
-            )
-
-    def test_promotion_allows_an_election_designated_generic_mailbox(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            candidates = self._read_json(paths["candidates"])
-            candidates["candidates"][0]["email"] = "info@vienna.mfa.gov.rs"
-            candidates["candidates"][0]["sourceQuote"] = (
-                "Za glasanje u inostranstvu, prijavu za izbore pošaljite na info@vienna.mfa.gov.rs."
-            )
-            self._write_json(paths["candidates"], candidates)
-
-            result = self._run_promotion(paths)
+            result = self._run_promotion(paths, "--station", "embassy-vienna")
 
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(result.stdout.strip(), "Promoted 1 election-specific contact(s).")
-
-    def test_promotion_rejects_url_parameterized_mailbox(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            candidates = self._read_json(paths["candidates"])
-            candidates["candidates"][0]["email"] = "izbori.vienna@mfa.gov.rs?bcc=attacker"
-            candidates["candidates"][0]["sourceQuote"] = (
-                "Za glasanje u inostranstvu, prijavu za izbore pošaljite na "
-                "izbori.vienna@mfa.gov.rs?bcc=attacker."
-            )
-            self._write_json(paths["candidates"], candidates)
-
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_rejects_source_host_mismatch(self) -> None:
-        cases = (
-            (
-                "sourceHost differs from sourceUrl",
-                "https://vienna.mfa.gov.rs/konzularne-usluge/izbori",
-                "belgrade.mfa.gov.rs",
-                "sourceHost does not match sourceUrl",
-            ),
-            (
-                "source host is not the candidate station's mission",
-                "https://belgrade.mfa.gov.rs/konzularne-usluge/izbori",
-                "belgrade.mfa.gov.rs",
-                "sourceHost does not match the station's canonical mission website",
-            ),
-        )
-        for name, source_url, source_host, error in cases:
-            with self.subTest(name=name), tempfile.TemporaryDirectory() as directory:
-                paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-                candidates = self._read_json(paths["candidates"])
-                candidates["candidates"][0]["sourceUrl"] = source_url
-                candidates["candidates"][0]["sourceHost"] = source_host
-                self._write_json(paths["candidates"], candidates)
-
-                result = self._run_promotion(paths)
-
-                self.assertEqual(result.returncode, 2, result.stderr)
-                self.assertIn(error, result.stderr)
-                self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_requires_the_exact_visible_mailbox(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            candidates = self._read_json(paths["candidates"])
-            candidates["candidates"][0]["sourceQuote"] = (
-                "Obaveštenje o izborima 2026. opisuje podnošenje prijave."
-            )
-            self._write_json(paths["candidates"], candidates)
-
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("does not visibly contain its exact email", result.stderr)
-            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_rejects_an_invalid_supplied_ai_review(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            reviews = self._read_json(paths["reviews"])
-            reviews["reviews"][0]["reviewStatus"] = "error"
-            self._write_json(paths["reviews"], reviews)
-
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("did not complete", result.stderr)
-            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_rejects_human_outside_reviewed_allowlist(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "mallory"))
-
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("not in the reviewed allow-list", result.stderr)
-            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_rejects_missing_or_mismatched_election_year(self) -> None:
-        cases = (
-            ("missing", lambda candidate: candidate.pop("electionYear"), "requires non-empty electionYear"),
-            (
-                "mismatched",
-                lambda candidate: candidate.__setitem__("electionYear", "2022"),
-                "electionYear does not match candidates electionId",
-            ),
-        )
-        for name, mutate, error in cases:
-            with self.subTest(name=name), tempfile.TemporaryDirectory() as directory:
-                paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-                candidates = self._read_json(paths["candidates"])
-                mutate(candidates["candidates"][0])
-                self._write_json(paths["candidates"], candidates)
-
-                result = self._run_promotion(paths)
-
-                self.assertEqual(result.returncode, 2, result.stderr)
-                self.assertIn(error, result.stderr)
-                self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_rejects_candidate_without_target_year_evidence(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            candidates = self._read_json(paths["candidates"])
-            candidate = candidates["candidates"][0]
-            candidate["title"] = "Obaveštenje o parlamentarnim izborima"
-            candidate["electionContext"] = "Glasanje u inostranstvu"
-            candidate["sourceQuote"] = (
-                "Za glasanje u inostranstvu, prijavu za izbore pošaljite na "
-                "izbori.vienna@mfa.gov.rs."
-            )
-            self._write_json(paths["candidates"], candidates)
-
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 2, result.stderr)
-            self.assertIn("does not visibly contain electionYear", result.stderr)
-            self.assertEqual(self._read_json(paths["overrides"]), {"missionOverrides": {}})
-
-    def test_promotion_records_provenance_after_authorized_human_approvals(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "boris"))
-            result = self._run_promotion(paths)
-
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(result.stdout.strip(), "Promoted 1 election-specific contact(s).")
             override = self._read_json(paths["overrides"])["missionOverrides"]["embassy-vienna"]
             provenance = override["_electionContactProvenance"]
             self.assertEqual(override["electionEmail"], "izbori.vienna@mfa.gov.rs")
-            self.assertEqual(provenance["candidateId"], "vienna-2026-election-contact")
-            self.assertEqual(provenance["electionId"], "parliamentary-2026")
-            self.assertEqual(provenance["electionYear"], "2026")
-            self.assertEqual(provenance["sourceHost"], "vienna.mfa.gov.rs")
-            self.assertEqual(
-                provenance["sourceQuote"],
-                "Za glasanje u inostranstvu na izborima 2026, prijavu pošaljite na izbori.vienna@mfa.gov.rs.",
-            )
-            self.assertEqual(provenance["aiReviewDecision"], "accept")
-            self.assertEqual(
-                provenance["humanApprovals"],
-                [
-                    {"reviewerId": "ana", "decision": "approve", "approvedAt": "2026-09-01T10:00:00Z"},
-                    {"reviewerId": "boris", "decision": "approve", "approvedAt": "2026-09-01T11:00:00Z"},
-                ],
-            )
-            self.assertTrue(provenance["promotedAt"].endswith("Z"))
+            self.assertEqual(provenance["schemaVersion"], 2)
+            self.assertEqual(provenance["candidateId"], "embassy-vienna-2026-election-contact")
+            self.assertNotIn("humanApprovals", provenance)
 
-    def test_promotion_accepts_a_single_authorized_human_approval(self) -> None:
+    def test_historical_human_ledger_does_not_authorize_changed_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana",))
-            reviewers = self._read_json(paths["reviewers"])
-            reviewers["reviewerIds"] = ["ana"]
-            reviewers["requiredHumanApprovals"] = 1
-            self._write_json(paths["reviewers"], reviewers)
+            paths = self._write_v2_promotion_fixture(Path(directory), historical_authority=True)
+            baseline = self._read_json(paths["overrides"])
+            report = paths["report"]
 
-            result = self._run_promotion(paths)
+            self._write_empty_reviews(paths)
+            result = self._run_promotion(paths, "--dry-run", "--report", str(report))
 
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(result.stdout.strip(), "Promoted 1 election-specific contact(s).")
+            self.assertEqual(self._read_json(report)["eligibleStationIds"], [])
+            self.assertEqual(self._read_json(paths["overrides"]), baseline)
+
+    def test_packet_export_holds_quote_without_exact_visible_mailbox(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._write_v2_promotion_fixture(Path(directory))
+            baseline = self._read_json(paths["overrides"])
+            candidates = self._read_json(paths["candidates"])
+            candidate = candidates["candidates"][0]
+            candidate["sourceQuote"] = "Obaveštenje o izborima 2026. opisuje podnošenje prijave."
+            candidate["quote"] = candidate["sourceQuote"]
+            self._write_json(paths["candidates"], candidates)
+
+            self._assert_unreviewable_packet_is_held(paths, baseline)
+
+    def test_packet_export_holds_source_from_another_mission(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._write_v2_promotion_fixture(Path(directory))
+            baseline = self._read_json(paths["overrides"])
+            candidates = self._read_json(paths["candidates"])
+            candidate = candidates["candidates"][0]
+            source = candidates["sources"].pop(candidate["sourceId"])
+            source_url = "https://belgrade.mfa.gov.rs/konzularne-usluge/izbori"
+            source["sourceUrl"] = source_url
+            source["finalUrl"] = source_url
+            candidate["sourceId"] = hashlib.sha256(
+                json.dumps(
+                    {"sourceUrl": source_url, "textSha256": source["textSha256"]},
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+            candidate["sourceChain"][-1] = source_url
+            candidates["sources"][candidate["sourceId"]] = source
+            self._write_json(paths["candidates"], candidates)
+
+            self._assert_unreviewable_packet_is_held(paths, baseline)
+
+    def test_selected_batch_does_not_apply_when_one_group_is_held(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._write_v2_promotion_fixture(Path(directory), include_second_station=True)
+            self._import_primary_accept(paths, "embassy-vienna")
+            baseline = self._read_json(paths["overrides"])
+
+            result = self._run_promotion(
+                paths,
+                "--station",
+                "embassy-vienna",
+                "--station",
+                "consulate-salzburg",
+            )
+
+            self.assertEqual(result.returncode, 2, result.stderr)
+            self.assertEqual(self._read_json(paths["overrides"]), baseline)
 
     def _run_discovery_fixture(self, election_id: str, notice_html: str) -> dict[str, object]:
-        country_url = "https://www.mfa.gov.rs/diplomatsko-konzularna-predstavnistva/austrija"
+        country_url = "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/austrija/ambasade-konzulati"
         notice_url = "https://vienna.mfa.gov.rs/konzularne-usluge/izbori"
         station = DISCOVERY.Station("AT", "embassy-vienna", "vienna.mfa.gov.rs")
-        notice_task = DISCOVERY.PageTask(notice_url, "AT", (station,), 0)
+        notice_task = DISCOVERY.PageTask(
+            notice_url,
+            "AT",
+            (station,),
+            0,
+            source_chain=(DISCOVERY.INDEX_URLS[0], country_url, notice_url),
+        )
         responses = iter(
             (
                 lambda urls: [
@@ -720,7 +557,19 @@ class ElectionContactPipelineTests(unittest.TestCase):
             return next(responses)(list(urls))
 
         with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory) / "candidates.json"
+            temporary_directory = Path(directory)
+            output = temporary_directory / "candidates.json"
+            missions = temporary_directory / "missions.json"
+            state = temporary_directory / "crawl-state.json"
+            report = temporary_directory / "crawl-report.json"
+            registry = temporary_directory / "registry.json"
+            overrides = temporary_directory / "overrides.json"
+            self._write_json(missions, {"countries": []})
+            self._write_json(
+                registry,
+                [{"country": "Austria", "url": "/spoljna-politika/bilateralna-saradnja/austrija/ambasade-konzulati"}],
+            )
+            self._write_json(overrides, {"missionOverrides": {}})
             with (
                 mock.patch.object(
                     DISCOVERY,
@@ -738,109 +587,365 @@ class ElectionContactPipelineTests(unittest.TestCase):
                         str(DISCOVERY_SCRIPT),
                         "--election-id",
                         election_id,
+                        "--election-year",
+                        "2026",
+                        "--mode",
+                        "full",
+                        "--missions",
+                        str(missions),
+                        "--registry",
+                        str(registry),
+                        "--state",
+                        str(state),
+                        "--report",
+                        str(report),
+                        "--overrides",
+                        str(overrides),
                         "--output",
                         str(output),
+                        "--max-hosts",
+                        "0",
                         "--max-pages",
-                        "5",
+                        "20",
                     ],
                 ),
             ):
                 self.assertEqual(DISCOVERY.main(), 0)
             return self._read_json(output)
+    def _write_v2_promotion_fixture(
+        self,
+        directory: Path,
+        *,
+        include_second_station: bool = False,
+        historical_authority: bool = False,
+    ) -> dict[str, Path]:
+        now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        election_id = "2026-parliamentary"
+        index_url = "https://www.mfa.gov.rs/diplomatsko-konzularna-predstavnistva"
+        country_url = f"{index_url}/austrija"
+        sources: dict[str, dict[str, str]] = {}
+        candidates: list[dict[str, str]] = []
 
-    def _write_promotion_fixture(self, directory: Path, reviewer_ids: tuple[str, ...]) -> dict[str, Path]:
-        candidate_id = "vienna-2026-election-contact"
-        election_id = "parliamentary-2026"
+        def add_source(source_url: str, text: str) -> str:
+            text_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
+            source_id = hashlib.sha256(
+                json.dumps(
+                    {"sourceUrl": source_url, "textSha256": text_sha256},
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+            sources[source_id] = {
+                "sourceUrl": source_url,
+                "finalUrl": source_url,
+                "fetchedAt": now,
+                "bodySha256": text_sha256,
+                "textSha256": text_sha256,
+                "text": text,
+                "extractorVersion": "1",
+            }
+            return source_id
+
+        index_source_id = add_source(index_url, "Diplomatsko-konzularna predstavništva: Austrija.")
+        country_source_id = add_source(
+            country_url,
+            "Austrija: Ambasada Republike Srbije u Beču.",
+        )
+
+        def add_candidate(station_id: str, host: str, email: str, city: str) -> None:
+            source_url = f"https://{host}/konzularne-usluge/izbori"
+            source_quote = (
+                f"Za glasanje u inostranstvu na izborima 2026, prijavu pošaljite na {email}."
+            )
+            source_id = add_source(
+                source_url,
+                f"Ambasada Republike Srbije u {city}. Obaveštenje o parlamentarnim izborima 2026. "
+                f"{source_quote}",
+            )
+            candidates.append(
+                {
+                    "candidateId": f"{station_id}-2026-election-contact",
+                    "electionId": election_id,
+                    "electionYear": "2026",
+                    "countryCode": "AT",
+                    "stationId": station_id,
+                    "stationName": f"Embassy in {city}",
+                    "email": email,
+                    "title": "Obaveštenje o parlamentarnim izborima 2026.",
+                    "electionContext": "Obaveštenje o parlamentarnim izborima 2026.",
+                    "sourceQuote": source_quote,
+                    "quote": source_quote,
+                    "sourceUrl": source_url,
+                    "sourceHost": host,
+                    "sourceId": source_id,
+                    "sourceChain": [index_url, country_url, source_url],
+                    "observedAt": now,
+                }
+            )
+
+        add_candidate("embassy-vienna", "vienna.mfa.gov.rs", "izbori.vienna@mfa.gov.rs", "Beču")
+        if include_second_station:
+            add_candidate(
+                "consulate-salzburg",
+                "salzburg.mfa.gov.rs",
+                "izbori.salzburg@mfa.gov.rs",
+                "Salcburgu",
+            )
+
         paths = {
             "candidates": directory / "candidates.json",
             "reviews": directory / "reviews.json",
-            "approvals": directory / "approvals.json",
             "reviewers": directory / "reviewers.json",
             "canonical": directory / "canonical.json",
             "overrides": directory / "overrides.json",
+            "packet": directory / "packet.json",
+            "imported_reviews": directory / "imported-reviews.json",
+            "report": directory / "promotion-report.json",
         }
         self._write_json(
             paths["candidates"],
             {
+                "schemaVersion": 1,
                 "electionId": election_id,
                 "electionYear": "2026",
-                "generatedAt": "2026-09-01T09:00:00Z",
-                "candidates": [
-                    {
-                        "candidateId": candidate_id,
-                        "electionId": election_id,
-                        "countryCode": "AT",
-                        "stationId": "embassy-vienna",
-                        "email": "izbori.vienna@mfa.gov.rs",
-                        "electionYear": "2026",
-                        "title": "Obaveštenje o parlamentarnim izborima 2026.",
-                        "electionContext": "Obaveštenje o parlamentarnim izborima 2026.",
-                        "sourceQuote": "Za glasanje u inostranstvu na izborima 2026, prijavu pošaljite na izbori.vienna@mfa.gov.rs.",
-                        "sourceUrl": "https://vienna.mfa.gov.rs/konzularne-usluge/izbori",
-                        "sourceHost": "vienna.mfa.gov.rs",
-                        "observedAt": "2026-09-01T09:00:00Z",
-                    }
-                ],
-            },
-        )
-        self._write_json(
-            paths["reviews"],
-            {
-                "reviews": [
-                    {
-                        "candidateId": candidate_id,
-                        "electionId": election_id,
-                        "decision": "accept",
-                        "reviewStatus": "completed",
-                    }
-                ]
-            },
-        )
-        self._write_json(
-            paths["approvals"],
-            {
-                "approvals": [
-                    {
-                        "candidateId": candidate_id,
-                        "electionId": election_id,
-                        "reviewerId": reviewer_id,
-                        "reviewerType": "human",
-                        "decision": "approve",
-                        "approvedAt": f"2026-09-01T{10 + index:02d}:00:00Z",
-                    }
-                    for index, reviewer_id in enumerate(reviewer_ids)
-                ]
+                "generatedAt": now,
+                "runId": "test-run",
+                "pendingStationIds": [candidate["stationId"] for candidate in candidates],
+                "sources": sources,
+                "candidates": candidates,
             },
         )
         self._write_json(
             paths["reviewers"],
             {
-                "schemaVersion": 1,
-                "reviewerIds": ["ana", "boris"],
-                "requiredHumanApprovals": 2,
+                "schemaVersion": 2,
+                "mode": "source_checked_ai",
+                "requiredAiApprovals": 1,
+                "escalationRole": "architect",
+                "humanReviewerIds": ["vokativ"],
+                "maxSourceAgeHours": 24,
             },
         )
+        stations = [
+            {
+                "id": "embassy-vienna",
+                "email": "info@vienna.mfa.gov.rs",
+                "website": "https://vienna.mfa.gov.rs",
+                "isResident": True,
+            }
+        ]
+        if include_second_station:
+            stations.append(
+                {
+                    "id": "consulate-salzburg",
+                    "email": "info@salzburg.mfa.gov.rs",
+                    "website": "https://salzburg.mfa.gov.rs",
+                }
+            )
         self._write_json(
             paths["canonical"],
-            {
-                "countries": [
-                    {
-                        "countryCode": "AT",
-                        "stations": [
-                            {
-                                "id": "embassy-vienna",
-                                "email": "info@vienna.mfa.gov.rs",
-                                "website": "https://vienna.mfa.gov.rs",
-                            }
-                        ],
-                    }
-                ]
-            },
+            {"countries": [{"countryCode": "AT", "stations": stations}]},
         )
-        self._write_json(paths["overrides"], {"missionOverrides": {}})
+        overrides: dict[str, object] = {"missionOverrides": {}}
+        if historical_authority:
+            overrides["missionOverrides"] = {
+                "embassy-vienna": {
+                    "electionEmail": "old-vienna-election@mfa.gov.rs",
+                    "_electionContactProvenance": {
+                        "electionId": election_id,
+                        "humanApprovals": [{"reviewerId": "vokativ", "decision": "approve"}],
+                    },
+                }
+            }
+        self._write_json(paths["overrides"], overrides)
         return paths
 
-    def _run_promotion(self, paths: dict[str, Path]) -> subprocess.CompletedProcess[str]:
+    def _export_packets(self, paths: dict[str, Path]) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            [
+                sys.executable,
+                str(REVIEW_SCRIPT),
+                "--input",
+                str(paths["candidates"]),
+                "--output",
+                str(paths["reviews"]),
+                "--canonical",
+                str(paths["canonical"]),
+                "--reviewers",
+                str(paths["reviewers"]),
+                "--overrides",
+                str(paths["overrides"]),
+                "--role",
+                "primary",
+                "--export-packet",
+                str(paths["packet"]),
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+    def _assert_unreviewable_packet_is_held(
+        self, paths: dict[str, Path], baseline: object
+    ) -> None:
+        export = self._export_packets(paths)
+        self.assertEqual(export.returncode, 0, export.stderr)
+        packet_document = self._read_json(paths["packet"])
+        self.assertEqual(packet_document["packets"], [])
+        self._write_json(
+            paths["reviews"],
+            {
+                "schemaVersion": 2,
+                "asOf": packet_document["asOf"],
+                "policyDigest": packet_document["policyDigest"],
+                "canonicalDigest": packet_document["canonicalDigest"],
+                "reviews": [],
+            },
+        )
+
+        dry_run = self._run_promotion(paths, "--dry-run", "--report", str(paths["report"]))
+        self.assertEqual(dry_run.returncode, 0, dry_run.stderr)
+        self.assertEqual(
+            self._read_json(paths["report"]),
+            {
+                "eligibleStationIds": [],
+                "held": [
+                    {
+                        "stationId": "embassy-vienna",
+                        "reason": "selected candidate group has incomplete evidence and must be refetched",
+                    }
+                ],
+                "unchangedStationIds": [],
+            },
+        )
+        self.assertEqual(self._read_json(paths["overrides"]), baseline)
+
+        promotion = self._run_promotion(paths, "--station", "embassy-vienna")
+        self.assertEqual(promotion.returncode, 2, promotion.stderr)
+        self.assertIn("Selected promotion batch is not eligible", promotion.stderr)
+        self.assertEqual(self._read_json(paths["overrides"]), baseline)
+
+    def _write_empty_reviews(self, paths: dict[str, Path]) -> None:
+        export = self._export_packets(paths)
+        self.assertEqual(export.returncode, 0, export.stderr)
+        packet_document = self._read_json(paths["packet"])
+        self._write_json(
+            paths["reviews"],
+            {
+                "schemaVersion": 2,
+                "asOf": packet_document["asOf"],
+                "policyDigest": packet_document["policyDigest"],
+                "canonicalDigest": packet_document["canonicalDigest"],
+                "reviews": [],
+            },
+        )
+
+    def _import_primary_accept(self, paths: dict[str, Path], station_id: str) -> None:
+        export = self._export_packets(paths)
+        self.assertEqual(export.returncode, 0, export.stderr)
+        packet_document = self._read_json(paths["packet"])
+        packet = next(item for item in packet_document["packets"] if item["stationId"] == station_id)
+        candidate = packet["candidates"][0]
+        source_id = candidate["sourceId"]
+        source_text = packet["sources"][source_id]["text"]
+        source_quote = self._read_json(paths["candidates"])["candidates"][
+            next(
+                index
+                for index, item in enumerate(self._read_json(paths["candidates"])["candidates"])
+                if item["stationId"] == station_id
+            )
+        ]["sourceQuote"]
+        self._write_json(
+            paths["imported_reviews"],
+            {
+                "schemaVersion": 2,
+                "asOf": packet_document["asOf"],
+                "policyDigest": packet_document["policyDigest"],
+                "canonicalDigest": packet_document["canonicalDigest"],
+                "reviews": [
+                    {
+                        "reviewId": f"{station_id}-genuine-test-harness-review",
+                        "reviewerType": "ai",
+                        "reviewRole": "primary",
+                        "reviewStatus": "completed",
+                        "reviewedAt": datetime.now(timezone.utc)
+                        .replace(microsecond=0)
+                        .isoformat()
+                        .replace("+00:00", "Z"),
+                        "asOf": packet_document["asOf"],
+                        "validity": {"deadlineText": None, "validUntil": None},
+                        "invocation": {
+                            "transport": "harness_import",
+                            "invocationId": "actual-harness-invocation-id",
+                            "requestedModel": "slow",
+                            "reportedModel": None,
+                            "identitySource": "operator_attestation",
+                        },
+                        "stationId": station_id,
+                        "candidateId": candidate["candidateId"],
+                        "electionId": candidate["electionId"],
+                        "electionYear": candidate["electionYear"],
+                        "candidateSetDigest": packet["candidateSetDigest"],
+                        "evidenceDigest": candidate["evidenceDigest"],
+                        "decision": "accept",
+                        "checks": {
+                            "currentElection": "supported",
+                            "registrationRecipient": "supported",
+                            "stationScope": "supported",
+                        },
+                        "citations": [
+                            {
+                                "check": "currentElection",
+                                "sourceId": source_id,
+                                "quote": "Obaveštenje o parlamentarnim izborima 2026.",
+                            },
+                            {
+                                "check": "registrationRecipient",
+                                "sourceId": source_id,
+                                "quote": source_quote,
+                            },
+                            {
+                                "check": "stationScope",
+                                "sourceId": source_id,
+                                "quote": source_text.split(".")[0] + ".",
+                            },
+                        ],
+                        "rationale": "The public notice identifies the current election and registration mailbox.",
+                        "resolvesReviewIds": [],
+                    }
+                ],
+            },
+        )
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(REVIEW_SCRIPT),
+                "--input",
+                str(paths["candidates"]),
+                "--output",
+                str(paths["reviews"]),
+                "--canonical",
+                str(paths["canonical"]),
+                "--reviewers",
+                str(paths["reviewers"]),
+                "--overrides",
+                str(paths["overrides"]),
+                "--role",
+                "primary",
+                "--import-reviews",
+                str(paths["imported_reviews"]),
+                "--attest-import",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def _run_promotion(
+        self, paths: dict[str, Path], *arguments: str
+    ) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [
                 sys.executable,
@@ -849,14 +954,13 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 str(paths["candidates"]),
                 "--reviews",
                 str(paths["reviews"]),
-                "--approvals",
-                str(paths["approvals"]),
                 "--reviewers",
                 str(paths["reviewers"]),
                 "--canonical",
                 str(paths["canonical"]),
                 "--overrides",
                 str(paths["overrides"]),
+                *arguments,
             ],
             check=False,
             capture_output=True,

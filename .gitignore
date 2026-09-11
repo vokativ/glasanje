@@ -90,3 +90,7 @@ firebase-debug.log
 
 # local Firebase/Cloudflare provisioning handoff
 /docs/firebase-domain-handoff.md
+
+# local election-contact workflow ownership lock
+/data/.election_contacts.lock
+/data/election_runs/

@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Discover election-notice contact evidence from MFA-linked mission sites.
 
-This command is deliberately a discovery stage only: it reads public pages and
-writes review candidates.  It never infers an address and never changes the
-recipient override file.
+Default incremental mode performs a bounded rotating crawl of missing hosts,
+using verified cached MFA country-to-mission chains.  ``--mode full`` is the
+only explicit directory-chain refresh; the command never broadens itself into
+a full crawl or retries non-transient failures.  It is discovery only: it
+reads public pages, writes review candidates, never infers an address, and
+never changes recipient overrides.
 """
 
 from __future__ import annotations
@@ -36,7 +39,6 @@ INDEX_URLS = (
     "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
 )
 MFA_HOSTS = frozenset({"mfa.gov.rs", "www.mfa.gov.rs"})
-OVERRIDES_PATH = Path("data/overrides.json").resolve()
 
 
 EMAIL_RE = re.compile(
@@ -67,6 +69,10 @@ class Station:
     station_id: str
     website_host: str
     email: str = ""
+    name: str = ""
+    is_resident: bool = True
+    is_election_contact_confirmed: bool = False
+
 
 @dataclass(frozen=True)
 class PageTask:
@@ -75,6 +81,7 @@ class PageTask:
     stations: tuple[Station, ...]
     depth: int
     title_hint: str = ""
+    source_chain: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -82,6 +89,8 @@ class Response:
     url: str
     content_type: str
     body: bytes
+    error: str = ""
+
 
 @dataclass(frozen=True)
 class ElectionEvidence:
@@ -322,13 +331,17 @@ def extract_html_evidence(
     return title, page_text, sorted(evidence, key=lambda item: (item.email, item.quote, item.context))
 
 
+class PdfExtractionError(ValueError):
+    """A PDF response could not be read as evidence; it is not an empty notice."""
+
+
 def extract_pdf_evidence(pdf: bytes, title_hint: str) -> tuple[str, str, list[ElectionEvidence]]:
     try:
         from pypdf import PdfReader
         reader = PdfReader(BytesIO(pdf))
         text = "\n".join((page.extract_text() or "") for page in reader.pages)
-    except Exception:
-        return title_hint, "", []
+    except Exception as error:
+        raise PdfExtractionError(str(error) or type(error).__name__) from error
     compact = " ".join(text.split())
     if not has_election_context(compact):
         return title_hint, compact, []
@@ -339,8 +352,8 @@ def extract_pdf_evidence(pdf: bytes, title_hint: str) -> tuple[str, str, list[El
             evidence.append(ElectionEvidence(email, quote, quote))
     return title_hint, compact, sorted(set(evidence), key=lambda item: (item.email, item.quote, item.context))
 
-
-def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: int, retries: int = 1) -> Response | None:
+def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: int, retries: int = 1) -> Response:
+    """Fetch an HTTPS resource once, retrying only transient transport/status failures."""
     for attempt in range(retries + 1):
         try:
             opener = build_opener(RestrictedRedirectHandler(allowed_hosts))
@@ -348,22 +361,28 @@ def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: in
             with opener.open(request, timeout=timeout) as response:
                 final_url = absolute_https_url(response.geturl())
                 if final_url is None or url_host(final_url) not in allowed_hosts:
-                    return None
+                    return Response(url, "", b"", "redirect left the verified official host")
                 length = response.headers.get("Content-Length")
                 if length and int(length) > max_bytes:
-                    return None
+                    return Response(url, "", b"", f"response exceeds {max_bytes} byte limit")
                 body = response.read(max_bytes + 1)
                 if len(body) > max_bytes:
-                    return None
+                    return Response(url, "", b"", f"response exceeds {max_bytes} byte limit")
                 return Response(final_url, response.headers.get_content_type().lower(), body)
-        except (URLError, OSError):
+        except HTTPError as error:
+            transient = error.code in {408, 425, 429} or 500 <= error.code <= 599
+            if transient and attempt < retries:
+                time.sleep(0.5)
+                continue
+            return Response(url, "", b"", f"HTTP {error.code}")
+        except (URLError, OSError) as error:
             if attempt < retries:
                 time.sleep(0.5)
                 continue
-            return None
-        except (HTTPError, ValueError):
-            return None
-    return None
+            return Response(url, "", b"", f"transport failure: {error.reason if isinstance(error, URLError) else error}")
+        except ValueError as error:
+            return Response(url, "", b"", f"invalid response: {error}")
+    return Response(url, "", b"", "retry loop exhausted")
 
 def fetch_many(
     urls: Iterable[tuple[str, frozenset[str]]],
@@ -371,8 +390,14 @@ def fetch_many(
     remaining_pages: int,
     timeout: float,
     max_bytes: int,
-) -> list[tuple[str, Response | None]]:
-    selected = list(urls)[:remaining_pages]
+) -> list[tuple[str, Response]]:
+    selected: list[tuple[str, frozenset[str]]] = []
+    seen_urls: set[str] = set()
+    for url, hosts in urls:
+        if url in seen_urls or len(selected) >= remaining_pages:
+            continue
+        seen_urls.add(url)
+        selected.append((url, hosts))
     if not selected:
         return []
     with ThreadPoolExecutor(max_workers=concurrency) as executor:
@@ -388,9 +413,13 @@ def load_stations(path: Path) -> tuple[dict[str, str], dict[str, tuple[Station, 
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError, TypeError):
         return {}, {}
+    if not isinstance(payload, dict) or not isinstance(payload.get("countries"), list):
+        return {}, {}
     country_names: dict[str, str] = {}
     stations_by_country: dict[str, list[Station]] = defaultdict(list)
-    for country in payload.get("countries", []):
+    for country in payload["countries"]:
+        if not isinstance(country, dict):
+            continue
         code = country.get("countryCode")
         if not isinstance(code, str) or not code:
             continue
@@ -398,16 +427,31 @@ def load_stations(path: Path) -> tuple[dict[str, str], dict[str, tuple[Station, 
             label = country.get(label_key)
             if isinstance(label, str) and label:
                 country_names[normalized_name(label)] = code
-        for station in country.get("stations", []):
+        stations = country.get("stations")
+        if not isinstance(stations, list):
+            continue
+        for station in stations:
+            if not isinstance(station, dict):
+                continue
             station_id = station.get("id")
             website = station.get("website")
-            if not isinstance(station_id, str) or not isinstance(website, str):
+            if not isinstance(station_id, str):
                 continue
+            official_url = absolute_https_url(website) if isinstance(website, str) else None
             email = station.get("email")
-            official_url = absolute_https_url(website)
-            if official_url is not None:
-                canonical_email = email.lower() if isinstance(email, str) and EMAIL_RE.fullmatch(email) else ""
-                stations_by_country[code].append(Station(code, station_id, url_host(official_url), canonical_email))
+            name = station.get("embassy")
+            canonical_email = email.lower() if isinstance(email, str) and EMAIL_RE.fullmatch(email) else ""
+            stations_by_country[code].append(
+                Station(
+                    code,
+                    station_id,
+                    url_host(official_url) if official_url is not None else "",
+                    canonical_email,
+                    name if isinstance(name, str) else "",
+                    bool(station.get("isResident", True)),
+                    station.get("isElectionContactConfirmed") is True,
+                )
+            )
     return country_names, {
         code: tuple(sorted(set(entries), key=lambda station: station.station_id))
         for code, entries in stations_by_country.items()
@@ -430,6 +474,12 @@ def country_links(html: bytes, index_url: str, country_names: dict[str, str]) ->
     return result
 
 
+def host_variants(host: str) -> frozenset[str]:
+    """Return only the canonical www/bare spelling pair, never a wider alias."""
+    bare = host[4:] if host.startswith("www.") else host
+    return frozenset({bare, f"www.{bare}"})
+
+
 def linked_mission_tasks(
     html: bytes,
     country_code: str,
@@ -438,21 +488,30 @@ def linked_mission_tasks(
 ) -> list[PageTask]:
     stations_by_host: dict[str, list[Station]] = defaultdict(list)
     for station in stations:
-        stations_by_host[station.website_host].append(station)
+        for host in host_variants(station.website_host):
+            stations_by_host[host].append(station)
     soup = BeautifulSoup(html, "html.parser")
     tasks: dict[str, PageTask] = {}
     for anchor in soup.find_all("a", href=True):
         target = absolute_https_url(urljoin(page_url, anchor["href"]))
         if target is None:
             continue
-        linked_stations = tuple(sorted(stations_by_host.get(url_host(target), ()), key=lambda station: station.station_id))
+        linked_stations = tuple(sorted(set(stations_by_host.get(url_host(target), ())), key=lambda station: station.station_id))
         if not linked_stations:
             continue
         tasks[target] = PageTask(target, country_code, linked_stations, 0, visible_text(anchor))
     return [tasks[url] for url in sorted(tasks)]
 
 
-def mission_links(html: bytes, task: PageTask) -> list[PageTask]:
+def mission_priority(task: PageTask, election_year: str | None) -> tuple[int, str]:
+    text = f"{task.url} {task.title_hint}".casefold()
+    election = bool(ELECTION_RE.search(searchable_text(text)))
+    current = election and election_year is not None and election_year in text
+    contact = bool(re.search(r"consul|konzul|kontakt|contact", text))
+    return (0 if current else 1 if election else 2 if contact else 3, task.url)
+
+
+def mission_links(html: bytes, task: PageTask, election_year: str | None = None) -> list[PageTask]:
     soup = BeautifulSoup(html, "html.parser")
     next_tasks: dict[str, PageTask] = {}
     for anchor in soup.find_all("a", href=True):
@@ -466,22 +525,48 @@ def mission_links(html: bytes, task: PageTask) -> list[PageTask]:
             continue
         if not is_pdf and not ACTIVITY_RE.search(f"{parsed.path} {parsed.query} {anchor_text}"):
             continue
-        next_tasks[target] = PageTask(target, task.country_code, task.stations, task.depth + 1, anchor_text)
-    return [next_tasks[url] for url in sorted(next_tasks)]
+        next_tasks[target] = PageTask(
+            target,
+            task.country_code,
+            task.stations,
+            task.depth + 1,
+            anchor_text,
+            task.source_chain + (target,),
+        )
+    return sorted(next_tasks.values(), key=lambda next_task: mission_priority(next_task, election_year))
+
 
 def attributed_stations(
     email: str,
-    source_url: str,
     fallback_stations: tuple[Station, ...],
-    stations_by_host: dict[str, tuple[Station, ...]],
+    known_mailboxes: frozenset[str],
 ) -> tuple[Station, ...]:
-    """Use an exact canonical mailbox match to attribute shared mission-site evidence."""
-    matching_stations = tuple(
-        station
-        for station in stations_by_host.get(url_host(source_url), ())
-        if station.email == email
-    )
-    return matching_stations or fallback_stations
+    """Attribute task matches; never let singleton fallback claim a known mailbox."""
+    matching_stations = tuple(station for station in fallback_stations if station.email == email)
+    if matching_stations:
+        return matching_stations
+    if email in known_mailboxes:
+        return ()
+    return fallback_stations if len(fallback_stations) == 1 else ()
+
+
+def canonical_json(value: object) -> str:
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+
+
+def source_identifier(source_url: str, text_sha256: str) -> str:
+    return hashlib.sha256(canonical_json({"sourceUrl": source_url, "textSha256": text_sha256}).encode("utf-8")).hexdigest()
+
+
+def normalized_chain(urls: Iterable[str]) -> list[str]:
+    chain: list[str] = []
+    for url in urls:
+        normalized = absolute_https_url(url)
+        if normalized is None:
+            raise ValueError(f"non-HTTPS URL in verified source chain: {url!r}")
+        if not chain or chain[-1] != normalized:
+            chain.append(normalized)
+    return chain
 
 
 def candidate_record(
@@ -495,7 +580,9 @@ def candidate_record(
     source_url: str,
     observed_at: str,
     evidence_type: str,
-) -> dict[str, str]:
+    source_id: str,
+    source_chain: Iterable[str],
+) -> dict[str, object]:
     candidate_id_source = "\x1f".join((election_id, station.country_code, station.station_id, email, source_url))
     return {
         "candidateId": hashlib.sha256(candidate_id_source.encode("utf-8")).hexdigest(),
@@ -511,7 +598,178 @@ def candidate_record(
         "sourceHost": url_host(source_url),
         "observedAt": observed_at,
         "evidenceType": evidence_type,
+        "sourceId": source_id,
+        "sourceChain": normalized_chain(source_chain),
     }
+
+
+def read_mapping(path: Path, label: str) -> dict:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError) as error:
+        raise ValueError(f"invalid {label} {path}: {error}") from error
+    if not isinstance(payload, dict):
+        raise ValueError(f"invalid {label} {path}: expected an object")
+    return payload
+
+
+def load_registry(path: Path, country_names: dict[str, str]) -> dict[str, str]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError) as error:
+        raise ValueError(f"invalid MFA registry {path}: {error}") from error
+    if not isinstance(payload, list):
+        raise ValueError(f"invalid MFA registry {path}: expected a list")
+    result: dict[str, str] = {}
+    for entry in payload:
+        if not isinstance(entry, dict):
+            raise ValueError(f"invalid MFA registry {path}: country entry is not an object")
+        country = entry.get("country")
+        location = entry.get("url")
+        if not isinstance(country, str) or not isinstance(location, str):
+            raise ValueError(f"invalid MFA registry {path}: country entry lacks country or url")
+        target = absolute_https_url(urljoin("https://www.mfa.gov.rs/", location))
+        if target is None or url_host(target) not in MFA_HOSTS:
+            raise ValueError(f"invalid MFA registry {path}: non-official country URL {location!r}")
+        if "/spoljna-politika/bilateralna-saradnja/" not in urlsplit(target).path:
+            raise ValueError(f"invalid MFA registry {path}: non-country URL {location!r}")
+        country_code = country_names.get(normalized_name(country))
+        if country_code:
+            existing = result.get(country_code)
+            if existing is not None and existing != target:
+                raise ValueError(f"invalid MFA registry {path}: duplicate country link for {country_code}")
+            result[country_code] = target
+    return result
+
+
+def load_state(path: Path, election_id: str) -> dict:
+    if not path.exists():
+        return {"schemaVersion": 1, "electionId": election_id, "hostCursor": 0, "countryChains": {}}
+    payload = read_mapping(path, "crawl state")
+    if payload.get("schemaVersion") != 1 or payload.get("electionId") != election_id:
+        raise ValueError("crawl state belongs to another election or has an unsupported schema")
+    if not isinstance(payload.get("hostCursor"), int) or payload["hostCursor"] < 0:
+        raise ValueError("crawl state has an invalid hostCursor")
+    chains = payload.get("countryChains")
+    if not isinstance(chains, dict):
+        raise ValueError("crawl state has invalid countryChains")
+    for country_code, chain in chains.items():
+        if not isinstance(country_code, str) or not isinstance(chain, dict):
+            raise ValueError("crawl state has malformed country chain")
+        index_url = chain.get("indexUrl")
+        country_url = chain.get("countryUrl")
+        entries = chain.get("missionEntries")
+        normalized_index = absolute_https_url(index_url) if isinstance(index_url, str) else None
+        normalized_country = absolute_https_url(country_url) if isinstance(country_url, str) else None
+        if (
+            normalized_index is None
+            or url_host(normalized_index) not in MFA_HOSTS
+            or normalized_country is None
+            or url_host(normalized_country) not in MFA_HOSTS
+            or "/spoljna-politika/bilateralna-saradnja/" not in urlsplit(normalized_country).path
+            or not isinstance(entries, list)
+        ):
+            raise ValueError("crawl state has malformed country chain")
+        if any(
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("url"), str)
+            or absolute_https_url(entry["url"]) is None
+            for entry in entries
+        ):
+            raise ValueError("crawl state has malformed mission entry")
+    return payload
+
+
+def load_candidate_artifact(path: Path, election_id: str, election_year: str) -> dict:
+    if not path.exists():
+        return {"schemaVersion": 1, "electionId": election_id, "electionYear": election_year, "candidates": [], "sources": {}}
+    payload = read_mapping(path, "candidate artifact")
+    if payload.get("electionId") != election_id or payload.get("electionYear") != election_year:
+        raise ValueError("candidate artifact belongs to another election; refusing an incompatible overwrite")
+    if not isinstance(payload.get("candidates"), list):
+        raise ValueError("candidate artifact has invalid candidates")
+    sources = payload.get("sources", {})
+    if not isinstance(sources, dict):
+        raise ValueError("candidate artifact has invalid sources")
+    return payload
+
+
+def load_overrides(path: Path) -> dict:
+    payload = read_mapping(path, "overrides")
+    if not isinstance(payload.get("missionOverrides", {}), dict):
+        raise ValueError("overrides has invalid missionOverrides")
+    return payload
+
+
+def same_election_override(entry: object, election_id: str, election_year: str) -> str:
+    if not isinstance(entry, dict):
+        return ""
+    email = entry.get("electionEmail")
+    provenance = entry.get("_electionContactProvenance")
+    if (
+        isinstance(email, str)
+        and EMAIL_RE.fullmatch(email)
+        and isinstance(provenance, dict)
+        and provenance.get("electionId") == election_id
+        and provenance.get("electionYear") == election_year
+    ):
+        return email.lower()
+    return ""
+
+
+def station_is_suppressed(entry: object, election_id: str) -> bool:
+    if not isinstance(entry, dict):
+        return False
+    suppression = entry.get("_electionContactSuppression")
+    if isinstance(suppression, dict):
+        if suppression.get("electionId") == election_id:
+            return True
+        election_ids = suppression.get("electionIds")
+        return isinstance(election_ids, list) and election_id in election_ids
+    return entry.get("_electionContactSuppressed") is True
+
+
+def chain_for_country(state: dict, country_code: str) -> dict | None:
+    candidate = state["countryChains"].get(country_code)
+    if not isinstance(candidate, dict):
+        return None
+    index_url = candidate.get("indexUrl")
+    country_url = candidate.get("countryUrl")
+    entries = candidate.get("missionEntries")
+    if (
+        not isinstance(index_url, str)
+        or absolute_https_url(index_url) is None
+        or not isinstance(country_url, str)
+        or absolute_https_url(country_url) is None
+        or not isinstance(entries, list)
+    ):
+        return None
+    for entry in entries:
+        if not isinstance(entry, dict) or not isinstance(entry.get("url"), str):
+            return None
+        if absolute_https_url(entry["url"]) is None:
+            return None
+    return candidate
+
+
+def station_host_tasks(
+    stations: Iterable[Station],
+    entry_url: str,
+    country_code: str,
+    source_chain: Iterable[str],
+) -> PageTask:
+    return PageTask(
+        entry_url,
+        country_code,
+        tuple(sorted(set(stations), key=lambda station: station.station_id)),
+        0,
+        "",
+        tuple(normalized_chain(source_chain)),
+    )
+
+
+def append_chain(chain: Iterable[str], url: str) -> tuple[str, ...]:
+    return tuple(normalized_chain((*chain, url)))
 
 
 def parse_args() -> argparse.Namespace:
@@ -523,14 +781,21 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output", default="data/election_candidates.json", type=Path)
     parser.add_argument("--missions", default="data/missions_canonical.json", type=Path)
-    parser.add_argument("--max-pages", default=500, type=int, help="Maximum total HTTP(S) pages/PDFs to fetch.")
+    parser.add_argument("--max-pages", default=80, type=int, help="Maximum total HTTP(S) pages/PDFs to fetch.")
     parser.add_argument("--max-depth", default=2, type=int, help="Maximum links beyond each linked mission homepage.")
-    parser.add_argument("--concurrency", default=6, type=int, help="Maximum concurrent HTTP requests.")
-    parser.add_argument("--timeout", default=20.0, type=float, help="Per-request timeout in seconds.")
+    parser.add_argument("--concurrency", default=2, type=int, help="Maximum concurrent HTTP requests.")
+    parser.add_argument("--timeout", default=15.0, type=float, help="Per-request timeout in seconds.")
     parser.add_argument("--max-bytes", default=5_000_000, type=int, help="Maximum response size in bytes.")
+    parser.add_argument("--mode", choices=("incremental", "full"), default="incremental")
+    parser.add_argument("--station", action="append", default=[], metavar="ID", help="Crawl this station, including retained stations.")
+    parser.add_argument("--state", default="data/election_crawl_state.json", type=Path)
+    parser.add_argument("--report", default="data/election_crawl_report.json", type=Path)
+    parser.add_argument("--overrides", default="data/overrides.json", type=Path)
+    parser.add_argument("--registry", default="data/mfa_representations.json", type=Path)
+    parser.add_argument("--max-hosts", default=5, type=int, help="Maximum distinct mission hosts this run; 0 means no host cap.")
     args = parser.parse_args()
-    if args.max_pages < len(INDEX_URLS):
-        parser.error(f"--max-pages must be at least {len(INDEX_URLS)} to fetch all MFA indexes")
+    if args.max_pages < 1:
+        parser.error("--max-pages must be positive")
     if args.max_depth < 0:
         parser.error("--max-depth must be non-negative")
     if args.concurrency < 1:
@@ -539,8 +804,8 @@ def parse_args() -> argparse.Namespace:
         parser.error("--timeout must be positive")
     if args.max_bytes < 1:
         parser.error("--max-bytes must be positive")
-    if args.output.resolve() == OVERRIDES_PATH:
-        parser.error("--output must not resolve to data/overrides.json")
+    if args.max_hosts < 0:
+        parser.error("--max-hosts must be non-negative")
     try:
         derived_year = derive_election_year(args.election_id)
     except ValueError as error:
@@ -552,6 +817,15 @@ def parse_args() -> argparse.Namespace:
     args.election_year = args.election_year or derived_year
     if args.election_year is None:
         parser.error("--election-year is required when --election-id has no unambiguous year")
+    output_paths = (args.output, args.report)
+    input_paths = (args.missions, args.state, args.overrides, args.registry)
+    if args.output.resolve() == args.report.resolve():
+        parser.error("--output and --report must be different paths")
+    if any(args.state.resolve() == source.resolve() for source in (args.missions, args.overrides, args.registry)):
+        parser.error("--state must not alias a crawler input")
+    for output in output_paths:
+        if any(output.resolve() == source.resolve() for source in input_paths):
+            parser.error(f"{output} must not alias a crawler input")
     return args
 
 
@@ -564,123 +838,442 @@ def write_output(path: Path, payload: dict) -> None:
     temporary_path.replace(path)
 
 
+def error_response(response: Response) -> str:
+    return response.error or "unsupported response content type"
+
+
 def main() -> int:
     args = parse_args()
     observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    country_names, stations_by_country = load_stations(args.missions)
-    stations_by_host_lists: dict[str, list[Station]] = defaultdict(list)
-    for stations in stations_by_country.values():
-        for station in stations:
-            stations_by_host_lists[station.website_host].append(station)
-    stations_by_host = {
-        host: tuple(sorted(stations, key=lambda station: (station.country_code, station.station_id)))
-        for host, stations in stations_by_host_lists.items()
-    }
-    candidates: dict[str, dict[str, str]] = {}
-    fetched_pages = 0
+    run_id = hashlib.sha256(f"{time.time_ns()}:{args.output.resolve()}".encode("utf-8")).hexdigest()[:24]
+    try:
+        country_names, stations_by_country = load_stations(args.missions)
+        if not country_names or not stations_by_country:
+            raise ValueError(f"invalid canonical missions {args.missions}")
+        registry = load_registry(args.registry, country_names)
+        state = load_state(args.state, args.election_id)
+        existing = load_candidate_artifact(args.output, args.election_id, args.election_year)
+        overrides = load_overrides(args.overrides)
+    except ValueError as error:
+        print(f"Election contact discovery failed: {error}", file=sys.stderr)
+        return 2
 
-    # An unreadable canonical registry cannot safely be mapped to a station, so
-    # produce the valid empty discovery result rather than guessing a recipient.
-    if country_names and stations_by_country:
-        index_results = fetch_many(
-            ((url, MFA_HOSTS) for url in INDEX_URLS),
-            args.concurrency,
-            args.max_pages,
-            args.timeout,
-            args.max_bytes,
+    all_stations = tuple(
+        sorted(
+            (station for stations in stations_by_country.values() for station in stations),
+            key=lambda station: (station.country_code, station.station_id),
         )
-        fetched_pages += len(index_results)
-        country_url_codes: dict[str, set[str]] = defaultdict(set)
-        for index_url, response in index_results:
-            if response is not None and "html" in response.content_type:
-                for country_url, codes in country_links(response.body, index_url, country_names).items():
-                    country_url_codes[country_url].update(codes)
+    )
+    known_mailboxes = frozenset(station.email for station in all_stations if station.email)
+    station_by_id = {station.station_id: station for station in all_stations}
+    if len(station_by_id) != len(all_stations):
+        print("Election contact discovery failed: canonical station IDs are not unique", file=sys.stderr)
+        return 2
+    requested_ids = tuple(dict.fromkeys(args.station))
+    unknown_stations = sorted(set(requested_ids) - set(station_by_id))
+    if unknown_stations:
+        print(f"Election contact discovery failed: unknown station(s): {', '.join(unknown_stations)}", file=sys.stderr)
+        return 2
 
-        country_results = fetch_many(
-            ((url, MFA_HOSTS) for url in sorted(country_url_codes)),
-            args.concurrency,
-            args.max_pages - fetched_pages,
-            args.timeout,
-            args.max_bytes,
-        )
-        fetched_pages += len(country_results)
-        initial_tasks: dict[tuple[str, str], PageTask] = {}
-        for country_url, response in country_results:
-            if response is None or "html" not in response.content_type:
+    prior_candidates: dict[str, dict[str, object]] = {}
+    for candidate in existing["candidates"]:
+        if not isinstance(candidate, dict):
+            print("Election contact discovery failed: candidate artifact has malformed candidate", file=sys.stderr)
+            return 2
+        candidate_id = candidate.get("candidateId")
+        station_id = candidate.get("stationId")
+        email = candidate.get("email")
+        if not isinstance(candidate_id, str) or not isinstance(station_id, str) or not isinstance(email, str):
+            print("Election contact discovery failed: candidate artifact has malformed candidate identity", file=sys.stderr)
+            return 2
+        prior_candidates[candidate_id] = candidate
+    sources: dict[str, object] = dict(existing.get("sources", {}))
+    overrides_by_station = overrides.get("missionOverrides", {})
+
+    def candidate_station_state() -> tuple[set[str], set[str]]:
+        source_backed_emails: dict[str, set[str]] = defaultdict(set)
+        legacy_emails: dict[str, set[str]] = defaultdict(set)
+        for candidate in prior_candidates.values():
+            station_id = candidate.get("stationId")
+            email = candidate.get("email")
+            if (
+                candidate.get("electionId") != args.election_id
+                or candidate.get("electionYear") != args.election_year
+                or not isinstance(station_id, str)
+                or not isinstance(email, str)
+            ):
                 continue
-            soup = BeautifulSoup(response.body, "html.parser")
-            h1 = soup.find("h1")
-            page_country = country_names.get(normalized_name(visible_text(h1))) if h1 else None
-            codes = {page_country} if page_country else country_url_codes[country_url]
-            for country_code in sorted(code for code in codes if code):
-                for task in linked_mission_tasks(response.body, country_code, stations_by_country.get(country_code, ()), response.url):
-                    initial_tasks[(task.country_code, task.url)] = task
+            station = station_by_id.get(station_id)
+            if station is None or not station.website_host:
+                continue
+            source_id = candidate.get("sourceId")
+            if isinstance(source_id, str) and isinstance(sources.get(source_id), dict):
+                source_backed_emails[station_id].add(email.lower())
+            else:
+                legacy_emails[station_id].add(email.lower())
+        unresolved = {
+            station_id
+            for station_id, emails in source_backed_emails.items()
+            if (
+                not (override_email := same_election_override(
+                    overrides_by_station.get(station_id), args.election_id, args.election_year
+                ))
+                or any(email != override_email for email in emails)
+            )
+        }
+        refresh_required = {
+            station_id
+            for station_id, emails in legacy_emails.items()
+            if any(
+                email != same_election_override(
+                    overrides_by_station.get(station_id), args.election_id, args.election_year
+                )
+                for email in emails
+            )
+        }
+        return unresolved, refresh_required
 
-        pending = [initial_tasks[key] for key in sorted(initial_tasks)]
-        seen_tasks: set[tuple[str, str]] = set()
-        while pending and fetched_pages < args.max_pages:
-            batch = [task for task in pending if (task.country_code, task.url) not in seen_tasks]
-            pending = []
-            if not batch:
-                break
-            batch = batch[: args.max_pages - fetched_pages]
-            seen_tasks.update((task.country_code, task.url) for task in batch)
-            response_by_url = dict(fetch_many(
-                ((task.url, frozenset({url_host(task.url)})) for task in batch),
-                args.concurrency,
-                args.max_pages - fetched_pages,
-                args.timeout,
-                args.max_bytes,
-            ))
-            fetched_pages += len(batch)
-            next_tasks: dict[tuple[str, str], PageTask] = {}
-            for task in batch:
-                response = response_by_url.get(task.url)
-                if response is None:
+    selected_stations = tuple(
+        station_by_id[station_id] for station_id in requested_ids
+    ) if requested_ids else all_stations
+    explicitly_requested = set(requested_ids)
+    unresolved_candidate_stations, refresh_required_station_ids = candidate_station_state()
+    retained_stations: set[str] = set()
+    due_by_host: dict[str, list[Station]] = defaultdict(list)
+    for station in selected_stations:
+        override = overrides_by_station.get(station.station_id)
+        override_email = same_election_override(override, args.election_id, args.election_year)
+        suppressed = station_is_suppressed(override, args.election_id)
+        if suppressed:
+            continue
+        if (
+            args.mode != "full"
+            and station.station_id not in explicitly_requested
+            and override_email
+            and station.station_id not in unresolved_candidate_stations
+            and station.station_id not in refresh_required_station_ids
+        ):
+            retained_stations.add(station.station_id)
+            continue
+        if station.website_host:
+            due_by_host[station.website_host].append(station)
+
+    host_names = sorted(due_by_host)
+    cursor = state["hostCursor"] % len(host_names) if host_names else 0
+    rotated_hosts = host_names[cursor:] + host_names[:cursor]
+    host_limit = len(rotated_hosts) if args.max_hosts == 0 else min(args.max_hosts, len(rotated_hosts))
+    scheduled_hosts = tuple(rotated_hosts[:host_limit])
+    deferred_hosts = set(rotated_hosts[host_limit:])
+    report_failures: list[dict[str, str]] = []
+    report_ambiguous: list[dict[str, object]] = []
+    attempted_hosts: set[str] = set()
+    failed_hosts: set[str] = set()
+    budget_hosts: set[str] = set()
+    depth_hosts: set[str] = set()
+    ambiguous_stations: set[str] = set()
+    fetched_pages = 0
+    response_cache: dict[str, Response] = {}
+
+    def fetch_urls(requests: Iterable[tuple[str, frozenset[str]]], scope: str) -> dict[str, Response]:
+        nonlocal fetched_pages
+        unique: list[tuple[str, frozenset[str]]] = []
+        seen_urls: set[str] = set()
+        for url, hosts in requests:
+            if url in response_cache or url in seen_urls:
+                continue
+            seen_urls.add(url)
+            unique.append((url, hosts))
+        available = max(args.max_pages - fetched_pages, 0)
+        selected = unique[:available]
+        if len(selected) < len(unique):
+            report_failures.append({"scope": scope, "reason": "page budget exhausted"})
+        if not selected:
+            return {}
+        results = dict(fetch_many(selected, args.concurrency, available, args.timeout, args.max_bytes))
+        fetched_pages += len(results)
+        response_cache.update(results)
+        return results
+
+    needed_countries = {station.country_code for host in scheduled_hosts for station in due_by_host[host]}
+    country_entries: dict[str, list[PageTask]] = defaultdict(list)
+    bootstrap_countries: set[str] = set()
+    for country_code in needed_countries:
+        cached = None if args.mode == "full" else chain_for_country(state, country_code)
+        cached_entries = cached.get("missionEntries", []) if cached else []
+        by_variant: dict[str, list[dict]] = defaultdict(list)
+        for entry in cached_entries:
+            if isinstance(entry, dict) and isinstance(entry.get("url"), str):
+                by_variant[url_host(entry["url"])].append(entry)
+        for host in scheduled_hosts:
+            stations = tuple(station for station in due_by_host[host] if station.country_code == country_code)
+            if not stations:
+                continue
+            entries = [entry for variant in host_variants(host) for entry in by_variant.get(variant, [])]
+            if len(entries) == 1:
+                entry = entries[0]
+                country_entries[country_code].append(
+                    station_host_tasks(stations, entry["url"], country_code, (cached["indexUrl"], cached["countryUrl"], entry["url"]))
+                )
+            else:
+                bootstrap_countries.add(country_code)
+
+    if bootstrap_countries:
+        index_results = fetch_urls(((url, MFA_HOSTS) for url in INDEX_URLS), "MFA index")
+        confirmed_country_links: dict[str, tuple[str, str]] = {}
+        for index_url, response in index_results.items():
+            if response.error or "html" not in response.content_type:
+                report_failures.append({"scope": "MFA index", "url": index_url, "reason": error_response(response)})
+                continue
+            for country_url, country_codes in country_links(response.body, response.url, country_names).items():
+                for country_code in country_codes:
+                    if country_code in bootstrap_countries and registry.get(country_code) == country_url:
+                        confirmed_country_links[country_code] = (response.url, country_url)
+        index_budget_limited = len(index_results) < len(INDEX_URLS) and fetched_pages >= args.max_pages
+        for country_code in sorted(bootstrap_countries - set(confirmed_country_links)):
+            for host in scheduled_hosts:
+                if not any(station.country_code == country_code for station in due_by_host[host]):
                     continue
-                is_pdf = task.url.lower().split("?", 1)[0].endswith(".pdf") or "pdf" in response.content_type
-                if is_pdf:
-                    title, _, evidence = extract_pdf_evidence(response.body, task.title_hint)
-                    evidence_type = "pdf"
-                elif "html" in response.content_type:
-                    title, _, evidence = extract_html_evidence(response.body, args.election_year)
-                    evidence_type = "html"
-                    if task.depth < args.max_depth:
-                        for next_task in mission_links(response.body, task):
-                            key = (next_task.country_code, next_task.url)
-                            if key not in seen_tasks:
-                                next_tasks[key] = next_task
+                if index_budget_limited:
+                    budget_hosts.add(host)
                 else:
+                    failed_hosts.add(host)
+            if not index_budget_limited:
+                report_failures.append({"scope": "country chain", "reason": f"registry country link not confirmed for {country_code}"})
+        country_results = fetch_urls(
+            ((country_url, MFA_HOSTS) for _, country_url in confirmed_country_links.values()),
+            "MFA country page",
+        )
+        for country_code, (index_url, country_url) in confirmed_country_links.items():
+            response = country_results.get(country_url) or response_cache.get(country_url)
+            if response is None:
+                for host in scheduled_hosts:
+                    if any(station.country_code == country_code for station in due_by_host[host]):
+                        budget_hosts.add(host)
+                continue
+            if response.error or "html" not in response.content_type:
+                report_failures.append(
+                    {"scope": "MFA country page", "url": country_url, "reason": error_response(response)}
+                )
+                for host in scheduled_hosts:
+                    if any(station.country_code == country_code for station in due_by_host[host]):
+                        failed_hosts.add(host)
+                continue
+            tasks = linked_mission_tasks(response.body, country_code, stations_by_country.get(country_code, ()), response.url)
+            state["countryChains"][country_code] = {
+                "indexUrl": index_url,
+                "countryUrl": response.url,
+                "missionEntries": [{"host": url_host(task.url), "url": task.url} for task in tasks],
+            }
+            for host in scheduled_hosts:
+                stations = tuple(station for station in due_by_host[host] if station.country_code == country_code)
+                if not stations:
                     continue
-                for item in evidence:
-                    election_context = election_context_for(item.quote, item.context, args.election_year)
-                    if election_context is None:
-                        continue
-                    for station in attributed_stations(item.email, response.url, task.stations, stations_by_host):
-                        candidate = candidate_record(
-                            args.election_id,
-                            args.election_year,
-                            station,
-                            item.email,
-                            title,
-                            election_context,
-                            item.quote,
-                            response.url,
-                            observed_at,
-                            evidence_type,
-                        )
-                        candidates[candidate["candidateId"]] = candidate
-            pending = [next_tasks[key] for key in sorted(next_tasks)]
+                selected_tasks = [task for task in tasks if url_host(task.url) in host_variants(host)]
+                if len(selected_tasks) != 1:
+                    failed_hosts.add(host)
+                    report_failures.append(
+                        {"scope": "mission chain", "reason": f"no unique official mission entry for {country_code}/{host}"}
+                    )
+                    continue
+                task = selected_tasks[0]
+                country_entries[country_code].append(
+                    station_host_tasks(stations, task.url, country_code, (index_url, response.url, task.url))
+                )
 
+    pending = [task for country_code in sorted(country_entries) for task in country_entries[country_code]]
+    seen_task_keys: set[tuple[str, str, tuple[str, ...]]] = set()
+    while pending:
+        batch: list[PageTask] = []
+        for task in pending:
+            key = (task.country_code, task.url, tuple(station.station_id for station in task.stations))
+            if key not in seen_task_keys:
+                seen_task_keys.add(key)
+                batch.append(task)
+        pending = []
+        if not batch:
+            break
+        required = ((task.url, frozenset({url_host(task.url)})) for task in batch)
+        fetch_urls(required, "mission page")
+        next_tasks: list[PageTask] = []
+        for task in batch:
+            response = response_cache.get(task.url)
+            task_hosts = {station.website_host for station in task.stations}
+            if response is None:
+                budget_hosts.update(task_hosts)
+                continue
+            attempted_hosts.update(task_hosts)
+            if response.error:
+                failed_hosts.update(task_hosts)
+                report_failures.append({"scope": "mission page", "url": task.url, "reason": response.error})
+                continue
+            is_pdf = task.url.lower().split("?", 1)[0].endswith(".pdf") or "pdf" in response.content_type
+            if is_pdf:
+                try:
+                    title, page_text, evidence = extract_pdf_evidence(response.body, task.title_hint)
+                except PdfExtractionError as error:
+                    failed_hosts.update(task_hosts)
+                    report_failures.append(
+                        {"scope": "mission PDF", "url": task.url, "reason": f"PDF parse failure: {error}"}
+                    )
+                    continue
+                evidence_type = "pdf"
+            elif "html" in response.content_type:
+                title, page_text, evidence = extract_html_evidence(response.body, args.election_year)
+                evidence_type = "html"
+                if task.depth < args.max_depth:
+                    for next_task in mission_links(response.body, task, args.election_year):
+                        next_tasks.append(next_task)
+                elif mission_links(response.body, task, args.election_year):
+                    depth_hosts.update(task_hosts)
+            else:
+                failed_hosts.update(task_hosts)
+                report_failures.append({"scope": "mission page", "url": task.url, "reason": error_response(response)})
+                continue
+            accepted: list[tuple[ElectionEvidence, tuple[Station, ...], str]] = []
+            for item in evidence:
+                election_context = election_context_for(item.quote, item.context, args.election_year)
+                if election_context is None:
+                    continue
+                stations = attributed_stations(item.email, task.stations, known_mailboxes)
+                if not stations:
+                    station_ids = sorted(station.station_id for station in task.stations)
+                    ambiguous_stations.update(station_ids)
+                    report_ambiguous.append({"sourceUrl": response.url, "email": item.email, "stationIds": station_ids})
+                    continue
+                accepted.append((item, stations, election_context))
+            if not accepted:
+                continue
+            text_sha256 = hashlib.sha256(page_text.encode("utf-8")).hexdigest()
+            source_id = source_identifier(task.url, text_sha256)
+            sources[source_id] = {
+                "sourceUrl": task.url,
+                "finalUrl": response.url,
+                "fetchedAt": observed_at,
+                "bodySha256": hashlib.sha256(response.body).hexdigest(),
+                "textSha256": text_sha256,
+                "text": page_text,
+                "extractorVersion": "1",
+            }
+            source_chain = append_chain(task.source_chain, response.url)
+            for item, stations, election_context in accepted:
+                for station in stations:
+                    candidate = candidate_record(
+                        args.election_id,
+                        args.election_year,
+                        station,
+                        item.email,
+                        title,
+                        election_context,
+                        item.quote,
+                        task.url,
+                        observed_at,
+                        evidence_type,
+                        source_id,
+                        source_chain,
+                    )
+                    prior_candidates[candidate["candidateId"]] = candidate
+        pending = next_tasks
+
+    completed_hosts = attempted_hosts | failed_hosts | depth_hosts
+    completed_prefix = 0
+    for host in scheduled_hosts:
+        if host not in completed_hosts:
+            break
+        completed_prefix += 1
+    if host_names:
+        state["hostCursor"] = (cursor + completed_prefix) % len(host_names)
+
+    candidate_stations, _ = candidate_station_state()
+    pending_station_ids = set(candidate_stations)
+
+    coverage: list[dict[str, object]] = []
+    selected_ids = {station.station_id for station in selected_stations}
+    for station in all_stations:
+        status = "not attempted"
+        override = overrides_by_station.get(station.station_id)
+        retained_authority = bool(same_election_override(override, args.election_id, args.election_year))
+        if not station.website_host:
+            status = "no-site"
+        elif station_is_suppressed(override, args.election_id):
+            status = "suppressed"
+        elif station.station_id in selected_ids and station.website_host in failed_hosts:
+            status = "failed"
+        elif station.station_id in selected_ids and station.website_host in budget_hosts:
+            status = "budget-limited"
+        elif station.station_id in selected_ids and station.website_host in depth_hosts:
+            status = "depth-limited"
+        elif station.station_id in selected_ids and station.station_id in ambiguous_stations:
+            status = "ambiguous"
+        elif station.station_id in candidate_stations:
+            status = "candidate"
+        elif station.station_id in retained_stations:
+            status = "retained"
+        elif station.station_id not in selected_ids:
+            status = "not attempted"
+        elif station.website_host in attempted_hosts:
+            status = "scanned-no-evidence"
+        elif station.website_host in deferred_hosts:
+            status = "not attempted"
+        coverage.append(
+            {
+                "stationId": station.station_id,
+                "countryCode": station.country_code,
+                "host": station.website_host,
+                "isResident": station.is_resident,
+                "retainedAuthority": retained_authority,
+                "status": status,
+            }
+        )
+
+    report_ambiguous = list({
+        (item["sourceUrl"], item["email"], tuple(item["stationIds"])): item for item in report_ambiguous
+    }.values())
+    deferred_station_ids = sorted(
+        station.station_id
+        for station in selected_stations
+        if station.website_host in deferred_hosts or station.website_host in budget_hosts
+    )
+    counts: dict[str, int] = defaultdict(int)
+    for item in coverage:
+        counts[str(item["status"])] += 1
+    report = {
+        "schemaVersion": 1,
+        "runId": run_id,
+        "electionId": args.election_id,
+        "electionYear": args.election_year,
+        "mode": args.mode,
+        "generatedAt": observed_at,
+        "fetchedPages": fetched_pages,
+        "maxPages": args.max_pages,
+        "maxHosts": args.max_hosts,
+        "uniqueMissionHosts": len({station.website_host for station in all_stations if station.website_host}),
+        "attemptedMissionHosts": len(attempted_hosts),
+        "coverage": coverage,
+        "counts": dict(sorted(counts.items())),
+        "failures": report_failures,
+        "deferredStationIds": deferred_station_ids,
+        "ambiguous": report_ambiguous,
+        "partial": bool(deferred_station_ids or report_failures or budget_hosts or depth_hosts),
+    }
     payload = {
         "schemaVersion": 1,
         "electionId": args.election_id,
         "electionYear": args.election_year,
         "generatedAt": observed_at,
-        "candidates": [candidates[key] for key in sorted(candidates)],
+        "runId": run_id,
+        "pendingStationIds": sorted(pending_station_ids),
+        "candidates": [prior_candidates[key] for key in sorted(prior_candidates)],
+        "sources": {source_id: sources[source_id] for source_id in sorted(sources)},
     }
     write_output(args.output, payload)
-    print(f"Wrote {len(payload['candidates'])} election-contact candidates to {args.output}", file=sys.stderr)
+    write_output(args.state, state)
+    write_output(args.report, report)
+    print(
+        f"Wrote {len(payload['candidates'])} election-contact candidates to {args.output}; "
+        f"report {args.report} ({len(coverage)} stations, {len(attempted_hosts)} hosts, "
+        f"{len(report_failures)} failures, {len(deferred_station_ids)} deferred).",
+        file=sys.stderr,
+    )
     return 0
 
 

@@ -1,0 +1,121 @@
+{
+  "countryChains": {
+    "AE": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/ujedinjeni-arapski-emirati-uae/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "abudhabi.mfa.gov.rs",
+          "url": "https://abudhabi.mfa.gov.rs/"
+        }
+      ]
+    },
+    "BF": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/burkina-faso/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "BJ": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/benin/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "ET": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/etiopija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "addisababa.mfa.gov.rs",
+          "url": "https://addisababa.mfa.gov.rs/"
+        }
+      ]
+    },
+    "GM": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/gambija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "LR": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/liberija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "NE": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/niger/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "NG": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/nigerija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "SL": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/sijera-leone/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "TG": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/togo/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+      "missionEntries": [
+        {
+          "host": "abuja.mfa.gov.rs",
+          "url": "https://abuja.mfa.gov.rs/"
+        }
+      ]
+    },
+    "TR": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "ankara.mfa.gov.rs",
+          "url": "https://ankara.mfa.gov.rs/"
+        },
+        {
+          "host": "istanbul.mfa.gov.rs",
+          "url": "https://istanbul.mfa.gov.rs/"
+        }
+      ]
+    }
+  },
+  "electionId": "2026-parliamentary",
+  "hostCursor": 5,
+  "schemaVersion": 1
+}
