@@ -1,7 +1,7 @@
 // Offline Service Worker for the application.
 // Caches the application shell, fonts, and form template for offline use.
 
-const CACHE_NAME = 'glasanje-offline-v4';
+const CACHE_NAME = 'glasanje-offline-v5';
 
 const ASSETS_TO_PRECACHE = [
   '/',
@@ -38,6 +38,26 @@ self.addEventListener('fetch', (event) => {
   // Only cache GET requests
   if (event.request.method !== 'GET') return;
 
+  // For HTML navigation requests, use network-first with offline fallback
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse.status === 200) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match('/index.html');
+        })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
@@ -55,12 +75,6 @@ self.addEventListener('fetch', (event) => {
           });
         }
         return networkResponse;
-      }).catch(() => {
-        // Fallback to cached index.html for SPA navigation
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html') as Promise<Response>;
-        }
-        throw new Error('Мрежа није доступна');
       });
     })
   );
