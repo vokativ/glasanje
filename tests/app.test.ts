@@ -486,7 +486,7 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.website).toBe('https://www.london.mfa.gov.rs');
   });
 
-  test('New Zealand is covered by Canberra embassy with correct email', () => {
+  test('New Zealand is covered by Canberra embassy with confirmed election email', () => {
     const nz = COUNTRY_BY_CODE.get('NZ');
     expect(nz).toBeDefined();
     expect(nz?.label).toBe('Novi Zeland');
@@ -494,7 +494,8 @@ describe('Missions and Coverage Dataset', () => {
 
     const station = nz!.stations[0];
     expect(station.isResident).toBe(false);
-    expect(station.email).toBe('srb.emb.australia@mfa.rs');
+    expect(station.email).toBe('consular.canberra@mfa.rs');
+    expect(station.isElectionContactConfirmed).toBe(true);
     expect(station.website).toBe('https://canberra.mfa.gov.rs');
   });
   test('Antigua and Barbuda uses the confirmed U.S. Embassy election recipient', () => {
@@ -551,7 +552,7 @@ describe('Missions and Coverage Dataset', () => {
     const confirmed = COUNTRIES.flatMap((country) => country.stations)
       .filter((station) => station.isElectionContactConfirmed);
 
-    expect(confirmed).toHaveLength(41);
+    expect(confirmed).toHaveLength(72);
     expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
       (station) => station.id === 'st-it-emb-main',
     )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
@@ -580,7 +581,7 @@ describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
 
-    expect(coverage.confirmed).toBe(41);
+    expect(coverage.confirmed).toBe(72);
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 

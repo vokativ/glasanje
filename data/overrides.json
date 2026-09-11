@@ -1095,6 +1095,564 @@
         "observedAt": "2026-09-11T08:12:46Z",
         "promotedAt": "2026-09-11T08:12:46Z"
       }
+    },
+    "st-ch-emb-main": {
+      "electionEmail": "konzul@ambasadasrbije.ch",
+      "_electionContactProvenance": {
+        "candidateId": "0866d1048ff155797dd5f6ac44f35bcf3047374ff953adc56e271ba185fbadda",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "CH",
+        "stationId": "st-ch-emb-main",
+        "email": "konzul@ambasadasrbije.ch",
+        "sourceUrl": "https://berne.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "sourceHost": "berne.mfa.gov.rs",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "Захтеви се могу поднети на следеће начине: - електронским путем на адресу konzul@ambasadasrbije.ch",
+        "sourceQuote": "електронским путем на адресу konzul@ambasadasrbije.ch",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-li": {
+      "electionEmail": "konzul@ambasadasrbije.ch",
+      "_electionContactProvenance": {
+        "candidateId": "836c892204e1e174c9a81ad2c18a429d3424c27d41214a59487463dffeb4d8db",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "LI",
+        "stationId": "st-nonres-li",
+        "email": "konzul@ambasadasrbije.ch",
+        "sourceUrl": "https://berne.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "sourceHost": "berne.mfa.gov.rs",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "Захтеви се могу поднети на следеће начине: - електронским путем на адресу konzul@ambasadasrbije.ch (Амбасада у Берну покрива Лихтенштајн на нерезиденцијалној основи)",
+        "sourceQuote": "електронским путем на адресу konzul@ambasadasrbije.ch",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-pl-emb-main": {
+      "electionEmail": "consular.warsaw@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "a3ec4b0a5705e5fb847d44196a483270cffbc0983fd1def6cd14118c7195047c",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "PL",
+        "stationId": "st-pl-emb-main",
+        "email": "consular.warsaw@mfa.rs",
+        "sourceUrl": "https://warsaw.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "sourceHost": "warsaw.mfa.gov.rs",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "Пријаве за гласање у Амбасади Републике Србије у Варшави могу се поднети на следећи начин: путем е-маила: consular.warsaw@mfa.rs",
+        "sourceQuote": "путем е-маила: consular.warsaw@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-lt": {
+      "electionEmail": "consular.warsaw@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "bc2df8c237d0569b738a866ecb68744c837e65b34cd55feb5f483e7bd4fbdbc7",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "LT",
+        "stationId": "st-nonres-lt",
+        "email": "consular.warsaw@mfa.rs",
+        "sourceUrl": "https://warsaw.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "sourceHost": "warsaw.mfa.gov.rs",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionContext": "Пријаве за гласање у Амбасади Републике Србије у Варшави могу се поднети на следећи начин: путем е-маила: consular.warsaw@mfa.rs (Амбасада у Варшави покрива Литванију на нерезиденцијалној основи)",
+        "sourceQuote": "путем е-маила: consular.warsaw@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-au-emb-main": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "984f7792506d4c5ecd6e82dc305873cad2da687c2aa0fdfcb185c6e48a89b514",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "AU",
+        "stationId": "st-au-emb-main",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-au-cons-sidnej": {
+      "electionEmail": "srb.cons.sydney@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "093674881353d3c73335b2f3f570cac11b2b61be112a14b48e050b34dff1052f",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "AU",
+        "stationId": "st-au-cons-sidnej",
+        "email": "srb.cons.sydney@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: srb.cons.sydney@mfa.rs",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: srb.cons.sydney@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-nz": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "5f5ea240b266ca97ef0294b8fba74551c622d04fea06fb5f8b2b17791303b14b",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "NZ",
+        "stationId": "st-nonres-nz",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Нови Зеланд на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-fj": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "5e95f6891654a821e3342327bc86d1e0262c6bbb16aec225e9268332f5da4121",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "FJ",
+        "stationId": "st-nonres-fj",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Фиџи на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-pg": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "c21d8d3422f10b5789e1485b9794c14c36297adc25af1dd36db75c4a46e06dfd",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "PG",
+        "stationId": "st-nonres-pg",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Папуа Нову Гвинеју на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-ws": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "5cc121d84f6544600c31f2b3ace36209a9601c11c4c48ac0fb4a14de72395d90",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "WS",
+        "stationId": "st-nonres-ws",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Самоу на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-sb": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "79d277bb24c9435bb019a110f0ee31e42d08555ce3ca59a86e9faeb13a965b43",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "SB",
+        "stationId": "st-nonres-sb",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Соломонова Острва на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-to": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "74e7728b57b6d14c0b9167ee21f7e2ad61a6c7c763f94ee5d8b0f44ff0f2f0d4",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "TO",
+        "stationId": "st-nonres-to",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Тонгу на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-tv": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "1143f17f876781afdc38d7d962cfadebfdafce8fc63a150f5e540529a0940d51",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "TV",
+        "stationId": "st-nonres-tv",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Тувалу на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-vu": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "1a2dddbdf817b5cc227efba1d536bdaeda1f2a718336b2efae19b34b192e5682",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "VU",
+        "stationId": "st-nonres-vu",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Вануату на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-ki": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "ebaedfa43df608e1fb215d5eb4b3232a6c5a85ae88fb9d0a0dfc92a922dfccf3",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "KI",
+        "stationId": "st-nonres-ki",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Кирибати на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-nr": {
+      "electionEmail": "consular.canberra@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "257c53a4730857da391ef3d03ebaeaeb2b31052e84e5125ef89241c713bbfc19",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "NR",
+        "stationId": "st-nonres-nr",
+        "email": "consular.canberra@mfa.rs",
+        "sourceUrl": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "canberra.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду у Канбери путем мејла: consular.canberra@mfa.rs (Амбасада у Канбери покрива Науру на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-jp-emb-main": {
+      "electionEmail": "srb.emb.japan@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "21d7c2fe260abe59a2eca42b70b132b6dc5c306d63e5d55b2b6804bc18d4b301",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "JP",
+        "stationId": "st-jp-emb-main",
+        "email": "srb.emb.japan@mfa.rs",
+        "sourceUrl": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+        "sourceHost": "tokyo.mfa.gov.rs",
+        "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+        "electionContext": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs",
+        "sourceQuote": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-mh": {
+      "electionEmail": "srb.emb.japan@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "e96fd2ace0a33e397cb35ff24be266f6103f158af522f2145f98161bdd1dc384",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MH",
+        "stationId": "st-nonres-mh",
+        "email": "srb.emb.japan@mfa.rs",
+        "sourceUrl": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+        "sourceHost": "tokyo.mfa.gov.rs",
+        "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+        "electionContext": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs (Амбасада у Токију покрива Маршалска Острва на нерезиденцијалној основи)",
+        "sourceQuote": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-fm": {
+      "electionEmail": "srb.emb.japan@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "f347615fec777ce2c6fd569c0a4338f0650f9d715946857f03308b65e14cc172",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "FM",
+        "stationId": "st-nonres-fm",
+        "email": "srb.emb.japan@mfa.rs",
+        "sourceUrl": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+        "sourceHost": "tokyo.mfa.gov.rs",
+        "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+        "electionContext": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs (Амбасада у Токију покрива Микронезију на нерезиденцијалној основи)",
+        "sourceQuote": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-pw": {
+      "electionEmail": "srb.emb.japan@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "916515fadb1646d29b53c699f7e854939092069e2342375b60b710a49effa296",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "PW",
+        "stationId": "st-nonres-pw",
+        "email": "srb.emb.japan@mfa.rs",
+        "sourceUrl": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+        "sourceHost": "tokyo.mfa.gov.rs",
+        "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+        "electionContext": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs (Амбасада у Токију покрива Палау на нерезиденцијалној основи)",
+        "sourceQuote": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-cn-emb-main": {
+      "electionEmail": "srb.emb.china@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "22f300cb4e6240d9bef4b6fe9b8981ec783e9c1c3af2b981e5c4b754286e22ad",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "CN",
+        "stationId": "st-cn-emb-main",
+        "email": "srb.emb.china@mfa.rs",
+        "sourceUrl": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+        "sourceHost": "beijing.mfa.gov.rs",
+        "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "Пријаве за гласање у иностранству електронским путем на: srb.emb.china@mfa.rs",
+        "sourceQuote": "електронским путем на : srb.emb.china@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-mn": {
+      "electionEmail": "srb.emb.china@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "a852ae245bf2424a6d919d2aefca6ffdf08dc5f6c4f67c7ea8f465bd04e62789",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MN",
+        "stationId": "st-nonres-mn",
+        "email": "srb.emb.china@mfa.rs",
+        "sourceUrl": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+        "sourceHost": "beijing.mfa.gov.rs",
+        "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "Пријаве за гласање у иностранству електронским путем на: srb.emb.china@mfa.rs (Амбасада у Пекингу покрива Монголију на нерезиденцијалној основи)",
+        "sourceQuote": "електронским путем на : srb.emb.china@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-kp": {
+      "electionEmail": "srb.emb.china@mfa.rs",
+      "_electionContactProvenance": {
+        "candidateId": "4ca778502d0174957a058c88804860f55dd71897403673fbb46b1e89868bb518",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "KP",
+        "stationId": "st-nonres-kp",
+        "email": "srb.emb.china@mfa.rs",
+        "sourceUrl": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+        "sourceHost": "beijing.mfa.gov.rs",
+        "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "Пријаве за гласање у иностранству електронским путем на: srb.emb.china@mfa.rs (Амбасада у Пекингу покрива Северну Кореју на нерезиденцијалној основи)",
+        "sourceQuote": "електронским путем на : srb.emb.china@mfa.rs",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-za-emb-main": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "b2d0273d77bb54c39be40a5ca369ee6ad8be88042493853424211116599cdacc",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "ZA",
+        "stationId": "st-za-emb-main",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-bw": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "446ba7f75f1d3295f24ca50f6062f680c3dfbc6feb4098135b5988dc923443d1",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "BW",
+        "stationId": "st-nonres-bw",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Боцвану на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-sz": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "eb596da1a5b3608b8c1434fc55ba0a7d9ed15ef2ba4e0ff0bbccb6f86b90518d",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "SZ",
+        "stationId": "st-nonres-sz",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Есватини на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-ls": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "a815db220203b68b91627385226a5ce7fd8daa9c7021cbbd0274b641c9346509",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "LS",
+        "stationId": "st-nonres-ls",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Лесото на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-mg": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "5366ebddde8d9a60e14066dd6257d881e0c24171c4b600a57a6ae9774fbd29f6",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MG",
+        "stationId": "st-nonres-mg",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Мадагаскар на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-mw": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "ef90606b5b5c8829fcc7ee61da80184c0f3350bc3a15be789d0663570798d2c7",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MW",
+        "stationId": "st-nonres-mw",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Малави на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-mu": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "fc79ea0942c668b8c82bac88837cb89c406b10ae3077c1564cd134f9b5c87f24",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MU",
+        "stationId": "st-nonres-mu",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Маурицијус на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
+    },
+    "st-nonres-mz": {
+      "electionEmail": "info@srbembassy.org.za",
+      "_electionContactProvenance": {
+        "candidateId": "432f21188488c48fdf496f3e848ae42fab5f30c838cb16029586d8ac027ca94d",
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "countryCode": "MZ",
+        "stationId": "st-nonres-mz",
+        "email": "info@srbembassy.org.za",
+        "sourceUrl": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "sourceHost": "pretoria.mfa.gov.rs",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionContext": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za (Амбасада у Преторији покрива Мозамбик на нерезиденцијалној основи)",
+        "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
+        "observedAt": "2026-09-11T09:15:00Z",
+        "promotedAt": "2026-09-11T09:15:00Z"
+      }
     }
   },
   "countryOverrides": {}

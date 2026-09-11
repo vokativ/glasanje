@@ -647,15 +647,12 @@
   ],
   "electionId": "2026-parliamentary",
   "electionYear": "2026",
-  "generatedAt": "2026-09-11T07:10:00Z",
+  "generatedAt": "2026-09-11T09:01:02Z",
   "pendingStationIds": [
-    "st-by-emb-main",
     "st-gb-emb-main",
-    "st-no-emb-main",
-    "st-nonres-ie",
-    "st-nonres-is"
+    "st-nonres-ie"
   ],
-  "runId": "b332810a6a58c3ded43bfac9",
+  "runId": "f3307ecf37501c2a1dfd2bee",
   "schemaVersion": 1,
   "sources": {
     "3ad90afac7bbb60f1bb237390d2b66312695e101694638d79b4ce8dc36ed83d8": {
