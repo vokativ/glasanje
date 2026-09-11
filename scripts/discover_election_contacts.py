@@ -14,6 +14,7 @@ import json
 import re
 import sys
 import tempfile
+import time
 import unicodedata
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
@@ -339,24 +340,30 @@ def extract_pdf_evidence(pdf: bytes, title_hint: str) -> tuple[str, str, list[El
     return title_hint, compact, sorted(set(evidence), key=lambda item: (item.email, item.quote, item.context))
 
 
-def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: int) -> Response | None:
-    try:
-        opener = build_opener(RestrictedRedirectHandler(allowed_hosts))
-        request = Request(url, headers={"User-Agent": "GlasanjeElectionContactDiscovery/1.0"})
-        with opener.open(request, timeout=timeout) as response:
-            final_url = absolute_https_url(response.geturl())
-            if final_url is None or url_host(final_url) not in allowed_hosts:
-                return None
-            length = response.headers.get("Content-Length")
-            if length and int(length) > max_bytes:
-                return None
-            body = response.read(max_bytes + 1)
-            if len(body) > max_bytes:
-                return None
-            return Response(final_url, response.headers.get_content_type().lower(), body)
-    except (HTTPError, URLError, OSError, ValueError):
-        return None
-
+def fetch(url: str, allowed_hosts: frozenset[str], timeout: float, max_bytes: int, retries: int = 1) -> Response | None:
+    for attempt in range(retries + 1):
+        try:
+            opener = build_opener(RestrictedRedirectHandler(allowed_hosts))
+            request = Request(url, headers={"User-Agent": "GlasanjeElectionContactDiscovery/1.0"})
+            with opener.open(request, timeout=timeout) as response:
+                final_url = absolute_https_url(response.geturl())
+                if final_url is None or url_host(final_url) not in allowed_hosts:
+                    return None
+                length = response.headers.get("Content-Length")
+                if length and int(length) > max_bytes:
+                    return None
+                body = response.read(max_bytes + 1)
+                if len(body) > max_bytes:
+                    return None
+                return Response(final_url, response.headers.get_content_type().lower(), body)
+        except (URLError, OSError):
+            if attempt < retries:
+                time.sleep(0.5)
+                continue
+            return None
+        except (HTTPError, ValueError):
+            return None
+    return None
 
 def fetch_many(
     urls: Iterable[tuple[str, frozenset[str]]],

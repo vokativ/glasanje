@@ -61,6 +61,8 @@ Ona piše preporuke u `data/election_ai_reviews.json`; ne menja kandidate niti `
 
 AI-u se šalje isključivo javni dokaz kandidata: adresa, citat, zvanični URL, host, izborni kontekst, vreme opažanja i identitet misije. AI samo rangira ili obrazlaže dokaz i može da preporuči odbacivanje. **AI ne može da objavi primaoca, ne može da promeni ljudska odobrenja i nikada ne sme da menja `data/overrides.json`.** Ne prihvatati AI nalaz kao dokaz bez nezavisne ljudske provere izvora.
 
+Ako je operativni artefakt `data/election_ai_reviews.json` prisutan ili je drugi artefakt pregleda priložen promociji, mora sadržati jedan dovršen zapis za **svakog** kandidata. Kandidat sa nalazom `reject` se ne sme zaobići: prisutan podrazumevani artefakt se mora proslediti kroz `--reviews`, a promocija se prekida uz naziv kandidata i razlog. Ako se savetodavni pregled zaista ne koristi, izostavljanje se mora izričito označiti opcijom `--omit-reviews`; ona se odbija dok je podrazumevani artefakt prisutan, pa samo odsustvo `--reviews` nije dovoljno.
+
 ### 3. Ljudska promocija
 
 Poverljivi održavalac nezavisno proverava kandidata u njegovom živom zvaničnom izvoru i u `data/missions_canonical.json`. Svako odobrenje beleži se u `data/election_approvals.json`. Fajl počinje sa `{"schemaVersion":1,"approvals":[]}`, a svaki zapis mora imati `candidateId`, `electionId`, stabilni ljudski `reviewerId`, `reviewerType:"human"`, `decision:"approve"` i `approvedAt` u ISO-8601 formatu.
@@ -90,15 +92,22 @@ Zatim pokrenuti:
 ```bash
 python3 scripts/promote_election_contacts.py \
   --candidates data/election_candidates.json \
+  --omit-reviews \
   --approvals data/election_approvals.json \
   --reviewers data/election_reviewers.json \
   --canonical data/missions_canonical.json \
   --overrides data/overrides.json
 ```
 
-Ako postoji dovršen savetodavni AI pregled, dodati `--reviews data/election_ai_reviews.json`. Faza ponovo nezavisno potvrđuje identitet stanice, HTTPS izvor, javno vidljivu adresu i, kada stanica ima kanonski sajt, host izvora. AI preporuka nije zamena za ljudsko odobrenje.
+Kada postoji dovršen savetodavni pregled, `--omit-reviews` se zamenjuje sa `--reviews data/election_ai_reviews.json`; dve opcije se ne kombinuju. Faza ponovo nezavisno potvrđuje identitet stanice, HTTPS izvor, javno vidljivu adresu i, kada stanica ima kanonski sajt, host izvora. AI preporuka nije zamena za ljudsko odobrenje.
 
-Promovisati samo adresu sa aktuelnim zvaničnim izvorom i jasnim rokom važenja. Svaki živi primalac mora imati takav aktuelni izvor i datum isteka; kada izvor istekne, ukloniti ili zameniti primaoca kroz isti postupak. Ne zadržavati primaoca zato što je bio ispravan u prethodnom ciklusu.
+Promocija se prekida bez menjanja `overrides.json` ako bilo koji izabrani kandidat nema tačno propisan broj različitih ljudskih odobrenja, ima ljudsko odbijanje, nema obavezni priloženi AI zapis ili ima `reject` nalaz. Dva kandidata za istu stanicu su dvosmislen izbor i takođe prekidaju promociju; alat nikada ne bira poslednji zapis. Promovisati samo adresu sa aktuelnim zvaničnim izvorom. Rok se ne zaključuje iz identifikatora izbora, vremena opažanja ili vremena pokretanja: poverljivi održavalac proverava živu objavu i izričito bira svaku stanicu.
+
+### Deaktivacija isteklog ovlašćenja
+
+Kada ljudski pregled žive objave utvrdi da izborna adresa više nije ovlašćena, poverljivi održavalac eksplicitno bira stanicu sa ponovljenom opcijom `--deactivate-station STATION_ID`. Ovaj režim ne prima kandidate, odobrenja ni AI pregled i odbija ponovljen, nepoznat ili već neaktivan ID stanice. Alat uklanja samo `electionEmail` i `_electionContactProvenance`; sve ostale ključeve postojećeg override-a, uključujući nevezane podatke o misiji, zadržava. Ako posle toga ne ostane nijedan ključ, uklanja se samo taj prazan override.
+
+Alat ne zaključuje datum isteka i ne deaktivira ništa automatski. Posle uspešne deaktivacije obavezno pokrenuti uobičajenu bezbednu regeneraciju skupa podataka i pregledati da je stanica ponovo nepotvrđena (`isElectionContactConfirmed:false`) pre izdavanja. Tako se kanonski kontakt vraća bez ručnog menjanja nepovezanih podataka misije.
 
 ## Pregled, čuvanje i trag revizije
 

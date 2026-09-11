@@ -509,8 +509,8 @@ class ElectionContactPipelineTests(unittest.TestCase):
             paths = self._write_promotion_fixture(Path(directory), reviewer_ids=("ana", "ana"))
             result = self._run_promotion(paths)
 
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(result.stdout.strip(), "Promoted 0 election-specific contact(s).")
+            self.assertEqual(result.returncode, 2, result.stderr)
+            self.assertIn("not from distinct reviewers", result.stderr)
             self.assertEqual(
                 self._read_json(paths["overrides"]),
                 {"missionOverrides": {}},

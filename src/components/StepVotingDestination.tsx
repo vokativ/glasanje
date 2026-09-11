@@ -14,6 +14,18 @@ export interface VotingDestinationSelection {
   stationId: string | null;
 }
 
+export interface VotingDestinationCoverage {
+  countryCount: number;
+  stationCount: number;
+}
+
+export const getVotingDestinationCoverage = (
+  countries: VotingCountry[] = COUNTRIES
+): VotingDestinationCoverage => ({
+  countryCount: countries.length,
+  stationCount: countries.reduce((count, country) => count + country.stations.length, 0),
+});
+
 const normalizeCountrySearchTerm = (value: string) =>
   value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
@@ -112,12 +124,14 @@ const formatCountryOptionLabel = (country: VotingCountry, script: Script) => {
 
 interface StepVotingDestinationProps {
   initialData?: Partial<VotingDestinationData>;
+  coverage?: VotingDestinationCoverage;
   onBack: () => void;
   onNext: (data: VotingDestinationData) => void;
 }
 
 export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
   initialData,
+  coverage = getVotingDestinationCoverage(),
   onBack,
   onNext,
 }) => {
@@ -308,43 +322,71 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             </span>
           )}
           <span className="form-hint">
-            {t('Ukupno obuhvaćeno 195 država prema zvaničnoj evidenciji Ministarstva spoljnih poslova')}
+            {t(
+              `Podaci trenutno obuhvataju ${coverage.countryCount} država i ${coverage.stationCount} diplomatsko-konzularnih predstavništava.`
+            )}
           </span>
         </div>
 
 
-        {currentCountry && (
-          <div className="form-group">
-            <label className="form-label" htmlFor="stationSelect">
-              {t('Diplomatsko-konzularno predstavništvo u ovoj državi *')}
-            </label>
-            {currentCountry.stations.length > 1 && (
-              <span className="mission-selection-hint">
-                {t(
-                  'Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam je najbliže.'
-                )}
-              </span>
-            )}
-            <select
-              id="stationSelect"
-              name="stationSelect"
-              autoComplete="off"
-              className="form-control"
-              value={selection.stationId ?? ''}
-              onChange={(e) =>
-                setSelection((previous) => ({ ...previous, stationId: e.target.value || null }))
-              }
-              required
+        {currentCountry &&
+          (currentCountry.stations.length > 0 ? (
+            <div className="form-group">
+              <label className="form-label" htmlFor="stationSelect">
+                {t('Diplomatsko-konzularno predstavništvo u ovoj državi *')}
+              </label>
+              {currentCountry.stations.length > 1 && (
+                <span className="mission-selection-hint">
+                  {t(
+                    'Za ovu državu ima više predstavništava: izaberite ono koje je nadležno za vas ili vam je najbliže.'
+                  )}
+                </span>
+              )}
+              <select
+                id="stationSelect"
+                name="stationSelect"
+                autoComplete="off"
+                className="form-control"
+                value={selection.stationId ?? ''}
+                onChange={(e) =>
+                  setSelection((previous) => ({ ...previous, stationId: e.target.value || null }))
+                }
+                required
+              >
+                <option value="">{t('Izaberite diplomatsko-konzularno predstavništvo…')}</option>
+                {currentCountry.stations.map((station) => (
+                  <option key={station.id} value={station.id}>
+                    {script === 'cyrillic' ? station.embassyCyr : station.embassy}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <section
+              className="mission-warning"
+              role="status"
+              aria-label={t('Nema objavljenog kontakta za prijavu za glasanje')}
             >
-              <option value="">{t('Izaberite diplomatsko-konzularno predstavništvo…')}</option>
-              {currentCountry.stations.map((station) => (
-                <option key={station.id} value={station.id}>
-                  {script === 'cyrillic' ? station.embassyCyr : station.embassy}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+              <strong>{t('Nema objavljenog kontakta za prijavu za glasanje.')}</strong>
+              <p>
+                {t(
+                  'Za izabranu državu trenutno nema objavljenog kontakta predstavništva na koji ova prijava može bezbedno da se usmeri.'
+                )}
+              </p>
+              <p>
+                {t('Proverite aktuelna uputstva na ')}
+                <a
+                  href="https://www.mfa.gov.rs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
+                >
+                  {t('zvaničnom sajtu Ministarstva spoljnih poslova')} ↗
+                </a>
+                {t('.')}
+              </p>
+            </section>
+          ))}
 
         {currentCountry && currentStation && (
           <div

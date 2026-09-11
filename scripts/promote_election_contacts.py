@@ -23,6 +23,7 @@ GENERIC_MAILBOX_LOCAL_PART_RE = re.compile(
 APPROVAL_DECISION = "approve"
 ADVISORY_DECISIONS = {"accept", "needs_human"}
 REVIEW_DECISIONS = ADVISORY_DECISIONS | {"reject"}
+DEFAULT_REVIEW_ARTIFACT = Path("data/election_ai_reviews.json")
 
 ELECTION_CONTEXT_RE = re.compile(
     r"\b(?:election\w*|vot(?:e|ing)\w*|electoral\w*|izbor\w*|glasanj\w*|bira[čc]\w*)\b|"
@@ -178,6 +179,7 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
     generated_at = require_string(payload, "generatedAt", "Candidates")
     require_timestamp(generated_at, "Candidates")
     candidates: dict[str, dict[str, Any]] = {}
+    candidate_ids_by_station: dict[str, str] = {}
     for index, candidate in enumerate(records_from(payload, "candidates", "Candidates")):
         label = f"Candidate #{index + 1}"
         candidate_id = require_string(candidate, "candidateId", label)
@@ -231,6 +233,13 @@ def validate_candidates(payload: Any, stations: dict[str, tuple[str, dict[str, A
         canonical_host = canonical_website_host(station, label)
         if canonical_host is not None and source_host != canonical_host:
             fail(f"{label} sourceHost does not match the station's canonical mission website")
+        existing_candidate_id = candidate_ids_by_station.get(station_id)
+        if existing_candidate_id is not None:
+            fail(
+                f"Candidates ambiguously select station {station_id} for both "
+                f"{existing_candidate_id} and {candidate_id}"
+            )
+        candidate_ids_by_station[station_id] = candidate_id
         candidates[candidate_id] = {
             "candidateId": candidate_id,
             "electionId": candidate_election_id,
@@ -328,6 +337,81 @@ def validate_approvals(
     return approvals
 
 
+def promotion_blocker(
+    candidate_id: str,
+    reviews_supplied: bool,
+    review: dict[str, Any] | None,
+    human_approvals: list[dict[str, str]],
+    required_human_approvals: int,
+) -> str | None:
+    if reviews_supplied and review is None:
+        return f"Candidate {candidate_id} is missing its supplied advisory review"
+    if review is not None and review["decision"] not in ADVISORY_DECISIONS:
+        return (
+            f"Candidate {candidate_id} was selected but its advisory review "
+            f"decision is {review['decision']}"
+        )
+    reviewer_ids = {approval["reviewerId"] for approval in human_approvals}
+    if len(human_approvals) != required_human_approvals:
+        return (
+            f"Candidate {candidate_id} was selected but has "
+            f"{len(human_approvals)} human approval record(s); policy requires "
+            f"{required_human_approvals}"
+        )
+    if len(reviewer_ids) != required_human_approvals:
+        return (
+            f"Candidate {candidate_id} was selected but its {required_human_approvals} "
+            "human approvals are not from distinct reviewers"
+        )
+    rejected_by = [
+        approval["reviewerId"]
+        for approval in human_approvals
+        if approval["decision"] != APPROVAL_DECISION
+    ]
+    if rejected_by:
+        return (
+            f"Candidate {candidate_id} was selected but was not approved by "
+            f"{', '.join(rejected_by)}"
+        )
+    return None
+
+
+def deactivate_expired_authorities(args: argparse.Namespace) -> int:
+    stations = canonical_stations(load_json(args.canonical, "canonical missions"))
+    overrides = load_json(args.overrides, "overrides")
+    if not isinstance(overrides, dict) or not isinstance(overrides.get("missionOverrides"), dict):
+        fail("Overrides must be an object with a missionOverrides object")
+    if len(args.deactivate_station) != len(set(args.deactivate_station)):
+        fail("A station can be selected for deactivation only once")
+
+    updated = copy.deepcopy(overrides)
+    mission_overrides = updated["missionOverrides"]
+    deactivated = 0
+    for station_id in args.deactivate_station:
+        if station_id not in stations:
+            fail(f"Selected station {station_id} is not in canonical missions")
+        previous = mission_overrides.get(station_id)
+        election_email = previous.get("electionEmail") if isinstance(previous, dict) else None
+        if (
+            not isinstance(election_email, str)
+            or not MAILBOX_RE.fullmatch(election_email)
+            or ".." in election_email
+        ):
+            fail(f"Selected station {station_id} has no active election authority to deactivate")
+        patch = copy.deepcopy(previous)
+        del patch["electionEmail"]
+        patch.pop("_electionContactProvenance", None)
+        if patch:
+            mission_overrides[station_id] = patch
+        else:
+            del mission_overrides[station_id]
+        deactivated += 1
+
+    write_json_atomically(args.overrides, updated)
+    print(f"Deactivated {deactivated} expired election-specific contact(s).")
+    return 0
+
+
 def promotion_provenance(
     candidate: dict[str, Any],
     review: dict[str, Any] | None,
@@ -355,9 +439,10 @@ def promotion_provenance(
 def promote(args: argparse.Namespace) -> int:
     stations = canonical_stations(load_json(args.canonical, "canonical missions"))
     candidates = validate_candidates(load_json(args.candidates, "candidates"), stations)
+    reviews_supplied = args.reviews is not None
     reviews = (
         validate_reviews(load_json(args.reviews, "AI reviews"), candidates)
-        if args.reviews is not None
+        if reviews_supplied
         else {}
     )
     allowed_reviewer_ids, required_human_approvals = validate_reviewer_policy(
@@ -372,21 +457,28 @@ def promote(args: argparse.Namespace) -> int:
     if not isinstance(overrides, dict) or not isinstance(overrides.get("missionOverrides"), dict):
         fail("Overrides must be an object with a missionOverrides object")
 
+    blockers = [
+        blocker
+        for candidate_id in candidates
+        if (
+            blocker := promotion_blocker(
+                candidate_id,
+                reviews_supplied,
+                reviews.get(candidate_id),
+                approvals[candidate_id],
+                required_human_approvals,
+            )
+        )
+        is not None
+    ]
+    if blockers:
+        fail("; ".join(blockers))
+
     updated = copy.deepcopy(overrides)
     mission_overrides = updated["missionOverrides"]
-    promoted = 0
     for candidate_id, candidate in candidates.items():
         review = reviews.get(candidate_id)
         human_approvals = approvals[candidate_id]
-        if review is not None and review["decision"] not in ADVISORY_DECISIONS:
-            continue
-        reviewer_ids = {approval["reviewerId"] for approval in human_approvals}
-        if (
-            len(human_approvals) != required_human_approvals
-            or len(reviewer_ids) != required_human_approvals
-            or any(approval["decision"] != APPROVAL_DECISION for approval in human_approvals)
-        ):
-            continue
         previous = mission_overrides.get(candidate["stationId"])
         if previous is not None and not isinstance(previous, dict):
             fail(f"Override for {candidate['stationId']} is malformed")
@@ -397,29 +489,51 @@ def promote(args: argparse.Namespace) -> int:
             patch["website"] = f"https://{candidate['sourceHost']}"
         patch.update(promotion_provenance(candidate, review, human_approvals))
         mission_overrides[candidate["stationId"]] = patch
-        promoted += 1
 
-    if promoted:
+    if candidates:
         write_json_atomically(args.overrides, updated)
-    print(f"Promoted {promoted} election-specific contact(s).")
+    print(f"Promoted {len(candidates)} election-specific contact(s).")
     return 0
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--candidates", type=Path, default=Path("data/election_candidates.json"))
-    parser.add_argument("--reviews", type=Path, help="Optional advisory AI reviews JSON")
+    review_mode = parser.add_mutually_exclusive_group()
+    review_mode.add_argument("--reviews", type=Path, help="Completed advisory AI reviews JSON")
+    review_mode.add_argument(
+        "--omit-reviews",
+        action="store_true",
+        help="Explicitly record that no advisory review artifact is being used",
+    )
     parser.add_argument("--approvals", type=Path, default=Path("data/election_approvals.json"))
     parser.add_argument("--reviewers", type=Path, default=Path("data/election_reviewers.json"))
     parser.add_argument("--canonical", type=Path, default=Path("data/missions_canonical.json"))
     parser.add_argument("--overrides", type=Path, default=Path("data/overrides.json"))
+    parser.add_argument(
+        "--deactivate-station",
+        action="append",
+        default=[],
+        metavar="STATION_ID",
+        help="Explicitly remove an expired election authority from a canonical station",
+    )
     args = parser.parse_args()
     try:
+        if args.deactivate_station:
+            if args.reviews is not None or args.omit_reviews:
+                fail("Deactivation cannot be combined with advisory review options")
+            return deactivate_expired_authorities(args)
+        if args.omit_reviews and DEFAULT_REVIEW_ARTIFACT.is_file():
+            fail(
+                f"Default advisory review artifact {DEFAULT_REVIEW_ARTIFACT} exists; "
+                "supply it with --reviews instead of omitting reviews"
+            )
+        if args.reviews is None and not args.omit_reviews:
+            fail("Promotion requires --reviews or explicit --omit-reviews")
         return promote(args)
     except ValidationError as error:
         print(f"Promotion aborted: {error}", file=sys.stderr)
         return 2
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

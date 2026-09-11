@@ -87,3 +87,6 @@ Thumbs.db
 *.cache
 firebase-debug.log
 *.cache
+
+# local Firebase/Cloudflare provisioning handoff
+/docs/firebase-domain-handoff.md

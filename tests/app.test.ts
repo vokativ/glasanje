@@ -719,4 +719,44 @@ describe('PDF Generator', () => {
     const pdfBytes = await generateApplicationPdf(sampleData);
     expect(pdfBytes.length).toBeGreaterThan(60000);
   });
+  test(
+    'generates a PDF for every selectable application-supplied voting target',
+    { timeout: 30_000 },
+    async () => {
+      const originalFetch = globalThis.fetch;
+      globalThis.fetch = async (url: string | URL | Request) => {
+        const pathStr = typeof url === 'string' ? url : url.toString();
+        const buffer = fs.readFileSync(`public${pathStr}`);
+        return {
+          ok: true,
+          arrayBuffer: async () =>
+            buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength),
+        } as unknown as Response;
+      };
+
+      try {
+        for (const country of COUNTRIES) {
+          for (const station of country.stations) {
+            const pdfBytes = await generateApplicationPdf({
+              fullName: 'Петар Петровић',
+              parentName: 'Милорад',
+              jmbg: '1207985710055',
+              serbianAddress: 'Немањина 11, Београд',
+              foreignAddress: '7500E Beach Road, Singapore 199595',
+              stationName: station.embassyCyr,
+              desiredLocation: country.labelCyr,
+              signingDate: '09.09.2026.',
+              phone: '+65 9123 4567',
+              email: 'petar.petrovic@example.com',
+              signaturePngDataUrl: '',
+            });
+
+            expect(new TextDecoder().decode(pdfBytes.slice(0, 8)).startsWith('%PDF-')).toBe(true);
+          }
+        }
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+    },
+  );
 });

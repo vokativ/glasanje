@@ -4,7 +4,11 @@ import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './compone
 import { Countdown } from './components/Countdown';
 import { StepVoterRegistry } from './components/StepVoterRegistry';
 import { StepPersonalInfo, PersonalInfoData } from './components/StepPersonalInfo';
-import { StepVotingDestination, VotingDestinationData } from './components/StepVotingDestination';
+import {
+  getVotingDestinationCoverage,
+  StepVotingDestination,
+  VotingDestinationData,
+} from './components/StepVotingDestination';
 import type { SignatureAndDocumentData } from './components/StepSignatureAndDocument';
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { COUNTRY_BY_CODE } from './data/missions';
@@ -52,6 +56,7 @@ const AppContent: React.FC = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
   const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
   const emailCoverage = useMemo(() => getElectionEmailCoverage(), []);
+  const votingDestinationCoverage = useMemo(() => getVotingDestinationCoverage(), []);
 
 
   // Form state
@@ -226,6 +231,7 @@ const AppContent: React.FC = () => {
             {currentStep === 3 && (
               <StepVotingDestination
                 initialData={votingDestination}
+                coverage={votingDestinationCoverage}
                 onBack={() => setCurrentStep(2)}
                 onNext={handleStep3Complete}
               />
