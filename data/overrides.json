@@ -972,7 +972,12 @@
     },
     "st-be-emb-main": {
       "electionEmail": "izbori.brisel@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "30a0f659d0372f774acca35a16f40ea453c76effffc787534c3cb99462be36eb",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -990,7 +995,12 @@
     },
     "st-nonres-lu": {
       "electionEmail": "izbori.brisel@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "aa105e30f56f85038adb903d46050e054de1320ffc7b016f4a77e7d5407ae40a",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1008,7 +1018,12 @@
     },
     "st-nonres-is": {
       "electionEmail": "izbori.oslo2026@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "5630547fc8dbae598281fc6664c91c713033f22a9b2b7a7c1f6e17e4bb04e921",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1062,7 +1077,12 @@
     },
     "st-nonres-sm": {
       "electionEmail": "izbori.rim@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "f13c4ce38bb4758a14875917f65679274c26fb7474fa343f2d93dae74780e22d",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
