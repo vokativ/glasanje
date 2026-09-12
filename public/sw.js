@@ -4,7 +4,7 @@
 // This is not a complete offline mirror: uncached or cross-origin requests still
 // need the network, and offline navigation can only fall back to `/index.html`.
 
-const CACHE_NAME = 'glasanje-offline-v5';
+const CACHE_NAME = 'glasanje-offline-v6';
 
 // Cache contents have no age or size policy. Change this version deliberately
 // when a stale precached asset must be invalidated.
