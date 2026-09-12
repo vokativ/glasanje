@@ -1762,6 +1762,30 @@
         "electionYear": "2026"
       }
     },
+    "st-il-emb-main": {
+      "electionEmail": "srb.emb.israel@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-se-emb-main": {
+      "electionEmail": "izbori.se@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
     "st-kr-emb-main": {
       "electionEmail": "srb.emb.repkorea@mfa.rs",
       "_operatorNote": "Operator-authorized recipient from the official election notice.",

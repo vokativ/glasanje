@@ -146,6 +146,17 @@ def has_confirmed_evidence_provenance(provenance):
         )
     )
 
+def election_contact_approval(provenance):
+    if has_confirmed_evidence_provenance(provenance):
+        return "source-confirmed"
+    if (
+        isinstance(provenance, dict)
+        and isinstance(provenance.get("authorization"), dict)
+        and provenance["authorization"].get("type") == "operator"
+    ):
+        return "operator-approved"
+    return "unconfirmed"
+
 # Search aliases are public catalog metadata only. Keep the source list explicit
 # and sort output below so every build produces the same country records.
 COUNTRY_SEARCH_ALIASES = {
@@ -296,6 +307,7 @@ for item in raw_data:
                 'embassy': name_lat,
                 'embassyCyr': name_cyr,
                 'email': primary_email,
+                'electionContactApproval': "unconfirmed",
                 'isElectionContactConfirmed': False,
                 'website': website,
                 'address': addr,
@@ -332,6 +344,7 @@ for item in raw_data:
                     'embassy': name_lat,
                     'embassyCyr': name_cyr,
                     'email': primary_email,
+                    'electionContactApproval': "unconfirmed",
                     'isElectionContactConfirmed': False,
                     'website': website,
                     'address': addr,
@@ -403,15 +416,13 @@ if os.path.exists(overrides_path):
                         if not k.startswith("_") and k != "electionEmail" and v is not None:
                             s[k] = v
                     election_email = patch.get("electionEmail")
-                    # A selected mailbox is confirmed only by complete AI or
-                    # historical human-reviewed evidence. Operator authority remains
-                    # usable, but must not imply independently verified routing.
-                    s["isElectionContactConfirmed"] = False
+                    approval = election_contact_approval(
+                        patch.get("_electionContactProvenance")
+                    )
+                    s["electionContactApproval"] = approval
+                    s["isElectionContactConfirmed"] = approval == "source-confirmed"
                     if is_valid_email(election_email):
                         s["email"] = election_email.strip()
-                        s["isElectionContactConfirmed"] = has_confirmed_evidence_provenance(
-                            patch.get("_electionContactProvenance")
-                        )
     except Exception as e:
         print("Warning: failed to apply overrides:", e)
 
@@ -508,6 +519,7 @@ export interface PollingStation {{
   embassy: string;
   embassyCyr: string;
   email: string;
+  electionContactApproval: 'source-confirmed' | 'operator-approved' | 'unconfirmed';
   isElectionContactConfirmed: boolean;
   website: string;
   address: string;

@@ -21,7 +21,7 @@ export interface WebShareInfo {
 
 export interface RecipientPayloadInput {
   toEmail: string;
-  isElectionContactConfirmed: boolean;
+  electionContactApproval: 'source-confirmed' | 'operator-approved' | 'unconfirmed';
   isIdDocumentEmbedded: boolean;
   isWetInkSignature: boolean;
   subject: string;
@@ -40,13 +40,13 @@ function temporaryBlock(sections: string[]): string {
 /**
  * Builds the alternatives a person can use to address and attach an
  * application. It only describes required attachments—it cannot attach files
- * through `mailto:` or a native share sheet. A confirmed-contact flag controls
- * wording only; it is not proof that a mission accepts this request.
+ * through `mailto:` or a native share sheet. Contact approval controls
+ * guidance only; it is not proof that a mission will accept the message.
  */
 
 export function buildRecipientPayloads({
   toEmail,
-  isElectionContactConfirmed,
+  electionContactApproval,
   isIdDocumentEmbedded,
   isWetInkSignature,
   subject,
@@ -69,7 +69,7 @@ export function buildRecipientPayloads({
   const mailtoBody = `${temporaryBlock(composeAttachmentInstructions)}\n\n${standardBody}`;
   const webShareInstructions = [
     `У поље „За“ унесите адресу:\n${toEmail}`,
-    ...(!isElectionContactConfirmed
+    ...(electionContactApproval === 'unconfirmed'
       ? [`ПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак.`]
       : []),
     ...(!isIdDocumentEmbedded ? [idDocumentInstruction] : []),

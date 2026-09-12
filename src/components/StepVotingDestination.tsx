@@ -404,7 +404,9 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
         {currentCountry && currentStation && (
           <div
             className={`mission-card${
-              currentStation.isElectionContactConfirmed ? '' : ' mission-card--unconfirmed'
+              currentStation.electionContactApproval === 'unconfirmed'
+                ? ' mission-card--unconfirmed'
+                : ''
             }`}
           >
             <div className="mission-title">
@@ -432,8 +434,12 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
                 {currentStation.email}
               </span>
             </div>
-            {currentStation.isElectionContactConfirmed ? (
+            {currentStation.electionContactApproval === 'source-confirmed' ? (
               <p className="form-hint">{t('Kontakt za prijavu za glasanje je potvrđen.')}</p>
+            ) : currentStation.electionContactApproval === 'operator-approved' ? (
+              <p className="form-hint" style={{ color: 'var(--color-success)' }}>
+                {t('Korišćenje ovog kontakta za prijavu za glasanje odobreno je od strane operatera.')}
+              </p>
             ) : (
               <p className="mission-warning" role="alert">
                 {t(

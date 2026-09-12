@@ -84,11 +84,11 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
 Молим за потврду пријема захтева.`;
 
-  // Recipient text adapts to the chosen signature and attachment state. Confirmation only
-  // controls the warning/instructions; it does not prove a mission will accept the message.
+  // Recipient text reflects the selected approval status; it does not prove a mission will
+  // accept the message.
   const { dispatchInfo, webShareInfo, manualText } = buildRecipientPayloads({
     toEmail: station.email,
-    isElectionContactConfirmed: station.isElectionContactConfirmed,
+    electionContactApproval: station.electionContactApproval,
     isIdDocumentEmbedded,
     isWetInkSignature,
     subject,
@@ -216,7 +216,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         {t('Preuzmite PDF, zatim ga sami priložite u poruku ili ga prenesite u izabranu aplikaciju. Ova stranica samo priprema PDF i ne obavlja predaju.')}
       </p>
 
-      {!station.isElectionContactConfirmed && (
+      {station.electionContactApproval === 'unconfirmed' && (
         <div
           role="alert"
           style={{
@@ -462,20 +462,26 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         </div>
         <p
           style={{
-            color: station.isElectionContactConfirmed ? 'var(--color-success)' : 'var(--color-danger)',
+            color: station.electionContactApproval === 'unconfirmed'
+              ? 'var(--color-danger)'
+              : 'var(--color-success)',
             fontSize: '0.9rem',
             fontWeight: 700,
             margin: '0.5rem 0',
           }}
         >
-          {station.isElectionContactConfirmed
+          {station.electionContactApproval === 'source-confirmed'
             ? t('✓ Potvrđena adresa za izbore 2026.')
-            : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
+            : station.electionContactApproval === 'operator-approved'
+              ? t('✓ Adresa za prijavu za glasanje odobrena je od strane operatera.')
+              : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
         <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
-          {station.isElectionContactConfirmed
+          {station.electionContactApproval === 'source-confirmed'
             ? t('Adresa je preuzeta iz aktuelnog, odobrenog izbornog obaveštenja.')
-            : t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
+            : station.electionContactApproval === 'operator-approved'
+              ? t('Odobrenje operatera nije potvrda da je adresa preuzeta iz zvaničnog izbornog obaveštenja.')
+              : t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
         </p>
         <div className="hub-email-box">
           <span className="hub-email-text">{station.email}</span>

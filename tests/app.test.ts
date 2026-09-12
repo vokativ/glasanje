@@ -220,7 +220,7 @@ describe('Signature submission guard', () => {
 });
 
 // Sharing guidance separates removable recipient instructions from the message body and warns
-// users when the selected mission contact has not been confirmed for election registration.
+// only when the selected mission contact is unconfirmed for election registration.
 describe('Recipient Payloads', () => {
   const toEmail = 'consular.jakarta@mfa.rs';
   const subject = 'Пријава за гласање из иностранства — избори 2026.';
@@ -235,7 +235,7 @@ describe('Recipient Payloads', () => {
   const buildPayloads = (overrides: Partial<Parameters<typeof buildRecipientPayloads>[0]> = {}) =>
     buildRecipientPayloads({
       toEmail,
-      isElectionContactConfirmed: true,
+      electionContactApproval: 'source-confirmed',
       isIdDocumentEmbedded: true,
       isWetInkSignature: false,
       subject,
@@ -257,7 +257,7 @@ describe('Recipient Payloads', () => {
 
   test('adds the unconfirmed-contact warning and missing-ID reminder to the Web Share block', () => {
     const payloads = buildPayloads({
-      isElectionContactConfirmed: false,
+      electionContactApproval: 'unconfirmed',
       isIdDocumentEmbedded: false,
     });
 
@@ -265,6 +265,13 @@ describe('Recipient Payloads', () => {
       `${temporaryHeader}\n\nУ поље „За“ унесите адресу:\n${toEmail}\n\nПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак.\n\n${idReminder}\n\n${temporaryFooter}\n\n${standardBody}`,
     );
     expect(payloads.webShareInfo.text).not.toContain(downloadedPdfReminder);
+  });
+
+  test('does not label an operator-approved recipient as an unconfirmed general contact', () => {
+    const payloads = buildPayloads({ electionContactApproval: 'operator-approved' });
+
+    expect(payloads.webShareInfo.text).toContain(`У поље „За“ унесите адресу:\n${toEmail}`);
+    expect(payloads.webShareInfo.text).not.toContain('је општи јавно објављени контакт мисије');
   });
 
   test('keeps the mailto recipient structural and requires the downloaded PDF plus a missing-ID attachment', () => {
@@ -509,6 +516,7 @@ describe('Missions and Coverage Dataset', () => {
     const station = nz!.stations[0];
     expect(station.isResident).toBe(false);
     expect(station.email).toBe('consular.canberra@mfa.rs');
+    expect(station.electionContactApproval).toBe('unconfirmed');
     expect(station.isElectionContactConfirmed).toBe(false);
     expect(station.website).toBe('https://canberra.mfa.gov.rs');
   });
@@ -562,44 +570,34 @@ describe('Missions and Coverage Dataset', () => {
     }
   });
 
-  test('identifies evidence-confirmed election recipients while excluding operator-authorized exceptions', () => {
+  test('keeps contact approval status aligned with evidence confirmation', () => {
     const stations = COUNTRIES.flatMap((country) => country.stations);
-    const confirmed = stations.filter((station) => station.isElectionContactConfirmed);
+    const validApprovalStatuses = [
+      'source-confirmed',
+      'operator-approved',
+      'unconfirmed',
+    ] as const;
 
-    const operatorStationIds = [
-      'st-ae-emb-main',
-      'st-de-cons-tutgart',
-      'st-de-cons-diseldorf',
-      'st-at-emb-main',
-      'st-ca-emb-main',
-      'st-dk-emb-main',
-      'st-us-cons-njujork',
-      'st-us-cons-ikago',
-      'st-mx-emb-main',
-      'st-kr-emb-main',
-    ];
-    const operatorStations = stations.filter((station) =>
-      operatorStationIds.includes(station.id),
-    );
-
-    expect(confirmed).toHaveLength(34);
-    expect(operatorStations).toHaveLength(10);
-    expect(operatorStations.every(
-      (station) => !station.isElectionContactConfirmed,
+    expect(stations.every((station) =>
+      validApprovalStatuses.includes(station.electionContactApproval),
     )).toBe(true);
-    expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
-      (station) => station.id === 'st-it-emb-main',
-    )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
-    expect(COUNTRY_BY_CODE.get('MT')!.stations.find(
-      (station) => station.id === 'st-mt-emb-main',
-    )).toMatchObject({ email: 'srb.office.valletta@mfa.rs', isElectionContactConfirmed: true });
+    expect(stations.some(
+      (station) => station.electionContactApproval === 'operator-approved',
+    )).toBe(true);
+    expect(stations.every(
+      (station) => station.isElectionContactConfirmed === (
+        station.electionContactApproval === 'source-confirmed'
+      ),
+    )).toBe(true);
   });
 
-  test('exposes election-contact confirmation as station metadata', () => {
+  test('exposes election-contact approval as station metadata', () => {
     const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
 
+    expect(station.electionContactApproval).toBe('unconfirmed');
     expect(station.isElectionContactConfirmed).toBe(false);
   });
+
 
   test('station IDs are non-empty and globally unique', () => {
     const stationIds = COUNTRIES.flatMap((country) =>
@@ -611,21 +609,27 @@ describe('Missions and Coverage Dataset', () => {
   });
 });
 
-// Rendering derives contact-coverage status from the dataset so both public surfaces disclose
+// Rendering derives source-confirmed coverage from the dataset so both public surfaces disclose
 // unconfirmed recipients rather than implying that an address is suitable for registration.
 describe('Registration Email Status', () => {
-  test('derives confirmed mission coverage from station records', () => {
+  test('derives source-confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
+    const stations = COUNTRIES.flatMap((country) => country.stations);
 
-    expect(coverage.confirmed).toBe(34);
-    expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
+    expect(coverage.confirmed).toBe(stations.filter(
+      (station) => station.electionContactApproval === 'source-confirmed',
+    ).length);
+    expect(coverage.total).toBe(stations.length);
   });
 
-  test('recalculates coverage when confirmation records change', () => {
+  test('counts only source-confirmed records as notice-backed coverage', () => {
     const sampledCountries = COUNTRIES.slice(0, 2).map((country) => ({
       ...country,
       stations: country.stations.map((station, index) => ({
         ...station,
+        electionContactApproval: (
+          index === 0 ? 'source-confirmed' : 'operator-approved'
+        ) as 'source-confirmed' | 'operator-approved',
         isElectionContactConfirmed: index === 0,
       })),
     }));
@@ -657,6 +661,38 @@ describe('Registration Email Status', () => {
     expect(statusMarkup).toContain(coverageSummary);
     expect(statusMarkup).toContain('Ако за мисију нема потврде');
   });
+  test('shows an operator-approved recipient without the unconfirmed-contact warning', () => {
+    const operatorCountry = COUNTRIES.find((country) =>
+      country.stations.some(
+        (station) => station.electionContactApproval === 'operator-approved',
+      ),
+    )!;
+    const station = operatorCountry.stations.find(
+      (candidate) => candidate.electionContactApproval === 'operator-approved',
+    )!;
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        null,
+        React.createElement(StepVotingDestination, {
+          initialData: {
+            countryCode: operatorCountry.countryCode,
+            stationId: station.id,
+            foreignAddress: 'Primer adrese',
+            desiredLocation: 'Primer mesta',
+          },
+          onBack: () => undefined,
+          onNext: () => undefined,
+        }),
+      ),
+    );
+
+    expect(markup).toContain(station.email);
+    expect(markup).toContain('од стране оператера');
+    expect(markup).not.toContain('mission-card--unconfirmed');
+    expect(markup).not.toContain('role="alert"');
+  });
+
 
   test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {
     const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
@@ -688,6 +724,7 @@ describe('Registration Email Status', () => {
       ),
     );
 
+    expect(station.electionContactApproval).toBe('unconfirmed');
     expect(station.isElectionContactConfirmed).toBe(false);
     expect(markup).toContain('role="alert"');
     expect(markup).toContain('Адреса за изборе није потврђена.');
