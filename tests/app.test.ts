@@ -659,20 +659,20 @@ describe('Missions and Coverage Dataset', () => {
   });
 });
 
-// Rendering derives source-confirmed coverage from the dataset so both public surfaces disclose
-// unconfirmed recipients rather than implying that an address is suitable for registration.
+// Rendering counts every usable recipient category while source confirmation remains
+// separately visible on each station.
 describe('Registration Email Status', () => {
-  test('derives source-confirmed mission coverage from station records', () => {
+  test('derives approved mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
     const stations = COUNTRIES.flatMap((country) => country.stations);
 
-    expect(coverage.confirmed).toBe(stations.filter(
-      (station) => station.electionContactApproval === 'source-confirmed',
+    expect(coverage.approved).toBe(stations.filter(
+      (station) => station.electionContactApproval !== 'unconfirmed',
     ).length);
     expect(coverage.total).toBe(stations.length);
   });
 
-  test('counts only source-confirmed records as notice-backed coverage', () => {
+  test('counts source-confirmed and operator-approved records as usable coverage', () => {
     const sampledCountries = COUNTRIES.slice(0, 2).map((country) => ({
       ...country,
       stations: country.stations.map((station, index) => ({
@@ -687,14 +687,14 @@ describe('Registration Email Status', () => {
     const coverage = getElectionEmailCoverage(sampledCountries);
 
     expect(coverage).toEqual({
-      confirmed: sampledCountries.length,
+      approved: sampledCountries.flatMap((country) => country.stations).length,
       total: sampledCountries.flatMap((country) => country.stations).length,
     });
   });
 
   test('shows the current coverage on both the home and status surfaces', () => {
     const coverage = getElectionEmailCoverage();
-    const coverageSummary = `${coverage.confirmed}/${coverage.total}`;
+    const coverageSummary = `${coverage.approved}/${coverage.total}`;
     const homeMarkup = renderToStaticMarkup(React.createElement(App));
     const statusMarkup = renderToStaticMarkup(
       React.createElement(
@@ -709,7 +709,7 @@ describe('Registration Email Status', () => {
     expect(statusMarkup).toContain('id="statusCountrySelect"');
     expect(statusMarkup).toContain('href="/"');
     expect(statusMarkup).toContain(coverageSummary);
-    expect(statusMarkup).toContain('Ако за мисију нема потврде');
+    expect(statusMarkup).toContain('Статус „потврђено из извора”');
   });
   test('shows an operator-approved recipient without the unconfirmed-contact warning', () => {
     const operatorCountry = COUNTRIES.find((country) =>

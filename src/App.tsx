@@ -201,7 +201,7 @@ const AppContent: React.FC = () => {
             }}
           >
             <span>{t('Status izbornih i-mejl adresa')}</span>
-            <strong>{emailCoverage.confirmed}/{emailCoverage.total}</strong>
+            <strong>{emailCoverage.approved}/{emailCoverage.total}</strong>
             <span aria-hidden="true">→</span>
           </a>
 

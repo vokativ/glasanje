@@ -6,7 +6,7 @@ import { useScript } from '../lib/script';
 // at runtime. A source-confirmed address is intentionally distinguished from an operator-approved
 // address and an unconfirmed general contact.
 export interface ElectionEmailCoverage {
-  confirmed: number;
+  approved: number;
   total: number;
 }
 
@@ -14,10 +14,9 @@ export const getElectionEmailCoverage = (
   countries: VotingCountry[] = COUNTRIES,
 ): ElectionEmailCoverage => {
   const stations = countries.flatMap((country) => country.stations);
-  // Count source-confirmed records only, so the summary does not overstate notice-backed coverage.
   return {
-    confirmed: stations.filter(
-      (station) => station.electionContactApproval === 'source-confirmed',
+    approved: stations.filter(
+      (station) => station.electionContactApproval !== 'unconfirmed',
     ).length,
     total: stations.length,
   };
@@ -42,12 +41,12 @@ export const RegistrationEmailStatusPage: React.FC = () => {
           {t('Status izbornih i-mejl adresa')}
         </h2>
         <p className="card-subtitle">
-          {t('Zvanične misije su do sada izričito objavile adresu za prijavu za glasanje za ')}
-          <strong>{coverage.confirmed}/{coverage.total}</strong>
+          {t('Misije imaju odobrenu adresu za prijavu za glasanje za ')}
+          <strong>{coverage.approved}/{coverage.total}</strong>
           {t(' predstavništava.')}
         </p>
         <p className="form-hint">
-          {t('Status znači da je aktuelno zvanično izborno obaveštenje navelo adresu. Status „odobreno od strane operatera” znači da je operater odobrio korišćenje adrese, ali nije potvrda da ju je navelo zvanično izborno obaveštenje. Ako za misiju nema potvrde, ne koristite opšti kontakt kao izbornu adresu bez provere zvaničnog obaveštenja.')}
+          {t('Status „potvrđeno iz izvora” znači da je aktuelno zvanično izborno obaveštenje navelo adresu. Status „odobreno od strane operatera” znači da je operater odobrio korišćenje adrese. Za neodobrene kontakte proverite zvanično obaveštenje misije pre predaje.')}
         </p>
 
         <div className="form-group" style={{ marginTop: '1.25rem' }}>
