@@ -1262,6 +1262,14 @@ def main() -> int:
     pending = [task for country_code in sorted(country_entries) for task in country_entries[country_code]]
     seen_task_keys: set[tuple[str, str, tuple[str, ...], str]] = set()
 
+    def task_key(task: PageTask) -> tuple[str, str, tuple[str, ...], str]:
+        return (
+            task.country_code,
+            task.url,
+            tuple(station.station_id for station in task.stations),
+            task.source_selection,
+        )
+
     def set_selected_outcome(task: PageTask, outcome: str) -> None:
         if task.source_selection == "operator-notice":
             selected_acquisitions[task.stations[0].station_id]["outcome"] = outcome
@@ -1269,12 +1277,7 @@ def main() -> int:
     while pending:
         batch: list[PageTask] = []
         for task in pending:
-            key = (
-                task.country_code,
-                task.url,
-                tuple(station.station_id for station in task.stations),
-                task.source_selection,
-            )
+            key = task_key(task)
             if key not in seen_task_keys:
                 seen_task_keys.add(key)
                 batch.append(task)
@@ -1347,7 +1350,12 @@ def main() -> int:
                 if task.source_selection != "operator-notice":
                     if task.depth < args.max_depth:
                         next_tasks.extend(mission_links(response.body, task, args.election_year))
-                    elif mission_links(response.body, task, args.election_year):
+                    elif any(
+                        task_key(link) not in seen_task_keys
+                        for link in mission_links(response.body, task, args.election_year)
+                    ):
+                        # Repeated navigation to this batch or earlier pages
+                        # does not mean the depth cap prevented exploration.
                         depth_hosts.update(task_hosts)
             else:
                 failed_hosts.update(task_hosts)

@@ -396,6 +396,39 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             self.assertEqual(self._coverage(deep_report, "st-beta")["status"], "not attempted")
             self.assertTrue(all(all("beta.mfa.gov.rs" not in url for url in call) for call in deep_calls))
 
+    def test_depth_limit_ignores_links_to_already_scheduled_pages(self) -> None:
+        # MFA notices repeat navigation links to their listing, themselves,
+        # and sibling notices. These do not leave unexplored work at the cap.
+        for has_unseen_link in (False, True):
+            with self.subTest(has_unseen_link=has_unseen_link), tempfile.TemporaryDirectory() as directory:
+                paths = self._paths(Path(directory))
+                self._write_json(paths["missions"], self._missions(("st-alpha", "alpha.mfa.gov.rs", True),))
+                self._write_json(paths["registry"], self._registry())
+                self._write_json(paths["overrides"], {"missionOverrides": {}})
+                self._write_json(paths["state"], self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"}))
+                navigation = '<a href="/mediji/aktuelnosti">Aktuelnosti</a>'
+                notices = '<a href="/mediji/notice-a">News A</a><a href="/mediji/notice-b">News B</a>'
+                extra = '<a href="/mediji/unseen">News C</a>' if has_unseen_link else ''
+                responses = {
+                    "https://alpha.mfa.gov.rs/": self._html(navigation),
+                    "https://alpha.mfa.gov.rs/mediji/aktuelnosti": self._html(navigation + notices),
+                    "https://alpha.mfa.gov.rs/mediji/notice-a": self._html(navigation + notices + extra),
+                    "https://alpha.mfa.gov.rs/mediji/notice-b": self._html(navigation + notices),
+                }
+
+                result, calls = self._run_with_calls(paths, station="st-alpha", responses=responses)
+                report = self._read_json(paths["report"])
+
+                self.assertEqual(result["candidates"], [])
+                self.assertEqual(report["fetchedPages"], 4)
+                self.assertEqual(report["failures"], [])
+                self.assertEqual(report["partial"], has_unseen_link)
+                self.assertEqual(
+                    self._coverage(report, "st-alpha")["status"],
+                    "depth-limited" if has_unseen_link else "scanned-no-evidence",
+                )
+                self.assertFalse(any("https://alpha.mfa.gov.rs/mediji/unseen" in call for call in calls))
+
     def test_deep_retry_respects_page_budget(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             paths = self._paths(Path(directory))
