@@ -516,6 +516,72 @@ def validate_candidate_document(
     return document, candidates, groups
 
 
+def public_election_notices(payload: Any, canonical_payload: Any) -> dict[str, dict[str, str]]:
+    """Project source-bound notice links without granting recipient approval.
+
+    Older candidate artifacts have no notices. New records reuse the existing
+    source validation; malformed records must never become public links.
+    """
+    if not isinstance(payload, dict):
+        fail("Notice input must be a candidate artifact")
+    records = payload.get("notices", [])
+    if not isinstance(records, list):
+        fail("Candidate notices must be an array")
+    if not records:
+        return {}
+    election_id = require_string(payload, "electionId", "Notices")
+    election_year = election_year_for(election_id, "Notices electionId")
+    if payload.get("electionYear") != election_year:
+        fail("Notices electionYear does not match electionId")
+    stations = canonical_stations(canonical_payload)
+    sources = payload.get("sources", {})
+    if not isinstance(sources, dict):
+        fail("Notices require source snapshots")
+    result: dict[str, dict[str, str]] = {}
+    for record in records:
+        if not isinstance(record, dict):
+            fail("Notice must be an object")
+        station_id = require_string(record, "stationId", "Notice")
+        station = stations.get(station_id)
+        if station is None or record.get("electionId") != election_id or record.get("electionYear") != election_year:
+            fail(f"Notice {station_id} has invalid station/election scope")
+        source_id = require_string(record, "sourceId", "Notice")
+        chain = record.get("sourceChain")
+        if not isinstance(chain, list) or not all(isinstance(url, str) for url in chain):
+            fail(f"Notice {station_id} requires its official source chain")
+        source = _validate_source(source_id, sources.get(source_id), station, chain, f"Notice {station_id}")
+        title = require_string(record, "title", "Notice")
+        context = require_string(record, "electionContext", "Notice")
+        if title not in source["text"] or context not in source["text"] or election_year not in context:
+            fail(f"Notice {station_id} lacks exact election context")
+        observed_at = require_string(record, "observedAt", "Notice")
+        if parse_nonfuture_timestamp(observed_at, "Notice observedAt") > parse_timestamp(source["fetchedAt"], "Notice source fetchedAt"):
+            fail(f"Notice {station_id} observation is newer than its source")
+        if record.get("sourceUrl") != source["sourceUrl"]:
+            fail(f"Notice {station_id} does not match its source URL")
+        emails = record.get("emails")
+        if not isinstance(emails, list) or any(
+            not isinstance(email, str) or not contains_exact_mailbox(source["text"], email)
+            for email in emails
+        ):
+            fail(f"Notice {station_id} contains an email absent from its source")
+        status = "email-extracted" if emails else "no-email-extracted"
+        if record.get("emailStatus") != status:
+            fail(f"Notice {station_id} has inconsistent email status")
+        public = {
+            "url": source["finalUrl"], "title": title,
+            "electionYear": election_year, "observedAt": observed_at,
+            "emailStatus": status,
+        }
+        # Prefer the latest observation, then the non-/lat/ notice variant.
+        prior = result.get(station_id)
+        def preference(item):
+            return (item["observedAt"], "/lat/" not in item["url"], item["url"])
+        if prior is None or preference(public) > preference(prior):
+            result[station_id] = public
+    return result
+
+
 def current_authority(overrides: Mapping[str, Any], station_id: str) -> dict[str, Any] | None:
     record = overrides["missionOverrides"].get(station_id)
     if record is None:

@@ -360,6 +360,14 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
         if not paths["run candidates"].exists() or not paths["discovery report"].exists():
             raise RunnerError("Discovery succeeded without writing its required run artifacts")
         atomic_copy(paths["run candidates"], paths["durable candidates"])
+        discovery_report = read_json(paths["discovery report"], "discovery report")
+        for notice in discovery_report.get("notices", []):
+            print(
+                f"Election notice: {notice['stationId']} — {notice['emailStatus']} — {notice['sourceUrl']}",
+                flush=True,
+            )
+        if discovery_report.get("partial"):
+            print("Collection is partial; see discovery-report.json for limits and failures.", flush=True)
         worklist = print_worklist(paths["run candidates"], set(args.station) if args.station else None)
         if not worklist:
             zero_readiness = {

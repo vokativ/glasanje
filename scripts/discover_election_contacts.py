@@ -49,6 +49,11 @@ ELECTION_RE = re.compile(
     r"\b(?:izbor\w*|glasanj\w*|birac\w*|election\w*|vot(?:e|ing)\w*|electoral\w*)\b",
     re.IGNORECASE,
 )
+REGISTRATION_NOTICE_RE = re.compile(
+    r"(?:glasan\w*\s+u\s+inostranstv|birac\w*\s+(?:spis|prav)|"
+    r"prijav\w*.{0,100}(?:glasan|izbor)|vot\w*\s+(?:from\s+)?abroad|voter\s+regist|electoral\s+roll)",
+    re.IGNORECASE,
+)
 ACTIVITY_RE = re.compile(
     r"(?:aktuelnost\w*|vesti?|obavestenj\w*|news|activit\w*|announcement\w*|saopstenj\w*|izbor\w*|glasanj\w*|birac\w*|election\w*|vot(?:e|ing)\w*)",
     re.IGNORECASE,
@@ -57,6 +62,7 @@ FORM_URL_RE = re.compile(r"(?:^|[/_.-])(?:form|formular|obrazac)(?:[/_.-]|$)", r
 ATTACHMENT_SUFFIXES = frozenset({
     ".doc", ".docm", ".docx", ".odt", ".ppt", ".pptx", ".rtf", ".xls", ".xlsm", ".xlsx",
 })
+IMAGE_SUFFIXES = frozenset({".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"})
 
 YEAR_RE = re.compile(r"(?<!\d)((?:19|20)\d{2})(?!\d)")
 YEAR_VALUE_RE = re.compile(r"(?:19|20)\d{2}")
@@ -231,7 +237,9 @@ def local_context_for(block, email: str, election_year: str | None) -> str | Non
                 return context
             continue
         if has_target_election_context(text, election_year):
-            return context
+            # A long notice can put its year far above the recipient. Preserve
+            # the already-validated enclosing context when clipping loses it.
+            return context if has_target_election_context(context, election_year) else text
         if has_election_context(text) and YEAR_RE.search(text):
             return None
     return fallback
@@ -307,6 +315,14 @@ def mailto_target_matches_visible_email(block, email: str) -> bool:
             return False
     return True
 
+def evidence_soup(html: bytes):
+    soup = BeautifulSoup(html, "html.parser")
+    # Site-wide contacts and navigation must not borrow a notice's year.
+    for ignored in reversed(soup.select("nav, footer, aside, [role='navigation'], [role='contentinfo']")):
+        ignored.decompose()
+    return soup
+
+
 def extract_html_evidence(
     html: bytes,
     election_year: str | None = None,
@@ -314,7 +330,7 @@ def extract_html_evidence(
     retain_uncontextualized_evidence: bool = False,
     requires_local_context: bool = False,
 ) -> tuple[str, str, list[ElectionEvidence]]:
-    soup = BeautifulSoup(html, "html.parser")
+    soup = evidence_soup(html)
     title_node = soup.find("h1") or soup.find("title")
     title = visible_text(title_node) if title_node else ""
     page_text = visible_text(soup)
@@ -343,6 +359,36 @@ def extract_html_evidence(
             if quote:
                 evidence.add(ElectionEvidence(email, quote, context))
     return title, page_text, sorted(evidence, key=lambda item: (item.email, item.quote, item.context))
+
+
+def extract_html_notice(html: bytes, election_year: str) -> dict | None:
+    """Keep an actual election notice even when no mailbox can be extracted.
+
+    A listing/sidebar mentioning elections is not itself a notice. The page's
+    own heading must identify elections, with the target year in its content.
+    Mailboxes here are observations, never recipient approvals.
+    """
+    soup = evidence_soup(html)
+    heading = soup.find("h1")
+    if heading is None or not has_election_context(visible_text(heading)):
+        return None
+    title = visible_text(heading)
+    if YEAR_RE.search(title) and not has_target_election_context(title, election_year):
+        return None
+    source_text = visible_text(soup)
+    content = soup.find("main") or soup.find("article") or soup.body
+    if content is None:
+        return None
+    text = visible_text(content)
+    if not REGISTRATION_NOTICE_RE.search(searchable_text(text)):
+        return None
+    context = next((
+        part for part in [title, *(visible_text(p) for p in content.select("p")), text]
+        if has_target_election_context(part, election_year) and part in source_text
+    ), None)
+    if context is None:
+        return None
+    return {"title": title, "electionContext": context, "emails": extract_visible_emails(text)}
 
 
 class PdfExtractionError(ValueError):
@@ -570,7 +616,7 @@ def mission_links(html: bytes, task: PageTask, election_year: str | None = None)
         anchor_text = visible_text(anchor)
         suffix = Path(parsed.path).suffix.casefold()
         is_pdf = suffix == ".pdf"
-        if suffix in ATTACHMENT_SUFFIXES or FORM_URL_RE.search(parsed.path):
+        if suffix in ATTACHMENT_SUFFIXES | IMAGE_SUFFIXES or FORM_URL_RE.search(parsed.path):
             continue
         if not is_pdf and not ACTIVITY_RE.search(f"{parsed.path} {parsed.query} {anchor_text}"):
             continue
@@ -747,6 +793,13 @@ def load_candidate_artifact(path: Path, election_id: str, election_year: str) ->
     sources = payload.get("sources", {})
     if not isinstance(sources, dict):
         raise ValueError("candidate artifact has invalid sources")
+    if not isinstance(payload.get("notices", []), list) or any(
+        not isinstance(notice, dict)
+        or not isinstance(notice.get("stationId"), str)
+        or not isinstance(notice.get("sourceUrl"), str)
+        for notice in payload.get("notices", [])
+    ):
+        raise ValueError("candidate artifact has invalid notices")
     return payload
 
 
@@ -1028,6 +1081,11 @@ def main() -> int:
             return 2
         prior_candidates[candidate_id] = candidate
     sources: dict[str, object] = dict(existing.get("sources", {}))
+    notices = {
+        (notice["stationId"], notice["sourceUrl"]): notice
+        for notice in existing.get("notices", [])
+    }
+    observed_notices: list[dict] = []
     overrides_by_station = overrides.get("missionOverrides", {})
 
     def candidate_station_state() -> tuple[set[str], set[str]]:
@@ -1327,6 +1385,7 @@ def main() -> int:
                     set_selected_outcome(task, "failed-redirect")
                     continue
             is_pdf = task.url.lower().split("?", 1)[0].endswith(".pdf") or "pdf" in response.content_type
+            notice = None
             if is_pdf:
                 try:
                     title, page_text, evidence = extract_pdf_evidence(response.body, task.title_hint)
@@ -1340,6 +1399,15 @@ def main() -> int:
                     set_selected_outcome(task, "failed-parse")
                     continue
                 evidence_type = "pdf"
+                if (
+                    has_election_context(title)
+                    and has_target_election_context(page_text, args.election_year)
+                    and REGISTRATION_NOTICE_RE.search(searchable_text(page_text))
+                ):
+                    notice = {
+                        "title": title if title in page_text else page_text[:160].strip(),
+                        "electionContext": page_text, "emails": extract_visible_emails(page_text),
+                    }
             elif "html" in response.content_type:
                 title, page_text, evidence = extract_html_evidence(
                     response.body,
@@ -1347,6 +1415,7 @@ def main() -> int:
                     requires_local_context=task.requires_local_context,
                 )
                 evidence_type = "html"
+                notice = extract_html_notice(response.body, args.election_year)
                 if task.source_selection != "operator-notice":
                     if task.depth < args.max_depth:
                         next_tasks.extend(mission_links(response.body, task, args.election_year))
@@ -1384,7 +1453,8 @@ def main() -> int:
                     "ambiguous" if any(station.station_id in ambiguous_stations for station in task.stations)
                     else "scanned-no-evidence",
                 )
-                continue
+                if notice is None:
+                    continue
             text_sha256 = hashlib.sha256(page_text.encode("utf-8")).hexdigest()
             source_id = source_identifier(task.url, text_sha256)
             sources[source_id] = {
@@ -1398,6 +1468,21 @@ def main() -> int:
                 "sourceSelection": task.source_selection,
             }
             source_chain = append_chain(task.source_chain, task.url, response.url)
+            if notice is not None:
+                for station in task.stations:
+                    record = {
+                        **notice,
+                        "stationId": station.station_id,
+                        "electionId": args.election_id,
+                        "electionYear": args.election_year,
+                        "sourceId": source_id,
+                        "sourceUrl": task.url,
+                        "sourceChain": list(source_chain),
+                        "observedAt": observed_at,
+                        "emailStatus": "email-extracted" if notice["emails"] else "no-email-extracted",
+                    }
+                    notices[(station.station_id, task.url)] = record
+                    observed_notices.append(record)
             for item, stations, election_context in accepted:
                 for station in stations:
                     candidate = candidate_record(
@@ -1416,7 +1501,8 @@ def main() -> int:
                         task.source_selection,
                     )
                     prior_candidates[candidate["candidateId"]] = candidate
-            set_selected_outcome(task, "candidate")
+            if accepted:
+                set_selected_outcome(task, "candidate")
         pending = next_tasks
 
     for station_id, acquisition in selected_acquisitions.items():
@@ -1487,6 +1573,10 @@ def main() -> int:
             "retainedAuthority": retained_authority,
             "retainedCandidateEvidence": station.station_id in candidate_stations,
             "status": status,
+            "noticeUrls": sorted({
+                notice["sourceUrl"] for notice in observed_notices
+                if notice["stationId"] == station.station_id
+            }),
         }
         if acquisition is not None:
             coverage_item["selectedAcquisitionOutcome"] = acquisition["outcome"]
@@ -1527,6 +1617,7 @@ def main() -> int:
         "unmappedRegistryNames": unmapped_registry_names,
         "selectedAcquisitions": selected_acquisition_records,
         "ambiguous": report_ambiguous,
+        "notices": observed_notices,
         "partial": bool(deferred_station_ids or report_failures or budget_hosts or depth_hosts),
     }
     payload = {
@@ -1538,6 +1629,7 @@ def main() -> int:
         "pendingStationIds": sorted(pending_station_ids),
         "candidates": [prior_candidates[key] for key in sorted(prior_candidates)],
         "sources": {source_id: sources[source_id] for source_id in sorted(sources)},
+        "notices": [notices[key] for key in sorted(notices)],
     }
     write_output(args.output, payload)
     # These are durable, separate artifacts: candidates preserve discovered

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { latinToCyrillic, type Script, useScript } from '../lib/script';
 import { COUNTRY_BY_CODE, COUNTRIES, type VotingCountry } from '../data/missions';
+import { ElectionNoticeLink } from './ElectionNoticeLink';
 /**
  * Resolves a voting destination from the bundled mission dataset. Search and selection are local:
  * this step emits the chosen published station plus the applicant's address to the wizard, but
@@ -445,6 +446,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
               </p>
             )}
 
+            <ElectionNoticeLink notice={currentStation.electionNotice} />
             {currentStation.website && (
               <div className="mission-detail">
                 <strong>{t('Zvanični sajt:')}</strong>

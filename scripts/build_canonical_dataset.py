@@ -10,6 +10,7 @@ import re
 import subprocess
 import unicodedata
 from urllib.parse import urlsplit
+from election_contact_common import public_election_notices
 
 # Treat the scraper artifact as external-source input, not as a canonical dataset:
 # missing or malformed source fields must be rejected or normalized before publication.
@@ -730,6 +731,18 @@ if duplicate_station_ids:
 
 countries_list.sort(key=lambda country: serbian_cyrillic_collation_key(country['labelCyr']))
 
+# Notice discovery is independent of recipient approval. Publish only the
+# bounded source metadata, never an unreviewed candidate mailbox.
+notice_path = "data/election_candidates.json"
+if os.path.exists(notice_path):
+    with open(notice_path, "r", encoding="utf-8") as f:
+        notice_links = public_election_notices(json.load(f), {"countries": countries_list})
+    for country in countries_list:
+        for station in country["stations"]:
+            notice = notice_links.get(station["id"]) or notice_links.get(station.get("coveringStationId"))
+            if notice:
+                station["electionNotice"] = notice
+
 os.makedirs("src/data", exist_ok=True)
 # These paired files are generated artifacts with different consumers: the JSON is
 # the durable canonical input and TypeScript is the application snapshot. Write both
@@ -749,6 +762,14 @@ ts_code = f"""/**
  * Date: 2026-09-09
  */
 
+export interface ElectionNotice {{
+  url: string;
+  title: string;
+  electionYear: string;
+  observedAt: string;
+  emailStatus: 'email-extracted' | 'no-email-extracted';
+}}
+
 export interface PollingStation {{
   id: string;
   embassy: string;
@@ -761,6 +782,7 @@ export interface PollingStation {{
   website: string;
   address: string;
   isResident: boolean;
+  electionNotice?: ElectionNotice;
 }}
 
 export interface VotingCountry {{

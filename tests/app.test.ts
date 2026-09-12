@@ -26,6 +26,7 @@ import {
   getInitialDesiredLocation,
 } from '../src/lib/invite';
 import App from '../src/App';
+import { ElectionNoticeLink } from '../src/components/ElectionNoticeLink';
 import { Header } from '../src/components/Header';
 import {
   getElectionEmailCoverage,
@@ -770,6 +771,24 @@ describe('Missions and Coverage Dataset', () => {
 
 // Rendering counts every confirmed recipient category as usable coverage.
 describe('Registration Email Status', () => {
+  test('links to notice evidence without asserting recipient approval', () => {
+    for (const emailStatus of ['email-extracted', 'no-email-extracted'] as const) {
+      const markup = renderToStaticMarkup(
+        React.createElement(ScriptProvider, { initialScript: 'latin' },
+          React.createElement(ElectionNoticeLink, { notice: {
+            url: 'https://nicosia.mfa.gov.rs/mediji/election-notice',
+            title: 'Izbori 2026', electionYear: '2026', observedAt: '2026-09-12T00:00:00Z', emailStatus,
+          } }),
+        ),
+      );
+      expect(markup).toContain('href="https://nicosia.mfa.gov.rs/mediji/election-notice"');
+      expect(markup).toContain('Zvanično izborno obaveštenje');
+      expect(markup).toContain('rel="noopener noreferrer"');
+      expect(markup).not.toContain('potvrđena');
+      expect(markup.includes('proverite obaveštenje i priloge')).toBe(emailStatus === 'no-email-extracted');
+    }
+  });
+
   test('derives approved mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
     const stations = COUNTRIES.flatMap((country) => country.stations);

@@ -35,9 +35,69 @@ def load_script_module(name: str, path: Path):
 
 
 DISCOVERY = load_script_module("election_contact_discovery_for_tests", DISCOVERY_SCRIPT)
+COMMON = load_script_module("election_notice_common_for_tests", REPOSITORY_ROOT / "scripts/election_contact_common.py")
 
 
 class ElectionContactPipelineTests(unittest.TestCase):
+    def test_long_notice_keeps_year_context_above_both_mailboxes(self) -> None:
+        # Ljubljana's notice places its year well before the submission list.
+        body = (
+            '<html><body><main><h1>Izbori 2026 — prijavljivanje za glasanje</h1><article>'
+            '<p>Za izbore 2026 zahtev se dostavlja ambasadi.</p>'
+            + '<p>Uz potpisan zahtev priložite kopiju dokumenta.</p>' * 30
+            + '<p>Popunjen zahtev može se dostaviti:</p>'
+            '<p>putem elektronske pošte: consular@example.org i embassy@example.org</p>'
+            '</article></main></body></html>'
+        )
+        payload = self._run_discovery_fixture("2026-parliamentary", body)
+        self.assertEqual({item["email"] for item in payload["candidates"]}, {
+            "consular@example.org", "embassy@example.org",
+        })
+        self.assertEqual(payload["notices"][0]["emailStatus"], "email-extracted")
+
+    def test_notice_without_email_is_retained_as_public_evidence_not_a_recipient(self) -> None:
+        payload = self._run_discovery_fixture("2026-parliamentary", '''
+            <html><body><main><h1>Raspisivanje izbora</h1>
+            <p>Za izbore 2026 birači mogu podneti zahtev za glasanje u inostranstvu.</p>
+            <footer>Kontakt: footer@example.org</footer></main></body></html>
+        ''')
+        self.assertEqual(payload["candidates"], [])
+        notice = payload["notices"][0]
+        self.assertEqual(notice["emailStatus"], "no-email-extracted")
+        self.assertEqual(notice["emails"], [])
+        self.assertIn(notice["sourceId"], payload["sources"])
+        canonical = {"countries": [{"countryCode": "AT", "stations": [{
+            "id": "embassy-vienna", "website": "https://vienna.mfa.gov.rs", "isResident": True,
+        }]}]}
+        public = COMMON.public_election_notices(payload, canonical)["embassy-vienna"]
+        self.assertEqual(public["url"], notice["sourceUrl"])
+        self.assertNotIn("emails", public)
+        self.assertNotIn("electionContactApproval", public)
+        payload["sources"][notice["sourceId"]]["text"] += ' injected text'
+        with self.assertRaises(COMMON.ValidationError):
+            COMMON.public_election_notices(payload, canonical)
+
+    def test_notice_detection_excludes_listing_competition_and_old_election(self) -> None:
+        for body in (
+            '<h1>Aktuelnosti</h1><p>Izbori 2026</p>',
+            '<h1>Konkurs za dijasporu 2026</h1><p>Komisija bira projekte.</p>',
+            '<h1>Izbori za predsednika Portugala 2026</h1><p>Rezultati izbora.</p>',
+            '<h1>Izbori 2023</h1><p>Glasanje 2023</p><aside>Izbori 2026</aside>',
+        ):
+            with self.subTest(body=body):
+                self.assertIsNone(DISCOVERY.extract_html_notice(
+                    f'<html><body><main>{body}</main></body></html>'.encode(), '2026'
+                ))
+
+    def test_incidental_image_link_is_not_crawled_as_a_webpage(self) -> None:
+        station = DISCOVERY.Station('TR', 'st-tr', 'ankara.mfa.gov.rs')
+        task = DISCOVERY.PageTask('https://ankara.mfa.gov.rs/', 'TR', (station,), 0)
+        links = DISCOVERY.mission_links(b'''
+            <a href="/sites/tr-mfa/files/2026-03/mfa%20obavestenje%202.jpg">Obavestenje</a>
+            <a href="/mediji/izbori-2026">Izbori 2026</a>
+        ''', task, '2026')
+        self.assertEqual([link.url for link in links], ['https://ankara.mfa.gov.rs/mediji/izbori-2026'])
+
     # Only an address visibly presented as an election-registration contact is evidence;
     # hidden markup and mismatched mailto links must not create a public candidate.
 

@@ -4,6 +4,14 @@
  * Date: 2026-09-09
  */
 
+export interface ElectionNotice {
+  url: string;
+  title: string;
+  electionYear: string;
+  observedAt: string;
+  emailStatus: 'email-extracted' | 'no-email-extracted';
+}
+
 export interface PollingStation {
   id: string;
   embassy: string;
@@ -16,6 +24,7 @@ export interface PollingStation {
   website: string;
   address: string;
   isResident: boolean;
+  electionNotice?: ElectionNotice;
 }
 
 export interface VotingCountry {
@@ -705,7 +714,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://sofia.mfa.gov.rs",
         "address": "Veliko Trnovo 31504 СОФИЈАБУГАРСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://sofia.mfa.gov.rs/press-service/announcements-and-notifications/raspisivanje-izbora-za-narodne-poslanike",
+          "title": "Рaсписивање избора за народне посланике",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T08:52:46Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2253,7 +2269,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nicosia.mfa.gov.rs",
         "address": "2, Vasilissis Olgas Street1101 НИКОЗИЈА КИПАР",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://nicosia.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ: ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T08:48:10Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4334,7 +4357,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://ljubljana.mfa.gov.rs",
         "address": "Ciril - Metodov trg 1 1000 ЉУБЉАНА СЛОВЕНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://ljubljana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-25-10-2026-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Избори за народне посланике 25.10.2026- пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T08:48:10Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [

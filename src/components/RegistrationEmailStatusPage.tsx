@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { COUNTRIES, type VotingCountry } from '../data/missions';
 import { useScript } from '../lib/script';
+import { ElectionNoticeLink } from './ElectionNoticeLink';
 
 // This page reports the mission data's approval status rather than discovering contact details
 // at runtime.
@@ -110,9 +111,10 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                     className="form-hint"
                     style={{ marginTop: '0.5rem', color: 'var(--color-danger)' }}
                   >
-                    {t('Izborna i-mejl adresa još nije potvrđena u aktuelnom zvaničnom obaveštenju.')}
+                    {t('Izborna i-mejl adresa još nije potvrđena u ovom alatu.')}
                   </p>
                 )}
+                <ElectionNoticeLink notice={station.electionNotice} />
                 {station.website && (
                   <a
                     href={station.website}

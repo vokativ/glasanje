@@ -23,6 +23,18 @@ Ovo je bezbedna podrazumevana komanda. Ona:
 
 Za ovu komandu nisu potrebne AI poverljive vrednosti i ona ne menja `data/overrides.json`. „Nema pronađenog dokaza“ nije isto što i uspešno pokrivena misija: pogledati `discovery-report.json` za neuspehe prenosa, odložene domaćine, budžetska/dubinska ograničenja i nejasne nalaze. Takav delimičan prolaz nije potvrda da je ceo adresar pregledan.
 
+### Obaveštenje je dokaz i kada nije izdvojena adresa
+
+Crawler sada čuva `notices` u trajnom `data/election_candidates.json`, nezavisno od liste kandidata. Zapis sadrži stanicu, izbor/godinu, naslov, stvarni URL obaveštenja, `sourceId`, službeni `sourceChain`, datum opažanja, tačan izborni kontekst i izdvojene e-adrese. Odgovarajući tekst i hash-evi ostaju u `sources` i kada nema kandidata. `emailStatus` razlikuje `email-extracted` od `no-email-extracted`; nijedna vrednost nije odobrenje primaoca niti tvrdnja da slika/prilog nema adresu.
+
+`discovery-report.json` sadrži samo obaveštenja opažena u tekućem prolazu, a svaka stanica ima `noticeUrls` iz tog prolaza. Konzolni ispis navodi URL i ishod izdvajanja i upozorava kada je prikupljanje delimično. Ranije opaženo obaveštenje ostaje u trajnom artefaktu posle neuspelog ponovnog pokušaja, sa starim datumom opažanja; ne predstavlja se kao nov uspeh.
+
+Prepoznavanje obaveštenja traži izborni naslov same stranice i kontekst ciljne godine. Lista vesti sa vezom ka izborima nije sama po sebi izborno obaveštenje. Navigacija, bočni sadržaj i podnožje ne daju adresu obaveštenja. Dugačak članak zadržava kontekst godine i kada je ona daleko iznad uputstva za slanje. Usputne veze ka slikama ne preuzimaju se kao HTML stranice; izričito zadat nepodržani `--notice-url` i dalje prijavljuje neuspeh.
+
+`bun run build:data` proverava poreklo, hash teksta i vezu ka kanonskoj misiji preko postojećeg validatora izvora, pa dodaje javni `electionNotice` sa URL-om, naslovom, godinom, datumom opažanja i statusom izdvajanja. Bira najnovije opažanje, uz prednost varijante bez `/lat/` kada su datumi isti. Sopstveno obaveštenje stanice ima prednost; inače stanica sa već razrešenim `coveringStationId` može prikazati obaveštenje pokrivajuće misije. Sirove kandidat-adrese ne prenose se ovim putem u javni izbor primaoca.
+
+Veza je vidljiva pri izboru predstavništva i na stranici statusa adresa. Postojeća oznaka odobrenja ostaje nepromenjena. Promena izbora zahteva usklađivanje aplikacije i izborno vezanih artefakata; staro obaveštenje ne preimenovati u obaveštenje za nove izbore.
+
 Nasleđeni kandidat sa nepotpunim ili nevezanim dokazom nikada ne dobija paket ni autorizaciju: njegova stanica se pojavljuje kao `held` i mora se ciljano ponovo pribaviti javni izvor. Istorijski zapisi bez `sourceId` i stanice bez javnog sajta (`no-site`) ostaju evidentirani, ali ako nisu izričito izabrani ne zaustavljaju ceo prolaz niti se predstavljaju kao pokrivenost.
 
 Po potrebi ograničite prolaz na konkretne stanice ili budžet:

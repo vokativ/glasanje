@@ -36,6 +36,28 @@ INDEX_URL = "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu
 
 
 class ElectionIncrementalDiscoveryTests(unittest.TestCase):
+    def test_failed_recheck_retains_notice_but_does_not_report_a_new_observation(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(("st-at", "alpha.mfa.gov.rs", True),))
+            self._write_json(paths["registry"], self._registry())
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            self._write_json(paths["state"], self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"}))
+            first = self._run(paths, station="st-at", responses={
+                "https://alpha.mfa.gov.rs/": self._html(
+                    '<html><body><main><h1>Izbori 2026</h1><p>Podnesite zahtev za glasanje u inostranstvu ambasadi.</p></main></body></html>'
+                ),
+            })
+            second = self._run(paths, station="st-at", responses={
+                "https://alpha.mfa.gov.rs/": self._failure("HTTP 503"),
+            })
+            self.assertEqual(len(first["notices"]), 1)
+            self.assertEqual(second["notices"], first["notices"])
+            self.assertEqual(second["sources"], first["sources"])
+            report = self._read_json(paths["report"])
+            self.assertEqual(report["notices"], [])
+            self.assertEqual(self._coverage(report, "st-at")["status"], "failed")
+
     # A targeted recheck may fail, but that operational failure must retain prior
     # election-scoped evidence rather than silently withdrawing a usable contact.
 
