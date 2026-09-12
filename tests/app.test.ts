@@ -659,8 +659,7 @@ describe('Missions and Coverage Dataset', () => {
   });
 });
 
-// Rendering counts every usable recipient category while source confirmation remains
-// separately visible on each station.
+// Rendering counts every confirmed recipient category as usable coverage.
 describe('Registration Email Status', () => {
   test('derives approved mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
@@ -709,9 +708,12 @@ describe('Registration Email Status', () => {
     expect(statusMarkup).toContain('id="statusCountrySelect"');
     expect(statusMarkup).toContain('href="/"');
     expect(statusMarkup).toContain(coverageSummary);
-    expect(statusMarkup).toContain('Статус „потврђено из извора”');
+    expect(statusMarkup).toContain('Потврђене изборне и-мејл адресе');
+    expect(statusMarkup).toContain('потврђену адресу за пријаву за гласање');
+    expect(statusMarkup).not.toContain('од стране оператера');
+    expect(statusMarkup).not.toContain('потврђено из извора');
   });
-  test('shows an operator-approved recipient without the unconfirmed-contact warning', () => {
+  test('renders an operator-approved recipient as confirmed without an unconfirmed-contact warning', () => {
     const operatorCountry = COUNTRIES.find((country) =>
       country.stations.some(
         (station) => station.electionContactApproval === 'operator-approved',
@@ -738,7 +740,8 @@ describe('Registration Email Status', () => {
     );
 
     expect(markup).toContain(station.email);
-    expect(markup).toContain('од стране оператера');
+    expect(markup).toContain('Контакт за пријаву за гласање је потврђен.');
+    expect(markup).not.toContain('од стране оператера');
     expect(markup).not.toContain('mission-card--unconfirmed');
     expect(markup).not.toContain('role="alert"');
   });

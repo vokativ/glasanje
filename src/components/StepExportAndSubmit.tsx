@@ -470,19 +470,15 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             margin: '0.5rem 0',
           }}
         >
-          {station.electionContactApproval === 'source-confirmed'
+          {station.electionContactApproval !== 'unconfirmed'
             ? t('✓ Potvrđena adresa za izbore 2026.')
-            : station.electionContactApproval === 'operator-approved'
-              ? t('✓ Adresa za prijavu za glasanje odobrena je od strane operatera.')
-              : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
+            : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
-        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
-          {station.electionContactApproval === 'source-confirmed'
-            ? t('Adresa je preuzeta iz aktuelnog, odobrenog izbornog obaveštenja.')
-            : station.electionContactApproval === 'operator-approved'
-              ? t('Odobrenje operatera nije potvrda da je adresa preuzeta iz zvaničnog izbornog obaveštenja.')
-              : t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
-        </p>
+        {station.electionContactApproval === 'unconfirmed' && (
+          <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
+            {t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
+          </p>
+        )}
         <div className="hub-email-box">
           <span className="hub-email-text">{station.email}</span>
           <button

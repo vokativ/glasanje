@@ -3,8 +3,7 @@ import { COUNTRIES, type VotingCountry } from '../data/missions';
 import { useScript } from '../lib/script';
 
 // This page reports the mission data's approval status rather than discovering contact details
-// at runtime. A source-confirmed address is intentionally distinguished from an operator-approved
-// address and an unconfirmed general contact.
+// at runtime.
 export interface ElectionEmailCoverage {
   approved: number;
   total: number;
@@ -38,15 +37,15 @@ export const RegistrationEmailStatusPage: React.FC = () => {
           ← {t('Nazad na prijavu za glasanje')}
         </a>
         <h2 id="registration-email-status-title" className="card-title">
-          {t('Status izbornih i-mejl adresa')}
+          {t('Potvrđene izborne i-mejl adrese')}
         </h2>
         <p className="card-subtitle">
-          {t('Misije imaju odobrenu adresu za prijavu za glasanje za ')}
+          {t('Misije imaju potvrđenu adresu za prijavu za glasanje za ')}
           <strong>{coverage.approved}/{coverage.total}</strong>
           {t(' predstavništava.')}
         </p>
         <p className="form-hint">
-          {t('Status „potvrđeno iz izvora” znači da je aktuelno zvanično izborno obaveštenje navelo adresu. Status „odobreno od strane operatera” znači da je operater odobrio korišćenje adrese. Za neodobrene kontakte proverite zvanično obaveštenje misije pre predaje.')}
+          {t('Za nepotvrđene kontakte proverite zvanično obaveštenje misije pre predaje.')}
         </p>
 
         <div className="form-group" style={{ marginTop: '1.25rem' }}>
@@ -96,28 +95,15 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                     {t('Pokriva ovu državu na nerezidencijalnoj osnovi')}
                   </span>
                 )}
-                {station.electionContactApproval === 'source-confirmed' ? (
+                {station.electionContactApproval !== 'unconfirmed' ? (
                   <>
                     <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>
-                      {t('✓ Izborna i-mejl adresa je objavljena')}
+                      {t('✓ Izborna i-mejl adresa je potvrđena.')}
                     </p>
                     <div className="mission-detail">
                       <strong>{t('Adresa za prijavu:')}</strong>
                       <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>{station.email}</span>
                     </div>
-                  </>
-                ) : station.electionContactApproval === 'operator-approved' ? (
-                  <>
-                    <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>
-                      {t('✓ Izborna i-mejl adresa odobrena je od strane operatera.')}
-                    </p>
-                    <div className="mission-detail">
-                      <strong>{t('Adresa za prijavu:')}</strong>
-                      <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>{station.email}</span>
-                    </div>
-                    <p className="form-hint">
-                      {t('Odobrenje operatera nije potvrda da je adresa navedena u aktuelnom zvaničnom izbornom obaveštenju.')}
-                    </p>
                   </>
                 ) : (
                   <p
