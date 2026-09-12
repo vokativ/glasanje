@@ -1,0 +1,92 @@
+# Operator-approval handoff: retained 2026 election recipients
+
+## Decision
+
+Treat the recipients below as valid for the 2026 election workflow and make each listed station `operator-approved` if it is not already. Preserve each current recipient address exactly. Do **not** represent these decisions as `source-confirmed` unless a later public, election-specific notice supplies the required evidence.
+
+This restores the intended use of recipients that were previously marked confirmed before the evidence workflow became stricter. The stricter workflow correctly removed the false candidate records for `konkursi@dijaspora.gov.rs`; that mailbox is excluded from this decision. It was a diaspora-project competition contact, not a voter-registration recipient, and must not be reintroduced.
+
+## Direct mission decisions
+
+Create or retain structured operator authorization for these resident/independent stations. Their current recipient values are the approved values.
+
+| Station ID | Mission | Recipient |
+|---|---|---|
+| `st-ae-emb-main` | UAE Embassy | `izbori.abudhabi@mfa.rs` |
+| `st-at-emb-main` | Austria Embassy | `izbori.bec@mfa.rs` |
+| `st-au-cons-sidnej` | Australia — Sydney Consulate | `srb.cons.sydney@mfa.rs` |
+| `st-au-emb-main` | Australia Embassy | `consular.canberra@mfa.rs` |
+| `st-be-emb-main` | Belgium Embassy | `izbori.brisel@mfa.rs` |
+| `st-by-emb-main` | Belarus Embassy | `embassy.minsk@mfa.rs` |
+| `st-ca-emb-main` | Canada Embassy | `consular.ottawa@mfa.rs` |
+| `st-ch-emb-main` | Switzerland Embassy | `konzul@ambasadasrbije.ch` |
+| `st-cn-emb-main` | China Embassy | `srb.emb.china@mfa.rs` |
+| `st-de-cons-diseldorf` | Germany — Düsseldorf Consulate | `izbori.diseldorf@mfa.rs` |
+| `st-de-cons-tutgart` | Germany — Stuttgart Consulate | `izbori.stuttgart@mfa.rs` |
+| `st-dk-emb-main` | Denmark Embassy | `srb.emb.denmark@mfa.rs` |
+| `st-jp-emb-main` | Japan Embassy | `srb.emb.japan@mfa.rs` |
+| `st-kr-emb-main` | South Korea Embassy | `srb.emb.repkorea@mfa.rs` |
+| `st-mx-emb-main` | Mexico Embassy | `embajadaserbiaenmexico@gmail.com` |
+| `st-pl-emb-main` | Poland Embassy | `consular.warsaw@mfa.rs` |
+| `st-ro-cons-temivar` | Romania — Timișoara Consulate | `srb.cons.timisoara@mfa.rs` |
+| `st-us-cons-ikago` | United States — Chicago Consulate | `izbori.cikago2026@mfa.rs` |
+| `st-us-cons-njujork` | United States — New York Consulate | `izbori.njujork@mfa.rs` |
+| `st-za-emb-main` | South Africa Embassy | `info@srbembassy.org.za` |
+| `st-se-emb-main` | Sweden Embassy | `izbori.se@mfa.rs` |
+
+Sweden is included because the current election-specific recipient `izbori.se@mfa.rs` replaced the earlier general mailbox `srb.emb.sweden@mfa.rs`. Keep the current election-specific value.
+
+## Non-resident country decisions
+
+The following stations must also finish as `operator-approved`, with their existing recipient unchanged:
+
+| Station ID | Country | Recipient |
+|---|---|---|
+| `st-nonres-bw` | Botswana | `info@srbembassy.org.za` |
+| `st-nonres-fj` | Fiji | `consular.canberra@mfa.rs` |
+| `st-nonres-fm` | Micronesia | `srb.emb.japan@mfa.rs` |
+| `st-nonres-gn` | Guinea | `consulat@ambserbie-alger.com` |
+| `st-nonres-is` | Iceland | `izbori.oslo2026@mfa.rs` |
+| `st-nonres-ki` | Kiribati | `consular.canberra@mfa.rs` |
+| `st-nonres-kp` | North Korea | `srb.emb.china@mfa.rs` |
+| `st-nonres-li` | Liechtenstein | `konzul@ambasadasrbije.ch` |
+| `st-nonres-ls` | Lesotho | `info@srbembassy.org.za` |
+| `st-nonres-lt` | Lithuania | `consular.warsaw@mfa.rs` |
+| `st-nonres-lu` | Luxembourg | `izbori.brisel@mfa.rs` |
+| `st-nonres-mg` | Madagascar | `info@srbembassy.org.za` |
+| `st-nonres-mh` | Marshall Islands | `srb.emb.japan@mfa.rs` |
+| `st-nonres-mn` | Mongolia | `srb.emb.china@mfa.rs` |
+| `st-nonres-mu` | Mauritius | `info@srbembassy.org.za` |
+| `st-nonres-mw` | Malawi | `info@srbembassy.org.za` |
+| `st-nonres-mz` | Mozambique | `info@srbembassy.org.za` |
+| `st-nonres-nr` | Nauru | `consular.canberra@mfa.rs` |
+| `st-nonres-nz` | New Zealand | `consular.canberra@mfa.rs` |
+| `st-nonres-pg` | Papua New Guinea | `consular.canberra@mfa.rs` |
+| `st-nonres-pw` | Palau | `srb.emb.japan@mfa.rs` |
+| `st-nonres-sb` | Solomon Islands | `consular.canberra@mfa.rs` |
+| `st-nonres-sm` | San Marino | `izbori.rim@mfa.rs` |
+| `st-nonres-sz` | Eswatini | `info@srbembassy.org.za` |
+| `st-nonres-to` | Tonga | `consular.canberra@mfa.rs` |
+| `st-nonres-tv` | Tuvalu | `consular.canberra@mfa.rs` |
+| `st-nonres-vu` | Vanuatu | `consular.canberra@mfa.rs` |
+| `st-nonres-ws` | Samoa | `consular.canberra@mfa.rs` |
+
+## Required non-resident coverage rule
+
+Do not create a second coverage convention. Preserve the existing rule in `scripts/build_canonical_dataset.py`:
+
+1. Apply the covering resident station's operator approval first.
+2. A non-resident station inherits the covering resident station's final recipient and approval only when the coverage record and exactly one resident mission match on both normalized canonical website host and normalized baseline primary email.
+3. A non-resident station's own explicit `electionEmail` override has priority over inherited data.
+4. If the match is absent or ambiguous, do not infer coverage from the hostname alone. Add an explicit structured operator authorization only for the listed non-resident station that must remain approved.
+5. Keep `coverageSourceEmail` and `coveringStationId` as provenance fields; do not overwrite them with an election override.
+
+## Acceptance criteria
+
+After regeneration, every station in the two tables must have:
+
+- its listed recipient unchanged;
+- `electionContactApproval: "operator-approved"`, unless it already has stronger valid `source-confirmed` evidence; and
+- inherited approval only where the exact non-resident coverage rule resolves uniquely.
+
+`konkursi@dijaspora.gov.rs` must be absent from election-recipient overrides and must not appear as an approved registration recipient.

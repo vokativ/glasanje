@@ -527,7 +527,7 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.website).toBe('https://www.london.mfa.gov.rs');
   });
 
-  test('New Zealand is covered by Canberra embassy with an unconfirmed election recipient', () => {
+  test('New Zealand is covered by Canberra embassy with an operator-approved election recipient', () => {
     const nz = COUNTRY_BY_CODE.get('NZ');
     expect(nz).toBeDefined();
     expect(nz?.label).toBe('Novi Zeland');
@@ -536,7 +536,7 @@ describe('Missions and Coverage Dataset', () => {
     const station = nz!.stations[0];
     expect(station.isResident).toBe(false);
     expect(station.email).toBe('consular.canberra@mfa.rs');
-    expect(station.electionContactApproval).toBe('unconfirmed');
+    expect(station.electionContactApproval).toBe('operator-approved');
     expect(station.isElectionContactConfirmed).toBe(false);
     expect(station.website).toBe('https://canberra.mfa.gov.rs');
   });

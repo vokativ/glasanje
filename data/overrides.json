@@ -1041,7 +1041,12 @@
     },
     "st-by-emb-main": {
       "electionEmail": "embassy.minsk@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "c9a1572fdd0abdd27fead9947006469f09cba546c75c78a1adac7e735278e20f",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1059,7 +1064,12 @@
     },
     "st-ro-cons-temivar": {
       "electionEmail": "srb.cons.timisoara@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "b05e287ffb0ac0328960b30a673c08534f29b93a05a9503cd3dd28ec1ee3d1d5",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1100,7 +1110,12 @@
     },
     "st-nonres-gn": {
       "electionEmail": "consulat@ambserbie-alger.com",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "ba6d299da75d2d833ff00952c7881f3c496f707a331516be85e15cd65c9fa6e1",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1118,7 +1133,12 @@
     },
     "st-ch-emb-main": {
       "electionEmail": "konzul@ambasadasrbije.ch",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "0866d1048ff155797dd5f6ac44f35bcf3047374ff953adc56e271ba185fbadda",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1136,7 +1156,12 @@
     },
     "st-nonres-li": {
       "electionEmail": "konzul@ambasadasrbije.ch",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "836c892204e1e174c9a81ad2c18a429d3424c27d41214a59487463dffeb4d8db",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1154,7 +1179,12 @@
     },
     "st-pl-emb-main": {
       "electionEmail": "consular.warsaw@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "a3ec4b0a5705e5fb847d44196a483270cffbc0983fd1def6cd14118c7195047c",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1172,7 +1202,12 @@
     },
     "st-nonres-lt": {
       "electionEmail": "consular.warsaw@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "bc2df8c237d0569b738a866ecb68744c837e65b34cd55feb5f483e7bd4fbdbc7",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1190,7 +1225,12 @@
     },
     "st-au-emb-main": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "984f7792506d4c5ecd6e82dc305873cad2da687c2aa0fdfcb185c6e48a89b514",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1208,7 +1248,12 @@
     },
     "st-au-cons-sidnej": {
       "electionEmail": "srb.cons.sydney@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "093674881353d3c73335b2f3f570cac11b2b61be112a14b48e050b34dff1052f",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1226,7 +1271,12 @@
     },
     "st-nonres-nz": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "5f5ea240b266ca97ef0294b8fba74551c622d04fea06fb5f8b2b17791303b14b",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1244,7 +1294,12 @@
     },
     "st-nonres-fj": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "5e95f6891654a821e3342327bc86d1e0262c6bbb16aec225e9268332f5da4121",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1262,7 +1317,12 @@
     },
     "st-nonres-pg": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "c21d8d3422f10b5789e1485b9794c14c36297adc25af1dd36db75c4a46e06dfd",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1280,7 +1340,12 @@
     },
     "st-nonres-ws": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "5cc121d84f6544600c31f2b3ace36209a9601c11c4c48ac0fb4a14de72395d90",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1298,7 +1363,12 @@
     },
     "st-nonres-sb": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "79d277bb24c9435bb019a110f0ee31e42d08555ce3ca59a86e9faeb13a965b43",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1316,7 +1386,12 @@
     },
     "st-nonres-to": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "74e7728b57b6d14c0b9167ee21f7e2ad61a6c7c763f94ee5d8b0f44ff0f2f0d4",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1334,7 +1409,12 @@
     },
     "st-nonres-tv": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "1143f17f876781afdc38d7d962cfadebfdafce8fc63a150f5e540529a0940d51",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1352,7 +1432,12 @@
     },
     "st-nonres-vu": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "1a2dddbdf817b5cc227efba1d536bdaeda1f2a718336b2efae19b34b192e5682",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1370,7 +1455,12 @@
     },
     "st-nonres-ki": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "ebaedfa43df608e1fb215d5eb4b3232a6c5a85ae88fb9d0a0dfc92a922dfccf3",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1388,7 +1478,12 @@
     },
     "st-nonres-nr": {
       "electionEmail": "consular.canberra@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "257c53a4730857da391ef3d03ebaeaeb2b31052e84e5125ef89241c713bbfc19",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1406,7 +1501,12 @@
     },
     "st-jp-emb-main": {
       "electionEmail": "srb.emb.japan@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "21d7c2fe260abe59a2eca42b70b132b6dc5c306d63e5d55b2b6804bc18d4b301",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1424,7 +1524,12 @@
     },
     "st-nonres-mh": {
       "electionEmail": "srb.emb.japan@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "e96fd2ace0a33e397cb35ff24be266f6103f158af522f2145f98161bdd1dc384",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1442,7 +1547,12 @@
     },
     "st-nonres-fm": {
       "electionEmail": "srb.emb.japan@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "f347615fec777ce2c6fd569c0a4338f0650f9d715946857f03308b65e14cc172",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1460,7 +1570,12 @@
     },
     "st-nonres-pw": {
       "electionEmail": "srb.emb.japan@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "916515fadb1646d29b53c699f7e854939092069e2342375b60b710a49effa296",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1478,7 +1593,12 @@
     },
     "st-cn-emb-main": {
       "electionEmail": "srb.emb.china@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "22f300cb4e6240d9bef4b6fe9b8981ec783e9c1c3af2b981e5c4b754286e22ad",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1496,7 +1616,12 @@
     },
     "st-nonres-mn": {
       "electionEmail": "srb.emb.china@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "a852ae245bf2424a6d919d2aefca6ffdf08dc5f6c4f67c7ea8f465bd04e62789",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1514,7 +1639,12 @@
     },
     "st-nonres-kp": {
       "electionEmail": "srb.emb.china@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "4ca778502d0174957a058c88804860f55dd71897403673fbb46b1e89868bb518",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1532,7 +1662,12 @@
     },
     "st-za-emb-main": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "b2d0273d77bb54c39be40a5ca369ee6ad8be88042493853424211116599cdacc",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1550,7 +1685,12 @@
     },
     "st-nonres-bw": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "446ba7f75f1d3295f24ca50f6062f680c3dfbc6feb4098135b5988dc923443d1",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1568,7 +1708,12 @@
     },
     "st-nonres-sz": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "eb596da1a5b3608b8c1434fc55ba0a7d9ed15ef2ba4e0ff0bbccb6f86b90518d",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1586,7 +1731,12 @@
     },
     "st-nonres-ls": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "a815db220203b68b91627385226a5ce7fd8daa9c7021cbbd0274b641c9346509",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1604,7 +1754,12 @@
     },
     "st-nonres-mg": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "5366ebddde8d9a60e14066dd6257d881e0c24171c4b600a57a6ae9774fbd29f6",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1622,7 +1777,12 @@
     },
     "st-nonres-mw": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "ef90606b5b5c8829fcc7ee61da80184c0f3350bc3a15be789d0663570798d2c7",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1640,7 +1800,12 @@
     },
     "st-nonres-mu": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "fc79ea0942c668b8c82bac88837cb89c406b10ae3077c1564cd134f9b5c87f24",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
@@ -1658,7 +1823,12 @@
     },
     "st-nonres-mz": {
       "electionEmail": "info@srbembassy.org.za",
+      "_operatorNote": "Operator-authorized recipient.",
       "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
         "candidateId": "432f21188488c48fdf496f3e848ae42fab5f30c838cb16029586d8ac027ca94d",
         "electionId": "2026-parliamentary",
         "electionYear": "2026",
