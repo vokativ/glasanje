@@ -1653,6 +1653,46 @@
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
       }
+    },
+    "st-ae-emb-main": {
+      "electionEmail": "izbori.abudhabi@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-de-cons-tutgart": {
+      "electionEmail": "izbori.stuttgart@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-de-cons-diseldorf": {
+      "electionEmail": "izbori.diseldorf@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-at-emb-main": {
+      "electionEmail": "izbori.bec@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-ca-emb-main": {
+      "electionEmail": "consular.ottawa@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-dk-emb-main": {
+      "electionEmail": "srb.emb.denmark@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-us-cons-njujork": {
+      "electionEmail": "izbori.njujork@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-us-cons-ikago": {
+      "electionEmail": "izbori.cikago2026@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
+    },
+    "st-mx-emb-main": {
+      "electionEmail": "embajadaserbiaenmexico@gmail.com",
+      "_operatorNote": "Operator-authorized normal-mailbox exception; official election notice defines the process but does not print a recipient."
+    },
+    "st-kr-emb-main": {
+      "electionEmail": "srb.emb.repkorea@mfa.rs",
+      "_operatorNote": "Operator-authorized recipient from the official election notice."
     }
   },
   "countryOverrides": {}

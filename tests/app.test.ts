@@ -535,10 +535,10 @@ describe('Missions and Coverage Dataset', () => {
     expect(hamburg?.isElectionContactConfirmed).toBe(true);
 
     expect(emails).toContain('izbori@botschaft-serbien.de');
-    expect(emails).toContain('gk-stutgart@t-online.de');
+    expect(emails).toContain('izbori.stuttgart@mfa.rs');
     expect(emails).toContain('izbori@gksrbfra.de');
     expect(emails).toContain('gk.muenchen@mfa.rs');
-    expect(emails).toContain('info.dusseldorf@mfa.rs');
+    expect(emails).toContain('izbori.diseldorf@mfa.rs');
     expect(emails).toContain('izbori@gkrshamburg.de');
   });
 
@@ -548,7 +548,7 @@ describe('Missions and Coverage Dataset', () => {
 
     const embassy = at!.stations.find((station) => station.id === 'st-at-emb-main');
     expect(embassy).toBeDefined();
-    expect(embassy?.email).toBe('consulate.vienna@mfa.rs');
+    expect(embassy?.email).toBe('izbori.bec@mfa.rs');
     expect(at!.stations.some((station) => station.id === 'st-at-emb-salcburg')).toBe(false);
   });
 
@@ -562,11 +562,11 @@ describe('Missions and Coverage Dataset', () => {
     }
   });
 
-  test('marks reviewed election recipients as confirmed', () => {
+  test('identifies confirmed election recipients', () => {
     const confirmed = COUNTRIES.flatMap((country) => country.stations)
       .filter((station) => station.isElectionContactConfirmed);
 
-    expect(confirmed).toHaveLength(72);
+    expect(confirmed).toHaveLength(82);
     expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
       (station) => station.id === 'st-it-emb-main',
     )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
@@ -597,7 +597,7 @@ describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
 
-    expect(coverage.confirmed).toBe(72);
+    expect(coverage.confirmed).toBe(82);
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 
