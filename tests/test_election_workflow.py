@@ -127,6 +127,17 @@ class ElectionWorkflowTests(unittest.TestCase):
 
         self.assertEqual(args.notice_url, ["st-selected=https://mission.example.test/notice"])
 
+    def test_notice_url_host_cap_is_rejected_at_workflow_entry(self) -> None:
+        with self.assertRaises(SystemExit):
+            runner.parse_args([
+                "--election-id", "2026-parliamentary",
+                "--station", "st-alpha",
+                "--station", "st-beta",
+                "--notice-url", "st-alpha=https://alpha.example.test/notice",
+                "--notice-url", "st-beta=https://beta.example.test/notice",
+                "--max-hosts", "1",
+            ])
+
     # A supplied notice URL remains within the requested station scope through every downstream phase.
     def test_notice_url_never_reviews_or_applies_other_pending_groups(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:

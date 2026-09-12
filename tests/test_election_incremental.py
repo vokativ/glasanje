@@ -635,15 +635,16 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
         requested_urls = {url for batch in calls for url in batch}
         self.assertTrue(set(DISCOVERY.INDEX_URLS).issubset(requested_urls))
         self.assertIn(country_url, requested_urls)
-        self.assertIn(mission_url, requested_urls)
+        self.assertNotIn(mission_url, requested_urls)
         self.assertIn(notice_url, requested_urls)
         self.assertEqual([candidate["stationId"] for candidate in result["candidates"]], ["st-se-emb-main"])
         candidate = result["candidates"][0]
         self.assertEqual(candidate["sourceUrl"], notice_url)
         self.assertEqual(candidate["sourceChain"], [INDEX_URL, country_url, mission_url, notice_url])
+        self.assertEqual(candidate["sourceSelection"], "operator-notice")
         self.assertEqual(result["sources"][candidate["sourceId"]]["sourceUrl"], notice_url)
 
-    def test_direct_notice_uses_full_page_context_without_broadening_mailbox_quote(self) -> None:
+    def test_direct_notice_rejects_distant_page_context_for_mailbox(self) -> None:
         notice_url = "https://alpha.mfa.gov.rs/mediji/obavestenje-o-izborima"
         distant_context = "Obaveštenje o parlamentarnim izborima 2026. " + ("Detalji " * 100)
         with tempfile.TemporaryDirectory() as directory:
@@ -665,13 +666,12 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
                     ),
                 },
             )
+            report = self._read_json(paths["report"])
 
-        self.assertEqual([candidate["stationId"] for candidate in result["candidates"]], ["st-at"])
-        candidate = result["candidates"][0]
-        self.assertIn("parlamentarnim izborima 2026", candidate["electionContext"])
-        self.assertEqual(candidate["sourceQuote"], "Prijavu pošaljite na izbori@alpha.example.")
+        self.assertEqual(result["candidates"], [])
+        self.assertEqual(self._coverage(report, "st-at")["selectedAcquisitionOutcome"], "scanned-no-evidence")
 
-    def test_direct_candidate_takes_coverage_precedence_over_normal_attachment_failure(self) -> None:
+    def test_direct_notice_skips_optional_discovered_attachment_fetches(self) -> None:
         notice_url = "https://alpha.mfa.gov.rs/mediji/obavestenje-o-izborima"
         attachment_url = "https://alpha.mfa.gov.rs/izbori.doc"
         with tempfile.TemporaryDirectory() as directory:
@@ -700,14 +700,28 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
 
         self.assertEqual([candidate["stationId"] for candidate in result["candidates"]], ["st-at"])
         self.assertEqual(self._coverage(report, "st-at")["status"], "candidate")
-        self.assertIn(
-            {
-                "scope": "mission page",
-                "url": attachment_url,
-                "reason": "unsupported response content type",
-            },
-            report["failures"],
-        )
+        self.assertFalse(report["failures"])
+
+    def test_crawl_skips_optional_unparseable_attachment_links(self) -> None:
+        attachment_url = "https://alpha.mfa.gov.rs/izbori.docx"
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(("st-at", "alpha.mfa.gov.rs", True),))
+            self._write_json(paths["registry"], self._registry())
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            self._write_json(paths["state"], self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"}))
+
+            _, calls = self._run_with_calls(
+                paths,
+                responses={
+                    "https://alpha.mfa.gov.rs/": self._html('<main><a href="/izbori.docx">Izbori 2026</a></main>'),
+                    attachment_url: self._failure("must not fetch"),
+                },
+            )
+
+            report = self._read_json(paths["report"])
+            self.assertEqual(calls, [["https://alpha.mfa.gov.rs/"]])
+            self.assertFalse(report["failures"])
 
     def test_normal_task_does_not_use_full_page_context_for_distant_mailbox(self) -> None:
         distant_context = "Obaveštenje o parlamentarnim izborima 2026. " + ("Detalji " * 100)
@@ -732,7 +746,7 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
         self.assertEqual(result["candidates"], [])
         self.assertEqual(self._coverage(report, "st-at")["status"], "scanned-no-evidence")
 
-    def test_direct_notice_respects_page_budget_after_normal_mission_task(self) -> None:
+    def test_direct_notice_uses_its_page_budget_without_homepage_fetch(self) -> None:
         notice_url = "https://alpha.mfa.gov.rs/mediji/obavestenje-o-izborima"
         with tempfile.TemporaryDirectory() as directory:
             paths = self._paths(Path(directory))
@@ -755,10 +769,10 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             )
             report = self._read_json(paths["report"])
 
-        self.assertEqual(result["candidates"], [])
-        self.assertEqual(calls, [["https://alpha.mfa.gov.rs/"]])
+        self.assertEqual([candidate["stationId"] for candidate in result["candidates"]], ["st-at"])
+        self.assertEqual(calls, [[notice_url]])
         self.assertEqual(report["fetchedPages"], 1)
-        self.assertEqual(self._coverage(report, "st-at")["status"], "budget-limited")
+        self.assertEqual(self._coverage(report, "st-at")["status"], "candidate")
 
     def test_notice_url_invalid_inputs_fail_before_fetch(self) -> None:
         no_station_argv = [
@@ -910,6 +924,181 @@ class ElectionIncrementalDiscoveryTests(unittest.TestCase):
             self.assertEqual(source["finalUrl"], "https://alpha.mfa.gov.rs/")
             self.assertEqual(source["extractorVersion"], "1")
             self.assertIn("izbori@alpha.example", source["text"])
+
+    def test_registry_name_indexes_raw_korean_registry_label_and_reports_unmapped(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            missions = Path(directory) / "missions.json"
+            registry = Path(directory) / "registry.json"
+            self._write_json(missions, {
+                "countries": [{
+                    "countryCode": "KR",
+                    "label": "Južna Koreja",
+                    "registryNames": ["Јужна Кореја"],
+                    "stations": [],
+                }],
+            })
+            self._write_json(registry, [
+                {"country": "Јужна Кореја", "url": "/spoljna-politika/bilateralna-saradnja/koreja/ambasade-konzulati"},
+                {"country": "Nepostojeća", "url": "/spoljna-politika/bilateralna-saradnja/nepostojeca/ambasade-konzulati"},
+            ])
+
+            names, _ = DISCOVERY.load_stations(missions)
+            links, unmapped = DISCOVERY.load_registry(registry, names)
+
+            self.assertIn("KR", links)
+            self.assertEqual(unmapped, ["Nepostojeća"])
+
+    def test_colliding_canonical_registry_names_are_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            missions = Path(directory) / "missions.json"
+            self._write_json(missions, {
+                "countries": [
+                    {"countryCode": "AA", "label": "Alpha", "registryNames": ["Shared"], "stations": []},
+                    {"countryCode": "BB", "label": "Beta", "aliases": ["Shared"], "stations": []},
+                ],
+            })
+
+            with self.assertRaisesRegex(ValueError, "collision"):
+                DISCOVERY.load_stations(missions)
+
+    def test_report_exposes_unmapped_registry_names(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(("st-at", "alpha.mfa.gov.rs", True),))
+            self._write_json(paths["registry"], [
+                *self._registry(),
+                {"country": "Nepostojeća", "url": "/spoljna-politika/bilateralna-saradnja/nepostojeca/ambasade-konzulati"},
+            ])
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            self._write_json(paths["state"], self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"}))
+
+            self._run(paths, responses={"https://alpha.mfa.gov.rs/": self._html("<main><p>Kontakt.</p></main>")})
+
+            self.assertEqual(self._read_json(paths["report"])["unmappedRegistryNames"], ["Nepostojeća"])
+
+    def test_explicit_notice_host_cap_rejects_before_any_fetch(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(
+                ("st-alpha", "alpha.mfa.gov.rs", True),
+                ("st-beta", "beta.mfa.gov.rs", True),
+            ))
+            self._write_json(paths["registry"], self._registry())
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            self._write_json(paths["state"], self._state({
+                "alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/",
+                "beta.mfa.gov.rs": "https://beta.mfa.gov.rs/",
+            }))
+            calls: list[object] = []
+            argv = [
+                str(DISCOVERY_PATH), "--election-id", ELECTION_ID,
+                "--output", str(paths["output"]), "--missions", str(paths["missions"]),
+                "--registry", str(paths["registry"]), "--state", str(paths["state"]),
+                "--report", str(paths["report"]), "--overrides", str(paths["overrides"]),
+                "--station", "st-alpha", "--station", "st-beta",
+                "--notice-url", "st-alpha=https://alpha.mfa.gov.rs/notice",
+                "--notice-url", "st-beta=https://beta.mfa.gov.rs/notice",
+                "--max-hosts", "1",
+            ]
+            with mock.patch.object(DISCOVERY, "fetch_many", side_effect=calls.append), mock.patch.object(
+                DISCOVERY.sys, "argv", argv
+            ):
+                self.assertEqual(DISCOVERY.main(), 2)
+            self.assertEqual(calls, [])
+
+    def test_direct_notice_is_local_only_marked_and_does_not_advance_cursor(self) -> None:
+        notice_url = "https://alpha.mfa.gov.rs/notice"
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(("st-at", "alpha.mfa.gov.rs", True),))
+            self._write_json(paths["registry"], self._registry())
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            state = self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"})
+            state["hostCursor"] = 7
+            self._write_json(paths["state"], state)
+
+            result, calls = self._run_with_calls(
+                paths,
+                station="st-at",
+                notice_urls=(f"st-at={notice_url}",),
+                responses={
+                    notice_url: self._html(
+                        '<main><article><p>Za parlamentarne izbore 2026 prijavu pošaljite na '
+                        'izbori@alpha.example.</p></article><a href="/izbori-potomak">Izbori 2026</a></main>'
+                    ),
+                    "https://alpha.mfa.gov.rs/izbori-potomak": self._failure("must not fetch"),
+                },
+            )
+
+            report = self._read_json(paths["report"])
+            self.assertEqual(calls, [[notice_url]])
+            self.assertEqual(self._read_json(paths["state"])["hostCursor"], 7)
+            self.assertEqual(result["candidates"][0]["sourceSelection"], "operator-notice")
+            self.assertEqual(result["candidates"][0]["sourceChain"][-1], notice_url)
+            self.assertEqual(report["selectedAcquisitions"], [{
+                "stationId": "st-at",
+                "sourceUrl": notice_url,
+                "sourceSelection": "operator-notice",
+                "outcome": "candidate",
+            }])
+
+    def test_direct_notice_rejects_page_wide_election_context_for_unrelated_mailbox(self) -> None:
+        notice_url = "https://alpha.mfa.gov.rs/notice"
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(("st-at", "alpha.mfa.gov.rs", True),))
+            self._write_json(paths["registry"], self._registry())
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            self._write_json(paths["state"], self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"}))
+
+            result = self._run(
+                paths,
+                station="st-at",
+                notice_urls=(f"st-at={notice_url}",),
+                responses={notice_url: self._html(
+                    "<main><h1>Parlamentarni izbori 2026</h1><p>Opšta pitanja: info@alpha.example.</p></main>"
+                )},
+            )
+
+            report = self._read_json(paths["report"])
+            self.assertEqual(result["candidates"], [])
+            self.assertEqual(self._coverage(report, "st-at")["selectedAcquisitionOutcome"], "scanned-no-evidence")
+
+    def test_unsupported_direct_notice_reports_current_acquisition_over_retained_candidate(self) -> None:
+        notice_url = "https://alpha.mfa.gov.rs/notice"
+        with tempfile.TemporaryDirectory() as directory:
+            paths = self._paths(Path(directory))
+            self._write_json(paths["missions"], self._missions(("st-at", "alpha.mfa.gov.rs", True),))
+            self._write_json(paths["registry"], self._registry())
+            self._write_json(paths["overrides"], {"missionOverrides": {}})
+            self._write_json(paths["state"], self._state({"alpha.mfa.gov.rs": "https://alpha.mfa.gov.rs/"}))
+            self._write_json(paths["output"], {
+                "schemaVersion": 1,
+                "electionId": ELECTION_ID,
+                "electionYear": "2026",
+                "candidates": [{
+                    "candidateId": "retained",
+                    "electionId": ELECTION_ID,
+                    "electionYear": "2026",
+                    "stationId": "st-at",
+                    "email": "izbori@alpha.example",
+                    "sourceId": "retained-source",
+                }],
+                "sources": {"retained-source": {}},
+            })
+
+            self._run(
+                paths,
+                station="st-at",
+                notice_urls=(f"st-at={notice_url}",),
+                responses={notice_url: DISCOVERY.Response("", "application/msword", b"document")},
+            )
+
+            report = self._read_json(paths["report"])
+            coverage = self._coverage(report, "st-at")
+            self.assertEqual(coverage["status"], "failed-acquisition")
+            self.assertTrue(coverage["retainedCandidateEvidence"])
+            self.assertEqual(coverage["selectedAcquisitionOutcome"], "failed-unsupported-media")
 
     def _run(
         self,

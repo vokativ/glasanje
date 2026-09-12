@@ -34,12 +34,17 @@ bun run contacts:run -- --election-id 2026-parliamentary \
 
 ## Izričito prikupljanje službenog obaveštenja
 
-Kada je poznat javni URL službenog izbornog obaveštenja, operater ga može dodati kao izvor kandidata pomoću ponovljivog para `--notice-url STATION_ID=HTTPS_URL`. Svaki takav par zahteva i odgovarajuću, izričito navedenu `--station`; stanica iz para mora biti u tom istom skupu. URL se normalizuje kao HTTPS, a njegov domaćin mora biti kanonska varijanta domaćina sajta te misije. Time se obaveštenje dodaje tek nakon normalnog lanca MSP → država → misija, kao običan izvorno vezan kandidat, uz ista ograničenja preusmerenja, domaćina, broja stranica i dubine kao i drugo prikupljanje.
+Kada je poznat javni URL službenog izbornog obaveštenja, operater ga može dodati kao izvor kandidata pomoću ponovljivog para `--notice-url STATION_ID=HTTPS_URL`. Svaki takav par zahteva i odgovarajuću, izričito navedenu `--station`; stanica iz para mora biti u tom istom skupu. URL se normalizuje kao HTTPS, a njegov domaćin mora biti kanonska varijanta domaćina sajta te misije.
+
+`--notice-url` je tačno ciljana akvizicija, a ne početna tačka za novo pretraživanje. Tek pošto je proverena normalna veza MSP → država → misija, tok pribavlja samo navedeno, za tu stanicu vezano obaveštenje. Ne posećuje početnu stranu, roditeljske/odredišne stranice niti potomke tog URL-a. Čuvaju se i zadati URL i konačni URL posle dopuštenih preusmerenja; zapis kandidata nosi `sourceSelection: "operator-notice"` (obično otkriven kandidat nosi `"crawled"`).
+
+Pre bilo kakvog pribavljanja, paket izričitih obaveštenja mora proći ograničenje `--max-hosts`: broj njegovih jedinstvenih domaćina ne sme ga preći. Operater mora navesti dovoljno visok `--max-hosts`, ili skup podeliti u manje prolaze; tok ne sme menjati rutinski pokazivač domaćina niti zaobilaziti ograničenje zbog izričitog URL-a.
 
 Za paket-only prolaz sa tri poznata službena obaveštenja pokrenite:
 
 ```bash
 bun run contacts:run -- --election-id 2026-parliamentary \
+  --max-hosts 3 \
   --station st-il-emb-main \
   --notice-url st-il-emb-main=https://telaviv.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-postupku-ostvarivanja-birackog-prava-drzavljana-srbije-koji-imaju-boraviste-u-izraelu \
   --station st-de-cons-tutgart \
@@ -50,7 +55,9 @@ bun run contacts:run -- --election-id 2026-parliamentary \
 
 Kraći telavivski put nije važeći URL obaveštenja i vraća 404.
 
-Ova opcija nije prečica za obične kontakte: ne navoditi Sofijino obaveštenje bez primaoca niti iranski obični, neizborni sandučić. Svaki prolaz i dalje čuva nepromenljive artefakte dokaza i snimke izvora u svom `runId` direktorijumu. Paket-only prolaz ne vrši pregled, `--apply` ni promociju i ne menja `data/overrides.json`; pre bilo kakve izmene override-a i dalje su potrebni redovan primarni pregled, a zatim zaseban, izričit `--apply`.
+Pronađene veze ka prilozima (`.doc`, `.docx` i slični formati) samo se beleže: ne preuzimaju se automatski i ne proširuju ciljani opseg. Ako je baš navedeno obaveštenje nepodržani medij koji se mora pribaviti, to je stvaran neuspeh, a ne dokaz koji se može premostiti. Izveštaj razdvaja izabrane odložene i neuspele akvizicije od ranije zadržanih kandidata; neuspešan tekući pokušaj ne sme biti prikazan kao uspešan status kandidata.
+
+Ova opcija nije prečica za obične kontakte: ne navoditi pariski zapis bez primaoca niti iranski obični, neizborni sandučić. Svaki prolaz i dalje čuva nepromenljive artefakte dokaza i snimke izvora u svom `runId` direktorijumu. Paket-only prolaz ne vrši pregled, `--apply` ni promociju i ne menja `data/overrides.json`; pre bilo kakve izmene override-a i dalje su potrebni redovan primarni pregled, a zatim zaseban, izričit `--apply`.
 
 ## Ciljani duboki ponovni prolaz
 
@@ -72,7 +79,7 @@ bun run contacts:run -- --election-id 2026-parliamentary --mode deep-retry \
 
 Svako izvršavanje dobija nov `runId` i sopstvene nepromenljive artefakte; ne prepisivati niti ručno menjati ranije artefakte. Ovaj ponovni prolaz samo prikuplja i izvozi dokaz u svom izričitom opsegu: ne daje direktnu autorizaciju i ne pokreće promociju. Pregled i `--apply` ostaju zasebne, izričite odluke prema postupku ispod.
 
-Za `st-de-cons-tutgart`, nepodržani `.doc` ostaje nedokazan rezultat dok javno izdvajanje iz izvora ne uspe; sama datoteka nije dokaz koji se može premostiti ovim režimom.
+Za bilo koju stanicu, nepodržani medij koji je izričito potreban kao ciljani dokaz ostaje neuspešna akvizicija dok se javni sadržaj iz tog izvora ne može pribaviti; režim dubokog ponavljanja ga ne može premostiti. Veze ka samo otkrivenim prilozima ne preuzimaju se automatski.
 
 ## AI pregled i autorizacija
 
@@ -101,25 +108,15 @@ Arhitekta se ne poziva rutinski. Potreban je samo kada je kandidat `needs_review
 
 ## Promocija je posebna, eksplicitna odluka
 
-Tek nakon stvarnog pregleda pokrenite isti ograničeni tok sa `--apply`:
+AI pregled i primena su odvojene radnje. Najpre završite stvarni pregled ili uvezite stvarno prikupljeni, potvrđeni harness artefakt bez `--apply`. Tek zatim, u zasebnom izričitom prolazu, pokrenite primenu:
 
 ```bash
-ELECTION_AI_BASE_URL=https://example.invalid/v1 \
-ELECTION_AI_API_KEY=... ELECTION_AI_MODEL=... \
-  bun run contacts:run -- --election-id 2026-parliamentary --review --apply
+bun run contacts:run -- --election-id 2026-parliamentary --apply
 ```
 
-ili, za već stvarno prikupljeni i potvrđeni harness artefakt:
+Pre pisanja, tok uvek pravi novi dry-run. Sa `--apply` bira **samo** `eligibleStationIds` iz tog dry-runa i šalje ih promociji kao eksplicitne stanice. Zadržane stanice (`held`) ostaju nepromenjene, a ako bilo koja izabrana grupa više nije validna promocija se prekida bez delimičnog upisa. `--apply` bez ranije stvarnog pregleda ili potvrđenog `--import-reviews` se odbija. Tok nikada ne izmišlja pregled, ne premošćava neuspelu raniju fazu i ne menja override pri samom izvozu paketa.
 
-```bash
-bun run contacts:run -- --election-id 2026-parliamentary \
-  --import-reviews /bezbedna/putanja/stvarni-harness-reviews.json \
-  --attest-import --apply
-```
-
-Pre pisanja, tok uvek pravi novi dry-run. Sa `--apply` bira **samo** `eligibleStationIds` iz tog dry-runa i šalje ih promociji kao eksplicitne stanice. Zadržane stanice (`held`) ostaju nepromenjene, a ako bilo koja izabrana grupa više nije validna promocija se prekida bez delimičnog upisa. `--apply` bez `--review` ili potvrđenog `--import-reviews` se odbija. Tok nikada ne izmišlja pregled, ne premošćava neuspelu raniju fazu i ne menja override pri samom izvozu paketa.
-
-Trajni override čuva postojeće, nevezane ključeve. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava.
+Trajni override čuva postojeće, nevezane ključeve. Svaki korisnički autorizovan primalac ima strukturisano poreklo `_electionContactProvenance` sa `schemaVersion: 2`, `authorization: {"type":"operator"}`, `electionId` i godinom izbora, bez izmišljenih AI polja. Takav primalac ostaje vidljiv, ali nije `isElectionContactConfirmed`: potvrđen može biti samo AI/evidence-vezan zapis. Postojeći meksički operator-autorizovan, process-only izuzetak zato ostaje vidljiv i nepotvrđen; nije kandidat za automatsku promociju. Automatska promocija zadržava svaku zamenu operatorove autorizacije dok arhitekta izričito ne prihvati tu zamenu. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava.
 
 ## Izgradnja podataka i zasebno objavljivanje
 

@@ -500,7 +500,7 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.website).toBe('https://www.london.mfa.gov.rs');
   });
 
-  test('New Zealand is covered by Canberra embassy with confirmed election email', () => {
+  test('New Zealand is covered by Canberra embassy with an unconfirmed election recipient', () => {
     const nz = COUNTRY_BY_CODE.get('NZ');
     expect(nz).toBeDefined();
     expect(nz?.label).toBe('Novi Zeland');
@@ -509,7 +509,7 @@ describe('Missions and Coverage Dataset', () => {
     const station = nz!.stations[0];
     expect(station.isResident).toBe(false);
     expect(station.email).toBe('consular.canberra@mfa.rs');
-    expect(station.isElectionContactConfirmed).toBe(true);
+    expect(station.isElectionContactConfirmed).toBe(false);
     expect(station.website).toBe('https://canberra.mfa.gov.rs');
   });
   test('Antigua and Barbuda uses the confirmed U.S. Embassy election recipient', () => {
@@ -562,11 +562,31 @@ describe('Missions and Coverage Dataset', () => {
     }
   });
 
-  test('identifies confirmed election recipients', () => {
-    const confirmed = COUNTRIES.flatMap((country) => country.stations)
-      .filter((station) => station.isElectionContactConfirmed);
+  test('identifies evidence-confirmed election recipients while excluding operator-authorized exceptions', () => {
+    const stations = COUNTRIES.flatMap((country) => country.stations);
+    const confirmed = stations.filter((station) => station.isElectionContactConfirmed);
 
-    expect(confirmed).toHaveLength(82);
+    const operatorStationIds = [
+      'st-ae-emb-main',
+      'st-de-cons-tutgart',
+      'st-de-cons-diseldorf',
+      'st-at-emb-main',
+      'st-ca-emb-main',
+      'st-dk-emb-main',
+      'st-us-cons-njujork',
+      'st-us-cons-ikago',
+      'st-mx-emb-main',
+      'st-kr-emb-main',
+    ];
+    const operatorStations = stations.filter((station) =>
+      operatorStationIds.includes(station.id),
+    );
+
+    expect(confirmed).toHaveLength(34);
+    expect(operatorStations).toHaveLength(10);
+    expect(operatorStations.every(
+      (station) => !station.isElectionContactConfirmed,
+    )).toBe(true);
     expect(COUNTRY_BY_CODE.get('IT')!.stations.find(
       (station) => station.id === 'st-it-emb-main',
     )).toMatchObject({ email: 'izbori.rim@mfa.rs', isElectionContactConfirmed: true });
@@ -597,7 +617,7 @@ describe('Registration Email Status', () => {
   test('derives confirmed mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
 
-    expect(coverage.confirmed).toBe(82);
+    expect(coverage.confirmed).toBe(34);
     expect(coverage.total).toBe(COUNTRIES.flatMap((country) => country.stations).length);
   });
 

@@ -173,8 +173,9 @@ def _evaluate_station(
     """Return eligibility without treating a candidate or review as current authority.
 
     Fresh unambiguous evidence needs a primary acceptance. Competing mailboxes,
-    same-election changes, or contrary reviews require an architect acceptance that
-    resolves every contrary review before the override may change.
+    same-election changes, contrary reviews, and replacement of operator authority
+    require an architect acceptance that resolves every contrary review before the
+    override may change.
     """
     if station_id in incomplete_station_ids:
         return "held", _hold(station_id, "selected candidate group has incomplete evidence and must be refetched"), None
@@ -219,7 +220,17 @@ def _evaluate_station(
     same_election_change = (
         authority is not None and authority.get("electionId") == election_id and authority["email"] not in emails
     )
-    requires_architect = len(emails) > 1 or same_election_change or bool(contrary_reviews)
+    operator_authority_replacement = (
+        authority is not None
+        and authority.get("authorizationType") == "operator"
+        and authority["email"] not in emails
+    )
+    requires_architect = (
+        len(emails) > 1
+        or same_election_change
+        or operator_authority_replacement
+        or bool(contrary_reviews)
+    )
     if not requires_architect:
         accepted = [
             review

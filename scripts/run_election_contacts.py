@@ -23,6 +23,8 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence
+from urllib.parse import urlsplit
+
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -103,6 +105,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
             parser.error("--notice-url must use STATION_ID=HTTPS_URL")
         if station_id not in selected_stations:
             parser.error(f"--notice-url station {station_id!r} must be selected with --station")
+    if args.notice_url and args.max_hosts:
+        notice_hosts = {urlsplit(notice_url.partition("=")[2]).hostname for notice_url in args.notice_url}
+        if None not in notice_hosts and len(notice_hosts) > args.max_hosts:
+            parser.error(
+                "--notice-url targets more unique hosts than --max-hosts; "
+                "raise the bound or split the explicit notice batch"
+            )
     if args.attest_import and args.import_reviews is None:
         parser.error("--attest-import requires --import-reviews")
     if args.import_reviews is not None and not args.attest_import:

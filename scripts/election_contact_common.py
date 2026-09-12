@@ -530,6 +530,11 @@ def current_authority(overrides: Mapping[str, Any], station_id: str) -> dict[str
     provenance = record.get("_electionContactProvenance")
     authority: dict[str, Any] = {"email": email_value.lower()}
     if isinstance(provenance, dict):
+        authorization = provenance.get("authorization")
+        if isinstance(authorization, dict):
+            authorization_type = authorization.get("type")
+            if isinstance(authorization_type, str) and authorization_type:
+                authority["authorizationType"] = authorization_type
         for field in ("electionId", "electionYear", "candidateId", "candidateSetDigest", "evidenceDigest"):
             value = provenance.get(field)
             if isinstance(value, str) and value:
@@ -575,7 +580,15 @@ def _candidate_set_digest(
     if authority is not None:
         authority_binding = {
             field: authority[field]
-            for field in ("email", "electionId", "electionYear", "candidateId", "candidateSetDigest", "evidenceDigest")
+            for field in (
+                "email",
+                "authorizationType",
+                "electionId",
+                "electionYear",
+                "candidateId",
+                "candidateSetDigest",
+                "evidenceDigest",
+            )
             if field in authority
         }
     return sha256_json(

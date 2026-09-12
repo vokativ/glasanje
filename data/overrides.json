@@ -1656,43 +1656,123 @@
     },
     "st-ae-emb-main": {
       "electionEmail": "izbori.abudhabi@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-de-cons-tutgart": {
       "electionEmail": "izbori.stuttgart@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-de-cons-diseldorf": {
       "electionEmail": "izbori.diseldorf@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-at-emb-main": {
       "electionEmail": "izbori.bec@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-ca-emb-main": {
       "electionEmail": "consular.ottawa@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-dk-emb-main": {
       "electionEmail": "srb.emb.denmark@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-us-cons-njujork": {
       "electionEmail": "izbori.njujork@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-us-cons-ikago": {
       "electionEmail": "izbori.cikago2026@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-mx-emb-main": {
       "electionEmail": "embajadaserbiaenmexico@gmail.com",
-      "_operatorNote": "Operator-authorized normal-mailbox exception; official election notice defines the process but does not print a recipient."
+      "_operatorNote": "Operator-authorized normal-mailbox exception; official election notice defines the process but does not print a recipient.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     },
     "st-kr-emb-main": {
       "electionEmail": "srb.emb.repkorea@mfa.rs",
-      "_operatorNote": "Operator-authorized recipient from the official election notice."
+      "_operatorNote": "Operator-authorized recipient from the official election notice.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     }
   },
   "countryOverrides": {}

@@ -728,6 +728,16 @@
         }
       ]
     },
+    "KR": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/koreja-republika/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.seoul.mfa.gov.rs",
+          "url": "https://www.seoul.mfa.gov.rs/"
+        }
+      ]
+    },
     "KW": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/kuvajt/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",

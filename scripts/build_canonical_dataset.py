@@ -8,6 +8,7 @@ import json
 import os
 import re
 import subprocess
+import unicodedata
 from urllib.parse import urlsplit
 
 # Treat the scraper artifact as external-source input, not as a canonical dataset:
@@ -95,22 +96,55 @@ def serbian_cyrillic_collation_key(label):
         for character in label.upper()
     )
 
-# Every named raw country must have a canonical alias before any output is built.
-unmapped_raw_countries = sorted({
+# Every raw registry name must have a canonical alias before any output is built.
+unmapped_registry_names = sorted({
     country
     for item in raw_data
     if (country := item.get('country')) and country not in country_aliases
 })
-if unmapped_raw_countries:
+if unmapped_registry_names:
     raise ValueError(
-        "Cannot build canonical dataset; unmapped raw countries: "
-        + ", ".join(repr(country) for country in unmapped_raw_countries)
+        "Cannot build canonical dataset; unmapped registry names: "
+        + ", ".join(repr(country) for country in unmapped_registry_names)
     )
 
 def to_latin(text):
     if not text:
         return ""
     return "".join(CYR_TO_LAT.get(ch, ch) for ch in text)
+
+def registry_name_key(value):
+    transliterated = to_latin(value).casefold()
+    decomposed = unicodedata.normalize("NFKD", transliterated)
+    return "".join(character for character in decomposed if character.isalnum())
+
+
+def has_confirmed_evidence_provenance(provenance):
+    if not isinstance(provenance, dict):
+        return False
+    authorization = provenance.get("authorization")
+    if isinstance(authorization, dict):
+        return authorization.get("type") == "ai" and all(
+            isinstance(provenance.get(field), str) and provenance[field]
+            for field in ("candidateId", "candidateSetDigest", "evidenceDigest")
+        )
+    human_approvals = provenance.get("humanApprovals")
+    return (
+        all(
+            isinstance(provenance.get(field), str) and provenance[field]
+            for field in ("electionId", "electionYear", "candidateId", "sourceUrl")
+        )
+        and isinstance(human_approvals, list)
+        and any(
+            isinstance(approval, dict)
+            and approval.get("decision") == "approve"
+            and all(
+                isinstance(approval.get(field), str) and approval[field]
+                for field in ("reviewerId", "approvedAt")
+            )
+            for approval in human_approvals
+        )
+    )
 
 # Search aliases are public catalog metadata only. Keep the source list explicit
 # and sort output below so every build produces the same country records.
@@ -369,18 +403,41 @@ if os.path.exists(overrides_path):
                         if not k.startswith("_") and k != "electionEmail" and v is not None:
                             s[k] = v
                     election_email = patch.get("electionEmail")
-                    # This flag records that the override supplied the selected
-                    # mailbox; it is not evidence that the address remains current.
+                    # A selected mailbox is confirmed only by complete AI or
+                    # historical human-reviewed evidence. Operator authority remains
+                    # usable, but must not imply independently verified routing.
                     s["isElectionContactConfirmed"] = False
                     if is_valid_email(election_email):
                         s["email"] = election_email.strip()
-                        s["isElectionContactConfirmed"] = True
+                        s["isElectionContactConfirmed"] = has_confirmed_evidence_provenance(
+                            patch.get("_electionContactProvenance")
+                        )
     except Exception as e:
         print("Warning: failed to apply overrides:", e)
+
+# Registry names preserve MFA's raw country labels separately from public search
+# aliases. They are generated from the raw-name-to-code map so registry discovery
+# can match source wording without expanding user-facing aliases.
+registry_names_by_code = {}
+registry_name_owners = {}
+for registry_name, (country_code, _, _) in country_aliases.items():
+    if not isinstance(registry_name, str) or not registry_name.strip():
+        raise ValueError(f"Cannot build canonical dataset; invalid registry name {registry_name!r}")
+    normalized = registry_name_key(registry_name)
+    if not normalized:
+        raise ValueError(f"Cannot build canonical dataset; invalid registry name {registry_name!r}")
+    owner = registry_name_owners.setdefault(normalized, country_code)
+    if owner != country_code:
+        raise ValueError(
+            f"Cannot build canonical dataset; registry name collision for "
+            f"{registry_name!r}: {owner} and {country_code}"
+        )
+    registry_names_by_code.setdefault(country_code, set()).add(registry_name.strip())
 
 # Add catalog search aliases after overrides so search follows the names users see.
 # ISO codes intentionally remain outside aliases and are handled as exact matches
 # by the client.
+country_name_owners = {}
 for country in countries_list:
     aliases = {
         country['label'],
@@ -389,6 +446,20 @@ for country in countries_list:
         *COUNTRY_SEARCH_ALIASES.get(country['countryCode'], ()),
     }
     country['aliases'] = sorted(alias for alias in aliases if alias)
+    country['registryNames'] = sorted(registry_names_by_code.get(country['countryCode'], ()))
+    for name in (
+        country['label'],
+        country['labelCyr'],
+        *country['aliases'],
+        *country['registryNames'],
+    ):
+        normalized = registry_name_key(name)
+        owner = country_name_owners.setdefault(normalized, country['countryCode'])
+        if owner != country['countryCode']:
+            raise ValueError(
+                f"Cannot build canonical dataset; discovery name collision for "
+                f"{name!r}: {owner} and {country['countryCode']}"
+            )
 
 # Overrides may replace station IDs, so enforce the global invariant after all
 # station mutations and before either canonical output is written.
@@ -448,6 +519,7 @@ export interface VotingCountry {{
   label: string;
   labelCyr: string;
   aliases?: string[];
+  registryNames: string[];
   stations: PollingStation[];
 }}
 

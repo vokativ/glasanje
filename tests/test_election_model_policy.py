@@ -229,6 +229,58 @@ class ElectionModelPolicyTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(json.loads(paths[3].read_text(encoding="utf-8"))["missionOverrides"], {})
 
+    # A matching operator-authorized recipient remains the active authority; it is
+    # not re-promoted merely because a source-checked candidate repeats it.
+    def test_matching_operator_authority_is_unchanged(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            canonical, policy, candidates, overrides = self.fixture_documents()
+            overrides["missionOverrides"]["st-test"] = {
+                "electionEmail": "izbori.vienna@mfa.gov.rs",
+                "_electionContactProvenance": {
+                    "schemaVersion": 2,
+                    "authorization": {"type": "operator"},
+                    "electionId": "2026-parliamentary",
+                    "electionYear": "2026",
+                },
+            }
+            paths = self.write_fixture(
+                Path(temporary),
+                review=self.accepted_review,
+                overrides_payload=overrides,
+            )
+            report = Path(temporary) / "report.json"
+            result = self.promote(*paths, extra=["--dry-run", "--report", str(report)])
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(
+                json.loads(report.read_text(encoding="utf-8")),
+                {"eligibleStationIds": [], "held": [], "unchangedStationIds": ["st-test"]},
+            )
+
+    # An operator-selected recipient cannot be replaced by a primary review alone.
+    def test_operator_authority_replacement_requires_architect_acceptance(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            canonical, policy, candidates, overrides = self.fixture_documents()
+            overrides["missionOverrides"]["st-test"] = {
+                "electionEmail": "operator.selected@mfa.gov.rs",
+                "_electionContactProvenance": {
+                    "schemaVersion": 2,
+                    "authorization": {"type": "operator"},
+                    "electionId": "2026-parliamentary",
+                    "electionYear": "2026",
+                },
+            }
+            paths = self.write_fixture(
+                Path(temporary),
+                review=self.accepted_review,
+                overrides_payload=overrides,
+            )
+            report = Path(temporary) / "report.json"
+            result = self.promote(*paths, extra=["--dry-run", "--report", str(report)])
+            self.assertEqual(result.returncode, 0, result.stderr)
+            held = json.loads(report.read_text(encoding="utf-8"))["held"]
+            self.assertEqual(held[0]["stationId"], "st-test")
+            self.assertIn("architect", held[0]["reason"])
+
     # A contrary primary conclusion is a conflict, not an authorization, until the escalation role resolves it.
     def test_contrary_primary_review_is_held_until_architect_resolves_it(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

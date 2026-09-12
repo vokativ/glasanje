@@ -22,6 +22,9 @@
       "aliases": [
         "Avganistan",
         "Авганистан"
+      ],
+      "registryNames": [
+        "Авганистан"
       ]
     },
     {
@@ -42,6 +45,9 @@
       ],
       "aliases": [
         "Azerbejdžan",
+        "Азербејџан"
+      ],
+      "registryNames": [
         "Азербејџан"
       ]
     },
@@ -64,6 +70,9 @@
       "aliases": [
         "Albanija",
         "Албанија"
+      ],
+      "registryNames": [
+        "Албанија"
       ]
     },
     {
@@ -84,6 +93,9 @@
       ],
       "aliases": [
         "Alžir",
+        "Алжир"
+      ],
+      "registryNames": [
         "Алжир"
       ]
     },
@@ -106,6 +118,9 @@
       "aliases": [
         "Angola",
         "Ангола"
+      ],
+      "registryNames": [
+        "Ангола"
       ]
     },
     {
@@ -126,6 +141,9 @@
       ],
       "aliases": [
         "Andora",
+        "Андора"
+      ],
+      "registryNames": [
         "Андора"
       ]
     },
@@ -148,6 +166,9 @@
       "aliases": [
         "Antigva i Barbuda",
         "Антигва и Барбуда"
+      ],
+      "registryNames": [
+        "Антигва и Барбуда"
       ]
     },
     {
@@ -169,6 +190,9 @@
       "aliases": [
         "Argentina",
         "Аргентина"
+      ],
+      "registryNames": [
+        "Аргентина"
       ]
     },
     {
@@ -181,7 +205,7 @@
           "embassy": "Ambasada Republike Srbije (Australija)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": true
@@ -191,7 +215,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Sidnej)",
           "embassyCyr": "Генерални конзулат Републике Србије (Сиднеј)",
           "email": "srb.cons.sydney@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://www.sydney.mfa.gov.rs",
           "address": "12, Trelawney Street, Woollahra, N.S.W.2025 P.O.Box 190 Edgecliff, N.S.W.2027 СИДНЕЈ АУСТРАЛИЈА",
           "isResident": true
@@ -199,6 +223,9 @@
       ],
       "aliases": [
         "Australija",
+        "Аустралија"
+      ],
+      "registryNames": [
         "Аустралија"
       ]
     },
@@ -212,7 +239,7 @@
           "embassy": "Ambasada Republike Srbije (Austrija)",
           "embassyCyr": "Амбасада Републике Србије (Аустрија)",
           "email": "izbori.bec@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://vienna.mfa.gov.rs",
           "address": "Ölzeltgasse 31030 БЕЧАУСТРИЈА",
           "isResident": true
@@ -230,6 +257,9 @@
       ],
       "aliases": [
         "Austrija",
+        "Аустрија"
+      ],
+      "registryNames": [
         "Аустрија"
       ]
     },
@@ -252,6 +282,9 @@
       "aliases": [
         "Bangladeš",
         "Бангладеш"
+      ],
+      "registryNames": [
+        "Бангладеш"
       ]
     },
     {
@@ -272,6 +305,9 @@
       ],
       "aliases": [
         "Barbados",
+        "Барбадос"
+      ],
+      "registryNames": [
         "Барбадос"
       ]
     },
@@ -294,6 +330,9 @@
       "aliases": [
         "Bahami",
         "Бахами"
+      ],
+      "registryNames": [
+        "Бахами"
       ]
     },
     {
@@ -315,6 +354,9 @@
       "aliases": [
         "Bahrein",
         "Бахреин"
+      ],
+      "registryNames": [
+        "Бахреин"
       ]
     },
     {
@@ -327,7 +369,7 @@
           "embassy": "Ambasada Republike Srbije (Belgija)",
           "embassyCyr": "Амбасада Републике Србије (Белгија)",
           "email": "izbori.brisel@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://brussels.mfa.gov.rs",
           "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
           "isResident": true
@@ -335,6 +377,9 @@
       ],
       "aliases": [
         "Belgija",
+        "Белгија"
+      ],
+      "registryNames": [
         "Белгија"
       ]
     },
@@ -357,6 +402,9 @@
       "aliases": [
         "Belize",
         "Белизе"
+      ],
+      "registryNames": [
+        "Белизе"
       ]
     },
     {
@@ -369,7 +417,7 @@
           "embassy": "Ambasada Republike Srbije (Belorusija)",
           "embassyCyr": "Амбасада Републике Србије (Белорусија)",
           "email": "embassy.minsk@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://minsk.mfa.gov.rs",
           "address": "Rumjanceva 4220034 МИНСКРЕПУБЛИКА БЕЛОРУСИЈА",
           "isResident": true
@@ -377,6 +425,9 @@
       ],
       "aliases": [
         "Belorusija",
+        "Белорусија"
+      ],
+      "registryNames": [
         "Белорусија"
       ]
     },
@@ -399,6 +450,9 @@
       "aliases": [
         "Benin",
         "Бенин"
+      ],
+      "registryNames": [
+        "Бенин"
       ]
     },
     {
@@ -419,6 +473,9 @@
       ],
       "aliases": [
         "Bolivija",
+        "Боливија"
+      ],
+      "registryNames": [
         "Боливија"
       ]
     },
@@ -481,6 +538,9 @@
       "aliases": [
         "Bosna i Hercegovina",
         "Босна и Херцеговина"
+      ],
+      "registryNames": [
+        "Босна и Херцеговина"
       ]
     },
     {
@@ -493,7 +553,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Bocvana)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Боцвана)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -501,6 +561,9 @@
       ],
       "aliases": [
         "Bocvana",
+        "Боцвана"
+      ],
+      "registryNames": [
         "Боцвана"
       ]
     },
@@ -523,6 +586,9 @@
       "aliases": [
         "Brazil",
         "Бразил"
+      ],
+      "registryNames": [
+        "Бразил"
       ]
     },
     {
@@ -543,6 +609,9 @@
       ],
       "aliases": [
         "Brunej Darusalam",
+        "Брунеј Дарусалам"
+      ],
+      "registryNames": [
         "Брунеј Дарусалам"
       ]
     },
@@ -565,6 +634,9 @@
       "aliases": [
         "Bugarska",
         "Бугарска"
+      ],
+      "registryNames": [
+        "Бугарска"
       ]
     },
     {
@@ -585,6 +657,9 @@
       ],
       "aliases": [
         "Burkina Faso",
+        "Буркина Фасо"
+      ],
+      "registryNames": [
         "Буркина Фасо"
       ]
     },
@@ -607,6 +682,9 @@
       "aliases": [
         "Burundi",
         "Бурунди"
+      ],
+      "registryNames": [
+        "Бурунди"
       ]
     },
     {
@@ -628,6 +706,9 @@
       "aliases": [
         "Butan",
         "Бутан"
+      ],
+      "registryNames": [
+        "Бутан"
       ]
     },
     {
@@ -640,7 +721,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Vanuatu)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Вануату)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -648,6 +729,9 @@
       ],
       "aliases": [
         "Vanuatu",
+        "Вануату"
+      ],
+      "registryNames": [
         "Вануату"
       ]
     },
@@ -671,6 +755,10 @@
         "Vatikan",
         "Vatikan (Sveta Stolica)",
         "Ватикан (Света Столица)"
+      ],
+      "registryNames": [
+        "Ватикан (Света Столица)",
+        "Света Столица"
       ]
     },
     {
@@ -691,6 +779,9 @@
       ],
       "aliases": [
         "Venecuela",
+        "Венецуела"
+      ],
+      "registryNames": [
         "Венецуела"
       ]
     },
@@ -713,6 +804,9 @@
       "aliases": [
         "Vijetnam",
         "Вијетнам"
+      ],
+      "registryNames": [
+        "Вијетнам"
       ]
     },
     {
@@ -733,6 +827,9 @@
       ],
       "aliases": [
         "Gabon",
+        "Габон"
+      ],
+      "registryNames": [
         "Габон"
       ]
     },
@@ -755,6 +852,9 @@
       "aliases": [
         "Gambija",
         "Гамбија"
+      ],
+      "registryNames": [
+        "Гамбија"
       ]
     },
     {
@@ -775,6 +875,9 @@
       ],
       "aliases": [
         "Gana",
+        "Гана"
+      ],
+      "registryNames": [
         "Гана"
       ]
     },
@@ -797,6 +900,9 @@
       "aliases": [
         "Gvajana",
         "Гвајана"
+      ],
+      "registryNames": [
+        "Гвајана"
       ]
     },
     {
@@ -818,6 +924,9 @@
       "aliases": [
         "Gvatemala",
         "Гватемала"
+      ],
+      "registryNames": [
+        "Гватемала"
       ]
     },
     {
@@ -830,7 +939,7 @@
           "embassy": "Ambasada Republike Srbije (Alžir) (pokriva Gvineja)",
           "embassyCyr": "Амбасада Републике Србије (Алжир) (покрива Гвинеја)",
           "email": "consulat@ambserbie-alger.com",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://alger.mfa.gov.rs",
           "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
           "isResident": false
@@ -839,6 +948,10 @@
       "aliases": [
         "Gvineja",
         "Гвинеја"
+      ],
+      "registryNames": [
+        "Гвинеја",
+        "Гвинеја, Република"
       ]
     },
     {
@@ -859,6 +972,9 @@
       ],
       "aliases": [
         "Gvineja Bisao",
+        "Гвинеја Бисао"
+      ],
+      "registryNames": [
         "Гвинеја Бисао"
       ]
     },
@@ -881,6 +997,9 @@
       "aliases": [
         "Grenada",
         "Гренада"
+      ],
+      "registryNames": [
+        "Гренада"
       ]
     },
     {
@@ -901,6 +1020,9 @@
       ],
       "aliases": [
         "Gruzija",
+        "Грузија"
+      ],
+      "registryNames": [
         "Грузија"
       ]
     },
@@ -933,6 +1055,9 @@
       "aliases": [
         "Grčka",
         "Грчка"
+      ],
+      "registryNames": [
+        "Грчка"
       ]
     },
     {
@@ -945,7 +1070,7 @@
           "embassy": "Ambasada Republike Srbije (Danska)",
           "embassyCyr": "Амбасада Републике Србије (Данска)",
           "email": "srb.emb.denmark@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://copenhagen.mfa.gov.rs",
           "address": "Svanevænget 362100 КОПЕНХАГЕНДАНСКА",
           "isResident": true
@@ -953,6 +1078,9 @@
       ],
       "aliases": [
         "Danska",
+        "Данска"
+      ],
+      "registryNames": [
         "Данска"
       ]
     },
@@ -975,6 +1103,10 @@
       "aliases": [
         "Demokratska Republika Kongo",
         "Демократска Република Конго"
+      ],
+      "registryNames": [
+        "Демократска Република Конго",
+        "Конго, Демократска Република"
       ]
     },
     {
@@ -995,6 +1127,9 @@
       ],
       "aliases": [
         "Dominika",
+        "Доминика"
+      ],
+      "registryNames": [
         "Доминика"
       ]
     },
@@ -1017,6 +1152,9 @@
       "aliases": [
         "Dominikanska Republika",
         "Доминиканска Република"
+      ],
+      "registryNames": [
+        "Доминиканска Република"
       ]
     },
     {
@@ -1037,6 +1175,9 @@
       ],
       "aliases": [
         "Egipat",
+        "Египат"
+      ],
+      "registryNames": [
         "Египат"
       ]
     },
@@ -1059,6 +1200,9 @@
       "aliases": [
         "Ekvador",
         "Еквадор"
+      ],
+      "registryNames": [
+        "Еквадор"
       ]
     },
     {
@@ -1079,6 +1223,9 @@
       ],
       "aliases": [
         "Ekvatorijalna Gvineja",
+        "Екваторијална Гвинеја"
+      ],
+      "registryNames": [
         "Екваторијална Гвинеја"
       ]
     },
@@ -1101,6 +1248,9 @@
       "aliases": [
         "El Salvador",
         "Ел Салвадор"
+      ],
+      "registryNames": [
+        "Ел Салвадор"
       ]
     },
     {
@@ -1122,6 +1272,9 @@
       "aliases": [
         "Eritreja",
         "Еритреја"
+      ],
+      "registryNames": [
+        "Еритреја"
       ]
     },
     {
@@ -1134,7 +1287,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Esvatini)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Есватини)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -1142,6 +1295,9 @@
       ],
       "aliases": [
         "Esvatini",
+        "Есватини"
+      ],
+      "registryNames": [
         "Есватини"
       ]
     },
@@ -1164,6 +1320,9 @@
       "aliases": [
         "Estonija",
         "Естонија"
+      ],
+      "registryNames": [
+        "Естонија"
       ]
     },
     {
@@ -1184,6 +1343,9 @@
       ],
       "aliases": [
         "Etiopija",
+        "Етиопија"
+      ],
+      "registryNames": [
         "Етиопија"
       ]
     },
@@ -1206,6 +1368,9 @@
       "aliases": [
         "Zambija",
         "Замбија"
+      ],
+      "registryNames": [
+        "Замбија"
       ]
     },
     {
@@ -1227,6 +1392,10 @@
       "aliases": [
         "Zelenortska Ostrva",
         "Зеленортска Острва"
+      ],
+      "registryNames": [
+        "Зеленортска Острва",
+        "Кабо Верде"
       ]
     },
     {
@@ -1247,6 +1416,9 @@
       ],
       "aliases": [
         "Zimbabve",
+        "Зимбабве"
+      ],
+      "registryNames": [
         "Зимбабве"
       ]
     },
@@ -1269,6 +1441,9 @@
       "aliases": [
         "Izrael",
         "Израел"
+      ],
+      "registryNames": [
+        "Израел"
       ]
     },
     {
@@ -1289,6 +1464,9 @@
       ],
       "aliases": [
         "Indija",
+        "Индија"
+      ],
+      "registryNames": [
         "Индија"
       ]
     },
@@ -1311,6 +1489,9 @@
       "aliases": [
         "Indonezija",
         "Индонезија"
+      ],
+      "registryNames": [
+        "Индонезија"
       ]
     },
     {
@@ -1331,6 +1512,9 @@
       ],
       "aliases": [
         "Irak",
+        "Ирак"
+      ],
+      "registryNames": [
         "Ирак"
       ]
     },
@@ -1353,6 +1537,9 @@
       "aliases": [
         "Iran",
         "Иран"
+      ],
+      "registryNames": [
+        "Иран"
       ]
     },
     {
@@ -1374,6 +1561,9 @@
       "aliases": [
         "Irska",
         "Ирска"
+      ],
+      "registryNames": [
+        "Ирска"
       ]
     },
     {
@@ -1386,7 +1576,7 @@
           "embassy": "Ambasada Republike Srbije (Norveška) (pokriva Island)",
           "embassyCyr": "Амбасада Републике Србије (Норвешка) (покрива Исланд)",
           "email": "izbori.oslo2026@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://www.oslo.mfa.gov.rs",
           "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
           "isResident": false
@@ -1394,6 +1584,9 @@
       ],
       "aliases": [
         "Island",
+        "Исланд"
+      ],
+      "registryNames": [
         "Исланд"
       ]
     },
@@ -1415,6 +1608,9 @@
       ],
       "aliases": [
         "Istočni Timor",
+        "Источни Тимор"
+      ],
+      "registryNames": [
         "Источни Тимор"
       ]
     },
@@ -1457,6 +1653,9 @@
       "aliases": [
         "Italija",
         "Италија"
+      ],
+      "registryNames": [
+        "Италија"
       ]
     },
     {
@@ -1478,6 +1677,9 @@
       "aliases": [
         "Jamajka",
         "Јамајка"
+      ],
+      "registryNames": [
+        "Јамајка"
       ]
     },
     {
@@ -1490,7 +1692,7 @@
           "embassy": "Ambasada Republike Srbije (Japan)",
           "embassyCyr": "Амбасада Републике Србије (Јапан)",
           "email": "srb.emb.japan@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://tokyo.mfa.gov.rs",
           "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
           "isResident": true
@@ -1498,6 +1700,9 @@
       ],
       "aliases": [
         "Japan",
+        "Јапан"
+      ],
+      "registryNames": [
         "Јапан"
       ]
     },
@@ -1520,6 +1725,9 @@
       "aliases": [
         "Jemen",
         "Јемен"
+      ],
+      "registryNames": [
+        "Јемен"
       ]
     },
     {
@@ -1540,6 +1748,9 @@
       ],
       "aliases": [
         "Jermenija",
+        "Јерменија"
+      ],
+      "registryNames": [
         "Јерменија"
       ]
     },
@@ -1562,6 +1773,9 @@
       "aliases": [
         "Jordan",
         "Јордан"
+      ],
+      "registryNames": [
+        "Јордан"
       ]
     },
     {
@@ -1574,7 +1788,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": true
@@ -1582,6 +1796,9 @@
       ],
       "aliases": [
         "Južna Afrika",
+        "Јужна Африка"
+      ],
+      "registryNames": [
         "Јужна Африка"
       ]
     },
@@ -1595,7 +1812,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Koreja)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Кореја)",
           "email": "srb.emb.repkorea@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://seoul.mfa.gov.rs",
           "address": "22nd Floor, Booyoung Taepyeong Building,55 Sejong-daero,Jung-guСЕУЛРЕПУБЛИКА КОРЕЈА",
           "isResident": true
@@ -1604,6 +1821,10 @@
       "aliases": [
         "Južna Koreja",
         "Јужна Кореја"
+      ],
+      "registryNames": [
+        "Јужна Кореја",
+        "Кореја, Република"
       ]
     },
     {
@@ -1624,6 +1845,9 @@
       ],
       "aliases": [
         "Južni Sudan",
+        "Јужни Судан"
+      ],
+      "registryNames": [
         "Јужни Судан"
       ]
     },
@@ -1646,6 +1870,9 @@
       "aliases": [
         "Kazahstan",
         "Казахстан"
+      ],
+      "registryNames": [
+        "Казахстан"
       ]
     },
     {
@@ -1666,6 +1893,9 @@
       ],
       "aliases": [
         "Kambodža",
+        "Камбоџа"
+      ],
+      "registryNames": [
         "Камбоџа"
       ]
     },
@@ -1688,6 +1918,9 @@
       "aliases": [
         "Kamerun",
         "Камерун"
+      ],
+      "registryNames": [
+        "Камерун"
       ]
     },
     {
@@ -1700,7 +1933,7 @@
           "embassy": "Ambasada Republike Srbije (Kanada)",
           "embassyCyr": "Амбасада Републике Србије (Канада)",
           "email": "consular.ottawa@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://ottawa.mfa.gov.rs",
           "address": "21, Blackburn AvenueОТАВА Онтарио K1N 8A2КАНАДА",
           "isResident": true
@@ -1718,6 +1951,9 @@
       ],
       "aliases": [
         "Kanada",
+        "Канада"
+      ],
+      "registryNames": [
         "Канада"
       ]
     },
@@ -1740,6 +1976,9 @@
       "aliases": [
         "Katar",
         "Катар"
+      ],
+      "registryNames": [
+        "Катар"
       ]
     },
     {
@@ -1761,6 +2000,9 @@
       "aliases": [
         "Kenija",
         "Кенија"
+      ],
+      "registryNames": [
+        "Кенија"
       ]
     },
     {
@@ -1773,7 +2015,7 @@
           "embassy": "Ambasada Republike Srbije (Kina)",
           "embassyCyr": "Амбасада Републике Србије (Кина)",
           "email": "srb.emb.china@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://beijing.mfa.gov.rs",
           "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
           "isResident": true
@@ -1791,6 +2033,9 @@
       ],
       "aliases": [
         "Kina",
+        "Кина"
+      ],
+      "registryNames": [
         "Кина"
       ]
     },
@@ -1812,6 +2057,9 @@
       ],
       "aliases": [
         "Kipar",
+        "Кипар"
+      ],
+      "registryNames": [
         "Кипар"
       ]
     },
@@ -1835,6 +2083,10 @@
         "Kirgistan",
         "Kirgizija",
         "Киргизија"
+      ],
+      "registryNames": [
+        "Киргизија",
+        "Киргиска Република"
       ]
     },
     {
@@ -1847,7 +2099,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Kiribati)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Кирибати)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -1855,6 +2107,9 @@
       ],
       "aliases": [
         "Kiribati",
+        "Кирибати"
+      ],
+      "registryNames": [
         "Кирибати"
       ]
     },
@@ -1877,6 +2132,9 @@
       "aliases": [
         "Kolumbija",
         "Колумбија"
+      ],
+      "registryNames": [
+        "Колумбија"
       ]
     },
     {
@@ -1897,6 +2155,9 @@
       ],
       "aliases": [
         "Kostarika",
+        "Костарика"
+      ],
+      "registryNames": [
         "Костарика"
       ]
     },
@@ -1919,6 +2180,9 @@
       "aliases": [
         "Kuba",
         "Куба"
+      ],
+      "registryNames": [
+        "Куба"
       ]
     },
     {
@@ -1939,6 +2203,9 @@
       ],
       "aliases": [
         "Kuvajt",
+        "Кувајт"
+      ],
+      "registryNames": [
         "Кувајт"
       ]
     },
@@ -1961,6 +2228,9 @@
       "aliases": [
         "Laos",
         "Лаос"
+      ],
+      "registryNames": [
+        "Лаос"
       ]
     },
     {
@@ -1973,7 +2243,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Lesoto)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Лесото)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -1981,6 +2251,9 @@
       ],
       "aliases": [
         "Lesoto",
+        "Лесото"
+      ],
+      "registryNames": [
         "Лесото"
       ]
     },
@@ -2013,6 +2286,9 @@
       "aliases": [
         "Letonija",
         "Летонија"
+      ],
+      "registryNames": [
+        "Летонија"
       ]
     },
     {
@@ -2033,6 +2309,9 @@
       ],
       "aliases": [
         "Liban",
+        "Либан"
+      ],
+      "registryNames": [
         "Либан"
       ]
     },
@@ -2055,6 +2334,9 @@
       "aliases": [
         "Liberija",
         "Либерија"
+      ],
+      "registryNames": [
+        "Либерија"
       ]
     },
     {
@@ -2076,6 +2358,9 @@
       "aliases": [
         "Libija",
         "Либија"
+      ],
+      "registryNames": [
+        "Либија"
       ]
     },
     {
@@ -2088,7 +2373,7 @@
           "embassy": "Ambasada Republike Srbije (Poljska) (pokriva Litvanija)",
           "embassyCyr": "Амбасада Републике Србије (Пољска) (покрива Литванија)",
           "email": "consular.warsaw@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://warsaw.mfa.gov.rs",
           "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
           "isResident": false
@@ -2096,6 +2381,9 @@
       ],
       "aliases": [
         "Litvanija",
+        "Литванија"
+      ],
+      "registryNames": [
         "Литванија"
       ]
     },
@@ -2109,7 +2397,7 @@
           "embassy": "Ambasada Republike Srbije (Švajcarska) (pokriva Lihtenštajn)",
           "embassyCyr": "Амбасада Републике Србије (Швајцарска) (покрива Лихтенштајн)",
           "email": "konzul@ambasadasrbije.ch",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://berne.mfa.gov.rs",
           "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
           "isResident": false
@@ -2117,6 +2405,9 @@
       ],
       "aliases": [
         "Lihtenštajn",
+        "Лихтенштајн"
+      ],
+      "registryNames": [
         "Лихтенштајн"
       ]
     },
@@ -2130,7 +2421,7 @@
           "embassy": "Ambasada Republike Srbije (Belgija) (pokriva Luksemburg)",
           "embassyCyr": "Амбасада Републике Србије (Белгија) (покрива Луксембург)",
           "email": "izbori.brisel@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://brussels.mfa.gov.rs",
           "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
           "isResident": false
@@ -2138,6 +2429,9 @@
       ],
       "aliases": [
         "Luksemburg",
+        "Луксембург"
+      ],
+      "registryNames": [
         "Луксембург"
       ]
     },
@@ -2151,7 +2445,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Madagaskar)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Мадагаскар)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -2159,6 +2453,9 @@
       ],
       "aliases": [
         "Madagaskar",
+        "Мадагаскар"
+      ],
+      "registryNames": [
         "Мадагаскар"
       ]
     },
@@ -2181,6 +2478,9 @@
       "aliases": [
         "Mađarska",
         "Мађарска"
+      ],
+      "registryNames": [
+        "Мађарска"
       ]
     },
     {
@@ -2193,7 +2493,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Malavi)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Малави)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -2201,6 +2501,9 @@
       ],
       "aliases": [
         "Malavi",
+        "Малави"
+      ],
+      "registryNames": [
         "Малави"
       ]
     },
@@ -2223,6 +2526,9 @@
       "aliases": [
         "Maldivi",
         "Малдиви"
+      ],
+      "registryNames": [
+        "Малдиви"
       ]
     },
     {
@@ -2243,6 +2549,9 @@
       ],
       "aliases": [
         "Malezija",
+        "Малезија"
+      ],
+      "registryNames": [
         "Малезија"
       ]
     },
@@ -2265,6 +2574,9 @@
       "aliases": [
         "Mali",
         "Мали"
+      ],
+      "registryNames": [
+        "Мали"
       ]
     },
     {
@@ -2285,6 +2597,9 @@
       ],
       "aliases": [
         "Malta",
+        "Малта"
+      ],
+      "registryNames": [
         "Малта"
       ]
     },
@@ -2307,6 +2622,9 @@
       "aliases": [
         "Maroko",
         "Мароко"
+      ],
+      "registryNames": [
+        "Мароко"
       ]
     },
     {
@@ -2319,7 +2637,7 @@
           "embassy": "Ambasada Republike Srbije (Japan) (pokriva Maršalska Ostrva)",
           "embassyCyr": "Амбасада Републике Србије (Јапан) (покрива Маршалска Острва)",
           "email": "srb.emb.japan@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://tokyo.mfa.gov.rs",
           "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
           "isResident": false
@@ -2327,6 +2645,10 @@
       ],
       "aliases": [
         "Maršalska Ostrva",
+        "Маршалска Острва"
+      ],
+      "registryNames": [
+        "Маршалова острва",
         "Маршалска Острва"
       ]
     },
@@ -2349,6 +2671,9 @@
       "aliases": [
         "Mauritanija",
         "Мауританија"
+      ],
+      "registryNames": [
+        "Мауританија"
       ]
     },
     {
@@ -2361,7 +2686,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Mauricijus)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Маурицијус)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -2369,6 +2694,9 @@
       ],
       "aliases": [
         "Mauricijus",
+        "Маурицијус"
+      ],
+      "registryNames": [
         "Маурицијус"
       ]
     },
@@ -2382,7 +2710,7 @@
           "embassy": "Ambasada Republike Srbije (Meksiko)",
           "embassyCyr": "Амбасада Републике Србије (Мексико)",
           "email": "embajadaserbiaenmexico@gmail.com",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://mexico.mfa.gov.rs",
           "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
           "isResident": true
@@ -2390,6 +2718,9 @@
       ],
       "aliases": [
         "Meksiko",
+        "Мексико"
+      ],
+      "registryNames": [
         "Мексико"
       ]
     },
@@ -2403,7 +2734,7 @@
           "embassy": "Ambasada Republike Srbije (Japan) (pokriva Mikronezija)",
           "embassyCyr": "Амбасада Републике Србије (Јапан) (покрива Микронезија)",
           "email": "srb.emb.japan@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://tokyo.mfa.gov.rs",
           "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
           "isResident": false
@@ -2411,6 +2742,9 @@
       ],
       "aliases": [
         "Mikronezija",
+        "Микронезија"
+      ],
+      "registryNames": [
         "Микронезија"
       ]
     },
@@ -2433,6 +2767,9 @@
       "aliases": [
         "Mjanmar",
         "Мјанмар"
+      ],
+      "registryNames": [
+        "Мјанмар"
       ]
     },
     {
@@ -2445,7 +2782,7 @@
           "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Mozambik)",
           "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Мозамбик)",
           "email": "info@srbembassy.org.za",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://pretoria.mfa.gov.rs",
           "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
           "isResident": false
@@ -2453,6 +2790,9 @@
       ],
       "aliases": [
         "Mozambik",
+        "Мозамбик"
+      ],
+      "registryNames": [
         "Мозамбик"
       ]
     },
@@ -2474,6 +2814,9 @@
       ],
       "aliases": [
         "Moldavija",
+        "Молдавија"
+      ],
+      "registryNames": [
         "Молдавија"
       ]
     },
@@ -2506,6 +2849,9 @@
       "aliases": [
         "Monako",
         "Монако"
+      ],
+      "registryNames": [
+        "Монако"
       ]
     },
     {
@@ -2518,7 +2864,7 @@
           "embassy": "Ambasada Republike Srbije (Kina) (pokriva Mongolija)",
           "embassyCyr": "Амбасада Републике Србије (Кина) (покрива Монголија)",
           "email": "srb.emb.china@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://beijing.mfa.gov.rs",
           "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
           "isResident": false
@@ -2526,6 +2872,9 @@
       ],
       "aliases": [
         "Mongolija",
+        "Монголија"
+      ],
+      "registryNames": [
         "Монголија"
       ]
     },
@@ -2548,6 +2897,9 @@
       "aliases": [
         "Namibija",
         "Намибија"
+      ],
+      "registryNames": [
+        "Намибија"
       ]
     },
     {
@@ -2560,7 +2912,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Nauru)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Науру)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -2568,6 +2920,9 @@
       ],
       "aliases": [
         "Nauru",
+        "Науру"
+      ],
+      "registryNames": [
         "Науру"
       ]
     },
@@ -2591,7 +2946,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Štutgart)",
           "embassyCyr": "Генерални конзулат Републике Србије (Штутгарт)",
           "email": "izbori.stuttgart@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://stuttgart.mfa.gov.rs",
           "address": "Taubenstrasse 4D-70199 ШТУТГАРТНЕМАЧКА",
           "isResident": true
@@ -2631,7 +2986,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Diseldorf)",
           "embassyCyr": "Генерални конзулат Републике Србије (Диселдорф)",
           "email": "izbori.diseldorf@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://duesseldorf.mfa.gov.rs",
           "address": "Klosterstrasse 79D-40211 ДИСЕЛДОРФНЕМАЧКА",
           "isResident": true
@@ -2639,6 +2994,9 @@
       ],
       "aliases": [
         "Nemačka",
+        "Немачка"
+      ],
+      "registryNames": [
         "Немачка"
       ]
     },
@@ -2661,6 +3019,9 @@
       "aliases": [
         "Nepal",
         "Непал"
+      ],
+      "registryNames": [
+        "Непал"
       ]
     },
     {
@@ -2681,6 +3042,9 @@
       ],
       "aliases": [
         "Niger",
+        "Нигер"
+      ],
+      "registryNames": [
         "Нигер"
       ]
     },
@@ -2703,6 +3067,9 @@
       "aliases": [
         "Nigerija",
         "Нигерија"
+      ],
+      "registryNames": [
+        "Нигерија"
       ]
     },
     {
@@ -2724,6 +3091,9 @@
       "aliases": [
         "Nikaragva",
         "Никарагва"
+      ],
+      "registryNames": [
+        "Никарагва"
       ]
     },
     {
@@ -2736,7 +3106,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Novi Zeland)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Нови Зеланд)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -2744,6 +3114,9 @@
       ],
       "aliases": [
         "Novi Zeland",
+        "Нови Зеланд"
+      ],
+      "registryNames": [
         "Нови Зеланд"
       ]
     },
@@ -2766,6 +3139,9 @@
       "aliases": [
         "Norveška",
         "Норвешка"
+      ],
+      "registryNames": [
+        "Норвешка"
       ]
     },
     {
@@ -2786,6 +3162,10 @@
       ],
       "aliases": [
         "Obala Slonovače",
+        "Обала Слоноваче"
+      ],
+      "registryNames": [
+        "Кот д' Ивоар",
         "Обала Слоноваче"
       ]
     },
@@ -2808,6 +3188,9 @@
       "aliases": [
         "Oman",
         "Оман"
+      ],
+      "registryNames": [
+        "Оман"
       ]
     },
     {
@@ -2829,6 +3212,9 @@
       "aliases": [
         "Pakistan",
         "Пакистан"
+      ],
+      "registryNames": [
+        "Пакистан"
       ]
     },
     {
@@ -2841,7 +3227,7 @@
           "embassy": "Ambasada Republike Srbije (Japan) (pokriva Palau)",
           "embassyCyr": "Амбасада Републике Србије (Јапан) (покрива Палау)",
           "email": "srb.emb.japan@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://tokyo.mfa.gov.rs",
           "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
           "isResident": false
@@ -2849,6 +3235,9 @@
       ],
       "aliases": [
         "Palau",
+        "Палау"
+      ],
+      "registryNames": [
         "Палау"
       ]
     },
@@ -2871,6 +3260,9 @@
       "aliases": [
         "Palestina",
         "Палестина"
+      ],
+      "registryNames": [
+        "Палестина"
       ]
     },
     {
@@ -2892,6 +3284,9 @@
       "aliases": [
         "Panama",
         "Панама"
+      ],
+      "registryNames": [
+        "Панама"
       ]
     },
     {
@@ -2904,7 +3299,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Papua Nova Gvineja)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Папуа Нова Гвинеја)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -2912,6 +3307,9 @@
       ],
       "aliases": [
         "Papua Nova Gvineja",
+        "Папуа Нова Гвинеја"
+      ],
+      "registryNames": [
         "Папуа Нова Гвинеја"
       ]
     },
@@ -2934,6 +3332,9 @@
       "aliases": [
         "Paragvaj",
         "Парагвај"
+      ],
+      "registryNames": [
+        "Парагвај"
       ]
     },
     {
@@ -2955,6 +3356,9 @@
       "aliases": [
         "Peru",
         "Перу"
+      ],
+      "registryNames": [
+        "Перу"
       ]
     },
     {
@@ -2967,7 +3371,7 @@
           "embassy": "Ambasada Republike Srbije (Poljska)",
           "embassyCyr": "Амбасада Републике Србије (Пољска)",
           "email": "consular.warsaw@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://warsaw.mfa.gov.rs",
           "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
           "isResident": true
@@ -2975,6 +3379,9 @@
       ],
       "aliases": [
         "Poljska",
+        "Пољска"
+      ],
+      "registryNames": [
         "Пољска"
       ]
     },
@@ -2997,6 +3404,9 @@
       "aliases": [
         "Portugalija",
         "Португалија"
+      ],
+      "registryNames": [
+        "Португалија"
       ]
     },
     {
@@ -3018,6 +3428,10 @@
       "aliases": [
         "Republika Kongo",
         "Република Конго"
+      ],
+      "registryNames": [
+        "Конго, Република",
+        "Република Конго"
       ]
     },
     {
@@ -3038,6 +3452,9 @@
       ],
       "aliases": [
         "Ruanda",
+        "Руанда"
+      ],
+      "registryNames": [
         "Руанда"
       ]
     },
@@ -3061,7 +3478,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Temišvar)",
           "embassyCyr": "Генерални конзулат Републике Србије (Темишвар)",
           "email": "srb.cons.timisoara@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://timisoara.mfa.gov.rs",
           "address": "Str.Remus No 4ТЕМИШВАРРУМУНИЈА",
           "isResident": true
@@ -3069,6 +3486,9 @@
       ],
       "aliases": [
         "Rumunija",
+        "Румунија"
+      ],
+      "registryNames": [
         "Румунија"
       ]
     },
@@ -3091,6 +3511,10 @@
       "aliases": [
         "Rusija",
         "Русија"
+      ],
+      "registryNames": [
+        "Русија",
+        "Руска Федерација"
       ]
     },
     {
@@ -3103,7 +3527,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Samoa)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Самоа)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -3111,6 +3535,9 @@
       ],
       "aliases": [
         "Samoa",
+        "Самоа"
+      ],
+      "registryNames": [
         "Самоа"
       ]
     },
@@ -3124,7 +3551,7 @@
           "embassy": "Ambasada Republike Srbije (Italija) (pokriva San Marino)",
           "embassyCyr": "Амбасада Републике Србије (Италија) (покрива Сан Марино)",
           "email": "izbori.rim@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://roma.mfa.gov.rs",
           "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
           "isResident": false
@@ -3132,6 +3559,9 @@
       ],
       "aliases": [
         "San Marino",
+        "Сан Марино"
+      ],
+      "registryNames": [
         "Сан Марино"
       ]
     },
@@ -3154,6 +3584,9 @@
       "aliases": [
         "Sao Tome i Prinsipe",
         "Сао Томе и Принсипе"
+      ],
+      "registryNames": [
+        "Сао Томе и Принсипе"
       ]
     },
     {
@@ -3174,6 +3607,9 @@
       ],
       "aliases": [
         "Saudijska Arabija",
+        "Саудијска Арабија"
+      ],
+      "registryNames": [
         "Саудијска Арабија"
       ]
     },
@@ -3196,6 +3632,9 @@
       "aliases": [
         "Sveta Lucija",
         "Света Луција"
+      ],
+      "registryNames": [
+        "Света Луција"
       ]
     },
     {
@@ -3217,6 +3656,9 @@
       "aliases": [
         "Sveti Vinsent i Grenadini",
         "Свети Винсент и Гренадини"
+      ],
+      "registryNames": [
+        "Свети Винсент и Гренадини"
       ]
     },
     {
@@ -3229,7 +3671,7 @@
           "embassy": "Ambasada Republike Srbije (Kina) (pokriva Severna Koreja)",
           "embassyCyr": "Амбасада Републике Србије (Кина) (покрива Северна Кореја)",
           "email": "srb.emb.china@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://beijing.mfa.gov.rs",
           "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
           "isResident": false
@@ -3237,6 +3679,10 @@
       ],
       "aliases": [
         "Severna Koreja",
+        "Северна Кореја"
+      ],
+      "registryNames": [
+        "Кореја, ДНР",
         "Северна Кореја"
       ]
     },
@@ -3259,6 +3705,9 @@
       "aliases": [
         "Severna Makedonija",
         "Северна Македонија"
+      ],
+      "registryNames": [
+        "Северна Македонија"
       ]
     },
     {
@@ -3279,6 +3728,9 @@
       ],
       "aliases": [
         "Sejšeli",
+        "Сејшели"
+      ],
+      "registryNames": [
         "Сејшели"
       ]
     },
@@ -3301,6 +3753,9 @@
       "aliases": [
         "Senegal",
         "Сенегал"
+      ],
+      "registryNames": [
+        "Сенегал"
       ]
     },
     {
@@ -3321,6 +3776,9 @@
       ],
       "aliases": [
         "Sent Kits i Nevis",
+        "Сент Китс и Невис"
+      ],
+      "registryNames": [
         "Сент Китс и Невис"
       ]
     },
@@ -3343,6 +3801,9 @@
       "aliases": [
         "Sijera Leone",
         "Сијера Леоне"
+      ],
+      "registryNames": [
+        "Сијера Леоне"
       ]
     },
     {
@@ -3364,6 +3825,9 @@
       "aliases": [
         "Singapur",
         "Сингапур"
+      ],
+      "registryNames": [
+        "Сингапур"
       ]
     },
     {
@@ -3384,6 +3848,9 @@
       ],
       "aliases": [
         "Sirija",
+        "Сирија"
+      ],
+      "registryNames": [
         "Сирија"
       ]
     },
@@ -3407,7 +3874,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Čikago)",
           "embassyCyr": "Генерални конзулат Републике Србије (Чикаго)",
           "email": "izbori.cikago2026@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://chicago.mfa.gov.rs",
           "address": "201 East Ohio Street, Suite 200ЧИКАГО, IL 60611, САД",
           "isResident": true
@@ -3417,7 +3884,7 @@
           "embassy": "Generalni konzulat Republike Srbije (Njujork)",
           "embassyCyr": "Генерални конзулат Републике Србије (Њујорк)",
           "email": "izbori.njujork@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://newyork.mfa.gov.rs",
           "address": "62 West 45th Street, 7 Floor,ЊУЈОРК, NY 10036, САД",
           "isResident": true
@@ -3436,6 +3903,9 @@
         "САД",
         "Сједињене Америчке Државе",
         "УСА"
+      ],
+      "registryNames": [
+        "Сједињене Америчке Државе"
       ]
     },
     {
@@ -3456,6 +3926,9 @@
       ],
       "aliases": [
         "Slovačka",
+        "Словачка"
+      ],
+      "registryNames": [
         "Словачка"
       ]
     },
@@ -3478,6 +3951,9 @@
       "aliases": [
         "Slovenija",
         "Словенија"
+      ],
+      "registryNames": [
+        "Словенија"
       ]
     },
     {
@@ -3490,7 +3966,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Solomonova Ostrva)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Соломонова Острва)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -3498,6 +3974,9 @@
       ],
       "aliases": [
         "Solomonova Ostrva",
+        "Соломонова Острва"
+      ],
+      "registryNames": [
         "Соломонова Острва"
       ]
     },
@@ -3520,6 +3999,9 @@
       "aliases": [
         "Somalija",
         "Сомалија"
+      ],
+      "registryNames": [
+        "Сомалија"
       ]
     },
     {
@@ -3540,6 +4022,10 @@
       ],
       "aliases": [
         "Suvereni Malteški Red",
+        "Суверени Малтешки Ред"
+      ],
+      "registryNames": [
+        "Суверени Војни Малтешки Ред",
         "Суверени Малтешки Ред"
       ]
     },
@@ -3562,6 +4048,9 @@
       "aliases": [
         "Sudan",
         "Судан"
+      ],
+      "registryNames": [
+        "Судан"
       ]
     },
     {
@@ -3582,6 +4071,9 @@
       ],
       "aliases": [
         "Surinam",
+        "Суринам"
+      ],
+      "registryNames": [
         "Суринам"
       ]
     },
@@ -3604,6 +4096,9 @@
       "aliases": [
         "Tajland",
         "Тајланд"
+      ],
+      "registryNames": [
+        "Тајланд"
       ]
     },
     {
@@ -3624,6 +4119,9 @@
       ],
       "aliases": [
         "Tanzanija",
+        "Танзанија"
+      ],
+      "registryNames": [
         "Танзанија"
       ]
     },
@@ -3646,6 +4144,9 @@
       "aliases": [
         "Tadžikistan",
         "Таџикистан"
+      ],
+      "registryNames": [
+        "Таџикистан"
       ]
     },
     {
@@ -3667,6 +4168,9 @@
       "aliases": [
         "Togo",
         "Того"
+      ],
+      "registryNames": [
+        "Того"
       ]
     },
     {
@@ -3679,7 +4183,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Tonga)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Тонга)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -3687,6 +4191,9 @@
       ],
       "aliases": [
         "Tonga",
+        "Тонга"
+      ],
+      "registryNames": [
         "Тонга"
       ]
     },
@@ -3709,6 +4216,9 @@
       "aliases": [
         "Trinidad i Tobago",
         "Тринидад и Тобаго"
+      ],
+      "registryNames": [
+        "Тринидад и Тобаго"
       ]
     },
     {
@@ -3721,7 +4231,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Tuvalu)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Тувалу)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -3729,6 +4239,9 @@
       ],
       "aliases": [
         "Tuvalu",
+        "Тувалу"
+      ],
+      "registryNames": [
         "Тувалу"
       ]
     },
@@ -3751,6 +4264,9 @@
       "aliases": [
         "Tunis",
         "Тунис"
+      ],
+      "registryNames": [
+        "Тунис"
       ]
     },
     {
@@ -3771,6 +4287,9 @@
       ],
       "aliases": [
         "Turkmenistan",
+        "Туркменистан"
+      ],
+      "registryNames": [
         "Туркменистан"
       ]
     },
@@ -3803,6 +4322,9 @@
       "aliases": [
         "Turska",
         "Турска"
+      ],
+      "registryNames": [
+        "Турска"
       ]
     },
     {
@@ -3823,6 +4345,9 @@
       ],
       "aliases": [
         "Uganda",
+        "Уганда"
+      ],
+      "registryNames": [
         "Уганда"
       ]
     },
@@ -3845,6 +4370,10 @@
       "aliases": [
         "Uzbekistan",
         "Узбекистан"
+      ],
+      "registryNames": [
+        "Узбекистан",
+        "Узбекистан, Република"
       ]
     },
     {
@@ -3857,7 +4386,7 @@
           "embassy": "Ambasada Republike Srbije (Ujedinjeni Arapski Emirati)",
           "embassyCyr": "Амбасада Републике Србије (Уједињени Арапски Емирати)",
           "email": "izbori.abudhabi@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://abudhabi.mfa.gov.rs",
           "address": "Mushref area, sector W31Al Rafee streetVilla number 06(opposite of Novotel hotel)АБУ ДАБИУЈЕДИЊЕНИ АРАПСКИ ЕМИРАТИ",
           "isResident": true
@@ -3865,6 +4394,9 @@
       ],
       "aliases": [
         "Ujedinjeni Arapski Emirati",
+        "Уједињени Арапски Емирати"
+      ],
+      "registryNames": [
         "Уједињени Арапски Емирати"
       ]
     },
@@ -3887,6 +4419,9 @@
       "aliases": [
         "Ujedinjeno Kraljevstvo",
         "Уједињено Краљевство"
+      ],
+      "registryNames": [
+        "Уједињено Краљевство"
       ]
     },
     {
@@ -3907,6 +4442,9 @@
       ],
       "aliases": [
         "Ukrajina",
+        "Украјина"
+      ],
+      "registryNames": [
         "Украјина"
       ]
     },
@@ -3929,6 +4467,9 @@
       "aliases": [
         "Unija Komora",
         "Унија Комора"
+      ],
+      "registryNames": [
+        "Унија Комора"
       ]
     },
     {
@@ -3949,6 +4490,9 @@
       ],
       "aliases": [
         "Urugvaj",
+        "Уругвај"
+      ],
+      "registryNames": [
         "Уругвај"
       ]
     },
@@ -3971,6 +4515,9 @@
       "aliases": [
         "Filipini",
         "Филипини"
+      ],
+      "registryNames": [
+        "Филипини"
       ]
     },
     {
@@ -3992,6 +4539,9 @@
       "aliases": [
         "Finska",
         "Финска"
+      ],
+      "registryNames": [
+        "Финска"
       ]
     },
     {
@@ -4004,7 +4554,7 @@
           "embassy": "Ambasada Republike Srbije (Australija) (pokriva Fidži)",
           "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Фиџи)",
           "email": "consular.canberra@mfa.rs",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://canberra.mfa.gov.rs",
           "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
           "isResident": false
@@ -4012,6 +4562,9 @@
       ],
       "aliases": [
         "Fidži",
+        "Фиџи"
+      ],
+      "registryNames": [
         "Фиџи"
       ]
     },
@@ -4054,6 +4607,9 @@
       "aliases": [
         "Francuska",
         "Француска"
+      ],
+      "registryNames": [
+        "Француска"
       ]
     },
     {
@@ -4074,6 +4630,9 @@
       ],
       "aliases": [
         "Haiti",
+        "Хаити"
+      ],
+      "registryNames": [
         "Хаити"
       ]
     },
@@ -4096,6 +4655,9 @@
       "aliases": [
         "Holandija",
         "Холандија"
+      ],
+      "registryNames": [
+        "Холандија"
       ]
     },
     {
@@ -4116,6 +4678,9 @@
       ],
       "aliases": [
         "Honduras",
+        "Хондурас"
+      ],
+      "registryNames": [
         "Хондурас"
       ]
     },
@@ -4158,6 +4723,9 @@
       "aliases": [
         "Hrvatska",
         "Хрватска"
+      ],
+      "registryNames": [
+        "Хрватска"
       ]
     },
     {
@@ -4178,6 +4746,9 @@
       ],
       "aliases": [
         "Centralnoafrička Republika",
+        "Централноафричка Република"
+      ],
+      "registryNames": [
         "Централноафричка Република"
       ]
     },
@@ -4210,6 +4781,9 @@
       "aliases": [
         "Crna Gora",
         "Црна Гора"
+      ],
+      "registryNames": [
+        "Црна Гора"
       ]
     },
     {
@@ -4230,6 +4804,9 @@
       ],
       "aliases": [
         "Čad",
+        "Чад"
+      ],
+      "registryNames": [
         "Чад"
       ]
     },
@@ -4252,6 +4829,9 @@
       "aliases": [
         "Češka",
         "Чешка"
+      ],
+      "registryNames": [
+        "Чешка"
       ]
     },
     {
@@ -4272,6 +4852,9 @@
       ],
       "aliases": [
         "Čile",
+        "Чиле"
+      ],
+      "registryNames": [
         "Чиле"
       ]
     },
@@ -4294,6 +4877,9 @@
       "aliases": [
         "Džibuti",
         "Џибути"
+      ],
+      "registryNames": [
+        "Џибути"
       ]
     },
     {
@@ -4306,7 +4892,7 @@
           "embassy": "Ambasada Republike Srbije (Švajcarska)",
           "embassyCyr": "Амбасада Републике Србије (Швајцарска)",
           "email": "konzul@ambasadasrbije.ch",
-          "isElectionContactConfirmed": true,
+          "isElectionContactConfirmed": false,
           "website": "https://berne.mfa.gov.rs",
           "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
           "isResident": true
@@ -4324,6 +4910,9 @@
       ],
       "aliases": [
         "Švajcarska",
+        "Швајцарска"
+      ],
+      "registryNames": [
         "Швајцарска"
       ]
     },
@@ -4346,6 +4935,9 @@
       "aliases": [
         "Švedska",
         "Шведска"
+      ],
+      "registryNames": [
+        "Шведска"
       ]
     },
     {
@@ -4367,6 +4959,9 @@
       "aliases": [
         "Španija",
         "Шпанија"
+      ],
+      "registryNames": [
+        "Шпанија"
       ]
     },
     {
@@ -4387,6 +4982,9 @@
       ],
       "aliases": [
         "Šri Lanka",
+        "Шри Ланка"
+      ],
+      "registryNames": [
         "Шри Ланка"
       ]
     }

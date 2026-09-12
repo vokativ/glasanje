@@ -20,6 +20,7 @@ export interface VotingCountry {
   label: string;
   labelCyr: string;
   aliases?: string[];
+  registryNames: string[];
   stations: PollingStation[];
 }
 
@@ -43,6 +44,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Avganistan",
       "Авганистан"
+    ],
+    "registryNames": [
+      "Авганистан"
     ]
   },
   {
@@ -63,6 +67,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Azerbejdžan",
+      "Азербејџан"
+    ],
+    "registryNames": [
       "Азербејџан"
     ]
   },
@@ -85,6 +92,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Albanija",
       "Албанија"
+    ],
+    "registryNames": [
+      "Албанија"
     ]
   },
   {
@@ -105,6 +115,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Alžir",
+      "Алжир"
+    ],
+    "registryNames": [
       "Алжир"
     ]
   },
@@ -127,6 +140,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Angola",
       "Ангола"
+    ],
+    "registryNames": [
+      "Ангола"
     ]
   },
   {
@@ -147,6 +163,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Andora",
+      "Андора"
+    ],
+    "registryNames": [
       "Андора"
     ]
   },
@@ -169,6 +188,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Antigva i Barbuda",
       "Антигва и Барбуда"
+    ],
+    "registryNames": [
+      "Антигва и Барбуда"
     ]
   },
   {
@@ -190,6 +212,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Argentina",
       "Аргентина"
+    ],
+    "registryNames": [
+      "Аргентина"
     ]
   },
   {
@@ -202,7 +227,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": true
@@ -212,7 +237,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Sidnej)",
         "embassyCyr": "Генерални конзулат Републике Србије (Сиднеј)",
         "email": "srb.cons.sydney@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://www.sydney.mfa.gov.rs",
         "address": "12, Trelawney Street, Woollahra, N.S.W.2025 P.O.Box 190 Edgecliff, N.S.W.2027 СИДНЕЈ АУСТРАЛИЈА",
         "isResident": true
@@ -220,6 +245,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Australija",
+      "Аустралија"
+    ],
+    "registryNames": [
       "Аустралија"
     ]
   },
@@ -233,7 +261,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Austrija)",
         "embassyCyr": "Амбасада Републике Србије (Аустрија)",
         "email": "izbori.bec@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://vienna.mfa.gov.rs",
         "address": "Ölzeltgasse 31030 БЕЧАУСТРИЈА",
         "isResident": true
@@ -251,6 +279,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Austrija",
+      "Аустрија"
+    ],
+    "registryNames": [
       "Аустрија"
     ]
   },
@@ -273,6 +304,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Bangladeš",
       "Бангладеш"
+    ],
+    "registryNames": [
+      "Бангладеш"
     ]
   },
   {
@@ -293,6 +327,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Barbados",
+      "Барбадос"
+    ],
+    "registryNames": [
       "Барбадос"
     ]
   },
@@ -315,6 +352,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Bahami",
       "Бахами"
+    ],
+    "registryNames": [
+      "Бахами"
     ]
   },
   {
@@ -336,6 +376,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Bahrein",
       "Бахреин"
+    ],
+    "registryNames": [
+      "Бахреин"
     ]
   },
   {
@@ -348,7 +391,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Belgija)",
         "embassyCyr": "Амбасада Републике Србије (Белгија)",
         "email": "izbori.brisel@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://brussels.mfa.gov.rs",
         "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
         "isResident": true
@@ -356,6 +399,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Belgija",
+      "Белгија"
+    ],
+    "registryNames": [
       "Белгија"
     ]
   },
@@ -378,6 +424,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Belize",
       "Белизе"
+    ],
+    "registryNames": [
+      "Белизе"
     ]
   },
   {
@@ -390,7 +439,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Belorusija)",
         "embassyCyr": "Амбасада Републике Србије (Белорусија)",
         "email": "embassy.minsk@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://minsk.mfa.gov.rs",
         "address": "Rumjanceva 4220034 МИНСКРЕПУБЛИКА БЕЛОРУСИЈА",
         "isResident": true
@@ -398,6 +447,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Belorusija",
+      "Белорусија"
+    ],
+    "registryNames": [
       "Белорусија"
     ]
   },
@@ -420,6 +472,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Benin",
       "Бенин"
+    ],
+    "registryNames": [
+      "Бенин"
     ]
   },
   {
@@ -440,6 +495,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Bolivija",
+      "Боливија"
+    ],
+    "registryNames": [
       "Боливија"
     ]
   },
@@ -502,6 +560,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Bosna i Hercegovina",
       "Босна и Херцеговина"
+    ],
+    "registryNames": [
+      "Босна и Херцеговина"
     ]
   },
   {
@@ -514,7 +575,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Bocvana)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Боцвана)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -522,6 +583,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Bocvana",
+      "Боцвана"
+    ],
+    "registryNames": [
       "Боцвана"
     ]
   },
@@ -544,6 +608,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Brazil",
       "Бразил"
+    ],
+    "registryNames": [
+      "Бразил"
     ]
   },
   {
@@ -564,6 +631,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Brunej Darusalam",
+      "Брунеј Дарусалам"
+    ],
+    "registryNames": [
       "Брунеј Дарусалам"
     ]
   },
@@ -586,6 +656,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Bugarska",
       "Бугарска"
+    ],
+    "registryNames": [
+      "Бугарска"
     ]
   },
   {
@@ -606,6 +679,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Burkina Faso",
+      "Буркина Фасо"
+    ],
+    "registryNames": [
       "Буркина Фасо"
     ]
   },
@@ -628,6 +704,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Burundi",
       "Бурунди"
+    ],
+    "registryNames": [
+      "Бурунди"
     ]
   },
   {
@@ -649,6 +728,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Butan",
       "Бутан"
+    ],
+    "registryNames": [
+      "Бутан"
     ]
   },
   {
@@ -661,7 +743,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Vanuatu)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Вануату)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -669,6 +751,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Vanuatu",
+      "Вануату"
+    ],
+    "registryNames": [
       "Вануату"
     ]
   },
@@ -692,6 +777,10 @@ export const COUNTRIES: VotingCountry[] = [
       "Vatikan",
       "Vatikan (Sveta Stolica)",
       "Ватикан (Света Столица)"
+    ],
+    "registryNames": [
+      "Ватикан (Света Столица)",
+      "Света Столица"
     ]
   },
   {
@@ -712,6 +801,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Venecuela",
+      "Венецуела"
+    ],
+    "registryNames": [
       "Венецуела"
     ]
   },
@@ -734,6 +826,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Vijetnam",
       "Вијетнам"
+    ],
+    "registryNames": [
+      "Вијетнам"
     ]
   },
   {
@@ -754,6 +849,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Gabon",
+      "Габон"
+    ],
+    "registryNames": [
       "Габон"
     ]
   },
@@ -776,6 +874,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Gambija",
       "Гамбија"
+    ],
+    "registryNames": [
+      "Гамбија"
     ]
   },
   {
@@ -796,6 +897,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Gana",
+      "Гана"
+    ],
+    "registryNames": [
       "Гана"
     ]
   },
@@ -818,6 +922,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Gvajana",
       "Гвајана"
+    ],
+    "registryNames": [
+      "Гвајана"
     ]
   },
   {
@@ -839,6 +946,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Gvatemala",
       "Гватемала"
+    ],
+    "registryNames": [
+      "Гватемала"
     ]
   },
   {
@@ -851,7 +961,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Alžir) (pokriva Gvineja)",
         "embassyCyr": "Амбасада Републике Србије (Алжир) (покрива Гвинеја)",
         "email": "consulat@ambserbie-alger.com",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": false
@@ -860,6 +970,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Gvineja",
       "Гвинеја"
+    ],
+    "registryNames": [
+      "Гвинеја",
+      "Гвинеја, Република"
     ]
   },
   {
@@ -880,6 +994,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Gvineja Bisao",
+      "Гвинеја Бисао"
+    ],
+    "registryNames": [
       "Гвинеја Бисао"
     ]
   },
@@ -902,6 +1019,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Grenada",
       "Гренада"
+    ],
+    "registryNames": [
+      "Гренада"
     ]
   },
   {
@@ -922,6 +1042,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Gruzija",
+      "Грузија"
+    ],
+    "registryNames": [
       "Грузија"
     ]
   },
@@ -954,6 +1077,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Grčka",
       "Грчка"
+    ],
+    "registryNames": [
+      "Грчка"
     ]
   },
   {
@@ -966,7 +1092,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Danska)",
         "embassyCyr": "Амбасада Републике Србије (Данска)",
         "email": "srb.emb.denmark@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://copenhagen.mfa.gov.rs",
         "address": "Svanevænget 362100 КОПЕНХАГЕНДАНСКА",
         "isResident": true
@@ -974,6 +1100,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Danska",
+      "Данска"
+    ],
+    "registryNames": [
       "Данска"
     ]
   },
@@ -996,6 +1125,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Demokratska Republika Kongo",
       "Демократска Република Конго"
+    ],
+    "registryNames": [
+      "Демократска Република Конго",
+      "Конго, Демократска Република"
     ]
   },
   {
@@ -1016,6 +1149,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Dominika",
+      "Доминика"
+    ],
+    "registryNames": [
       "Доминика"
     ]
   },
@@ -1038,6 +1174,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Dominikanska Republika",
       "Доминиканска Република"
+    ],
+    "registryNames": [
+      "Доминиканска Република"
     ]
   },
   {
@@ -1058,6 +1197,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Egipat",
+      "Египат"
+    ],
+    "registryNames": [
       "Египат"
     ]
   },
@@ -1080,6 +1222,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Ekvador",
       "Еквадор"
+    ],
+    "registryNames": [
+      "Еквадор"
     ]
   },
   {
@@ -1100,6 +1245,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Ekvatorijalna Gvineja",
+      "Екваторијална Гвинеја"
+    ],
+    "registryNames": [
       "Екваторијална Гвинеја"
     ]
   },
@@ -1122,6 +1270,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "El Salvador",
       "Ел Салвадор"
+    ],
+    "registryNames": [
+      "Ел Салвадор"
     ]
   },
   {
@@ -1143,6 +1294,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Eritreja",
       "Еритреја"
+    ],
+    "registryNames": [
+      "Еритреја"
     ]
   },
   {
@@ -1155,7 +1309,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Esvatini)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Есватини)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -1163,6 +1317,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Esvatini",
+      "Есватини"
+    ],
+    "registryNames": [
       "Есватини"
     ]
   },
@@ -1185,6 +1342,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Estonija",
       "Естонија"
+    ],
+    "registryNames": [
+      "Естонија"
     ]
   },
   {
@@ -1205,6 +1365,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Etiopija",
+      "Етиопија"
+    ],
+    "registryNames": [
       "Етиопија"
     ]
   },
@@ -1227,6 +1390,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Zambija",
       "Замбија"
+    ],
+    "registryNames": [
+      "Замбија"
     ]
   },
   {
@@ -1248,6 +1414,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Zelenortska Ostrva",
       "Зеленортска Острва"
+    ],
+    "registryNames": [
+      "Зеленортска Острва",
+      "Кабо Верде"
     ]
   },
   {
@@ -1268,6 +1438,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Zimbabve",
+      "Зимбабве"
+    ],
+    "registryNames": [
       "Зимбабве"
     ]
   },
@@ -1290,6 +1463,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Izrael",
       "Израел"
+    ],
+    "registryNames": [
+      "Израел"
     ]
   },
   {
@@ -1310,6 +1486,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Indija",
+      "Индија"
+    ],
+    "registryNames": [
       "Индија"
     ]
   },
@@ -1332,6 +1511,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Indonezija",
       "Индонезија"
+    ],
+    "registryNames": [
+      "Индонезија"
     ]
   },
   {
@@ -1352,6 +1534,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Irak",
+      "Ирак"
+    ],
+    "registryNames": [
       "Ирак"
     ]
   },
@@ -1374,6 +1559,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Iran",
       "Иран"
+    ],
+    "registryNames": [
+      "Иран"
     ]
   },
   {
@@ -1395,6 +1583,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Irska",
       "Ирска"
+    ],
+    "registryNames": [
+      "Ирска"
     ]
   },
   {
@@ -1407,7 +1598,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Norveška) (pokriva Island)",
         "embassyCyr": "Амбасада Републике Србије (Норвешка) (покрива Исланд)",
         "email": "izbori.oslo2026@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://www.oslo.mfa.gov.rs",
         "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
         "isResident": false
@@ -1415,6 +1606,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Island",
+      "Исланд"
+    ],
+    "registryNames": [
       "Исланд"
     ]
   },
@@ -1436,6 +1630,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Istočni Timor",
+      "Источни Тимор"
+    ],
+    "registryNames": [
       "Источни Тимор"
     ]
   },
@@ -1478,6 +1675,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Italija",
       "Италија"
+    ],
+    "registryNames": [
+      "Италија"
     ]
   },
   {
@@ -1499,6 +1699,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Jamajka",
       "Јамајка"
+    ],
+    "registryNames": [
+      "Јамајка"
     ]
   },
   {
@@ -1511,7 +1714,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Japan)",
         "embassyCyr": "Амбасада Републике Србије (Јапан)",
         "email": "srb.emb.japan@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": true
@@ -1519,6 +1722,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Japan",
+      "Јапан"
+    ],
+    "registryNames": [
       "Јапан"
     ]
   },
@@ -1541,6 +1747,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Jemen",
       "Јемен"
+    ],
+    "registryNames": [
+      "Јемен"
     ]
   },
   {
@@ -1561,6 +1770,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Jermenija",
+      "Јерменија"
+    ],
+    "registryNames": [
       "Јерменија"
     ]
   },
@@ -1583,6 +1795,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Jordan",
       "Јордан"
+    ],
+    "registryNames": [
+      "Јордан"
     ]
   },
   {
@@ -1595,7 +1810,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": true
@@ -1603,6 +1818,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Južna Afrika",
+      "Јужна Африка"
+    ],
+    "registryNames": [
       "Јужна Африка"
     ]
   },
@@ -1616,7 +1834,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Koreja)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Кореја)",
         "email": "srb.emb.repkorea@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://seoul.mfa.gov.rs",
         "address": "22nd Floor, Booyoung Taepyeong Building,55 Sejong-daero,Jung-guСЕУЛРЕПУБЛИКА КОРЕЈА",
         "isResident": true
@@ -1625,6 +1843,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Južna Koreja",
       "Јужна Кореја"
+    ],
+    "registryNames": [
+      "Јужна Кореја",
+      "Кореја, Република"
     ]
   },
   {
@@ -1645,6 +1867,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Južni Sudan",
+      "Јужни Судан"
+    ],
+    "registryNames": [
       "Јужни Судан"
     ]
   },
@@ -1667,6 +1892,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Kazahstan",
       "Казахстан"
+    ],
+    "registryNames": [
+      "Казахстан"
     ]
   },
   {
@@ -1687,6 +1915,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kambodža",
+      "Камбоџа"
+    ],
+    "registryNames": [
       "Камбоџа"
     ]
   },
@@ -1709,6 +1940,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Kamerun",
       "Камерун"
+    ],
+    "registryNames": [
+      "Камерун"
     ]
   },
   {
@@ -1721,7 +1955,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Kanada)",
         "embassyCyr": "Амбасада Републике Србије (Канада)",
         "email": "consular.ottawa@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://ottawa.mfa.gov.rs",
         "address": "21, Blackburn AvenueОТАВА Онтарио K1N 8A2КАНАДА",
         "isResident": true
@@ -1739,6 +1973,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kanada",
+      "Канада"
+    ],
+    "registryNames": [
       "Канада"
     ]
   },
@@ -1761,6 +1998,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Katar",
       "Катар"
+    ],
+    "registryNames": [
+      "Катар"
     ]
   },
   {
@@ -1782,6 +2022,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Kenija",
       "Кенија"
+    ],
+    "registryNames": [
+      "Кенија"
     ]
   },
   {
@@ -1794,7 +2037,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Kina)",
         "embassyCyr": "Амбасада Републике Србије (Кина)",
         "email": "srb.emb.china@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://beijing.mfa.gov.rs",
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
         "isResident": true
@@ -1812,6 +2055,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kina",
+      "Кина"
+    ],
+    "registryNames": [
       "Кина"
     ]
   },
@@ -1833,6 +2079,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kipar",
+      "Кипар"
+    ],
+    "registryNames": [
       "Кипар"
     ]
   },
@@ -1856,6 +2105,10 @@ export const COUNTRIES: VotingCountry[] = [
       "Kirgistan",
       "Kirgizija",
       "Киргизија"
+    ],
+    "registryNames": [
+      "Киргизија",
+      "Киргиска Република"
     ]
   },
   {
@@ -1868,7 +2121,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Kiribati)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Кирибати)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -1876,6 +2129,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kiribati",
+      "Кирибати"
+    ],
+    "registryNames": [
       "Кирибати"
     ]
   },
@@ -1898,6 +2154,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Kolumbija",
       "Колумбија"
+    ],
+    "registryNames": [
+      "Колумбија"
     ]
   },
   {
@@ -1918,6 +2177,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kostarika",
+      "Костарика"
+    ],
+    "registryNames": [
       "Костарика"
     ]
   },
@@ -1940,6 +2202,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Kuba",
       "Куба"
+    ],
+    "registryNames": [
+      "Куба"
     ]
   },
   {
@@ -1960,6 +2225,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Kuvajt",
+      "Кувајт"
+    ],
+    "registryNames": [
       "Кувајт"
     ]
   },
@@ -1982,6 +2250,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Laos",
       "Лаос"
+    ],
+    "registryNames": [
+      "Лаос"
     ]
   },
   {
@@ -1994,7 +2265,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Lesoto)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Лесото)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -2002,6 +2273,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Lesoto",
+      "Лесото"
+    ],
+    "registryNames": [
       "Лесото"
     ]
   },
@@ -2034,6 +2308,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Letonija",
       "Летонија"
+    ],
+    "registryNames": [
+      "Летонија"
     ]
   },
   {
@@ -2054,6 +2331,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Liban",
+      "Либан"
+    ],
+    "registryNames": [
       "Либан"
     ]
   },
@@ -2076,6 +2356,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Liberija",
       "Либерија"
+    ],
+    "registryNames": [
+      "Либерија"
     ]
   },
   {
@@ -2097,6 +2380,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Libija",
       "Либија"
+    ],
+    "registryNames": [
+      "Либија"
     ]
   },
   {
@@ -2109,7 +2395,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Poljska) (pokriva Litvanija)",
         "embassyCyr": "Амбасада Републике Србије (Пољска) (покрива Литванија)",
         "email": "consular.warsaw@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://warsaw.mfa.gov.rs",
         "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
         "isResident": false
@@ -2117,6 +2403,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Litvanija",
+      "Литванија"
+    ],
+    "registryNames": [
       "Литванија"
     ]
   },
@@ -2130,7 +2419,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Švajcarska) (pokriva Lihtenštajn)",
         "embassyCyr": "Амбасада Републике Србије (Швајцарска) (покрива Лихтенштајн)",
         "email": "konzul@ambasadasrbije.ch",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://berne.mfa.gov.rs",
         "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
         "isResident": false
@@ -2138,6 +2427,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Lihtenštajn",
+      "Лихтенштајн"
+    ],
+    "registryNames": [
       "Лихтенштајн"
     ]
   },
@@ -2151,7 +2443,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Belgija) (pokriva Luksemburg)",
         "embassyCyr": "Амбасада Републике Србије (Белгија) (покрива Луксембург)",
         "email": "izbori.brisel@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://brussels.mfa.gov.rs",
         "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
         "isResident": false
@@ -2159,6 +2451,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Luksemburg",
+      "Луксембург"
+    ],
+    "registryNames": [
       "Луксембург"
     ]
   },
@@ -2172,7 +2467,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Madagaskar)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Мадагаскар)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -2180,6 +2475,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Madagaskar",
+      "Мадагаскар"
+    ],
+    "registryNames": [
       "Мадагаскар"
     ]
   },
@@ -2202,6 +2500,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Mađarska",
       "Мађарска"
+    ],
+    "registryNames": [
+      "Мађарска"
     ]
   },
   {
@@ -2214,7 +2515,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Malavi)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Малави)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -2222,6 +2523,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Malavi",
+      "Малави"
+    ],
+    "registryNames": [
       "Малави"
     ]
   },
@@ -2244,6 +2548,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Maldivi",
       "Малдиви"
+    ],
+    "registryNames": [
+      "Малдиви"
     ]
   },
   {
@@ -2264,6 +2571,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Malezija",
+      "Малезија"
+    ],
+    "registryNames": [
       "Малезија"
     ]
   },
@@ -2286,6 +2596,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Mali",
       "Мали"
+    ],
+    "registryNames": [
+      "Мали"
     ]
   },
   {
@@ -2306,6 +2619,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Malta",
+      "Малта"
+    ],
+    "registryNames": [
       "Малта"
     ]
   },
@@ -2328,6 +2644,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Maroko",
       "Мароко"
+    ],
+    "registryNames": [
+      "Мароко"
     ]
   },
   {
@@ -2340,7 +2659,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Japan) (pokriva Maršalska Ostrva)",
         "embassyCyr": "Амбасада Републике Србије (Јапан) (покрива Маршалска Острва)",
         "email": "srb.emb.japan@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": false
@@ -2348,6 +2667,10 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Maršalska Ostrva",
+      "Маршалска Острва"
+    ],
+    "registryNames": [
+      "Маршалова острва",
       "Маршалска Острва"
     ]
   },
@@ -2370,6 +2693,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Mauritanija",
       "Мауританија"
+    ],
+    "registryNames": [
+      "Мауританија"
     ]
   },
   {
@@ -2382,7 +2708,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Mauricijus)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Маурицијус)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -2390,6 +2716,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Mauricijus",
+      "Маурицијус"
+    ],
+    "registryNames": [
       "Маурицијус"
     ]
   },
@@ -2403,7 +2732,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko)",
         "embassyCyr": "Амбасада Републике Србије (Мексико)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": true
@@ -2411,6 +2740,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Meksiko",
+      "Мексико"
+    ],
+    "registryNames": [
       "Мексико"
     ]
   },
@@ -2424,7 +2756,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Japan) (pokriva Mikronezija)",
         "embassyCyr": "Амбасада Републике Србије (Јапан) (покрива Микронезија)",
         "email": "srb.emb.japan@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": false
@@ -2432,6 +2764,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Mikronezija",
+      "Микронезија"
+    ],
+    "registryNames": [
       "Микронезија"
     ]
   },
@@ -2454,6 +2789,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Mjanmar",
       "Мјанмар"
+    ],
+    "registryNames": [
+      "Мјанмар"
     ]
   },
   {
@@ -2466,7 +2804,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Južna Afrika) (pokriva Mozambik)",
         "embassyCyr": "Амбасада Републике Србије (Јужна Африка) (покрива Мозамбик)",
         "email": "info@srbembassy.org.za",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false
@@ -2474,6 +2812,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Mozambik",
+      "Мозамбик"
+    ],
+    "registryNames": [
       "Мозамбик"
     ]
   },
@@ -2495,6 +2836,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Moldavija",
+      "Молдавија"
+    ],
+    "registryNames": [
       "Молдавија"
     ]
   },
@@ -2527,6 +2871,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Monako",
       "Монако"
+    ],
+    "registryNames": [
+      "Монако"
     ]
   },
   {
@@ -2539,7 +2886,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Kina) (pokriva Mongolija)",
         "embassyCyr": "Амбасада Републике Србије (Кина) (покрива Монголија)",
         "email": "srb.emb.china@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://beijing.mfa.gov.rs",
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
         "isResident": false
@@ -2547,6 +2894,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Mongolija",
+      "Монголија"
+    ],
+    "registryNames": [
       "Монголија"
     ]
   },
@@ -2569,6 +2919,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Namibija",
       "Намибија"
+    ],
+    "registryNames": [
+      "Намибија"
     ]
   },
   {
@@ -2581,7 +2934,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Nauru)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Науру)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -2589,6 +2942,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Nauru",
+      "Науру"
+    ],
+    "registryNames": [
       "Науру"
     ]
   },
@@ -2612,7 +2968,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Štutgart)",
         "embassyCyr": "Генерални конзулат Републике Србије (Штутгарт)",
         "email": "izbori.stuttgart@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://stuttgart.mfa.gov.rs",
         "address": "Taubenstrasse 4D-70199 ШТУТГАРТНЕМАЧКА",
         "isResident": true
@@ -2652,7 +3008,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Diseldorf)",
         "embassyCyr": "Генерални конзулат Републике Србије (Диселдорф)",
         "email": "izbori.diseldorf@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://duesseldorf.mfa.gov.rs",
         "address": "Klosterstrasse 79D-40211 ДИСЕЛДОРФНЕМАЧКА",
         "isResident": true
@@ -2660,6 +3016,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Nemačka",
+      "Немачка"
+    ],
+    "registryNames": [
       "Немачка"
     ]
   },
@@ -2682,6 +3041,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Nepal",
       "Непал"
+    ],
+    "registryNames": [
+      "Непал"
     ]
   },
   {
@@ -2702,6 +3064,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Niger",
+      "Нигер"
+    ],
+    "registryNames": [
       "Нигер"
     ]
   },
@@ -2724,6 +3089,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Nigerija",
       "Нигерија"
+    ],
+    "registryNames": [
+      "Нигерија"
     ]
   },
   {
@@ -2745,6 +3113,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Nikaragva",
       "Никарагва"
+    ],
+    "registryNames": [
+      "Никарагва"
     ]
   },
   {
@@ -2757,7 +3128,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Novi Zeland)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Нови Зеланд)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -2765,6 +3136,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Novi Zeland",
+      "Нови Зеланд"
+    ],
+    "registryNames": [
       "Нови Зеланд"
     ]
   },
@@ -2787,6 +3161,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Norveška",
       "Норвешка"
+    ],
+    "registryNames": [
+      "Норвешка"
     ]
   },
   {
@@ -2807,6 +3184,10 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Obala Slonovače",
+      "Обала Слоноваче"
+    ],
+    "registryNames": [
+      "Кот д' Ивоар",
       "Обала Слоноваче"
     ]
   },
@@ -2829,6 +3210,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Oman",
       "Оман"
+    ],
+    "registryNames": [
+      "Оман"
     ]
   },
   {
@@ -2850,6 +3234,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Pakistan",
       "Пакистан"
+    ],
+    "registryNames": [
+      "Пакистан"
     ]
   },
   {
@@ -2862,7 +3249,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Japan) (pokriva Palau)",
         "embassyCyr": "Амбасада Републике Србије (Јапан) (покрива Палау)",
         "email": "srb.emb.japan@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": false
@@ -2870,6 +3257,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Palau",
+      "Палау"
+    ],
+    "registryNames": [
       "Палау"
     ]
   },
@@ -2892,6 +3282,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Palestina",
       "Палестина"
+    ],
+    "registryNames": [
+      "Палестина"
     ]
   },
   {
@@ -2913,6 +3306,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Panama",
       "Панама"
+    ],
+    "registryNames": [
+      "Панама"
     ]
   },
   {
@@ -2925,7 +3321,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Papua Nova Gvineja)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Папуа Нова Гвинеја)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -2933,6 +3329,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Papua Nova Gvineja",
+      "Папуа Нова Гвинеја"
+    ],
+    "registryNames": [
       "Папуа Нова Гвинеја"
     ]
   },
@@ -2955,6 +3354,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Paragvaj",
       "Парагвај"
+    ],
+    "registryNames": [
+      "Парагвај"
     ]
   },
   {
@@ -2976,6 +3378,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Peru",
       "Перу"
+    ],
+    "registryNames": [
+      "Перу"
     ]
   },
   {
@@ -2988,7 +3393,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Poljska)",
         "embassyCyr": "Амбасада Републике Србије (Пољска)",
         "email": "consular.warsaw@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://warsaw.mfa.gov.rs",
         "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
         "isResident": true
@@ -2996,6 +3401,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Poljska",
+      "Пољска"
+    ],
+    "registryNames": [
       "Пољска"
     ]
   },
@@ -3018,6 +3426,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Portugalija",
       "Португалија"
+    ],
+    "registryNames": [
+      "Португалија"
     ]
   },
   {
@@ -3039,6 +3450,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Republika Kongo",
       "Република Конго"
+    ],
+    "registryNames": [
+      "Конго, Република",
+      "Република Конго"
     ]
   },
   {
@@ -3059,6 +3474,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Ruanda",
+      "Руанда"
+    ],
+    "registryNames": [
       "Руанда"
     ]
   },
@@ -3082,7 +3500,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Temišvar)",
         "embassyCyr": "Генерални конзулат Републике Србије (Темишвар)",
         "email": "srb.cons.timisoara@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://timisoara.mfa.gov.rs",
         "address": "Str.Remus No 4ТЕМИШВАРРУМУНИЈА",
         "isResident": true
@@ -3090,6 +3508,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Rumunija",
+      "Румунија"
+    ],
+    "registryNames": [
       "Румунија"
     ]
   },
@@ -3112,6 +3533,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Rusija",
       "Русија"
+    ],
+    "registryNames": [
+      "Русија",
+      "Руска Федерација"
     ]
   },
   {
@@ -3124,7 +3549,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Samoa)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Самоа)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -3132,6 +3557,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Samoa",
+      "Самоа"
+    ],
+    "registryNames": [
       "Самоа"
     ]
   },
@@ -3145,7 +3573,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Italija) (pokriva San Marino)",
         "embassyCyr": "Амбасада Републике Србије (Италија) (покрива Сан Марино)",
         "email": "izbori.rim@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://roma.mfa.gov.rs",
         "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
         "isResident": false
@@ -3153,6 +3581,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "San Marino",
+      "Сан Марино"
+    ],
+    "registryNames": [
       "Сан Марино"
     ]
   },
@@ -3175,6 +3606,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Sao Tome i Prinsipe",
       "Сао Томе и Принсипе"
+    ],
+    "registryNames": [
+      "Сао Томе и Принсипе"
     ]
   },
   {
@@ -3195,6 +3629,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Saudijska Arabija",
+      "Саудијска Арабија"
+    ],
+    "registryNames": [
       "Саудијска Арабија"
     ]
   },
@@ -3217,6 +3654,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Sveta Lucija",
       "Света Луција"
+    ],
+    "registryNames": [
+      "Света Луција"
     ]
   },
   {
@@ -3238,6 +3678,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Sveti Vinsent i Grenadini",
       "Свети Винсент и Гренадини"
+    ],
+    "registryNames": [
+      "Свети Винсент и Гренадини"
     ]
   },
   {
@@ -3250,7 +3693,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Kina) (pokriva Severna Koreja)",
         "embassyCyr": "Амбасада Републике Србије (Кина) (покрива Северна Кореја)",
         "email": "srb.emb.china@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://beijing.mfa.gov.rs",
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
         "isResident": false
@@ -3258,6 +3701,10 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Severna Koreja",
+      "Северна Кореја"
+    ],
+    "registryNames": [
+      "Кореја, ДНР",
       "Северна Кореја"
     ]
   },
@@ -3280,6 +3727,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Severna Makedonija",
       "Северна Македонија"
+    ],
+    "registryNames": [
+      "Северна Македонија"
     ]
   },
   {
@@ -3300,6 +3750,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Sejšeli",
+      "Сејшели"
+    ],
+    "registryNames": [
       "Сејшели"
     ]
   },
@@ -3322,6 +3775,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Senegal",
       "Сенегал"
+    ],
+    "registryNames": [
+      "Сенегал"
     ]
   },
   {
@@ -3342,6 +3798,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Sent Kits i Nevis",
+      "Сент Китс и Невис"
+    ],
+    "registryNames": [
       "Сент Китс и Невис"
     ]
   },
@@ -3364,6 +3823,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Sijera Leone",
       "Сијера Леоне"
+    ],
+    "registryNames": [
+      "Сијера Леоне"
     ]
   },
   {
@@ -3385,6 +3847,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Singapur",
       "Сингапур"
+    ],
+    "registryNames": [
+      "Сингапур"
     ]
   },
   {
@@ -3405,6 +3870,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Sirija",
+      "Сирија"
+    ],
+    "registryNames": [
       "Сирија"
     ]
   },
@@ -3428,7 +3896,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Čikago)",
         "embassyCyr": "Генерални конзулат Републике Србије (Чикаго)",
         "email": "izbori.cikago2026@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://chicago.mfa.gov.rs",
         "address": "201 East Ohio Street, Suite 200ЧИКАГО, IL 60611, САД",
         "isResident": true
@@ -3438,7 +3906,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Njujork)",
         "embassyCyr": "Генерални конзулат Републике Србије (Њујорк)",
         "email": "izbori.njujork@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://newyork.mfa.gov.rs",
         "address": "62 West 45th Street, 7 Floor,ЊУЈОРК, NY 10036, САД",
         "isResident": true
@@ -3457,6 +3925,9 @@ export const COUNTRIES: VotingCountry[] = [
       "САД",
       "Сједињене Америчке Државе",
       "УСА"
+    ],
+    "registryNames": [
+      "Сједињене Америчке Државе"
     ]
   },
   {
@@ -3477,6 +3948,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Slovačka",
+      "Словачка"
+    ],
+    "registryNames": [
       "Словачка"
     ]
   },
@@ -3499,6 +3973,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Slovenija",
       "Словенија"
+    ],
+    "registryNames": [
+      "Словенија"
     ]
   },
   {
@@ -3511,7 +3988,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Solomonova Ostrva)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Соломонова Острва)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -3519,6 +3996,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Solomonova Ostrva",
+      "Соломонова Острва"
+    ],
+    "registryNames": [
       "Соломонова Острва"
     ]
   },
@@ -3541,6 +4021,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Somalija",
       "Сомалија"
+    ],
+    "registryNames": [
+      "Сомалија"
     ]
   },
   {
@@ -3561,6 +4044,10 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Suvereni Malteški Red",
+      "Суверени Малтешки Ред"
+    ],
+    "registryNames": [
+      "Суверени Војни Малтешки Ред",
       "Суверени Малтешки Ред"
     ]
   },
@@ -3583,6 +4070,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Sudan",
       "Судан"
+    ],
+    "registryNames": [
+      "Судан"
     ]
   },
   {
@@ -3603,6 +4093,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Surinam",
+      "Суринам"
+    ],
+    "registryNames": [
       "Суринам"
     ]
   },
@@ -3625,6 +4118,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Tajland",
       "Тајланд"
+    ],
+    "registryNames": [
+      "Тајланд"
     ]
   },
   {
@@ -3645,6 +4141,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Tanzanija",
+      "Танзанија"
+    ],
+    "registryNames": [
       "Танзанија"
     ]
   },
@@ -3667,6 +4166,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Tadžikistan",
       "Таџикистан"
+    ],
+    "registryNames": [
+      "Таџикистан"
     ]
   },
   {
@@ -3688,6 +4190,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Togo",
       "Того"
+    ],
+    "registryNames": [
+      "Того"
     ]
   },
   {
@@ -3700,7 +4205,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Tonga)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Тонга)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -3708,6 +4213,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Tonga",
+      "Тонга"
+    ],
+    "registryNames": [
       "Тонга"
     ]
   },
@@ -3730,6 +4238,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Trinidad i Tobago",
       "Тринидад и Тобаго"
+    ],
+    "registryNames": [
+      "Тринидад и Тобаго"
     ]
   },
   {
@@ -3742,7 +4253,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Tuvalu)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Тувалу)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -3750,6 +4261,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Tuvalu",
+      "Тувалу"
+    ],
+    "registryNames": [
       "Тувалу"
     ]
   },
@@ -3772,6 +4286,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Tunis",
       "Тунис"
+    ],
+    "registryNames": [
+      "Тунис"
     ]
   },
   {
@@ -3792,6 +4309,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Turkmenistan",
+      "Туркменистан"
+    ],
+    "registryNames": [
       "Туркменистан"
     ]
   },
@@ -3824,6 +4344,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Turska",
       "Турска"
+    ],
+    "registryNames": [
+      "Турска"
     ]
   },
   {
@@ -3844,6 +4367,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Uganda",
+      "Уганда"
+    ],
+    "registryNames": [
       "Уганда"
     ]
   },
@@ -3866,6 +4392,10 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Uzbekistan",
       "Узбекистан"
+    ],
+    "registryNames": [
+      "Узбекистан",
+      "Узбекистан, Република"
     ]
   },
   {
@@ -3878,7 +4408,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Ujedinjeni Arapski Emirati)",
         "embassyCyr": "Амбасада Републике Србије (Уједињени Арапски Емирати)",
         "email": "izbori.abudhabi@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://abudhabi.mfa.gov.rs",
         "address": "Mushref area, sector W31Al Rafee streetVilla number 06(opposite of Novotel hotel)АБУ ДАБИУЈЕДИЊЕНИ АРАПСКИ ЕМИРАТИ",
         "isResident": true
@@ -3886,6 +4416,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Ujedinjeni Arapski Emirati",
+      "Уједињени Арапски Емирати"
+    ],
+    "registryNames": [
       "Уједињени Арапски Емирати"
     ]
   },
@@ -3908,6 +4441,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Ujedinjeno Kraljevstvo",
       "Уједињено Краљевство"
+    ],
+    "registryNames": [
+      "Уједињено Краљевство"
     ]
   },
   {
@@ -3928,6 +4464,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Ukrajina",
+      "Украјина"
+    ],
+    "registryNames": [
       "Украјина"
     ]
   },
@@ -3950,6 +4489,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Unija Komora",
       "Унија Комора"
+    ],
+    "registryNames": [
+      "Унија Комора"
     ]
   },
   {
@@ -3970,6 +4512,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Urugvaj",
+      "Уругвај"
+    ],
+    "registryNames": [
       "Уругвај"
     ]
   },
@@ -3992,6 +4537,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Filipini",
       "Филипини"
+    ],
+    "registryNames": [
+      "Филипини"
     ]
   },
   {
@@ -4013,6 +4561,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Finska",
       "Финска"
+    ],
+    "registryNames": [
+      "Финска"
     ]
   },
   {
@@ -4025,7 +4576,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Australija) (pokriva Fidži)",
         "embassyCyr": "Амбасада Републике Србије (Аустралија) (покрива Фиџи)",
         "email": "consular.canberra@mfa.rs",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false
@@ -4033,6 +4584,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Fidži",
+      "Фиџи"
+    ],
+    "registryNames": [
       "Фиџи"
     ]
   },
@@ -4075,6 +4629,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Francuska",
       "Француска"
+    ],
+    "registryNames": [
+      "Француска"
     ]
   },
   {
@@ -4095,6 +4652,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Haiti",
+      "Хаити"
+    ],
+    "registryNames": [
       "Хаити"
     ]
   },
@@ -4117,6 +4677,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Holandija",
       "Холандија"
+    ],
+    "registryNames": [
+      "Холандија"
     ]
   },
   {
@@ -4137,6 +4700,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Honduras",
+      "Хондурас"
+    ],
+    "registryNames": [
       "Хондурас"
     ]
   },
@@ -4179,6 +4745,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Hrvatska",
       "Хрватска"
+    ],
+    "registryNames": [
+      "Хрватска"
     ]
   },
   {
@@ -4199,6 +4768,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Centralnoafrička Republika",
+      "Централноафричка Република"
+    ],
+    "registryNames": [
       "Централноафричка Република"
     ]
   },
@@ -4231,6 +4803,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Crna Gora",
       "Црна Гора"
+    ],
+    "registryNames": [
+      "Црна Гора"
     ]
   },
   {
@@ -4251,6 +4826,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Čad",
+      "Чад"
+    ],
+    "registryNames": [
       "Чад"
     ]
   },
@@ -4273,6 +4851,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Češka",
       "Чешка"
+    ],
+    "registryNames": [
+      "Чешка"
     ]
   },
   {
@@ -4293,6 +4874,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Čile",
+      "Чиле"
+    ],
+    "registryNames": [
       "Чиле"
     ]
   },
@@ -4315,6 +4899,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Džibuti",
       "Џибути"
+    ],
+    "registryNames": [
+      "Џибути"
     ]
   },
   {
@@ -4327,7 +4914,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Švajcarska)",
         "embassyCyr": "Амбасада Републике Србије (Швајцарска)",
         "email": "konzul@ambasadasrbije.ch",
-        "isElectionContactConfirmed": true,
+        "isElectionContactConfirmed": false,
         "website": "https://berne.mfa.gov.rs",
         "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
         "isResident": true
@@ -4345,6 +4932,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Švajcarska",
+      "Швајцарска"
+    ],
+    "registryNames": [
       "Швајцарска"
     ]
   },
@@ -4367,6 +4957,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Švedska",
       "Шведска"
+    ],
+    "registryNames": [
+      "Шведска"
     ]
   },
   {
@@ -4388,6 +4981,9 @@ export const COUNTRIES: VotingCountry[] = [
     "aliases": [
       "Španija",
       "Шпанија"
+    ],
+    "registryNames": [
+      "Шпанија"
     ]
   },
   {
@@ -4408,6 +5004,9 @@ export const COUNTRIES: VotingCountry[] = [
     ],
     "aliases": [
       "Šri Lanka",
+      "Шри Ланка"
+    ],
+    "registryNames": [
       "Шри Ланка"
     ]
   }

@@ -54,6 +54,10 @@ ACTIVITY_RE = re.compile(
     re.IGNORECASE,
 )
 FORM_URL_RE = re.compile(r"(?:^|[/_.-])(?:form|formular|obrazac)(?:[/_.-]|$)", re.IGNORECASE)
+ATTACHMENT_SUFFIXES = frozenset({
+    ".doc", ".docm", ".docx", ".odt", ".ppt", ".pptx", ".rtf", ".xls", ".xlsm", ".xlsx",
+})
+
 YEAR_RE = re.compile(r"(?<!\d)((?:19|20)\d{2})(?!\d)")
 YEAR_VALUE_RE = re.compile(r"(?:19|20)\d{2}")
 
@@ -82,7 +86,8 @@ class PageTask:
     depth: int
     title_hint: str = ""
     source_chain: tuple[str, ...] = ()
-    allows_page_context_fallback: bool = False
+    source_selection: str = "crawled"
+    requires_local_context: bool = False
 
 @dataclass(frozen=True)
 class Response:
@@ -302,12 +307,12 @@ def mailto_target_matches_visible_email(block, email: str) -> bool:
             return False
     return True
 
-
 def extract_html_evidence(
     html: bytes,
     election_year: str | None = None,
     *,
     retain_uncontextualized_evidence: bool = False,
+    requires_local_context: bool = False,
 ) -> tuple[str, str, list[ElectionEvidence]]:
     soup = BeautifulSoup(html, "html.parser")
     title_node = soup.find("h1") or soup.find("title")
@@ -320,7 +325,11 @@ def extract_html_evidence(
         if not text:
             continue
         for email in extract_visible_emails(text):
-            context = evidence_context_for(block, email, election_year)
+            context = (
+                local_context_for(block, email, election_year)
+                if requires_local_context
+                else evidence_context_for(block, email, election_year)
+            )
             if not context and not retain_uncontextualized_evidence:
                 continue
             if any(
@@ -436,6 +445,18 @@ def load_stations(path: Path) -> tuple[dict[str, str], dict[str, tuple[Station, 
         return {}, {}
     country_names: dict[str, str] = {}
     stations_by_country: dict[str, list[Station]] = defaultdict(list)
+
+    def register_country_name(value: str, code: str) -> None:
+        normalized = normalized_name(value)
+        if not normalized:
+            raise ValueError(f"canonical country {code} has an empty discovery name")
+        existing = country_names.get(normalized)
+        if existing is not None and existing != code:
+            raise ValueError(
+                f"canonical country discovery-name collision {value!r}: {existing} and {code}"
+            )
+        country_names[normalized] = code
+
     for country in payload["countries"]:
         if not isinstance(country, dict):
             continue
@@ -445,7 +466,15 @@ def load_stations(path: Path) -> tuple[dict[str, str], dict[str, tuple[Station, 
         for label_key in ("label", "labelCyr"):
             label = country.get(label_key)
             if isinstance(label, str) and label:
-                country_names[normalized_name(label)] = code
+                register_country_name(label, code)
+        for name_key in ("aliases", "registryNames"):
+            names = country.get(name_key, [])
+            if names is None:
+                continue
+            if not isinstance(names, list) or any(not isinstance(name, str) or not name for name in names):
+                raise ValueError(f"canonical country {code} has invalid {name_key}")
+            for name in names:
+                register_country_name(name, code)
         stations = country.get("stations")
         if not isinstance(stations, list):
             continue
@@ -539,8 +568,9 @@ def mission_links(html: bytes, task: PageTask, election_year: str | None = None)
             continue
         parsed = urlsplit(target)
         anchor_text = visible_text(anchor)
-        is_pdf = parsed.path.lower().endswith(".pdf")
-        if FORM_URL_RE.search(parsed.path):
+        suffix = Path(parsed.path).suffix.casefold()
+        is_pdf = suffix == ".pdf"
+        if suffix in ATTACHMENT_SUFFIXES or FORM_URL_RE.search(parsed.path):
             continue
         if not is_pdf and not ACTIVITY_RE.search(f"{parsed.path} {parsed.query} {anchor_text}"):
             continue
@@ -601,6 +631,7 @@ def candidate_record(
     evidence_type: str,
     source_id: str,
     source_chain: Iterable[str],
+    source_selection: str = "crawled",
 ) -> dict[str, object]:
     candidate_id_source = "\x1f".join((election_id, station.country_code, station.station_id, email, source_url))
     return {
@@ -617,6 +648,7 @@ def candidate_record(
         "sourceHost": url_host(source_url),
         "observedAt": observed_at,
         "evidenceType": evidence_type,
+        "sourceSelection": source_selection,
         "sourceId": source_id,
         "sourceChain": normalized_chain(source_chain),
     }
@@ -632,7 +664,7 @@ def read_mapping(path: Path, label: str) -> dict:
     return payload
 
 
-def load_registry(path: Path, country_names: dict[str, str]) -> dict[str, str]:
+def load_registry(path: Path, country_names: dict[str, str]) -> tuple[dict[str, str], list[str]]:
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError, TypeError) as error:
@@ -640,6 +672,7 @@ def load_registry(path: Path, country_names: dict[str, str]) -> dict[str, str]:
     if not isinstance(payload, list):
         raise ValueError(f"invalid MFA registry {path}: expected a list")
     result: dict[str, str] = {}
+    unmapped_names: set[str] = set()
     for entry in payload:
         if not isinstance(entry, dict):
             raise ValueError(f"invalid MFA registry {path}: country entry is not an object")
@@ -658,7 +691,9 @@ def load_registry(path: Path, country_names: dict[str, str]) -> dict[str, str]:
             if existing is not None and existing != target:
                 raise ValueError(f"invalid MFA registry {path}: duplicate country link for {country_code}")
             result[country_code] = target
-    return result
+        else:
+            unmapped_names.add(country)
+    return result, sorted(unmapped_names)
 
 
 def load_state(path: Path, election_id: str) -> dict:
@@ -803,6 +838,7 @@ def direct_notice_tasks(
             0,
             "",
             verified_chain,
+            "operator-notice",
             True,
         )
         for station in stations
@@ -842,8 +878,8 @@ def validated_notice_urls(
     return notice_urls
 
 
-def append_chain(chain: Iterable[str], url: str) -> tuple[str, ...]:
-    return tuple(normalized_chain((*chain, url)))
+def append_chain(chain: Iterable[str], *urls: str) -> tuple[str, ...]:
+    return tuple(normalized_chain((*chain, *urls)))
 
 
 def parse_args() -> argparse.Namespace:
@@ -939,7 +975,7 @@ def main() -> int:
         country_names, stations_by_country = load_stations(args.missions)
         if not country_names or not stations_by_country:
             raise ValueError(f"invalid canonical missions {args.missions}")
-        registry = load_registry(args.registry, country_names)
+        registry, unmapped_registry_names = load_registry(args.registry, country_names)
         state = load_state(args.state, args.election_id)
         existing = load_candidate_artifact(args.output, args.election_id, args.election_year)
         overrides = load_overrides(args.overrides)
@@ -967,6 +1003,16 @@ def main() -> int:
         notice_urls_by_station = validated_notice_urls(args.notice_url, station_by_id, set(requested_ids))
     except ValueError as error:
         print(f"Election contact discovery failed: {error}", file=sys.stderr)
+        return 2
+
+    notice_hosts = {url_host(url) for url in notice_urls_by_station.values()}
+    if args.max_hosts and len(notice_hosts) > args.max_hosts:
+        print(
+            "Election contact discovery failed: --notice-url targets "
+            f"{len(notice_hosts)} hosts, exceeding --max-hosts {args.max_hosts}; "
+            "raise the bound or split the explicit notice batch",
+            file=sys.stderr,
+        )
         return 2
 
     prior_candidates: dict[str, dict[str, object]] = {}
@@ -1055,15 +1101,26 @@ def main() -> int:
             due_by_host[station.website_host].append(station)
 
     host_names = sorted(due_by_host)
-    # Rotation gives deferred hosts a future turn while max_hosts bounds both
-    # network exposure and the amount of work a single incremental run can add.
-    cursor = state["hostCursor"] % len(host_names) if host_names else 0
-    rotated_hosts = host_names[cursor:] + host_names[:cursor]
+    # Explicit station work is a targeted acquisition, not a turn in the
+    # routine host rotation.  It may be bounded, but it never consumes cursor
+    # state reserved for ordinary incremental discovery.
+    routine_cursor = not bool(requested_ids)
+    cursor = state["hostCursor"] % len(host_names) if routine_cursor and host_names else 0
+    rotated_hosts = host_names[cursor:] + host_names[:cursor] if routine_cursor else host_names
     host_limit = len(rotated_hosts) if args.max_hosts == 0 else min(args.max_hosts, len(rotated_hosts))
     scheduled_hosts = tuple(rotated_hosts[:host_limit])
     deferred_hosts = set(rotated_hosts[host_limit:])
     report_failures: list[dict[str, str]] = []
     report_ambiguous: list[dict[str, object]] = []
+    selected_acquisitions: dict[str, dict[str, str]] = {
+        station_id: {
+            "stationId": station_id,
+            "sourceUrl": notice_url,
+            "sourceSelection": "operator-notice",
+            "outcome": "pending-chain",
+        }
+        for station_id, notice_url in notice_urls_by_station.items()
+    }
     attempted_hosts: set[str] = set()
     failed_hosts: set[str] = set()
     budget_hosts: set[str] = set()
@@ -1109,15 +1166,19 @@ def main() -> int:
             entries = [entry for variant in host_variants(host) for entry in by_variant.get(variant, [])]
             if len(entries) == 1:
                 entry = entries[0]
-                mission_task = station_host_tasks(
-                    stations,
-                    entry["url"],
-                    country_code,
-                    (cached["indexUrl"], cached["countryUrl"], entry["url"]),
+                source_chain = (cached["indexUrl"], cached["countryUrl"], entry["url"])
+                notice_stations = tuple(
+                    station for station in stations if station.station_id in notice_urls_by_station
                 )
-                country_entries[country_code].append(mission_task)
+                crawl_stations = tuple(
+                    station for station in stations if station.station_id not in notice_urls_by_station
+                )
+                if crawl_stations:
+                    country_entries[country_code].append(
+                        station_host_tasks(crawl_stations, entry["url"], country_code, source_chain)
+                    )
                 country_entries[country_code].extend(
-                    direct_notice_tasks(stations, notice_urls_by_station, country_code, mission_task.source_chain)
+                    direct_notice_tasks(notice_stations, notice_urls_by_station, country_code, source_chain)
                 )
             else:
                 bootstrap_countries.add(country_code)
@@ -1183,16 +1244,28 @@ def main() -> int:
                     )
                     continue
                 task = selected_tasks[0]
-                mission_task = station_host_tasks(
-                    stations, task.url, country_code, (index_url, response.url, task.url)
+                source_chain = (index_url, response.url, task.url)
+                notice_stations = tuple(
+                    station for station in stations if station.station_id in notice_urls_by_station
                 )
-                country_entries[country_code].append(mission_task)
+                crawl_stations = tuple(
+                    station for station in stations if station.station_id not in notice_urls_by_station
+                )
+                if crawl_stations:
+                    country_entries[country_code].append(
+                        station_host_tasks(crawl_stations, task.url, country_code, source_chain)
+                    )
                 country_entries[country_code].extend(
-                    direct_notice_tasks(stations, notice_urls_by_station, country_code, mission_task.source_chain)
+                    direct_notice_tasks(notice_stations, notice_urls_by_station, country_code, source_chain)
                 )
 
     pending = [task for country_code in sorted(country_entries) for task in country_entries[country_code]]
-    seen_task_keys: set[tuple[str, str, tuple[str, ...], bool]] = set()
+    seen_task_keys: set[tuple[str, str, tuple[str, ...], str]] = set()
+
+    def set_selected_outcome(task: PageTask, outcome: str) -> None:
+        if task.source_selection == "operator-notice":
+            selected_acquisitions[task.stations[0].station_id]["outcome"] = outcome
+
     while pending:
         batch: list[PageTask] = []
         for task in pending:
@@ -1200,7 +1273,7 @@ def main() -> int:
                 task.country_code,
                 task.url,
                 tuple(station.station_id for station in task.stations),
-                task.allows_page_context_fallback,
+                task.source_selection,
             )
             if key not in seen_task_keys:
                 seen_task_keys.add(key)
@@ -1208,7 +1281,15 @@ def main() -> int:
         pending = []
         if not batch:
             break
-        required = ((task.url, frozenset({url_host(task.url)})) for task in batch)
+        required = (
+            (
+                task.url,
+                frozenset().union(*(host_variants(station.website_host) for station in task.stations))
+                if task.source_selection == "operator-notice"
+                else frozenset({url_host(task.url)}),
+            )
+            for task in batch
+        )
         fetch_urls(required, "mission page")
         next_tasks: list[PageTask] = []
         for task in batch:
@@ -1216,50 +1297,70 @@ def main() -> int:
             task_hosts = {station.website_host for station in task.stations}
             if response is None:
                 budget_hosts.update(task_hosts)
+                set_selected_outcome(task, "deferred-page-budget")
                 continue
             attempted_hosts.update(task_hosts)
             if response.error:
                 failed_hosts.update(task_hosts)
-                report_failures.append({"scope": "mission page", "url": task.url, "reason": response.error})
+                report_failures.append({
+                    "scope": "selected notice" if task.source_selection == "operator-notice" else "mission page",
+                    "url": task.url,
+                    "reason": response.error,
+                })
+                set_selected_outcome(task, "failed-fetch")
                 continue
+            if task.source_selection == "operator-notice":
+                verified_hosts = frozenset().union(
+                    *(host_variants(station.website_host) for station in task.stations)
+                )
+                final_url = absolute_https_url(response.url)
+                if final_url is None or url_host(final_url) not in verified_hosts:
+                    failed_hosts.update(task_hosts)
+                    report_failures.append({
+                        "scope": "selected notice",
+                        "url": task.url,
+                        "reason": "redirect left the verified station host",
+                    })
+                    set_selected_outcome(task, "failed-redirect")
+                    continue
             is_pdf = task.url.lower().split("?", 1)[0].endswith(".pdf") or "pdf" in response.content_type
             if is_pdf:
                 try:
                     title, page_text, evidence = extract_pdf_evidence(response.body, task.title_hint)
                 except PdfExtractionError as error:
                     failed_hosts.update(task_hosts)
-                    report_failures.append(
-                        {"scope": "mission PDF", "url": task.url, "reason": f"PDF parse failure: {error}"}
-                    )
+                    report_failures.append({
+                        "scope": "selected notice" if task.source_selection == "operator-notice" else "mission PDF",
+                        "url": task.url,
+                        "reason": f"PDF parse failure: {error}",
+                    })
+                    set_selected_outcome(task, "failed-parse")
                     continue
                 evidence_type = "pdf"
             elif "html" in response.content_type:
                 title, page_text, evidence = extract_html_evidence(
                     response.body,
                     args.election_year,
-                    retain_uncontextualized_evidence=task.allows_page_context_fallback,
+                    requires_local_context=task.requires_local_context,
                 )
                 evidence_type = "html"
-                if task.depth < args.max_depth:
-                    for next_task in mission_links(response.body, task, args.election_year):
-                        next_tasks.append(next_task)
-                elif mission_links(response.body, task, args.election_year):
-                    depth_hosts.update(task_hosts)
+                if task.source_selection != "operator-notice":
+                    if task.depth < args.max_depth:
+                        next_tasks.extend(mission_links(response.body, task, args.election_year))
+                    elif mission_links(response.body, task, args.election_year):
+                        depth_hosts.update(task_hosts)
             else:
                 failed_hosts.update(task_hosts)
-                report_failures.append({"scope": "mission page", "url": task.url, "reason": error_response(response)})
+                report_failures.append({
+                    "scope": "selected notice" if task.source_selection == "operator-notice" else "mission page",
+                    "url": task.url,
+                    "reason": error_response(response),
+                })
+                set_selected_outcome(task, "failed-unsupported-media")
                 continue
-            page_election_context = (
-                page_text
-                if task.allows_page_context_fallback
-                and has_target_election_context(page_text, args.election_year)
-                else None
-            )
             accepted: list[tuple[ElectionEvidence, tuple[Station, ...], str]] = []
             for item in evidence:
                 election_context = election_context_for(item.quote, item.context, args.election_year)
-                if election_context is None and page_election_context is not None:
-                    election_context = page_election_context
                 if election_context is None:
                     continue
                 stations = attributed_stations(item.email, task.stations, known_mailboxes)
@@ -1270,8 +1371,11 @@ def main() -> int:
                     continue
                 accepted.append((item, stations, election_context))
             if not accepted:
-            # Evidence that cannot bind an email to this election/station never
-            # creates a candidate or source artifact.
+                set_selected_outcome(
+                    task,
+                    "ambiguous" if any(station.station_id in ambiguous_stations for station in task.stations)
+                    else "scanned-no-evidence",
+                )
                 continue
             text_sha256 = hashlib.sha256(page_text.encode("utf-8")).hexdigest()
             source_id = source_identifier(task.url, text_sha256)
@@ -1283,8 +1387,9 @@ def main() -> int:
                 "textSha256": text_sha256,
                 "text": page_text,
                 "extractorVersion": "1",
+                "sourceSelection": task.source_selection,
             }
-            source_chain = append_chain(task.source_chain, response.url)
+            source_chain = append_chain(task.source_chain, task.url, response.url)
             for item, stations, election_context in accepted:
                 for station in stations:
                     candidate = candidate_record(
@@ -1300,19 +1405,32 @@ def main() -> int:
                         evidence_type,
                         source_id,
                         source_chain,
+                        task.source_selection,
                     )
                     prior_candidates[candidate["candidateId"]] = candidate
+            set_selected_outcome(task, "candidate")
         pending = next_tasks
 
+    for station_id, acquisition in selected_acquisitions.items():
+        if acquisition["outcome"] != "pending-chain":
+            continue
+        station = station_by_id[station_id]
+        if station.website_host in deferred_hosts or station.website_host in budget_hosts:
+            acquisition["outcome"] = "deferred-chain"
+        elif station.website_host in failed_hosts:
+            acquisition["outcome"] = "failed-chain"
+        else:
+            acquisition["outcome"] = "failed-chain"
+
     completed_hosts = attempted_hosts | failed_hosts | depth_hosts
-    # Advance only the completed prefix.  A failed or budget-limited host stays
-    # at the cursor for a later run instead of being silently skipped.
+    # Advance only ordinary rotation.  An explicit station run must not consume
+    # the routine cursor even when its selected acquisition succeeds.
     completed_prefix = 0
     for host in scheduled_hosts:
         if host not in completed_hosts:
             break
         completed_prefix += 1
-    if host_names:
+    if routine_cursor and host_names:
         state["hostCursor"] = (cursor + completed_prefix) % len(host_names)
 
     candidate_stations, _ = candidate_station_state()
@@ -1324,18 +1442,25 @@ def main() -> int:
         status = "not attempted"
         override = overrides_by_station.get(station.station_id)
         retained_authority = bool(same_election_override(override, args.election_id, args.election_year))
+        acquisition = selected_acquisitions.get(station.station_id)
         if not station.website_host:
             status = "no-site"
         elif station_is_suppressed(override, args.election_id):
             status = "suppressed"
-        elif station.station_id in candidate_stations:
-            status = "candidate"
+        elif acquisition is not None and acquisition["outcome"].startswith("failed"):
+            status = "failed-acquisition"
+        elif acquisition is not None and acquisition["outcome"].startswith("deferred"):
+            status = "deferred-acquisition"
+        elif acquisition is not None and acquisition["outcome"] == "ambiguous":
+            status = "ambiguous"
         elif station.station_id in selected_ids and station.website_host in failed_hosts:
             status = "failed"
         elif station.station_id in selected_ids and station.website_host in budget_hosts:
             status = "budget-limited"
         elif station.station_id in selected_ids and station.website_host in depth_hosts:
             status = "depth-limited"
+        elif station.station_id in candidate_stations:
+            status = "candidate"
         elif station.station_id in selected_ids and station.station_id in ambiguous_stations:
             status = "ambiguous"
         elif station.station_id in retained_stations:
@@ -1346,28 +1471,35 @@ def main() -> int:
             status = "scanned-no-evidence"
         elif station.website_host in deferred_hosts:
             status = "not attempted"
-        coverage.append(
-            {
-                "stationId": station.station_id,
-                "countryCode": station.country_code,
-                "host": station.website_host,
-                "isResident": station.is_resident,
-                "retainedAuthority": retained_authority,
-                "status": status,
-            }
-        )
+        coverage_item: dict[str, object] = {
+            "stationId": station.station_id,
+            "countryCode": station.country_code,
+            "host": station.website_host,
+            "isResident": station.is_resident,
+            "retainedAuthority": retained_authority,
+            "retainedCandidateEvidence": station.station_id in candidate_stations,
+            "status": status,
+        }
+        if acquisition is not None:
+            coverage_item["selectedAcquisitionOutcome"] = acquisition["outcome"]
+        coverage.append(coverage_item)
 
     report_ambiguous = list({
         (item["sourceUrl"], item["email"], tuple(item["stationIds"])): item for item in report_ambiguous
     }.values())
-    deferred_station_ids = sorted(
+    deferred_station_ids = sorted({
         station.station_id
         for station in selected_stations
-        if station.website_host in deferred_hosts or station.website_host in budget_hosts
-    )
+        if station.website_host in deferred_hosts
+        or station.website_host in budget_hosts
+        or selected_acquisitions.get(station.station_id, {}).get("outcome", "").startswith("deferred")
+    })
     counts: dict[str, int] = defaultdict(int)
     for item in coverage:
         counts[str(item["status"])] += 1
+    selected_acquisition_records = [
+        selected_acquisitions[station_id] for station_id in sorted(selected_acquisitions)
+    ]
     report = {
         "schemaVersion": 1,
         "runId": run_id,
@@ -1384,6 +1516,8 @@ def main() -> int:
         "counts": dict(sorted(counts.items())),
         "failures": report_failures,
         "deferredStationIds": deferred_station_ids,
+        "unmappedRegistryNames": unmapped_registry_names,
+        "selectedAcquisitions": selected_acquisition_records,
         "ambiguous": report_ambiguous,
         "partial": bool(deferred_station_ids or report_failures or budget_hosts or depth_hosts),
     }
