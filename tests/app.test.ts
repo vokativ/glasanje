@@ -42,6 +42,11 @@ import {
   calculateRemaining,
 } from '../src/components/Countdown';
 
+
+type CoverageStation = (typeof COUNTRIES)[number]['stations'][number] & {
+  coverageSourceEmail?: string;
+  coveringStationId?: string;
+};
 // Personal-information fields and the JMBG explanation must collect only what this flow needs
 // without presenting the local checksum as identity or voter-roll verification.
 describe('Personal information', () => {
@@ -481,16 +486,31 @@ describe('Missions and Coverage Dataset', () => {
     );
   });
 
-  test('Singapore is covered by Jakarta embassy with correct email', () => {
+  test('Singapore inherits Jakarta’s final election-contact state through its exact coverage link', () => {
     const sg = COUNTRY_BY_CODE.get('SG');
     expect(sg).toBeDefined();
     expect(sg?.label).toBe('Singapur');
     expect(sg?.stations.length).toBe(1);
 
-    const station = sg!.stations[0];
-    expect(station.isResident).toBe(false);
-    expect(station.email).toBe('consular.jakarta@mfa.rs');
-    expect(station.website).toBe('https://jakarta.mfa.gov.rs');
+    const station = sg!.stations[0] as CoverageStation;
+    const coveringStation = COUNTRIES
+      .flatMap((country) => country.stations)
+      .find((candidate) => candidate.id === station.coveringStationId);
+
+    expect(station).toMatchObject({
+      isResident: false,
+      coverageSourceEmail: 'consular.jakarta@mfa.rs',
+      coveringStationId: 'st-id-emb-main',
+      website: 'https://jakarta.mfa.gov.rs',
+    });
+    expect(coveringStation).toMatchObject({ isResident: true });
+    expect(station.email).toBe(coveringStation!.email);
+    expect(station.electionContactApproval).toBe(
+      coveringStation!.electionContactApproval,
+    );
+    expect(station.isElectionContactConfirmed).toBe(
+      coveringStation!.isElectionContactConfirmed,
+    );
     expect(station.embassyCyr).toContain('Индонезија');
     expect(station.embassyCyr).toContain('Сингапур');
   });
@@ -520,17 +540,47 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.isElectionContactConfirmed).toBe(false);
     expect(station.website).toBe('https://canberra.mfa.gov.rs');
   });
-  test('Antigua and Barbuda uses the confirmed U.S. Embassy election recipient', () => {
+  test('Antigua and Barbuda preserves its explicit election recipient over its coverage source', () => {
     const station = COUNTRY_BY_CODE.get('AG')!.stations.find(
       (candidate) => candidate.id === 'st-nonres-ag',
-    );
+    ) as CoverageStation;
 
     expect(station).toMatchObject({
+      coverageSourceEmail: 'info@serbiaembusa.org',
+      coveringStationId: 'st-us-emb-main',
       email: 'izbori@serbiaembusa.org',
+      electionContactApproval: 'source-confirmed',
       isElectionContactConfirmed: true,
     });
   });
 
+
+  test('keeps Burundi’s ambiguous Nairobi coverage raw and unconfirmed', () => {
+    const station = COUNTRY_BY_CODE.get('BI')!.stations[0] as CoverageStation;
+    const candidateResidents = ['KE', 'TZ'].map(
+      (countryCode) => COUNTRY_BY_CODE.get(countryCode)!.stations[0],
+    );
+
+    expect(candidateResidents).toEqual([
+      expect.objectContaining({
+        email: 'srb.emb.kenya@mfa.rs',
+        website: 'https://nairobi.mfa.gov.rs',
+        isResident: true,
+      }),
+      expect.objectContaining({
+        email: 'srb.emb.kenya@mfa.rs',
+        website: 'https://nairobi.mfa.gov.rs',
+        isResident: true,
+      }),
+    ]);
+    expect(station).toMatchObject({
+      coverageSourceEmail: 'srb.emb.kenya@mfa.rs',
+      email: 'srb.emb.kenya@mfa.rs',
+      electionContactApproval: 'unconfirmed',
+      isElectionContactConfirmed: false,
+    });
+    expect(station).not.toHaveProperty('coveringStationId');
+  });
 
   test('Germany has 6 resident stations', () => {
     const de = COUNTRY_BY_CODE.get('DE');

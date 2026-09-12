@@ -118,6 +118,14 @@ Pre pisanja, tok uvek pravi novi dry-run. Sa `--apply` bira **samo** `eligibleSt
 
 Trajni override čuva postojeće, nevezane ključeve. Svaki korisnički autorizovan primalac ima strukturisano poreklo `_electionContactProvenance` sa `schemaVersion: 2`, `authorization: {"type":"operator"}`, `electionId` i godinom izbora, bez izmišljenih AI polja. Takav primalac ostaje vidljiv, ali nije `isElectionContactConfirmed`: potvrđen može biti samo AI/evidence-vezan zapis. Postojeći meksički operator-autorizovan, process-only izuzetak zato ostaje vidljiv i nepotvrđen; nije kandidat za automatsku promociju. Automatska promocija zadržava svaku zamenu operatorove autorizacije dok arhitekta izričito ne prihvati tu zamenu. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava.
 
+## Nerezidentne stanice i pokrivanje
+
+Pri izgradnji javnih podataka, nerezidentna stanica može biti povezana sa pokrivajućom rezidentnom misijom samo ako sirovi zapis o pokrivanju i **tačno jedna** rezidentna misija imaju isti normalizovani kanonski domaćin sajta i istu normalizovanu osnovnu primarnu e-adresu. Domaćin se normalizuje konzervativno: mala slova i par golog domaćina sa `www` varijantom; podudaranje samo po domaćinu je zabranjeno. E-adresa se normalizuje po postojećim pravilima graditelja.
+
+Kada je veza jedinstveno razrešena, javni zapis čuva `coveringStationId`, a izvornu e-adresu iz zapisa o pokrivanju čuva kao `coverageSourceEmail` radi provere porekla. Override-i rezidentnih misija primenjuju se prvo. Zatim nerezidentna stanica bez sopstvenog izričitog override-a za `electionEmail` nasleđuje konačno izabranog primaoca rezidentne misije, `electionContactApproval` i `isElectionContactConfirmed`. Njen izričiti `electionEmail` override uvek ima prednost.
+
+Ako nema jedinstvenog podudaranja — uključujući više mogućih rezidentnih misija — veza se ne razrešava: zadržavaju se sirova e-adresa pokrivanja i nepotvrđen status. Ovo je pravilo izbora primaoca pri generisanju podataka, a ne automatski dokaz da je kontakt izborni.
+
 ## Izgradnja podataka i zasebno objavljivanje
 
 Posle uspešnog `--apply`, u radnoj kopiji ponovo izgradite podatke koje koristi frontend, pa proverite i sastavite izdanje:

@@ -184,6 +184,17 @@ def clean_address(addr):
 def is_valid_email(value):
     return isinstance(value, str) and bool(re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', value.strip()))
 
+def canonical_website_host(website):
+    if not isinstance(website, str) or not website.strip():
+        return ""
+    parsed = urlsplit(website if '://' in website else f'//{website}')
+    host = (parsed.hostname or "").casefold()
+    return host[4:] if host.startswith("www.") else host
+
+
+def normalized_baseline_email(email):
+    return email.strip().casefold() if isinstance(email, str) else ""
+
 def station_email_suffix(email):
     local_part = email.split('@', 1)[0].lower()
     return re.sub(r'[^a-z0-9]+', '-', local_part).strip('-')
@@ -200,8 +211,7 @@ def station_identity_suffix(website, email):
 
     return station_email_suffix(email)
 
-# 1. Build mission registry
-missions_by_domain = {}
+# 1. Build resident mission registry
 all_resident_missions = []
 
 for item in raw_data:
@@ -240,6 +250,7 @@ for item in raw_data:
             # not create anonymous replacements for missions already known to callers.
             mission_id = f"rs-{'emb' if sec == 'Амбасада' else 'cons'}-{code.lower()}-{to_latin(city_cyr).lower() or 'mission'}"
             mission_id = re.sub(r'[^a-z0-9-]+', '', mission_id)
+            mission_key = (code, sec, city_cyr, website, primary_email)
 
             mission_obj = {
                 'id': mission_id,
@@ -255,12 +266,12 @@ for item in raw_data:
                 'email': primary_email,
                 'isElectionContactConfirmed': False,
                 'backupEmails': [e for e in emails if e != primary_email],
+                'missionKey': mission_key,
+                'websiteHost': canonical_website_host(website),
+                'baselineEmail': normalized_baseline_email(primary_email),
             }
             all_resident_missions.append(mission_obj)
 
-            if website:
-                domain = re.sub(r'^https?://(www\.)?', '', website).rstrip('/')
-                missions_by_domain[domain] = mission_obj
 
 # 2. Build final country stations mapping
 countries_list = []
@@ -301,6 +312,7 @@ for item in raw_data:
 
             station_id = f"st-{code.lower()}-{'emb' if sec == 'Амбасада' else 'cons'}-{to_latin(city_cyr).lower() or 'main'}"
             station_id = re.sub(r'[^a-z0-9-]+', '', station_id)
+            mission_key = (code, sec, city_cyr, website, primary_email)
 
             stations.append({
                 'id': station_id,
@@ -312,6 +324,7 @@ for item in raw_data:
                 'website': website,
                 'address': addr,
                 'isResident': True,
+                '_residentMissionKey': mission_key,
             })
 
     # If no resident station with email, check non-residential coverage
@@ -319,7 +332,6 @@ for item in raw_data:
         for rep in item.get('representations', []):
             if rep['section'] in ['Покрива на нерезиденцијалној основи', 'Амбасада']:
                 website = rep.get('website') or ""
-                domain = re.sub(r'^https?://(www\.)?', '', website).rstrip('/') if website else ""
                 emails = rep.get('emails', [])
                 primary_email = rep.get('primary_consular_email') or (emails[0] if emails else "")
                 if '?' in primary_email:
@@ -329,17 +341,34 @@ for item in raw_data:
                 if not primary_email:
                     continue
 
-                covering_mission = missions_by_domain.get(domain)
-                if covering_mission:
-                    name_cyr = f"{covering_mission['nameCyr']} (покрива {c_cyr})"
-                    name_lat = f"{covering_mission['name']} (pokriva {c_lat})"
+                coverage_host = canonical_website_host(website)
+                coverage_email = normalized_baseline_email(primary_email)
+                covering_candidates = [
+                    mission for mission in all_resident_missions
+                    if coverage_host
+                    and coverage_email
+                    and mission['websiteHost'] == coverage_host
+                    and mission['baselineEmail'] == coverage_email
+                ]
+                covering_mission = (
+                    covering_candidates[0] if len(covering_candidates) == 1 else None
+                )
+                # An unmatched source retains its existing host-derived label, but
+                # this presentation fallback never establishes a coverage link.
+                display_mission = covering_mission
+                if display_mission is None and coverage_host:
+                    for mission in all_resident_missions:
+                        if mission['websiteHost'] == coverage_host:
+                            display_mission = mission
+                if display_mission:
+                    name_cyr = f"{display_mission['nameCyr']} (покрива {c_cyr})"
+                    name_lat = f"{display_mission['name']} (pokriva {c_lat})"
                 else:
                     name_cyr = f"Надлежно дипломатско представништво (покрива {c_cyr})"
                     name_lat = f"Nadležno diplomatsko predstavništvo (pokriva {c_lat})"
 
                 station_id = f"st-nonres-{code.lower()}"
-
-                stations.append({
+                station = {
                     'id': station_id,
                     'embassy': name_lat,
                     'embassyCyr': name_cyr,
@@ -349,7 +378,11 @@ for item in raw_data:
                     'website': website,
                     'address': addr,
                     'isResident': False,
-                })
+                    'coverageSourceEmail': primary_email,
+                }
+                if covering_mission:
+                    station['_coveringMissionKey'] = covering_mission['missionKey']
+                stations.append(station)
 
     countries_list.append({
         'countryCode': code,
@@ -395,36 +428,101 @@ for base_id, colliding_stations in stations_by_base_id.items():
                 )
             station['id'] = f"{candidate_id}-{email_suffix}"
 
-# Overrides are the maintained correction layer over the MFA baseline. Private
-# provenance fields stay out of stations, while a valid electionEmail intentionally
-# replaces the scraped mailbox for the generated public catalog.
+# A coverage source can identify a resident station only by the paired source
+# fields. Host-only matches are deliberately not links.
+resident_stations_by_mission_key = {}
+for country in countries_list:
+    for station in country['stations']:
+        if station['isResident']:
+            mission_key = station.pop('_residentMissionKey')
+            resident_stations_by_mission_key.setdefault(mission_key, []).append(station)
+
+# Overrides are the maintained correction layer over the MFA baseline. Resident
+# corrections are applied first so a resolved nonresident station can inherit the
+# resident's final election-contact state.
 overrides_path = "data/overrides.json"
+mission_overrides = {}
+country_overrides = {}
 if os.path.exists(overrides_path):
     try:
-        with open(overrides_path, "r", encoding="utf-8") as of:
-            ov_data = json.load(of)
-            m_ov = ov_data.get("missionOverrides", {})
-            c_ov = ov_data.get("countryOverrides", {})
-            for country in countries_list:
-                if country["countryCode"] in c_ov:
-                    country.update(c_ov[country["countryCode"]])
-                for s in country["stations"]:
-                    patch = m_ov.get(s["id"])
-                    if not isinstance(patch, dict):
-                        continue
-                    for k, v in patch.items():
-                        if not k.startswith("_") and k != "electionEmail" and v is not None:
-                            s[k] = v
-                    election_email = patch.get("electionEmail")
-                    approval = election_contact_approval(
-                        patch.get("_electionContactProvenance")
-                    )
-                    s["electionContactApproval"] = approval
-                    s["isElectionContactConfirmed"] = approval == "source-confirmed"
-                    if is_valid_email(election_email):
-                        s["email"] = election_email.strip()
+        with open(overrides_path, "r", encoding="utf-8") as override_file:
+            overrides = json.load(override_file)
+        loaded_mission_overrides = overrides.get("missionOverrides", {})
+        loaded_country_overrides = overrides.get("countryOverrides", {})
+        if isinstance(loaded_mission_overrides, dict):
+            mission_overrides = loaded_mission_overrides
+        if isinstance(loaded_country_overrides, dict):
+            country_overrides = loaded_country_overrides
     except Exception as e:
-        print("Warning: failed to apply overrides:", e)
+        print("Warning: failed to read overrides:", e)
+
+
+def apply_non_election_override(station, patch):
+    for key, value in patch.items():
+        if (
+            not key.startswith("_")
+            and key not in {"electionEmail", "coverageSourceEmail", "coveringStationId"}
+            and value is not None
+        ):
+            station[key] = value
+
+
+def apply_election_contact_override(station, patch):
+    approval = election_contact_approval(
+        patch.get("_electionContactProvenance")
+    )
+    station["electionContactApproval"] = approval
+    station["isElectionContactConfirmed"] = approval == "source-confirmed"
+    election_email = patch.get("electionEmail")
+    if is_valid_email(election_email):
+        station["email"] = election_email.strip()
+        return True
+    return False
+
+
+for country in countries_list:
+    country_patch = country_overrides.get(country["countryCode"])
+    if isinstance(country_patch, dict):
+        country.update(country_patch)
+    for station in country["stations"]:
+        if not station["isResident"]:
+            continue
+        patch = mission_overrides.get(station["id"])
+        if isinstance(patch, dict):
+            apply_non_election_override(station, patch)
+            apply_election_contact_override(station, patch)
+
+
+for country in countries_list:
+    for station in country["stations"]:
+        if station["isResident"]:
+            continue
+
+        patch = mission_overrides.get(station["id"])
+        has_explicit_election_email = False
+        if isinstance(patch, dict):
+            apply_non_election_override(station, patch)
+            has_explicit_election_email = apply_election_contact_override(station, patch)
+
+        covering_stations = resident_stations_by_mission_key.get(
+            station.pop('_coveringMissionKey', None),
+            [],
+        )
+        covering_station = covering_stations[0] if len(covering_stations) == 1 else None
+        if covering_station:
+            station["coveringStationId"] = covering_station["id"]
+
+        if has_explicit_election_email:
+            continue
+        if covering_station:
+            station["email"] = covering_station["email"]
+            station["electionContactApproval"] = covering_station["electionContactApproval"]
+            station["isElectionContactConfirmed"] = covering_station["isElectionContactConfirmed"]
+            continue
+
+        station["email"] = station["coverageSourceEmail"]
+        station["electionContactApproval"] = "unconfirmed"
+        station["isElectionContactConfirmed"] = False
 
 # Registry names preserve MFA's raw country labels separately from public search
 # aliases. They are generated from the raw-name-to-code map so registry discovery
@@ -521,6 +619,8 @@ export interface PollingStation {{
   email: string;
   electionContactApproval: 'source-confirmed' | 'operator-approved' | 'unconfirmed';
   isElectionContactConfirmed: boolean;
+  coverageSourceEmail?: string;
+  coveringStationId?: string;
   website: string;
   address: string;
   isResident: boolean;

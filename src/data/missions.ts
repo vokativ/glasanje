@@ -11,6 +11,8 @@ export interface PollingStation {
   email: string;
   electionContactApproval: 'source-confirmed' | 'operator-approved' | 'unconfirmed';
   isElectionContactConfirmed: boolean;
+  coverageSourceEmail?: string;
+  coveringStationId?: string;
   website: string;
   address: string;
   isResident: boolean;
@@ -40,7 +42,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tehran.mfa.gov.rs",
         "address": "No. 3, 4th Alley, North Mohammad Reza Shajarian St.,Shahrak e Qods (Gharb), Tehran, IRAN",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno@serbiatehran.com",
+        "coveringStationId": "st-ir-emb-main"
       }
     ],
     "aliases": [
@@ -165,7 +169,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://madrid.mfa.gov.rs",
         "address": "c/Velazquez 3, Piso 228001 МАДРИДШПАНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konz.madrid@mfa.rs",
+        "coveringStationId": "st-es-emb-main"
       }
     ],
     "aliases": [
@@ -190,7 +196,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -312,7 +320,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://newdelhi.mfa.gov.rs",
         "address": "3/50 G Niti Marg Chanakyapuri110021 ЊУ ДЕЛХИИНДИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embassyofserbiadelhi@hotmail.com",
+        "coveringStationId": "st-in-emb-main"
       }
     ],
     "aliases": [
@@ -337,7 +347,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -362,7 +374,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -437,7 +451,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -487,7 +503,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -512,7 +530,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://buenosaires.mfa.gov.rs",
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consulado.argentina@mfa.rs",
+        "coveringStationId": "st-ar-emb-main"
       }
     ],
     "aliases": [
@@ -606,7 +626,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -656,7 +678,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -706,7 +730,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -731,7 +757,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -756,7 +783,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://newdelhi.mfa.gov.rs",
         "address": "3/50 G Niti Marg Chanakyapuri110021 ЊУ ДЕЛХИИНДИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embassyofserbiadelhi@hotmail.com",
+        "coveringStationId": "st-in-emb-main"
       }
     ],
     "aliases": [
@@ -781,7 +810,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -858,7 +889,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -883,7 +916,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.angola@mfa.rs",
+        "coveringStationId": "st-ao-emb-main"
       }
     ],
     "aliases": [
@@ -908,7 +943,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -958,7 +995,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -979,11 +1018,13 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko) (pokriva Gvatemala)",
         "embassyCyr": "Амбасада Републике Србије (Мексико) (покрива Гватемала)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
+        "coveringStationId": "st-mx-emb-main"
       }
     ],
     "aliases": [
@@ -1008,7 +1049,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambasada@ambserbie-alger.com",
+        "coveringStationId": "st-dz-emb-main"
       }
     ],
     "aliases": [
@@ -1034,7 +1077,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambasada@ambserbie-alger.com",
+        "coveringStationId": "st-dz-emb-main"
       }
     ],
     "aliases": [
@@ -1059,7 +1104,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -1084,7 +1131,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "",
         "address": "10 Vazgen Sargsyan St. 0010 Yerevan Piazza Grande Business Center, 1st floor, office 109",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embserbia.yerevan@gmail.com"
       }
     ],
     "aliases": [
@@ -1196,7 +1244,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -1221,7 +1271,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://havana.mfa.gov.rs",
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "officesrbhav@gmail.com",
+        "coveringStationId": "st-cu-emb-main"
       }
     ],
     "aliases": [
@@ -1271,7 +1323,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://buenosaires.mfa.gov.rs",
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consulado.argentina@mfa.rs",
+        "coveringStationId": "st-ar-emb-main"
       }
     ],
     "aliases": [
@@ -1296,7 +1350,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.angola@mfa.rs",
+        "coveringStationId": "st-ao-emb-main"
       }
     ],
     "aliases": [
@@ -1317,11 +1373,13 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko) (pokriva El Salvador)",
         "embassyCyr": "Амбасада Републике Србије (Мексико) (покрива Ел Салвадор)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
+        "coveringStationId": "st-mx-emb-main"
       }
     ],
     "aliases": [
@@ -1346,7 +1404,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -1371,7 +1430,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -1396,7 +1457,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://helsinki.mfa.gov.rs",
         "address": "Kulosaarentie 3600570 ХЕЛСИНКИФИНСКА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "office@serbianembassy.fi",
+        "coveringStationId": "st-fi-emb-main"
       }
     ],
     "aliases": [
@@ -1471,7 +1534,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.lisbon.mfa.gov.rs",
         "address": "Rua de Alcolena 11 1400 – 004 ЛИСАБОН ПОРТУГАЛ",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serviaemba@netcabo.pt",
+        "coveringStationId": "st-pt-emb-main"
       }
     ],
     "aliases": [
@@ -1647,7 +1712,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://www.london.mfa.gov.rs",
         "address": "28 Belgrave Square ЛОНДОН SW1X 8QB ВЕЛИКА БРИТАНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.london@mfa.rs",
+        "coveringStationId": "st-gb-emb-main"
       }
     ],
     "aliases": [
@@ -1672,7 +1739,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.oslo.mfa.gov.rs",
         "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambasada@serbianembassy.no",
+        "coveringStationId": "st-no-emb-main"
       }
     ],
     "aliases": [
@@ -1697,7 +1766,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -1769,7 +1840,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://havana.mfa.gov.rs",
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "officesrbhav@gmail.com",
+        "coveringStationId": "st-cu-emb-main"
       }
     ],
     "aliases": [
@@ -1819,7 +1892,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://kuwait.mfa.gov.rs",
         "address": "BayanBlock No. 13, Street No. 1, Villa No.18Safat 13066P.O. Box 20511КУВАЈТКУВАЈТ",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embrskw@gmail.comserbkonzkw",
+        "coveringStationId": "st-kw-emb-main"
       }
     ],
     "aliases": [
@@ -1869,7 +1944,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://damascus.mfa.gov.rs",
         "address": "Mazzeh Eastern Villas, Farabi Street,Damascus,Syria",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.syria@mfa.rs",
+        "coveringStationId": "st-sy-emb-main"
       }
     ],
     "aliases": [
@@ -1945,7 +2022,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -1995,7 +2073,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -2020,7 +2100,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://kinshasa.mfa.gov.rs",
         "address": "Avenue de 1 Etoile 112,Gombe, КИНШАСА, КОНГО, ДР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbambakin@gmail.com",
+        "coveringStationId": "st-cd-emb-main"
       }
     ],
     "aliases": [
@@ -2192,7 +2274,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.moskva.mfa.gov.rs",
         "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno.moskva@mfa.rs",
+        "coveringStationId": "st-ru-emb-main"
       }
     ],
     "aliases": [
@@ -2219,7 +2303,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -2244,7 +2330,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -2265,11 +2353,13 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko) (pokriva Kostarika)",
         "embassyCyr": "Амбасада Републике Србије (Мексико) (покрива Костарика)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
+        "coveringStationId": "st-mx-emb-main"
       }
     ],
     "aliases": [
@@ -2344,7 +2434,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://yangon.mfa.gov.rs",
         "address": "114-A Inya Road,Kamayut TownshipЈАНГОНМЈАНМАР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbemb@yangon.net.mm",
+        "coveringStationId": "st-mm-emb-main"
       }
     ],
     "aliases": [
@@ -2369,7 +2461,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -2455,7 +2549,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -2505,7 +2601,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://warsaw.mfa.gov.rs",
         "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embassy.warsaw@mfa.rs",
+        "coveringStationId": "st-pl-emb-main"
       }
     ],
     "aliases": [
@@ -2530,7 +2628,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://berne.mfa.gov.rs",
         "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@ambasadasrbije.ch",
+        "coveringStationId": "st-ch-emb-main"
       }
     ],
     "aliases": [
@@ -2555,7 +2655,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://brussels.mfa.gov.rs",
         "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno.brisel@mfa.rs",
+        "coveringStationId": "st-be-emb-main"
       }
     ],
     "aliases": [
@@ -2580,7 +2682,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -2630,7 +2734,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -2655,7 +2761,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://newdelhi.mfa.gov.rs",
         "address": "3/50 G Niti Marg Chanakyapuri110021 ЊУ ДЕЛХИИНДИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embassyofserbiadelhi@hotmail.com",
+        "coveringStationId": "st-in-emb-main"
       }
     ],
     "aliases": [
@@ -2680,7 +2788,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -2705,7 +2815,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambasada@ambserbie-alger.com",
+        "coveringStationId": "st-dz-emb-main"
       }
     ],
     "aliases": [
@@ -2780,7 +2892,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.japan@mfa.rs",
+        "coveringStationId": "st-jp-emb-main"
       }
     ],
     "aliases": [
@@ -2806,7 +2920,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://rabat.mfa.gov.rs",
         "address": "24, Rue El Kadi Ahmed MoulineSouissiРАБАТМАРОКОB.P.5014",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambrsrabat@gmail.com",
+        "coveringStationId": "st-ma-emb-main"
       }
     ],
     "aliases": [
@@ -2831,7 +2947,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -2881,7 +2999,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.japan@mfa.rs",
+        "coveringStationId": "st-jp-emb-main"
       }
     ],
     "aliases": [
@@ -2931,7 +3051,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@srbembassy.org.za",
+        "coveringStationId": "st-za-emb-main"
       }
     ],
     "aliases": [
@@ -2956,7 +3078,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://bucharest.mfa.gov.rs",
         "address": "General Eremia Grigorescu nr. 12БукурештРумунија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consulate.bucharest@mfa.rs",
+        "coveringStationId": "st-ro-emb-main"
       }
     ],
     "aliases": [
@@ -2981,7 +3105,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.paris.mfa.gov.rs",
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambassade.paris@mfa.rs",
+        "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs"
       },
       {
         "id": "st-nonres-mc-info",
@@ -2992,7 +3118,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "",
         "address": "123, Rue St Martin 75004 ПАРИЗ ФРАНЦУСКА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@ccserbie.com"
       }
     ],
     "aliases": [
@@ -3017,7 +3144,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://beijing.mfa.gov.rs",
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embserbia@embserbia.cn",
+        "coveringStationId": "st-cn-emb-main"
       }
     ],
     "aliases": [
@@ -3042,7 +3171,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.angola@mfa.rs",
+        "coveringStationId": "st-ao-emb-main"
       }
     ],
     "aliases": [
@@ -3067,7 +3198,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -3172,7 +3305,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://newdelhi.mfa.gov.rs",
         "address": "3/50 G Niti Marg Chanakyapuri110021 ЊУ ДЕЛХИИНДИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embassyofserbiadelhi@hotmail.com",
+        "coveringStationId": "st-in-emb-main"
       }
     ],
     "aliases": [
@@ -3197,7 +3332,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -3243,11 +3380,13 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko) (pokriva Nikaragva)",
         "embassyCyr": "Амбасада Републике Србије (Мексико) (покрива Никарагва)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
+        "coveringStationId": "st-mx-emb-main"
       }
     ],
     "aliases": [
@@ -3272,7 +3411,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -3322,7 +3463,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -3348,7 +3491,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://cairo.mfa.gov.rs",
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbia@serbiaeg.comkonzul",
+        "coveringStationId": "st-eg-emb-main"
       }
     ],
     "aliases": [
@@ -3373,7 +3518,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tehran.mfa.gov.rs",
         "address": "No. 3, 4th Alley, North Mohammad Reza Shajarian St.,Shahrak e Qods (Gharb), Tehran, IRAN",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno@serbiatehran.com",
+        "coveringStationId": "st-ir-emb-main"
       }
     ],
     "aliases": [
@@ -3398,7 +3545,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.japan@mfa.rs",
+        "coveringStationId": "st-jp-emb-main"
       }
     ],
     "aliases": [
@@ -3423,7 +3572,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://cairo.mfa.gov.rs",
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbia@serbiaeg.comkonzul",
+        "coveringStationId": "st-eg-emb-main"
       }
     ],
     "aliases": [
@@ -3444,11 +3595,13 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko) (pokriva Panama)",
         "embassyCyr": "Амбасада Републике Србије (Мексико) (покрива Панама)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
+        "coveringStationId": "st-mx-emb-main"
       }
     ],
     "aliases": [
@@ -3473,7 +3626,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -3498,7 +3653,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://buenosaires.mfa.gov.rs",
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consulado.argentina@mfa.rs",
+        "coveringStationId": "st-ar-emb-main"
       }
     ],
     "aliases": [
@@ -3523,7 +3680,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://buenosaires.mfa.gov.rs",
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consulado.argentina@mfa.rs",
+        "coveringStationId": "st-ar-emb-main"
       }
     ],
     "aliases": [
@@ -3598,7 +3757,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://kinshasa.mfa.gov.rs",
         "address": "Avenue de 1 Etoile 112,Gombe, КИНШАСА, КОНГО, ДР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbambakin@gmail.com",
+        "coveringStationId": "st-cd-emb-main"
       }
     ],
     "aliases": [
@@ -3624,7 +3785,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -3711,7 +3873,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -3736,7 +3900,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://roma.mfa.gov.rs",
         "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.italy@mfa.rs",
+        "coveringStationId": "st-it-emb-main"
       }
     ],
     "aliases": [
@@ -3761,7 +3927,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.angola@mfa.rs",
+        "coveringStationId": "st-ao-emb-main"
       }
     ],
     "aliases": [
@@ -3811,7 +3979,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -3836,7 +4006,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -3861,7 +4033,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://beijing.mfa.gov.rs",
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embserbia@embserbia.cn",
+        "coveringStationId": "st-cn-emb-main"
       }
     ],
     "aliases": [
@@ -3912,7 +4086,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -3937,7 +4112,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://rabat.mfa.gov.rs",
         "address": "24, Rue El Kadi Ahmed MoulineSouissiРАБАТМАРОКОB.P.5014",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "ambrsrabat@gmail.com",
+        "coveringStationId": "st-ma-emb-main"
       }
     ],
     "aliases": [
@@ -3962,7 +4139,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -3987,7 +4166,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -4012,7 +4193,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -4169,7 +4352,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -4194,7 +4379,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -4219,7 +4405,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://vatican.mfa.gov.rs",
         "address": "Via dei Monti Parioli 2000197 РИМВАТИКАН",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "amb.serbia.vatican@ambroma.com",
+        "coveringStationId": "st-va-emb-main"
       }
     ],
     "aliases": [
@@ -4245,7 +4433,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://cairo.mfa.gov.rs",
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbia@serbiaeg.comkonzul",
+        "coveringStationId": "st-eg-emb-main"
       }
     ],
     "aliases": [
@@ -4270,7 +4460,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -4295,7 +4487,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -4345,7 +4539,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.moskva.mfa.gov.rs",
         "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno.moskva@mfa.rs",
+        "coveringStationId": "st-ru-emb-main"
       }
     ],
     "aliases": [
@@ -4370,7 +4566,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abuja.mfa.gov.rs",
         "address": "11, Rio Negro Close, off Yedseram StreetMaitama DistrictАБУЏАНИГЕРИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbconsabuja@gmail.com",
+        "coveringStationId": "st-ng-emb-main"
       }
     ],
     "aliases": [
@@ -4395,7 +4593,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -4420,7 +4620,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "info@serbiaembusa.org",
+        "coveringStationId": "st-us-emb-main"
       }
     ],
     "aliases": [
@@ -4445,7 +4647,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -4495,7 +4699,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.moskva.mfa.gov.rs",
         "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno.moskva@mfa.rs",
+        "coveringStationId": "st-ru-emb-main"
       }
     ],
     "aliases": [
@@ -4556,7 +4762,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -4581,7 +4788,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.moskva.mfa.gov.rs",
         "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "konzularno.moskva@mfa.rs",
+        "coveringStationId": "st-ru-emb-main"
       }
     ],
     "aliases": [
@@ -4682,7 +4891,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -4707,7 +4917,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://buenosaires.mfa.gov.rs",
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consulado.argentina@mfa.rs",
+        "coveringStationId": "st-ar-emb-main"
       }
     ],
     "aliases": [
@@ -4732,7 +4944,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "consular.jakarta@mfa.rs",
+        "coveringStationId": "st-id-emb-main"
       }
     ],
     "aliases": [
@@ -4782,7 +4996,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.australia@mfa.rs",
+        "coveringStationId": "st-au-emb-main"
       }
     ],
     "aliases": [
@@ -4854,7 +5070,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://havana.mfa.gov.rs",
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "officesrbhav@gmail.com",
+        "coveringStationId": "st-cu-emb-main"
       }
     ],
     "aliases": [
@@ -4900,11 +5118,13 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Meksiko) (pokriva Honduras)",
         "embassyCyr": "Амбасада Републике Србије (Мексико) (покрива Хондурас)",
         "email": "embajadaserbiaenmexico@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
+        "coveringStationId": "st-mx-emb-main"
       }
     ],
     "aliases": [
@@ -4976,7 +5196,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://kinshasa.mfa.gov.rs",
         "address": "Avenue de 1 Etoile 112,Gombe, КИНШАСА, КОНГО, ДР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbambakin@gmail.com",
+        "coveringStationId": "st-cd-emb-main"
       }
     ],
     "aliases": [
@@ -5037,7 +5259,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://kinshasa.mfa.gov.rs",
         "address": "Avenue de 1 Etoile 112,Gombe, КИНШАСА, КОНГО, ДР",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "serbambakin@gmail.com",
+        "coveringStationId": "st-cd-emb-main"
       }
     ],
     "aliases": [
@@ -5112,7 +5336,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
       }
     ],
     "aliases": [
@@ -5223,7 +5448,9 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://newdelhi.mfa.gov.rs",
         "address": "3/50 G Niti Marg Chanakyapuri110021 ЊУ ДЕЛХИИНДИЈА",
-        "isResident": false
+        "isResident": false,
+        "coverageSourceEmail": "embassyofserbiadelhi@hotmail.com",
+        "coveringStationId": "st-in-emb-main"
       }
     ],
     "aliases": [
