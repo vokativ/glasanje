@@ -101,7 +101,7 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                     <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>
                       {t('✓ Izborna i-mejl adresa je potvrđena.')}
                     </p>
-                    <ElectionNoticeLink notice={station.electionNotice} showMissing />
+                    <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing />
                     <div className="mission-detail">
                       <strong>{t('Adresa za prijavu:')}</strong>
                       <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>{station.email}</span>
@@ -116,7 +116,7 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                   </p>
                 )}
                 {station.electionContactApproval === 'unconfirmed' && (
-                  <ElectionNoticeLink notice={station.electionNotice} />
+                  <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} />
                 )}
                 {station.website && (
                   <a

@@ -541,7 +541,7 @@ def apply_non_election_override(station, patch):
     for key, value in patch.items():
         if (
             not key.startswith("_")
-            and key not in {"electionEmail", "electionNotice", "coverageSourceEmail", "coveringStationId"}
+            and key not in {"electionEmail", "electionNotice", "electionNoticeStatus", "coverageSourceEmail", "coveringStationId"}
             and value is not None
         ):
             station[key] = value
@@ -741,11 +741,23 @@ if os.path.exists(notice_path):
 # Deliberately selected announcement links survive later crawl opinions/failures.
 # They need no archived candidate packet and confer no recipient authorization.
 notice_links.update(maintained_election_notices(mission_overrides, {"countries": countries_list}))
+notice_statuses = {}
+for station_id, patch in mission_overrides.items():
+    if isinstance(patch, dict) and "electionNoticeStatus" in patch:
+        if station_id not in station_id_locations or patch["electionNoticeStatus"] != "not-published":
+            raise ValueError(f"Invalid maintained election notice status for {station_id}")
+        notice_statuses[station_id] = patch["electionNoticeStatus"]
 for country in countries_list:
     for station in country["stations"]:
         notice = notice_links.get(station["id"]) or notice_links.get(station.get("coveringStationId"))
         if notice:
             station["electionNotice"] = notice
+        else:
+            # A later actual announcement supersedes a recorded absence. Otherwise
+            # inherit only through an already resolved ministry coverage relationship.
+            status = notice_statuses.get(station["id"]) or notice_statuses.get(station.get("coveringStationId"))
+            if status:
+                station["electionNoticeStatus"] = status
 
 os.makedirs("src/data", exist_ok=True)
 # These paired files are generated artifacts with different consumers: the JSON is
@@ -787,6 +799,7 @@ export interface PollingStation {{
   address: string;
   isResident: boolean;
   electionNotice?: ElectionNotice;
+  electionNoticeStatus?: 'not-published';
 }}
 
 export interface VotingCountry {{

@@ -25,6 +25,7 @@ export interface PollingStation {
   address: string;
   isResident: boolean;
   electionNotice?: ElectionNotice;
+  electionNoticeStatus?: 'not-published';
 }
 
 export interface VotingCountry {
@@ -859,7 +860,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -1276,7 +1278,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "10 Vazgen Sargsyan St. 0010 Yerevan Piazza Grande Business Center, 1st floor, office 109",
         "isResident": false,
         "coverageSourceEmail": "embserbia.yerevan@gmail.com",
-        "coveringStationId": "st-am-emb-main"
+        "coveringStationId": "st-am-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -1571,7 +1574,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -2141,7 +2145,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "",
         "address": "10 Vazgen Sargsyan St. 0010 Yerevan Piazza Grande Business Center, 1st floor, office 109",
-        "isResident": true
+        "isResident": true,
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -2260,7 +2265,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -2439,7 +2445,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -3484,7 +3491,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
         "isResident": false,
         "coverageSourceEmail": "ambassade.paris@mfa.rs",
-        "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs"
+        "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
+        "electionNoticeStatus": "not-published"
       },
       {
         "id": "st-nonres-mc-info",
@@ -3497,7 +3505,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
         "isResident": false,
         "coverageSourceEmail": "info@ccserbie.com",
-        "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs"
+        "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -4270,7 +4279,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -4621,7 +4631,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -4957,7 +4968,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -5369,7 +5381,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -5513,7 +5526,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [
@@ -5658,7 +5672,8 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.paris.mfa.gov.rs",
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNoticeStatus": "not-published"
       },
       {
         "id": "st-fr-emb-main-info",
@@ -5987,7 +6002,8 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
-        "coveringStationId": "st-ke-emb-main"
+        "coveringStationId": "st-ke-emb-main",
+        "electionNoticeStatus": "not-published"
       }
     ],
     "aliases": [

@@ -446,7 +446,7 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
               </p>
             )}
 
-            <ElectionNoticeLink notice={currentStation.electionNotice} showMissing={currentStation.electionContactApproval !== 'unconfirmed'} />
+            <ElectionNoticeLink notice={currentStation.electionNotice} status={currentStation.electionNoticeStatus} showMissing={currentStation.electionContactApproval !== 'unconfirmed'} />
             {currentStation.website && (
               <div className="mission-detail">
                 <strong>{t('Zvanični sajt:')}</strong>

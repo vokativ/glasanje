@@ -231,7 +231,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           }}
         >
           {t('Adresa za izbore nije potvrđena. Ovo je opšti kontakt misije, a ne potvrđeno elektronsko sanduče za upis u birački spisak. Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti sajt misije u odeljku za kontakt na dnu stranice.')}
-          <ElectionNoticeLink notice={station.electionNotice} />
+          <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} />
         </div>
       )}
 
@@ -476,7 +476,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             ? t('✓ Potvrđena adresa za izbore 2026.')
             : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
-        <ElectionNoticeLink notice={station.electionNotice} showMissing={station.electionContactApproval !== 'unconfirmed'} />
+        <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing={station.electionContactApproval !== 'unconfirmed'} />
         {station.electionContactApproval === 'unconfirmed' && (
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
             {t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}

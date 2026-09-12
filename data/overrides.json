@@ -2256,6 +2256,18 @@
         "observedAt": "2026-09-12T12:38:29Z",
         "emailStatus": "email-extracted"
       }
+    },
+    "st-fr-emb-main-paris-mfa-gov-rs": {
+      "electionNoticeStatus": "not-published",
+      "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
+    },
+    "st-ke-emb-main": {
+      "electionNoticeStatus": "not-published",
+      "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
+    },
+    "st-am-emb-main": {
+      "electionNoticeStatus": "not-published",
+      "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
     }
   },
   "countryOverrides": {}

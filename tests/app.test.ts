@@ -800,6 +800,28 @@ describe('Registration Email Status', () => {
     expect(markup).not.toContain('nije potvrđena');
   });
 
+  test('distinguishes a stated absence from a missing link and prefers a later announcement', () => {
+    const render = (notice?: (typeof COUNTRIES)[number]['stations'][number]['electionNotice']) =>
+      renderToStaticMarkup(React.createElement(ScriptProvider, { initialScript: 'latin' },
+        React.createElement(ElectionNoticeLink, { status: 'not-published', showMissing: true, notice }),
+      ));
+    expect(render()).toContain('Misija nije objavila izborno obaveštenje.');
+    expect(render()).not.toContain('još nije dodat');
+    const notice = COUNTRY_BY_CODE.get('AT')!.stations[0].electionNotice!;
+    expect(render(notice)).toContain(`href="${notice.url}"`);
+    expect(render(notice)).not.toContain('nije objavila');
+    for (const code of ['FR', 'KE', 'AM', 'MC', 'GE', 'BI', 'DJ', 'ER', 'KM', 'RW', 'SC', 'SO', 'SS', 'UG']) {
+      const country = COUNTRY_BY_CODE.get(code)!;
+      const affected = country.stations.filter(station =>
+        ['st-fr-emb-main-paris-mfa-gov-rs', 'st-ke-emb-main', 'st-am-emb-main'].includes(station.coveringStationId || station.id));
+      expect(affected.length).toBeGreaterThan(0);
+      for (const station of affected) {
+        expect(station.electionNoticeStatus).toBe('not-published');
+        expect(station.electionNotice).toBeUndefined();
+      }
+    }
+  });
+
   test('derives approved mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
     const stations = COUNTRIES.flatMap((country) => country.stations);

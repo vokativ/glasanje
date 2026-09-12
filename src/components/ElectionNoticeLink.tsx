@@ -2,8 +2,11 @@ import React from 'react';
 import type { ElectionNotice } from '../data/missions';
 import { useScript } from '../lib/script';
 
-export const ElectionNoticeLink: React.FC<{ notice?: ElectionNotice; showMissing?: boolean }> = ({ notice, showMissing = false }) => {
+export const ElectionNoticeLink: React.FC<{ notice?: ElectionNotice; showMissing?: boolean; status?: 'not-published' }> = ({ notice, showMissing = false, status }) => {
   const { t } = useScript();
+  if (!notice && status === 'not-published') {
+    return <p className="form-hint">{t('Misija nije objavila izborno obaveštenje.')}</p>;
+  }
   if (!notice) return showMissing
     ? <p className="form-hint">{t('Link ka izbornom obaveštenju još nije dodat.')}</p>
     : null;
