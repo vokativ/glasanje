@@ -17,9 +17,23 @@ if (rootEl) {
 // Offline caching is opt-in only for production bundles. Development must fetch
 // current local assets directly so a stale worker cannot obscure active changes.
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  let reloadingForServiceWorker = false;
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloadingForServiceWorker || !navigator.serviceWorker.controller) {
+      return;
+    }
+
+    reloadingForServiceWorker = true;
+    window.location.reload();
+  });
+
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch((err) => {
-      console.warn('ServiceWorker registration failed: ', err);
-    });
+    navigator.serviceWorker
+      .register('/sw.js', { updateViaCache: 'none' })
+      .then((registration) => registration.update())
+      .catch((err) => {
+        console.warn('ServiceWorker registration failed: ', err);
+      });
   });
 }
