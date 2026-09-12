@@ -73,12 +73,12 @@ The following stations must also finish as `operator-approved`, with their exist
 
 ## Required non-resident coverage rule
 
-Do not create a second coverage convention. Preserve the existing rule in `scripts/build_canonical_dataset.py`:
+The decisions above remain in force. The original host/email-only instructions have been superseded by the explicit ministry relationships now supported in `scripts/build_canonical_dataset.py`. Use [AGENTS.md](../AGENTS.md) and the [current operations guide](election-contact-operations.md#nerezidentne-stanice-i-sluzbeno-pokrivanje-msp) for the maintained rule:
 
 1. Apply the covering resident station's operator approval first.
-2. A non-resident station inherits the covering resident station's final recipient and approval only when the coverage record and exactly one resident mission match on both normalized canonical website host and normalized baseline primary email.
-3. A non-resident station's own explicit `electionEmail` override has priority over inherited data.
-4. If the match is absent or ambiguous, do not infer coverage from the hostname alone. Add an explicit structured operator authorization only for the listed non-resident station that must remain approved.
+2. A non-resident station's own explicit `electionEmail` override has first priority for its recipient and approval.
+3. Otherwise, an explicit relationship in `data/official_coverage_relationships.json` supplies its stored recipient and approval and identifies the covering mission. Review those stored values when the resident recipient changes.
+4. Without an explicit relationship, inherit the covering resident station's final recipient and approval only when exactly one resident mission matches both normalized canonical website host and normalized baseline primary email. If that match is absent or ambiguous, use an evidenced ministry relationship or an explicitly authorized recipient decision; do not infer jurisdiction from hostname alone.
 5. Keep `coverageSourceEmail` and `coveringStationId` as provenance fields; do not overwrite them with an election override.
 
 ## Acceptance criteria
@@ -87,6 +87,6 @@ After regeneration, every station in the two tables must have:
 
 - its listed recipient unchanged;
 - `electionContactApproval: "operator-approved"`, unless it already has stronger valid `source-confirmed` evidence; and
-- inherited approval only where the exact non-resident coverage rule resolves uniquely.
+- recipient resolution follows the explicit-override, official-relationship, then unique automatic-match precedence above.
 
 `konkursi@dijaspora.gov.rs` must be absent from election-recipient overrides and must not appear as an approved registration recipient.
