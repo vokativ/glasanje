@@ -555,31 +555,77 @@ describe('Missions and Coverage Dataset', () => {
   });
 
 
-  test('keeps Burundi’s ambiguous Nairobi coverage raw and unconfirmed', () => {
+  test('Burundi presents Kenya’s approved coverage mission without losing its country context', () => {
     const station = COUNTRY_BY_CODE.get('BI')!.stations[0] as CoverageStation;
-    const candidateResidents = ['KE', 'TZ'].map(
-      (countryCode) => COUNTRY_BY_CODE.get(countryCode)!.stations[0],
-    );
+    const kenya = COUNTRY_BY_CODE.get('KE')!.stations.find(
+      (candidate) => candidate.id === 'st-ke-emb-main',
+    )!;
 
-    expect(candidateResidents).toEqual([
-      expect.objectContaining({
-        email: 'srb.emb.kenya@mfa.rs',
-        website: 'https://nairobi.mfa.gov.rs',
-        isResident: true,
-      }),
-      expect.objectContaining({
-        email: 'srb.emb.kenya@mfa.rs',
-        website: 'https://nairobi.mfa.gov.rs',
-        isResident: true,
-      }),
-    ]);
     expect(station).toMatchObject({
+      isResident: false,
       coverageSourceEmail: 'srb.emb.kenya@mfa.rs',
+      coveringStationId: 'st-ke-emb-main',
       email: 'srb.emb.kenya@mfa.rs',
+      electionContactApproval: 'operator-approved',
+      isElectionContactConfirmed: false,
+      website: kenya.website,
+      address: kenya.address,
+    });
+    expect(station.embassy).toBe(`${kenya.embassy} (pokriva Burundi)`);
+    expect(station.embassyCyr).toBe(`${kenya.embassyCyr} (покрива Бурунди)`);
+  });
+
+  test('Georgia presents Armenia’s approved coverage mission', () => {
+    const station = COUNTRY_BY_CODE.get('GE')!.stations.find(
+      (candidate) => candidate.id === 'st-nonres-ge',
+    ) as CoverageStation;
+    const armenia = COUNTRY_BY_CODE.get('AM')!.stations.find(
+      (candidate) => candidate.id === 'st-am-emb-main',
+    )!;
+
+    expect(station).toMatchObject({
+      isResident: false,
+      coverageSourceEmail: 'embserbia.yerevan@gmail.com',
+      coveringStationId: 'st-am-emb-main',
+      email: 'embserbia.yerevan@gmail.com',
+      electionContactApproval: 'operator-approved',
+      isElectionContactConfirmed: false,
+      website: armenia.website,
+      address: armenia.address,
+    });
+    expect(station.embassy).toBe(`${armenia.embassy} (pokriva Gruzija)`);
+    expect(station.embassyCyr).toBe(`${armenia.embassyCyr} (покрива Грузија)`);
+  });
+
+  test('Monaco presents Paris’s approved coverage mission without changing its other record', () => {
+    const monaco = COUNTRY_BY_CODE.get('MC')!;
+    const station = monaco.stations.find(
+      (candidate) => candidate.id === 'st-nonres-mc-info',
+    ) as CoverageStation;
+    const existingParisCoverage = monaco.stations.find(
+      (candidate) => candidate.id === 'st-nonres-mc-paris-mfa-gov-rs',
+    )!;
+    const paris = COUNTRY_BY_CODE.get('FR')!.stations.find(
+      (candidate) => candidate.id === 'st-fr-emb-main-paris-mfa-gov-rs',
+    )!;
+
+    expect(station).toMatchObject({
+      isResident: false,
+      coverageSourceEmail: 'info@ccserbie.com',
+      coveringStationId: 'st-fr-emb-main-paris-mfa-gov-rs',
+      email: 'ambassade.paris@mfa.rs',
+      electionContactApproval: 'operator-approved',
+      isElectionContactConfirmed: false,
+      website: paris.website,
+      address: paris.address,
+    });
+    expect(station.embassy).toBe(`${paris.embassy} (pokriva Monako)`);
+    expect(station.embassyCyr).toBe(`${paris.embassyCyr} (покрива Монако)`);
+    expect(existingParisCoverage).toMatchObject({
+      email: 'ambassade.paris@mfa.rs',
       electionContactApproval: 'unconfirmed',
       isElectionContactConfirmed: false,
     });
-    expect(station).not.toHaveProperty('coveringStationId');
   });
 
   test('Germany has 6 resident stations', () => {
@@ -656,6 +702,27 @@ describe('Missions and Coverage Dataset', () => {
 
     expect(stationIds.every((id) => id.trim().length > 0)).toBe(true);
     expect(new Set(stationIds).size).toBe(stationIds.length);
+  });
+
+  test('exposes only resident targets through public coverage links', () => {
+    const stations = COUNTRIES.flatMap((country) => country.stations);
+
+    for (const country of COUNTRIES) {
+      for (const station of country.stations) {
+        const coverageStation = station as CoverageStation;
+        if (!coverageStation.coveringStationId) {
+          continue;
+        }
+
+        const coveringStation = stations.find(
+          (candidate) => candidate.id === coverageStation.coveringStationId,
+        );
+        expect(coverageStation.isResident).toBe(false);
+        expect(coverageStation.coverageSourceEmail).toMatch(/@/);
+        expect(coveringStation).toMatchObject({ isResident: true });
+        expect(coverageStation).not.toHaveProperty('_coverageStationId');
+      }
+    }
   });
 });
 

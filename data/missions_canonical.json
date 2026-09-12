@@ -725,15 +725,16 @@
       "stations": [
         {
           "id": "st-nonres-bi",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Burundi)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Бурунди)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Burundi)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Бурунди)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -1099,15 +1100,16 @@
       "stations": [
         {
           "id": "st-nonres-ge",
-          "embassy": "Nadležno diplomatsko predstavništvo (pokriva Gruzija)",
-          "embassyCyr": "Надлежно дипломатско представништво (покрива Грузија)",
+          "embassy": "Ambasada Republike Srbije (Jermenija) (pokriva Gruzija)",
+          "embassyCyr": "Амбасада Републике Србије (Јерменија) (покрива Грузија)",
           "email": "embserbia.yerevan@gmail.com",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "",
           "address": "10 Vazgen Sargsyan St. 0010 Yerevan Piazza Grande Business Center, 1st floor, office 109",
           "isResident": false,
-          "coverageSourceEmail": "embserbia.yerevan@gmail.com"
+          "coverageSourceEmail": "embserbia.yerevan@gmail.com",
+          "coveringStationId": "st-am-emb-main"
         }
       ],
       "aliases": [
@@ -1372,15 +1374,16 @@
       "stations": [
         {
           "id": "st-nonres-er",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Eritreja)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Еритреја)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Eritreja)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Еритреја)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -1990,15 +1993,16 @@
       "stations": [
         {
           "id": "st-nonres-ss",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Južni Sudan)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Јужни Судан)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Južni Sudan)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Јужни Судан)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -3086,15 +3090,16 @@
         },
         {
           "id": "st-nonres-mc-info",
-          "embassy": "Nadležno diplomatsko predstavništvo (pokriva Monako)",
-          "embassyCyr": "Надлежно дипломатско представништво (покрива Монако)",
-          "email": "info@ccserbie.com",
-          "electionContactApproval": "unconfirmed",
+          "embassy": "Ambasada Republike Srbije (Francuska) (pokriva Monako)",
+          "embassyCyr": "Амбасада Републике Србије (Француска) (покрива Монако)",
+          "email": "ambassade.paris@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
-          "website": "",
-          "address": "123, Rue St Martin 75004 ПАРИЗ ФРАНЦУСКА",
+          "website": "https://www.paris.mfa.gov.rs",
+          "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
           "isResident": false,
-          "coverageSourceEmail": "info@ccserbie.com"
+          "coverageSourceEmail": "info@ccserbie.com",
+          "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs"
         }
       ],
       "aliases": [
@@ -3753,15 +3758,16 @@
       "stations": [
         {
           "id": "st-nonres-rw",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Ruanda)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Руанда)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Ruanda)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Руанда)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -4054,15 +4060,16 @@
       "stations": [
         {
           "id": "st-nonres-sc",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Sejšeli)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Сејшели)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Sejšeli)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Сејшели)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -4347,15 +4354,16 @@
       "stations": [
         {
           "id": "st-nonres-so",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Somalija)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Сомалија)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Somalija)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Сомалија)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -4730,15 +4738,16 @@
       "stations": [
         {
           "id": "st-nonres-ug",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Uganda)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Уганда)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Uganda)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Уганда)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -4859,15 +4868,16 @@
       "stations": [
         {
           "id": "st-nonres-km",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Unija Komora)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Унија Комора)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Unija Komora)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Унија Комора)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [
@@ -5304,15 +5314,16 @@
       "stations": [
         {
           "id": "st-nonres-dj",
-          "embassy": "Ambasada Republike Srbije (Tanzanija) (pokriva Džibuti)",
-          "embassyCyr": "Амбасада Републике Србије (Танзанија) (покрива Џибути)",
+          "embassy": "Ambasada Republike Srbije (Kenija) (pokriva Džibuti)",
+          "embassyCyr": "Амбасада Републике Србије (Кенија) (покрива Џибути)",
           "email": "srb.emb.kenya@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nairobi.mfa.gov.rs",
           "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
           "isResident": false,
-          "coverageSourceEmail": "srb.emb.kenya@mfa.rs"
+          "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
+          "coveringStationId": "st-ke-emb-main"
         }
       ],
       "aliases": [

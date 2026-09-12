@@ -120,11 +120,11 @@ Trajni override čuva postojeće, nevezane ključeve. Svaki korisnički autorizo
 
 ## Nerezidentne stanice i pokrivanje
 
-Pri izgradnji javnih podataka, nerezidentna stanica može biti povezana sa pokrivajućom rezidentnom misijom samo ako sirovi zapis o pokrivanju i **tačno jedna** rezidentna misija imaju isti normalizovani kanonski domaćin sajta i istu normalizovanu osnovnu primarnu e-adresu. Domaćin se normalizuje konzervativno: mala slova i par golog domaćina sa `www` varijantom; podudaranje samo po domaćinu je zabranjeno. E-adresa se normalizuje po postojećim pravilima graditelja.
+Nerešena nerezidentna veza pokrivanja razrešava se **samo** izričitom operatorskom mapom `_coverageStationId` u override-u nerezidentne stanice. Vrednost mora označavati rezidentnu misiju; ne sme se zaključivati iz domaćina sajta, podudaranja e-adresa niti bilo kog drugog izvedenog signala. Ako nema takve važeće mape, veza ostaje nerešena, bez obzira na sličnost domaćina ili e-adrese.
 
-Kada je veza jedinstveno razrešena, javni zapis čuva `coveringStationId`, a izvornu e-adresu iz zapisa o pokrivanju čuva kao `coverageSourceEmail` radi provere porekla. Override-i rezidentnih misija primenjuju se prvo. Zatim nerezidentna stanica bez sopstvenog izričitog override-a za `electionEmail` nasleđuje konačno izabranog primaoca rezidentne misije, `electionContactApproval` i `isElectionContactConfirmed`. Njen izričiti `electionEmail` override uvek ima prednost.
+Kada je operator izričito odobri, javni zapis postavlja `coveringStationId` na tu rezidentnu misiju i projektuje njen javni identitet misije: naziv, sajt i adresu. Izričito odobreni primalac pokrivajuće misije postaje izborni primalac nerezidentne stanice, dok se sirova e-adresa iz zapisa o pokrivanju čuva kao `coverageSourceEmail` isključivo radi revizijskog porekla. Override-i rezidentne misije primenjuju se prvo.
 
-Ako nema jedinstvenog podudaranja — uključujući više mogućih rezidentnih misija — veza se ne razrešava: zadržavaju se sirova e-adresa pokrivanja i nepotvrđen status. Ovo je pravilo izbora primaoca pri generisanju podataka, a ne automatski dokaz da je kontakt izborni.
+Izričiti `electionEmail` override ili njegovo poreklo na nerezidentnoj stanici uvek imaju prednost nad projektovanim primaocem. Pokrivanje je pravilo izbora i prikaza odobrenog primaoca, a ne automatski dokaz da je kontakt izborni.
 
 ## Izgradnja podataka i zasebno objavljivanje
 

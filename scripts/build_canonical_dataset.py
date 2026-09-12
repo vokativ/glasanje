@@ -492,6 +492,26 @@ for country in countries_list:
             apply_non_election_override(station, patch)
             apply_election_contact_override(station, patch)
 
+# Explicit coverage targets name public station IDs, so resolve them only after
+# resident overrides have settled those IDs. Keep every match to reject a target
+# that is absent or ambiguously identifies more than one resident station.
+resident_stations_by_id = {}
+for country in countries_list:
+    for station in country["stations"]:
+        if station["isResident"]:
+            resident_stations_by_id.setdefault(station["id"], []).append(station)
+
+
+def project_covering_mission_identity(station, covering_station, country):
+    station["embassy"] = (
+        f"{covering_station['embassy']} (pokriva {country['label']})"
+    )
+    station["embassyCyr"] = (
+        f"{covering_station['embassyCyr']} (покрива {country['labelCyr']})"
+    )
+    station["website"] = covering_station["website"]
+    station["address"] = covering_station["address"]
+
 
 for country in countries_list:
     for station in country["stations"]:
@@ -504,11 +524,35 @@ for country in countries_list:
             apply_non_election_override(station, patch)
             has_explicit_election_email = apply_election_contact_override(station, patch)
 
-        covering_stations = resident_stations_by_mission_key.get(
+        raw_covering_stations = resident_stations_by_mission_key.get(
             station.pop('_coveringMissionKey', None),
             [],
         )
-        covering_station = covering_stations[0] if len(covering_stations) == 1 else None
+        covering_station = (
+            raw_covering_stations[0]
+            if len(raw_covering_stations) == 1
+            else None
+        )
+
+        if isinstance(patch, dict) and "_coverageStationId" in patch:
+            coverage_station_id = patch["_coverageStationId"]
+            if not isinstance(coverage_station_id, str) or not coverage_station_id:
+                raise ValueError(
+                    f"Invalid explicit coverage target for {station['id']}: "
+                    f"{coverage_station_id!r}; expected one resident station ID"
+                )
+            explicit_covering_stations = resident_stations_by_id.get(
+                coverage_station_id,
+                [],
+            )
+            if len(explicit_covering_stations) != 1:
+                raise ValueError(
+                    f"Invalid explicit coverage target for {station['id']}: "
+                    f"{coverage_station_id!r}; expected one resident station ID"
+                )
+            covering_station = explicit_covering_stations[0]
+            project_covering_mission_identity(station, covering_station, country)
+
         if covering_station:
             station["coveringStationId"] = covering_station["id"]
 

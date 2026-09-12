@@ -1987,6 +1987,138 @@
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
       }
+    },
+    "st-nonres-ge": {
+      "_coverageStationId": "st-am-emb-main",
+      "electionEmail": "embserbia.yerevan@gmail.com",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-mc-info": {
+      "_coverageStationId": "st-fr-emb-main-paris-mfa-gov-rs",
+      "electionEmail": "ambassade.paris@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-km": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-dj": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-er": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-ss": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-bi": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-ug": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-so": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-sc": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
+    },
+    "st-nonres-rw": {
+      "_coverageStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      }
     }
   },
   "countryOverrides": {}
