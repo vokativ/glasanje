@@ -2268,6 +2268,445 @@
     "st-am-emb-main": {
       "electionNoticeStatus": "not-published",
       "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
+    },
+    "st-at-cons-salcburg": {
+      "electionNotice": {
+        "url": "https://salzburg.mfa.gov.rs/gradjani/najcesca-pitanja",
+        "title": "ИЗБОРИ 2026",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "izbori.salzburg2026@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://salzburg.mfa.gov.rs/gradjani/najcesca-pitanja",
+        "title": "ИЗБОРИ 2026",
+        "observedAt": "2026-09-12T19:24:37Z"
+      }
+    },
+    "st-ba-cons-trebinje": {
+      "electionNotice": {
+        "url": "https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status",
+        "title": "ИЗБОРИ 2026-Пријем захтева за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "kktrebinje2026@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status",
+        "title": "ИЗБОРИ 2026-Пријем захтева за гласање у иностранству",
+        "observedAt": "2026-09-12T19:24:37Z"
+      }
+    },
+    "st-ba-cons-banjaluka": {
+      "electionNotice": {
+        "url": "https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status",
+        "title": "ИЗБОРИ 2026-Пријем захтева за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "banjaluka2026@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status",
+        "title": "ИЗБОРИ 2026-Пријем захтева за гласање у иностранству",
+        "observedAt": "2026-09-12T19:24:37Z"
+      }
+    },
+    "st-ba-cons-mostar": {
+      "electionNotice": {
+        "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+        "title": "Одлука о расписивању избора за народне посланике",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "gk.mostar@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+        "title": "Одлука о расписивању избора за народне посланике",
+        "observedAt": "2026-09-12T19:24:37Z"
+      }
+    },
+    "st-br-emb-main": {
+      "electionNotice": {
+        "url": "https://brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори: Пријављивање за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-bg-emb-main": {
+      "electionNotice": {
+        "url": "https://sofia.mfa.gov.rs/press-service/announcements-and-notifications/raspisivanje-izbora-za-narodne-poslanike",
+        "title": "Рaсписивање избора за народне посланике",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "izbori.sofija@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://sofia.mfa.gov.rs/press-service/announcements-and-notifications/raspisivanje-izbora-za-narodne-poslanike",
+        "title": "Рaсписивање избора за народне посланике",
+        "observedAt": "2026-09-12T19:24:37Z"
+      }
+    },
+    "st-it-cons-trst": {
+      "electionNotice": {
+        "url": "https://trieste.mfa.gov.rs/mediji/aktivnosti/razgovor-konzula-zerana-paunovica-sa-prefektom-i-kvestorom-udina",
+        "title": "ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:37Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "izboritrst@gmail.com",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://trieste.mfa.gov.rs/mediji/aktivnosti/razgovor-konzula-zerana-paunovica-sa-prefektom-i-kvestorom-udina",
+        "title": "ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "observedAt": "2026-09-12T19:24:37Z"
+      }
+    },
+    "st-qa-emb-main": {
+      "electionNotice": {
+        "url": "https://doha.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:39Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "izbori.ambrs.doha@gmail.com",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://doha.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "observedAt": "2026-09-12T19:24:39Z"
+      }
+    },
+    "st-cn-cons-angaj": {
+      "electionNotice": {
+        "url": "https://shanghai.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-2026",
+        "title": "Парламентарни избори 2026",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:39Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "srb.cons.shanghai@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://shanghai.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-2026",
+        "title": "Парламентарни избори 2026",
+        "observedAt": "2026-09-12T19:24:39Z"
+      }
+    },
+    "st-cy-emb-main": {
+      "electionNotice": {
+        "url": "https://nicosia.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ: ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:39Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "izbori.nikozija@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://nicosia.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ: ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "observedAt": "2026-09-12T19:24:39Z"
+      }
+    },
+    "st-lv-emb-main-stockholm-mfa-gov-rs": {
+      "isResident": false,
+      "_operatorNote": "Maintainer confirmed Latvia consular coverage by Sweden. MFA Latvia directory explicitly names the embassy in Sweden for consular matters; preserve both existing station IDs and resolve them to Stockholm. Source: https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati"
+    },
+    "st-ly-emb-main": {
+      "electionNotice": {
+        "url": "https://tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
+        "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У ДРЖАВИ ЛИБИЈИ О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. Г.",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:39Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-pt-emb-main": {
+      "electionNotice": {
+        "url": "https://lisbon.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Обавештење о пријави за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:39Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "serviaemba@netcabo.pt",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://lisbon.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Обавештење о пријави за гласање у иностранству",
+        "observedAt": "2026-09-12T19:24:39Z"
+      }
+    },
+    "st-ro-emb-main": {
+      "electionNotice": {
+        "url": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:40Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "consulate.bucharest@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ",
+        "observedAt": "2026-09-12T19:24:40Z"
+      }
+    },
+    "st-ru-emb-main": {
+      "electionNotice": {
+        "url": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:40Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "konzularno.moskva@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "observedAt": "2026-09-12T19:24:40Z"
+      }
+    },
+    "st-si-emb-main": {
+      "electionNotice": {
+        "url": "https://ljubljana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-25-10-2026-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори за народне посланике 25.10.2026- пријављивање за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:40Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "embassy.ljubljana@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://ljubljana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-25-10-2026-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори за народне посланике 25.10.2026- пријављивање за гласање у иностранству",
+        "observedAt": "2026-09-12T19:24:40Z"
+      }
+    },
+    "st-tn-emb-main": {
+      "electionNotice": {
+        "url": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
+        "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У РЕПУБЛИЦИ ТУНИС О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:40Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-tr-emb-main": {
+      "electionNotice": {
+        "url": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори: Пријављивање за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:40Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-tr-cons-istanbul": {
+      "electionNotice": {
+        "url": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори: Пријављивање за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:40Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-hr-emb-main": {
+      "electionNotice": {
+        "url": "https://zagreb.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори: Пријављивање за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:41Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "konzularno.zagreb@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://zagreb.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Избори: Пријављивање за гласање у иностранству",
+        "observedAt": "2026-09-12T19:24:41Z"
+      }
+    },
+    "st-hr-cons-rijeka": {
+      "electionNotice": {
+        "url": "https://rijeka.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:41Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "izboririjeka2026@gmail.com",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://rijeka.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "observedAt": "2026-09-12T19:24:41Z"
+      }
+    },
+    "st-hr-cons-vukovar": {
+      "electionNotice": {
+        "url": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
+        "title": "OБАВЕШТЕЊЕ - ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:41Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-me-emb-main": {
+      "electionNotice": {
+        "url": "https://podgorica.mfa.gov.rs/mediji/aktivnosti/saopstenje-za-javnost-izbori-u-republici-srbiji",
+        "title": "САОПШТЕЊЕ ЗА ЈАВНОСТ, ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:41Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "embassy.podgorica@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://podgorica.mfa.gov.rs/mediji/aktivnosti/saopstenje-za-javnost-izbori-u-republici-srbiji",
+        "title": "САОПШТЕЊЕ ЗА ЈАВНОСТ, ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ",
+        "observedAt": "2026-09-12T19:24:41Z"
+      }
+    },
+    "st-cz-emb-main": {
+      "electionNotice": {
+        "url": "https://prague.mfa.gov.rs/mediji/najave-i-obavestenja/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T19:24:41Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "konzularno.prag@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://prague.mfa.gov.rs/mediji/najave-i-obavestenja/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "observedAt": "2026-09-12T19:24:41Z"
+      }
+    },
+    "st-zw-emb-main": {
+      "_operatorNote": "Maintainer confirmed on 2026-09-12 UTC: Zimbabwe mission has no website, only https://x.com/SRBinZimbabwe, with no mention of the election. Keep existing public contact; do not infer Pretoria coverage from the conflicting bilateral overview."
+    },
+    "st-lv-emb-main-srb-emb-latvia": {
+      "isResident": false,
+      "_operatorNote": "Maintainer confirmed Latvia consular coverage by Sweden. MFA Latvia directory explicitly names the embassy in Sweden for consular matters; preserve both existing station IDs and resolve them to Stockholm. Source: https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati"
     }
   },
   "countryOverrides": {}

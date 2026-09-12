@@ -57,6 +57,10 @@
         {
           "host": "vienna.mfa.gov.rs",
           "url": "https://vienna.mfa.gov.rs/"
+        },
+        {
+          "host": "www.salzburg.mfa.gov.rs",
+          "url": "https://www.salzburg.mfa.gov.rs/"
         }
       ]
     },
@@ -233,6 +237,16 @@
         {
           "host": "www.ottawa.mfa.gov.rs",
           "url": "https://www.ottawa.mfa.gov.rs/"
+        }
+      ]
+    },
+    "CD": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/kongo-demokratska-republika/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.kinshasa.mfa.gov.rs",
+          "url": "https://www.kinshasa.mfa.gov.rs/"
         }
       ]
     },
@@ -751,7 +765,12 @@
     "KZ": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/kazahstan-republika/ambasade-konzulati",
       "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
-      "missionEntries": []
+      "missionEntries": [
+        {
+          "host": "www.astana.mfa.gov.rs",
+          "url": "https://www.astana.mfa.gov.rs/"
+        }
+      ]
     },
     "LA": {
       "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/laos/ambasade-konzulati",
@@ -890,6 +909,10 @@
         {
           "host": "hercegnovi.mfa.gov.rs",
           "url": "https://hercegnovi.mfa.gov.rs/"
+        },
+        {
+          "host": "www.podgorica.mfa.gov.rs",
+          "url": "https://www.podgorica.mfa.gov.rs/"
         }
       ]
     },
@@ -1204,6 +1227,16 @@
         {
           "host": "timisoara.mfa.gov.rs",
           "url": "https://timisoara.mfa.gov.rs/"
+        }
+      ]
+    },
+    "RU": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/ruska-federacija/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.moskva.mfa.gov.rs",
+          "url": "https://www.moskva.mfa.gov.rs/"
         }
       ]
     },
@@ -1546,6 +1579,16 @@
         {
           "host": "buenosaires.mfa.gov.rs",
           "url": "https://buenosaires.mfa.gov.rs/"
+        }
+      ]
+    },
+    "VA": {
+      "countryUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/sveta-stolica-vatikan/ambasade-konzulati",
+      "indexUrl": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+      "missionEntries": [
+        {
+          "host": "www.vatican.mfa.gov.rs",
+          "url": "https://www.vatican.mfa.gov.rs/"
         }
       ]
     },

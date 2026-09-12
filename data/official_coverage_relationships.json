@@ -99,6 +99,26 @@
       "provenance": {
         "kind": "ministry-coverage"
       }
+    },
+    {
+      "coveredStationId": "st-lv-emb-main-srb-emb-latvia",
+      "coveringStationId": "st-se-emb-main",
+      "electionEmail": "izbori.se@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage",
+        "sourceUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati"
+      }
+    },
+    {
+      "coveredStationId": "st-lv-emb-main-stockholm-mfa-gov-rs",
+      "coveringStationId": "st-se-emb-main",
+      "electionEmail": "izbori.se@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage",
+        "sourceUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati"
+      }
     }
   ]
 }

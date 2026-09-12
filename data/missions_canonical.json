@@ -307,12 +307,19 @@
           "id": "st-at-cons-salcburg",
           "embassy": "Generalni konzulat Republike Srbije (Salcburg)",
           "embassyCyr": "Генерални конзулат Републике Србије (Салцбург)",
-          "email": "genconsulate.salzburg@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "email": "izbori.salzburg2026@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.salzburg.mfa.gov.rs",
           "address": "Schallmooser Hauptstrasse 99 5020 САЛЦБУРГ АУСТРИЈА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://salzburg.mfa.gov.rs/gradjani/najcesca-pitanja",
+            "title": "ИЗБОРИ 2026",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -615,12 +622,19 @@
           "id": "st-ba-cons-trebinje",
           "embassy": "Generalni konzulat Republike Srbije (Trebinje)",
           "embassyCyr": "Генерални конзулат Републике Србије (Требиње)",
-          "email": "kk.trebinje@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "email": "kktrebinje2026@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://banjaluka.mfa.gov.rs",
           "address": "Његошева 489101 ТребињеБОСНА И ХЕРЦЕГОВИНА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status",
+            "title": "ИЗБОРИ 2026-Пријем захтева за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-ba-cons-drvar",
@@ -631,29 +645,50 @@
           "isElectionContactConfirmed": false,
           "website": "https://mostar.mfa.gov.rs",
           "address": "Титова бб80260 ДрварБОСНА И ХЕРЦЕГОВИНА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+            "title": "Одлука о расписивању избора за народне посланике",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:19:51Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-ba-cons-mostar",
           "embassy": "Generalni konzulat Republike Srbije (Mostar)",
           "embassyCyr": "Генерални конзулат Републике Србије (Мостар)",
           "email": "gk.mostar@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://mostar.mfa.gov.rs",
           "address": "Ulica Konak br.588000 МОСТАРБОСНА И ХЕРЦЕГОВИНА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+            "title": "Одлука о расписивању избора за народне посланике",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-ba-cons-banjaluka",
           "embassy": "Generalni konzulat Republike Srbije (Banja Luka)",
           "embassyCyr": "Генерални конзулат Републике Србије (Бања Лука)",
-          "email": "konzulat.bl@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "email": "banjaluka2026@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.banjaluka.mfa.gov.rs",
           "address": "Војводе Радомира Путника 2 78000 БАЊАЛУКА БОСНА И ХЕРЦЕГОВИНА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status",
+            "title": "ИЗБОРИ 2026-Пријем захтева за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -712,7 +747,14 @@
           "isElectionContactConfirmed": false,
           "website": "https://brasilia.mfa.gov.rs",
           "address": "SES Avenida das Nacoes, Qd. 803, Lote 15CEP 70409-900 БРАЗИЛИЈАБРАЗИЛ",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+            "title": "Избори: Пријављивање за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "no-email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -759,8 +801,8 @@
           "id": "st-bg-emb-main",
           "embassy": "Ambasada Republike Srbije (Bugarska)",
           "embassyCyr": "Амбасада Републике Србије (Бугарска)",
-          "email": "srb.emb.bulgaria@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "email": "izbori.sofija@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://sofia.mfa.gov.rs",
           "address": "Veliko Trnovo 31504 СОФИЈАБУГАРСКА",
@@ -769,8 +811,8 @@
             "url": "https://sofia.mfa.gov.rs/press-service/announcements-and-notifications/raspisivanje-izbora-za-narodne-poslanike",
             "title": "Рaсписивање избора за народне посланике",
             "electionYear": "2026",
-            "observedAt": "2026-09-12T08:52:46Z",
-            "emailStatus": "no-email-extracted"
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "email-extracted"
           }
         }
       ],
@@ -1679,13 +1721,20 @@
           "embassy": "Ambasada Republike Srbije (Portugalija) (pokriva Zelenortska Ostrva)",
           "embassyCyr": "Амбасада Републике Србије (Португалија) (покрива Зеленортска Острва)",
           "email": "serviaemba@netcabo.pt",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.lisbon.mfa.gov.rs",
           "address": "Rua de Alcolena 11 1400 – 004 ЛИСАБОН ПОРТУГАЛ",
           "isResident": false,
           "coverageSourceEmail": "serviaemba@netcabo.pt",
-          "coveringStationId": "st-pt-emb-main"
+          "coveringStationId": "st-pt-emb-main",
+          "electionNotice": {
+            "url": "https://lisbon.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+            "title": "Обавештење о пријави за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:39Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -1976,12 +2025,19 @@
           "id": "st-it-cons-trst",
           "embassy": "Generalni konzulat Republike Srbije (Trst)",
           "embassyCyr": "Генерални конзулат Републике Србије (Трст)",
-          "email": "gkrstrst@spin.it",
-          "electionContactApproval": "unconfirmed",
+          "email": "izboritrst@gmail.com",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://trieste.mfa.gov.rs",
           "address": "Strada del Friuli 5434136 ТРСТИТАЛИЈА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://trieste.mfa.gov.rs/mediji/aktivnosti/razgovor-konzula-zerana-paunovica-sa-prefektom-i-kvestorom-udina",
+            "title": "ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:37Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-it-cons-milano",
@@ -2380,12 +2436,19 @@
           "id": "st-qa-emb-main",
           "embassy": "Ambasada Republike Srbije (Katar)",
           "embassyCyr": "Амбасада Републике Србије (Катар)",
-          "email": "srb.emb.qatar@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "email": "izbori.ambrs.doha@gmail.com",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://doha.mfa.gov.rs",
           "address": "Zone 66, West Bay, Um Al Seneem no.5,Doha, Qatar, P.O. Box 22195,Катар",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://doha.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+            "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:39Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -2450,11 +2513,18 @@
           "embassy": "Generalni konzulat Republike Srbije (Šangaj)",
           "embassyCyr": "Генерални конзулат Републике Србије (Шангај)",
           "email": "srb.cons.shanghai@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://shanghai.mfa.gov.rs",
           "address": "Rm, 801, No.1, Lane 60, Lyon Garden,Ronghua East Road, Gu Bei New Area,ШАНГАЈ 201103Н.Р. КИНА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://shanghai.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-2026",
+            "title": "Парламентарни избори 2026",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:39Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -2474,8 +2544,8 @@
           "id": "st-cy-emb-main",
           "embassy": "Ambasada Republike Srbije (Kipar)",
           "embassyCyr": "Амбасада Републике Србије (Кипар)",
-          "email": "nicosia@serbia.org.cy",
-          "electionContactApproval": "unconfirmed",
+          "email": "izbori.nikozija@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://nicosia.mfa.gov.rs",
           "address": "2, Vasilissis Olgas Street1101 НИКОЗИЈА КИПАР",
@@ -2484,7 +2554,7 @@
             "url": "https://nicosia.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
             "title": "ИЗБОРИ: ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
             "electionYear": "2026",
-            "observedAt": "2026-09-12T08:48:10Z",
+            "observedAt": "2026-09-12T19:24:39Z",
             "emailStatus": "email-extracted"
           }
         }
@@ -2507,13 +2577,20 @@
           "embassy": "Ambasada Republike Srbije (Rusija) (pokriva Kirgistan)",
           "embassyCyr": "Амбасада Републике Србије (Русија) (покрива Киргизија)",
           "email": "konzularno.moskva@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.moskva.mfa.gov.rs",
           "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
           "isResident": false,
           "coverageSourceEmail": "konzularno.moskva@mfa.rs",
-          "coveringStationId": "st-ru-emb-main"
+          "coveringStationId": "st-ru-emb-main",
+          "electionNotice": {
+            "url": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -2746,25 +2823,43 @@
       "stations": [
         {
           "id": "st-lv-emb-main-srb-emb-latvia",
-          "embassy": "Ambasada Republike Srbije (Letonija)",
-          "embassyCyr": "Амбасада Републике Србије (Летонија)",
-          "email": "srb.emb.latvia@mfa.rs",
-          "electionContactApproval": "unconfirmed",
-          "isElectionContactConfirmed": false,
-          "website": "",
-          "address": "",
-          "isResident": true
-        },
-        {
-          "id": "st-lv-emb-main-stockholm-mfa-gov-rs",
-          "embassy": "Ambasada Republike Srbije (Letonija)",
-          "embassyCyr": "Амбасада Републике Србије (Летонија)",
-          "email": "srb.emb.sweden@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "embassy": "Ambasada Republike Srbije (Švedska) (pokriva Letonija)",
+          "embassyCyr": "Амбасада Републике Србије (Шведска) (покрива Летонија)",
+          "email": "izbori.se@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://stockholm.mfa.gov.rs",
           "address": "Hantverkargatan 26,3rd floorBox 529 101 30СТОКХОЛМШВЕДСКА",
-          "isResident": true
+          "isResident": false,
+          "coverageSourceEmail": "srb.emb.latvia@mfa.rs",
+          "coveringStationId": "st-se-emb-main",
+          "electionNotice": {
+            "url": "https://stockholm.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
+            "title": "Расписивање избора за народне посланике Републике Србије",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T12:38:29Z",
+            "emailStatus": "email-extracted"
+          }
+        },
+        {
+          "id": "st-lv-emb-main-stockholm-mfa-gov-rs",
+          "embassy": "Ambasada Republike Srbije (Švedska) (pokriva Letonija)",
+          "embassyCyr": "Амбасада Републике Србије (Шведска) (покрива Летонија)",
+          "email": "izbori.se@mfa.rs",
+          "electionContactApproval": "operator-approved",
+          "isElectionContactConfirmed": false,
+          "website": "https://stockholm.mfa.gov.rs",
+          "address": "Hantverkargatan 26,3rd floorBox 529 101 30СТОКХОЛМШВЕДСКА",
+          "isResident": false,
+          "coverageSourceEmail": "srb.emb.sweden@mfa.rs",
+          "coveringStationId": "st-se-emb-main",
+          "electionNotice": {
+            "url": "https://stockholm.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
+            "title": "Расписивање избора за народне посланике Републике Србије",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:19:51Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -2841,7 +2936,14 @@
           "isElectionContactConfirmed": false,
           "website": "https://www.tripoli.mfa.gov.rs",
           "address": "Kvart Ben Ašur, Abdal Ben Salam P.O.Box 1087 ТРИПОЛИ ЛИБИЈА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
+            "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У ДРЖАВИ ЛИБИЈИ О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. Г.",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:39Z",
+            "emailStatus": "no-email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -3423,13 +3525,20 @@
           "embassy": "Ambasada Republike Srbije (Rumunija) (pokriva Moldavija)",
           "embassyCyr": "Амбасада Републике Србије (Румунија) (покрива Молдавија)",
           "email": "consulate.bucharest@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://bucharest.mfa.gov.rs",
           "address": "General Eremia Grigorescu nr. 12БукурештРумунија",
           "isResident": false,
           "coverageSourceEmail": "consulate.bucharest@mfa.rs",
-          "coveringStationId": "st-ro-emb-main"
+          "coveringStationId": "st-ro-emb-main",
+          "electionNotice": {
+            "url": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -4185,11 +4294,18 @@
           "embassy": "Ambasada Republike Srbije (Portugalija)",
           "embassyCyr": "Амбасада Републике Србије (Португалија)",
           "email": "serviaemba@netcabo.pt",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.lisbon.mfa.gov.rs",
           "address": "Rua de Alcolena 11 1400 – 004 ЛИСАБОН ПОРТУГАЛ",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://lisbon.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+            "title": "Обавештење о пријави за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:39Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -4266,11 +4382,18 @@
           "embassy": "Ambasada Republike Srbije (Rumunija)",
           "embassyCyr": "Амбасада Републике Србије (Румунија)",
           "email": "consulate.bucharest@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://bucharest.mfa.gov.rs",
           "address": "General Eremia Grigorescu nr. 12БукурештРумунија",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-ro-cons-temivar",
@@ -4309,11 +4432,18 @@
           "embassy": "Ambasada Republike Srbije (Rusija)",
           "embassyCyr": "Амбасада Републике Србије (Русија)",
           "email": "konzularno.moskva@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.moskva.mfa.gov.rs",
           "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -4861,7 +4991,7 @@
           "embassy": "Ambasada Republike Srbije (Slovenija)",
           "embassyCyr": "Амбасада Републике Србије (Словенија)",
           "email": "embassy.ljubljana@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://ljubljana.mfa.gov.rs",
           "address": "Ciril - Metodov trg 1 1000 ЉУБЉАНА СЛОВЕНИЈА",
@@ -4870,7 +5000,7 @@
             "url": "https://ljubljana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-25-10-2026-prijavljivanje-za-glasanje-u-inostranstvu",
             "title": "Избори за народне посланике 25.10.2026- пријављивање за гласање у иностранству",
             "electionYear": "2026",
-            "observedAt": "2026-09-12T08:48:10Z",
+            "observedAt": "2026-09-12T19:24:40Z",
             "emailStatus": "email-extracted"
           }
         }
@@ -5096,13 +5226,20 @@
           "embassy": "Ambasada Republike Srbije (Rusija) (pokriva Tadžikistan)",
           "embassyCyr": "Амбасада Републике Србије (Русија) (покрива Таџикистан)",
           "email": "konzularno.moskva@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.moskva.mfa.gov.rs",
           "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
           "isResident": false,
           "coverageSourceEmail": "konzularno.moskva@mfa.rs",
-          "coveringStationId": "st-ru-emb-main"
+          "coveringStationId": "st-ru-emb-main",
+          "electionNotice": {
+            "url": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -5256,7 +5393,14 @@
           "isElectionContactConfirmed": false,
           "website": "https://www.tunis.mfa.gov.rs",
           "address": "4, Rue du Lac Majeur, 1053 - Les Berges du Lac ТУНИС",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
+            "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У РЕПУБЛИЦИ ТУНИС О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "no-email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -5277,13 +5421,20 @@
           "embassy": "Ambasada Republike Srbije (Rusija) (pokriva Turkmenistan)",
           "embassyCyr": "Амбасада Републике Србије (Русија) (покрива Туркменистан)",
           "email": "konzularno.moskva@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.moskva.mfa.gov.rs",
           "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
           "isResident": false,
           "coverageSourceEmail": "konzularno.moskva@mfa.rs",
-          "coveringStationId": "st-ru-emb-main"
+          "coveringStationId": "st-ru-emb-main",
+          "electionNotice": {
+            "url": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -5308,7 +5459,14 @@
           "isElectionContactConfirmed": false,
           "website": "https://ankara.mfa.gov.rs",
           "address": "Амбасада Републике СрбијеYazanlar Sokak No. 1P.K.2806691 KavaklidereАнкараТурска",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+            "title": "Избори: Пријављивање за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "no-email-extracted"
+          }
         },
         {
           "id": "st-tr-cons-istanbul",
@@ -5319,7 +5477,14 @@
           "isElectionContactConfirmed": false,
           "website": "https://istanbul.mfa.gov.rs",
           "address": "Sümbül Sk. No: 2,Levent Mah. Besiktas,34330 Istanbul, Turkey",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+            "title": "Избори: Пријављивање за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "no-email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -5368,13 +5533,20 @@
           "embassy": "Ambasada Republike Srbije (Rusija) (pokriva Uzbekistan)",
           "embassyCyr": "Амбасада Републике Србије (Русија) (покрива Узбекистан)",
           "email": "konzularno.moskva@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.moskva.mfa.gov.rs",
           "address": "Mosfiljmovskaja 46 R-119285 МОСКВА РУСКА ФЕДЕРАЦИЈА",
           "isResident": false,
           "coverageSourceEmail": "konzularno.moskva@mfa.rs",
-          "coveringStationId": "st-ru-emb-main"
+          "coveringStationId": "st-ru-emb-main",
+          "electionNotice": {
+            "url": "https://moskva.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-u-republici-srbiji-25-oktobar-2026-godine",
+            "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:40Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -5774,22 +5946,36 @@
           "embassy": "Ambasada Republike Srbije (Hrvatska)",
           "embassyCyr": "Амбасада Републике Србије (Хрватска)",
           "email": "konzularno.zagreb@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://zagreb.mfa.gov.rs",
           "address": "Јабуковац 2310000 ЗАГРЕБРЕПУБЛИКА ХРВАТСКА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://zagreb.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+            "title": "Избори: Пријављивање за гласање у иностранству",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:41Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-hr-cons-rijeka",
           "embassy": "Generalni konzulat Republike Srbije (Rijeka)",
           "embassyCyr": "Генерални конзулат Републике Србије (Ријека)",
-          "email": "konzulat.srbije.rijeka@gmail.com",
-          "electionContactApproval": "unconfirmed",
+          "email": "izboririjeka2026@gmail.com",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://rijeka.mfa.gov.rs",
           "address": "Еразма Барчића 951000 РИЈЕКАХРВАТСКА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://rijeka.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+            "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:41Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-hr-cons-vukovar",
@@ -5800,7 +5986,14 @@
           "isElectionContactConfirmed": false,
           "website": "https://vukovar.mfa.gov.rs",
           "address": "Ивана Гундулића 19ВУКОВАРХРВАТСКА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
+            "title": "OБАВЕШТЕЊЕ - ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:41Z",
+            "emailStatus": "no-email-extracted"
+          }
         }
       ],
       "aliases": [
@@ -5848,11 +6041,18 @@
           "embassy": "Ambasada Republike Srbije (Crna Gora)",
           "embassyCyr": "Амбасада Републике Србије (Црна Гора)",
           "email": "embassy.podgorica@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://podgorica.mfa.gov.rs",
           "address": "Булевар Ивана Црнојевића бр. 10,ПОДГОРИЦАЦРНА ГОРА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://podgorica.mfa.gov.rs/mediji/aktivnosti/saopstenje-za-javnost-izbori-u-republici-srbiji",
+            "title": "САОПШТЕЊЕ ЗА ЈАВНОСТ, ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:41Z",
+            "emailStatus": "email-extracted"
+          }
         },
         {
           "id": "st-me-cons-hercegnovi",
@@ -5910,12 +6110,19 @@
           "id": "st-cz-emb-main",
           "embassy": "Ambasada Republike Srbije (Češka)",
           "embassyCyr": "Амбасада Републике Србије (Чешка)",
-          "email": "embassy.prague@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "email": "konzularno.prag@mfa.rs",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.prague.mfa.gov.rs",
           "address": "118 00 ПРАГ 1, Mostecka 15 ЧЕШКА РЕПУБЛИКА",
-          "isResident": true
+          "isResident": true,
+          "electionNotice": {
+            "url": "https://prague.mfa.gov.rs/mediji/najave-i-obavestenja/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+            "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+            "electionYear": "2026",
+            "observedAt": "2026-09-12T19:24:41Z",
+            "emailStatus": "email-extracted"
+          }
         }
       ],
       "aliases": [

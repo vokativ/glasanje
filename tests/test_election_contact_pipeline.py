@@ -40,6 +40,22 @@ COMMON = load_script_module("election_notice_common_for_tests", REPOSITORY_ROOT 
 
 
 class ElectionContactPipelineTests(unittest.TestCase):
+    def test_mfa_http_mission_links_are_acquired_over_https(self) -> None:
+        # Actual directory structure: the visible label is HTTPS but the href
+        # is HTTP. Keep acquisition and subsequent redirects HTTPS-only.
+        for country, host in [("AT", "salzburg.mfa.gov.rs"), ("ME", "podgorica.mfa.gov.rs")]:
+            with self.subTest(country=country):
+                station = DISCOVERY.Station(country, "mission", host)
+                html = (
+                    f'<a href="http://www.{host}/">https://{host}</a>'
+                    '<a href="http://unrelated.example/">Other mission</a>'
+                    f'<a href="http://user:pass@{host}/">Credentials</a>'
+                    f'<a href="http://{host}:8080/">Nonstandard port</a>'
+                ).encode()
+                tasks = DISCOVERY.linked_mission_tasks(html, country, (station,), "https://www.mfa.gov.rs/directory")
+                self.assertEqual([task.url for task in tasks], [f"https://www.{host}/"])
+                self.assertEqual(tasks[0].stations, (station,))
+
     def test_maintained_notice_metadata_does_not_require_archived_evidence_or_grant_approval(self) -> None:
         canonical = {"countries": [{"stations": [{"id": "sydney"}]}]}
         notice = {
@@ -82,6 +98,16 @@ class ElectionContactPipelineTests(unittest.TestCase):
             self.assertEqual(built["st-nonres-nz"]["electionNotice"], built["st-au-emb-main"]["electionNotice"])
             self.assertEqual(built["st-mt-emb-main"]["email"], "srb.office.valletta@mfa.rs")
             self.assertEqual(built["st-au-cons-sidnej"]["email"], "srb.cons.sydney@mfa.rs")
+            for station_id, baseline_email in [
+                ("st-lv-emb-main-srb-emb-latvia", "srb.emb.latvia@mfa.rs"),
+                ("st-lv-emb-main-stockholm-mfa-gov-rs", "srb.emb.sweden@mfa.rs"),
+            ]:
+                station = built[station_id]
+                self.assertFalse(station["isResident"])
+                self.assertEqual(station["coverageSourceEmail"], baseline_email)
+                self.assertEqual(station["coveringStationId"], "st-se-emb-main")
+                self.assertEqual(station["email"], built["st-se-emb-main"]["email"])
+                self.assertEqual(station["electionNotice"], built["st-se-emb-main"]["electionNotice"])
             # A maintained station notice takes precedence over a crawled one and
             # over its covering mission, without altering the selected recipient.
             shutil.copyfile(REPOSITORY_ROOT / "data/election_candidates.json", root / "data/election_candidates.json")

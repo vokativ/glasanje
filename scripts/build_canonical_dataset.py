@@ -538,6 +538,11 @@ if manual_coverage_overrides:
 
 
 def apply_non_election_override(station, patch):
+    # MFA may list a resident embassy while assigning its consular work to a
+    # mission abroad (Latvia/Sweden). Preserve the original contact and stable
+    # ID when a maintained correction resolves that entry through coverage.
+    if station["isResident"] and patch.get("isResident") is False:
+        station.setdefault("coverageSourceEmail", station["email"])
     for key, value in patch.items():
         if (
             not key.startswith("_")
@@ -624,10 +629,11 @@ for country in countries_list:
             has_explicit_election_email = apply_election_contact_override(station, patch)
 
         relationship = official_coverage_relationships.get(station["id"])
-        raw_covering_stations = resident_stations_by_mission_key.get(
-            station.pop('_coveringMissionKey', None),
-            [],
-        )
+        raw_covering_stations = [
+            candidate for candidate in resident_stations_by_mission_key.get(
+                station.pop('_coveringMissionKey', None), [],
+            ) if candidate["isResident"]
+        ]
         if relationship:
             covering_station = resident_stations_by_id[
                 relationship["coveringStationId"]

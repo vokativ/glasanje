@@ -587,7 +587,19 @@ def linked_mission_tasks(
     soup = BeautifulSoup(html, "html.parser")
     tasks: dict[str, PageTask] = {}
     for anchor in soup.find_all("a", href=True):
-        target = absolute_https_url(urljoin(page_url, anchor["href"]))
+        linked_url = urljoin(page_url, anchor["href"])
+        parsed = urlsplit(linked_url)
+        # The official MFA directory still links Salzburg and Podgorica with
+        # HTTP hrefs despite HTTPS labels. Try HTTPS on the same known mission
+        # host; never fetch HTTP or relax redirect/host validation.
+        if (
+            parsed.scheme == "http"
+            and parsed.hostname in stations_by_host
+            and not parsed.username and not parsed.password
+            and parsed.port in (None, 80)
+        ):
+            linked_url = urlunsplit(("https", parsed.hostname, parsed.path, parsed.query, ""))
+        target = absolute_https_url(linked_url)
         if target is None:
             continue
         linked_stations = tuple(sorted(set(stations_by_host.get(url_host(target), ())), key=lambda station: station.station_id))

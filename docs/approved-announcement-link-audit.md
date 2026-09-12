@@ -1,5 +1,7 @@
 # Approved recipient announcement links — 12 September 2026
 
+This records the earlier 101-entry snapshot. The subsequent [remaining mission collection audit](remaining-mission-collection-audit.md) adds the newly reviewed recipients, Latvia's Sweden coverage and the release coverage comparison.
+
 Reviewed all 101 approved public entries (34 source-confirmed, 67 operator-approved), grouped by their 41 responsible missions/consulates. Existing ministry coverage resolution and operator decisions were retained. This was a targeted source-link audit, not a new recipient promotion run.
 
 38 missions now have maintained links to 36 distinct current official announcements. Those links reach 90 approved entries, including dependent non-resident countries. For 83 entries the relevant mission's published mailbox appears in the notice text; Mexico and its six dependent countries have a current registration notice without a mailbox in the retrieved page text. The remaining 11 approved entries depend on Paris, Nairobi and Yerevan. On 13 September the maintainer confirmed that those missions have no announcement; they are now marked accordingly.

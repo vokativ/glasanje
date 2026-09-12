@@ -1,5 +1,7 @@
 # Operator-approval handoff: retained 2026 election recipients
 
+Additional decisions from 13 September local time are recorded in the [remaining mission collection audit](remaining-mission-collection-audit.md): the maintainer explicitly approved 17 newly inspected recipients and clarified Latvia's consular coverage by Sweden. Those later maintained decisions supplement this handoff.
+
 ## Decision
 
 Treat the recipients below as valid for the 2026 election workflow and make each listed station `operator-approved` if it is not already. Preserve each current recipient address exactly. Do **not** represent these decisions as `source-confirmed` unless a later public, election-specific notice supplies the required evidence.
