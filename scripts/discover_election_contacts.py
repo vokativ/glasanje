@@ -82,7 +82,7 @@ class PageTask:
     depth: int
     title_hint: str = ""
     source_chain: tuple[str, ...] = ()
-
+    allows_page_context_fallback: bool = False
 
 @dataclass(frozen=True)
 class Response:
@@ -304,7 +304,10 @@ def mailto_target_matches_visible_email(block, email: str) -> bool:
 
 
 def extract_html_evidence(
-    html: bytes, election_year: str | None = None
+    html: bytes,
+    election_year: str | None = None,
+    *,
+    retain_uncontextualized_evidence: bool = False,
 ) -> tuple[str, str, list[ElectionEvidence]]:
     soup = BeautifulSoup(html, "html.parser")
     title_node = soup.find("h1") or soup.find("title")
@@ -318,7 +321,7 @@ def extract_html_evidence(
             continue
         for email in extract_visible_emails(text):
             context = evidence_context_for(block, email, election_year)
-            if not context:
+            if not context and not retain_uncontextualized_evidence:
                 continue
             if any(
                 email in extract_visible_emails(visible_text(child))
@@ -785,6 +788,59 @@ def station_host_tasks(
         tuple(normalized_chain(source_chain)),
     )
 
+def direct_notice_tasks(
+    stations: Iterable[Station],
+    notice_urls_by_station: dict[str, str],
+    country_code: str,
+    source_chain: Iterable[str],
+) -> list[PageTask]:
+    verified_chain = tuple(normalized_chain(source_chain))
+    return [
+        PageTask(
+            notice_url,
+            country_code,
+            (station,),
+            0,
+            "",
+            verified_chain,
+            True,
+        )
+        for station in stations
+        if (notice_url := notice_urls_by_station.get(station.station_id)) is not None
+    ]
+
+
+def validated_notice_urls(
+    pairs: Iterable[str],
+    station_by_id: dict[str, Station],
+    explicitly_requested: set[str],
+) -> dict[str, str]:
+    notice_urls: dict[str, str] = {}
+    stations_by_url: dict[str, str] = {}
+    for pair in pairs:
+        station_id, separator, raw_url = pair.partition("=")
+        if not separator or not station_id or not raw_url:
+            raise ValueError("--notice-url must be STATION_ID=HTTPS_URL")
+        notice_url = absolute_https_url(raw_url)
+        if notice_url is None:
+            raise ValueError(f"--notice-url for {station_id} must be an HTTPS URL")
+        station = station_by_id.get(station_id)
+        if station is None:
+            raise ValueError(f"--notice-url references unknown station {station_id}")
+        if station_id not in explicitly_requested:
+            raise ValueError(f"--notice-url station {station_id} must be selected with --station")
+        if not station.website_host or url_host(notice_url) not in host_variants(station.website_host):
+            raise ValueError(f"--notice-url host is not canonical for station {station_id}")
+        if station_id in notice_urls:
+            raise ValueError(f"duplicate --notice-url for station {station_id}")
+        if (other_station := stations_by_url.get(notice_url)) is not None:
+            raise ValueError(
+                f"--notice-url {notice_url} is already bound to station {other_station}"
+            )
+        notice_urls[station_id] = notice_url
+        stations_by_url[notice_url] = station_id
+    return notice_urls
+
 
 def append_chain(chain: Iterable[str], url: str) -> tuple[str, ...]:
     return tuple(normalized_chain((*chain, url)))
@@ -800,12 +856,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", default="data/election_candidates.json", type=Path)
     parser.add_argument("--missions", default="data/missions_canonical.json", type=Path)
     parser.add_argument("--max-pages", default=80, type=int, help="Maximum total HTTP(S) pages/PDFs to fetch.")
-    parser.add_argument("--max-depth", default=2, type=int, help="Maximum links beyond each linked mission homepage.")
+    parser.add_argument("--max-depth", type=int, help="Maximum links beyond each linked mission homepage (default: 2).")
     parser.add_argument("--concurrency", default=2, type=int, help="Maximum concurrent HTTP requests.")
     parser.add_argument("--timeout", default=15.0, type=float, help="Per-request timeout in seconds.")
     parser.add_argument("--max-bytes", default=5_000_000, type=int, help="Maximum response size in bytes.")
-    parser.add_argument("--mode", choices=("incremental", "full"), default="incremental")
+    parser.add_argument("--mode", choices=("incremental", "full", "deep-retry"), default="incremental")
     parser.add_argument("--station", action="append", default=[], metavar="ID", help="Crawl this station, including retained stations.")
+    parser.add_argument(
+        "--notice-url",
+        action="append",
+        default=[],
+        metavar="STATION_ID=HTTPS_URL",
+        help="Fetch this station-bound official notice after its MFA mission chain is verified.",
+    )
     parser.add_argument("--state", default="data/election_crawl_state.json", type=Path)
     parser.add_argument("--report", default="data/election_crawl_report.json", type=Path)
     parser.add_argument("--overrides", default="data/overrides.json", type=Path)
@@ -814,10 +877,18 @@ def parse_args() -> argparse.Namespace:
     args = parser.parse_args()
     if args.max_pages < 1:
         parser.error("--max-pages must be positive")
-    if args.max_depth < 0:
+    if args.max_depth is not None and args.max_depth < 0:
         parser.error("--max-depth must be non-negative")
-    if args.concurrency < 1:
-        parser.error("--concurrency must be positive")
+    if args.mode == "deep-retry":
+        if not args.station:
+            parser.error("--mode deep-retry requires at least one --station")
+        if args.max_depth is not None and args.max_depth != 6:
+            parser.error("--mode deep-retry requires --max-depth 6")
+        args.max_depth = 6
+    elif args.max_depth is None:
+        args.max_depth = 2
+    if args.notice_url and not args.station:
+        parser.error("--notice-url requires at least one --station")
     if args.timeout <= 0:
         parser.error("--timeout must be positive")
     if args.max_bytes < 1:
@@ -891,6 +962,11 @@ def main() -> int:
     unknown_stations = sorted(set(requested_ids) - set(station_by_id))
     if unknown_stations:
         print(f"Election contact discovery failed: unknown station(s): {', '.join(unknown_stations)}", file=sys.stderr)
+        return 2
+    try:
+        notice_urls_by_station = validated_notice_urls(args.notice_url, station_by_id, set(requested_ids))
+    except ValueError as error:
+        print(f"Election contact discovery failed: {error}", file=sys.stderr)
         return 2
 
     prior_candidates: dict[str, dict[str, object]] = {}
@@ -1033,8 +1109,15 @@ def main() -> int:
             entries = [entry for variant in host_variants(host) for entry in by_variant.get(variant, [])]
             if len(entries) == 1:
                 entry = entries[0]
-                country_entries[country_code].append(
-                    station_host_tasks(stations, entry["url"], country_code, (cached["indexUrl"], cached["countryUrl"], entry["url"]))
+                mission_task = station_host_tasks(
+                    stations,
+                    entry["url"],
+                    country_code,
+                    (cached["indexUrl"], cached["countryUrl"], entry["url"]),
+                )
+                country_entries[country_code].append(mission_task)
+                country_entries[country_code].extend(
+                    direct_notice_tasks(stations, notice_urls_by_station, country_code, mission_task.source_chain)
                 )
             else:
                 bootstrap_countries.add(country_code)
@@ -1100,16 +1183,25 @@ def main() -> int:
                     )
                     continue
                 task = selected_tasks[0]
-                country_entries[country_code].append(
-                    station_host_tasks(stations, task.url, country_code, (index_url, response.url, task.url))
+                mission_task = station_host_tasks(
+                    stations, task.url, country_code, (index_url, response.url, task.url)
+                )
+                country_entries[country_code].append(mission_task)
+                country_entries[country_code].extend(
+                    direct_notice_tasks(stations, notice_urls_by_station, country_code, mission_task.source_chain)
                 )
 
     pending = [task for country_code in sorted(country_entries) for task in country_entries[country_code]]
-    seen_task_keys: set[tuple[str, str, tuple[str, ...]]] = set()
+    seen_task_keys: set[tuple[str, str, tuple[str, ...], bool]] = set()
     while pending:
         batch: list[PageTask] = []
         for task in pending:
-            key = (task.country_code, task.url, tuple(station.station_id for station in task.stations))
+            key = (
+                task.country_code,
+                task.url,
+                tuple(station.station_id for station in task.stations),
+                task.allows_page_context_fallback,
+            )
             if key not in seen_task_keys:
                 seen_task_keys.add(key)
                 batch.append(task)
@@ -1142,7 +1234,11 @@ def main() -> int:
                     continue
                 evidence_type = "pdf"
             elif "html" in response.content_type:
-                title, page_text, evidence = extract_html_evidence(response.body, args.election_year)
+                title, page_text, evidence = extract_html_evidence(
+                    response.body,
+                    args.election_year,
+                    retain_uncontextualized_evidence=task.allows_page_context_fallback,
+                )
                 evidence_type = "html"
                 if task.depth < args.max_depth:
                     for next_task in mission_links(response.body, task, args.election_year):
@@ -1153,9 +1249,17 @@ def main() -> int:
                 failed_hosts.update(task_hosts)
                 report_failures.append({"scope": "mission page", "url": task.url, "reason": error_response(response)})
                 continue
+            page_election_context = (
+                page_text
+                if task.allows_page_context_fallback
+                and has_target_election_context(page_text, args.election_year)
+                else None
+            )
             accepted: list[tuple[ElectionEvidence, tuple[Station, ...], str]] = []
             for item in evidence:
                 election_context = election_context_for(item.quote, item.context, args.election_year)
+                if election_context is None and page_election_context is not None:
+                    election_context = page_election_context
                 if election_context is None:
                     continue
                 stations = attributed_stations(item.email, task.stations, known_mailboxes)
@@ -1224,6 +1328,8 @@ def main() -> int:
             status = "no-site"
         elif station_is_suppressed(override, args.election_id):
             status = "suppressed"
+        elif station.station_id in candidate_stations:
+            status = "candidate"
         elif station.station_id in selected_ids and station.website_host in failed_hosts:
             status = "failed"
         elif station.station_id in selected_ids and station.website_host in budget_hosts:
@@ -1232,8 +1338,6 @@ def main() -> int:
             status = "depth-limited"
         elif station.station_id in selected_ids and station.station_id in ambiguous_stations:
             status = "ambiguous"
-        elif station.station_id in candidate_stations:
-            status = "candidate"
         elif station.station_id in retained_stations:
             status = "retained"
         elif station.station_id not in selected_ids:

@@ -32,6 +32,48 @@ bun run contacts:run -- --election-id 2026-parliamentary \
 
 `--station` je ponovljiv. Izričito navedena stanica može se ponovo proveriti i kada je ranije potvrđena; rutinski prolaz je ne proverava samo zato što je već potvrđena.
 
+## Izričito prikupljanje službenog obaveštenja
+
+Kada je poznat javni URL službenog izbornog obaveštenja, operater ga može dodati kao izvor kandidata pomoću ponovljivog para `--notice-url STATION_ID=HTTPS_URL`. Svaki takav par zahteva i odgovarajuću, izričito navedenu `--station`; stanica iz para mora biti u tom istom skupu. URL se normalizuje kao HTTPS, a njegov domaćin mora biti kanonska varijanta domaćina sajta te misije. Time se obaveštenje dodaje tek nakon normalnog lanca MSP → država → misija, kao običan izvorno vezan kandidat, uz ista ograničenja preusmerenja, domaćina, broja stranica i dubine kao i drugo prikupljanje.
+
+Za paket-only prolaz sa tri poznata službena obaveštenja pokrenite:
+
+```bash
+bun run contacts:run -- --election-id 2026-parliamentary \
+  --station st-il-emb-main \
+  --notice-url st-il-emb-main=https://telaviv.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-postupku-ostvarivanja-birackog-prava-drzavljana-srbije-koji-imaju-boraviste-u-izraelu \
+  --station st-de-cons-tutgart \
+  --notice-url st-de-cons-tutgart=https://stuttgart.mfa.gov.rs/mediji/aktivnosti/raspisivanje-izbora-za-narodne-poslanike \
+  --station st-se-emb-main \
+  --notice-url st-se-emb-main=https://stockholm.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije
+```
+
+Kraći telavivski put nije važeći URL obaveštenja i vraća 404.
+
+Ova opcija nije prečica za obične kontakte: ne navoditi Sofijino obaveštenje bez primaoca niti iranski obični, neizborni sandučić. Svaki prolaz i dalje čuva nepromenljive artefakte dokaza i snimke izvora u svom `runId` direktorijumu. Paket-only prolaz ne vrši pregled, `--apply` ni promociju i ne menja `data/overrides.json`; pre bilo kakve izmene override-a i dalje su potrebni redovan primarni pregled, a zatim zaseban, izričit `--apply`.
+
+## Ciljani duboki ponovni prolaz
+
+Za stanice čiji je raniji prolaz dosegao ograničenje dubine ili je neuspeo, koristite isključivo sledeći ograničeni ponovni prolaz:
+
+```bash
+bun run contacts:run -- --election-id 2026-parliamentary --mode deep-retry \
+  --station st-nonres-af \
+  --station st-bg-emb-main \
+  --station st-de-cons-tutgart \
+  --station st-il-emb-main \
+  --station st-ir-emb-main \
+  --station st-lv-emb-main-stockholm-mfa-gov-rs \
+  --station st-nonres-pk \
+  --station st-se-emb-main
+```
+
+`--mode deep-retry` zahteva najmanje jednu izričito navedenu `--station`; ne prihvata neograničen skup stanica. Za svaku tako izabranu stanicu dubina je fiksno 6, a budžet je podrazumevano ograničen na 240 stranica kada se izostavi `--max-pages`; pozivaoci mogu navesti drugačije pozitivno ograničenje broja stranica unutar dopuštenih granica. Opseg se čuva kroz sve naredne faze: ovaj prolaz ne proširuje skup na druge stanice, ne zaobilazi ograničenje stranica i nije automatsko potpuno osvežavanje.
+
+Svako izvršavanje dobija nov `runId` i sopstvene nepromenljive artefakte; ne prepisivati niti ručno menjati ranije artefakte. Ovaj ponovni prolaz samo prikuplja i izvozi dokaz u svom izričitom opsegu: ne daje direktnu autorizaciju i ne pokreće promociju. Pregled i `--apply` ostaju zasebne, izričite odluke prema postupku ispod.
+
+Za `st-de-cons-tutgart`, nepodržani `.doc` ostaje nedokazan rezultat dok javno izdvajanje iz izvora ne uspe; sama datoteka nije dokaz koji se može premostiti ovim režimom.
+
 ## AI pregled i autorizacija
 
 Kandidat može biti promovisan samo uz **jedan stvaran, dovršen primarni AI pregled** po politici `data/election_reviewers.json`. Prihvaćeni pregled mora vezati kandidata, skup kandidata za stanicu, izvor i tačne javne citate za tri stvari: aktuelni izbor, adresu za prijavu i identitet stanice. Paket i pregled sadrže stvarni identitet/odgovor poziva kada je dostupan; ne upisivati niti prepisivati ime modela koje nije stvarno prijavljeno.

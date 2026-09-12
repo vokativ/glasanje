@@ -40,6 +40,12 @@ def new_run_id() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + secrets.token_hex(6)
 
 
+DEFAULT_MAX_DEPTH = 2
+DEEP_RETRY_MAX_DEPTH = 6
+DEFAULT_MAX_PAGES = 80
+DEEP_RETRY_MAX_PAGES = 240
+
+
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
@@ -48,10 +54,21 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         )
     )
     parser.add_argument("--election-id", required=True, help="Election identifier recorded in all evidence.")
-    parser.add_argument("--mode", choices=("incremental", "full"), default="incremental")
+    parser.add_argument("--mode", choices=("incremental", "full", "deep-retry"), default="incremental")
     parser.add_argument("--station", action="append", default=[], help="Limit work to a canonical station ID; repeatable.")
+    parser.add_argument(
+        "--notice-url",
+        action="append",
+        default=[],
+        metavar="STATION_ID=HTTPS_URL",
+        help="Add one official mission notice URL for a selected station; repeatable.",
+    )
     parser.add_argument("--max-hosts", type=int, default=5, help="Bound distinct mission hosts (0 means all only in full mode).")
-    parser.add_argument("--max-pages", type=int, default=80, help="Bound public pages fetched by discovery.")
+    parser.add_argument(
+        "--max-pages",
+        type=int,
+        help="Bound public pages fetched by discovery (default: 240 for deep-retry, otherwise 80).",
+    )
     parser.add_argument("--timeout", type=float, default=15.0, help="Per-request timeout in seconds.")
     review_mode = parser.add_mutually_exclusive_group()
     review_mode.add_argument("--review", action="store_true", help="Call the configured ELECTION_AI_* endpoint for a primary review.")
@@ -63,6 +80,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--apply", action="store_true", help="Promote only groups eligible in this run's dry-run.")
     args = parser.parse_args(argv)
+    args.max_pages = args.max_pages if args.max_pages is not None else (
+        DEEP_RETRY_MAX_PAGES if args.mode == "deep-retry" else DEFAULT_MAX_PAGES
+    )
+    args.max_depth = DEEP_RETRY_MAX_DEPTH if args.mode == "deep-retry" else DEFAULT_MAX_DEPTH
     if args.max_hosts < 0:
         parser.error("--max-hosts must be zero or greater")
     if args.max_pages <= 0:
@@ -71,6 +92,17 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         parser.error("--timeout must be greater than zero")
     if args.max_hosts == 0 and args.mode != "full":
         parser.error("--max-hosts 0 is permitted only with --mode full")
+    if args.mode == "deep-retry" and not args.station:
+        parser.error("--mode deep-retry requires at least one --station")
+    if args.notice_url and not args.station:
+        parser.error("--notice-url requires at least one --station")
+    selected_stations = set(args.station)
+    for notice_url in args.notice_url:
+        station_id, separator, url = notice_url.partition("=")
+        if not separator or not station_id or not url:
+            parser.error("--notice-url must use STATION_ID=HTTPS_URL")
+        if station_id not in selected_stations:
+            parser.error(f"--notice-url station {station_id!r} must be selected with --station")
     if args.attest_import and args.import_reviews is None:
         parser.error("--attest-import requires --import-reviews")
     if args.import_reviews is not None and not args.attest_import:
@@ -272,7 +304,13 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
         "electionId": args.election_id,
         "mode": args.mode,
         "stations": list(args.station),
-        "limits": {"maxHosts": args.max_hosts, "maxPages": args.max_pages, "timeout": args.timeout},
+        "noticeUrls": list(args.notice_url),
+        "limits": {
+            "maxHosts": args.max_hosts,
+            "maxPages": args.max_pages,
+            "maxDepth": args.max_depth,
+            "timeout": args.timeout,
+        },
         "reviewRoute": "endpoint" if args.review else "attested_import" if args.import_reviews else "packet_export",
         "applyRequested": args.apply,
         "artifacts": {name: str(path.relative_to(root)) for name, path in paths.items() if name not in {"workflow lock"}},
@@ -301,8 +339,12 @@ def run_workflow(args: argparse.Namespace, root: Path = ROOT) -> Path:
             "--max-pages", str(args.max_pages),
             "--timeout", str(args.timeout),
         ]
+        if args.mode == "deep-retry":
+            crawler.extend(("--max-depth", str(DEEP_RETRY_MAX_DEPTH)))
         for station_id in args.station:
             crawler.extend(("--station", station_id))
+        for notice_url in args.notice_url:
+            crawler.extend(("--notice-url", notice_url))
         run_phase("discovery", crawler, audit, root)
         # Discovery succeeds only after its run-local artifacts exist; copying
         # candidates here is the default workflow's deliberate durable update.

@@ -92,8 +92,43 @@ class ElectionWorkflowTests(unittest.TestCase):
 
             self.assertEqual(runner.print_worklist(candidates), ["current-station"])
 
-    # A station request is a hard boundary: every downstream phase receives only that station.
-    def test_station_scope_never_reviews_or_applies_other_pending_groups(self) -> None:
+    def test_deep_retry_requires_station_and_resolves_mode_sensitive_limits(self) -> None:
+        with self.assertRaises(SystemExit):
+            runner.parse_args(["--election-id", "2026-parliamentary", "--mode", "deep-retry"])
+
+        normal = runner.parse_args(["--election-id", "2026-parliamentary"])
+        deep_retry = runner.parse_args([
+            "--election-id", "2026-parliamentary",
+            "--mode", "deep-retry",
+            "--station", "st-selected",
+        ])
+
+        self.assertEqual((normal.max_pages, normal.max_depth), (80, 2))
+        self.assertEqual((deep_retry.max_pages, deep_retry.max_depth), (240, 6))
+
+    def test_notice_url_requires_matching_explicit_station(self) -> None:
+        with self.assertRaises(SystemExit):
+            runner.parse_args([
+                "--election-id", "2026-parliamentary",
+                "--notice-url", "st-selected=https://mission.example.test/notice",
+            ])
+        with self.assertRaises(SystemExit):
+            runner.parse_args([
+                "--election-id", "2026-parliamentary",
+                "--station", "st-selected",
+                "--notice-url", "st-unrelated=https://mission.example.test/notice",
+            ])
+
+        args = runner.parse_args([
+            "--election-id", "2026-parliamentary",
+            "--station", "st-selected",
+            "--notice-url", "st-selected=https://mission.example.test/notice",
+        ])
+
+        self.assertEqual(args.notice_url, ["st-selected=https://mission.example.test/notice"])
+
+    # A supplied notice URL remains within the requested station scope through every downstream phase.
+    def test_notice_url_never_reviews_or_applies_other_pending_groups(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
             scripts = root / "scripts"
@@ -102,6 +137,7 @@ class ElectionWorkflowTests(unittest.TestCase):
             data.mkdir()
             input_reviews = root / "actual-reviews.json"
             input_reviews.write_text("{}", encoding="utf-8")
+            notice_url = "st-selected=https://mission.example.test/notice"
             candidate_document = {
                 "schemaVersion": 1,
                 "electionId": "2026-parliamentary",
@@ -141,10 +177,12 @@ class ElectionWorkflowTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            runner.run_workflow(
+            run_dir = runner.run_workflow(
                 runner.parse_args([
                     "--election-id", "2026-parliamentary",
+                    "--mode", "deep-retry",
                     "--station", "st-selected",
+                    "--notice-url", notice_url,
                     "--import-reviews", str(input_reviews),
                     "--attest-import",
                     "--apply",
@@ -158,6 +196,20 @@ class ElectionWorkflowTests(unittest.TestCase):
                 self.assertIn("--station", phase)
                 station_ids = [phase[index + 1] for index, value in enumerate(phase[:-1]) if value == "--station"]
                 self.assertEqual(station_ids, ["st-selected"])
+            audit = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                audit["limits"],
+                {"maxHosts": 5, "maxPages": 240, "maxDepth": 6, "timeout": 15.0},
+            )
+            discovery = audit["phases"][0]["command"]
+            self.assertEqual(discovery[discovery.index("--mode") + 1], "deep-retry")
+            self.assertEqual(discovery[discovery.index("--max-pages") + 1], "240")
+            self.assertEqual(discovery[discovery.index("--max-depth") + 1], "6")
+            notice_urls = [
+                discovery[index + 1] for index, value in enumerate(discovery[:-1]) if value == "--notice-url"
+            ]
+            self.assertEqual(notice_urls, [notice_url])
+            self.assertEqual(audit["noticeUrls"], [notice_url])
 
     # Selecting a station with no pending work must not fall back to reviewing unrelated stations.
     def test_selected_station_without_pending_work_skips_global_review(self) -> None:
@@ -204,6 +256,9 @@ class ElectionWorkflowTests(unittest.TestCase):
             audit = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
             self.assertEqual([phase["name"] for phase in audit["phases"]], ["discovery"])
             self.assertEqual(audit["promotion"]["eligibleStationIds"], [])
+            self.assertEqual(audit["limits"]["maxPages"], 80)
+            self.assertEqual(audit["limits"]["maxDepth"], 2)
+            self.assertNotIn("--max-depth", audit["phases"][0]["command"])
 
     @staticmethod
     def _review_document(
