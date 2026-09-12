@@ -8,6 +8,20 @@ Jedan pokretani postupak ima jednog vlasnika: zaključavanje `data/.election_con
 
 ## Uobičajeni ograničeni prolaz
 
+Za ručno pregledana izborna obaveštenja nije potrebno prvo pokretati crawler ili praviti arhivu. Sačuvati `electionNotice` u postojećem zapisu stanice u `data/overrides.json`, pa pokrenuti `bun run build:data`. Primer oblika zapisa (vreme označava stvarni pregled izvora):
+
+```json
+"electionNotice": {
+  "url": "https://vienna.mfa.gov.rs/gradjani/najcesca-pitanja",
+  "title": "Избори 2026",
+  "electionYear": "2026",
+  "observedAt": "2026-09-12T12:39:06Z",
+  "emailStatus": "email-extracted"
+}
+```
+
+Ovo je samo veza ka objavi: ne menja `electionEmail` niti `_electionContactProvenance`. `emailStatus` opisuje izdvajanje iz teksta, a ne odobrenje primaoca. Održavana veza ima prednost nad automatski pronađenom za istu stanicu; sopstvena veza ima prednost nad vezom već razrešene pokrivajuće misije. Graditelj proverava oblik metapodataka, HTTPS URL i identitet stanice, ali ta provera nije dokaz autoriteta ili sadržaja izvora. Ne menjati godinu ili vreme pregleda bez stvarnog pregleda. Nedostajuća veza ne povlači postojeće odobrenje. Pregled svih odobrenih primalaca i preostalih veza je u [evidenciji pregleda](approved-announcement-link-audit.md); interna arhiva je zabeležena kao buduća mogućnost.
+
 Pokrenite samo ograničeno inkrementalno otkrivanje, izvoz paketa i proveru spremnosti:
 
 ```bash

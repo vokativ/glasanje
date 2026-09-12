@@ -52,6 +52,13 @@
           }
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
+      },
+      "electionNotice": {
+        "url": "https://munich.mfa.gov.rs/mediji/aktivnosti/prijava-za-izbore-25-10-2026",
+        "title": "Пријава за изборе 25.10.2026. године",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:56Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-de-emb-main": {
@@ -76,6 +83,13 @@
           }
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
+      },
+      "electionNotice": {
+        "url": "https://berlin.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+        "title": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:57Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-ml": {
@@ -125,7 +139,15 @@
           }
         ],
         "promotedAt": "2026-09-10T11:41:03Z"
-      }
+      },
+      "electionNotice": {
+        "url": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:59Z",
+        "emailStatus": "email-extracted"
+      },
+      "_electionNoticeNote": "The Rome announcement has a separate Malta submission section naming srb.office.valletta@mfa.rs."
     },
     "st-es-emb-main": {
       "electionEmail": "konz.madrid@mfa.rs",
@@ -149,6 +171,13 @@
           }
         ],
         "promotedAt": "2026-09-10T11:41:03Z"
+      },
+      "electionNotice": {
+        "url": "https://madrid.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026-obavestenje-za-birace-koji-imaju-boraviste-u-k-spaniji-o-ostvarivanju-birackog-prava-na-izborima-za-narodne-poslanike",
+        "title": "Избори за народне посланике 2026 -  ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:58Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-de-cons-frankfurt": {
@@ -173,6 +202,13 @@
           }
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
+      },
+      "electionNotice": {
+        "url": "https://frankfurt.mfa.gov.rs/mediji/najave-i-obavestenja/obavestavaju-se-biraci-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:55Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-fi-emb-main": {
@@ -197,6 +233,13 @@
           }
         ],
         "promotedAt": "2026-09-10T11:41:03Z"
+      },
+      "electionNotice": {
+        "url": "https://helsinki.mfa.gov.rs/mediji/najave-i-obavestenja/vazno-obavestenje-izbori-2026",
+        "title": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:58Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-dz-emb-main": {
@@ -221,6 +264,13 @@
           }
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
+      },
+      "electionNotice": {
+        "url": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:58Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-ee": {
@@ -293,6 +343,13 @@
           }
         ],
         "promotedAt": "2026-09-10T11:41:03Z"
+      },
+      "electionNotice": {
+        "url": "https://toronto.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+        "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:54Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-it-emb-main": {
@@ -317,6 +374,13 @@
           }
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
+      },
+      "electionNotice": {
+        "url": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:59Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-it-cons-milano": {
@@ -341,6 +405,13 @@
           }
         ],
         "promotedAt": "2026-09-10T11:41:03Z"
+      },
+      "electionNotice": {
+        "url": "https://milano.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-parlamentarnim-izborima-25-oktobra-2026-godine",
+        "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:58Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-mk-emb-main": {
@@ -365,6 +436,13 @@
           }
         ],
         "promotedAt": "2026-09-10T14:56:10Z"
+      },
+      "electionNotice": {
+        "url": "https://skopje.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026",
+        "title": "Парламентарни избори 2026",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:59Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-sr": {
@@ -437,6 +515,13 @@
           }
         ],
         "promotedAt": "2026-09-10T14:56:10Z"
+      },
+      "electionNotice": {
+        "url": "https://thehague.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:00Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-lc": {
@@ -509,6 +594,13 @@
           }
         ],
         "promotedAt": "2026-09-10T14:56:10Z"
+      },
+      "electionNotice": {
+        "url": "https://hamburg.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+        "title": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:56Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-kn": {
@@ -725,6 +817,13 @@
           }
         ],
         "promotedAt": "2026-09-11T05:08:13Z"
+      },
+      "electionNotice": {
+        "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Обавештење о пријави за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:01Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-co": {
@@ -822,6 +921,13 @@
           ]
         },
         "promotedAt": "2026-09-11T07:10:44Z"
+      },
+      "electionNotice": {
+        "url": "https://london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+        "title": "PRIJAVLjIVANjE ZA GLASANjE NA IZBORIMA  25. OKTOBRA 2026. GODINE",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-no-emb-main": {
@@ -896,6 +1002,13 @@
           "resolvesReviewIds": []
         },
         "promotedAt": "2026-09-11T07:10:44Z"
+      },
+      "electionNotice": {
+        "url": "https://oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ НАРОДНЕ СКУПШТИНЕ РЕПУБЛИКЕ СРБИЈЕ 2026 - пријем захтева за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-ie": {
@@ -991,6 +1104,13 @@
         "sourceQuote": "Захтев можете доставити Амбасади путем мејла на мејл адресу izbori.brisel@mfa.rs",
         "observedAt": "2026-09-11T08:12:46Z",
         "promotedAt": "2026-09-11T08:12:46Z"
+      },
+      "electionNotice": {
+        "url": "https://brussels.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike",
+        "title": "Рaсписивање избора за народне посланике",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:54Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-lu": {
@@ -1060,6 +1180,13 @@
         "sourceQuote": "или електронском поштом искључиво на имејл адресу: embassy.minsk@mfa.rs",
         "observedAt": "2026-09-11T08:12:46Z",
         "promotedAt": "2026-09-11T08:12:46Z"
+      },
+      "electionNotice": {
+        "url": "https://minsk.mfa.gov.rs/mediji/aktivnosti/raspisivanje-vanrednih-parlamentarnih-izbora-republike-srbije-koji-ce-se-odrzati-25-oktobra-2026-godine",
+        "title": "Расписивање ванредних парламентарних избора Републике Србије који ће се одржати 25. октобра 2026. године",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-ro-cons-temivar": {
@@ -1083,6 +1210,13 @@
         "sourceQuote": "Захтев можете доставити Генералном конзулату путем мејла на следећу мејл адресу: srb.cons.timisoara@mfa.rs",
         "observedAt": "2026-09-11T08:12:46Z",
         "promotedAt": "2026-09-11T08:12:46Z"
+      },
+      "electionNotice": {
+        "url": "https://timisoara.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+        "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:01Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-sm": {
@@ -1152,6 +1286,13 @@
         "sourceQuote": "електронским путем на адресу konzul@ambasadasrbije.ch",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
+      },
+      "electionNotice": {
+        "url": "https://berne.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:55Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-li": {
@@ -1198,6 +1339,13 @@
         "sourceQuote": "путем е-маила: consular.warsaw@mfa.rs",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
+      },
+      "electionNotice": {
+        "url": "https://warsaw.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+        "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:01Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-lt": {
@@ -1244,6 +1392,13 @@
         "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: consular.canberra@mfa.rs",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
+      },
+      "electionNotice": {
+        "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:57Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-au-cons-sidnej": {
@@ -1267,7 +1422,15 @@
         "sourceQuote": "За све информације можете контактирати Амбасаду у Канбери или Генерални конзулат у Сиднеју путем мејла: srb.cons.sydney@mfa.rs",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
-      }
+      },
+      "electionNotice": {
+        "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:57Z",
+        "emailStatus": "email-extracted"
+      },
+      "_electionNoticeNote": "Canberra publishes this joint election notice naming both consular.canberra@mfa.rs and srb.cons.sydney@mfa.rs. Retain the separate Sydney recipient."
     },
     "st-nonres-nz": {
       "electionEmail": "consular.canberra@mfa.rs",
@@ -1520,6 +1683,13 @@
         "sourceQuote": "Захтев можете доставити Амбасади на мејл адресу: srb.emb.japan@mfa.rs",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
+      },
+      "electionNotice": {
+        "url": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+        "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:59Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-mh": {
@@ -1612,6 +1782,13 @@
         "sourceQuote": "електронским путем на : srb.emb.china@mfa.rs",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
+      },
+      "electionNotice": {
+        "url": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+        "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:37:55Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-mn": {
@@ -1681,6 +1858,13 @@
         "sourceQuote": "За све информације можете контактирати Амбасаду Србије у Преторији путем меила на адресу info@srbembassy.org.za",
         "observedAt": "2026-09-11T09:15:00Z",
         "promotedAt": "2026-09-11T09:15:00Z"
+      },
+      "electionNotice": {
+        "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:01Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-nonres-bw": {
@@ -1854,6 +2038,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://abudhabi.mfa.gov.rs/mediji/aktivnosti/izbori-2026-obavestenje-za-birace",
+        "title": "ИЗБОРИ 2026 - Обавештење за бираче",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-de-cons-tutgart": {
@@ -1866,6 +2057,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://stuttgart.mfa.gov.rs/mediji/aktivnosti/raspisivanje-izbora-za-narodne-poslanike",
+        "title": "Расписивање избора за народне посланике",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-de-cons-diseldorf": {
@@ -1878,6 +2076,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://duesseldorf.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "title": "Избори за народне посланике – пријем захтева за гласање у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-at-emb-main": {
@@ -1890,6 +2095,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://vienna.mfa.gov.rs/gradjani/najcesca-pitanja",
+        "title": "Избори 2026",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:39:06Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-ca-emb-main": {
@@ -1902,6 +2114,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://ottawa.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-dk-emb-main": {
@@ -1914,6 +2133,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://copenhagen.mfa.gov.rs/mediji/aktivnosti/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
+        "title": "Расписивање избора за народне посланике Републике Србије",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:28Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-us-cons-njujork": {
@@ -1926,6 +2152,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://newyork.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-us-cons-ikago": {
@@ -1938,6 +2171,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://chicago.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-mx-emb-main": {
@@ -1950,7 +2190,15 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
-      }
+      },
+      "electionNotice": {
+        "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+        "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "no-email-extracted"
+      },
+      "_electionNoticeNote": "Current registration notice explicitly names Mexico, Honduras, Costa Rica, Panama, Nicaragua, El Salvador and Guatemala. No mailbox extracted from its page text; this link does not replace the existing operator authorization of embajadaserbiaenmexico@gmail.com. See docs/approved-announcement-link-audit.md."
     },
     "st-il-emb-main": {
       "electionEmail": "srb.emb.israel@mfa.rs",
@@ -1962,6 +2210,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://telaviv.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-postupku-ostvarivanja-birackog-prava-drzavljana-srbije-koji-imaju-boraviste-u-izraelu",
+        "title": "ОБАВЕШТЕЊЕ О ПОСТУПКУ ОСТВАРИВАЊА БИРАЧКОГ ПРАВА ДРЖАВЉАНА СРБИЈЕ КОЈИ ИМАЈУ БОРАВИШТЕ У ИЗРАЕЛУ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-se-emb-main": {
@@ -1974,6 +2229,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://stockholm.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
+        "title": "Расписивање избора за народне посланике Републике Србије",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "email-extracted"
       }
     },
     "st-kr-emb-main": {
@@ -1986,6 +2248,13 @@
         },
         "electionId": "2026-parliamentary",
         "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://seoul.mfa.gov.rs/mediji/aktivnosti/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+        "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+        "electionYear": "2026",
+        "observedAt": "2026-09-12T12:38:29Z",
+        "emailStatus": "email-extracted"
       }
     }
   },

@@ -44,6 +44,42 @@ class ValidationError(ValueError):
     """Raised when a public artifact cannot safely authorize a contact."""
 
 
+def maintained_election_notices(overrides: Mapping[str, Any], canonical: Mapping[str, Any]) -> dict[str, dict[str, str]]:
+    """Read maintained source pointers without requiring a crawl archive or granting approval.
+
+    These are deliberate data edits, like the other mission overrides. Validation
+    checks their shape and link safety; the operator must actually read the source.
+    Cross-mission publications are allowed (e.g. Canberra's notice also names Sydney).
+    """
+    station_ids = {station["id"] for country in canonical["countries"] for station in country["stations"]}
+    fields = ("url", "title", "electionYear", "observedAt", "emailStatus")
+    notices = {}
+    for station_id, patch in overrides.items():
+        if not isinstance(patch, dict) or "electionNotice" not in patch:
+            continue
+        notice = patch["electionNotice"]
+        if station_id not in station_ids or not isinstance(notice, dict) or any(
+            not isinstance(notice.get(field), str) or not notice[field].strip() for field in fields
+        ):
+            raise ValidationError(f"Invalid maintained election notice for {station_id}")
+        url = urlparse(notice["url"])
+        if (
+            url.scheme != "https" or not url.hostname or url.username or url.password
+            or any(character.isspace() for character in notice["url"])
+            or not ELECTION_YEAR_RE.fullmatch(notice["electionYear"])
+            or notice["emailStatus"] not in {"email-extracted", "no-email-extracted"}
+        ):
+            raise ValidationError(f"Invalid maintained election notice link/metadata for {station_id}")
+        try:
+            observed_at = datetime.fromisoformat(notice["observedAt"].replace("Z", "+00:00"))
+            if observed_at.tzinfo is None or observed_at > datetime.now(timezone.utc):
+                raise ValueError("Observation must be a non-future timestamp with timezone")
+        except ValueError as error:
+            raise ValidationError(f"Invalid maintained election notice observation for {station_id}") from error
+        notices[station_id] = {field: notice[field] for field in fields}
+    return notices
+
+
 def fail(message: str) -> None:
     raise ValidationError(message)
 

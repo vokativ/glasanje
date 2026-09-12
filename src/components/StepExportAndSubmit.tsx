@@ -13,6 +13,7 @@ import {
 } from '../lib/share';
 import { PollingStation } from '../data/missions';
 import { useScript } from '../lib/script';
+import { ElectionNoticeLink } from './ElectionNoticeLink';
 /**
  * Creates a PDF from the wizard's in-memory application data and prepares handoff helpers.
  * Download, mail links, clipboard writes, and native sharing leave the final attachment and
@@ -230,6 +231,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           }}
         >
           {t('Adresa za izbore nije potvrđena. Ovo je opšti kontakt misije, a ne potvrđeno elektronsko sanduče za upis u birački spisak. Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti sajt misije u odeljku za kontakt na dnu stranice.')}
+          <ElectionNoticeLink notice={station.electionNotice} />
         </div>
       )}
 
@@ -474,6 +476,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             ? t('✓ Potvrđena adresa za izbore 2026.')
             : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
+        <ElectionNoticeLink notice={station.electionNotice} showMissing={station.electionContactApproval !== 'unconfirmed'} />
         {station.electionContactApproval === 'unconfirmed' && (
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
             {t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}

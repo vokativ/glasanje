@@ -789,6 +789,17 @@ describe('Registration Email Status', () => {
     }
   });
 
+  test('shows a precise missing-link note without relabelling approval', () => {
+    const markup = renderToStaticMarkup(
+      React.createElement(ScriptProvider, { initialScript: 'latin' },
+        React.createElement(ElectionNoticeLink, { showMissing: true }),
+      ),
+    );
+    expect(markup).toContain('Link ka izbornom obaveštenju još nije dodat.');
+    expect(markup).not.toContain('href=');
+    expect(markup).not.toContain('nije potvrđena');
+  });
+
   test('derives approved mission coverage from station records', () => {
     const coverage = getElectionEmailCoverage();
     const stations = COUNTRIES.flatMap((country) => country.stations);
@@ -869,11 +880,47 @@ describe('Registration Email Status', () => {
 
     expect(markup).toContain(station.email);
     expect(markup).toContain('Контакт за пријаву за гласање је потврђен.');
+    expect(markup).toContain(`href="${station.electionNotice!.url}"`);
     expect(markup).not.toContain('од стране оператера');
     expect(markup).not.toContain('mission-card--unconfirmed');
     expect(markup).not.toContain('role="alert"');
   });
 
+
+  test('puts the announcement link beside the confirmed recipient on the submission screen', () => {
+    const station = COUNTRY_BY_CODE.get('AT')!.stations[0];
+    const markup = renderToStaticMarkup(
+      React.createElement(
+        ScriptProvider,
+        null,
+        React.createElement(StepExportAndSubmit, {
+          formData: {
+            fullName: 'Петар Петровић',
+            parentName: 'Милош',
+            jmbg: '0101990710006',
+            serbianAddress: 'Београд',
+            foreignAddress: 'Singapore',
+            stationName: station.embassyCyr,
+            desiredLocation: 'Singapur',
+            signingDate: '10.09.2026.',
+            phone: '+381601234567',
+            email: 'petar@example.com',
+            signaturePngDataUrl: '',
+          },
+          station,
+          countryName: 'Singapur',
+          countryNameCyr: 'Сингапур',
+          isWetInkSignature: false,
+          onBack: () => undefined,
+          onReset: () => undefined,
+        }),
+      ),
+    );
+
+    expect(markup).toContain('✓ Потврђена адреса за изборе 2026.');
+    expect(markup).toContain(`href="${station.electionNotice!.url}"`);
+    expect(markup).not.toContain('role="alert"');
+  });
 
   test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {
     const station = COUNTRY_BY_CODE.get('SG')!.stations[0];

@@ -10,7 +10,7 @@ import re
 import subprocess
 import unicodedata
 from urllib.parse import urlsplit
-from election_contact_common import public_election_notices
+from election_contact_common import maintained_election_notices, public_election_notices
 
 # Treat the scraper artifact as external-source input, not as a canonical dataset:
 # missing or malformed source fields must be rejected or normalized before publication.
@@ -541,7 +541,7 @@ def apply_non_election_override(station, patch):
     for key, value in patch.items():
         if (
             not key.startswith("_")
-            and key not in {"electionEmail", "coverageSourceEmail", "coveringStationId"}
+            and key not in {"electionEmail", "electionNotice", "coverageSourceEmail", "coveringStationId"}
             and value is not None
         ):
             station[key] = value
@@ -734,14 +734,18 @@ countries_list.sort(key=lambda country: serbian_cyrillic_collation_key(country['
 # Notice discovery is independent of recipient approval. Publish only the
 # bounded source metadata, never an unreviewed candidate mailbox.
 notice_path = "data/election_candidates.json"
+notice_links = {}
 if os.path.exists(notice_path):
     with open(notice_path, "r", encoding="utf-8") as f:
         notice_links = public_election_notices(json.load(f), {"countries": countries_list})
-    for country in countries_list:
-        for station in country["stations"]:
-            notice = notice_links.get(station["id"]) or notice_links.get(station.get("coveringStationId"))
-            if notice:
-                station["electionNotice"] = notice
+# Deliberately selected announcement links survive later crawl opinions/failures.
+# They need no archived candidate packet and confer no recipient authorization.
+notice_links.update(maintained_election_notices(mission_overrides, {"countries": countries_list}))
+for country in countries_list:
+    for station in country["stations"]:
+        notice = notice_links.get(station["id"]) or notice_links.get(station.get("coveringStationId"))
+        if notice:
+            station["electionNotice"] = notice
 
 os.makedirs("src/data", exist_ok=True)
 # These paired files are generated artifacts with different consumers: the JSON is

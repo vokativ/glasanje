@@ -128,7 +128,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://alger.mfa.gov.rs",
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -180,7 +187,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "c/Velazquez 3, Piso 228001 МАДРИДШПАНИЈА",
         "isResident": false,
         "coverageSourceEmail": "konz.madrid@mfa.rs",
-        "coveringStationId": "st-es-emb-main"
+        "coveringStationId": "st-es-emb-main",
+        "electionNotice": {
+          "url": "https://madrid.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026-obavestenje-za-birace-koji-imaju-boraviste-u-k-spaniji-o-ostvarivanju-birackog-prava-na-izborima-za-narodne-poslanike",
+          "title": "Избори за народне посланике 2026 -  ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -207,7 +221,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -257,7 +278,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://canberra.mfa.gov.rs",
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-au-cons-sidnej",
@@ -268,7 +296,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.sydney.mfa.gov.rs",
         "address": "12, Trelawney Street, Woollahra, N.S.W.2025 P.O.Box 190 Edgecliff, N.S.W.2027 СИДНЕЈ АУСТРАЛИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -293,7 +328,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://vienna.mfa.gov.rs",
         "address": "Ölzeltgasse 31030 БЕЧАУСТРИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://vienna.mfa.gov.rs/gradjani/najcesca-pitanja",
+          "title": "Избори 2026",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:39:06Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-at-cons-salcburg",
@@ -358,7 +400,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -385,7 +434,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -435,7 +491,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://brussels.mfa.gov.rs",
         "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://brussels.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike",
+          "title": "Рaсписивање избора за народне посланике",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:54Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -462,7 +525,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -487,7 +557,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://minsk.mfa.gov.rs",
         "address": "Rumjanceva 4220034 МИНСКРЕПУБЛИКА БЕЛОРУСИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://minsk.mfa.gov.rs/mediji/aktivnosti/raspisivanje-vanrednih-parlamentarnih-izbora-republike-srbije-koji-ce-se-odrzati-25-oktobra-2026-godine",
+          "title": "Расписивање ванредних парламентарних избора Републике Србије који ће се одржати 25. октобра 2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -637,7 +714,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -829,7 +913,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1014,7 +1105,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1041,7 +1139,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": false,
         "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
-        "coveringStationId": "st-mx-emb-main"
+        "coveringStationId": "st-mx-emb-main",
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1068,7 +1173,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": false,
         "coverageSourceEmail": "ambasada@ambserbie-alger.com",
-        "coveringStationId": "st-dz-emb-main"
+        "coveringStationId": "st-dz-emb-main",
+        "electionNotice": {
+          "url": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1096,7 +1208,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": false,
         "coverageSourceEmail": "ambasada@ambserbie-alger.com",
-        "coveringStationId": "st-dz-emb-main"
+        "coveringStationId": "st-dz-emb-main",
+        "electionNotice": {
+          "url": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1123,7 +1242,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1211,7 +1337,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://copenhagen.mfa.gov.rs",
         "address": "Svanevænget 362100 КОПЕНХАГЕНДАНСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://copenhagen.mfa.gov.rs/mediji/aktivnosti/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
+          "title": "Расписивање избора за народне посланике Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1264,7 +1397,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1397,7 +1537,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": false,
         "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
-        "coveringStationId": "st-mx-emb-main"
+        "coveringStationId": "st-mx-emb-main",
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1451,7 +1598,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1478,7 +1632,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Kulosaarentie 3600570 ХЕЛСИНКИФИНСКА",
         "isResident": false,
         "coverageSourceEmail": "office@serbianembassy.fi",
-        "coveringStationId": "st-fi-emb-main"
+        "coveringStationId": "st-fi-emb-main",
+        "electionNotice": {
+          "url": "https://helsinki.mfa.gov.rs/mediji/najave-i-obavestenja/vazno-obavestenje-izbori-2026",
+          "title": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1606,7 +1767,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://telaviv.mfa.gov.rs",
         "address": "10, Bodenheimer St.62008 ТЕЛ АВИВИЗРАЕЛ",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://telaviv.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-postupku-ostvarivanja-birackog-prava-drzavljana-srbije-koji-imaju-boraviste-u-izraelu",
+          "title": "ОБАВЕШТЕЊЕ О ПОСТУПКУ ОСТВАРИВАЊА БИРАЧКОГ ПРАВА ДРЖАВЉАНА СРБИЈЕ КОЈИ ИМАЈУ БОРАВИШТЕ У ИЗРАЕЛУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1733,7 +1901,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "28 Belgrave Square ЛОНДОН SW1X 8QB ВЕЛИКА БРИТАНИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.london@mfa.rs",
-        "coveringStationId": "st-gb-emb-main"
+        "coveringStationId": "st-gb-emb-main",
+        "electionNotice": {
+          "url": "https://london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "title": "PRIJAVLjIVANjE ZA GLASANjE NA IZBORIMA  25. OKTOBRA 2026. GODINE",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1760,7 +1935,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
         "isResident": false,
         "coverageSourceEmail": "ambasada@serbianembassy.no",
-        "coveringStationId": "st-no-emb-main"
+        "coveringStationId": "st-no-emb-main",
+        "electionNotice": {
+          "url": "https://oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ НАРОДНЕ СКУПШТИНЕ РЕПУБЛИКЕ СРБИЈЕ 2026 - пријем захтева за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1812,7 +1994,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://roma.mfa.gov.rs",
         "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-it-cons-trst",
@@ -1834,7 +2023,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://milano.mfa.gov.rs",
         "address": "Via Pantano 220122 МИЛАНОИТАЛИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://milano.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-parlamentarnim-izborima-25-oktobra-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1886,7 +2082,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tokyo.mfa.gov.rs",
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+          "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1990,7 +2193,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://pretoria.mfa.gov.rs",
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2015,7 +2225,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://seoul.mfa.gov.rs",
         "address": "22nd Floor, Booyoung Taepyeong Building,55 Sejong-daero,Jung-guСЕУЛРЕПУБЛИКА КОРЕЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://seoul.mfa.gov.rs/mediji/aktivnosti/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+          "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2147,7 +2364,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://ottawa.mfa.gov.rs",
         "address": "21, Blackburn AvenueОТАВА Онтарио K1N 8A2КАНАДА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://ottawa.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-ca-cons-toronto",
@@ -2158,7 +2382,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://toronto.mfa.gov.rs",
         "address": "40 Eglinton Avenue East, 7 floor,unit 701 M4P 3A2ТОРОНТО, ON M4P 3A2КАНАДА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://toronto.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:54Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2233,7 +2464,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://beijing.mfa.gov.rs",
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:55Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-cn-cons-angaj",
@@ -2332,7 +2570,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2359,7 +2604,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2386,7 +2638,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": false,
         "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
-        "coveringStationId": "st-mx-emb-main"
+        "coveringStationId": "st-mx-emb-main",
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2490,7 +2749,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2630,7 +2896,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
         "isResident": false,
         "coverageSourceEmail": "embassy.warsaw@mfa.rs",
-        "coveringStationId": "st-pl-emb-main"
+        "coveringStationId": "st-pl-emb-main",
+        "electionNotice": {
+          "url": "https://warsaw.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+          "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2657,7 +2930,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
         "isResident": false,
         "coverageSourceEmail": "info@ambasadasrbije.ch",
-        "coveringStationId": "st-ch-emb-main"
+        "coveringStationId": "st-ch-emb-main",
+        "electionNotice": {
+          "url": "https://berne.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:55Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2684,7 +2964,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Boulevard Du Regent 531000 БРИСЕЛБЕЛГИЈА",
         "isResident": false,
         "coverageSourceEmail": "konzularno.brisel@mfa.rs",
-        "coveringStationId": "st-be-emb-main"
+        "coveringStationId": "st-be-emb-main",
+        "electionNotice": {
+          "url": "https://brussels.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike",
+          "title": "Рaсписивање избора за народне посланике",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:54Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2711,7 +2998,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2763,7 +3057,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2844,7 +3145,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "42, rue des Frères Benali Abdellah (ex rue Parmentier)B.P.366, HYDRAАЛЖИР",
         "isResident": false,
         "coverageSourceEmail": "ambasada@ambserbie-alger.com",
-        "coveringStationId": "st-dz-emb-main"
+        "coveringStationId": "st-dz-emb-main",
+        "electionNotice": {
+          "url": "https://alger.mfa.gov.rs/mediji/aktivnosti/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2869,7 +3177,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://roma.mfa.gov.rs",
         "address": "Europa Centre, Level 3, Office 18/a, Triq Sant` Anna 58, Floriana, FRN,1400 Malta",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2921,7 +3236,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.japan@mfa.rs",
-        "coveringStationId": "st-jp-emb-main"
+        "coveringStationId": "st-jp-emb-main",
+        "electionNotice": {
+          "url": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+          "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2976,7 +3298,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3001,7 +3330,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://mexico.mfa.gov.rs",
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3028,7 +3364,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.japan@mfa.rs",
-        "coveringStationId": "st-jp-emb-main"
+        "coveringStationId": "st-jp-emb-main",
+        "electionNotice": {
+          "url": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+          "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3080,7 +3423,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Marais163,Brooklyn 0181, P.O.B 13026HATFIELD 0028ПреторијаЈужна Африка",
         "isResident": false,
         "coverageSourceEmail": "info@srbembassy.org.za",
-        "coveringStationId": "st-za-emb-main"
+        "coveringStationId": "st-za-emb-main",
+        "electionNotice": {
+          "url": "https://pretoria.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3174,7 +3524,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
         "isResident": false,
         "coverageSourceEmail": "embserbia@embserbia.cn",
-        "coveringStationId": "st-cn-emb-main"
+        "coveringStationId": "st-cn-emb-main",
+        "electionNotice": {
+          "url": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:55Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3228,7 +3585,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3253,7 +3617,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://berlin.mfa.gov.rs",
         "address": "Taubert Strasse 18D-14193 БЕРЛИННЕМАЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://berlin.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+          "title": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-de-cons-tutgart",
@@ -3264,7 +3635,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://stuttgart.mfa.gov.rs",
         "address": "Taubenstrasse 4D-70199 ШТУТГАРТНЕМАЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://stuttgart.mfa.gov.rs/mediji/aktivnosti/raspisivanje-izbora-za-narodne-poslanike",
+          "title": "Расписивање избора за народне посланике",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-de-cons-hamburg",
@@ -3275,7 +3653,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://hamburg.mfa.gov.rs",
         "address": "Harvestehuder Weg 101D-20149 ХАМБУРГНЕМАЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://hamburg.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+          "title": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:56Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-de-cons-frankfurt",
@@ -3286,7 +3671,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://frankfurt.mfa.gov.rs",
         "address": "Thueringer Strasse 3D-60316 ФРАНКФУРТНЕМАЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://frankfurt.mfa.gov.rs/mediji/najave-i-obavestenja/obavestavaju-se-biraci-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+          "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:55Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-de-cons-minhen",
@@ -3297,7 +3689,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://munich.mfa.gov.rs",
         "address": "Bohmerwaldplatz 2D-81679 МИНХЕННЕМАЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://munich.mfa.gov.rs/mediji/aktivnosti/prijava-za-izbore-25-10-2026",
+          "title": "Пријава за изборе 25.10.2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:56Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-de-cons-diseldorf",
@@ -3308,7 +3707,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://duesseldorf.mfa.gov.rs",
         "address": "Klosterstrasse 79D-40211 ДИСЕЛДОРФНЕМАЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://duesseldorf.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-prijem-zahteva-za-glasanje-u-inostranstvu",
+          "title": "Избори за народне посланике – пријем захтева за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3414,7 +3820,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": false,
         "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
-        "coveringStationId": "st-mx-emb-main"
+        "coveringStationId": "st-mx-emb-main",
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3441,7 +3854,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3466,7 +3886,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://www.oslo.mfa.gov.rs",
         "address": "Munkedamsveien 59B0270 ОСЛОНОРВЕШКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://oslo.mfa.gov.rs/mediji/aktivnosti/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ НАРОДНЕ СКУПШТИНЕ РЕПУБЛИКЕ СРБИЈЕ 2026 - пријем захтева за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3575,7 +4002,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4-16-12 Takanawa,Minato-ku108-0074 ТОКИОЈАПАН",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.japan@mfa.rs",
-        "coveringStationId": "st-jp-emb-main"
+        "coveringStationId": "st-jp-emb-main",
+        "electionNotice": {
+          "url": "https://tokyo.mfa.gov.rs/mediji/najave-i-obavestenja/ostvarivanje-birackog-prava-na-izborima-25-oktobra",
+          "title": "ОСТВАРИВАЊE БИРАЧКОГ ПРАВА НА ИЗБОРИМА 25. ОКТОБРА",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3629,7 +4063,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": false,
         "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
-        "coveringStationId": "st-mx-emb-main"
+        "coveringStationId": "st-mx-emb-main",
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3656,7 +4097,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3735,7 +4183,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://warsaw.mfa.gov.rs",
         "address": "Aleja Róż 500-556 ВАРШАВАПОЉСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://warsaw.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine",
+          "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3851,7 +4306,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://timisoara.mfa.gov.rs",
         "address": "Str.Remus No 4ТЕМИШВАРРУМУНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://timisoara.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+          "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3904,7 +4366,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3931,7 +4400,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Via dei Monti Parioli 2000197 РИМИТАЛИЈА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.italy@mfa.rs",
-        "coveringStationId": "st-it-emb-main"
+        "coveringStationId": "st-it-emb-main",
+        "electionNotice": {
+          "url": "https://roma.mfa.gov.rs/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine-10-septembar-2026-godine",
+          "title": "ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ НА ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4010,7 +4486,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4037,7 +4520,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4064,7 +4554,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "San Li Tun, Dong 6 Jie 1100600 ПЕКИНГН.Р. КИНА",
         "isResident": false,
         "coverageSourceEmail": "embserbia@embserbia.cn",
-        "coveringStationId": "st-cn-emb-main"
+        "coveringStationId": "st-cn-emb-main",
+        "electionNotice": {
+          "url": "https://beijing.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-upis-u-biracki-spisak-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ ЗА УПИС У БИРАЧКИ СПИСАК ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:55Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4090,7 +4587,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://skopje.mfa.gov.rs",
         "address": "Самоилова бр. 34, СКОПЉЕСЕВЕРНА МАКЕДОНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://skopje.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026",
+          "title": "Парламентарни избори 2026",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:59Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4171,7 +4675,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4275,7 +4786,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://washington.mfa.gov.rs",
         "address": "1333 16th St NWВашингтон,DC 20036",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-us-cons-ikago",
@@ -4286,7 +4804,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://chicago.mfa.gov.rs",
         "address": "201 East Ohio Street, Suite 200ЧИКАГО, IL 60611, САД",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://chicago.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-us-cons-njujork",
@@ -4297,7 +4822,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://newyork.mfa.gov.rs",
         "address": "62 West 45th Street, 7 Floor,ЊУЈОРК, NY 10036, САД",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://newyork.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4391,7 +4923,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4500,7 +5039,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4633,7 +5179,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4660,7 +5213,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "1333 16th St NWВашингтон,DC 20036",
         "isResident": false,
         "coverageSourceEmail": "info@serbiaembusa.org",
-        "coveringStationId": "st-us-emb-main"
+        "coveringStationId": "st-us-emb-main",
+        "electionNotice": {
+          "url": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Обавештење о пријави за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:01Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4687,7 +5247,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4855,7 +5422,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://abudhabi.mfa.gov.rs",
         "address": "Mushref area, sector W31Al Rafee streetVilla number 06(opposite of Novotel hotel)АБУ ДАБИУЈЕДИЊЕНИ АРАПСКИ ЕМИРАТИ",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://abudhabi.mfa.gov.rs/mediji/aktivnosti/izbori-2026-obavestenje-za-birace",
+          "title": "ИЗБОРИ 2026 - Обавештење за бираче",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4880,7 +5454,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://www.london.mfa.gov.rs",
         "address": "28 Belgrave Square ЛОНДОН SW1X 8QB ВЕЛИКА БРИТАНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://london.mfa.gov.rs/lat/mediji/najave-i-obavestenja/prijavljivanje-za-glasanje-na-izborima-25-oktobra-2026-godine",
+          "title": "PRIJAVLjIVANjE ZA GLASANjE NA IZBORIMA  25. OKTOBRA 2026. GODINE",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:28Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5011,7 +5592,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://helsinki.mfa.gov.rs",
         "address": "Kulosaarentie 3600570 ХЕЛСИНКИФИНСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://helsinki.mfa.gov.rs/mediji/najave-i-obavestenja/vazno-obavestenje-izbori-2026",
+          "title": "ВАЖНО ОБАВЕШТЕЊЕ - ИЗБОРИ 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5038,7 +5626,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "4 Bulwara CloseO'Malley, ACT 2606Канбера, Аустралија",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.australia@mfa.rs",
-        "coveringStationId": "st-au-emb-main"
+        "coveringStationId": "st-au-emb-main",
+        "electionNotice": {
+          "url": "https://canberra.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ – ПРИЈАВЉИВАЊЕ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:57Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5137,7 +5732,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://thehague.mfa.gov.rs",
         "address": "Burgemeester van Karnebeeklaan 192585 ХАГ ХОЛАНДИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://thehague.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-25-10-2026",
+          "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:00Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5164,7 +5766,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Av. Montanas Rocallosas No.515Lomas de Chapultepec11000 МЕКСИКО, Д.Ф.МЕКСИКО",
         "isResident": false,
         "coverageSourceEmail": "embajadaserbiaenmexico@gmail.com",
-        "coveringStationId": "st-mx-emb-main"
+        "coveringStationId": "st-mx-emb-main",
+        "electionNotice": {
+          "url": "https://mexico.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-u-srbiji-25-oktobra-2026-godine-ostvarivanje-birackog-prava-u-inostranstvu",
+          "title": "Парламентарни избори у Србији, 25. октобра 2026. године - Остваривање бирачког права у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5403,7 +6012,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://berne.mfa.gov.rs",
         "address": "Seminarstrasse 5CH-3006 БЕРНШВАЈЦАРСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://berne.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ У ИНОСТРАНСТВУ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:55Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-ch-cons-cirih",
@@ -5439,7 +6055,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://stockholm.mfa.gov.rs",
         "address": "Hantverkargatan 26,3rd floorBox 529 101 30СТОКХОЛМШВЕДСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://stockholm.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
+          "title": "Расписивање избора за народне посланике Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:38:29Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5464,7 +6087,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": true,
         "website": "https://madrid.mfa.gov.rs",
         "address": "c/Velazquez 3, Piso 228001 МАДРИДШПАНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://madrid.mfa.gov.rs/mediji/aktivnosti/parlamentarni-izbori-2026-obavestenje-za-birace-koji-imaju-boraviste-u-k-spaniji-o-ostvarivanju-birackog-prava-na-izborima-za-narodne-poslanike",
+          "title": "Избори за народне посланике 2026 -  ОБАВЕШТЕЊЕ за бираче који имају боравиште у К. Шпанији о остваривању бирачког права",
+          "electionYear": "2026",
+          "observedAt": "2026-09-12T12:37:58Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [

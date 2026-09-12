@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 import hashlib
 import importlib.util
 import json
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -39,6 +40,64 @@ COMMON = load_script_module("election_notice_common_for_tests", REPOSITORY_ROOT 
 
 
 class ElectionContactPipelineTests(unittest.TestCase):
+    def test_maintained_notice_metadata_does_not_require_archived_evidence_or_grant_approval(self) -> None:
+        canonical = {"countries": [{"stations": [{"id": "sydney"}]}]}
+        notice = {
+            "url": "https://canberra.mfa.gov.rs/notice", "title": "Joint election notice",
+            "electionYear": "2026", "observedAt": "2026-09-01T00:00:00Z",
+            "emailStatus": "email-extracted", "electionContactApproval": "source-confirmed",
+        }
+        result = COMMON.maintained_election_notices({"sydney": {"electionNotice": notice}}, canonical)
+        self.assertEqual(result["sydney"]["url"], notice["url"])
+        self.assertNotIn("electionContactApproval", result["sydney"])
+        for field, value in [
+            ("url", "javascript:alert(1)"), ("url", "https://user:password@example.org/notice"),
+            ("title", ""), ("electionYear", "current"), ("observedAt", "2099-01-01T00:00:00Z"),
+            ("observedAt", "2026-09-01"), ("emailStatus", "approved"),
+        ]:
+            with self.subTest(field=field, value=value), self.assertRaises(COMMON.ValidationError):
+                COMMON.maintained_election_notices({"sydney": {"electionNotice": {**notice, field: value}}}, canonical)
+        with self.assertRaises(COMMON.ValidationError):
+            COMMON.maintained_election_notices({"unknown": {"electionNotice": notice}}, canonical)
+
+    def test_build_retains_maintained_notices_without_archive_and_resolves_covering_missions(self) -> None:
+        # Exercise the actual build with a disposable copy, including the no-archive path.
+        # This proves publication behavior, not the real-world validity of a notice.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            for name in ("mfa_representations.json", "missions_canonical.json", "overrides.json", "official_coverage_relationships.json"):
+                shutil.copyfile(REPOSITORY_ROOT / "data" / name, root / "data" / name)
+            def build():
+                subprocess.run([sys.executable, str(REPOSITORY_ROOT / "scripts/build_canonical_dataset.py")], cwd=root, check=True, capture_output=True)
+                return {s["id"]: s for c in json.loads((root / "data/missions_canonical.json").read_text())["countries"] for s in c["stations"]}
+            original = json.loads((root / "data/missions_canonical.json").read_text())
+            built = build()
+            for country in original["countries"]:
+                for station in country["stations"]:
+                    self.assertEqual(
+                        {k: v for k, v in station.items() if k != "electionNotice"},
+                        {k: v for k, v in built[station["id"]].items() if k != "electionNotice"},
+                    )
+            self.assertEqual(built["st-nonres-nz"]["electionNotice"], built["st-au-emb-main"]["electionNotice"])
+            self.assertEqual(built["st-mt-emb-main"]["email"], "srb.office.valletta@mfa.rs")
+            self.assertEqual(built["st-au-cons-sidnej"]["email"], "srb.cons.sydney@mfa.rs")
+            # A maintained station notice takes precedence over a crawled one and
+            # over its covering mission, without altering the selected recipient.
+            shutil.copyfile(REPOSITORY_ROOT / "data/election_candidates.json", root / "data/election_candidates.json")
+            path = root / "data/overrides.json"
+            overrides = json.loads(path.read_text())
+            for station_id in ("st-cy-emb-main", "st-nonres-nz"):
+                overrides["missionOverrides"].setdefault(station_id, {})["electionNotice"] = {
+                    **built["st-au-emb-main"]["electionNotice"], "url": "https://canberra.mfa.gov.rs/selected-notice",
+                }
+            path.write_text(json.dumps(overrides))
+            rebuilt = build()
+            for station_id in ("st-cy-emb-main", "st-nonres-nz"):
+                self.assertEqual(rebuilt[station_id]["electionNotice"]["url"], "https://canberra.mfa.gov.rs/selected-notice")
+                self.assertEqual(rebuilt[station_id]["email"], built[station_id]["email"])
+                self.assertEqual(rebuilt[station_id]["electionContactApproval"], built[station_id]["electionContactApproval"])
+
     def test_long_notice_keeps_year_context_above_both_mailboxes(self) -> None:
         # Ljubljana's notice places its year well before the submission list.
         body = (
