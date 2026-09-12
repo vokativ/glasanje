@@ -184,6 +184,77 @@ def clean_address(addr):
 def is_valid_email(value):
     return isinstance(value, str) and bool(re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', value.strip()))
 
+ELECTION_CONTACT_APPROVALS = {
+    "source-confirmed",
+    "operator-approved",
+    "unconfirmed",
+}
+
+
+def load_official_coverage_relationships():
+    with open("data/official_coverage_relationships.json", "r", encoding="utf-8") as f:
+        document = json.load(f)
+
+    if not isinstance(document, dict) or document.get("schemaVersion") != 1:
+        raise ValueError(
+            "Official coverage relationships must be an object with schemaVersion 1"
+        )
+
+    relationships = document.get("relationships")
+    if not isinstance(relationships, list):
+        raise ValueError("Official coverage relationships must contain a relationships list")
+
+    relationships_by_covered_station_id = {}
+    for index, relationship in enumerate(relationships):
+        if not isinstance(relationship, dict):
+            raise ValueError(f"Official coverage relationship {index} must be an object")
+
+        covered_station_id = relationship.get("coveredStationId")
+        covering_station_id = relationship.get("coveringStationId")
+        election_email = relationship.get("electionEmail")
+        approval = relationship.get("approval")
+        provenance = relationship.get("provenance")
+
+        if not isinstance(covered_station_id, str) or not covered_station_id.strip():
+            raise ValueError(
+                f"Official coverage relationship {index} has no valid coveredStationId"
+            )
+        if not isinstance(covering_station_id, str) or not covering_station_id.strip():
+            raise ValueError(
+                f"Official coverage relationship {index} has no valid coveringStationId"
+            )
+        if covered_station_id == covering_station_id:
+            raise ValueError(
+                f"Official coverage relationship {covered_station_id!r} covers itself"
+            )
+        if not is_valid_email(election_email):
+            raise ValueError(
+                f"Official coverage relationship {covered_station_id!r} has an invalid electionEmail"
+            )
+        if approval not in ELECTION_CONTACT_APPROVALS:
+            raise ValueError(
+                f"Official coverage relationship {covered_station_id!r} has an unknown approval"
+            )
+        if not isinstance(provenance, dict) or provenance.get("kind") != "ministry-coverage":
+            raise ValueError(
+                f"Official coverage relationship {covered_station_id!r} lacks ministry coverage provenance"
+            )
+        if covered_station_id in relationships_by_covered_station_id:
+            raise ValueError(
+                f"Duplicate official coverage relationship for {covered_station_id!r}"
+            )
+
+        relationships_by_covered_station_id[covered_station_id] = {
+            "coveringStationId": covering_station_id,
+            "electionEmail": election_email.strip(),
+            "approval": approval,
+        }
+
+    return relationships_by_covered_station_id
+
+
+official_coverage_relationships = load_official_coverage_relationships()
+
 def canonical_website_host(website):
     if not isinstance(website, str) or not website.strip():
         return ""
@@ -353,13 +424,9 @@ for item in raw_data:
                 covering_mission = (
                     covering_candidates[0] if len(covering_candidates) == 1 else None
                 )
-                # An unmatched source retains its existing host-derived label, but
-                # this presentation fallback never establishes a coverage link.
+                # Host and baseline email together can establish an automatic
+                # relationship. Host-only matches remain unresolved raw coverage.
                 display_mission = covering_mission
-                if display_mission is None and coverage_host:
-                    for mission in all_resident_missions:
-                        if mission['websiteHost'] == coverage_host:
-                            display_mission = mission
                 if display_mission:
                     name_cyr = f"{display_mission['nameCyr']} (покрива {c_cyr})"
                     name_lat = f"{display_mission['name']} (pokriva {c_lat})"
@@ -456,6 +523,18 @@ if os.path.exists(overrides_path):
     except Exception as e:
         print("Warning: failed to read overrides:", e)
 
+manual_coverage_overrides = [
+    station_id
+    for station_id, patch in mission_overrides.items()
+    if isinstance(patch, dict) and "_coverageStationId" in patch
+]
+if manual_coverage_overrides:
+    raise ValueError(
+        "Manual _coverageStationId overrides are not supported; use "
+        "data/official_coverage_relationships.json: "
+        + ", ".join(sorted(manual_coverage_overrides))
+    )
+
 
 def apply_non_election_override(station, patch):
     for key, value in patch.items():
@@ -492,14 +571,33 @@ for country in countries_list:
             apply_non_election_override(station, patch)
             apply_election_contact_override(station, patch)
 
-# Explicit coverage targets name public station IDs, so resolve them only after
-# resident overrides have settled those IDs. Keep every match to reject a target
-# that is absent or ambiguously identifies more than one resident station.
+# Official coverage targets name public station IDs, so validate their resident
+# targets after resident overrides have settled station identity.
 resident_stations_by_id = {}
+nonresident_stations_by_id = {}
 for country in countries_list:
     for station in country["stations"]:
-        if station["isResident"]:
-            resident_stations_by_id.setdefault(station["id"], []).append(station)
+        stations_by_id = (
+            resident_stations_by_id
+            if station["isResident"]
+            else nonresident_stations_by_id
+        )
+        stations_by_id.setdefault(station["id"], []).append(station)
+
+for covered_station_id, relationship in official_coverage_relationships.items():
+    covered_stations = nonresident_stations_by_id.get(covered_station_id, [])
+    if len(covered_stations) != 1:
+        raise ValueError(
+            f"Official coverage relationship {covered_station_id!r} must identify "
+            "exactly one nonresident station"
+        )
+    covering_station_id = relationship["coveringStationId"]
+    covering_stations = resident_stations_by_id.get(covering_station_id, [])
+    if len(covering_stations) != 1:
+        raise ValueError(
+            f"Official coverage relationship {covered_station_id!r} must identify "
+            f"exactly one resident covering station, got {covering_station_id!r}"
+        )
 
 
 def project_covering_mission_identity(station, covering_station, country):
@@ -524,39 +622,34 @@ for country in countries_list:
             apply_non_election_override(station, patch)
             has_explicit_election_email = apply_election_contact_override(station, patch)
 
+        relationship = official_coverage_relationships.get(station["id"])
         raw_covering_stations = resident_stations_by_mission_key.get(
             station.pop('_coveringMissionKey', None),
             [],
         )
-        covering_station = (
-            raw_covering_stations[0]
-            if len(raw_covering_stations) == 1
-            else None
-        )
-
-        if isinstance(patch, dict) and "_coverageStationId" in patch:
-            coverage_station_id = patch["_coverageStationId"]
-            if not isinstance(coverage_station_id, str) or not coverage_station_id:
-                raise ValueError(
-                    f"Invalid explicit coverage target for {station['id']}: "
-                    f"{coverage_station_id!r}; expected one resident station ID"
-                )
-            explicit_covering_stations = resident_stations_by_id.get(
-                coverage_station_id,
-                [],
-            )
-            if len(explicit_covering_stations) != 1:
-                raise ValueError(
-                    f"Invalid explicit coverage target for {station['id']}: "
-                    f"{coverage_station_id!r}; expected one resident station ID"
-                )
-            covering_station = explicit_covering_stations[0]
+        if relationship:
+            covering_station = resident_stations_by_id[
+                relationship["coveringStationId"]
+            ][0]
             project_covering_mission_identity(station, covering_station, country)
+        else:
+            covering_station = (
+                raw_covering_stations[0]
+                if len(raw_covering_stations) == 1
+                else None
+            )
 
         if covering_station:
             station["coveringStationId"] = covering_station["id"]
 
         if has_explicit_election_email:
+            continue
+        if relationship:
+            station["email"] = relationship["electionEmail"]
+            station["electionContactApproval"] = relationship["approval"]
+            station["isElectionContactConfirmed"] = (
+                relationship["approval"] == "source-confirmed"
+            )
             continue
         if covering_station:
             station["email"] = covering_station["email"]

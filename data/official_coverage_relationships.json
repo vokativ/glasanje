@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "relationships": [
+    {
+      "coveredStationId": "st-nonres-ge",
+      "coveringStationId": "st-am-emb-main",
+      "electionEmail": "embserbia.yerevan@gmail.com",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-mc-info",
+      "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
+      "electionEmail": "ambassade.paris@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-km",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-dj",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-er",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-ss",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-bi",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-ug",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-so",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-sc",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    },
+    {
+      "coveredStationId": "st-nonres-rw",
+      "coveringStationId": "st-ke-emb-main",
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "approval": "operator-approved",
+      "provenance": {
+        "kind": "ministry-coverage"
+      }
+    }
+  ]
+}

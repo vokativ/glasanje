@@ -554,6 +554,48 @@ describe('Missions and Coverage Dataset', () => {
     });
   });
 
+  test('projects every official Ministry coverage relationship with its declared recipient', () => {
+    const expectedRelationships = [
+      ['st-nonres-ge', 'st-am-emb-main', 'embserbia.yerevan@gmail.com'],
+      ['st-nonres-mc-info', 'st-fr-emb-main-paris-mfa-gov-rs', 'ambassade.paris@mfa.rs'],
+      ['st-nonres-km', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-dj', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-er', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-ss', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-bi', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-ug', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-so', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-sc', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+      ['st-nonres-rw', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
+    ] as const;
+    const stations = COUNTRIES.flatMap((country) => country.stations);
+
+    for (const [coveredStationId, coveringStationId, electionEmail] of expectedRelationships) {
+      const coveredStation = stations.find(
+        (station) => station.id === coveredStationId,
+      ) as CoverageStation;
+      const coveringStation = stations.find(
+        (station) => station.id === coveringStationId,
+      )!;
+
+      expect(coveredStation).toMatchObject({
+        isResident: false,
+        coveringStationId,
+        email: electionEmail,
+        electionContactApproval: 'operator-approved',
+        isElectionContactConfirmed: false,
+      });
+      expect(coveredStation.coverageSourceEmail).toMatch(/@/);
+      expect(coveringStation).toMatchObject({
+        isResident: true,
+        electionContactApproval: 'unconfirmed',
+      });
+      expect(coveredStation.electionContactApproval).not.toBe(
+        coveringStation.electionContactApproval,
+      );
+    }
+  });
+
 
   test('Burundi presents Kenya’s approved coverage mission without losing its country context', () => {
     const station = COUNTRY_BY_CODE.get('BI')!.stations[0] as CoverageStation;

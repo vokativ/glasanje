@@ -118,13 +118,24 @@ Pre pisanja, tok uvek pravi novi dry-run. Sa `--apply` bira **samo** `eligibleSt
 
 Trajni override čuva postojeće, nevezane ključeve. Svaki korisnički autorizovan primalac ima strukturisano poreklo `_electionContactProvenance` sa `schemaVersion: 2`, `authorization: {"type":"operator"}`, `electionId` i godinom izbora, bez izmišljenih AI polja. Takav primalac ostaje vidljiv, ali nije `isElectionContactConfirmed`: potvrđen može biti samo AI/evidence-vezan zapis. Postojeći meksički operator-autorizovan, process-only izuzetak zato ostaje vidljiv i nepotvrđen; nije kandidat za automatsku promociju. Automatska promocija zadržava svaku zamenu operatorove autorizacije dok arhitekta izričito ne prihvati tu zamenu. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava.
 
-## Nerezidentne stanice i pokrivanje
+## Nerezidentne stanice i službeno pokrivanje MSP
 
-Nerešena nerezidentna veza pokrivanja razrešava se **samo** izričitom operatorskom mapom `_coverageStationId` u override-u nerezidentne stanice. Vrednost mora označavati rezidentnu misiju; ne sme se zaključivati iz domaćina sajta, podudaranja e-adresa niti bilo kog drugog izvedenog signala. Ako nema takve važeće mape, veza ostaje nerešena, bez obzira na sličnost domaćina ili e-adrese.
+Službene činjenice da jedna misija pokriva nerezidentnu stanicu vode se isključivo u `data/official_coverage_relationships.json`. Datoteka ima `schemaVersion: 1`; svaka veza sadrži `coveredStationId`, `coveringStationId`, konačni `electionEmail`, `approval: "operator-approved"` i poreklo `{"kind":"ministry-coverage"}`. To su odnosi koje je objavilo MSP, a ne lokalni ili lični override-i.
 
-Kada je operator izričito odobri, javni zapis postavlja `coveringStationId` na tu rezidentnu misiju i projektuje njen javni identitet misije: naziv, sajt i adresu. Izričito odobreni primalac pokrivajuće misije postaje izborni primalac nerezidentne stanice, dok se sirova e-adresa iz zapisa o pokrivanju čuva kao `coverageSourceEmail` isključivo radi revizijskog porekla. Override-i rezidentne misije primenjuju se prvo.
+Pre izgradnje javnih podataka proverava se da je svaki `coveredStationId` jedinstven, da oba ID-ja postoje, da je `coveringStationId` rezidentna misija, da je `electionEmail` važeća e-adresa, da je `approval` poznata vrednost i da `coveredStationId` nije jednak `coveringStationId`. Neispravna ili dvosmislena službena veza prekida izgradnju; ne popravlja se nagađanjem.
 
-Izričiti `electionEmail` override ili njegovo poreklo na nerezidentnoj stanici uvek imaju prednost nad projektovanim primaocem. Pokrivanje je pravilo izbora i prikaza odobrenog primaoca, a ne automatski dokaz da je kontakt izborni.
+Za nerezidentnu stanicu redosled razrešavanja je strogo sledeći:
+
+1. izričiti `electionEmail` override na samoj nerezidentnoj stanici;
+2. službena veza iz `official_coverage_relationships.json`;
+3. tačno automatsko podudaranje domaćina i osnovne e-adrese;
+4. inače nerešen sirovi zapis.
+
+Službena veza projektuje javni identitet pokrivajuće misije — naziv, sajt i adresu — postavlja javni `coveringStationId`, a kao izborni primalac koristi `electionEmail`, `approval` i poreklo iz te veze. Izvorna e-adresa nerezidentnog zapisa ostaje sačuvana u `coverageSourceEmail` samo radi revizijskog porekla. Override-i pokrivajuće rezidentne misije primenjuju se pre te projekcije. Izričiti `electionEmail` override ili njegovo poreklo na nerezidentnoj stanici i dalje imaju prednost nad službenom vezom.
+
+Podudaranje samo po domaćinu nikada nije pokrivanje. Automatsko razrešavanje je dopušteno samo kada se istovremeno tačno podudaraju kanonski domaćin i osnovna e-adresa; sličan domaćin, ista domena ili samo podudarna e-adresa ostavljaju zapis nerešenim. Službena veza je pravilo izbora i prikaza odobrenog primaoca, a ne automatski dokaz da je kontakt izborni.
+
+Ručno polje `_coverageStationId` više nije dopušteno ni u jednom override-u. Izgradnja odbija svaki njegov budući unos; službenu vezu dodati ili ispraviti u `official_coverage_relationships.json` uz navedeno poreklo MSP, nikada u override-u.
 
 ## Izgradnja podataka i zasebno objavljivanje
 
