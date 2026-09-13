@@ -2707,6 +2707,42 @@
     "st-lv-emb-main-srb-emb-latvia": {
       "isResident": false,
       "_operatorNote": "Maintainer confirmed Latvia consular coverage by Sweden. MFA Latvia directory explicitly names the embassy in Sweden for consular matters; preserve both existing station IDs and resolve them to Stockholm. Source: https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati"
+    },
+    "st-ar-emb-main": {
+      "electionNotice": {
+        "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+        "title": "Избори 2026: Пријављивање за гласање у иностранству",
+        "observedAt": "2026-09-13T16:07:31Z",
+        "electionYear": "2026",
+        "emailStatus": "email-extracted"
+      }
+    },
+    "st-ba-emb-main": {
+      "electionNotice": {
+        "url": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству",
+        "observedAt": "2026-09-13T16:07:31Z",
+        "electionYear": "2026",
+        "emailStatus": "email-extracted"
+      }
+    },
+    "st-eg-emb-main": {
+      "electionNotice": {
+        "url": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+        "observedAt": "2026-09-13T16:07:31Z",
+        "electionYear": "2026",
+        "emailStatus": "email-extracted"
+      }
+    },
+    "st-ma-emb-main": {
+      "electionNotice": {
+        "url": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+        "observedAt": "2026-09-13T16:07:33Z",
+        "electionYear": "2026",
+        "emailStatus": "email-extracted"
+      }
     }
   },
   "countryOverrides": {}

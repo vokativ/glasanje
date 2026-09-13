@@ -278,6 +278,30 @@
       "title": "Обавештење о пријави за гласање у иностранству"
     },
     {
+      "candidateId": "34224f14fce83f039c8ccc650c132b0a92170a1df49281eb369828512d7ef80b",
+      "countryCode": "MA",
+      "electionContext": ". godine u ponoć po lokalnom vremenu u Srbiji odnosno, do 3. oktobra 2026. godine do 23.00 časova po lokalnom vremenu u Maroku . Napominjemo da zahtevi podneti nakon navedenog vremena neće moći da se procesuiraju. Državljani R. Srbije mogu na osnovu jedinstvenog matičnog broja (JMBG) i broja lične karte elektronski proveriti da li su upisani y Jedinstveni birački spisak preko sajta Ministarstva državne uprave i lokalne samouprave (MDULS), odnosno sledećeg linka: https://upit.birackispisak.gov.rs/ Ukoliko utvrdite da ste upisani u Jedinstveni birački spisak, potrebno je da nam na imejl adresu: ambrsrabat@gmail.com dostavite „Zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu“ , koji možete preuzeti na linku: Zahtev za glasanje u inostranstvu.doc Uz zahtev je potrebno da obavezno dostavite kopiju važeće lične karte ili pasoša Republike Srbije. Ukoliko podnosilac zahteva ima ličnu kartu sa čipom, poželjno je da priloži kopiju očitane lične kart",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "ambrsrabat@gmail.com",
+      "evidenceType": "html",
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/maroko/ambasade-konzulati",
+        "https://rabat.mfa.gov.rs/",
+        "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://rabat.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceHost": "rabat.mfa.gov.rs",
+      "sourceId": "5360606b21294ed13011445bebcc977eb04dc671e5521d96e43e8cce646bf40e",
+      "sourceQuote": "Zahteve nam možete dostaviti na imejl adresu: ambrsrabat@gmail.com , lično u prostorijama Ambasade Republike Srbije u Rabatu svakog radnog dana od 10 do 13 sati, ili poštom (24, Rue El Kadi Ahmed Mouline, Souissi, Rabat, Morocco, B.P.5014).",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://rabat.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-ma-emb-main",
+      "title": "Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije"
+    },
+    {
       "candidateId": "38fbf7651fe17a6dd35a0f7bba40de41514dae9ca310e9fb81d7045585528eae",
       "countryCode": "DE",
       "electionContext": "потпуни и исправни. Погрешно унети подаци могу бити основ за доношење решења о одбијању захтева. 5. ДО КАДА СЕ МОЖЕТЕ ПРИЈАВИТИ ЗА ГЛАСАЊЕ Захтев за упис у Јединствени бирачки списак и захтев за гласање у иностранству се преко дипломатско-конзуларног представништва Републике Србије може поднети најкасније до поноћи 3. октобра 2026. године. Након наведеног времена неће бити могуће процесуирање пријаве кроз систем, због чега препоручујемо да се због времена потребног за обраду захтеви поднесу што раније. 6. КАКО МОЖЕТЕ ПОДНЕТИ ЗАХТЕВ ЗА ГЛАСАЊЕ У АМБАСАДИ РЕПУБЛИКЕ СРБИЈЕ У БЕРЛИНУ путем мејла: izbori@botschaft-serbien.de лично у Амбасади (радно време са странкама: 09,00-13,00) путем поште-адреса: Botschaft der Republik Serbien, Taubertstr. 18, 14193 Berlin",
@@ -291,6 +315,29 @@
       "sourceUrl": "https://berlin.mfa.gov.rs/mediji/aktivnosti/prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
       "stationId": "st-de-emb-main",
       "title": "ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године"
+    },
+    {
+      "candidateId": "3ae671da9f5613e02068b09f340eb7a42ba091db5cfbaf0046db364b0f85ac7b",
+      "countryCode": "BA",
+      "electionContext": "бирача, име једног родитеља, јединствени матични број грађана (ЈМБГ), општину/град и адресу пребивалишта бирача у Републици Србији, као и податке о општини/граду и адреси боравишта у Републици Српској/БиХ, као и да је потписан од стране бирача. Попуњен и потписан образац захтева са копијом важећег личног документа Републике Србије можете доставити Амбасади Републике Србије у Сарајеву на један од следећих начина: - лично у просторијама Амбасаде (Обала Мака Диздара 3а, Сарајево) - путем поште на наведену адресу Амбасаде, путем телефакса (+ 387 33 221-469) или електронским путем на имејл адресу sarajevo2026@mfa.rs Захтеви се могу поднети од 10. септембра 2026. године до 03. октобра 2026 у 23:59ч (након истека рока неће бити могуће накнадно пријављивање). Апелујемо на све држављане Републике Србије који имају право гласа, а који своје право желе да остваре у иностранству, да Захтев за упис у бирачки списак податка да ће бирач гласати у иностранству поднесу благовремен",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "sarajevo2026@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
+        "https://sarajevo.mfa.gov.rs/",
+        "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu"
+      ],
+      "sourceHost": "sarajevo.mfa.gov.rs",
+      "sourceId": "45d45b75b6a80a9e0e7f789a986f7b15cb7dd83a24f6acf660bfef0441c5d42d",
+      "sourceQuote": "- путем поште на наведену адресу Амбасаде, путем телефакса (+ 387 33 221-469) или електронским путем на имејл адресу sarajevo2026@mfa.rs",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "stationId": "st-ba-emb-main",
+      "title": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству"
     },
     {
       "candidateId": "3efeb282a2bea95e60228c72f7309b4a26cc91bcf1dbe36f0aee30806a6e0ec5",
@@ -527,6 +574,31 @@
       "title": "Избори за народне посланике 25.10.2026- пријављивање за гласање у иностранству"
     },
     {
+      "candidateId": "54aea690c3c83f1d62c8d3f797599746ebf1750d5996ae55d9fb58228c6d86d6",
+      "countryCode": "EG",
+      "electionContext": "avništva najkasnije pet dana pre dana zaključenja Jedinstvenog biračkog spiska (JBS), odnosno do 03. oktobra 2026. y ponoć (po lokalnom vremenu y Srbiji). Nakon navedenog vremena zahtevi neće moći da se procesuiraju. Državljani Srbije mogu na osnovu jedinstvenog matičnog broja (JMBG) i broja lične karte elektronski proveriti da li su upisani y Jedinstveni birački spisak preko sajta Ministarstva državne uprave i lokalne samouprave (MDULS), odnosno sledećeg linka: https://upit.birackispisak.gov.rs/ Ukoliko utvrdite da ste upisani u Jedinstveni birački spisak, potrebno je da nam na i-mejl adresu serbia@serbiaeg.com dostavite „Zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu“ , koji možete preuzeti na linku Zahtev-za-glasanje-u-inostranstvu_1.doc . Uz zahtev je potrebno da obavezno dostavite kopiju važeće lične karte ili pasoša Republike Srbije. Ukoliko podnosilac zahteva ima ličnu kartu sa čipom, poželjno je da priloži kopiju očitane lične k",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "serbia@serbiaeg.com",
+      "evidenceType": "html",
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/egipat/ambasade-konzulati",
+        "https://www.cairo.mfa.gov.rs/",
+        "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://www.cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceHost": "www.cairo.mfa.gov.rs",
+      "sourceId": "87245ce4ac51cd4dc356a7a7a3d7cc27b9aaf42421a200f8ac1ad57f4b7c3cfc",
+      "sourceQuote": "Zahteve za ostvarivanje biračkog prava na predstojećim izborima za narodne poslanike možete nam dostaviti na i-mejl adresu serbia@serbiaeg.com , poštom (na adresu 33 El-Mansour Mohammed, Abu Al Feda, Zamalek, Cairo Governorate 11211 ) ili lično u prostorijama Ambasade Republike Srbije u Kairu svakog radnog dana (od nedelje do četvrtka) od 10 do 13 časova.",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://www.cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-eg-emb-main",
+      "title": "Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije"
+    },
+    {
       "candidateId": "5630547fc8dbae598281fc6664c91c713033f22a9b2b7a7c1f6e17e4bb04e921",
       "countryCode": "IS",
       "electionContext": "Попуњен и потписан образац Захтева за упис у Једниствени борачки списак и попуњен и потписан Захтев за гласање у иностранству, држављани Р.Србије могу поднети на следећу имејл адресу: izbori.oslo2026@mfa.rs или лично – сваког радног дана у периоду од 10:00 до 15:00 часова, доласком у Конзуларну јединицу Амбасаде Р.Србије у Ослу, адреса Munkedamsveien 59B, 0270 Oslo.",
@@ -717,6 +789,29 @@
       "sourceUrl": "https://www.shanghai.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-2026",
       "stationId": "st-cn-cons-angaj",
       "title": "Парламентарни избори 2026"
+    },
+    {
+      "candidateId": "7a297e1b1ae802d30ba59b28b428303070fc9c771eb064b28f87c16321116781",
+      "countryCode": "MA",
+      "electionContext": "26. године у поноћ по локалном времену у Србији односно, до 3. октобра 2026. године до 23.00 часова по локалном времену у Мароку . Напомињемо да захтеви поднети након наведеног времена неће моћи да се процесуирају. Држављани Р. Србије могу на основу јединственог матичног броја (ЈМБГ) и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта Министарства државне управе и локалне самоуправе (МДУЛС), односно следећег линка: https://upit.birackispisak.gov.rs/ Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на имејл адресу: ambrsrabat@gmail.com доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку: Захтев за гласање у иностранству.doc Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне карте,",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "ambrsrabat@gmail.com",
+      "evidenceType": "html",
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/maroko/ambasade-konzulati",
+        "https://rabat.mfa.gov.rs/",
+        "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceHost": "rabat.mfa.gov.rs",
+      "sourceId": "45ac7c5281c44d60a682fd0bfc29606fda9e9b79c8c286345456211530944afe",
+      "sourceQuote": "Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на имејл адресу: ambrsrabat@gmail.com доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку: Захтев за гласање у иностранству.doc",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-ma-emb-main",
+      "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије"
     },
     {
       "candidateId": "875b3e6bc297fc63b11792e2fc0a282d166e1622c5dd9e29d26da5cd54a85e0e",
@@ -1054,6 +1149,30 @@
       "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ"
     },
     {
+      "candidateId": "ae6391af5be39aec491e8b86abf8438724e4a5d19bfa771fe29c4deb35f6eb7d",
+      "countryCode": "BA",
+      "electionContext": "irača, ime jednog roditelja, jedinstveni matični broj građana (JMBG), opštinu/grad i adresu prebivališta birača u Republici Srbiji, kao i podatke o opštini/gradu i adresi boravišta u Republici Srpskoj/BiH, kao i da je potpisan od strane birača. Popunjen i potpisan obrazac zahteva sa kopijom važećeg ličnog dokumenta Republike Srbije možete dostaviti Ambasadi Republike Srbije u Sarajevu na jedan od sledećih načina: - lično u prostorijama Ambasade (Obala Maka Dizdara 3a, Sarajevo) - putem pošte na navedenu adresu Ambasade, putem telefaksa (+ 387 33 221-469) ili elektronskim putem na imejl adresu sarajevo2026@mfa.rs Zahtevi se mogu podneti od 10. septembra 2026. godine do 03. oktobra 2026 u 23:59č (nakon isteka roka neće biti moguće naknadno prijavljivanje). Apelujemo na sve državljane Republike Srbije koji imaju pravo glasa, a koji svoje pravo žele da ostvare u inostranstvu, da Zahtev za upis u birački spisak podatka da će birač glasati u inostranstvu podnesu blagovre",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "sarajevo2026@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
+        "https://sarajevo.mfa.gov.rs/",
+        "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "https://sarajevo.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu"
+      ],
+      "sourceHost": "sarajevo.mfa.gov.rs",
+      "sourceId": "7b44abd79efdbba07be436d99406d3f5312cd8b4a773b5f03d232bedf55ca6d8",
+      "sourceQuote": "- putem pošte na navedenu adresu Ambasade, putem telefaksa (+ 387 33 221-469) ili elektronskim putem na imejl adresu sarajevo2026@mfa.rs",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://sarajevo.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "stationId": "st-ba-emb-main",
+      "title": "IZBORI 2026 - Prijem zahteva za glasanje u inostranstvu"
+    },
+    {
       "candidateId": "aebe9fed06db1f6d99fd66c2b9cd6a9bd0c37ffb4db91c87b448bda5ab7e983b",
       "countryCode": "US",
       "electionContext": "asanje na ranijim izborima . Popunjene i potpisane formulare, zajedno sa fotokopijom važećeg pasoša ili lične karte, odnosno očitanu ličnu kartu sa čipom, potrebno je dostaviti Generalnom konzulatu Republike Srbije u Čikagu na imejl adresu izbori.cikago2026@mfa.rs , putem pošte slanjem zahteva na adresu Generalnog konzulata ( 201 E Ohio St, Suite 200, Chicago, IL 60611 ), ili lično u prostorijama istog, radnim danima, od ponedeljka do petka, od 09:00 do 17:00 časova.",
@@ -1229,6 +1348,30 @@
       "sourceUrl": "https://washington.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
       "stationId": "st-nonres-bs",
       "title": "Обавештење о пријави за гласање у иностранству"
+    },
+    {
+      "candidateId": "ccf82a38d688715b7f642ea12164d0da03bb8742d1470bcfa197727f4eeee233",
+      "countryCode": "EG",
+      "electionContext": "дставништва најкасније пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ (по локалном времену y Србији). Након наведеног времена захтеви неће моћи да се процесуирају. Држављани Србије могу на основу јединственог матичног броја (ЈМБГ) и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта Министарства државне управе и локалне самоуправе (МДУЛС), односно следећег линка: https://upit.birackispisak.gov.rs/ Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на и-мејл адресу serbia@serbiaeg.com доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку Zahtev-za-glasanje-u-inostranstvu_1.doc . Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне ка",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "serbia@serbiaeg.com",
+      "evidenceType": "html",
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/egipat/ambasade-konzulati",
+        "https://www.cairo.mfa.gov.rs/",
+        "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceHost": "www.cairo.mfa.gov.rs",
+      "sourceId": "d0979b2067003c1adba6a14f1fa328ffa55c2e49a944a567f19fc9ed1251f92e",
+      "sourceQuote": "Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на и-мејл адресу serbia@serbiaeg.com доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку Zahtev-za-glasanje-u-inostranstvu_1.doc . Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне ка",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-eg-emb-main",
+      "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије"
     },
     {
       "candidateId": "cf56b96f18b2a9690dd1c4913481838c2d42468126c6fa6a22a4376fb0654342",
@@ -1653,7 +1796,7 @@
   ],
   "electionId": "2026-parliamentary",
   "electionYear": "2026",
-  "generatedAt": "2026-09-12T19:38:17Z",
+  "generatedAt": "2026-09-13T16:06:29Z",
   "notices": [
     {
       "electionContext": "ИЗБОРИ 2026",
@@ -1704,7 +1847,7 @@
       "emails": [
         "gk.mostar@mfa.rs"
       ],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
@@ -1726,7 +1869,7 @@
       "emails": [
         "gk.mostar@mfa.rs"
       ],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
@@ -1803,6 +1946,47 @@
       "title": "Одлука о расписивању избора за народне посланике"
     },
     {
+      "electionContext": "IZBORI 2026 - Prijem zahteva za glasanje u inostranstvu",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "sarajevo2026@mfa.rs"
+      ],
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
+        "https://sarajevo.mfa.gov.rs/",
+        "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "https://sarajevo.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu"
+      ],
+      "sourceId": "7b44abd79efdbba07be436d99406d3f5312cd8b4a773b5f03d232bedf55ca6d8",
+      "sourceUrl": "https://sarajevo.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "stationId": "st-ba-emb-main",
+      "title": "IZBORI 2026 - Prijem zahteva za glasanje u inostranstvu"
+    },
+    {
+      "electionContext": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "sarajevo2026@mfa.rs"
+      ],
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
+        "https://sarajevo.mfa.gov.rs/",
+        "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu"
+      ],
+      "sourceId": "45d45b75b6a80a9e0e7f789a986f7b15cb7dd83a24f6acf660bfef0441c5d42d",
+      "sourceUrl": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "stationId": "st-ba-emb-main",
+      "title": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству"
+    },
+    {
       "electionContext": "Министарство државне управе и локалне самоуправе (МДУЛС) издало је Обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење је могуће прегледати на следећем линку: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/",
       "electionId": "2026-parliamentary",
       "electionYear": "2026",
@@ -1869,7 +2053,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -1889,7 +2073,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -2032,6 +2216,49 @@
       "title": "ПРИЈАВA ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ"
     },
     {
+      "electionContext": "https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "serbia@serbiaeg.com"
+      ],
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/egipat/ambasade-konzulati",
+        "https://www.cairo.mfa.gov.rs/",
+        "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://www.cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceId": "87245ce4ac51cd4dc356a7a7a3d7cc27b9aaf42421a200f8ac1ad57f4b7c3cfc",
+      "sourceUrl": "https://www.cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-eg-emb-main",
+      "title": "Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije"
+    },
+    {
+      "electionContext": "https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "serbia@serbiaeg.com"
+      ],
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/egipat/ambasade-konzulati",
+        "https://www.cairo.mfa.gov.rs/",
+        "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceId": "d0979b2067003c1adba6a14f1fa328ffa55c2e49a944a567f19fc9ed1251f92e",
+      "sourceUrl": "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-eg-emb-main",
+      "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије"
+    },
+    {
       "electionContext": "Za sve informacije možete kontaktirati Generalni konzulat Srbije u Rijeci putem mejla: izboririjeka2026@gmail.com odnosno na broj telefona: +38551337420",
       "electionId": "2026-parliamentary",
       "electionYear": "2026",
@@ -2078,7 +2305,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2097,7 +2324,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2115,7 +2342,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2134,7 +2361,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:38:17Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2275,7 +2502,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
@@ -2295,7 +2522,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
@@ -2307,6 +2534,47 @@
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "stationId": "st-ly-emb-main",
       "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У ДРЖАВИ ЛИБИЈИ О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. Г."
+    },
+    {
+      "electionContext": "https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "ambrsrabat@gmail.com"
+      ],
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/maroko/ambasade-konzulati",
+        "https://rabat.mfa.gov.rs/",
+        "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "https://rabat.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceId": "5360606b21294ed13011445bebcc977eb04dc671e5521d96e43e8cce646bf40e",
+      "sourceUrl": "https://rabat.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-ma-emb-main",
+      "title": "Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije"
+    },
+    {
+      "electionContext": "https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "ambrsrabat@gmail.com"
+      ],
+      "observedAt": "2026-09-13T16:06:29Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/maroko/ambasade-konzulati",
+        "https://rabat.mfa.gov.rs/",
+        "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije"
+      ],
+      "sourceId": "45ac7c5281c44d60a682fd0bfc29606fda9e9b79c8c286345456211530944afe",
+      "sourceUrl": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "stationId": "st-ma-emb-main",
+      "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије"
     },
     {
       "electionContext": "САОПШТЕЊЕ ЗА ЈАВНОСТ, ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ 10. сеп 2026. Амбасада Републике Србије обавештава све држављане Републике Србије да је председник Републике Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати 25. октобра 2026. године. Потребно је да сви држављани Републике Србије који имају пријављено пребивалиште у Републици Србији и који своје бирачко право желе да остваре у Црној Гори- Амбасади Републике Србије у Подгорици, који поседују важеће документе Републике Србије- пасош или личну карту имају право да поднесу Захтев за упис у бирачки списак података да ће бирач гласати у иностранству. Уз Захтев се прилаже копија пасоша/личне карте Републике Србије. Уколико је лична карта са чипом, пожељно је да подносилац захтева приложи копију очитане личне карте. Формулар Захтева- Zahtev-za-glasanje-u-inostranstvu.doc Захтеви се могу подносити од 10. септембра 2026. најкасније до 3. октобра 2026. у поноћ. Апелујемо на све наше држављане, који своје бирачко право желе да остваре у иностранству, да благовремено поднесу Захтев за упис у бирачки списак података. Такође, обавештавају се бирачи да увид у јединствени бирачки списак могу извршити и електронским путем на званичној интернет страници Министарства државне управе и локалне самоуправе уношењем података о јединственом матичном броју грађана и регистраском броју личне карте, односно пасоша. Попуњен и потписан образац Захтева са копијом личног документа се Амбасади Републике Србије у Црној Гори може доставити на један од следећих начина: лично - доласком у представништво на адреси Булевар Ивана Црнојевића 10, путем поште, телефакса: +382/ 20-664-301 или електронским путем на адресу: embassy.podgorica@mfa.rs , podgorica.konzularno@mfa.rs . За додатне информације заинтересована лица се могу обратити Амбасади Републике Србије у Подгорици, Булевар Ивана Црнојевића 10, путем поште, телефакса: +382/ 20-664-301 или електронским путем на адресу: embassy.podgorica@mfa.rs , podgorica.konzularno@mfa.rs . Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
@@ -2552,7 +2820,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
@@ -2572,7 +2840,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
@@ -2591,7 +2859,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2610,7 +2878,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2628,7 +2896,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2647,7 +2915,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-13T16:06:29Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2661,12 +2929,15 @@
     }
   ],
   "pendingStationIds": [
+    "st-ba-emb-main",
+    "st-eg-emb-main",
+    "st-ma-emb-main",
     "st-me-emb-main",
     "st-pt-emb-main",
     "st-ro-emb-main",
     "st-si-emb-main"
   ],
-  "runId": "203cdc7e5621ac0b20878ab7",
+  "runId": "26ba5a2fa5d78634ea59124a",
   "schemaVersion": 1,
   "sources": {
     "02b0bdfecf9b2fe66d3cf890567f16149b06ee75bc26dcab09ffbd5650b880b2": {
@@ -2721,7 +2992,7 @@
     "27c3681993858dfa87293621e930e28cc133e8c93aeed08498cfac7aea7bfcf8": {
       "bodySha256": "79a2a9d4f27a1c9de819faef082336484d621f8a56c35bf1d3e365be5626701d",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -2755,6 +3026,26 @@
       "sourceUrl": "https://stockholm.mfa.gov.rs/lat/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije",
       "text": "Raspisivanje izbora za narodne poslanike Republike Srbije | Ambasada Republike Srbije u Kraljevini Švedskoj Preskoči na glavni deo Ambasada Republike Srbije u Kraljevini Švedskoj Отвори претрагу Затвори претрагу Отвори навигацију Raspisivanje izbora za narodne poslanike Republike Srbije 10. sep 2026. Predsednik Republike Srbije Aleksandar Vučić doneo je odluku o raspisivanju vanrednih izbora za poslanike Narodne skupštine i isti su zakazani za 25. oktobar 2026. godine. Ministarstvo spoljnih poslova poziva državljane Republike Srbije koji žele da iskoriste svoje biračko pravo u inostranstvu da se obrate najbližem diplomatsko-konzularnom predstavništvu Republike Srbije. Zahtev za upis u jedinstveni birački spisak (u daljem tekstu JBS) podatka o tome da će birač glasati u inostranstvu obavezno mora da sadrži sledeće podatke: ime i prezime birača; jedinstveni matični broj birača; opštinu, odnosno grad i adresu prebivališta birača u zemlji, kao i podatke o opštini, odnosno gradu i adresi boravišta u inostranstvu prema kojoj će birač glasati na predstojećim izborima i potpis podnosioca zahteva. Diplomatsko-konzularno predstavništvo Republike Srbije – Ambasada Republike Srbije u Stokholmu, kojoj je podnet zahtev za upis u JBS podatka o tome da birač želi da glasa prema mestu boravišta u inostranstvu, na propisani način dostavlja nadležnoj opštinskoj, odnosno gradskoj upravi po mestu prebivališta birača u zemlji, koja o tome donosi rešenje. Po donošenju rešenja o određivanju biračkih mesta od strane nadležne izborne komisije za glasanje na izborima, nadležna opštinska, odnosno gradska uprava donosi rešenje o upisivanju podatka da će birač na izborima glasati prema mestu boravišta u inostranstvu i biračko mesto na kome će glasati, odnosno rešenje da nisu ispunjeni uslovi da će birač na izborima glasati prema mestu boravišta u inostranstvu. Nakon donošenja rešenja da će birač na predstojećim izborima glasati prema mestu boravišta u inostranstvu i upisu tog podatka u JBS, birač se ne upisuje u izvod iz jedinstvenog biračkog spiska po mestu prebivališta u zemlji, odnosno upisuje se u izvod iz jedinstvenog biračkog spiska prema mestu boravišta u inostranstvu. Ukazuje se da se podatak o tome da će birač glasati u inostranstvu može upisati u JBS samo za lice koje je već upisano u JBS. U slučaju da lice koje ima biračko pravo nije upisano u JBS za odlučivanje po zahtevu za upis podatka o tome da će birač glasati u inostranstvu, neophodno je prethodno sprovesti postupak upisa u JBS. Zahtev za upis u JBS, istovremeno sa zahtevom za upis podatka da će birač glasati u inostranstvu, podnosi se Ambasadi Republike Srbije u Stokholmu koja oba zahteva dostavlja nadležnoj opštinskoj, odnosno gradskoj upravi prema poslednjem prebivalištu podnosioca zahteva pre odlaska u inostranstvo, odnosno poslednjem prebivalištu jednog od njegovih roditelja. Nakon što prvi zahtev bude rešen, odnosno nadležni organ donese rešenje o upisu u JBS, onda se obrađuje i zahtev za glasanje u inostranstvu. Ministarstvo državne uprave i lokalne samouprave (MDULS) izdalo je Obaveštenje za birače koji imaju boravište u inostranstvu o ostvarivanju biračkog prava na izborima. Obaveštenje se može videti na sledećem mestu: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Državljani Republike Srbije mogu na osnovu JMBG i broja lične karte elektronski proveriti da li su upisani u JBS sajta MDULS, odnosno sledećeg linka: https://upit.birackispisak.gov.rs/ Zahtev za upis u JBS se može podneti i direktno preko portala eUprave ukoliko lice ima nalog na portalu eUprave i istom pristupa kvalifikovanim elektronskim sertifikatom ili putem mobilne aplikacije ConsentID. Građani koji žele da glasaju u Kraljevini Švedskoj mogu da podnesu zahtev preko Ambasade Republike Srbije u Stokholmu. Zahtev je potrebno podneti najkasnije do 3. oktobra 2026. godine u ponoć, po vremenu u Republici Srbiji . 1. Ako ste upisani u Jedinstveni birački spisak, podnosite: Zahtev za upis podatka da će birač glasati u inostranstvu. 2. Ako niste upisani u Jedinstveni birački spisak, potrebno je istovremeno podneti Zahtev za upis u Jedinstveni birački spisak u Republici Srbiji i Zahtev za upis podatka da će birač glasati u inostranstvu. Potrebna dokumenta uz zahtev/zahteve: Uz popunjen i potpisan zahtev ili zahteve potrebno je priložiti: kopiju važećeg pasoša Republike Srbije ili kopiju važeće lične karte Republike Srbije – prednja i zadnja strana na jednoj stranici , a preporučuje se da se dostavi očitana lična karta sa podatkom o adresi prebivališta u Republici Srbiji. Zahtev mora biti čitko popunjen i svojeručno potpisan , a svi traženi podaci moraju biti navedeni. Čitko skenirani Zahtev i važeći lični dokument potrebno je objediniti u jedan PDF dokument i dostaviti Ambasadi Republike Srbije u Kraljevini Švedskoj na obradu. NAPOMENA: Zahtev mora biti uredno popunjen, da sadrži sve propisane podatke i da bude potpisan. MDULS Način dostavljanja zahteva Zahtev se može dostaviti Ambasadi Republike Srbije na jedan od tri načina: lično u prostorijama Ambasade Republike Srbije u Kraljevini Švedskoj, u periodu od 10:00 do 13:00 časova bez zakazivanja termina, na adresi: Hantverkargatan 26 / III 112 21 Stockholm poštom na adresu: Embassy of the Republic of Serbia BOX 529 101 30 Stockholm elektronskom poštom, objedinjeno u PDF formatu, isključivo na i-mejl adresu: izbori.se@mfa.rs Važno: Svi građani su dužni da na dan izbora sa sobom ponesu važeći pasoš ili ličnu kartu radi utvrđivanja identiteta. Zahtev za upis u JBS Zahtev za glasanje u inostranstvu Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
       "textSha256": "f141a090b214418dfb6db065a8077e77a598240bd9dfcc3ecf1736a61b00a115"
+    },
+    "45ac7c5281c44d60a682fd0bfc29606fda9e9b79c8c286345456211530944afe": {
+      "bodySha256": "3cf91511cf73656d79b86dd4afcca0291cafef5328b8872e7c14134865247ac7",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-13T16:06:29Z",
+      "finalUrl": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "text": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије | Амбасада Републике Србије у Краљевини Мароко Прескочи на главни део Амбасада Републике Србије у Краљевини Мароко Отвори претрагу Затвори претрагу Отвори навигацију Обавештење о изборима за народне посланике Народне скупштине Републике Србије 13. сеп 2026. Обавештавамо вас да је председник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике Народне скупштине Републике Србије, који су заказани за 25. октобар 2026. године. Министарство државне управе и локалне самоуправе Републике Србије издало је обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење можете прочитати на следећем линку: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Држављани Р. Србије са бирачким правом који желе да гласају, могу поднети захтев за гласање у Амбасади Р. Србије у Рабату најкасније пет дана пре дана закључења јединственог бирачког списка: до 3. октобра 2026. године у поноћ по локалном времену у Србији односно, до 3. октобра 2026. године до 23.00 часова по локалном времену у Мароку . Напомињемо да захтеви поднети након наведеног времена неће моћи да се процесуирају. Држављани Р. Србије могу на основу јединственог матичног броја (ЈМБГ) и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта Министарства државне управе и локалне самоуправе (МДУЛС), односно следећег линка: https://upit.birackispisak.gov.rs/ Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на имејл адресу: ambrsrabat@gmail.com доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку: Захтев за гласање у иностранству.doc Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне карте, ради увида y адресу пребивалишта. Уколико утврдите да нисте уписани у Јединствени бирачки списак неопходно је да нам заједно са „Захтевом за упис у бирачки списак податка да ће бирач гласати у иностранству“ доставите и попуњени „Захтев за упис у Јединствени бирачки списак“ који можете преузети на линку: Захтев за упис у јединствени бирачки списак.doc Процесуирање захтева за гласање y иностранству могуће је тек пошто надлежни орган донесе решење о упису y Јединствени бирачки списак. Захтеве нам можете доставити на имејл адресу: ambrsrabat@gmail.com , лично у просторијама Амбасаде Републике Србије у Рабату сваког радног дана од 10 до 13 сати, или поштом (24, Rue El Kadi Ahmed Mouline, Souissi, Rabat, Morocco, B.P.5014). Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "6bd402052699275b5b7ca96cfa85745f717c4e1d787799ae4952e9faf42d6c43"
+    },
+    "45d45b75b6a80a9e0e7f789a986f7b15cb7dd83a24f6acf660bfef0441c5d42d": {
+      "bodySha256": "71bcb1b9d900957c2287a0427988f9eb7b4558ba4a64be0d08a6d13a4f170d56",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-13T16:06:29Z",
+      "finalUrl": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "text": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству | Амбасада Републике Србије у Босни и Херцеговини Прескочи на главни део Амбасада Републике Србије у Босни и Херцеговини Отвори претрагу Затвори претрагу Отвори навигацију ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству 10. сеп 2026. Амбасада Републике Србије у Сарајеву обавештава да је преседник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати дана 25. октобра 2026. године. Сви држављани Републике Србије који имају пријављено пребивалиште на територији Републике Србије, а који своје бирачко право желе да остваре у Амбасади Републике Србије у Сарајеву, потребно је да поднесу Захтев за упис у бирачки списак податка да ће бирач гласати у иностранству. Уз захтев је потребно приложити копију важећег документа Републике Србије (лична карта или пасош). Уколико је лична карта са чипом, пожељно је да подносилац захтева приложи копију очитане личне карте, а уколико се прилаже копија пасоша неопходно је да у пасошу буде наведена адреса пребивалишта на територији Републике Србије. Формулар Захтева за гласање у иностранству и Формулар захтева за упис у Јединствени бирачки списак можете преузети овде: Zahtev-za-glasanje-u-inostranstvu.doc Zahtev-za-upis-u-JBS.doc Захтев мора да садржи следеће податке: име и презиме бирача, име једног родитеља, јединствени матични број грађана (ЈМБГ), општину/град и адресу пребивалишта бирача у Републици Србији, као и податке о општини/граду и адреси боравишта у Републици Српској/БиХ, као и да је потписан од стране бирача. Попуњен и потписан образац захтева са копијом важећег личног документа Републике Србије можете доставити Амбасади Републике Србије у Сарајеву на један од следећих начина: - лично у просторијама Амбасаде (Обала Мака Диздара 3а, Сарајево) - путем поште на наведену адресу Амбасаде, путем телефакса (+ 387 33 221-469) или електронским путем на имејл адресу sarajevo2026@mfa.rs Захтеви се могу поднети од 10. септембра 2026. године до 03. октобра 2026 у 23:59ч (након истека рока неће бити могуће накнадно пријављивање). Апелујемо на све држављане Републике Србије који имају право гласа, а који своје право желе да остваре у иностранству, да Захтев за упис у бирачки списак податка да ће бирач гласати у иностранству поднесу благовремено. Држављани Републике Србије са пребивалиштем на територији Републике Србије могу на основу свог ЈМБГ и броја личне карте електронским путем да провере да ли су уписани у јединствени бирачки списак преко линка: https://upit.birackispisak.gov.rs/ Држављанин Републике Србије са пребивалиштем на територији Републике Србије може такође поднети Захтев за упис у Јединствени бирачки списак и директно преко портала еУправе, ком приступа квилификованим електронским сертификатом или путем мобилне апликације ConsentID. Потребно је да је грађанин регистровани корисник портала еУправа. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "bc50b9cbec0196ca51e8d07a612465331c181978145c64cb97bd72904901113f"
     },
     "4a1e9f9873401f22b96cefe89857f631dd436b4137280176bea945fb9d644778": {
       "bodySha256": "cc9a7228ac2bb97cad255bec53aeee6406dbd9e1c4302efc16864aef2b81f06f",
@@ -2795,6 +3086,16 @@
       "text": "Одлука о расписивању избора за народне посланике | Генерални конзулат Републике Србије у Мостару Прескочи на главни део Генерални конзулат Републике Србије у Мостару Отвори претрагу Затвори претрагу Отвори навигацију Одлука о расписивању избора за народне посланике 09. сеп 2026. Председник Републике Србије Александар Вучић донео је Oдлуку о расписивању избора за народне посланике ПР бр.127 од 09.09.2026.г. (Службени гласник Р. Србије бр. 85/26 од 09.09.2026) којом су исти расписани за 25. октобар 2026. године. Министарство државне управе и локалне самоуправе Републике Србије издало је обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење можете погледати на следећем линку https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ . Позивају се држављани Републике Србије који имају пријављено пребивалиште у Републици Србији, а који бораве у Босни и Херцеговини, да поднесу захтев Генералном конзулату Републике Србије у Мостару за гласање у иностранству. Пријаве се могу поднети најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 03. октобра 2026. у поноћ (локално време у Републици Србији) Напомињемо да је, сходно прописима, за гласање у иностранству за изборе за народне посланике Народне скупштине Републике Србије, који су заказани за 25. октобар 2026. године, потребно поднети пријаву, без обзира на то да ли сте се пријављивали за гласање на ранијим изборима. Формулар за пријаву можете преузети кликом на овај линк. Попуњен и потписан формулар, заједно са копијом важећег пасоша или личне карте, односно личну карту са чипом која је очитана, потребно је доставити Генералном конзулату Републике Србије у Мостару на е-mail gk.mostar@mfa.rs или лично сваког радног дана у периоду од 08:30 до 16:30 часова. Адреса: Генерални конзулат Републике Србије, Конак 5, 88 000 Мостар, Босна и Херцеговина. Провера да ли је лице уписано у Јединствени бирачки списак се може извршити електронским путем преко следећег линка https://upit.birackispisak.gov.rs/ Уколико лице није уписано у Јединствени бирачки списак, у Генералном конзулату Републике Србије у Мостару може се поднети захтев за упис у Јединствени бирачки списак. Образац захтева за упис у јединствени бирачки списак можете преузети овде. У том случају, неопходно је поднети истовремено захтев за упис у Јединствени бирачки списак и захтев за упис у бирачки списак података да ће бирач гласати у иностранству. Провера да ли је лице уписано у Јединствени бирачки списак се може извршити електронским путем преко следећег линка https://upit.birackispisak.gov.rs/ За све додатне информације стојимо на располагању путем контаката наведених на веб страници ГК РС Мостар. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
       "textSha256": "04fb9d0b38bcb22ae63808a2bb19ffa8a21286bdfe0ec1910abca809f154e4d5"
     },
+    "5360606b21294ed13011445bebcc977eb04dc671e5521d96e43e8cce646bf40e": {
+      "bodySha256": "823293d5cc1696c4270354cdd8ad457b7b76aad1dfbe40356c0403ad9785df0f",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-13T16:06:29Z",
+      "finalUrl": "https://rabat.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://rabat.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "text": "Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije | Ambasada Republike Srbije u Kraljevini Maroko Preskoči na glavni deo Ambasada Republike Srbije u Kraljevini Maroko Отвори претрагу Затвори претрагу Отвори навигацију Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije 13. sep 2026. Obaveštavamo vas da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike Narodne skupštine Republike Srbije, koji su zakazani za 25. oktobar 2026. godine. Ministarstvo državne uprave i lokalne samouprave Republike Srbije izdalo je obaveštenje za birače koji imaju boravište u inostranstvu o ostvarivanju biračkog prava na izborima. Obaveštenje možete pročitati na sledećem linku: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Državljani R. Srbije sa biračkim pravom koji žele da glasaju, mogu podneti zahtev za glasanje u Ambasadi R. Srbije u Rabatu najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska: do 3. oktobra 2026. godine u ponoć po lokalnom vremenu u Srbiji odnosno, do 3. oktobra 2026. godine do 23.00 časova po lokalnom vremenu u Maroku . Napominjemo da zahtevi podneti nakon navedenog vremena neće moći da se procesuiraju. Državljani R. Srbije mogu na osnovu jedinstvenog matičnog broja (JMBG) i broja lične karte elektronski proveriti da li su upisani y Jedinstveni birački spisak preko sajta Ministarstva državne uprave i lokalne samouprave (MDULS), odnosno sledećeg linka: https://upit.birackispisak.gov.rs/ Ukoliko utvrdite da ste upisani u Jedinstveni birački spisak, potrebno je da nam na imejl adresu: ambrsrabat@gmail.com dostavite „Zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu“ , koji možete preuzeti na linku: Zahtev za glasanje u inostranstvu.doc Uz zahtev je potrebno da obavezno dostavite kopiju važeće lične karte ili pasoša Republike Srbije. Ukoliko podnosilac zahteva ima ličnu kartu sa čipom, poželjno je da priloži kopiju očitane lične karte, radi uvida y adresu prebivališta. Ukoliko utvrdite da niste upisani u Jedinstveni birački spisak neophodno je da nam zajedno sa „Zahtevom za upis u birački spisak podatka da će birač glasati u inostranstvu“ dostavite i popunjeni „Zahtev za upis u Jedinstveni birački spisak“ koji možete preuzeti na linku: Zahtev za upis u jedinstveni birački spisak.doc Procesuiranje zahteva za glasanje y inostranstvu moguće je tek pošto nadležni organ donese rešenje o upisu y Jedinstveni birački spisak. Zahteve nam možete dostaviti na imejl adresu: ambrsrabat@gmail.com , lično u prostorijama Ambasade Republike Srbije u Rabatu svakog radnog dana od 10 do 13 sati, ili poštom (24, Rue El Kadi Ahmed Mouline, Souissi, Rabat, Morocco, B.P.5014). Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "1a8752460118ddd6e8ba86f4b227ccecd2ded1941780d0499792ebaa5639c2a4"
+    },
     "5419c918ce8766968a1bf569871971ddcb619d72e4b9cd24e1c2755d291fc1e1": {
       "bodySha256": "9f6bce2f4fd4f045f06fcefba627df7c465faf37525cc6d3597015d374c7a6cb",
       "extractorVersion": "1",
@@ -2818,7 +3119,7 @@
     "54341477820b38268477a1ac563f8963ba351e1bd40531ca9a73dc55fbc341a0": {
       "bodySha256": "b986713aac514a17000d49c7ed0aa04a246c6ab420118bfaedd1ee6542cf9a6d",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
@@ -2828,7 +3129,7 @@
     "5537cd5a965444a104210b33765bf7c399d1860468712f09a0447b5e6bbe9f87": {
       "bodySha256": "b314db0392107c2f4dfb68bc9bbceca5ceef26b75d05b141cd4673b992e8ec13",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/index%2ephp/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/index%2ephp/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -2887,7 +3188,7 @@
     "6158ea6f885100b2a72c8762b890075d5f4be12ec66a0dc55a1debd8da0d51b3": {
       "bodySha256": "fef0fad3a525f2e64eb2bb0462f86dd320a30cd97c9721e186efa252cd01ad3a",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -2934,7 +3235,7 @@
     "6e87f80ab2e6c8944ffa0196e6cddfa16f05d5204ead8a595146d63f103b1551": {
       "bodySha256": "a550010edb97bccf8ec498a0834e3b3bdf049cfbe141cd5e3072f6b60c2fa6e6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://tripoli.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
@@ -2944,7 +3245,7 @@
     "7017dceff5bab6af789c5a71869459f8083bc38b1b90ca2043409cdfaa3efe1e": {
       "bodySha256": "e44684c2bb0b8e4d7e99f3fdc12c3d58f70eead1572edc0e23c56c1e189b585e",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -3007,6 +3308,16 @@
       "text": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије | Амбасада Републике Србије у Канади Прескочи на главни део Амбасада Републике Србије у Канади Главна навигација Назад Насловна Амбасада Још Назад Амбасадор Дипломатско особље Надлежност Конзулати Почасни конзулати Контакт Затвори навигацију Билатерална сарадња Грађани Још Назад Услуге Још Назад Конзуларна надлежност Путне исправе Овера докумената Држављанство Статусна питања и матичне књиге Пренос посмртних остатака Царина Војна обавеза Оставинска питања Пријава и одјава боравка Ценовник конзуларних услуга Затвори навигацију Путовање у Србију Још Назад Општи услови Услови за визу Визни режим Возачка дозвола и осигурање моторних возила Унос кућних љубимаца Затвори навигацију Улазак у Канаду Још Назад Визе и информације о држави Опште препоруке Затвори навигацију Дијаспора Најчешћа питања Контакт Затвори навигацију Медији Још Назад Активности Актуелно из Србије Друштвене мреже Контакт Затвори навигацију Ћирилица Latinica English Отвори претрагу Затвори претрагу Отвори навигацију Мрвице Насловна Медији Најаве и обавештења Обавештење о изборима за народне посланике Народне скупштине Републике Србије Обавештење о изборима за народне посланике Народне скупштине Републике Србије 11. сеп 2026. Обавештавамо вас да је председник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике Народне скупштине Републике Србије, који су заказани за 25. октобар 2026. године. Министарство државне управе и локалне самоуправе Републике Србије издало је обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење можете прочитати на следећем линку: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Држављани Републике Србије који имају боравиште у иностранству подносе захтев за гласање преко дипломатско-конзуларног представништва најкасније пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ (по локалном времену y Србији). Након наведеног времена захтеви неће моћи да се процесуирају. Држављани Србије могу на основу јединственог матичног броја (ЈМБГ) и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта Министарства државне управе и локалне самоуправе (МДУЛС), односно следећег линка: https://upit.birackispisak.gov.rs/ Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на и-мејл адресу consular.ottawa@mfa.rs доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку Zahtev-za-glasanje-u-inostranstvu_1.doc . Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне карте, ради увида y адресу пребивалишта. Уколико утврдите да нисте уписани у Јединствени бирачки списак неопходно је да нам заједно са „Захтевом за упис у бирачки списак података да ће бирач гласати у иностранству“доставите и попуњени „Захтев за упис у Јединствени бирачки списак“ који можете преузети на линку Zahtev-za-upis-u-JBS_0.doc . Дакле, процесуирање захтева за гласање y иностранству могуће је тек пошто надлежни орган донесе решење о упису y Јединствени бирачки списак. „Захтев за упис y Јединствени бирачки списак“ може се поднети дипломатско-конзуларном представништву или преко портала еУправе уколико лице има налог на порталу еУправе и истом приступа квалификованим електронским сертификатом или путем мобилне апликације ConsentlD. Захтеве за остваривање бирачког права на предстојећим изборима за народне посланике можете нам доставити на и-мејл адресу consular.ottawa@mfa.rs , поштом (на адресу 21 Blackburn Avenue, Ottawa, ON, K1N 8A2) или лично у просторијама Амбасаде Републике Србије у Отави сваког радног дана од 10 до 15 часова. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште Facebook X (Twitter) © Министарство спољних послова Републике Србије - Сва права задржана",
       "textSha256": "190522b48be3fa363259aaa7157a9062c6ee18dbdda2b394b02532182eb8e777"
     },
+    "7b44abd79efdbba07be436d99406d3f5312cd8b4a773b5f03d232bedf55ca6d8": {
+      "bodySha256": "94d324854c98939aac22d82c5ce2a0b3648579ccd663cdda9023aa84ac890077",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-13T16:06:29Z",
+      "finalUrl": "https://sarajevo.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://sarajevo.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+      "text": "IZBORI 2026 - Prijem zahteva za glasanje u inostranstvu | Ambasada Republike Srbije u Bosni i Hercegovini Preskoči na glavni deo Ambasada Republike Srbije u Bosni i Hercegovini Отвори претрагу Затвори претрагу Отвори навигацију IZBORI 2026 - Prijem zahteva za glasanje u inostranstvu 10. sep 2026. Ambasada Republike Srbije u Sarajevu obaveštava da je presednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike, koji će se održati dana 25. oktobra 2026. godine. Svi državljani Republike Srbije koji imaju prijavljeno prebivalište na teritoriji Republike Srbije, a koji svoje biračko pravo žele da ostvare u Ambasadi Republike Srbije u Sarajevu, potrebno je da podnesu Zahtev za upis u birački spisak podatka da će birač glasati u inostranstvu. Uz zahtev je potrebno priložiti kopiju važećeg dokumenta Republike Srbije (lična karta ili pasoš). Ukoliko je lična karta sa čipom, poželjno je da podnosilac zahteva priloži kopiju očitane lične karte, a ukoliko se prilaže kopija pasoša neophodno je da u pasošu bude navedena adresa prebivališta na teritoriji Republike Srbije. Formular Zahteva za glasanje u inostranstvu i Formular zahteva za upis u Jedinstveni birački spisak možete preuzeti ovde: Zahtev-za-glasanje-u-inostranstvu.doc Zahtev-za-upis-u-JBS.doc Zahtev mora da sadrži sledeće podatke: ime i prezime birača, ime jednog roditelja, jedinstveni matični broj građana (JMBG), opštinu/grad i adresu prebivališta birača u Republici Srbiji, kao i podatke o opštini/gradu i adresi boravišta u Republici Srpskoj/BiH, kao i da je potpisan od strane birača. Popunjen i potpisan obrazac zahteva sa kopijom važećeg ličnog dokumenta Republike Srbije možete dostaviti Ambasadi Republike Srbije u Sarajevu na jedan od sledećih načina: - lično u prostorijama Ambasade (Obala Maka Dizdara 3a, Sarajevo) - putem pošte na navedenu adresu Ambasade, putem telefaksa (+ 387 33 221-469) ili elektronskim putem na imejl adresu sarajevo2026@mfa.rs Zahtevi se mogu podneti od 10. septembra 2026. godine do 03. oktobra 2026 u 23:59č (nakon isteka roka neće biti moguće naknadno prijavljivanje). Apelujemo na sve državljane Republike Srbije koji imaju pravo glasa, a koji svoje pravo žele da ostvare u inostranstvu, da Zahtev za upis u birački spisak podatka da će birač glasati u inostranstvu podnesu blagovremeno. Državljani Republike Srbije sa prebivalištem na teritoriji Republike Srbije mogu na osnovu svog JMBG i broja lične karte elektronskim putem da provere da li su upisani u jedinstveni birački spisak preko linka: https://upit.birackispisak.gov.rs/ Državljanin Republike Srbije sa prebivalištem na teritoriji Republike Srbije može takođe podneti Zahtev za upis u Jedinstveni birački spisak i direktno preko portala eUprave, kom pristupa kvilifikovanim elektronskim sertifikatom ili putem mobilne aplikacije ConsentID. Potrebno je da je građanin registrovani korisnik portala eUprava. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "65478eb92f63a0a78e99807197df356f451cc5e90fef10ca5c467d9f4c033506"
+    },
     "812b35314300ac3e5e8b75fd764dd2a200d6081e5833343c1cff0f4f9acc0161": {
       "bodySha256": "a16e29d97633faa433b7212f466269838ba7afad408877d2c9ead219ff3636fb",
       "extractorVersion": "1",
@@ -3025,10 +3336,20 @@
       "text": "Расписивање избора за народне посланике | Генерални конзулат Републике Србије у Штутгарту Прескочи на главни део Генерални конзулат Републике Србије у Штутгарту Главна навигација Назад Насловна Конзулат Још Назад Генерални конзул Дипломатско особље Надлежност Конзулати Почасни конзулати Контакт Затвори навигацију Билатерална сарадња Грађани Још Назад Услуге Још Назад Путне исправе Овера докумената Држављанство Статусна питања и матичне књиге Пренос посмртних остатака Царина Војна обавеза Оставинска питања Пријава и одјава боравка Ценовник конзуларних услуга Допунска настава на српском језику у покрајини Баден-Виртемберг Плаћање конзуларних такси Урађене путне исправе Затвори навигацију Путовање у Србију Још Назад Општи услови Услови за визу Визни режим Возачка дозвола и осигурање моторних возила Унос кућних љубимаца Затвори навигацију Улазак у Немачку Још Назад Визе и информације о држави Опште препоруке Затвори навигацију Дијаспора Најчешћа питања Контакт Затвори навигацију Медији Још Назад Активности Актуелно из Србије Друштвене мреже Контакт Затвори навигацију Ћирилица Latinica English Отвори претрагу Затвори претрагу Отвори навигацију Мрвице Насловна Медији Активности Расписивање избора за народне посланике Расписивање избора за народне посланике 11. сеп 2026. Председник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике Народне скупштине Републике Србије, који су заказани за 25. октобар 2026. године. Министарство државне управе и локалне самоуправе Републике Србије издало је обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење можете прочитати на следећем линку: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Држављани Републике Србије који имају боравиште у иностранству подносе захтев за гласање преко дипломатско-конзуларног представништва најкасније пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ по локалном времену y Србији. Након наведеног времена захтеви неће моћи да се процесуирају. Држављани Србије могу на основу јединственог матичног броја (ЈМБГ) и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта Министарства државне управе и локалне самоуправе (МДУЛС), односно следећег линка: https://upit.birackispisak.gov.rs/ Формулар Захтева за гласање у иностранству можете преузети на линку Zahtev-za-glasanje-u-inostranstvu.doc Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне карте, ради увида y адресу пребивалишта. Лице које je држављанин Републике Србије и има пребивалиште y Републици Србији a није уписано y Јединствени бирачки списак (ЈБС), неопходно је да поднесе и захтев за упис у ЈБС, како би исти био обрађен y оквиру система ЈБС. Пошто захтев буде решен, односно надлежни орган донесе решење о упису y ЈБС, онда је могуће процесуирање захтева за гласање y иностранству. Формулар Захтева за упис у ЈБС можете преузети кликом путем линка Zahtev-za-upis-u-JBS.doc Захтев можете доставити ГК путем мејла на мејл адресу izbori.stuttgart@mfa.rs , путем поште (adresa Taubenstraße 4, 70199 Stuttgart) или непосредно у Генералном конзулату Републике Србије у Штутгарту, сваког радног дана у периоду 08,30 – 16,00 часова. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште X (Twitter) © Министарство спољних послова Републике Србије - Сва права задржана",
       "textSha256": "904f37e187dca5d2397259df0900c588ceecbeccd12bb5320b87d704aa574450"
     },
+    "87245ce4ac51cd4dc356a7a7a3d7cc27b9aaf42421a200f8ac1ad57f4b7c3cfc": {
+      "bodySha256": "bde67886d1b5bcfa40a8e3249cd78b74a28efead39b85e36614446954584dc7a",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-13T16:06:29Z",
+      "finalUrl": "https://cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://www.cairo.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "text": "Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije | Ambasada Republike Srbije u Arapskoj Republici Egipat Preskoči na glavni deo Ambasada Republike Srbije u Arapskoj Republici Egipat Отвори претрагу Затвори претрагу Отвори навигацију Obaveštenje o izborima za narodne poslanike Narodne skupštine Republike Srbije 12. sep 2026. Obaveštavamo vas da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike Narodne skupštine Republike Srbije, koji su zakazani za 25. oktobar 2026. godine. Ministarstvo državne uprave i lokalne samouprave Republike Srbije izdalo je obaveštenje za birače koji imaju boravište u inostranstvu o ostvarivanju biračkog prava na izborima. Obaveštenje možete pročitati na sledećem linku: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Državljani Republike Srbije koji imaju boravište u inostranstvu podnose zahtev za glasanje preko diplomatsko-konzularnog predstavništva najkasnije pet dana pre dana zaključenja Jedinstvenog biračkog spiska (JBS), odnosno do 03. oktobra 2026. y ponoć (po lokalnom vremenu y Srbiji). Nakon navedenog vremena zahtevi neće moći da se procesuiraju. Državljani Srbije mogu na osnovu jedinstvenog matičnog broja (JMBG) i broja lične karte elektronski proveriti da li su upisani y Jedinstveni birački spisak preko sajta Ministarstva državne uprave i lokalne samouprave (MDULS), odnosno sledećeg linka: https://upit.birackispisak.gov.rs/ Ukoliko utvrdite da ste upisani u Jedinstveni birački spisak, potrebno je da nam na i-mejl adresu serbia@serbiaeg.com dostavite „Zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu“ , koji možete preuzeti na linku Zahtev-za-glasanje-u-inostranstvu_1.doc . Uz zahtev je potrebno da obavezno dostavite kopiju važeće lične karte ili pasoša Republike Srbije. Ukoliko podnosilac zahteva ima ličnu kartu sa čipom, poželjno je da priloži kopiju očitane lične karte, radi uvida y adresu prebivališta. Ukoliko utvrdite da niste upisani u Jedinstveni birački spisak neophodno je da nam zajedno sa „Zahtevom za upis u birački spisak podataka da će birač glasati u inostranstvu“dostavite i popunjeni „Zahtev za upis u Jedinstveni birački spisak“ koji možete preuzeti na linku Zahtev-za-upis-u-JBS_0.doc . Dakle, procesuiranje zahteva za glasanje y inostranstvu moguće je tek pošto nadležni organ donese rešenje o upisu y Jedinstveni birački spisak. „Zahtev za upis y Jedinstveni birački spisak“ može se podneti diplomatsko-konzularnom predstavništvu ili preko portala eUprave ukoliko lice ima nalog na portalu eUprave i istom pristupa kvalifikovanim elektronskim sertifikatom ili putem mobilne aplikacije ConsentlD. Zahteve za ostvarivanje biračkog prava na predstojećim izborima za narodne poslanike možete nam dostaviti na i-mejl adresu serbia@serbiaeg.com , poštom (na adresu 33 El-Mansour Mohammed, Abu Al Feda, Zamalek, Cairo Governorate 11211 ) ili lično u prostorijama Ambasade Republike Srbije u Kairu svakog radnog dana (od nedelje do četvrtka) od 10 do 13 časova. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "85f62b8ce2a0d594a6414dfa8b11d99e23dd705357999b050822bde4b0744a32"
+    },
     "885742fc9722cbf8f141b436adc551ef5b91f59c0f362381646082e58b8027a1": {
       "bodySha256": "b07d2925507a1e3f7933c70bf40545b088fb1640c5566e57ff3a16ec439b3d46",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3038,7 +3359,7 @@
     "8944b57b08b4ff434a8a36f23d30d88486c32912cd8ae903eda552c04868a6cd": {
       "bodySha256": "5ea42471505d9490c19d56ec39cc7b7642c3a686c5304f83b98394217320ae92",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/index%2ephp/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/index%2ephp/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -3058,7 +3379,7 @@
     "93212a45ea56f7272a25efa2275afdca17a5195e8fbd259e7a31b1140ea0f286": {
       "bodySha256": "f3c2daf9b1e8f3010a07c2d6d4fb1c8c68961f5d5f36e4eafea37f5496ac0793",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
@@ -3157,7 +3478,7 @@
     "b40884b2c699b27431128400dce81843733512755123bd6d951dffa9c5b21bef": {
       "bodySha256": "71fcae55f6431c1fad915916159cb8a8133bab0d36bed78f17882ec6f75285b6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3195,17 +3516,27 @@
     "cbcc7551cb724512e468bf0b4f4c585c975fb664a0f13e66ea7b001e688955ae": {
       "bodySha256": "25b206e43cf6f914c15e11b0ae369064619b21461e34f8011ed4b6469981fa7f",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://istanbul.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://istanbul.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "text": "Izbori: Prijavljivanje za glasanje u inostranstvu | Generalni konzulat Republike Srbije u Istanbulu Preskoči na glavni deo Generalni konzulat Republike Srbije u Istanbulu Отвори претрагу Затвори претрагу Отвори навигацију Izbori: Prijavljivanje za glasanje u inostranstvu 12. sep 2026. Povodom izbora za narodne poslanike u Republici Srbiji, raspisanim za 25. oktobar 2026.godine, prenosimo obaveštenje Ministarstva državne uprave i lokalne samouprave: “Na osnovu člana 16. stav 2. Zakona o jedinstvenom biračkom spisku („Službeni glasnik RS”, br. 104/09, 99/11, 44/24 i 96/25) i tačke 8. Uputstva za sprovođenje Zakona o jedinstvenom biračkom spisku („Službeni glasnik RS”, br. 15/12, 88/18, 67/20, 40/21, 90/21, 16/22, 34/24, 44/24, 4/26 i 16/26), Ministarstvo državne uprave i lokalne samouprave Obaveštavaju se birači koji imaju boravište u inostranstvu da preko diplomatsko-konzularnog predstavništva Republike Srbije, najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska (do 3. oktobra 2026. godine u ponoć), mogu podneti zahtev da se u jedinstveni birački spisak upiše podatak da će na predstojećim izborima glasati u inostranstvu. Zahtev za upis u jedinstveni birački spisak podatka o tome da će birač glasati u inostranstvu obavezno mora da sadrži sledeće podatke: ime i prezime birača; ime jednog roditelja birača; jedinstveni matični broj birača; opštinu, odnosno grad i adresu prebivališta birača u zemlji, kao i podatke o državi, opštini, odnosno gradu i adresi boravišta u inostranstvu prema kojoj će birač glasati na predstojećim izborima i potpis podnosioca zahteva. Diplomatsko-konzularno predstavništvo Republike Srbije kome je podnet zahtev za upis u jedinstveni birački spisak podatka o tome da birač želi da glasa prema mestu boravišta u inostranstvu, na propisani način dostavlja nadležnoj opštinskoj, odnosno gradskoj upravi po mestu prebivališta birača u zemlji, koja o tome donosi rešenje. Po donošenju rešenja o određivanju biračkih mesta od strane nadležne izborne komisije za glasanje na izborima, nadležna opštinska, odnosno gradska uprava donosi rešenje o upisivanju podatka da će birač na izborima glasati prema mestu boravišta u inostranstvu i biračko mesto na kome će glasati, odnosno rešenje da nisu ispunjeni uslovi da će birač na izborima glasati prema mestu boravišta u inostranstvu. Nakon donošenja rešenja da će birač na predstojećim izborima glasati prema mestu boravišta u inostranstvu i upisu tog podatka u jedinstveni birački spisak, birač se ne upisuje u izvod iz jedinstvenog biračkog spiska po mestu prebivališta u zemlji, odnosno upisuje se u izvod iz jedinstvenog biračkog spiska prema mestu boravišta u inostranstvu. Ukazuje se da se podatak o tome da će birač glasati u inostranstvu može upisati u jedinstveni birački spisak samo za lice koje je već upisano u jedinstveni birački spisak. U slučaju da lice koje ima biračko pravo nije upisano u jedinstveni birački spisak za odlučivanje po zahtevu za upis podatka o tome da će birač glasati u inostranstvu, neophodno je prethodno sprovesti postupak upisa u jedinstveni birački spisak. Zahtev za upis u jedinstveni birački spisak, istovremeno sa zahtevom za upis podatka da će birač glasati u inostranstvu, podnosi se diplomatsko-konzularnom predstavništvu Republike Srbije koje oba zahteva dostavlja nadležnoj opštinskoj, odnosno gradskoj upravi prema poslednjem prebivalištu podnosioca zahteva pre odlaska u inostranstvo, odnosno poslednjem prebivalištu jednog od njegovih roditelja. Uvid u jedinstveni birački spisak može se izvršiti elektronskim putem, unošenjem podatka o jedinstvenom matičnom broju građana i registarskom broju lične karte, na zvaničnoj internet stranici Ministarstva državne uprave i lokalne samouprave – https://upit.birackispisak.gov.rs/. Pored toga, uvid u podatke koji se vode o biraču može se izvršiti i preko Portala eUprava (usluga eZahtev za upis/izmenu podataka u Jedinstvenom biračkom spisku). Potrebno je da je građanin registrovani korisnik Portala eUprava. Prijava na Portal eUprava moguća je putem mobilne aplikacije ConsentID ili kvalifikovanim elektronski sertifikatom. Takođe, obaveštavaju se birači koji imaju boravište u inostranstvu da mogu preko diplomatsko-konzularnog predstavništva Republike Srbije podneti opštinskoj, odnosno gradskoj upravi po mestu njihovog prebivališta u zemlji zahtev za davanje obaveštenja o podacima koji su o njima upisani u jedinstveni birački spisak.“ Ministarstvo spoljnih poslova poziva državljane Republike Srbije koji žele da iskoriste svoje biračko pravo u inostranstvu da se obrate najbližem diplomatsko-konzularnom predstavništvu Republike Srbije. Lista diplomatsko-konzularnih predstavništava Republike Srbije se može naći ovde . Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
       "textSha256": "eb56818a7800a7705868d4a78dc0546be6ec21e580a34ee209db79a3f08bb5d9"
     },
+    "d0979b2067003c1adba6a14f1fa328ffa55c2e49a944a567f19fc9ed1251f92e": {
+      "bodySha256": "749307fa83464cc148d0d6d0975b5e09799b9778b02f9ba787f1f5d511535dad",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-13T16:06:29Z",
+      "finalUrl": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://www.cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+      "text": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије | Амбасада Републике Србије у Арапској Републици Египат Прескочи на главни део Амбасада Републике Србије у Арапској Републици Египат Отвори претрагу Затвори претрагу Отвори навигацију Обавештење о изборима за народне посланике Народне скупштине Републике Србије 12. сеп 2026. Обавештавамо вас да је председник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике Народне скупштине Републике Србије, који су заказани за 25. октобар 2026. године. Министарство државне управе и локалне самоуправе Републике Србије издало је обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење можете прочитати на следећем линку: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Држављани Републике Србије који имају боравиште у иностранству подносе захтев за гласање преко дипломатско-конзуларног представништва најкасније пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ (по локалном времену y Србији). Након наведеног времена захтеви неће моћи да се процесуирају. Држављани Србије могу на основу јединственог матичног броја (ЈМБГ) и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта Министарства државне управе и локалне самоуправе (МДУЛС), односно следећег линка: https://upit.birackispisak.gov.rs/ Уколико утврдите да сте уписани у Јединствени бирачки списак, потребно је да нам на и-мејл адресу serbia@serbiaeg.com доставите „Захтев за упис у бирачки списак података да ће бирач гласати у иностранству“ , који можете преузети на линку Zahtev-za-glasanje-u-inostranstvu_1.doc . Уз захтев је потребно да обавезно доставите копију важеће личне карте или пасоша Републике Србије. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне карте, ради увида y адресу пребивалишта. Уколико утврдите да нисте уписани у Јединствени бирачки списак неопходно је да нам заједно са „Захтевом за упис у бирачки списак података да ће бирач гласати у иностранству“доставите и попуњени „Захтев за упис у Јединствени бирачки списак“ који можете преузети на линку Zahtev-za-upis-u-JBS_0.doc . Дакле, процесуирање захтева за гласање y иностранству могуће је тек пошто надлежни орган донесе решење о упису y Јединствени бирачки списак. „Захтев за упис y Јединствени бирачки списак“ може се поднети дипломатско-конзуларном представништву или преко портала еУправе уколико лице има налог на порталу еУправе и истом приступа квалификованим електронским сертификатом или путем мобилне апликације ConsentlD. Захтеве за остваривање бирачког права на предстојећим изборима за народне посланике можете нам доставити на и-мејл адресу serbia@serbiaeg.com , поштом (на адресу 33 El-Mansour Mohammed, Abu Al Feda, Zamalek, Cairo Governorate 11211 ) или лично у просторијама Амбасаде Републике Србије у Каиру сваког радног дана (од недеље до четвртка) од 10 до 13 часова. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "edf9415d767aaf8ff55b9e5efc7c4f40691e3bdef0154ee1784021431dd73c2b"
+    },
     "d2881f191a6cbd254680acb61c0373bf12bcea01ca967883a088a7ef84a471de": {
       "bodySha256": "36b50a21bb4e9af748346b72a9cf18e24d1bb0ec5c21f650b62b27110f48f835",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
@@ -3272,7 +3603,7 @@
     "eca8b05819d101518ffaf2cc4b4b1dcb4e5220666f79f20bf152027a999ef48b": {
       "bodySha256": "3b2a157f1735ed1c757d934eb571b6c1bf7a979945a47b715b305b615bfee4c1",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
@@ -3292,7 +3623,7 @@
     "eeaa4a97d57143c9de805748c5b6dc70e5300bab755c36faffe18992e213e20e": {
       "bodySha256": "3ea9b5019b2edc3630bc1117e3d953d93a87e1257c47707a5a1a38ae65777ac8",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://tunis.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tunis.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
@@ -3332,7 +3663,7 @@
     "fce186b593c2dfce0d33959f48675d53b1abf36ae46a04b05947d1a032c90b74": {
       "bodySha256": "24811e25d48d7b392d00da67d89155eef92ae57a18f2544b5ecf1b773fa66508",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3342,9 +3673,9 @@
     "fdfa5c67a9f1634c9e862ac1360ff08c20ec02e1e29a6deff3932593079f0ba1": {
       "bodySha256": "e4ba5051d3044e4525d331109e29131467824ababa63374b7c9354616f8455ff",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:38:17Z",
+      "fetchedAt": "2026-09-13T16:06:29Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
-      "sourceSelection": "operator-notice",
+      "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "text": "OБАВЕШТЕЊЕ - ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ | Генерални конзулат Републике Србије у Вуковару Прескочи на главни део Генерални конзулат Републике Србије у Вуковару Отвори претрагу Затвори претрагу Отвори навигацију OБАВЕШТЕЊЕ - ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ 09. сеп 2026. Председник Републике Србије Александар Вучић донео је Одлуку о расписивању избора за народне посланике ПР бр. 127 од 09. септембра 2026. године, који ће се одржати 25. октобра 2026. године. На основу члана 16. став 2. Закона о јединственом бирачком списку („Службени гласник РС”, бр. 104/09, 99/11, 44/24 и 96/25) и тачке 8. Упутства за спровођење Закона о јединственом бирачком списку („Службени гласник РС”, бр. 15/12, 88/18, 67/20, 40/21, 90/21, 16/22, 34/24, 44/24, 4/26 и 16/26), а у складу са обавештењем Министарства државне управе и локалне самоуправе Републике Србије, обавештавају се бирачи који имају боравиште у Републици Хрватској да своје бирачко право могу да остваре у дипломатско-конзуларним представништвима Републике Србије у Републици Хрватској, односно у Генералном конзулату Републике Србије у Вуковару. Да би остварили своје бирачко право потребно је да поседују важећу личну карту Републике Србије или важећи пасош Р.Србије. Такође, је потребно да буду уписани у јединствени бирачки списак у Републици Србији. Уколико лице које има бирачко право није уписано у јединствени бирачки списак, захтев за упис у јединствени бирачки списак може поднети преко дипломатско-конзуларног представништва Републике Србије у Републици Хрватској истовремено са захтевом за упис податка да ће гласати у иностранству. Бирачи могу да изврше увид да ли су уписани у јединствени бирачки списак електронским путем на сајту https://upit.birackispisak.gov.rs/ , уношењем података о јединственом матичном броју грађана и регистрационом броју личне карте. Рок за подношење захтева да се у јединствени бирачки списак упише податак да ће бирач на предстојећим председничким изборима гласати у иностранству истиче 03. октобра 2026. године, у поноћ . Позивају се држављани Републике Србије са боравком на јурисдикционом подручју Генералног конзулата Републике Србије у Вуковару да најкасније до 03. октобра 2026. године, Генералном конзулату Републике Србије у Вуковару поднесу захтев за упис у бирачки списак податка да ће гласати у овом представништву . Напомињемо да су лица која су на претходним изборима гласала на овом бирачком месту дужна да поднесу нови захтев за предстојеће изборе. Ради додатних информација грађани се могу обратити Генералном конзулату Републике Србије у Вуковару на телефон 032 / 441 016 и 032 / 441 183. У прилогу доставаљамо формуларе захтева: ФОРМУЛАР бр. 1 попуњавају сви грађани који ће гласати у Генералном конзулату. FORMULAR BR 1 Zahtev-za-glasanje-u-inostranstvu15.doc ФОРМУЛАР бр.2 попуњавају само грађани за које се утврди да нису уписани у јединствени бирачки списак у Р.Србији. FORMULAR BR.2 Zahtev-za-upis-u-JBS.doc Са попуњеним формуларом доставља се и копија пасоша или копија личне карте. Уколико је лична карта са чипом, пожељно је да подносилац приложи и копију очитане личне карте, ради увида у адресу пребивалишта у Р.Србији. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
       "textSha256": "4b83f8c5fc46a141418a0be1a26d659c284c69d0bb7951193e6906bbd0911790"

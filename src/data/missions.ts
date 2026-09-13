@@ -254,7 +254,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://buenosaires.mfa.gov.rs",
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+          "title": "Избори 2026: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -626,7 +633,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
         "isResident": false,
         "coverageSourceEmail": "consulado.argentina@mfa.rs",
-        "coveringStationId": "st-ar-emb-main"
+        "coveringStationId": "st-ar-emb-main",
+        "electionNotice": {
+          "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+          "title": "Избори 2026: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -651,7 +665,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://sarajevo.mfa.gov.rs",
         "address": "Обала Мака Диздара 3aСАРАЈЕВОБОСНА И ХЕРЦЕГОВИНА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+          "title": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-ba-cons-trebinje",
@@ -685,7 +706,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
           "title": "Одлука о расписивању избора за народне посланике",
           "electionYear": "2026",
-          "observedAt": "2026-09-12T19:19:51Z",
+          "observedAt": "2026-09-13T16:06:29Z",
           "emailStatus": "email-extracted"
         }
       },
@@ -1501,7 +1522,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://cairo.mfa.gov.rs",
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1528,7 +1556,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
         "isResident": false,
         "coverageSourceEmail": "consulado.argentina@mfa.rs",
-        "coveringStationId": "st-ar-emb-main"
+        "coveringStationId": "st-ar-emb-main",
+        "electionNotice": {
+          "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+          "title": "Избори 2026: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3318,7 +3353,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://rabat.mfa.gov.rs",
         "address": "24, Rue El Kadi Ahmed MoulineSouissiРАБАТМАРОКОB.P.5014",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:33Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3380,7 +3422,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "24, Rue El Kadi Ahmed MoulineSouissiРАБАТМАРОКОB.P.5014",
         "isResident": false,
         "coverageSourceEmail": "ambrsrabat@gmail.com",
-        "coveringStationId": "st-ma-emb-main"
+        "coveringStationId": "st-ma-emb-main",
+        "electionNotice": {
+          "url": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:33Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4066,7 +4115,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
         "isResident": false,
         "coverageSourceEmail": "serbia@serbiaeg.com",
-        "coveringStationId": "st-eg-emb-main"
+        "coveringStationId": "st-eg-emb-main",
+        "electionNotice": {
+          "url": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4154,7 +4210,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
         "isResident": false,
         "coverageSourceEmail": "serbia@serbiaeg.com",
-        "coveringStationId": "st-eg-emb-main"
+        "coveringStationId": "st-eg-emb-main",
+        "electionNotice": {
+          "url": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4249,7 +4312,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
         "isResident": false,
         "coverageSourceEmail": "consulado.argentina@mfa.rs",
-        "coveringStationId": "st-ar-emb-main"
+        "coveringStationId": "st-ar-emb-main",
+        "electionNotice": {
+          "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+          "title": "Избори 2026: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4276,7 +4346,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
         "isResident": false,
         "coverageSourceEmail": "consulado.argentina@mfa.rs",
-        "coveringStationId": "st-ar-emb-main"
+        "coveringStationId": "st-ar-emb-main",
+        "electionNotice": {
+          "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+          "title": "Избори 2026: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4789,7 +4866,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "24, Rue El Kadi Ahmed MoulineSouissiРАБАТМАРОКОB.P.5014",
         "isResident": false,
         "coverageSourceEmail": "ambrsrabat@gmail.com",
-        "coveringStationId": "st-ma-emb-main"
+        "coveringStationId": "st-ma-emb-main",
+        "electionNotice": {
+          "url": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:33Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5154,7 +5238,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "33, Al Mansour Mohamed St.,ZAMALEKКАИРОЕГИПАТ",
         "isResident": false,
         "coverageSourceEmail": "serbia@serbiaeg.com",
-        "coveringStationId": "st-eg-emb-main"
+        "coveringStationId": "st-eg-emb-main",
+        "electionNotice": {
+          "url": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+          "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5726,7 +5817,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "Montevideo 696 1019 BUENOS AIRES ARGENTINE",
         "isResident": false,
         "coverageSourceEmail": "consulado.argentina@mfa.rs",
-        "coveringStationId": "st-ar-emb-main"
+        "coveringStationId": "st-ar-emb-main",
+        "electionNotice": {
+          "url": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+          "title": "Избори 2026: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-13T16:07:31Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
