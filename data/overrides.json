@@ -2715,6 +2715,19 @@
         "observedAt": "2026-09-13T16:07:31Z",
         "electionYear": "2026",
         "emailStatus": "email-extracted"
+      },
+      "electionEmail": "consulado.argentina@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://buenosaires.mfa.gov.rs/mediji/aktivnosti/ambasador-lazic-predao-akreditivna-pisma-predsedniku-paragvaja",
+        "title": "Избори 2026: Пријављивање за гласање у иностранству",
+        "observedAt": "2026-09-13T16:07:31Z"
       }
     },
     "st-ba-emb-main": {
@@ -2724,6 +2737,19 @@
         "observedAt": "2026-09-13T16:07:31Z",
         "electionYear": "2026",
         "emailStatus": "email-extracted"
+      },
+      "electionEmail": "sarajevo2026@mfa.rs",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://sarajevo.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-2026-prijem-zahteva-za-glasanje-u-inostranstvu",
+        "title": "ИЗБОРИ 2026 - Пријем захтева за гласање у иностранству",
+        "observedAt": "2026-09-13T16:07:31Z"
       }
     },
     "st-eg-emb-main": {
@@ -2733,6 +2759,19 @@
         "observedAt": "2026-09-13T16:07:31Z",
         "electionYear": "2026",
         "emailStatus": "email-extracted"
+      },
+      "electionEmail": "serbia@serbiaeg.com",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://cairo.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+        "observedAt": "2026-09-13T16:07:31Z"
       }
     },
     "st-ma-emb-main": {
@@ -2742,6 +2781,19 @@
         "observedAt": "2026-09-13T16:07:33Z",
         "electionYear": "2026",
         "emailStatus": "email-extracted"
+      },
+      "electionEmail": "ambrsrabat@gmail.com",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
+        "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
+        "observedAt": "2026-09-13T16:07:33Z"
       }
     }
   },

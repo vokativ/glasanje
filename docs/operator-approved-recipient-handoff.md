@@ -92,3 +92,7 @@ After regeneration, every station in the two tables must have:
 - recipient resolution follows the explicit-override, official-relationship, then unique automatic-match precedence above.
 
 `konkursi@dijaspora.gov.rs` must be absent from election-recipient overrides and must not appear as an approved registration recipient.
+
+## Additional approval — 14 September 2026
+
+The maintainer explicitly approved Buenos Aires, Sarajevo, Cairo and Rabat and their existing resolved country coverage. Exact recipients, source links and the 14-entry public coverage diff are recorded in the [missing-recipient recheck](missing-recipient-recheck-2026-09-14.md#operator-approved-recipient-release--14-september-2026). Preserve these operator approvals alongside the earlier decisions.

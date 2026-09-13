@@ -4,7 +4,7 @@
 
 ## New recipient findings
 
-The full current notice was read for each mission below. Each explicitly directs completed voter-registration requests and ID copies to the listed mailbox. These findings await operator approval; the configured automatic AI review endpoint remains unavailable.
+The full current notice was read for each mission below. Each explicitly directs completed voter-registration requests and ID copies to the listed mailbox. The maintainer subsequently explicitly approved all four recipients and their existing resolved country coverage on 14 September 2026 local time. See the approval release below. The initial collection did not fabricate an automatic AI review.
 
 | Mission | Station ID | Recipient | Official announcement |
 | --- | --- | --- | --- |
@@ -71,12 +71,39 @@ Run `20260913T160629Z-8d60eaf51d44` selected all 43 entries and fetched 268 page
 | `st-zm-emb-main` | scanned-no-evidence |
 | `st-zw-emb-main` | no-site |
 
-## Publication and coverage
+## Initial link-only publication and coverage
 
-The four new maintained announcement links also reach ten existing covered-country entries: Bolivia, Ecuador, Paraguay, Peru and Uruguay (Buenos Aires); Oman, Palestine and Sudan (Cairo); Mauritania and Senegal (Rabat). Their existing recipient approvals remain unchanged while the explicit approval request is pending. No published mailbox was replaced. In particular, Sarajevo’s proposed `sarajevo2026@mfa.rs` remains a discovery finding, not the selected public recipient.
+The four new maintained announcement links also reach ten existing covered-country entries: Bolivia, Ecuador, Paraguay, Peru and Uruguay (Buenos Aires); Oman, Palestine and Sudan (Cairo); Mauritania and Senegal (Rabat). In the initial link-only release, their recipient approvals remained unchanged while the explicit approval request was pending. That release did not replace any published mailbox. The subsequent approval release below selects Sarajevo’s published election recipient.
 
 The verified live baseline was `https://korak-do-glasa-hosting-2026.web.app/assets/index-BS5Fy9va.js`, checked at Sun, 13 Sep 2026 16:07:16 GMT; SHA-256 `e73ea08d57865ef3b2bb70337c606cbafba8e0f7c54e8d540a00b99b8a9a84fc`. Comparison by all 223 stable IDs shows no email removal, replacement, approval downgrade or station deletion. Approved coverage remains **126 → 126**; public notice links increase **122 → 136**.
 
 Validation passed: `bun run build:data`, 87 Python tests, `bun run check`, 63 Bun tests, and the production build. No application or crawler logic was changed for this data refresh. The normal build still reports its existing PDF dependency chunk-size warning.
 
 Firebase deployment succeeded. Live HTML and `/assets/index-Dt5AAgH1.js` were verified byte-for-byte against the build at Sun, 13 Sep 2026 16:13:07 GMT. The parsed live country dataset matches every generated public field. Release bundle SHA-256: `245aa9240c4ac248ff5d4c60b2b7e2cb2b440a85c74541572c770f925f85cee3`.
+
+## Operator-approved recipient release — 14 September 2026
+
+The maintainer explicitly approved Buenos Aires (`consulado.argentina@mfa.rs`), Sarajevo (`sarajevo2026@mfa.rs`), Cairo (`serbia@serbiaeg.com`) and Rabat (`ambrsrabat@gmail.com`), including existing resolved coverage. All four now use structured schema-version-2 operator authorization, retaining the actual announcement URL, title and observation time. No automatic AI confirmation is claimed.
+
+The approvals reach ten dependent entries listed above. Approved public coverage increases **126 → 140**. Sarajevo changes from its ordinary contact to the specifically published election mailbox; every other affected address is preserved. All 223 stable station IDs and all announcement links are retained. No recipient is removed and no approval is downgraded. Explicit coverage relationships and non-resident overrides were checked; the ten dependents resolve through the approved missions without additional pinned-address changes.
+
+The live pre-release baseline was `https://korak-do-glasa-hosting-2026.web.app/assets/index-Dt5AAgH1.js`, verified at Sun, 13 Sep 2026 23:13:42 GMT; SHA-256 `245aa9240c4ac248ff5d4c60b2b7e2cb2b440a85c74541572c770f925f85cee3`. Individual public changes:
+
+| Station ID | Previous email | Approved email | Approval change |
+| --- | --- | --- | --- |
+| `st-ar-emb-main` | `consulado.argentina@mfa.rs` | `consulado.argentina@mfa.rs` | unconfirmed → operator-approved |
+| `st-nonres-bo` | `consulado.argentina@mfa.rs` | `consulado.argentina@mfa.rs` | unconfirmed → operator-approved |
+| `st-ba-emb-main` | `ambasada.sarajevo@mfa.rs` | `sarajevo2026@mfa.rs` | unconfirmed → operator-approved |
+| `st-eg-emb-main` | `serbia@serbiaeg.com` | `serbia@serbiaeg.com` | unconfirmed → operator-approved |
+| `st-nonres-ec` | `consulado.argentina@mfa.rs` | `consulado.argentina@mfa.rs` | unconfirmed → operator-approved |
+| `st-ma-emb-main` | `ambrsrabat@gmail.com` | `ambrsrabat@gmail.com` | unconfirmed → operator-approved |
+| `st-nonres-mr` | `ambrsrabat@gmail.com` | `ambrsrabat@gmail.com` | unconfirmed → operator-approved |
+| `st-nonres-om` | `serbia@serbiaeg.com` | `serbia@serbiaeg.com` | unconfirmed → operator-approved |
+| `st-nonres-ps` | `serbia@serbiaeg.com` | `serbia@serbiaeg.com` | unconfirmed → operator-approved |
+| `st-nonres-py` | `consulado.argentina@mfa.rs` | `consulado.argentina@mfa.rs` | unconfirmed → operator-approved |
+| `st-nonres-pe` | `consulado.argentina@mfa.rs` | `consulado.argentina@mfa.rs` | unconfirmed → operator-approved |
+| `st-nonres-sn` | `ambrsrabat@gmail.com` | `ambrsrabat@gmail.com` | unconfirmed → operator-approved |
+| `st-nonres-sd` | `serbia@serbiaeg.com` | `serbia@serbiaeg.com` | unconfirmed → operator-approved |
+| `st-nonres-uy` | `consulado.argentina@mfa.rs` | `consulado.argentina@mfa.rs` | unconfirmed → operator-approved |
+
+Approval release validation passed: 87 Python tests, 63 Bun tests, TypeScript checking, data generation and the production build. Firebase deployment succeeded; live HTML and `/assets/index-BKbI2BZz.js` match the tested build byte-for-byte, and all public station fields match the generated dataset. Verified at Sun, 13 Sep 2026 23:15:15 GMT; release SHA-256 `77a39b8e2985800212cac9e73d6bac5de7938341cb7aa6d4e73bb8e8f1f123bb`.
