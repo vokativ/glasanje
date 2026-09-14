@@ -9,6 +9,13 @@ import React, { createContext, useContext, useMemo, useState } from 'react';
 
 export type Script = 'cyrillic' | 'latin';
 
+// Internal page links carry an explicit Latin choice across a full navigation.
+// No browser storage or applicant data is needed; absent/ambiguous hints use Cyrillic.
+export const getInitialScript = (search: string): Script => {
+  const values = new URLSearchParams(search).getAll('script');
+  return values.length === 1 && values[0] === 'latin' ? 'latin' : 'cyrillic';
+};
+
 // Long digraphs precede single letters so DŽ, LJ, and NJ remain one Serbian character.
 
 const LATIN_TO_CYRILLIC: Record<string, string> = {

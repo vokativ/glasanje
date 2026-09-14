@@ -35,7 +35,7 @@ export const RegistrationEmailStatusPage: React.FC = () => {
   return (
     <main>
       <section className="card" aria-labelledby="registration-email-status-title">
-        <a href="/" className="btn btn-sm btn-navy" style={{ marginBottom: '1.25rem' }}>
+        <a href={script === 'latin' ? '/?script=latin' : '/'} className="btn btn-sm btn-navy" style={{ marginBottom: '1.25rem' }}>
           ← {t('Nazad na prijavu za glasanje')}
         </a>
         <h2 id="registration-email-status-title" className="card-title">
@@ -135,7 +135,7 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                 />
               </article>
             ))}
-            <a href={`/?country=${country.countryCode}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+            <a href={`/?country=${country.countryCode}${script === 'latin' ? '&script=latin' : ''}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
               {t('Započnite prijavu za ovu državu')} →
             </a>
           </section>

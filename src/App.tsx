@@ -20,7 +20,7 @@ import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { COUNTRY_BY_CODE } from './data/missions';
 import { ApplicationFormData } from './lib/pdf';
 import { getInitialDesiredLocation } from './lib/invite';
-import { ScriptProvider, useScript } from './lib/script';
+import { getInitialScript, ScriptProvider, useScript } from './lib/script';
 import { formatSerbianDate } from './lib/validators';
 
 // Canvas and PDF/export code is deferred until its later wizard step so the
@@ -195,7 +195,7 @@ const AppContent: React.FC = () => {
         <>
           <Countdown />
           <a
-            href="/status"
+            href={script === 'latin' ? '/status?script=latin' : '/status'}
             className="btn btn-sm btn-navy"
             style={{
               marginBottom: '1.25rem',
@@ -324,7 +324,7 @@ const AppContent: React.FC = () => {
 };
 
 export const App: React.FC = () => (
-  <ScriptProvider>
+  <ScriptProvider initialScript={getInitialScript(typeof window === 'undefined' ? '' : window.location.search)}>
     <AppContent />
   </ScriptProvider>
 );

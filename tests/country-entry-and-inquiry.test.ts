@@ -2,12 +2,35 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, test } from 'bun:test';
 import App from '../src/App';
-import { COUNTRY_BY_CODE } from '../src/data/missions';
+import { COUNTRIES, COUNTRY_BY_CODE } from '../src/data/missions';
 import { MissionInquiryLink } from '../src/components/MissionInquiryLink';
 import { buildMissionInquiryUrl } from '../src/lib/missionInquiry';
-import { ScriptProvider } from '../src/lib/script';
+import { getInitialScript, ScriptProvider } from '../src/lib/script';
 
 describe('Country links into the registration wizard', () => {
+  test('accepts one explicit Latin preference and defaults ambiguous hints to Cyrillic', () => {
+    expect(getInitialScript('?country=SG&script=latin')).toBe('latin');
+    for (const search of ['', '?script=cyrillic', '?script=invalid', '?script=latin&script=cyrillic', '?script=latin&script=latin']) {
+      expect(getInitialScript(search)).toBe('cyrillic');
+    }
+  });
+
+  test('country entry retains Latin for personal details and the return link to coverage', () => {
+    const previousWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    Object.defineProperty(globalThis, 'window', {
+      configurable: true,
+      value: { location: { pathname: '/', search: '?country=SG&script=latin' } },
+    });
+    try {
+      const markup = renderToStaticMarkup(React.createElement(App));
+      expect(markup).toContain('Korak 2: Lični podaci');
+      expect(markup).toContain('href="/status?script=latin"');
+    } finally {
+      if (previousWindow) Object.defineProperty(globalThis, 'window', previousWindow);
+      else Reflect.deleteProperty(globalThis, 'window');
+    }
+  });
+
   test.each([
     ['?country=SG', true],
     ['?country=%20sg%20', true],
@@ -39,6 +62,30 @@ describe('Country links into the registration wizard', () => {
 });
 
 describe('Mission inquiry drafts', () => {
+  test('every current unconfirmed entry has its own recipient and selected-country text in both scripts', () => {
+    for (const country of COUNTRIES) {
+      for (const station of country.stations) {
+        for (const script of ['cyrillic', 'latin'] as const) {
+          const label = script === 'latin' ? country.label : country.labelCyr;
+          const href = buildMissionInquiryUrl(station, label, script);
+          if (station.electionContactApproval !== 'unconfirmed') {
+            expect(href).toBeNull();
+            continue;
+          }
+          expect(href).not.toBeNull();
+          const url = new URL(href!);
+          expect(url.pathname).toBe(station.email.trim());
+          expect([...url.searchParams.keys()]).toEqual(['subject', 'body']);
+          expect(url.searchParams.get('subject')).toBe(`${script === 'latin' ? 'Upit o prijavi za glasanje 2026.' : 'Упит о пријави за гласање 2026.'} — ${label}`);
+          const body = url.searchParams.get('body')!;
+          expect(body).toContain(`${script === 'latin' ? 'Država u kojoj boravim:' : 'Држава у којој боравим:'} ${label}.`);
+          expect(body.startsWith(script === 'latin' ? 'Poštovani,' : 'Поштовани,')).toBe(true);
+          expect(script === 'latin' ? /[\u0400-\u04ff]/u.test(body) : /[A-Za-z]/u.test(body)).toBe(false);
+        }
+      }
+    }
+  });
+
   test('uses the resolved covering mission while retaining the selected country in the draft', () => {
     const singapore = COUNTRY_BY_CODE.get('SG')!;
     const station = singapore.stations[0];
