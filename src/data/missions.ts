@@ -116,7 +116,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
           "title": "Амбасада Републике Србије у Тирани обавештава да је преседник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати дана 25. октобра 2026. године.",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T13:12:20Z",
+          "observedAt": "2026-09-14T22:51:41Z",
           "emailStatus": "no-email-extracted"
         }
       }
@@ -727,7 +727,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
           "title": "Одлука о расписивању избора за народне посланике",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T13:12:20Z",
+          "observedAt": "2026-09-14T22:51:41Z",
           "emailStatus": "email-extracted"
         }
       },
@@ -5171,7 +5171,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://bratislava.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
           "title": "Избори: Пријављивање за гласање у иностранству",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T13:12:20Z",
+          "observedAt": "2026-09-14T22:51:41Z",
           "emailStatus": "no-email-extracted"
         }
       }
@@ -6292,7 +6292,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://hercegnovi.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
           "title": "Избори: Пријављивање за гласање у иностранству 2026.",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T13:12:20Z",
+          "observedAt": "2026-09-14T22:51:41Z",
           "emailStatus": "no-email-extracted"
         }
       }

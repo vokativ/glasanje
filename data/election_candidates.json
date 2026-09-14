@@ -2184,7 +2184,7 @@
   ],
   "electionId": "2026-parliamentary",
   "electionYear": "2026",
-  "generatedAt": "2026-09-14T13:12:20Z",
+  "generatedAt": "2026-09-14T22:51:41Z",
   "notices": [
     {
       "electionContext": "Ambasada Republike Srbije u Tirani obaveštava da je presednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike, koji će se održati dana 25. oktobra 2026. godine.",
@@ -2192,7 +2192,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/albanija/ambasade-konzulati",
@@ -2211,7 +2211,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/albanija/ambasade-konzulati",
@@ -2354,7 +2354,7 @@
       "emails": [
         "gk.mostar@mfa.rs"
       ],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
@@ -2363,7 +2363,7 @@
         "https://www.mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
         "https://mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike"
       ],
-      "sourceId": "93212a45ea56f7272a25efa2275afdca17a5195e8fbd259e7a31b1140ea0f286",
+      "sourceId": "04738154727623b318c592a04adf09880151651f7b5863fd05ab22a46c60e307",
       "sourceUrl": "https://www.mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
       "stationId": "st-ba-cons-drvar",
       "title": "Odluka o raspisivanju izbora za narodne poslanike"
@@ -2376,7 +2376,7 @@
       "emails": [
         "gk.mostar@mfa.rs"
       ],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
@@ -2384,7 +2384,7 @@
         "https://www.mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
         "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike"
       ],
-      "sourceId": "54341477820b38268477a1ac563f8963ba351e1bd40531ca9a73dc55fbc341a0",
+      "sourceId": "9c05333c11e32317e9b93bac8a78a51c044f940762e9a0bb787bf685f53e90c2",
       "sourceUrl": "https://www.mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
       "stationId": "st-ba-cons-drvar",
       "title": "Одлука о расписивању избора за народне посланике"
@@ -2560,7 +2560,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -2580,7 +2580,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -2984,7 +2984,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -3003,7 +3003,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -3021,7 +3021,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -3040,7 +3040,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -3267,7 +3267,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
@@ -3287,7 +3287,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
@@ -3347,7 +3347,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/crna-gora/ambasade-konzulati",
@@ -3366,7 +3366,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/crna-gora/ambasade-konzulati",
@@ -3622,7 +3622,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/slovacka-republika/ambasade-konzulati",
@@ -3642,7 +3642,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/slovacka-republika/ambasade-konzulati",
@@ -3661,7 +3661,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
@@ -3681,7 +3681,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
@@ -3700,7 +3700,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -3719,7 +3719,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -3737,7 +3737,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -3756,7 +3756,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-14T13:12:20Z",
+      "observedAt": "2026-09-14T22:51:41Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -3770,20 +3770,12 @@
     }
   ],
   "pendingStationIds": [
-    "st-ao-emb-main",
-    "st-az-emb-main",
-    "st-ch-cons-cirih",
-    "st-fr-cons-strazbur",
-    "st-gr-cons-solun",
-    "st-gr-emb-main",
-    "st-hu-emb-main",
-    "st-kz-emb-main",
     "st-me-emb-main",
     "st-pt-emb-main",
     "st-ro-emb-main",
     "st-si-emb-main"
   ],
-  "runId": "d81eb3c94926b1aa6b8935c3",
+  "runId": "9929267b27cafec1ef90436d",
   "schemaVersion": 1,
   "sources": {
     "02b0bdfecf9b2fe66d3cf890567f16149b06ee75bc26dcab09ffbd5650b880b2": {
@@ -3795,6 +3787,16 @@
       "sourceUrl": "https://ljubljana.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-25-10-2026-prijavljivanje-za-glasanje-u-inostranstvu",
       "text": "Izbori za narodne poslanike 25.10.2026- prijavljivanje za glasanje u inostranstvu | Ambasada Republike Srbije u Republici Sloveniji Preskoči na glavni deo Ambasada Republike Srbije u Republici Sloveniji Отвори претрагу Затвори претрагу Отвори навигацију Izbori za narodne poslanike 25.10.2026- prijavljivanje za glasanje u inostranstvu 10. sep 2026. Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike PR br. 127 od 09.09.2026.g. (Službeni glasnik R. Srbije br. 85/26 od 09.09.2026.) kojom su isti raspisani za 25. oktobar 2026. godine. Povodom predstojećih izbora, Ministarstvo državne uprave i lokalne samouprave izdalo je Obaveštenje za birače koji imaju boravište u inostranstvu o ostvarivanju biračkog prava na izborima, koje možete pogledati na sledećem linku: Obaveštenje za birače u inostranstvu Uvid u jedinstveni birački spisak može se izvršiti elektronskim putem, unošenjem podatka o jedinstvenom matičnom broju građana (JMBG) i registarskom broju lične karte na zvaničnoj internet stranici Ministarstva državne uprave i lokalne samouprave: Birački spisak Državljani Republike Srbije koji imaju biračko pravo a nisu upisani u jedinstveni birački spisak (JBS) neophodno je da podnesu zahtev za upis u JBS u Republici Srbiji zajedno sa zahtevom za upis u birački spisak podataka da će birač glasati u inostranstvu. Zahtev za upis u JBS se može podneti i direktno preko portala eUprave, ukoliko osoba ima nalog na portalu eUprave i istom pristupa kvalifikovanim elektronskim sertifikatom ili putem mobilne aplikacije ConsentID. Državljani Republike Srbije koji imaju biračko pravo, a upisani su u jedinstveni birački spisak u Republici Srbiji mogu da podnesu zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu. Obrazac za Zahtev za upis u JBS možete preuzeti ovde: Zahtev-za-upis-u-JBS.doc Obrazac za Zahtev za glasanje u inostranstvu možete preuzeti ovde: Zahtev-za-glasanje-u-inostranstvu_0.doc VAŽNO! Uz uredno popunjen i potpisan zahtev, potrebno je priložiti i kopiju važeće biometrijske lične karte Republike Srbije ili kopiju važećeg biometrijskoj pasoša Republike Srbije. Ukoliko je lična karta sa čipom, poželjno je priložiti kopiju očitane lične karte, ukoliko je posedujete. Državljani Republike Srbije u Republici Sloveniji sa biračkim pravom podnose zahtev za glasanje u inostranstvu Ambasadi R. Srbije u Ljubljani, najkasnije do 3. oktobra 2026. godine. Nakon navedenog roka zahtevi neće moći da se procesuiraju, zbog čega apelujemo na zainteresovane građane da zahteve podnesu blagovremeno. Ambasada Republike Srbije zahteve prosleđuje nadležnom organu u Republici Srbiji 03.10. 2026. godine do ponoći. S tim u vezi, ljubazno se moli da se poslednjeg dana roka zahtevi dostave Ambasadi najkasnije do 23.30 časova. Shodno propisima, za glasanje u inostranstvu, potrebno podneti prijavu, bez obzira na to da li ste se prijavljivali za glasanje na ranijim izborima . Zahtev mogu podneti i državljani Republike Srbije koji se na dan izbora privremeno nalaze u inostranstvu, uključujući lica koja u Sloveniji borave turistički . Popunjen i potpisan obrazac Zahteva, sa kopijom važećeg ličnog dokumenta (pasoša ili lične karte Republike Srbije) Ambasadi Republike Srbije u Ljubljani može se dostaviti: • putem elektronske pošte: konzularno.ljubljana@mfa.rs i embassy.ljubljana@mfa.rs • lično, dolaskom u Ambasadu Republike Srbije u Ljubljani: Ciril-Metodov trg 1, 1000 Ljubljana (ponedeljak - petak: 09.00 - 13:00) • putem pošte, preporučenom pošiljkom na navedenu adresu Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
       "textSha256": "efdb1acb070b9ff3d3b2251bc99d1f4c7de0d685784c85cb170591dba6d0997e"
+    },
+    "04738154727623b318c592a04adf09880151651f7b5863fd05ab22a46c60e307": {
+      "bodySha256": "127d0a2fdd0d5b04eb947296c77b15588f064499ec83cc5dd595e935008709ab",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-14T22:51:41Z",
+      "finalUrl": "https://mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://www.mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+      "text": "Odluka o raspisivanju izbora za narodne poslanike | Generalni konzulat Republike Srbije u Mostaru Preskoči na glavni deo Generalni konzulat Republike Srbije u Mostaru Отвори претрагу Затвори претрагу Отвори навигацију Odluka o raspisivanju izbora za narodne poslanike 09. sep 2026. Predsednik Republike Srbije Aleksandar Vučić doneo je Odluku o raspisivanju izbora za narodne poslanike PR br.127 od 09.09.2026.g. (Službeni glasnik R. Srbije br. 85/26 od 09.09.2026) kojom su isti raspisani za 25. oktobar 2026. godine. Ministarstvo državne uprave i lokalne samouprave Republike Srbije izdalo je obaveštenje za birače koji imaju boravište u inostranstvu o ostvarivanju biračkog prava na izborima. Obaveštenje možete pogledati na sledećem linku https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ . Pozivaju se državljani Republike Srbije koji imaju prijavljeno prebivalište u Republici Srbiji, a koji borave u Bosni i Hercegovini, da podnesu zahtev Generalnom konzulatu Republike Srbije u Mostaru za glasanje u inostranstvu. Zahtevi se mogu podneti najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 03. oktobra 2026. u ponoć (lokalno vreme u Republici Srbiji) Napominjemo da je, shodno propisima, za glasanje u inostranstvu za izbore za narodne poslanike Narodne skupštine Republike Srbije, koji su zakazani za 25. oktobar 2026. godine, potrebno podneti zahtev, bez obzira na to da li ste koristili biračko pravo za glasanje na ranijim izborima. Formular za prijavu možete preuzeti klikom na ovaj link. Popunjen i potpisan formular, zajedno sa kopijom važećeg pasoša ili lične karte, odnosno ličnu kartu sa čipom koja je očitana, potrebno je dostaviti Generalnom konzulatu Republike Srbije u Mostaru na e-mail gk.mostar@mfa.rs ili lično svakog radnog dana u periodu od 08:30 do 16:30 časova. Adresa: Generalni konzulat Republike Srbije, Konak 5, 88 000 Mostar, Bosna i Hercegovina. Provera da li je lice upisano u Jedinstveni birački spisak se može izvršiti elektronskim putem preko sledećeg linka https://upit.birackispisak.gov.rs/ Ukoliko lice nije upisano u Jedinstveni birački spisak, u Generalnom konzulatu Republike Srbije u Mostaru može se podneti zahtev za upis u Jedinstveni birački spisak. Obrazac zahteva za upis u jedinstveni birački spisak možete preuzeti ovde. U tom slučaju, neophodno je podneti istovremeno zahtev za upis u Jedinstveni birački spisak i zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu. Provera da li je lice upisano u Jedinstveni birački spisak se može izvršiti elektronskim putem preko sledećeg linka https://upit.birackispisak.gov.rs/ Za sve dodatne informacije stojimo na raspolaganju putem kontakata navedenih na veb stranici GK RS Mostar. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "080ad4d64b519a8720c8949b423fa87ac83828f79d2dd01d06f5dd3662754527"
     },
     "06e7fc93c0701a49e805b288f802f616c2327b1db0d87fe5ed6ff6bbf54cfa31": {
       "bodySha256": "daf8b6ff2e7c904f691b51e0533aa0808650556e4a3b47e4124ee489bf37c16e",
@@ -3819,7 +3821,7 @@
     "11491856a93a54fc821091b8184d140bd5a4a92e2b460da55e73895aa8f274e4": {
       "bodySha256": "e88eef5d869559e3580a7d088aa35deda9afc96f0c2ae658f0203a687657252f",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
       "sourceSelection": "crawled",
       "sourceUrl": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
@@ -3868,7 +3870,7 @@
     "27c3681993858dfa87293621e930e28cc133e8c93aeed08498cfac7aea7bfcf8": {
       "bodySha256": "79a2a9d4f27a1c9de819faef082336484d621f8a56c35bf1d3e365be5626701d",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4015,7 +4017,7 @@
     "5537cd5a965444a104210b33765bf7c399d1860468712f09a0447b5e6bbe9f87": {
       "bodySha256": "b314db0392107c2f4dfb68bc9bbceca5ceef26b75d05b141cd4673b992e8ec13",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/index%2ephp/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/index%2ephp/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -4084,7 +4086,7 @@
     "6158ea6f885100b2a72c8762b890075d5f4be12ec66a0dc55a1debd8da0d51b3": {
       "bodySha256": "fef0fad3a525f2e64eb2bb0462f86dd320a30cd97c9721e186efa252cd01ad3a",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4131,7 +4133,7 @@
     "6e87f80ab2e6c8944ffa0196e6cddfa16f05d5204ead8a595146d63f103b1551": {
       "bodySha256": "a550010edb97bccf8ec498a0834e3b3bdf049cfbe141cd5e3072f6b60c2fa6e6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://tripoli.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
@@ -4141,7 +4143,7 @@
     "7017dceff5bab6af789c5a71869459f8083bc38b1b90ca2043409cdfaa3efe1e": {
       "bodySha256": "e44684c2bb0b8e4d7e99f3fdc12c3d58f70eead1572edc0e23c56c1e189b585e",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -4265,7 +4267,7 @@
     "885742fc9722cbf8f141b436adc551ef5b91f59c0f362381646082e58b8027a1": {
       "bodySha256": "b07d2925507a1e3f7933c70bf40545b088fb1640c5566e57ff3a16ec439b3d46",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4275,7 +4277,7 @@
     "8944b57b08b4ff434a8a36f23d30d88486c32912cd8ae903eda552c04868a6cd": {
       "bodySha256": "5ea42471505d9490c19d56ec39cc7b7642c3a686c5304f83b98394217320ae92",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/index%2ephp/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/index%2ephp/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -4332,10 +4334,20 @@
       "text": "Izbori za narodne poslanike 25.10.2026.- prijavljivanje za glasanje u inostranstvu | Ambasada Republike Srbije u Republici Kazahstan Preskoči na glavni deo Ambasada Republike Srbije u Republici Kazahstan Отвори претрагу Затвори претрагу Отвори навигацију Izbori za narodne poslanike 25.10.2026.- prijavljivanje za glasanje u inostranstvu 14. sep 2026. Obaveštavamo da je predsednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike PR br. 127 od 09.09.2026.g. (Službeni glasnik R. Srbije br. 85/26 od 09.09.2026.) kojom su isti raspisani za 25. oktobar 2026. godine. Povodom predstojećih izbora, Ministarstvo državne uprave i lokalne samouprave izdalo je Obaveštenje za birače koji imaju boravište u inostranstvu o ostvarivanju biračkog prava na izborima, koje možete pogledati na sledećem linku: Uvid u jedinstveni birački spisak može se izvršiti elektronskim putem, unošenjem podatka o jedinstvenom matičnom broju građana (JMBG) i registarskom broju lične karte na zvaničnoj internet stranici Ministarstva državne uprave i lokalne samouprave: Državljani Republike Srbije koji imaju biračko pravo a nisu upisani u jedinstveni birački spisak (JBS) neophodno je da podnesu zahtev za upis u JBS u Republici Srbiji zajedno sa zahtevom za upis u birački spisak podataka da će birač glasati u inostranstvu. Zahtev za upis u JBS se može podneti i direktno preko portala eUprave, ukoliko osoba ima nalog na portalu eUprave i istom pristupa kvalifikovanim elektronskim sertifikatom ili putem mobilne aplikacije ConsentID. Državljani Republike Srbije koji imaju biračko pravo, a upisani su u jedinstveni birački spisak u Republici Srbiji mogu da podnesu zahtev za upis u birački spisak podataka da će birač glasati u inostranstvu. Obrazac za Zahtev za upis u JBS možete preuzeti ovde: Zahtev-za-upis-u-JBS.doc Obrazac za Zahtev za glasanje u inostranstvu možete preuzeti ovde: Zahtev-za-glasanje-u-inostranstvu_0.doc VAŽNO! Uz uredno popunjen i potpisan zahtev, potrebno je priložiti i kopiju važeće biometrijske lične karte Republike Srbije ili kopiju važećeg biometrijskoj pasoša Republike Srbije. Ukoliko je lična karta sa čipom, poželjno je priložiti kopiju očitane lične karte, ukoliko je posedujete. Državljani Republike Srbije u Republici Kazahstan sa biračkim pravom podnose zahtev za glasanje u inostranstvu Ambasadi R. Srbije u Astani, najkasnije do 3. oktobra 2026. godine. Nakon navedenog roka zahtevi neće moći da se procesuiraju, zbog čega apelujemo na zainteresovane građane da zahteve podnesu blagovremeno. Ambasada Republike Srbije zahteve prosleđuje nadležnom organu u Republici Srbiji 03.10. 2026. godine do ponoći. S tim u vezi, ljubazno se moli da se poslednjeg dana roka zahtevi dostave Ambasadi najkasnije do 23.00 časova. Shodno propisima, za glasanje u inostranstvu, potrebno je podneti prijavu, bez obzira na to da li ste se prijavljivali za glasanje na ranijim izborima. Zahtev mogu podneti i državljani Republike Srbije koji se na dan izbora privremeno nalaze u inostranstvu, uključujući lica koja u Kazahstanu borave turistički. Popunjen i potpisan obrazac Zahteva, sa kopijom važećeg ličnog dokumenta (pasoša ili lične karte Republike Srbije) Ambasadi Republike Srbije u Astani može se dostaviti: • putem elektronske pošte: amb.astana@mail.ru , • lično, dolaskom u Ambasadu Republike Srbije u Kazahstanu: Biznis centar „Arman“, Sariarka 6, VI sprat, kanc. 640 (ponedeljak - petak: 11.00 - 14:00) • putem pošte, preporučenom pošiljkom na navedenu adresu Napomena za R. Kazahstan: Napominjemo da je za otvaranje glasačkog mesta u inostranstvu (uključujući i u R.Kazahstan) nepophodno da se do kraja roka za prijavljivanje prijavi dovoljan broj zainteresovanih glasača. Zatim, da na osnovu toga, Republička izborna komisija donese odluku da se otvori glasačko mesto, kao i da R. Kazahstan kao zemlja prijema dozvoli da se sprovede glasanje na teritoriji Kazahstana. Ukoliko se svi pomenuti uslovi ispune, informacija o otvaranju glasačkog mesta u Kazahstanu će biti objavljena na sajtu ambasade R. Srbije u Astani, kao i na zvaničnom sajtu Republičke izborne komisije. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
       "textSha256": "8233d301ea810749ae3f2c3e33e6ff6599f8ba77bb51d0cef902dc2ff7dc721c"
     },
+    "9c05333c11e32317e9b93bac8a78a51c044f940762e9a0bb787bf685f53e90c2": {
+      "bodySha256": "4358ad4fb4fdd226422e3a0ec0ac637a3a9cc1e6512074a29c878f61179b5e36",
+      "extractorVersion": "1",
+      "fetchedAt": "2026-09-14T22:51:41Z",
+      "finalUrl": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://www.mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+      "text": "Одлука о расписивању избора за народне посланике | Генерални конзулат Републике Србије у Мостару Прескочи на главни део Генерални конзулат Републике Србије у Мостару Отвори претрагу Затвори претрагу Отвори навигацију Одлука о расписивању избора за народне посланике 09. сеп 2026. Председник Републике Србије Александар Вучић донео је Oдлуку о расписивању избора за народне посланике ПР бр.127 од 09.09.2026.г. (Службени гласник Р. Србије бр. 85/26 од 09.09.2026) којом су исти расписани за 25. октобар 2026. године. Министарство државне управе и локалне самоуправе Републике Србије издало је обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење можете погледати на следећем линку https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ . Позивају се држављани Републике Србије који имају пријављено пребивалиште у Републици Србији, а који бораве у Босни и Херцеговини, да поднесу захтев Генералном конзулату Републике Србије у Мостару за гласање у иностранству. Захтеви се могу поднети најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 03. октобра 2026. у поноћ (локално време у Републици Србији) Напомињемо да је, сходно прописима, за гласање у иностранству за изборе за народне посланике Народне скупштине Републике Србије, који су заказани за 25. октобар 2026. године, потребно поднети захтев, без обзира на то да ли сте користили бирачко право за гласање на ранијим изборима. Формулар за пријаву можете преузети кликом на овај линк. Попуњен и потписан формулар, заједно са копијом важећег пасоша или личне карте, односно личну карту са чипом која је очитана, потребно је доставити Генералном конзулату Републике Србије у Мостару на е-mail gk.mostar@mfa.rs или лично сваког радног дана у периоду од 08:30 до 16:30 часова. Адреса: Генерални конзулат Републике Србије, Конак 5, 88 000 Мостар, Босна и Херцеговина. Провера да ли је лице уписано у Јединствени бирачки списак се може извршити електронским путем преко следећег линка https://upit.birackispisak.gov.rs/ Уколико лице није уписано у Јединствени бирачки списак, у Генералном конзулату Републике Србије у Мостару може се поднети захтев за упис у Јединствени бирачки списак. Образац захтева за упис у јединствени бирачки списак можете преузети овде. У том случају, неопходно је поднети истовремено захтев за упис у Јединствени бирачки списак и захтев за упис у бирачки списак података да ће бирач гласати у иностранству. Провера да ли је лице уписано у Јединствени бирачки списак се може извршити електронским путем преко следећег линка https://upit.birackispisak.gov.rs/ За све додатне информације стојимо на располагању путем контаката наведених на веб страници ГК РС Мостар. Подели на Facebook Подели на Twitter Подели на Viber Подели на WhatsApp Подели путем е-поште",
+      "textSha256": "062112dcf7624674cd145228dd69d58d462b7587f49fe8650697234cfb218dfe"
+    },
     "9c200a0b331db66f98731043e0a8123e0fccc3fb01eaf117268ee2af638bb782": {
       "bodySha256": "6cdb8a351f1f650cb0339797730d2785be79c121af3229c1439ecde2d2dbfb11",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://tirana.mfa.gov.rs/lat/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
       "sourceSelection": "crawled",
       "sourceUrl": "https://tirana.mfa.gov.rs/lat/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
@@ -4444,7 +4456,7 @@
     "ae706641ccfe301c522b9b22a0e19f6cf4840cc4d7d3151c98cbdaae56d1b310": {
       "bodySha256": "b7d36bd0f42936082028f36936193fb0402110ab03bd36fe093c0b2c89d0a0b6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://hercegnovi.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://hercegnovi.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
@@ -4464,7 +4476,7 @@
     "b40884b2c699b27431128400dce81843733512755123bd6d951dffa9c5b21bef": {
       "bodySha256": "71fcae55f6431c1fad915916159cb8a8133bab0d36bed78f17882ec6f75285b6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4484,7 +4496,7 @@
     "bb0cb61fda3d6ca3b8d746a66ab724a56e4bb766172b7504eb53c0540f48d214": {
       "bodySha256": "d8f2a9f1987ac31111bf503aa16d4a67a07cc781c5bc9fa2d1278efc9f20c0b6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://hercegnovi.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://hercegnovi.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
@@ -4542,7 +4554,7 @@
     "cbcc7551cb724512e468bf0b4f4c585c975fb664a0f13e66ea7b001e688955ae": {
       "bodySha256": "25b206e43cf6f914c15e11b0ae369064619b21461e34f8011ed4b6469981fa7f",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://istanbul.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://istanbul.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4562,7 +4574,7 @@
     "d2881f191a6cbd254680acb61c0373bf12bcea01ca967883a088a7ef84a471de": {
       "bodySha256": "36b50a21bb4e9af748346b72a9cf18e24d1bb0ec5c21f650b62b27110f48f835",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
@@ -4582,7 +4594,7 @@
     "dbd50f5cb296a0588598910692fa4563c8336300643104c94c41dac554aae014": {
       "bodySha256": "e656abe62c15b1cb0d44bad267fabe483732146600faa3aaf42719f7060ab480",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://bratislava.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.bratislava.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4659,7 +4671,7 @@
     "eca8b05819d101518ffaf2cc4b4b1dcb4e5220666f79f20bf152027a999ef48b": {
       "bodySha256": "3b2a157f1735ed1c757d934eb571b6c1bf7a979945a47b715b305b615bfee4c1",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
@@ -4679,7 +4691,7 @@
     "eeaa4a97d57143c9de805748c5b6dc70e5300bab755c36faffe18992e213e20e": {
       "bodySha256": "3ea9b5019b2edc3630bc1117e3d953d93a87e1257c47707a5a1a38ae65777ac8",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://tunis.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tunis.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
@@ -4709,7 +4721,7 @@
     "f396a749c23ee7b661b3282a38eff7c71dc7836ad7f34235ca27b97d6d05d7ad": {
       "bodySha256": "aa035384820b0fa5f8df4e2203e2b79d8ce6381b2b3701066f7f2c6fa8b1dd68",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://bratislava.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.bratislava.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4729,7 +4741,7 @@
     "fce186b593c2dfce0d33959f48675d53b1abf36ae46a04b05947d1a032c90b74": {
       "bodySha256": "24811e25d48d7b392d00da67d89155eef92ae57a18f2544b5ecf1b773fa66508",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4739,7 +4751,7 @@
     "fdfa5c67a9f1634c9e862ac1360ff08c20ec02e1e29a6deff3932593079f0ba1": {
       "bodySha256": "e4ba5051d3044e4525d331109e29131467824ababa63374b7c9354616f8455ff",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-14T13:12:20Z",
+      "fetchedAt": "2026-09-14T22:51:41Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
