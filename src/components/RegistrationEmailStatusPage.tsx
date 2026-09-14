@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { COUNTRIES, type VotingCountry } from '../data/missions';
-import { useScript } from '../lib/script';
+import { useScript, type Script } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
 
@@ -23,14 +23,25 @@ export const getElectionEmailCoverage = (
   };
 };
 
+export const groupCoverageCountries = (script: Script, countries: VotingCountry[] = COUNTRIES) => {
+  const name = (country: VotingCountry) => script === 'latin' ? country.label : country.labelCyr;
+  const collator = new Intl.Collator(script === 'latin' ? 'sr-Latn' : 'sr-Cyrl');
+  const groups: { letter: string; countries: VotingCountry[] }[] = [];
+  for (const country of [...countries].sort((a, b) => collator.compare(name(a), name(b)))) {
+    const label = name(country);
+    // Serbian Latin digraphs are single alphabet letters.
+    const letter = script === 'latin' ? label.match(/^(Dž|Lj|Nj|.)/u)![0] : label[0];
+    const previous = groups[groups.length - 1];
+    if (previous?.letter === letter) previous.countries.push(country);
+    else groups.push({ letter, countries: [country] });
+  }
+  return groups;
+};
+
 export const RegistrationEmailStatusPage: React.FC = () => {
   const { script, t } = useScript();
-  const [countryCode, setCountryCode] = useState('');
   const coverage = useMemo(() => getElectionEmailCoverage(), []);
-  const country = useMemo(
-    () => COUNTRIES.find((candidate) => candidate.countryCode === countryCode),
-    [countryCode],
-  );
+  const groups = useMemo(() => groupCoverageCountries(script), [script]);
 
   return (
     <main>
@@ -47,99 +58,117 @@ export const RegistrationEmailStatusPage: React.FC = () => {
           {t(' predstavništava.')}
         </p>
         <p className="form-hint">
-          {t('Za nepotvrđene kontakte proverite zvanično obaveštenje misije pre predaje.')}
+          {t('Status označava potvrđenu adresu za prijavu u ovom alatu, ne otvaranje biračkog mesta. Otvorite državu za kontakte, zvanična obaveštenja i prijavu.')}
         </p>
-
-        <div className="form-group" style={{ marginTop: '1.25rem' }}>
-          <label className="form-label" htmlFor="statusCountrySelect">
-            {t('Država boravka')}
-          </label>
-          <select
-            id="statusCountrySelect"
-            name="statusCountrySelect"
-            className="form-control"
-            value={countryCode}
-            onChange={(event) => setCountryCode(event.currentTarget.value)}
-          >
-            <option value="">{t('Izaberite državu boravka…')}</option>
-            {COUNTRIES.map((candidate) => (
-              <option key={candidate.countryCode} value={candidate.countryCode}>
-                {script === 'cyrillic' ? candidate.labelCyr : candidate.label}
-              </option>
-            ))}
-          </select>
+        <div className="coverage-legend">
+          <span className="coverage-status coverage-status--confirmed">✓ {t('Sve adrese potvrđene')}</span>
+          <span className="coverage-status coverage-status--partial">◐ {t('Deo adresa potvrđen')}</span>
+          <span className="coverage-status coverage-status--unconfirmed">✕ {t('Bez potvrđene adrese')}</span>
         </div>
-
-        {country && (
-          <section aria-live="polite" aria-label={t('Status predstavništava za izabranu državu')}>
-            <h3 style={{ fontSize: '1rem', margin: '1.25rem 0 0.75rem' }}>
-              {script === 'cyrillic' ? country.labelCyr : country.label}
-            </h3>
-            {country.stations.map((station) => (
-              <article
-                key={station.id}
-                className="mission-card"
-                style={{
-                  marginBottom: '0.75rem',
-                  ...(station.electionContactApproval === 'unconfirmed'
-                    ? {
-                        backgroundColor: 'var(--color-error-bg)',
-                        borderColor: '#fecaca',
-                      }
-                    : {}),
-                }}
-              >
-                <div className="mission-title">
-                  {script === 'cyrillic' ? station.embassyCyr : station.embassy}
-                </div>
-                {!station.isResident && (
-                  <span className="mission-coverage-badge">
-                    {t('Pokriva ovu državu na nerezidencijalnoj osnovi')}
-                  </span>
-                )}
-                {station.electionContactApproval !== 'unconfirmed' ? (
-                  <>
-                    <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>
-                      {t('✓ Izborna i-mejl adresa je potvrđena.')}
-                    </p>
-                    <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing />
-                    <div className="mission-detail">
-                      <strong>{t('Adresa za prijavu:')}</strong>
-                      <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>{station.email}</span>
-                    </div>
-                  </>
-                ) : (
-                  <p
-                    className="form-hint"
-                    style={{ marginTop: '0.5rem', color: 'var(--color-danger)' }}
-                  >
-                    {t('Izborna i-mejl adresa još nije potvrđena u ovom alatu.')}
-                  </p>
-                )}
-                {station.electionContactApproval === 'unconfirmed' && (
-                  <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} />
-                )}
-                {station.website && (
-                  <a
-                    href={station.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
-                  >
-                    {t('Zvanični sajt misije')} ↗
-                  </a>
-                )}
-                <MissionInquiryLink
-                  station={station}
-                  countryName={script === 'cyrillic' ? country.labelCyr : country.label}
-                />
-              </article>
-            ))}
-            <a href={`/?country=${country.countryCode}${script === 'latin' ? '&script=latin' : ''}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
-              {t('Započnite prijavu za ovu državu')} →
+        <nav className="coverage-alphabet" aria-label={t('Države po početnom slovu')}>
+          {groups.map(group => (
+            <a key={group.letter} href={`/status${script === 'latin' ? '?script=latin' : ''}#coverage-letter-${group.countries[0].countryCode}`}>
+              {group.letter}
             </a>
-          </section>
-        )}
+          ))}
+        </nav>
+
+        <div className="coverage-list">
+          {groups.map(group => (
+            <section key={group.letter} className="coverage-letter-group" aria-labelledby={`coverage-letter-${group.countries[0].countryCode}`}>
+              <h3 id={`coverage-letter-${group.countries[0].countryCode}`} className="coverage-letter">{group.letter}</h3>
+              {group.countries.map(country => {
+                const { approved, total } = getElectionEmailCoverage([country]);
+                const status = approved === total ? 'confirmed' : approved > 0 ? 'partial' : 'unconfirmed';
+                return (
+                  <details key={country.countryCode} id={`coverage-country-${country.countryCode}`} className="coverage-country">
+                    <summary>
+                      <img
+                        className="coverage-country-flag"
+                        src={`/assets/flags/${country.countryCode.toLowerCase()}.svg`}
+                        alt=""
+                        width="24"
+                        height="18"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span className="coverage-country-name">{script === 'cyrillic' ? country.labelCyr : country.label}</span>
+                      <span className={`coverage-status coverage-status--${status}`}>
+                        <span aria-hidden="true">{status === 'confirmed' ? '✓' : status === 'partial' ? '◐' : '✕'}</span>{' '}
+                        {status === 'confirmed' ? t('Potvrđeno') : status === 'partial' ? `${t('Delimično')} · ${approved}/${total}` : t('Nije potvrđeno')}
+                      </span>
+                    </summary>
+                    <div className="coverage-country-details">
+                      {country.stations.map((station) => (
+                        <article
+                          key={station.id}
+                          className="mission-card"
+                          style={{
+                            marginBottom: '0.75rem',
+                            ...(station.electionContactApproval === 'unconfirmed'
+                              ? {
+                                  backgroundColor: 'var(--color-error-bg)',
+                                  borderColor: '#fecaca',
+                                }
+                              : {}),
+                          }}
+                        >
+                          <div className="mission-title">
+                            {script === 'cyrillic' ? station.embassyCyr : station.embassy}
+                          </div>
+                          {!station.isResident && (
+                            <span className="mission-coverage-badge">
+                              {t('Pokriva ovu državu na nerezidencijalnoj osnovi')}
+                            </span>
+                          )}
+                          {station.electionContactApproval !== 'unconfirmed' ? (
+                            <>
+                              <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>
+                                {t('✓ Izborna i-mejl adresa je potvrđena.')}
+                              </p>
+                              <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing />
+                              <div className="mission-detail">
+                                <strong>{t('Adresa za prijavu:')}</strong>
+                                <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>{station.email}</span>
+                              </div>
+                            </>
+                          ) : (
+                            <p
+                              className="form-hint"
+                              style={{ marginTop: '0.5rem', color: 'var(--color-danger)' }}
+                            >
+                              {t('Izborna i-mejl adresa još nije potvrđena u ovom alatu.')}
+                            </p>
+                          )}
+                          {station.electionContactApproval === 'unconfirmed' && (
+                            <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} />
+                          )}
+                          {station.website && (
+                            <a
+                              href={station.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
+                            >
+                              {t('Zvanični sajt misije')} ↗
+                            </a>
+                          )}
+                          <MissionInquiryLink
+                            station={station}
+                            countryName={script === 'cyrillic' ? country.labelCyr : country.label}
+                          />
+                        </article>
+                      ))}
+                      <a href={`/?country=${country.countryCode}${script === 'latin' ? '&script=latin' : ''}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+                        {t('Započnite prijavu za ovu državu')} →
+                      </a>
+                    </div>
+                  </details>
+                );
+              })}
+            </section>
+          ))}
+        </div>
       </section>
     </main>
   );

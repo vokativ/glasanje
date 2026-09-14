@@ -701,6 +701,116 @@ body {
   color: var(--color-text-muted);
 }
 
+/* Every country remains visible and browser-searchable; details expand in place. */
+.coverage-legend,
+.coverage-alphabet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.coverage-alphabet a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.coverage-alphabet a:hover {
+  background: #eff6ff;
+}
+
+.coverage-alphabet a:focus-visible,
+.coverage-country summary:focus-visible {
+  outline: 3px solid var(--color-info);
+  outline-offset: 2px;
+}
+
+.coverage-letter {
+  margin-top: 1.5rem;
+  padding: 0.5rem 0;
+  color: var(--color-primary);
+  border-bottom: 2px solid #cbd5e1;
+  scroll-margin-top: 1rem;
+}
+
+.coverage-country {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.coverage-country summary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.coverage-country summary::-webkit-details-marker {
+  display: none;
+}
+
+.coverage-country summary::after {
+  content: '+';
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.coverage-country[open] summary::after {
+  content: '−';
+}
+
+.coverage-country-name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.coverage-country-flag {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 2px;
+  outline: 1px solid rgb(15 36 66 / 0.12);
+}
+
+.coverage-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.4rem;
+}
+
+.coverage-status--confirmed {
+  color: var(--color-success);
+  background: var(--color-success-bg);
+}
+
+.coverage-status--partial {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.coverage-status--unconfirmed {
+  color: var(--color-danger);
+  background: var(--color-error-bg);
+}
+
+.coverage-country-details {
+  padding-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+
 /* Small screens retain the numbered controls and the live current-step text
  * while hiding repeated labels that would otherwise crowd the progress bar. */
 /* Responsive */

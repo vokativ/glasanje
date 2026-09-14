@@ -866,7 +866,8 @@ describe('Registration Email Status', () => {
 
     expect(homeMarkup).toContain('href="/status"');
     expect(homeMarkup).toContain(coverageSummary);
-    expect(statusMarkup).toContain('id="statusCountrySelect"');
+    expect(statusMarkup).not.toContain('<select');
+    expect(statusMarkup).toContain('id="coverage-country-SG"');
     expect(statusMarkup).toContain('href="/"');
     expect(statusMarkup).toContain(coverageSummary);
     expect(statusMarkup).toContain('Потврђене изборне и-мејл адресе');

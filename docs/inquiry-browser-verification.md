@@ -11,3 +11,11 @@ The corrected build passed the entire matrix and a complete Singapore → Jakart
 These checks inspect generated drafts and application behavior; they do not test delivery or re-establish the real-world validity of the maintained recipients. No mailto links were opened and no messages were sent. The maintained station data and approvals were unchanged.
 
 Validation: `bun run check`, all 79 Bun tests, `bun run build`, and `git diff --check` passed. The existing PDF chunk-size build warning remains. Dataset-wide checks for both scripts and the country-entry script regression are retained in `tests/country-entry-and-inquiry.test.ts`.
+
+## Follow-up: alphabetical country list and flags
+
+The status page now shows all 195 countries as visible summary rows grouped by the selected Serbian alphabet, with letter links and expandable mission details. Green means every listed recipient is approved, amber means only some are, and red means none are. These describe election-email approval, not whether a polling place will open. The application form's existing country and mission pickers are unchanged.
+
+The production build was checked in the same Chrome profile at 390 px and 1280 px, in both scripts. Every country row, status and expanded mission card was inspected programmatically in all four combinations; all 332 inquiry-link checks passed. Every flag decoded successfully in the browser. Country names remain visible for browser search. Alphabet links stay on `/status` despite the document's root `<base>` URL. Native keyboard expansion and the Latin Singapore → personal details → destination flow passed. Representative list rows and expanded partial-coverage cards were visually checked in mobile screenshots. No horizontal overflow or application exceptions were observed.
+
+Flags are served locally and loaded lazily. The 194 upstream flags, one maintained Order of Malta flag, source notes and license are in `public/assets/flags/` (about 1.1 MB total SVG data). All 81 Bun tests, TypeScript checking, the production build and whitespace validation passed. No recipient or approval data changed.
