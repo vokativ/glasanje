@@ -1796,7 +1796,7 @@
   ],
   "electionId": "2026-parliamentary",
   "electionYear": "2026",
-  "generatedAt": "2026-09-13T16:06:29Z",
+  "generatedAt": "2026-09-14T05:39:52Z",
   "notices": [
     {
       "electionContext": "ИЗБОРИ 2026",
@@ -1847,7 +1847,7 @@
       "emails": [
         "gk.mostar@mfa.rs"
       ],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
@@ -1869,7 +1869,7 @@
       "emails": [
         "gk.mostar@mfa.rs"
       ],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/bosna-i-hercegovina/ambasade-konzulati",
@@ -2053,7 +2053,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -2073,7 +2073,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -2305,7 +2305,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2324,7 +2324,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2342,7 +2342,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2361,7 +2361,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/hrvatska/ambasade-konzulati",
@@ -2502,7 +2502,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
@@ -2522,7 +2522,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/libija/ambasade-konzulati",
@@ -2820,7 +2820,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
@@ -2840,7 +2840,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/tunis/ambasade-konzulati",
@@ -2859,7 +2859,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2878,7 +2878,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2896,7 +2896,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2915,7 +2915,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-13T16:06:29Z",
+      "observedAt": "2026-09-14T05:39:52Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -2929,15 +2929,12 @@
     }
   ],
   "pendingStationIds": [
-    "st-ba-emb-main",
-    "st-eg-emb-main",
-    "st-ma-emb-main",
     "st-me-emb-main",
     "st-pt-emb-main",
     "st-ro-emb-main",
     "st-si-emb-main"
   ],
-  "runId": "26ba5a2fa5d78634ea59124a",
+  "runId": "0ee04972038a5e12832ca4cb",
   "schemaVersion": 1,
   "sources": {
     "02b0bdfecf9b2fe66d3cf890567f16149b06ee75bc26dcab09ffbd5650b880b2": {
@@ -2992,7 +2989,7 @@
     "27c3681993858dfa87293621e930e28cc133e8c93aeed08498cfac7aea7bfcf8": {
       "bodySha256": "79a2a9d4f27a1c9de819faef082336484d621f8a56c35bf1d3e365be5626701d",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3119,7 +3116,7 @@
     "54341477820b38268477a1ac563f8963ba351e1bd40531ca9a73dc55fbc341a0": {
       "bodySha256": "b986713aac514a17000d49c7ed0aa04a246c6ab420118bfaedd1ee6542cf9a6d",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
@@ -3129,7 +3126,7 @@
     "5537cd5a965444a104210b33765bf7c399d1860468712f09a0447b5e6bbe9f87": {
       "bodySha256": "b314db0392107c2f4dfb68bc9bbceca5ceef26b75d05b141cd4673b992e8ec13",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/index%2ephp/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/index%2ephp/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -3188,7 +3185,7 @@
     "6158ea6f885100b2a72c8762b890075d5f4be12ec66a0dc55a1debd8da0d51b3": {
       "bodySha256": "fef0fad3a525f2e64eb2bb0462f86dd320a30cd97c9721e186efa252cd01ad3a",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3235,7 +3232,7 @@
     "6e87f80ab2e6c8944ffa0196e6cddfa16f05d5204ead8a595146d63f103b1551": {
       "bodySha256": "a550010edb97bccf8ec498a0834e3b3bdf049cfbe141cd5e3072f6b60c2fa6e6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://tripoli.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
@@ -3245,7 +3242,7 @@
     "7017dceff5bab6af789c5a71869459f8083bc38b1b90ca2043409cdfaa3efe1e": {
       "bodySha256": "e44684c2bb0b8e4d7e99f3fdc12c3d58f70eead1572edc0e23c56c1e189b585e",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -3349,7 +3346,7 @@
     "885742fc9722cbf8f141b436adc551ef5b91f59c0f362381646082e58b8027a1": {
       "bodySha256": "b07d2925507a1e3f7933c70bf40545b088fb1640c5566e57ff3a16ec439b3d46",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3359,7 +3356,7 @@
     "8944b57b08b4ff434a8a36f23d30d88486c32912cd8ae903eda552c04868a6cd": {
       "bodySha256": "5ea42471505d9490c19d56ec39cc7b7642c3a686c5304f83b98394217320ae92",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/index%2ephp/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/index%2ephp/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
@@ -3379,7 +3376,7 @@
     "93212a45ea56f7272a25efa2275afdca17a5195e8fbd259e7a31b1140ea0f286": {
       "bodySha256": "f3c2daf9b1e8f3010a07c2d6d4fb1c8c68961f5d5f36e4eafea37f5496ac0793",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.mostar.mfa.gov.rs/lat/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
@@ -3478,7 +3475,7 @@
     "b40884b2c699b27431128400dce81843733512755123bd6d951dffa9c5b21bef": {
       "bodySha256": "71fcae55f6431c1fad915916159cb8a8133bab0d36bed78f17882ec6f75285b6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3516,7 +3513,7 @@
     "cbcc7551cb724512e468bf0b4f4c585c975fb664a0f13e66ea7b001e688955ae": {
       "bodySha256": "25b206e43cf6f914c15e11b0ae369064619b21461e34f8011ed4b6469981fa7f",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://istanbul.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://istanbul.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3536,7 +3533,7 @@
     "d2881f191a6cbd254680acb61c0373bf12bcea01ca967883a088a7ef84a471de": {
       "bodySha256": "36b50a21bb4e9af748346b72a9cf18e24d1bb0ec5c21f650b62b27110f48f835",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
@@ -3603,7 +3600,7 @@
     "eca8b05819d101518ffaf2cc4b4b1dcb4e5220666f79f20bf152027a999ef48b": {
       "bodySha256": "3b2a157f1735ed1c757d934eb571b6c1bf7a979945a47b715b305b615bfee4c1",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
@@ -3623,7 +3620,7 @@
     "eeaa4a97d57143c9de805748c5b6dc70e5300bab755c36faffe18992e213e20e": {
       "bodySha256": "3ea9b5019b2edc3630bc1117e3d953d93a87e1257c47707a5a1a38ae65777ac8",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://tunis.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.tunis.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
@@ -3663,7 +3660,7 @@
     "fce186b593c2dfce0d33959f48675d53b1abf36ae46a04b05947d1a032c90b74": {
       "bodySha256": "24811e25d48d7b392d00da67d89155eef92ae57a18f2544b5ecf1b773fa66508",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://istanbul.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -3673,7 +3670,7 @@
     "fdfa5c67a9f1634c9e862ac1360ff08c20ec02e1e29a6deff3932593079f0ba1": {
       "bodySha256": "e4ba5051d3044e4525d331109e29131467824ababa63374b7c9354616f8455ff",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-13T16:06:29Z",
+      "fetchedAt": "2026-09-14T05:39:52Z",
       "finalUrl": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
       "sourceSelection": "crawled",
       "sourceUrl": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",

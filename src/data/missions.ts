@@ -706,7 +706,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
           "title": "Одлука о расписивању избора за народне посланике",
           "electionYear": "2026",
-          "observedAt": "2026-09-13T16:06:29Z",
+          "observedAt": "2026-09-14T05:39:52Z",
           "emailStatus": "email-extracted"
         }
       },
