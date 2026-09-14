@@ -15,6 +15,7 @@ import { PollingStation } from '../data/missions';
 import { useScript } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
+import { CountryFlag } from './CountryFlag';
 /**
  * Creates a PDF from the wizard's in-memory application data and prepares handoff helpers.
  * Download, mail links, clipboard writes, and native sharing leave the final attachment and
@@ -27,6 +28,7 @@ interface StepExportAndSubmitProps {
   station: PollingStation;
   countryName: string;
   countryNameCyr: string;
+  countryCode?: string;
   isWetInkSignature: boolean;
   onBack: () => void;
   onReset: () => void;
@@ -37,6 +39,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   station,
   countryName,
   countryNameCyr,
+  countryCode,
   isWetInkSignature,
   onBack,
   onReset,
@@ -256,7 +259,13 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             fontSize: '0.85rem',
           }}
         >
-          <div><strong>{t('Država:')}</strong> {selectedCountryName}</div>
+          <div>
+            <strong>{t('Država:')}</strong>{' '}
+            <span className="country-label">
+              <CountryFlag countryCode={countryCode} />
+              <span>{selectedCountryName}</span>
+            </span>
+          </div>
           <div><strong>{t('Predstavništvo:')}</strong> {selectedEmbassy}</div>
           <div>
             <strong>{t('Prilog pasoša:')}</strong>{' '}

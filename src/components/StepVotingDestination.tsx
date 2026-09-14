@@ -3,6 +3,7 @@ import { latinToCyrillic, type Script, useScript } from '../lib/script';
 import { COUNTRY_BY_CODE, COUNTRIES, type VotingCountry } from '../data/missions';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
+import { CountryFlag } from './CountryFlag';
 /**
  * Resolves a voting destination from the bundled mission dataset. Search and selection are local:
  * this step emits the chosen published station plus the applicant's address to the wizard, but
@@ -302,7 +303,9 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
                     aria-selected={selection.countryCode === country.countryCode}
                     onClick={() => handleCountryChange(country.countryCode)}
                     style={{
-                      display: 'block',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
                       width: '100%',
                       padding: '0.65rem 0.85rem',
                       border: 0,
@@ -319,7 +322,8 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
                       textAlign: 'left',
                     }}
                   >
-                    {formatCountryOptionLabel(country, script)}
+                    <CountryFlag countryCode={country.countryCode} />
+                    <span>{formatCountryOptionLabel(country, script)}</span>
                   </button>
                 ))
               ) : (
@@ -333,7 +337,11 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
           )}
           {currentCountry && (
             <span className="form-hint" aria-live="polite">
-              {t('Izabrana država: ')}{formatCountryOptionLabel(currentCountry, script)}
+              {t('Izabrana država: ')}
+              <span className="country-label">
+                <CountryFlag countryCode={currentCountry.countryCode} />
+                <span>{formatCountryOptionLabel(currentCountry, script)}</span>
+              </span>
             </span>
           )}
           <span className="form-hint">
@@ -418,7 +426,10 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             {!currentStation.isResident && (
               <span className="mission-coverage-badge">
                 {t('Ovo predstavništvo je nadležno za birače u državi ')}
-                <strong>{script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}</strong>
+                <strong className="country-label">
+                  <CountryFlag countryCode={currentCountry.countryCode} />
+                  <span>{script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}</span>
+                </strong>
                 {t(' na nerezidencijalnoj osnovi.')}
               </span>
             )}

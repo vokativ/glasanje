@@ -3,6 +3,7 @@ import { COUNTRIES, type VotingCountry } from '../data/missions';
 import { useScript, type Script } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
+import { CountryFlag } from './CountryFlag';
 
 // This page reports the mission data's approval status rather than discovering contact details
 // at runtime.
@@ -65,6 +66,9 @@ export const RegistrationEmailStatusPage: React.FC = () => {
           <span className="coverage-status coverage-status--partial">◐ {t('Deo adresa potvrđen')}</span>
           <span className="coverage-status coverage-status--unconfirmed">✕ {t('Bez potvrđene adrese')}</span>
         </div>
+        <p className="form-hint" style={{ marginTop: '0.5rem' }}>
+          {t('Delimično znači da neka predstavništva imaju potvrđenu adresu, a druga još nemaju. Broj pokazuje koliko ih je potvrđeno od ukupnog broja — ne koliki deo države je pokriven.')}
+        </p>
         <nav className="coverage-alphabet" aria-label={t('Države po početnom slovu')}>
           {groups.map(group => (
             <a key={group.letter} href={`/status${script === 'latin' ? '?script=latin' : ''}#coverage-letter-${group.countries[0].countryCode}`}>
@@ -83,15 +87,7 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                 return (
                   <details key={country.countryCode} id={`coverage-country-${country.countryCode}`} className="coverage-country">
                     <summary>
-                      <img
-                        className="coverage-country-flag"
-                        src={`/assets/flags/${country.countryCode.toLowerCase()}.svg`}
-                        alt=""
-                        width="24"
-                        height="18"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <CountryFlag countryCode={country.countryCode} />
                       <span className="coverage-country-name">{script === 'cyrillic' ? country.labelCyr : country.label}</span>
                       <span className={`coverage-status coverage-status--${status}`}>
                         <span aria-hidden="true">{status === 'confirmed' ? '✓' : status === 'partial' ? '◐' : '✕'}</span>{' '}

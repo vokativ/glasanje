@@ -775,13 +775,20 @@ body {
   font-weight: 600;
 }
 
-.coverage-country-flag {
+.country-flag {
   flex: 0 0 24px;
   width: 24px;
   height: 18px;
   object-fit: contain;
   border-radius: 2px;
   outline: 1px solid rgb(15 36 66 / 0.12);
+}
+
+.country-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  vertical-align: middle;
 }
 
 .coverage-status {

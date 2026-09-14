@@ -281,6 +281,7 @@ const AppContent: React.FC = () => {
                   station={currentStation}
                   countryName={countryDisplayName}
                   countryNameCyr={countryNameCyr}
+                  countryCode={votingDestination.countryCode}
                   isWetInkSignature={signatureAndDoc.isWetInkSignature}
                   onBack={() => setCurrentStep(4)}
                   onReset={handleReset}
