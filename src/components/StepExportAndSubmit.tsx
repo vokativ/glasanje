@@ -14,6 +14,7 @@ import {
 import { PollingStation } from '../data/missions';
 import { useScript } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
+import { MissionInquiryLink } from './MissionInquiryLink';
 /**
  * Creates a PDF from the wizard's in-memory application data and prepares handoff helpers.
  * Download, mail links, clipboard writes, and native sharing leave the final attachment and
@@ -477,6 +478,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
         <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing={station.electionContactApproval !== 'unconfirmed'} />
+        <MissionInquiryLink station={station} countryName={selectedCountryName} />
         {station.electionContactApproval === 'unconfirmed' && (
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
             {t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
@@ -502,6 +504,19 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           {t('🌐 Zvanični sajt misije ↗')}
         </a>
       </div>
+
+      <aside className="mission-card" aria-labelledby="registry-reminder-title" style={{ marginBottom: '1.5rem' }}>
+        <h3 id="registry-reminder-title" className="mission-title">
+          {t('Ne zaboravite proveru biračkog spiska')}
+        </h3>
+        <p>{t('Ako već niste, proverite da li ste upisani u jedinstveni birački spisak.')}</p>
+        <a href="https://upit.birackispisak.gov.rs/" target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline">
+          {t('Proverite upis u birački spisak')} ↗
+        </a>
+        <p className="form-hint">
+          {t('Ako niste upisani, od misije zatražite i obrazac za upis u birački spisak i podnesite ga zajedno sa zahtevom za glasanje u inostranstvu. Ovaj alat priprema samo zahtev za glasanje u inostranstvu.')}
+        </p>
+      </aside>
 
       <div className="btn-row">
         <button type="button" onClick={onBack} className="btn btn-secondary">

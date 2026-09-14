@@ -64,7 +64,9 @@ const STEPS = [
 
 const AppContent: React.FC = () => {
   const { script, t } = useScript();
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [initialCountryCode] = useState(getInitialCountryCode);
+  const [currentStep, setCurrentStep] = useState<number>(() => initialCountryCode ? 2 : 1);
+  const [registryStepCompleted, setRegistryStepCompleted] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
   // This intentionally small route split avoids a routing dependency for the
   // standalone status surface; all other paths stay in the registration flow.
@@ -86,7 +88,7 @@ const AppContent: React.FC = () => {
   });
 
   const [votingDestination, setVotingDestination] = useState<VotingDestinationData>(() => ({
-    countryCode: getInitialCountryCode(),
+    countryCode: initialCountryCode,
     stationId: null,
     foreignAddress: '',
     desiredLocation: getInitialDesiredLocationFromUrl(),
@@ -99,6 +101,7 @@ const AppContent: React.FC = () => {
   });
 
   const handleStep1Complete = () => {
+    setRegistryStepCompleted(true);
     setCurrentStep(2);
   };
 
@@ -122,6 +125,7 @@ const AppContent: React.FC = () => {
   const handleReset = () => {
     if (window.confirm(t('Da li ste sigurni da želite da započnete novu prijavu?'))) {
       setCurrentStep(1);
+      setRegistryStepCompleted(false);
       setPersonalInfo({
         fullName: '',
         parentName: '',
@@ -210,7 +214,9 @@ const AppContent: React.FC = () => {
           <div className="stepper-context">
             <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
               {STEPS.map((s) => {
-                const isCompleted = s.id < currentStep;
+                // A country link skips the registry screen; it does not attest
+                // that the user checked their entry in the voter register.
+                const isCompleted = s.id < currentStep && (s.id !== 1 || registryStepCompleted);
                 const isActive = s.id === currentStep;
                 return (
                   <button

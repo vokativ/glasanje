@@ -942,6 +942,9 @@ describe('Registration Email Status', () => {
     expect(markup).toContain('✓ Потврђена адреса за изборе 2026.');
     expect(markup).toContain(`href="${station.electionNotice!.url}"`);
     expect(markup).not.toContain('role="alert"');
+    expect(markup).toContain('Не заборавите проверу бирачког списка');
+    expect(markup).toContain('href="https://upit.birackispisak.gov.rs/"');
+    expect(markup).toContain('поднесите га заједно са захтевом за гласање у иностранству');
   });
 
   test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {

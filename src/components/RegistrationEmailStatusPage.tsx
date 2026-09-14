@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { COUNTRIES, type VotingCountry } from '../data/missions';
 import { useScript } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
+import { MissionInquiryLink } from './MissionInquiryLink';
 
 // This page reports the mission data's approval status rather than discovering contact details
 // at runtime.
@@ -128,6 +129,10 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                     {t('Zvanični sajt misije')} ↗
                   </a>
                 )}
+                <MissionInquiryLink
+                  station={station}
+                  countryName={script === 'cyrillic' ? country.labelCyr : country.label}
+                />
               </article>
             ))}
             <a href={`/?country=${country.countryCode}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
