@@ -5,8 +5,13 @@ import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
 import { CountryFlag } from './CountryFlag';
 
-// This page reports the mission data's approval status rather than discovering contact details
-// at runtime.
+/**
+ * Public, searchable inventory of country/mission approval, using generated data
+ * only. Each non-resident station already carries its resolved recipient; this
+ * view must not infer jurisdiction or deduplicate separate consulates by email.
+ * Partial counts approved station records, never geographic coverage or whether
+ * a polling place will open. See docs/architecture.md for the UI/data contract.
+ */
 export interface ElectionEmailCoverage {
   approved: number;
   total: number;
@@ -69,6 +74,8 @@ export const RegistrationEmailStatusPage: React.FC = () => {
         <p className="form-hint" style={{ marginTop: '0.5rem' }}>
           {t('Delimično znači da neka predstavništva imaju potvrđenu adresu, a druga još nemaju. Broj pokazuje koliko ih je potvrđeno od ukupnog broja — ne koliki deo države je pokriven.')}
         </p>
+        {/* Include /status explicitly: the document's base URL is /, so a bare
+            fragment would navigate to the form. Preserve script on every link. */}
         <nav className="coverage-alphabet" aria-label={t('Države po početnom slovu')}>
           {groups.map(group => (
             <a key={group.letter} href={`/status${script === 'latin' ? '?script=latin' : ''}#coverage-letter-${group.countries[0].countryCode}`}>
@@ -77,6 +84,8 @@ export const RegistrationEmailStatusPage: React.FC = () => {
           ))}
         </nav>
 
+        {/* Native details retain all country names for browser Find and keyboard
+            navigation, while keeping per-mission contact information compact. */}
         <div className="coverage-list">
           {groups.map(group => (
             <section key={group.letter} className="coverage-letter-group" aria-labelledby={`coverage-letter-${group.countries[0].countryCode}`}>

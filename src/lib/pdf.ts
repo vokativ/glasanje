@@ -30,32 +30,39 @@ const FONT_URL = '/assets/Roboto-Regular.ttf';
 // Cache immutable asset bytes only. Never cache ApplicationFormData, which can
 // contain identity and contact information.
 
-let cachedTemplateBytes: ArrayBuffer | null = null;
-let cachedFontBytes: ArrayBuffer | null = null;
+type PdfAssets = { template: ArrayBuffer; font: ArrayBuffer };
+let assetPromise: Promise<PdfAssets> | null = null;
 
 /**
- * Loads the template and font together so generation fails before writing
- * fields when either required asset is unavailable. Cached bytes are reused
- * within this browser session; failed fetches are not cached.
+ * Share one in-flight request between startup preloading and an early export.
+ * Keep successful bytes in this module's memory, not just the HTTP cache: a
+ * later offline export must not need another fetch. Publish the pair only after
+ * both bodies finish reading. Clear a rejection so reconnect/export can retry.
+ * No application fields, signatures or ID images belong in this shared cache.
  */
-
-async function loadAssets(): Promise<{ template: ArrayBuffer; font: ArrayBuffer }> {
-  if (cachedTemplateBytes && cachedFontBytes) {
-    return { template: cachedTemplateBytes, font: cachedFontBytes };
+function loadAssets(): Promise<PdfAssets> {
+  if (!assetPromise) {
+    assetPromise = (async () => {
+      const [tplRes, fontRes] = await Promise.all([fetch(TEMPLATE_URL), fetch(FONT_URL)]);
+      if (!tplRes.ok) throw new Error(`Неуспешно учитавање PDF шаблона: ${tplRes.statusText}`);
+      if (!fontRes.ok) throw new Error(`Неуспешно учитавање фонта: ${fontRes.statusText}`);
+      const [template, font] = await Promise.all([tplRes.arrayBuffer(), fontRes.arrayBuffer()]);
+      return { template, font };
+    })().catch(error => {
+      assetPromise = null;
+      throw error;
+    });
   }
+  return assetPromise;
+}
 
-  const [tplRes, fontRes] = await Promise.all([
-    fetch(TEMPLATE_URL),
-    fetch(FONT_URL),
-  ]);
-
-  if (!tplRes.ok) throw new Error(`Неуспешно учитавање PDF шаблона: ${tplRes.statusText}`);
-  if (!fontRes.ok) throw new Error(`Неуспешно учитавање фонта: ${fontRes.statusText}`);
-
-  cachedTemplateBytes = await tplRes.arrayBuffer();
-  cachedFontBytes = await fontRes.arrayBuffer();
-
-  return { template: cachedTemplateBytes, font: cachedFontBytes };
+/**
+ * Loading a screen alone does not load its nested dynamic imports. Warm the
+ * actual PDF engines as well as the form/font, without generating any personal
+ * document. The browser's module cache reuses these exact imports in export.
+ */
+export async function preloadPdfResources(): Promise<void> {
+  await Promise.all([loadAssets(), import('pdf-lib'), import('@pdf-lib/fontkit')]);
 }
 
 

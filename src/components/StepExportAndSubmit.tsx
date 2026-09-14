@@ -66,28 +66,22 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
   const hideProviderLinks = isNarrowMobileBrowser();
   const desiredLocation = formData.desiredLocation?.trim() ?? '';
 
-  const subject = 'Пријава за гласање из иностранства — избори 2026.';
+  // Keep the official PDF separate from the user's email: the PDF template is
+  // Cyrillic, but compose/share/copy instructions follow the chosen UI script.
+  // Translate static pieces before interpolating names, mission labels or PDF.
+  const subject = t('Prijava za glasanje iz inostranstva — izbori 2026.');
   const isIdDocumentEmbedded = Boolean(formData.idDocumentDataUrl);
   const idDocumentSentence = isIdDocumentEmbedded
-    ? 'Копија идентификационог документа уграђена је у PDF.'
-    : 'Уз пријаву достављам и копију идентификационог документа.';
-  const messageBody = isWetInkSignature
-    ? `Поштовани,
-
-Након штампања и својеручног потписивања, у прилогу достављам скенирану или фотографисану пријаву за гласање у иностранству за изборе 2026. године. ${idDocumentSentence}
-
-Држава боравка: ${countryNameCyr}
-Дипломатско представништво: ${station.embassyCyr}
-
-Молим за потврду пријема захтева.`
-    : `Поштовани,
-
-У прилогу достављам попуњен и потписан Захтев за упис у бирачки списак податка да ћу гласати у иностранству на предстојећим изборима 2026. године. ${idDocumentSentence}
-
-Држава боравка: ${countryNameCyr}
-Дипломатско представништво: ${station.embassyCyr}
-
-Молим за потврду пријема захтева.`;
+    ? `${t('Kopija identifikacionog dokumenta ugrađena je u ')}PDF.`
+    : t('Uz prijavu dostavljam i kopiju identifikacionog dokumenta.');
+  const messageBody = [
+    t('Poštovani,'),
+    `${isWetInkSignature
+      ? t('Nakon štampanja i svojeručnog potpisivanja, u prilogu dostavljam skeniranu ili fotografisanu prijavu za glasanje u inostranstvu za izbore 2026. godine.')
+      : t('U prilogu dostavljam popunjen i potpisan Zahtev za upis u birački spisak podatka da ću glasati u inostranstvu na predstojećim izborima 2026. godine.')} ${idDocumentSentence}`,
+    `${t('Država boravka:')} ${selectedCountryName}\n${t('Diplomatsko predstavništvo:')} ${selectedEmbassy}`,
+    t('Molim za potvrdu prijema zahteva.'),
+  ].join('\n\n');
 
   // Recipient text reflects the selected approval status; it does not prove a mission will
   // accept the message.
@@ -99,6 +93,7 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
     subject,
     body: messageBody,
     fullName: formData.fullName,
+    script,
   });
 
   const webmailLinks = getWebmailLinks(dispatchInfo);

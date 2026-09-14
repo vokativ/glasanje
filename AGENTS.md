@@ -8,7 +8,7 @@ The Ministry of Foreign Affairs (MSP/MFA) publishes three complementary director
 
 An election notice commonly gives a specific address for sending the completed request and attachments. It may be below the ordinary contact address, in an image, or in a linked document. It can also explicitly reuse the mission's ordinary consular mailbox. The purpose comes from the notice, not the spelling of the address: `izbori`/`izb` is a useful discovery clue, not proof, and a Gmail or non-MFA mailbox is acceptable when the official mission publishes it for that purpose.
 
-Read this file first. Use [election-contact operations](docs/election-contact-operations.md) for commands and schemas, and the [operator handoff](docs/operator-approved-recipient-handoff.md) for recorded decisions. This file is the current guidance for agent judgment; historical examples in handoffs must not override it or a later explicit user instruction.
+Read this file first. For application structure, state ownership, script handling and offline preparation, see [architecture and maintenance contracts](docs/architecture.md). Keep comments and that map current when changing those contracts. Use [election-contact operations](docs/election-contact-operations.md) for commands and schemas, and the [operator handoff](docs/operator-approved-recipient-handoff.md) for recorded decisions. This file is the current guidance for agent judgment; historical examples in handoffs must not override it or a later explicit user instruction.
 
 ## How to judge evidence
 

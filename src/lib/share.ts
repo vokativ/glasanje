@@ -27,13 +27,14 @@ export interface RecipientPayloadInput {
   subject: string;
   body: string;
   fullName: string;
+  script?: Script;
 }
 
-function temporaryBlock(sections: string[]): string {
+function temporaryBlock(sections: string[], script: Script): string {
   return [
-    '*** ПРИВРЕМЕНО УПУТСТВО — ОБРИШИТЕ ОВАЈ БЛОК ПРЕ СЛАЊА ***',
+    translateStaticText(script, '*** PRIVREMENO UPUTSTVO — OBRIŠITE OVAJ BLOK PRE SLANJA ***'),
     ...sections,
-    '*** КРАЈ ПРИВРЕМЕНОГ УПУТСТВА ***',
+    translateStaticText(script, '*** KRAJ PRIVREMENOG UPUTSTVA ***'),
   ].join('\n\n');
 }
 
@@ -52,34 +53,39 @@ export function buildRecipientPayloads({
   subject,
   body,
   fullName,
+  script = 'cyrillic',
 }: RecipientPayloadInput): {
   standardBody: string;
   dispatchInfo: EmailDispatchInfo;
   webShareInfo: WebShareInfo;
   manualText: string;
 } {
-  const standardBody = `${body}\n\nС поштовањем,\n${fullName}`;
-  const idDocumentInstruction = 'Приложите слику прве стране српског пасоша или личне карте.';
+  // Translate only helper-owned copy. The supplied body/name may deliberately
+  // use a different script; transliterating the assembled message would corrupt
+  // those values (and potentially the exact destination mailbox).
+  const t = (text: string) => translateStaticText(script, text);
+  const standardBody = `${body}\n\n${t('S poštovanjem,')}\n${fullName}`;
+  const idDocumentInstruction = t('Priložite sliku prve strane srpskog pasoša ili lične karte.');
   const composeAttachmentInstructions = [
     isWetInkSignature
-      ? 'Приложите скенирану или фотографисану својеручно потписану пријаву.'
-      : 'Приложите преузети PDF формулар.',
+      ? t('Priložite skeniranu ili fotografisanu svojeručno potpisanu prijavu.')
+      : `${t('Priložite preuzeti ')}PDF${t(' formular.')}`,
     ...(!isIdDocumentEmbedded ? [idDocumentInstruction] : []),
   ];
-  const mailtoBody = `${temporaryBlock(composeAttachmentInstructions)}\n\n${standardBody}`;
+  const mailtoBody = `${temporaryBlock(composeAttachmentInstructions, script)}\n\n${standardBody}`;
   const webShareInstructions = [
-    `У поље „За“ унесите адресу:\n${toEmail}`,
+    `${t('U polje „Za“ unesite adresu:')}\n${toEmail}`,
     ...(electionContactApproval === 'unconfirmed'
-      ? [`ПАЖЊА: ${toEmail} је општи јавно објављени контакт мисије и није потврђен за упис у бирачки списак.`]
+      ? [`${t('PAŽNJA:')} ${toEmail}${t(' je opšti javno objavljeni kontakt misije i nije potvrđen za upis u birački spisak.')}`]
       : []),
     ...(!isIdDocumentEmbedded ? [idDocumentInstruction] : []),
   ];
   const requiredAttachments = [
     isWetInkSignature
-      ? 'скенирана или фотографисана својеручно потписана пријава'
-      : 'PDF формулар',
+      ? t('skenirana ili fotografisana svojeručno potpisana prijava')
+      : `PDF${t(' formular')}`,
     ...(!isIdDocumentEmbedded
-      ? ['слика прве стране српског пасоша или личне карте']
+      ? [t('slika prve strane srpskog pasoša ili lične karte')]
       : []),
   ];
 
@@ -88,13 +94,13 @@ export function buildRecipientPayloads({
     dispatchInfo: { toEmail, subject, body: mailtoBody },
     webShareInfo: {
       subject,
-      text: `${temporaryBlock(webShareInstructions)}\n\n${standardBody}`,
+      text: `${temporaryBlock(webShareInstructions, script)}\n\n${standardBody}`,
     },
     manualText: `${temporaryBlock([
-      `За: ${toEmail}`,
-      `Наслов: ${subject}`,
-      `Обавезни прилози: ${requiredAttachments.join('; ')}.`,
-    ])}\n\n${standardBody}`,
+      `${t('Za:')} ${toEmail}`,
+      `${t('Naslov:')} ${subject}`,
+      `${t('Obavezni prilozi:')} ${requiredAttachments.join('; ')}.`,
+    ], script)}\n\n${standardBody}`,
   };
 }
 

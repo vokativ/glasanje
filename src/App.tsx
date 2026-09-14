@@ -4,7 +4,7 @@
  * details, signatures, or documents beyond the open page, and reset must clear
  * every step's data together.
  */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Header } from './components/Header';
 import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
 import { Countdown } from './components/Countdown';
@@ -18,24 +18,23 @@ import {
 import type { SignatureAndDocumentData } from './components/StepSignatureAndDocument';
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { COUNTRY_BY_CODE } from './data/missions';
-import { ApplicationFormData } from './lib/pdf';
+import { type ApplicationFormData, preloadPdfResources } from './lib/pdf';
 import { getInitialDesiredLocation } from './lib/invite';
 import { getInitialScript, ScriptProvider, useScript } from './lib/script';
 import { formatSerbianDate } from './lib/validators';
 
-// Canvas and PDF/export code is deferred until its later wizard step so the
-// initial eligibility check does not load those browser-heavy dependencies.
-const StepSignatureAndDocument = React.lazy(() =>
-  import('./components/StepSignatureAndDocument').then(({ StepSignatureAndDocument }) => ({
-    default: StepSignatureAndDocument,
-  }))
+// Render the first screen immediately, then import the later screens in the
+// background. Use the same loaders for React.lazy and preloading so successful
+// imports are reused by the browser. This is preparation within an open page,
+// not persistent offline storage or permission to retain an application.
+const loadSignatureStep = () => import('./components/StepSignatureAndDocument').then(
+  ({ StepSignatureAndDocument }) => ({ default: StepSignatureAndDocument }),
 );
-
-const StepExportAndSubmit = React.lazy(() =>
-  import('./components/StepExportAndSubmit').then(({ StepExportAndSubmit }) => ({
-    default: StepExportAndSubmit,
-  }))
+const loadExportStep = () => import('./components/StepExportAndSubmit').then(
+  ({ StepExportAndSubmit }) => ({ default: StepExportAndSubmit }),
 );
+const StepSignatureAndDocument = React.lazy(loadSignatureStep);
+const StepExportAndSubmit = React.lazy(loadExportStep);
 
 // URL values are hints for the first render, not retained wizard state. Accept
 // exactly one recognised country code to avoid treating ambiguous links as data.
@@ -68,6 +67,31 @@ const AppContent: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(() => initialCountryCode ? 2 : 1);
   const [registryStepCompleted, setRegistryStepCompleted] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
+  const [resourceStatus, setResourceStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  // Stable callback keeps a background readiness update from restarting the
+  // modal's focus effect and moving focus away from the reader's current control.
+  const closePrivacy = useCallback(() => setIsPrivacyOpen(false), []);
+
+  useEffect(() => {
+    let mounted = true;
+    const prepare = async () => {
+      if (mounted) setResourceStatus('loading');
+      try {
+        await Promise.all([loadSignatureStep(), loadExportStep(), preloadPdfResources()]);
+        if (mounted) setResourceStatus('ready');
+      } catch {
+        // Startup is best effort: keep the form usable and retry on reconnect.
+        // Export also retries failed asset fetches and shows its existing error.
+        if (mounted) setResourceStatus('error');
+      }
+    };
+    void prepare();
+    window.addEventListener('online', prepare);
+    return () => {
+      mounted = false;
+      window.removeEventListener('online', prepare);
+    };
+  }, []);
   // This intentionally small route split avoids a routing dependency for the
   // standalone status surface; all other paths stay in the registration flow.
   const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
@@ -319,7 +343,7 @@ const AppContent: React.FC = () => {
       </footer>
 
       {/* Privacy Policy Modal */}
-      <PrivacyPolicyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+      <PrivacyPolicyModal isOpen={isPrivacyOpen} onClose={closePrivacy} resourceStatus={resourceStatus} />
     </div>
   );
 };
