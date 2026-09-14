@@ -74,12 +74,19 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-az-emb-main",
         "embassy": "Ambasada Republike Srbije (Azerbejdžan)",
         "embassyCyr": "Амбасада Републике Србије (Азербејџан)",
-        "email": "serbianembassy.baku@azeurotel.comserbianembassy.consular.baku",
-        "electionContactApproval": "unconfirmed",
+        "email": "serbianembassy.consular.baku@gmail.com",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://baku.mfa.gov.rs",
         "address": "Farid Aliyev, 6,IcherisheherAZ 1095БАКУАЗЕРБЕЈЏАН",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://baku.mfa.gov.rs/mediji/aktivnosti/informacija-o-raspisivanju-parlamentarnih-izbora-2026",
+          "title": "Информација о расписивању парламентарних избора",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -104,7 +111,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://tirana.mfa.gov.rs",
         "address": "Rr. Donika Kastrioti 9/1 ТИРАНА АЛБАНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
+          "title": "Амбасада Републике Србије у Тирани обавештава да је преседник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати дана 25. октобра 2026. године.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -157,11 +171,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Angola)",
         "embassyCyr": "Амбасада Републике Србије (Ангола)",
         "email": "srb.emb.angola@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://luanda.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-godine",
+          "title": "Избори за народне посланике Народне скупштине Републике Србије 2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -706,7 +727,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
           "title": "Одлука о расписивању избора за народне посланике",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T05:39:52Z",
+          "observedAt": "2026-09-14T13:12:20Z",
           "emailStatus": "email-extracted"
         }
       },
@@ -1085,13 +1106,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Angola) (pokriva Gabon)",
         "embassyCyr": "Амбасада Републике Србије (Ангола) (покрива Габон)",
         "email": "srb.emb.angola@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.angola@mfa.rs",
-        "coveringStationId": "st-ao-emb-main"
+        "coveringStationId": "st-ao-emb-main",
+        "electionNotice": {
+          "url": "https://luanda.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-godine",
+          "title": "Избори за народне посланике Народне скупштине Републике Србије 2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1362,23 +1390,37 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-gr-emb-main",
         "embassy": "Ambasada Republike Srbije (Grčka)",
         "embassyCyr": "Амбасада Републике Србије (Грчка)",
-        "email": "embassy.athens@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "email": "embassy.athens.consular@mfa.rs",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://athens.mfa.gov.rs",
         "address": "106, Vasilissis Sofias Ave.11527 АТИНАГРЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://athens.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+          "title": "ИЗБОРИ: ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-gr-cons-solun",
         "embassy": "Generalni konzulat Republike Srbije (Solun)",
         "embassyCyr": "Генерални конзулат Републике Србије (Солун)",
         "email": "srbcons@otenet.gr",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.thessaloniki.mfa.gov.rs",
         "address": "Komninon 454624 СОЛУНГРЧКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://thessaloniki.mfa.gov.rs/mediji/aktivnosti/zbori-prijava-za-glasanje-na-parlamentarnim-izborima-nedelja-25-10-2026-godine",
+          "title": "ИЗБОРИ: ПРИЈАВА ЗА ГЛАСАЊЕ НА ПАРЛАМЕНТАРНИМ ИЗБОРИМА - недеља, 25.10.2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1584,13 +1626,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Angola) (pokriva Ekvatorijalna Gvineja)",
         "embassyCyr": "Амбасада Републике Србије (Ангола) (покрива Екваторијална Гвинеја)",
         "email": "srb.emb.angola@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.angola@mfa.rs",
-        "coveringStationId": "st-ao-emb-main"
+        "coveringStationId": "st-ao-emb-main",
+        "electionNotice": {
+          "url": "https://luanda.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-godine",
+          "title": "Избори за народне посланике Народне скупштине Републике Србије 2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2378,11 +2427,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Kazahstan)",
         "embassyCyr": "Амбасада Републике Србије (Казахстан)",
         "email": "amb.astana@mail.ru",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://astana.mfa.gov.rs",
         "address": "Sariarka 6010000 АстанаРепублика Казахстан",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://astana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-25-10-2026-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Избори за народне посланике 25.10.2026.- пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3170,11 +3226,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Mađarska)",
         "embassyCyr": "Амбасада Републике Србије (Мађарска)",
         "email": "budapest-consulat@serbiaemb.t-online.hu",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.budapest.mfa.gov.rs",
         "address": "Dozsa Gyorgy ut 92/b H-1068 БУДИМПЕШТА МАЂАРСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://budapest.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-2026",
+          "title": "Избори за народне посланике 2026",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3719,13 +3782,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Angola) (pokriva Namibija)",
         "embassyCyr": "Амбасада Републике Србије (Ангола) (покрива Намибија)",
         "email": "srb.emb.angola@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.angola@mfa.rs",
-        "coveringStationId": "st-ao-emb-main"
+        "coveringStationId": "st-ao-emb-main",
+        "electionNotice": {
+          "url": "https://luanda.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-godine",
+          "title": "Избори за народне посланике Народне скупштине Републике Србије 2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4645,13 +4715,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Angola) (pokriva Sao Tome i Prinsipe)",
         "embassyCyr": "Амбасада Републике Србије (Ангола) (покрива Сао Томе и Принсипе)",
         "email": "srb.emb.angola@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://luanda.mfa.gov.rs",
         "address": "Comandante N'Zaji 25/27, AlvaladeЛУАНДААНГОЛА",
         "isResident": false,
         "coverageSourceEmail": "srb.emb.angola@mfa.rs",
-        "coveringStationId": "st-ao-emb-main"
+        "coveringStationId": "st-ao-emb-main",
+        "electionNotice": {
+          "url": "https://luanda.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-godine",
+          "title": "Избори за народне посланике Народне скупштине Републике Србије 2026. године",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5089,7 +5166,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://www.bratislava.mfa.gov.rs",
         "address": "Budkova 38 81104 БРАТИСЛАВА СЛОВАЧКА РЕПУБЛИКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://bratislava.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Избори: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5961,11 +6045,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Strazbur)",
         "embassyCyr": "Генерални конзулат Републике Србије (Стразбур)",
         "email": "consulate.strasbourg@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.strasbourg.mfa.gov.rs",
         "address": "26, Avenue de la Forêt Noire 67000 СТРАЗБУР ФРАНЦУСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://strasbourg.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Избори: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -6196,7 +6287,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://hercegnovi.mfa.gov.rs",
         "address": "Trg Hercega Stjepana (Belavista) 1585340 ХЕРЦЕГ НОВИЦРНА ГОРА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://hercegnovi.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
+          "title": "Избори: Пријављивање за гласање у иностранству 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -6347,11 +6445,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Cirih)",
         "embassyCyr": "Генерални конзулат Републике Србије (Цирих)",
         "email": "srb.cons.zurich@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.zurich.mfa.gov.rs",
         "address": "Alfred-Escher-Strasse 4, 8002 ЦИРИХ ШВАЈЦАРСКА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://zurich.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Избори: Пријављивање за гласање у иностранству",
+          "electionYear": "2026",
+          "observedAt": "2026-09-14T13:12:20Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
