@@ -1,7 +1,7 @@
 /**
  * CANONICAL DIPLOMATIC MISSIONS DATASET
- * Generated from verified MFA Serbia official records (mfa.gov.rs).
- * Date: 2026-09-09
+ * Generated from MFA directory input and maintained recipient decisions.
+ * Rebuild with bun run build:data; source dates remain in their evidence records.
  */
 
 export interface ElectionNotice {

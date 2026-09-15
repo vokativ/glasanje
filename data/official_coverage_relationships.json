@@ -6,7 +6,7 @@
       "coveringStationId": "st-am-emb-main",
       "electionEmail": "embserbia.yerevan@gmail.com",
       "approval": "unconfirmed",
-      "_approvalNote": "2026-09-16: maintainer explicitly requests both Georgia and Armenia be marked not covered for election registration for now. Withdraw Georgia's earlier operator approval; preserve the official Yerevan relationship and general-contact mailbox. Armenia remains unconfirmed. See docs/operator-approved-recipient-handoff.md.",
+      "_approvalNote": "2026-09-16: maintainer explicitly requests both Georgia and Armenia be marked not covered for election registration for now. Withdraw Georgia's earlier operator approval; preserve the official Yerevan relationship and general-contact mailbox. Armenia remains unconfirmed. See docs/recipient-decisions.md.",
       "provenance": {
         "kind": "ministry-coverage",
         "sourceUrl": "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/gruzija/ambasade-konzulati"

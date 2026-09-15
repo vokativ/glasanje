@@ -7,7 +7,6 @@ output files below are generated together and must be rebuilt rather than hand-e
 import json
 import os
 import re
-import subprocess
 import unicodedata
 from urllib.parse import urlsplit
 from election_contact_common import maintained_election_notices, public_election_notices, validate_covering_recipient_approvals
@@ -47,20 +46,8 @@ country_aliases = {
     'Танзанија': ('TZ', 'Tanzanija', 'Танзанија'),
 }
 
-try:
-    res = subprocess.run(["git", "show", "HEAD:src/app/register/form/constants.ts"], capture_output=True, text=True)
-    if res.returncode == 0:
-        matches = re.findall(r"countryCode:\s*'([A-Z]{2})',\s*label:\s*'([^']+)',\s*labelCyr:\s*'([^']+)'", res.stdout)
-        for code, lat, cyr in matches:
-            if cyr.strip() not in country_aliases:
-                country_aliases[cyr.strip()] = (code, lat.strip(), cyr.strip())
-            if lat.strip() not in country_aliases:
-                country_aliases[lat.strip()] = (code, lat.strip(), cyr.strip())
-except Exception as e:
-    print("Could not read git constants:", e)
-
-# The checked-in canonical registry is the durable country-code source when the
-# historical UI constants are unavailable. It is read before this script writes
+# The checked-in canonical registry is the durable country-code source.
+# It is read before this script writes
 # its replacement output, so a data rebuild retains every established mapping.
 existing_canonical = {}
 try:
@@ -805,15 +792,14 @@ os.makedirs("src/data", exist_ok=True)
 with open("data/missions_canonical.json", "w", encoding="utf-8") as f:
     json.dump({
         'schemaVersion': 1,
-        'publishedAt': '2026-09-09T14:00:00Z',
         'totalCountries': len(countries_list),
         'countries': countries_list
     }, f, ensure_ascii=False, indent=2)
 
 ts_code = f"""/**
  * CANONICAL DIPLOMATIC MISSIONS DATASET
- * Generated from verified MFA Serbia official records (mfa.gov.rs).
- * Date: 2026-09-09
+ * Generated from MFA directory input and maintained recipient decisions.
+ * Rebuild with bun run build:data; source dates remain in their evidence records.
  */
 
 export interface ElectionNotice {{

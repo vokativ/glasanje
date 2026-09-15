@@ -8,19 +8,19 @@ Jedan pokretani postupak ima jednog vlasnika: zaključavanje `data/.election_con
 
 ## Uobičajeni ograničeni prolaz
 
-Za ručno pregledana izborna obaveštenja nije potrebno prvo pokretati crawler ili praviti arhivu. Sačuvati `electionNotice` u postojećem zapisu stanice u `data/overrides.json`, pa pokrenuti `bun run build:data`. Primer oblika zapisa (vreme označava stvarni pregled izvora):
+Za ručno pregledana izborna obaveštenja nije potrebno prvo pokretati crawler ili praviti arhivu. Sačuvati `electionNotice` u postojećem zapisu stanice u `data/overrides.json`, pa pokrenuti `bun run build:data`. Šablon zapisa: zameniti sve vrednosti u uglastim zagradama stvarno pročitanim izvorom i stvarnim vremenom pregleda; primer nije spreman za primenu:
 
 ```json
 "electionNotice": {
-  "url": "https://vienna.mfa.gov.rs/gradjani/najcesca-pitanja",
-  "title": "Избори 2026",
-  "electionYear": "2026",
-  "observedAt": "2026-09-12T12:39:06Z",
+  "url": "<actual HTTPS notice URL>",
+  "title": "<actual notice title>",
+  "electionYear": "<election year>",
+  "observedAt": "<actual ISO-8601 UTC observation time>",
   "emailStatus": "email-extracted"
 }
 ```
 
-Ovo je samo veza ka objavi: ne menja `electionEmail` niti `_electionContactProvenance`. `emailStatus` opisuje izdvajanje iz teksta, a ne odobrenje primaoca. Održavana veza ima prednost nad automatski pronađenom za istu stanicu; sopstvena veza ima prednost nad vezom već razrešene pokrivajuće misije. Graditelj proverava oblik metapodataka, HTTPS URL i identitet stanice, ali ta provera nije dokaz autoriteta ili sadržaja izvora. Ne menjati godinu ili vreme pregleda bez stvarnog pregleda. Nedostajuća veza ne povlači postojeće odobrenje. Pregled svih odobrenih primalaca i preostalih veza je u [evidenciji pregleda](approved-announcement-link-audit.md); interna arhiva je zabeležena kao buduća mogućnost.
+Ovo je samo veza ka objavi: ne menja `electionEmail` niti `_electionContactProvenance`. `emailStatus` opisuje izdvajanje iz teksta, a ne odobrenje primaoca. Održavana veza ima prednost nad automatski pronađenom za istu stanicu; sopstvena veza ima prednost nad vezom već razrešene pokrivajuće misije. Graditelj proverava oblik metapodataka, HTTPS URL i identitet stanice, ali ta provera nije dokaz autoriteta ili sadržaja izvora. Ne menjati godinu ili vreme pregleda bez stvarnog pregleda. Nedostajuća veza ne povlači postojeće odobrenje. Aktuelne veze čitati iz održavanih podataka; [odluke o primaocima](recipient-decisions.md) objašnjavaju izuzetke. Interna arhiva ručno pročitanih objava ostaje moguća buduća dopuna, nije uslov za čuvanje veze.
 
 Pokrenite samo ograničeno inkrementalno otkrivanje, izvoz paketa i proveru spremnosti:
 
@@ -39,7 +39,7 @@ Za ovu komandu nisu potrebne AI poverljive vrednosti i ona ne menja `data/overri
 
 ### Obaveštenje je dokaz i kada nije izdvojena adresa
 
-Crawler sada čuva `notices` u trajnom `data/election_candidates.json`, nezavisno od liste kandidata. Zapis sadrži stanicu, izbor/godinu, naslov, stvarni URL obaveštenja, `sourceId`, službeni `sourceChain`, datum opažanja, tačan izborni kontekst i izdvojene e-adrese. Odgovarajući tekst i hash-evi ostaju u `sources` i kada nema kandidata. `emailStatus` razlikuje `email-extracted` od `no-email-extracted`; nijedna vrednost nije odobrenje primaoca niti tvrdnja da slika/prilog nema adresu.
+Crawler čuva `notices` u trajnom `data/election_candidates.json`, nezavisno od liste kandidata. Zapis sadrži stanicu, izbor/godinu, naslov, stvarni URL obaveštenja, `sourceId`, službeni `sourceChain`, datum opažanja, tačan izborni kontekst i izdvojene e-adrese. Odgovarajući tekst i hash-evi ostaju u `sources` i kada nema kandidata. `emailStatus` razlikuje `email-extracted` od `no-email-extracted`; nijedna vrednost nije odobrenje primaoca niti tvrdnja da slika/prilog nema adresu.
 
 `discovery-report.json` sadrži samo obaveštenja opažena u tekućem prolazu, a svaka stanica ima `noticeUrls` iz tog prolaza. Konzolni ispis navodi URL i ishod izdvajanja i upozorava kada je prikupljanje delimično. Ranije opaženo obaveštenje ostaje u trajnom artefaktu posle neuspelog ponovnog pokušaja, sa starim datumom opažanja; ne predstavlja se kao nov uspeh.
 
@@ -68,20 +68,14 @@ Kada je poznat javni URL službenog izbornog obaveštenja, operater ga može dod
 
 Pre bilo kakvog pribavljanja, paket izričitih obaveštenja mora proći ograničenje `--max-hosts`: broj njegovih jedinstvenih domaćina ne sme ga preći. Operater mora navesti dovoljno visok `--max-hosts`, ili skup podeliti u manje prolaze; tok ne sme menjati rutinski pokazivač domaćina niti zaobilaziti ograničenje zbog izričitog URL-a.
 
-Za paket-only prolaz sa tri poznata službena obaveštenja pokrenite:
+Za paket-only prolaz zamenite ID i URL u sledećem šablonu. Koristite godinu/ID izbora iz tekućeg skupa, ne iz starog izveštaja.
 
 ```bash
-bun run contacts:run -- --election-id 2026-parliamentary \
-  --max-hosts 3 \
-  --station st-il-emb-main \
-  --notice-url st-il-emb-main=https://telaviv.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-postupku-ostvarivanja-birackog-prava-drzavljana-srbije-koji-imaju-boraviste-u-izraelu \
-  --station st-de-cons-tutgart \
-  --notice-url st-de-cons-tutgart=https://stuttgart.mfa.gov.rs/mediji/aktivnosti/raspisivanje-izbora-za-narodne-poslanike \
-  --station st-se-emb-main \
-  --notice-url st-se-emb-main=https://stockholm.mfa.gov.rs/mediji/najave-i-obavestenja/raspisivanje-izbora-za-narodne-poslanike-republike-srbije
+bun run contacts:run -- --election-id ELECTION_ID \
+  --station STATION_ID --notice-url 'STATION_ID=HTTPS_NOTICE_URL' --max-hosts 1
 ```
 
-Kraći telavivski put nije važeći URL obaveštenja i vraća 404.
+Isti notice URL trenutno može imati samo jedan station binding po ciljanom prolazu. Za zajedničku objavu više kancelarija koristite odvojene ciljane prolaze ako su potrebni automatski paketi; ručno pročitana objava može dati zasebne održavane veze za svaku kancelariju.
 
 Pronađene veze ka prilozima (`.doc`, `.docx` i slični formati) samo se beleže: ne preuzimaju se automatski i ne proširuju ciljani opseg. Ako je baš navedeno obaveštenje nepodržani medij koji se mora pribaviti, to je stvaran neuspeh, a ne dokaz koji se može premostiti. Izveštaj razdvaja izabrane odložene i neuspele akvizicije od ranije zadržanih kandidata; neuspešan tekući pokušaj ne sme biti prikazan kao uspešan status kandidata.
 
@@ -91,18 +85,11 @@ Ova opcija sama ne potvrđuje namenu adrese: opšti kontakt mora biti povezan sa
 
 ## Ciljani duboki ponovni prolaz
 
-Za stanice čiji je raniji prolaz dosegao ograničenje dubine ili je neuspeo, koristite isključivo sledeći ograničeni ponovni prolaz:
+Za konkretne stanice iz aktuelnog izveštaja koje su dostigle ograničenje ili imale neuspeh, zamenite ID-jeve u šablonu:
 
 ```bash
-bun run contacts:run -- --election-id 2026-parliamentary --mode deep-retry \
-  --station st-nonres-af \
-  --station st-bg-emb-main \
-  --station st-de-cons-tutgart \
-  --station st-il-emb-main \
-  --station st-ir-emb-main \
-  --station st-lv-emb-main-stockholm-mfa-gov-rs \
-  --station st-nonres-pk \
-  --station st-se-emb-main
+bun run contacts:run -- --election-id ELECTION_ID --mode deep-retry \
+  --station STATION_ID --max-pages 240
 ```
 
 `--mode deep-retry` zahteva najmanje jednu izričito navedenu `--station`; ne prihvata neograničen skup stanica. Za svaku tako izabranu stanicu dubina je fiksno 6, a budžet je podrazumevano ograničen na 240 stranica kada se izostavi `--max-pages`; pozivaoci mogu navesti drugačije pozitivno ograničenje broja stranica unutar dopuštenih granica. Opseg se čuva kroz sve naredne faze: ovaj prolaz ne proširuje skup na druge stanice, ne zaobilazi ograničenje stranica i nije automatsko potpuno osvežavanje.
@@ -148,7 +135,7 @@ bun run contacts:run -- --election-id 2026-parliamentary --apply
 
 Pre pisanja, tok uvek pravi novi dry-run. Sa `--apply` bira **samo** `eligibleStationIds` iz tog dry-runa i šalje ih promociji kao eksplicitne stanice. Zadržane stanice (`held`) ostaju nepromenjene, a ako bilo koja izabrana grupa više nije validna promocija se prekida bez delimičnog upisa. `--apply` bez ranije stvarnog pregleda ili potvrđenog `--import-reviews` se odbija. Tok nikada ne izmišlja pregled, ne premošćava neuspelu raniju fazu i ne menja override pri samom izvozu paketa.
 
-Trajni override čuva postojeće, nevezane ključeve. Svaki korisnički autorizovan primalac ima strukturisano poreklo `_electionContactProvenance` sa `schemaVersion: 2`, `authorization: {"type":"operator"}`, `electionId` i godinom izbora, bez izmišljenih AI polja. Njegov javni status je `electionContactApproval: "operator-approved"`: upotrebljiv je izborni primalac i računa se u pokrivenost. Uži boolean `isElectionContactConfirmed` ostaje false i ne sme se tumačiti kao `unconfirmed`. To važi i za meksički primalac iz održavanog handoff-a; nije poseban process-only izuzetak. Automatska promocija zadržava svaku zamenu operatorove autorizacije dok arhitekta izričito ne prihvati tu zamenu; to nije zahtev za dodatno AI odobrenje izričite operatorove izmene održavanih podataka. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava. Za povlačenje ili snižavanje objavljene pokrivenosti važi obavezno pravilo iz AGENTS.md.
+Trajni override čuva postojeće, nevezane ključeve. Svaki korisnički autorizovan primalac ima strukturisano poreklo `_electionContactProvenance` sa `schemaVersion: 2`, `authorization: {"type":"operator"}`, `electionId` i godinom izbora, bez izmišljenih AI polja. Njegov javni status je `electionContactApproval: "operator-approved"`: upotrebljiv je izborni primalac i računa se u pokrivenost. Uži boolean `isElectionContactConfirmed` ostaje false i ne sme se tumačiti kao `unconfirmed`. Automatska promocija zadržava svaku zamenu operatorove autorizacije dok arhitekta izričito ne prihvati tu zamenu; to nije zahtev za dodatno AI odobrenje izričite operatorove izmene održavanih podataka. Staro ljudsko odobrenje i postojeća potvrda ostaju arhivirani; novi izvor dobija AI autorizaciju i njen javni dokaz. Eksplicitna deaktivacija ostaje poseban postupak promocionog alata i inkrementalno otkrivanje je ne poništava. Za povlačenje ili snižavanje objavljene pokrivenosti važi obavezno pravilo iz AGENTS.md.
 
 Ako MSP adresar svrsta ustanovu koja nije diplomatska ili konzularna misija u odeljak ambasade, sačuvati sirovi scrape i dodati dokumentovani `_excludeFromPublic: true` override njenom stabilnom ID-ju. Builder proverava da ID zaista postoji, pa zatim uklanja taj red pre razrešavanja pokrivanja. Ovo je uska korekcija klasifikacije izvora, ne način za skrivanje nerešene misije. Trenutni primer su `st-fr-emb-main-info` i `st-nonres-mc-info`, izvedeni iz Srpskog kulturnog centra u Parizu (`info@ccserbie.com`); pravi Paris/Monako zapisi ostaju u skupu.
 
@@ -156,9 +143,9 @@ Ako MSP adresar svrsta ustanovu koja nije diplomatska ili konzularna misija u od
 
 Pre novog odobrenja nerezidentnog primaoca mora biti odobren izborni primalac pokrivajuće misije. Sama nadležnost iz adresara MSP, postojeća opšta e-adresa ili oznaka `ministry-coverage` ne potvrđuju izborni kontakt. Najpre evidentirati odobrenje matične misije, zatim njen odobreni primalac i dostupno izborno obaveštenje preneti na pokrivene zemlje. Ovo važi i za eksplicitne veze i override-e: odvojeno čuvanje polja ne dozvoljava nezavisno odobrenje zemlje uz nepotvrđenu matičnu misiju. Builder posle razrešavanja primalaca, pre upisa generisanih datoteka, odbija novu nedoslednost sa nepotvrđenom matičnom misijom. Nepromenjena istorijska nedoslednost iz prethodnog lokalnog kanonskog skupa daje upozorenje i ostaje sačuvana do odluke o ispravci; lokalni skup nije dokaz izvora ni produkcioni baseline. Pre objavljivanja pregledati matičnu misiju i sve zavisne zapise zajedno. Ranije objavljene nedoslednosti prijaviti sa tačnim ID-jevima i ispraviti prema pravilu očuvanja pokrivenosti iz AGENTS.md.
 
-Prikupljanje organizovati po odgovornoj misiji: jednom pročitati obaveštenje ambasade, potvrditi primaoca, zatim obuhvatiti sve utvrđene nerezidentne zemlje. Svakoj zemlji nije potrebno zasebno izborno obaveštenje. Konzulate obrađivati kao zasebne primaoce čak i kada dele zemlju ili sajt; zajednička adresa mora proizlaziti iz uputstva. Posebna kancelarija može imati svoj primalac u zajedničkom obaveštenju, kao Malta u objavi Rima. Crawler već deli preuzimanje iste stranice preko keša, uz zasebne lance izvora po zemlji; to nije automatsko odobrenje niti pravilo da svi primaoci na sajtu imaju istu adresu. Videti [pregled slojeva i izuzetaka](operator-approved-recipient-handoff.md#georgiaarmenia-correction-and-release--16-september-2026).
+Prikupljanje organizovati po odgovornoj misiji: jednom pročitati obaveštenje ambasade, potvrditi primaoca, zatim obuhvatiti sve utvrđene nerezidentne zemlje. Svakoj zemlji nije potrebno zasebno izborno obaveštenje. Konzulate obrađivati kao zasebne primaoce čak i kada dele zemlju ili sajt; zajednička adresa mora proizlaziti iz uputstva. Posebna kancelarija može imati svoj primalac u zajedničkom obaveštenju, kao Malta u objavi Rima. Crawler već deli preuzimanje iste stranice preko keša, uz zasebne lance izvora po zemlji; to nije automatsko odobrenje niti pravilo da svi primaoci na sajtu imaju istu adresu. Videti [pravila za misije i izuzetke](recipient-decisions.md#covering-missions-and-separate-offices).
 
-Službene činjenice da jedna misija pokriva nerezidentnu stanicu vode se isključivo u `data/official_coverage_relationships.json`. Datoteka ima `schemaVersion: 1`; svaka veza sadrži `coveredStationId`, `coveringStationId`, konačni `electionEmail`, `approval` i poreklo `{"kind":"ministry-coverage"}`. `approval` koristi iste tri javne vrednosti; `unconfirmed` čuva nadležnost i opšti kontakt bez odobrenja za izbore, kao kod Gruzije/Jerevana posle odluke održavaoca 16. septembra 2026. To su odnosi koje je objavilo MSP, a ne lokalni ili lični override-i.
+Službene činjenice da jedna misija pokriva nerezidentnu stanicu vode se isključivo u `data/official_coverage_relationships.json`. Datoteka ima `schemaVersion: 1`; svaka veza sadrži `coveredStationId`, `coveringStationId`, konačni `electionEmail`, `approval` i poreklo `{"kind":"ministry-coverage"}`. `approval` koristi iste tri javne vrednosti; `unconfirmed` čuva nadležnost i opšti kontakt bez odobrenja za izbore, kao kod Gruzije/Jerevana prema održavanoj odluci. To su odnosi koje je objavilo MSP, a ne lokalni ili lični override-i.
 
 Pre izgradnje javnih podataka proverava se da je svaki `coveredStationId` jedinstven, da oba ID-ja postoje, da je `coveringStationId` rezidentna misija, da je `electionEmail` važeća e-adresa, da je `approval` poznata vrednost i da `coveredStationId` nije jednak `coveringStationId`. Neispravna ili dvosmislena službena veza prekida izgradnju; ne popravlja se nagađanjem.
 
@@ -214,3 +201,11 @@ Direktorijum jednog prolaza sadrži najmanje `candidates.json`, `discovery-repor
 Ako u izričito izabranom skupu nema stanica koje čekaju pregled, tok čuva izveštaj sa praznom listom spremnosti i `run.json`, pa preskače pregled i promociju. Tada nema novog paketa ni AI odluke; nerešene stanice izvan tog skupa ostaju u trajnoj evidenciji za naredni prolaz.
 
 Ako otkrivanje, pregled, uvoz ili promocija vrati grešku, tok se zaustavlja i kasnije faze se ne izvršavaju. Pročitati `run.json` i odgovarajući izveštaj, ukloniti uzrok i pokrenuti nov prolaz; ne popravljati paket, kandidat ili AI odgovor ručno. Sačuvati samo javni institucionalni dokaz i ne unositi tajne u JSON ili zapis izvršavanja.
+
+## Trenutna ograničenja automatskog pregleda
+
+- Paketi vezuju izvore kandidata, ali ne uvoze automatski tekst nadležnosti iz `official_coverage_relationships.json`. Provera citata za teritoriju traži ime pokrivene zemlje. Ako paket nema odgovarajući izvor, koristiti održavani odnos i odobrenje matične misije; ne izmišljati citat niti ponavljati crawl istog obaveštenja očekujući sva imena zemalja.
+- Validator traži tačan citat sa godinom i citat sa adresom i kontekstom prijave. Duži stvarni odlomak može zadovoljiti uslov; slika ili razdvojeni sadržaj mogu zahtevati ciljano pribavljanje. Ne slabiti proveru bez konkretnog primera kvara.
+- Politika svežine za novu automatsku promociju je u `data/election_reviewers.json`. Ona ne ističe već objavljena odobrenja. Izvezeni paket nema sistemski prompt; spoljni harness mora pratiti isti `request_review` prompt i AGENTS.md.
+
+Za ponovljivu proveru stvarnih izvora koristiti [postupak testiranja](testing.md#crawler-and-ai-review). Za objavljivanje i domene koristiti [postupak objavljivanja](deployment.md).

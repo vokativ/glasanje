@@ -2,7 +2,7 @@
 
 Keep the real hosting project, credentials, domains, and deployment procedure in an ignored local `OPERATOR.md`.
 
-1. Build the static site output with the project's documented build command.
+1. Follow `docs/deployment.md`: rebuild data, compare public coverage with a verified deployed baseline, run relevant checks, then build the static output.
 2. In the hosting provider's private configuration, choose the hosting project and credentials for this deployment.
 3. Copy `.firebaserc.example` to the ignored `.firebaserc` and replace `YOUR_FIREBASE_PROJECT_ID` with that private project ID.
 4. Deploy the generated static output using the provider's CLI. When using Firebase Hosting, explicitly select the project: `firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID`.

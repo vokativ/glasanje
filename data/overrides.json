@@ -15,7 +15,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "srb.emb.angola@mfa.rs",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. The Luanda notice contains copied Rome wording but gives Luanda's address and this Angola mission mailbox. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. The Luanda notice contains copied Rome wording but gives Luanda's address and this Angola mission mailbox. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -37,7 +37,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "serbianembassy.consular.baku@gmail.com",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -59,7 +59,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "srb.cons.zurich@mfa.rs",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -81,7 +81,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "consulate.strasbourg@mfa.rs",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -103,7 +103,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "srbcons@otenet.gr",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -125,7 +125,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "embassy.athens.consular@mfa.rs",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -147,7 +147,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "budapest-consulat@serbiaemb.t-online.hu",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -169,7 +169,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "amb.astana@mail.ru",
-      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer pre-approved newly found recipients that are explicitly connected to voter registration on working official pages. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2374,7 +2374,7 @@
         "observedAt": "2026-09-12T12:38:29Z",
         "emailStatus": "no-email-extracted"
       },
-      "_electionNoticeNote": "Current registration notice explicitly names Mexico, Honduras, Costa Rica, Panama, Nicaragua, El Salvador and Guatemala. No mailbox extracted from its page text; this link does not replace the existing operator authorization of embajadaserbiaenmexico@gmail.com. See docs/approved-announcement-link-audit.md."
+      "_electionNoticeNote": "Current registration notice explicitly names Mexico, Honduras, Costa Rica, Panama, Nicaragua, El Salvador and Guatemala. No mailbox extracted from its page text; this link does not replace the existing operator authorization of embajadaserbiaenmexico@gmail.com. See docs/recipient-decisions.md."
     },
     "st-id-emb-main": {
       "electionEmail": "consular.jakarta@mfa.rs",
@@ -2521,7 +2521,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "izbori.salzburg2026@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2543,7 +2543,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "kktrebinje2026@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2565,7 +2565,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "banjaluka2026@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2609,7 +2609,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "gk.mostar@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2640,7 +2640,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "izbori.sofija@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2662,7 +2662,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "izboritrst@gmail.com",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2684,7 +2684,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "izbori.ambrs.doha@gmail.com",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2706,7 +2706,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "srb.cons.shanghai@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2728,7 +2728,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "izbori.nikozija@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2763,7 +2763,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "serviaemba@netcabo.pt",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2785,7 +2785,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "consulate.bucharest@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2807,7 +2807,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "konzularno.moskva@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2829,7 +2829,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "embassy.ljubljana@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2878,7 +2878,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "konzularno.zagreb@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2900,7 +2900,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "izboririjeka2026@gmail.com",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2931,7 +2931,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "embassy.podgorica@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2953,7 +2953,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "konzularno.prag@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/remaining-mission-collection-audit.md.",
+      "_operatorNote": "Maintainer explicitly approved all 17 reviewed recipients in this conversation on 2026-09-12 UTC; see docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -2982,7 +2982,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "consulado.argentina@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -3004,7 +3004,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "sarajevo2026@mfa.rs",
-      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -3026,7 +3026,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "serbia@serbiaeg.com",
-      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {
@@ -3048,7 +3048,7 @@
         "emailStatus": "email-extracted"
       },
       "electionEmail": "ambrsrabat@gmail.com",
-      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/missing-recipient-recheck-2026-09-14.md.",
+      "_operatorNote": "Maintainer explicitly approved all four reviewed recipients and their existing resolved country coverage in this conversation on 14 September 2026 local time. See docs/recipient-decisions.md.",
       "_electionContactProvenance": {
         "schemaVersion": 2,
         "authorization": {

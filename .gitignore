@@ -3,10 +3,6 @@
 # compiled output
 /dist
 /tmp
-/out-tsc
-
-# compiled output for firebase functions
-/functions/lib
 
 # local Firebase and deployment configuration
 /.firebaserc
@@ -44,8 +40,6 @@ ui-debug.log
 # Python cache
 __pycache__/
 *.py[cod]
-# Only exists if Bazel was run
-/bazel-out
 
 # dependencies
 /node_modules
@@ -87,9 +81,6 @@ Thumbs.db
 *.cache
 firebase-debug.log
 *.cache
-
-# local Firebase/Cloudflare provisioning handoff
-/docs/firebase-domain-handoff.md
 
 # local election-contact workflow ownership lock
 /data/.election_contacts.lock
