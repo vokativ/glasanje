@@ -3706,26 +3706,12 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Francuska) (pokriva Monako)",
         "embassyCyr": "Амбасада Републике Србије (Француска) (покрива Монако)",
         "email": "ambassade.paris@mfa.rs",
-        "electionContactApproval": "unconfirmed",
-        "isElectionContactConfirmed": false,
-        "website": "https://www.paris.mfa.gov.rs",
-        "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
-        "isResident": false,
-        "coverageSourceEmail": "ambassade.paris@mfa.rs",
-        "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
-        "electionNoticeStatus": "not-published"
-      },
-      {
-        "id": "st-nonres-mc-info",
-        "embassy": "Ambasada Republike Srbije (Francuska) (pokriva Monako)",
-        "embassyCyr": "Амбасада Републике Србије (Француска) (покрива Монако)",
-        "email": "ambassade.paris@mfa.rs",
         "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.paris.mfa.gov.rs",
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
         "isResident": false,
-        "coverageSourceEmail": "info@ccserbie.com",
+        "coverageSourceEmail": "ambassade.paris@mfa.rs",
         "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
         "electionNoticeStatus": "not-published"
       }
@@ -6028,17 +6014,6 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
         "isResident": true,
         "electionNoticeStatus": "not-published"
-      },
-      {
-        "id": "st-fr-emb-main-info",
-        "embassy": "Ambasada Republike Srbije (Francuska)",
-        "embassyCyr": "Амбасада Републике Србије (Француска)",
-        "email": "info@ccserbie.com",
-        "electionContactApproval": "unconfirmed",
-        "isElectionContactConfirmed": false,
-        "website": "",
-        "address": "123, Rue St Martin 75004 ПАРИЗ ФРАНЦУСКА",
-        "isResident": true
       },
       {
         "id": "st-fr-cons-strazbur",

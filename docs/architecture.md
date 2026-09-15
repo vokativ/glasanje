@@ -94,7 +94,7 @@ An inquiry link is offered only for an unconfirmed mission with a syntactically 
 
 A notice URL and recipient approval are independent facts. Render the exact current notice when present, including inherited covering-mission evidence. A recorded `not-published` status can coexist with an operator-approved recipient. Missing or inaccessible evidence does not automatically remove public coverage.
 
-The authoritative input files and precedence rules are listed in [AGENTS.md](../AGENTS.md#non-resident-recipients-and-maintained-data). Never hand-edit `data/missions_canonical.json` or `src/data/missions.ts`. Use stable station IDs in comparisons; additions cannot offset a loss at another station.
+The authoritative input files and precedence rules are listed in [AGENTS.md](../AGENTS.md#non-resident-recipients-and-maintained-data). Never hand-edit `data/missions_canonical.json` or `src/data/missions.ts`. Use stable station IDs in comparisons; additions cannot offset a loss at another station. A mission override with `_excludeFromPublic: true` is the narrow correction path for a directory row that is not actually a diplomatic or consular mission. The builder validates that the named raw station exists before filtering it, so a changed upstream identity fails visibly instead of silently leaving the bad row in public data.
 
 ## Handoff and privacy
 

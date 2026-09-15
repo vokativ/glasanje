@@ -11,7 +11,7 @@
       }
     },
     {
-      "coveredStationId": "st-nonres-mc-info",
+      "coveredStationId": "st-nonres-mc-paris-mfa-gov-rs",
       "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
       "electionEmail": "ambassade.paris@mfa.rs",
       "approval": "operator-approved",

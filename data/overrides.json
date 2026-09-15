@@ -2437,6 +2437,14 @@
       "electionNoticeStatus": "not-published",
       "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
     },
+    "st-fr-emb-main-info": {
+      "_excludeFromPublic": true,
+      "_exclusionNote": "Maintainer clarified on 2026-09-15 that info@ccserbie.com belongs to the Serbian Cultural Centre in Paris and is not a consular or Serbian-citizen-services contact. The MFA directory places the Centre inside the Embassy section, but it must not become a public mission station or election-contact fallback."
+    },
+    "st-nonres-mc-info": {
+      "_excludeFromPublic": true,
+      "_exclusionNote": "This Monaco source row is the non-resident duplicate derived from the Serbian Cultural Centre in Paris. Exclude it together with st-fr-emb-main-info; Monaco is represented by st-nonres-mc-paris-mfa-gov-rs and its explicit official coverage relationship."
+    },
     "st-ke-emb-main": {
       "electionNoticeStatus": "not-published",
       "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."

@@ -89,12 +89,32 @@ class ElectionContactPipelineTests(unittest.TestCase):
                 return {s["id"]: s for c in json.loads((root / "data/missions_canonical.json").read_text())["countries"] for s in c["stations"]}
             original = json.loads((root / "data/missions_canonical.json").read_text())
             built = build()
+            maintained = json.loads((root / "data/overrides.json").read_text())["missionOverrides"]
+            excluded = {
+                station_id
+                for station_id, patch in maintained.items()
+                if isinstance(patch, dict) and patch.get("_excludeFromPublic") is True
+            }
             for country in original["countries"]:
                 for station in country["stations"]:
+                    if station["id"] in excluded:
+                        self.assertNotIn(station["id"], built)
+                        continue
                     self.assertEqual(
                         {k: v for k, v in station.items() if k != "electionNotice"},
                         {k: v for k, v in built[station["id"]].items() if k != "electionNotice"},
                     )
+            self.assertNotIn("st-fr-emb-main-info", built)
+            self.assertNotIn("st-nonres-mc-info", built)
+            self.assertNotIn("info@ccserbie.com", {station["email"] for station in built.values()})
+            self.assertEqual(
+                built["st-nonres-mc-paris-mfa-gov-rs"]["coveringStationId"],
+                "st-fr-emb-main-paris-mfa-gov-rs",
+            )
+            self.assertEqual(
+                built["st-nonres-mc-paris-mfa-gov-rs"]["email"],
+                "ambassade.paris@mfa.rs",
+            )
             self.assertEqual(built["st-nonres-nz"]["electionNotice"], built["st-au-emb-main"]["electionNotice"])
             self.assertEqual(built["st-mt-emb-main"]["email"], "srb.office.valletta@mfa.rs")
             self.assertEqual(built["st-au-cons-sidnej"]["email"], "srb.cons.sydney@mfa.rs")

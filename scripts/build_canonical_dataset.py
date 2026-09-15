@@ -496,15 +496,6 @@ for base_id, colliding_stations in stations_by_base_id.items():
                 )
             station['id'] = f"{candidate_id}-{email_suffix}"
 
-# A coverage source can identify a resident station only by the paired source
-# fields. Host-only matches are deliberately not links.
-resident_stations_by_mission_key = {}
-for country in countries_list:
-    for station in country['stations']:
-        if station['isResident']:
-            mission_key = station.pop('_residentMissionKey')
-            resident_stations_by_mission_key.setdefault(mission_key, []).append(station)
-
 # Overrides are the maintained correction layer over the MFA baseline. Resident
 # corrections are applied first so a resolved nonresident station can inherit the
 # resident's final election-contact state.
@@ -535,6 +526,43 @@ if manual_coverage_overrides:
         "data/official_coverage_relationships.json: "
         + ", ".join(sorted(manual_coverage_overrides))
     )
+
+# The MFA directory can place a non-mission institution inside an embassy or
+# non-resident section. Keep the raw scrape intact, but allow an explicit,
+# documented maintained exclusion after stable IDs have been assigned. Filtering
+# both the resident and non-resident source rows prevents that institution from
+# becoming a public contact or an accidental coverage source.
+excluded_station_ids = {
+    station_id
+    for station_id, patch in mission_overrides.items()
+    if isinstance(patch, dict) and patch.get("_excludeFromPublic") is True
+}
+available_station_ids = {
+    station["id"]
+    for country in countries_list
+    for station in country["stations"]
+}
+unknown_excluded_station_ids = excluded_station_ids - available_station_ids
+if unknown_excluded_station_ids:
+    raise ValueError(
+        "Maintained exclusions identify unknown station IDs: "
+        + ", ".join(sorted(unknown_excluded_station_ids))
+    )
+for country in countries_list:
+    country["stations"] = [
+        station
+        for station in country["stations"]
+        if station["id"] not in excluded_station_ids
+    ]
+
+# A coverage source can identify a resident station only by the paired source
+# fields. Host-only matches are deliberately not links.
+resident_stations_by_mission_key = {}
+for country in countries_list:
+    for station in country['stations']:
+        if station['isResident']:
+            mission_key = station.pop('_residentMissionKey')
+            resident_stations_by_mission_key.setdefault(mission_key, []).append(station)
 
 
 def apply_non_election_override(station, patch):

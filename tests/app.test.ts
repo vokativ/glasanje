@@ -558,7 +558,7 @@ describe('Missions and Coverage Dataset', () => {
   test('projects every official Ministry coverage relationship with its declared recipient', () => {
     const expectedRelationships = [
       ['st-nonres-ge', 'st-am-emb-main', 'embserbia.yerevan@gmail.com'],
-      ['st-nonres-mc-info', 'st-fr-emb-main-paris-mfa-gov-rs', 'ambassade.paris@mfa.rs'],
+      ['st-nonres-mc-paris-mfa-gov-rs', 'st-fr-emb-main-paris-mfa-gov-rs', 'ambassade.paris@mfa.rs'],
       ['st-nonres-km', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
       ['st-nonres-dj', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
       ['st-nonres-er', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
@@ -640,21 +640,19 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.embassyCyr).toBe(`${armenia.embassyCyr} (покрива Грузија)`);
   });
 
-  test('Monaco presents Paris’s approved coverage mission without changing its other record', () => {
+  test('Monaco presents only the real Paris embassy coverage record', () => {
     const monaco = COUNTRY_BY_CODE.get('MC')!;
     const station = monaco.stations.find(
-      (candidate) => candidate.id === 'st-nonres-mc-info',
-    ) as CoverageStation;
-    const existingParisCoverage = monaco.stations.find(
       (candidate) => candidate.id === 'st-nonres-mc-paris-mfa-gov-rs',
-    )!;
+    ) as CoverageStation;
     const paris = COUNTRY_BY_CODE.get('FR')!.stations.find(
       (candidate) => candidate.id === 'st-fr-emb-main-paris-mfa-gov-rs',
     )!;
 
+    expect(monaco.stations).toHaveLength(1);
     expect(station).toMatchObject({
       isResident: false,
-      coverageSourceEmail: 'info@ccserbie.com',
+      coverageSourceEmail: 'ambassade.paris@mfa.rs',
       coveringStationId: 'st-fr-emb-main-paris-mfa-gov-rs',
       email: 'ambassade.paris@mfa.rs',
       electionContactApproval: 'operator-approved',
@@ -664,11 +662,9 @@ describe('Missions and Coverage Dataset', () => {
     });
     expect(station.embassy).toBe(`${paris.embassy} (pokriva Monako)`);
     expect(station.embassyCyr).toBe(`${paris.embassyCyr} (покрива Монако)`);
-    expect(existingParisCoverage).toMatchObject({
-      email: 'ambassade.paris@mfa.rs',
-      electionContactApproval: 'unconfirmed',
-      isElectionContactConfirmed: false,
-    });
+    expect(COUNTRIES.flatMap((country) => country.stations).some(
+      (candidate) => candidate.email === 'info@ccserbie.com',
+    )).toBe(false);
   });
 
   test('Germany has 6 resident stations', () => {
