@@ -26,7 +26,7 @@ These 17 recipients were read in current official election notices and explicitl
 | Podgorica | `st-me-emb-main` | `embassy.podgorica@mfa.rs` | [Announcement](https://podgorica.mfa.gov.rs/mediji/aktivnosti/saopstenje-za-javnost-izbori-u-republici-srbiji) |
 | Prague | `st-cz-emb-main` | `konzularno.prag@mfa.rs` | [Announcement](https://prague.mfa.gov.rs/mediji/najave-i-obavestenja/prijava-za-glasanje-na-parlamentarnim-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine) |
 
-Rijeka says requests may be sent by email and supplies the election mailbox later in the same notice. Shanghai has an earlier copied reference to Skopje, but its operative submission instructions explicitly name Shanghai, its street address and the mailbox above. Banja Luka’s shared notice separately identifies the Trebinje office and its recipient. Mostar’s notice does not establish Drvar’s recipient.
+Rijeka says requests may be sent by email and supplies the election mailbox later in the same notice. Shanghai has an earlier copied reference to Skopje, but its operative submission instructions explicitly name Shanghai, its street address and the mailbox above. Banja Luka’s shared notice separately identifies the Trebinje office and its recipient. The MFA identifies Drvar as a consular office of the General Consulate in Mostar and assigns it the Mostar website. That site’s notice directs Serbian citizens residing in Bosnia and Herzegovina to submit to `gk.mostar@mfa.rs`; the maintainer confirmed on 15 September that this shared recipient counts for Drvar.
 
 ## Collection and limitations
 
@@ -72,7 +72,7 @@ Bahrain’s MFA bilateral page links `www.bahrain.mfa.gov.rs`, but both that hos
 | `st-at-cons-salcburg` | Generalni konzulat Republike Srbije (Salcburg) | Operator-approved recipient | [Source](https://salzburg.mfa.gov.rs/gradjani/najcesca-pitanja) |
 | `st-az-emb-main` | Ambasada Republike Srbije (Azerbejdžan) | No current notice found | [Source](https://baku.mfa.gov.rs) |
 | `st-ba-cons-banjaluka` | Generalni konzulat Republike Srbije (Banja Luka) | Operator-approved recipient | [Source](https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status) |
-| `st-ba-cons-drvar` | Generalni konzulat Republike Srbije (Drvar) | Mostar notice found; no separate Drvar recipient established | [Source](https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike) |
+| `st-ba-cons-drvar` | Generalni konzulat Republike Srbije (Drvar) | Shared Mostar recipient approved: `gk.mostar@mfa.rs`; MFA lists Drvar as Mostar’s consular office and the notice addresses residents throughout Bosnia and Herzegovina | [Source](https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike) |
 | `st-ba-cons-mostar` | Generalni konzulat Republike Srbije (Mostar) | Operator-approved recipient | [Source](https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike) |
 | `st-ba-cons-trebinje` | Generalni konzulat Republike Srbije (Trebinje) | Operator-approved recipient | [Source](https://banjaluka.mfa.gov.rs/mediji/aktivnosti/konkurs-za-sufinansiranje-projekata-za-oblasti-skole-manifestacije-i-status) |
 | `st-ba-emb-main` | Ambasada Republike Srbije (Bosna i Hercegovina) | No current notice found | [Source](https://sarajevo.mfa.gov.rs) |

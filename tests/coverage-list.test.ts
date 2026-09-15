@@ -34,10 +34,11 @@ test('the static list exposes every country and distinguishes partial mission co
   const summary = (code: string) => markup.split(`id="coverage-country-${code}"`)[1].split('</summary>')[0];
   expect(summary('AT')).toContain('coverage-status--confirmed');
   expect(summary('SG')).toContain('coverage-status--unconfirmed');
-  const bosnia = COUNTRIES.find(country => country.countryCode === 'BA')!;
-  const confirmed = bosnia.stations.filter(station => station.electionContactApproval !== 'unconfirmed').length;
-  expect(summary('BA')).toContain(`Delimično · ${confirmed}/${bosnia.stations.length}`);
-  expect(summary('BA')).toContain('coverage-status--partial');
+  expect(summary('BA')).toContain('coverage-status--confirmed');
+  const croatia = COUNTRIES.find(country => country.countryCode === 'HR')!;
+  const confirmed = croatia.stations.filter(station => station.electionContactApproval !== 'unconfirmed').length;
+  expect(summary('HR')).toContain(`Delimično · ${confirmed}/${croatia.stations.length}`);
+  expect(summary('HR')).toContain('coverage-status--partial');
   for (const country of COUNTRIES) {
     expect(summary(country.countryCode)).toContain(country.label.replaceAll('&', '&amp;'));
     const flag = `/assets/flags/${country.countryCode.toLowerCase()}.svg`;

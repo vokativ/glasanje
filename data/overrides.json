@@ -2511,6 +2511,28 @@
         "observedAt": "2026-09-12T19:24:37Z"
       }
     },
+    "st-ba-cons-drvar": {
+      "electionNotice": {
+        "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+        "title": "Одлука о расписивању избора за народне посланике",
+        "electionYear": "2026",
+        "observedAt": "2026-09-14T22:51:41Z",
+        "emailStatus": "email-extracted"
+      },
+      "electionEmail": "gk.mostar@mfa.rs",
+      "_operatorNote": "Maintainer confirmed on 2026-09-15 that a shared election mailbox counts when the official page establishes it. The MFA lists Drvar as the consular office of the General Consulate in Mostar and assigns it the Mostar website; the 2026 notice directs Serbian citizens residing in Bosnia and Herzegovina to submit to gk.mostar@mfa.rs.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",
+        "title": "Одлука о расписивању избора за народне посланике",
+        "observedAt": "2026-09-14T22:51:41Z"
+      }
+    },
     "st-ba-cons-mostar": {
       "electionNotice": {
         "url": "https://mostar.mfa.gov.rs/mediji/najave-i-obavestenja/odluka-o-raspisivanju-izbora-za-narodne-poslanike",

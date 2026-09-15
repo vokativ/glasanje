@@ -96,3 +96,5 @@ After regeneration, every station in the two tables must have:
 ## Additional approval — 14 September 2026
 
 The maintainer explicitly approved Buenos Aires, Sarajevo, Cairo and Rabat and their existing resolved country coverage. Exact recipients, source links and the 14-entry public coverage diff are recorded in the [missing-recipient recheck](missing-recipient-recheck-2026-09-14.md#operator-approved-recipient-release--14-september-2026). Preserve these operator approvals alongside the earlier decisions.
+
+On 15 September 2026, the maintainer clarified that an officially published shared recipient counts when the notice establishes its use. The MFA identifies Drvar as a consular office of the General Consulate in Mostar and assigns it the Mostar website; the current notice addresses Serbian citizens residing throughout Bosnia and Herzegovina and directs requests to `gk.mostar@mfa.rs`. Drvar is therefore operator-approved with that shared recipient and source. See the [Drvar correction](missing-recipient-recheck-2026-09-14.md#drvar-correction--15-september-2026).
