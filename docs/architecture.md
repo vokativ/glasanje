@@ -78,6 +78,8 @@ The existing worker activates with `skipWaiting` and `clients.claim`; `main.tsx`
 
 ## Script and document contracts
 
+Keep English names such as Web Share, Gmail and Apple Mail outside translated text spans. Passing them through Serbian transliteration produces mixed-script labels. Test the final rendered heading when editing these spans.
+
 Use `useScript().t()` or `translateStaticText()` for fixed UI/email copy. Choose `label`/`labelCyr` and `embassy`/`embassyCyr` from the dataset for country and mission names. Do not transliterate an entire assembled email: that would alter a person's name, address, email address or other entered content. `buildRecipientPayloads` receives the selected script and preserves caller-supplied subject/body/name; its default remains Cyrillic for existing callers.
 
 The application form is an official fixed PDF. Its printed labels and mission field remain Cyrillic independently of the interface script; typed applicant values stay as entered. Changing the UI to Latin is not a request to translate or replace the official template. `pdf.ts` uses fixed coordinates, wrapping and an embedded Serbian-capable font. Replacing the template requires rendered-page inspection, not only successful PDF parsing.
@@ -87,6 +89,20 @@ A drawn signature is embedded in the form. Paper-signature mode leaves that box 
 ## Coverage, inquiry and evidence
 
 The three approval states are `source-confirmed`, `operator-approved`, and `unconfirmed`. Both approved states are usable election recipients. `isElectionContactConfirmed` is a narrower legacy field, not the UI's approval gate.
+
+Country, receiving mission and publishing website are separate identities:
+
+| Case | Recipient and evidence behavior |
+| --- | --- |
+| Embassy and its non-resident countries | Approve the embassy first, then apply its recipient and notice to established dependents; Singapore/Jakarta and Ireland/London are examples. |
+| Independent consulates in the same country | Keep separate station IDs and office-specific evidence. An explicitly shared email is allowed; a shared country or host is insufficient. |
+| Separate office in a shared announcement | Preserve the named office recipient. Malta uses its own mailbox in Rome's joint notice. In the current registry it is a separate resident station, not a non-resident alias. |
+
+New non-resident approvals require an approved recipient at the covering mission first. Jurisdiction alone cannot approve a mailbox. `validate_covering_recipient_approvals` runs after recipient resolution and before either generated file is written. It rejects new inconsistencies and parent approval downgrades that leave approved dependents. An unchanged historical inconsistency produces a warning and retains published state for operator correction. The previous local canonical input supports only that preservation exception; the live deployment comparison remains a separate requirement.
+
+Explicit relationship fields remain stored separately: the guard checks approval consistency but does not synchronize mailboxes or overwrite office-specific exceptions. Review the parent and all dependent relationships/overrides together after a recipient change. See [AGENTS.md](../AGENTS.md#approval-must-start-with-the-covering-mission) and the [layered coverage review](operator-approved-recipient-handoff.md#georgiaarmenia-correction-and-release--16-september-2026).
+
+Discovery schedules by host but preserves country/station-specific tasks and MFA source chains. Its response cache avoids repeated HTTP fetches of shared notices. Exact mailbox attribution protects known separate recipients (including Rome/Malta); an unknown address on a multi-station task can still need review. Collection starts with the responsible mission, then maintained data propagates approved coverage. Extraction alone never approves dependents. Images and scanned PDFs still need direct visual inspection when text extraction misses the instructions.
 
 Coverage summaries count **station records**, including already resolved non-resident entries. All approved is green; some approved is amber/partial; none approved is red. Partial means that some listed missions have a confirmed election recipient while others do not. It does not mean a geographic percentage of the country is covered or that a polling station will open. Country grouping uses Serbian collation and treats Latin `Dž`, `Lj` and `Nj` as single initial letters. Native `<details>` keeps the entire country list searchable and keyboard operable.
 

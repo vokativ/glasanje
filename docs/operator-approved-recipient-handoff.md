@@ -1,5 +1,23 @@
 # Operator-approval handoff: retained 2026 election recipients
 
+## Later correction to interpretation of these historical decisions
+
+On 16 September 2026, the maintainer explicitly instructed: "Mark both Georgia and Armenia as not covered for now" for election registration. This supersedes Georgia's historical operator approval: `st-nonres-ge` becomes `unconfirmed`; `st-am-emb-main` remains `unconfirmed`. Keep the shared general mailbox and official Georgia → Yerevan relationship. This authorizes the specific published approval decrease; do not reinstate it from the historical tables below. See [the correction and release record](#georgiaarmenia-correction-and-release--16-september-2026).
+
+### Georgia/Armenia correction and release — 16 September 2026
+
+The [MFA Georgia entry](https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/gruzija/ambasade-konzulati) and [MFA Armenia entry](https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/jermenija-republika/ambasade-konzulati) establish the same receiving embassy in Yerevan and `embserbia.yerevan@gmail.com`. The relationship was correct; the mismatched election approval was the error. Both entries retain this general contact and their recorded absence of an election announcement. The maintainer authorized withdrawing Georgia's approval and then deploying.
+
+The layered review also checked Singapore/Jakarta, Ireland/London and Rome's joint notice with a distinct Malta office recipient. Keep office-specific submission sections and recipients even on shared websites. Discovery already caches shared HTTP fetches while retaining country/station evidence chains; no regrouping rewrite was needed. The AI review prompt now explains the ordinary embassy inheritance rule and the consulate/office exceptions. The builder rejects new approved dependents under unconfirmed resolved parents and preserves unchanged historical errors with warnings. These are software and judgment safeguards, not a live AI accuracy evaluation.
+
+The pre-deployment live baseline was `https://korak-do-glasa-hosting-2026.web.app/assets/index-Cwzu7aMn.js`, SHA-256 `4f76052b3ccf85b55c5ec2e894defa6a356ac743633a14a5dab7cadc7663469a`. Its dataset was extracted from JavaScript literals without executing the bundle. Comparing all 221 stable station IDs, emails and approvals found exactly the authorized Georgia change: `operator-approved` → `unconfirmed`. No email or station was removed. Usable approved entries decrease 167 → 166; distinct countries with at least one approved entry decrease 144 → 143. Armenia was already unconfirmed.
+
+TypeScript checking, 83 Bun tests, 89 election-contact Python tests and the production build passed. Firebase deployment succeeded. Both the Firebase hostname and `https://korakdoglasa.org/` served `assets/index-C_3ED7zd.js`, SHA-256 `9c1f0d659916bad82c17a5469c018b7e396aee1ea41bda35eb05c0af2a36bbe9`, matching the tested local build byte for byte. The build retains its existing PDF-engine chunk-size warning.
+
+The obsolete GitHub Pages site published raw `master` at `/`, including `/src/main.tsx` and `<base href="/">`, instead of built Vite assets. A successful Pages static build therefore served a broken application at `/glasanje/`. The maintainer authorized removal or repair; Pages was disabled through the repository API, and a subsequent read confirmed `has_pages: false`. Firebase remains the application host; the README now links to the public application. Do not re-enable branch-root Pages publishing for this source tree.
+
+The maintainer clarified that a covered country cannot acquire election-recipient approval while its covering mission's recipient is unconfirmed. Historical instructions below to approve dependent entries independently must not be repeated. A ministry mapping proves jurisdiction only. Establish the covering mission's recipient approval first, then propagate it and its available notice to dependent countries. See [the current approval rule](../AGENTS.md#approval-must-start-with-the-covering-mission). Existing published inconsistencies require an explicit correction under the coverage-preservation gate, not fabricated parent approval or a silent downgrade.
+
 Additional decisions from 13 September local time are recorded in the [remaining mission collection audit](remaining-mission-collection-audit.md): the maintainer explicitly approved 17 newly inspected recipients and clarified Latvia's consular coverage by Sweden. Those later maintained decisions supplement this handoff.
 
 ## Decision

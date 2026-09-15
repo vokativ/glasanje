@@ -44,6 +44,44 @@ class ValidationError(ValueError):
     """Raised when a public artifact cannot safely authorize a contact."""
 
 
+def validate_covering_recipient_approvals(canonical: Mapping[str, Any], previous: Mapping[str, Any]) -> list[str]:
+    """Reject new parent/dependent approval inconsistencies before publication.
+
+    The previous local dataset only preserves an unchanged historical error for
+    operator correction; it is not source evidence or a deployed coverage baseline.
+    Return warnings for those errors so rebuilding cannot quietly bless them.
+    Separate resident consulates/offices do not inherit an embassy's approval.
+    """
+    def stations(document):
+        return {s["id"]: s for c in document.get("countries", []) for s in c["stations"]}
+
+    def state(station):
+        return tuple(station.get(key) for key in (
+            "email", "electionContactApproval", "coveringStationId", "isResident",
+        ))
+
+    current, old = stations(canonical), stations(previous)
+    approved = {"operator-approved", "source-confirmed"}
+    warnings = []
+    for station_id, station in current.items():
+        parent_id = station.get("coveringStationId")
+        parent = current.get(parent_id)
+        if station.get("isResident") is not False or station.get("electionContactApproval") not in approved:
+            continue
+        if not parent_id:
+            continue  # Unresolved identity is a separate coverage/source review.
+        if parent and parent.get("electionContactApproval") in approved:
+            continue
+        message = f"Approved dependent {station_id} has unconfirmed covering mission {parent_id}"
+        if (parent and station_id in old and parent_id in old
+                and state(station) == state(old[station_id])
+                and state(parent) == state(old[parent_id])):
+            warnings.append(message + "; unchanged historical inconsistency requires operator correction")
+        else:
+            raise ValidationError(message + "; establish the parent's election-recipient approval first")
+    return warnings
+
+
 def maintained_election_notices(overrides: Mapping[str, Any], canonical: Mapping[str, Any]) -> dict[str, dict[str, str]]:
     """Read maintained source pointers without requiring a crawl archive or granting approval.
 

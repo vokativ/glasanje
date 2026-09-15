@@ -1383,7 +1383,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Jermenija) (pokriva Gruzija)",
         "embassyCyr": "Амбасада Републике Србије (Јерменија) (покрива Грузија)",
         "email": "embserbia.yerevan@gmail.com",
-        "electionContactApproval": "operator-approved",
+        "electionContactApproval": "unconfirmed",
         "isElectionContactConfirmed": false,
         "website": "",
         "address": "10 Vazgen Sargsyan St. 0010 Yerevan Piazza Grande Business Center, 1st floor, office 109",

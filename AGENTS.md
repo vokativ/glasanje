@@ -6,6 +6,8 @@ This is a small, periodic project used around Serbian elections, usually every f
 
 The Ministry of Foreign Affairs (MSP/MFA) publishes three complementary directories: embassies, consulates, and countries covered on a non-resident basis. All three belong in our coverage. A country without a resident mission is not necessarily unserved: its entry may designate an embassy in another country. One embassy can serve several countries; several consulates in one country can have distinct recipients. Do not merge those consulates or substitute the embassy's address merely because they share a country.
 
+Use three separate concepts: the country where the applicant lives, the mission responsible for receiving the request, and the website publishing the instructions. Ordinarily an approved embassy recipient and its notice serve both its home country and its established non-resident territories (Singapore → Jakarta, Ireland → London), without separate announcements for each country. Independent consulates retain their own records and need office-specific recipient evidence, even if the notice explicitly gives them the same mailbox. A separate office can be an exception abroad: Rome's joint notice names a distinct Malta office recipient. Preserve that recipient; a shared website does not make Malta an ordinary Rome-email alias. Follow explicit submission sections and territorial restrictions over the default inheritance.
+
 An election notice commonly gives a specific address for sending the completed request and attachments. It may be below the ordinary contact address, in an image, or in a linked document. It can also explicitly reuse the mission's ordinary consular mailbox. The purpose comes from the notice, not the spelling of the address: `izbori`/`izb` is a useful discovery clue, not proof, and a Gmail or non-MFA mailbox is acceptable when the official mission publishes it for that purpose.
 
 Read this file first. For application structure, state ownership, script handling and offline preparation, see [architecture and maintenance contracts](docs/architecture.md). Keep comments and that map current when changing those contracts. Use [election-contact operations](docs/election-contact-operations.md) for commands and schemas, and the [operator handoff](docs/operator-approved-recipient-handoff.md) for recorded decisions. This file is the current guidance for agent judgment; historical examples in handoffs must not override it or a later explicit user instruction.
@@ -45,6 +47,18 @@ For newly discovered automatic candidates, use the existing single primary AI re
 
 ## Non-resident recipients and maintained data
 
+### Approval must start with the covering mission
+
+A ministry coverage relationship establishes responsibility, not an approved election recipient. If the covering mission's recipient is `unconfirmed`, its dependent non-resident country must not be newly marked approved or counted as having confirmed election-email coverage. A populated general-contact email or a relationship tagged `ministry-coverage` is insufficient. First establish and record the covering mission's election-recipient approval, then apply that approved recipient to its covered countries and propagate its current announcement link when available. This applies to explicit relationship records and non-resident overrides as well as automatic inheritance; separate storage is not an exception to the rule.
+
+When changing a covering mission, review the parent and every dependent together. Check their recipient, approval and notice independently: adding a notice alone does not grant approval, and missing a notice does not revoke an already established approval. Do not treat an earlier approval of a jurisdiction mapping as approval of an election mailbox. A genuinely separate recipient requires evidence of the responsible mission and its approval, not an invented country-specific exception.
+
+The earlier Nairobi-dependent and Monaco approvals while their parent missions were unconfirmed were a data-maintenance mistake, not a precedent. Later notices resolved those cases. If another already published case violates this rule, identify the exact parent/dependent IDs and report the inconsistency for correction; do not invent parent approval or silently downgrade published coverage. The deployment preservation gate below still applies to withdrawals.
+
+In coverage reports, distinguish approved station records from distinct countries and distinguish total countries served from newly approved entries. Show the before/after baseline so previously counted dependents are not described as new gains.
+
+The builder rejects newly introduced approvals under an unconfirmed resolved parent. An unchanged historical parent/dependent inconsistency emits a warning so rebuilding preserves published state while keeping the correction visible. Its previous local canonical input is only a preservation baseline, never source evidence or the last-deployed baseline. Do not edit generated input to bypass this check.
+
 Use the existing data model; do not introduce another coverage convention:
 
 - `data/mfa_representations.json`: scraped ministry directory input.
@@ -66,7 +80,11 @@ The exact host/email match is an automatic fallback, not the definition of diplo
 
 ## Keep the workflow proportionate
 
+On a fresh clone, check the [README toolchain prerequisites](README.md#потребни-алати-на-новом-рачунару) before running commands: Bun for dependencies/tests, compatible Node.js for Vite, Python for data tooling, and the documented Python packages for crawling. Cloning does not install these tools. Verify their commands are on PATH; keep setup documentation current when dependencies change.
+
 Start with the named stations, known notice URLs, existing evidence, and recorded decisions. Use targeted discovery or a browser inspection before a full crawl. Routine `contacts:run` writes crawl state and candidates; it is not read-only. Use a full crawl only when the task calls for the whole directory. Keep a single workflow owner and preserve run artifacts.
+
+Plan collection around responsible missions: inspect the parent notice once, establish its recipient, then review all its resolved countries together, including explicit relationships and overrides. Keep independent consulates and separate-office exceptions as individual recipients. The crawler caches shared page fetches but retains country-specific evidence chains; it does not infer territory-wide approval from an extracted email. A dependent's failed extraction does not require a new notice when the approved parent's notice and ministry relationship already establish the answer.
 
 Prefer a correction in the existing data/provenance model or a small parser/prompt fix over a new service, approval layer, schema, or review harness. Explain any added mechanism by the concrete failure it fixes. Stop rechecking a resolved fact unless new conflicting evidence or the task justifies it. Do not turn the automatic promotion tool's freshness window into an expiry timer for published approvals.
 

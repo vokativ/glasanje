@@ -40,6 +40,56 @@ COMMON = load_script_module("election_notice_common_for_tests", REPOSITORY_ROOT 
 
 
 class ElectionContactPipelineTests(unittest.TestCase):
+    def test_covering_approval_guard_blocks_new_errors_and_reports_unchanged_history(self):
+        parent = {"id": "parent", "isResident": True, "email": "vote@example.org", "electionContactApproval": "unconfirmed"}
+        child = {"id": "child", "isResident": False, "coveringStationId": "parent", "email": "vote@example.org", "electionContactApproval": "operator-approved"}
+        def document(*stations):
+            return {"countries": [{"stations": list(stations)}]}
+        current = document(parent, child)
+        with self.assertRaisesRegex(COMMON.ValidationError, "establish the parent's"):
+            COMMON.validate_covering_recipient_approvals(current, document(parent))
+        warnings = COMMON.validate_covering_recipient_approvals(current, current)
+        self.assertEqual(len(warnings), 1)
+        self.assertIn("unchanged historical inconsistency", warnings[0])
+        with self.assertRaises(COMMON.ValidationError):
+            COMMON.validate_covering_recipient_approvals(document(parent, {**child, "email": "new@example.org"}), current)
+        approved_parent = {**parent, "electionContactApproval": "operator-approved"}
+        self.assertEqual(COMMON.validate_covering_recipient_approvals(document(approved_parent, child), current), [])
+        with self.assertRaises(COMMON.ValidationError):
+            COMMON.validate_covering_recipient_approvals(current, document(approved_parent, child))
+        # Separate offices/consulates can have their own evidence and mailbox.
+        office = {"id": "office", "isResident": True, "email": "office@example.org", "electionContactApproval": "operator-approved"}
+        self.assertEqual(COMMON.validate_covering_recipient_approvals(document(parent, office), {}), [])
+
+    def test_build_blocks_changed_dependent_under_unconfirmed_parent_before_writing(self) -> None:
+        # Reproduce the maintained-relationship route that once approved a
+        # dependent before its parent. Both generated artifacts must survive a
+        # failed build unchanged, including the historical published recipient.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            (root / "src/data").mkdir(parents=True)
+            for name in ("mfa_representations.json", "missions_canonical.json", "overrides.json", "official_coverage_relationships.json"):
+                shutil.copyfile(REPOSITORY_ROOT / "data" / name, root / "data" / name)
+            public_ts = root / "src/data/missions.ts"
+            public_ts.write_text("// existing public output\n")
+            canonical = root / "data/missions_canonical.json"
+            before = canonical.read_bytes()
+            relationships_path = root / "data/official_coverage_relationships.json"
+            relationships = json.loads(relationships_path.read_text())
+            relationship = next(r for r in relationships["relationships"] if r["coveredStationId"] == "st-nonres-ge")
+            relationship["electionEmail"] = "changed@example.org"
+            relationship["approval"] = "operator-approved"
+            relationships_path.write_text(json.dumps(relationships))
+            result = subprocess.run(
+                [sys.executable, str(REPOSITORY_ROOT / "scripts/build_canonical_dataset.py")],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("st-nonres-ge has unconfirmed covering mission st-am-emb-main", result.stderr)
+            self.assertEqual(canonical.read_bytes(), before)
+            self.assertEqual(public_ts.read_text(), "// existing public output\n")
+
     def test_mfa_http_mission_links_are_acquired_over_https(self) -> None:
         # Actual directory structure: the visible label is HTTPS but the href
         # is HTTP. Keep acquisition and subsequent redirects HTTPS-only.

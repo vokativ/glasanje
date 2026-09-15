@@ -10,7 +10,7 @@ import re
 import subprocess
 import unicodedata
 from urllib.parse import urlsplit
-from election_contact_common import maintained_election_notices, public_election_notices
+from election_contact_common import maintained_election_notices, public_election_notices, validate_covering_recipient_approvals
 
 # Treat the scraper artifact as external-source input, not as a canonical dataset:
 # missing or malformed source fields must be rejected or normalized before publication.
@@ -62,6 +62,7 @@ except Exception as e:
 # The checked-in canonical registry is the durable country-code source when the
 # historical UI constants are unavailable. It is read before this script writes
 # its replacement output, so a data rebuild retains every established mapping.
+existing_canonical = {}
 try:
     with open("data/missions_canonical.json", "r", encoding="utf-8") as f:
         existing_canonical = json.load(f)
@@ -762,6 +763,9 @@ if duplicate_station_ids:
         f"Cannot write canonical dataset with duplicate station IDs: "
         f"{duplicate_station_ids}"
     )
+
+for warning in validate_covering_recipient_approvals({"countries": countries_list}, existing_canonical):
+    print("Warning:", warning)
 
 countries_list.sort(key=lambda country: serbian_cyrillic_collation_key(country['labelCyr']))
 

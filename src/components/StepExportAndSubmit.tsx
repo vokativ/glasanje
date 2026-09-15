@@ -281,7 +281,8 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
             marginBottom: '1.5rem',
           }}
         >
-          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>{t('Na telefonu: podeli PDF (Web Share)')}</h3>
+          {/* Keep the English API name outside Serbian transliteration, like mail brands below. */}
+          <h3 id="mobile-handoff-title" style={{ marginTop: 0 }}>{t('Na telefonu: podeli PDF')} (Web Share)</h3>
           <p>
             {t('Otvorite deljenje i izaberite ')}Gmail, Apple Mail, Outlook {t('ili ')}Yahoo Mail{t(' da prenesete PDF. U izabranoj aplikaciji ručno unesite adresu primaoca prema uputstvu u tekstu poruke, pa uklonite to privremeno uputstvo pre slanja.')}
           </p>

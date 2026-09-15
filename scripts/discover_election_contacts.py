@@ -648,7 +648,13 @@ def attributed_stations(
     fallback_stations: tuple[Station, ...],
     known_mailboxes: frozenset[str],
 ) -> tuple[Station, ...]:
-    """Attribute task matches; never let singleton fallback claim a known mailbox."""
+    """Attribute task matches; never let singleton fallback claim a known mailbox.
+
+    Tasks retain country/station identity even when the HTTP cache reuses a
+    shared notice. This protects separate recipients such as Rome and Malta.
+    Candidate attribution is not approval or covering-mission inheritance:
+    review the publishing mission first, then resolve its maintained dependents.
+    """
     matching_stations = tuple(station for station in fallback_stations if station.email == email)
     if matching_stations:
         return matching_stations

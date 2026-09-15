@@ -557,7 +557,6 @@ describe('Missions and Coverage Dataset', () => {
 
   test('projects every official Ministry coverage relationship with its declared recipient', () => {
     const expectedRelationships = [
-      ['st-nonres-ge', 'st-am-emb-main', 'embserbia.yerevan@gmail.com'],
       ['st-nonres-mc-paris-mfa-gov-rs', 'st-fr-emb-main-paris-mfa-gov-rs', 'izbori.pariz@mfa.rs'],
       ['st-nonres-km', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
       ['st-nonres-dj', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
@@ -614,7 +613,7 @@ describe('Missions and Coverage Dataset', () => {
     expect(station.embassyCyr).toBe(`${kenya.embassyCyr} (покрива Бурунди)`);
   });
 
-  test('Georgia presents Armenia’s approved coverage mission', () => {
+  test('Georgia retains Armenia’s jurisdiction while both lack election-email coverage', () => {
     const station = COUNTRY_BY_CODE.get('GE')!.stations.find(
       (candidate) => candidate.id === 'st-nonres-ge',
     ) as CoverageStation;
@@ -627,13 +626,15 @@ describe('Missions and Coverage Dataset', () => {
       coverageSourceEmail: 'embserbia.yerevan@gmail.com',
       coveringStationId: 'st-am-emb-main',
       email: 'embserbia.yerevan@gmail.com',
-      electionContactApproval: 'operator-approved',
+      electionContactApproval: 'unconfirmed',
       isElectionContactConfirmed: false,
       website: armenia.website,
       address: armenia.address,
     });
     expect(station.embassy).toBe(`${armenia.embassy} (pokriva Gruzija)`);
     expect(station.embassyCyr).toBe(`${armenia.embassyCyr} (покрива Грузија)`);
+    expect(armenia.electionContactApproval).toBe('unconfirmed');
+    expect(armenia.email).toBe(station.email);
   });
 
   test('Monaco presents only the real Paris embassy coverage record', () => {
@@ -952,7 +953,14 @@ describe('Registration Email Status', () => {
 
   test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {
     const station = COUNTRY_BY_CODE.get('AF')!.stations[0];
-    const markup = renderToStaticMarkup(
+    // Exercise the mobile-only heading with browser file-sharing support.
+    const windowDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    Object.defineProperty(globalThis, 'window', { configurable: true, value: { isSecureContext: true } });
+    const navigatorDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator');
+    Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { share: async () => {}, canShare: () => true } });
+    let markup: string;
+    try {
+      markup = renderToStaticMarkup(
       React.createElement(
         ScriptProvider,
         null,
@@ -980,6 +988,13 @@ describe('Registration Email Status', () => {
       ),
     );
 
+    } finally {
+      if (windowDescriptor) Object.defineProperty(globalThis, 'window', windowDescriptor);
+      else Reflect.deleteProperty(globalThis, 'window');
+      if (navigatorDescriptor) Object.defineProperty(globalThis, 'navigator', navigatorDescriptor);
+      else Reflect.deleteProperty(globalThis, 'navigator');
+    }
+
     expect(station.electionContactApproval).toBe('unconfirmed');
     expect(station.isElectionContactConfirmed).toBe(false);
     expect(markup).toContain('role="alert"');
@@ -987,6 +1002,7 @@ describe('Registration Email Status', () => {
     expect(markup).toContain('Gmail');
     expect(markup).toContain('Outlook');
     expect(markup).toContain('Yahoo Mail');
+    expect(markup).toContain('На телефону: подели ПДФ (Web Share)');
     expect(markup).not.toContain('Гмаил');
     expect(markup).not.toContain('Аутлук');
     expect(markup).not.toContain('Јаху');
