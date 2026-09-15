@@ -558,7 +558,7 @@ describe('Missions and Coverage Dataset', () => {
   test('projects every official Ministry coverage relationship with its declared recipient', () => {
     const expectedRelationships = [
       ['st-nonres-ge', 'st-am-emb-main', 'embserbia.yerevan@gmail.com'],
-      ['st-nonres-mc-paris-mfa-gov-rs', 'st-fr-emb-main-paris-mfa-gov-rs', 'ambassade.paris@mfa.rs'],
+      ['st-nonres-mc-paris-mfa-gov-rs', 'st-fr-emb-main-paris-mfa-gov-rs', 'izbori.pariz@mfa.rs'],
       ['st-nonres-km', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
       ['st-nonres-dj', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
       ['st-nonres-er', 'st-ke-emb-main', 'srb.emb.kenya@mfa.rs'],
@@ -589,11 +589,7 @@ describe('Missions and Coverage Dataset', () => {
       expect(coveredStation.coverageSourceEmail).toMatch(/@/);
       expect(coveringStation).toMatchObject({
         isResident: true,
-        electionContactApproval: 'unconfirmed',
       });
-      expect(coveredStation.electionContactApproval).not.toBe(
-        coveringStation.electionContactApproval,
-      );
     }
   });
 
@@ -654,7 +650,7 @@ describe('Missions and Coverage Dataset', () => {
       isResident: false,
       coverageSourceEmail: 'ambassade.paris@mfa.rs',
       coveringStationId: 'st-fr-emb-main-paris-mfa-gov-rs',
-      email: 'ambassade.paris@mfa.rs',
+      email: 'izbori.pariz@mfa.rs',
       electionContactApproval: 'operator-approved',
       isElectionContactConfirmed: false,
       website: paris.website,
@@ -806,14 +802,24 @@ describe('Registration Email Status', () => {
     const notice = COUNTRY_BY_CODE.get('AT')!.stations[0].electionNotice!;
     expect(render(notice)).toContain(`href="${notice.url}"`);
     expect(render(notice)).not.toContain('nije objavila');
-    for (const code of ['FR', 'KE', 'AM', 'MC', 'GE', 'BI', 'DJ', 'ER', 'KM', 'RW', 'SC', 'SO', 'SS', 'UG']) {
+    for (const code of ['AM', 'GE']) {
       const country = COUNTRY_BY_CODE.get(code)!;
       const affected = country.stations.filter(station =>
-        ['st-fr-emb-main-paris-mfa-gov-rs', 'st-ke-emb-main', 'st-am-emb-main'].includes(station.coveringStationId || station.id));
+        ['st-am-emb-main'].includes(station.coveringStationId || station.id));
       expect(affected.length).toBeGreaterThan(0);
       for (const station of affected) {
         expect(station.electionNoticeStatus).toBe('not-published');
         expect(station.electionNotice).toBeUndefined();
+      }
+    }
+    for (const code of ['FR', 'KE', 'MC', 'BI', 'DJ', 'ER', 'KM', 'RW', 'SC', 'SO', 'SS', 'UG']) {
+      const country = COUNTRY_BY_CODE.get(code)!;
+      const affected = country.stations.filter(station =>
+        ['st-fr-emb-main-paris-mfa-gov-rs', 'st-ke-emb-main'].includes(station.coveringStationId || station.id));
+      expect(affected.length).toBeGreaterThan(0);
+      for (const station of affected) {
+        expect(station.electionNoticeStatus).toBeUndefined();
+        expect(station.electionNotice?.emailStatus).toBe('email-extracted');
       }
     }
   });

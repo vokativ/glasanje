@@ -113,7 +113,7 @@ class ElectionContactPipelineTests(unittest.TestCase):
             )
             self.assertEqual(
                 built["st-nonres-mc-paris-mfa-gov-rs"]["email"],
-                "ambassade.paris@mfa.rs",
+                "izbori.pariz@mfa.rs",
             )
             self.assertEqual(built["st-nonres-nz"]["electionNotice"], built["st-au-emb-main"]["electionNotice"])
             self.assertEqual(built["st-mt-emb-main"]["email"], "srb.office.valletta@mfa.rs")

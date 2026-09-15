@@ -2457,8 +2457,26 @@
       }
     },
     "st-fr-emb-main-paris-mfa-gov-rs": {
-      "electionNoticeStatus": "not-published",
-      "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
+      "electionEmail": "izbori.pariz@mfa.rs",
+      "_operatorNote": "Maintainer pre-approved clear recipients found on working current official election notices in this conversation on 2026-09-15. This current notice supersedes the earlier recorded not-published status; Monaco uses the same recipient through its existing official coverage relationship.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://paris.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+        "observedAt": "2026-09-15T14:45:50Z"
+      },
+      "electionNotice": {
+        "url": "https://paris.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+        "electionYear": "2026",
+        "observedAt": "2026-09-15T14:45:50Z",
+        "emailStatus": "email-extracted"
+      }
     },
     "st-fr-emb-main-info": {
       "_excludeFromPublic": true,
@@ -2469,8 +2487,26 @@
       "_exclusionNote": "This Monaco source row is the non-resident duplicate derived from the Serbian Cultural Centre in Paris. Exclude it together with st-fr-emb-main-info; Monaco is represented by st-nonres-mc-paris-mfa-gov-rs and its explicit official coverage relationship."
     },
     "st-ke-emb-main": {
-      "electionNoticeStatus": "not-published",
-      "_electionNoticeNote": "Maintainer explicitly states on 2026-09-13 that this mission has no 2026 election announcement. Applies to its resolved covered countries as well. This records announcement availability only; existing recipient approvals remain unchanged."
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_operatorNote": "Maintainer pre-approved clear recipients found on working current official election notices in this conversation on 2026-09-15. This current notice supersedes the earlier recorded not-published status and also supplies evidence for Nairobi’s existing resolved country coverage.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+        "observedAt": "2026-09-15T14:45:50Z"
+      },
+      "electionNotice": {
+        "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+        "electionYear": "2026",
+        "observedAt": "2026-09-15T14:45:50Z",
+        "emailStatus": "email-extracted"
+      }
     },
     "st-am-emb-main": {
       "electionNoticeStatus": "not-published",
@@ -3023,6 +3059,72 @@
         "sourceUrl": "https://rabat.mfa.gov.rs/mediji/aktivnosti/obavestenje-o-izborima-za-narodne-poslanike-narodne-skupstine-republike-srbije",
         "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије",
         "observedAt": "2026-09-13T16:07:33Z"
+      }
+    },
+    "st-tz-emb-main": {
+      "electionEmail": "srb.emb.kenya@mfa.rs",
+      "_operatorNote": "Maintainer pre-approved clear recipients found on working current official election notices in this conversation on 2026-09-15. The MFA Tanzania directory entry points to the Nairobi mission/site, and the notice directs applications to this mailbox.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+        "observedAt": "2026-09-15T14:45:50Z"
+      },
+      "electionNotice": {
+        "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+        "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+        "electionYear": "2026",
+        "observedAt": "2026-09-15T14:45:50Z",
+        "emailStatus": "email-extracted"
+      }
+    },
+    "st-lb-emb-main": {
+      "electionEmail": "beirut.dkp@gmail.com",
+      "_operatorNote": "Maintainer pre-approved clear recipients found on working current official election notices in this conversation on 2026-09-15.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://beirut.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+        "observedAt": "2026-09-15T14:45:50Z"
+      },
+      "electionNotice": {
+        "url": "https://beirut.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+        "electionYear": "2026",
+        "observedAt": "2026-09-15T14:45:50Z",
+        "emailStatus": "email-extracted"
+      }
+    },
+    "st-sk-emb-main": {
+      "electionEmail": "consular.bratislava@mfa.rs",
+      "_operatorNote": "Maintainer pre-approved clear recipients found on working current official election notices in this conversation on 2026-09-15.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://bratislava.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+        "observedAt": "2026-09-15T14:45:50Z"
+      },
+      "electionNotice": {
+        "url": "https://bratislava.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+        "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+        "electionYear": "2026",
+        "observedAt": "2026-09-15T14:45:50Z",
+        "emailStatus": "email-extracted"
       }
     }
   },

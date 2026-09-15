@@ -2,6 +2,8 @@
 
 Scope: 62 unconfirmed resident-directory entries, excluding Paris, Yerevan and Nairobi and their duplicate entries. Existing approved recipients are preserved.
 
+This document records the 12 September snapshot. Later notices and approvals, including Jakarta, Paris, Nairobi, Beirut and Bratislava, are recorded in the [missing-recipient recheck](missing-recipient-recheck-2026-09-14.md); its later findings supersede “no current notice found” rows below.
+
 ## Directly reviewed and operator-approved recipients
 
 These 17 recipients were read in current official election notices and explicitly approved by the maintainer in this conversation on 12 September UTC (13 September local time). They move from `unconfirmed` to `operator-approved`, with honest schema-version-2 operator provenance. No AI invocation or automatic confirmation was fabricated. Ordinary mailboxes already named by the notice are retained.

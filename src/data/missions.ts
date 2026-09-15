@@ -116,7 +116,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
           "title": "Амбасада Републике Србије у Тирани обавештава да је преседник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати дана 25. октобра 2026. године.",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T22:51:41Z",
+          "observedAt": "2026-09-15T14:45:50Z",
           "emailStatus": "no-email-extracted"
         }
       }
@@ -952,7 +952,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1715,7 +1721,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2434,7 +2446,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2630,12 +2648,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Kenija)",
         "embassyCyr": "Амбасада Републике Србије (Кенија)",
         "email": "srb.emb.kenya@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
         "isResident": true,
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3041,11 +3065,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Liban)",
         "embassyCyr": "Амбасада Републике Србије (Либан)",
         "email": "beirut.dkp@gmail.com",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://beirut.mfa.gov.rs",
         "address": "Jounieh-Kaslik Roundabout,Etoile Center (Zara Building),2nd floor,Lebanon",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://beirut.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3747,7 +3778,7 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-nonres-mc-paris-mfa-gov-rs",
         "embassy": "Ambasada Republike Srbije (Francuska) (pokriva Monako)",
         "embassyCyr": "Амбасада Републике Србије (Француска) (покрива Монако)",
-        "email": "ambassade.paris@mfa.rs",
+        "email": "izbori.pariz@mfa.rs",
         "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.paris.mfa.gov.rs",
@@ -3755,7 +3786,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "ambassade.paris@mfa.rs",
         "coveringStationId": "st-fr-emb-main-paris-mfa-gov-rs",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://paris.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4571,7 +4608,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -4944,7 +4987,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5196,18 +5245,18 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-sk-emb-main",
         "embassy": "Ambasada Republike Srbije (Slovačka)",
         "embassyCyr": "Амбасада Републике Србије (Словачка)",
-        "email": "embassy.bratislava@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "email": "consular.bratislava@mfa.rs",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.bratislava.mfa.gov.rs",
         "address": "Budkova 38 81104 БРАТИСЛАВА СЛОВАЧКА РЕПУБЛИКА",
         "isResident": true,
         "electionNotice": {
-          "url": "https://bratislava.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
-          "title": "Избори: Пријављивање за гласање у иностранству",
+          "url": "https://bratislava.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T22:51:41Z",
-          "emailStatus": "no-email-extracted"
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
         }
       }
     ],
@@ -5302,7 +5351,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5453,11 +5508,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Tanzanija)",
         "embassyCyr": "Амбасада Републике Србије (Танзанија)",
         "email": "srb.emb.kenya@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://nairobi.mfa.gov.rs",
         "address": "Fortis Tower, Woodvale Grove, 6th floor,00100 НАЈРОБИ,КЕНИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5764,7 +5826,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5916,7 +5984,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -6070,13 +6144,19 @@ export const COUNTRIES: VotingCountry[] = [
         "id": "st-fr-emb-main-paris-mfa-gov-rs",
         "embassy": "Ambasada Republike Srbije (Francuska)",
         "embassyCyr": "Амбасада Републике Србије (Француска)",
-        "email": "ambassade.paris@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "email": "izbori.pariz@mfa.rs",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.paris.mfa.gov.rs",
         "address": "5, Rue Leonard de Vinci 75116 ПАРИЗ ФРАНЦУСКА",
         "isResident": true,
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://paris.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       },
       {
         "id": "st-fr-cons-strazbur",
@@ -6330,7 +6410,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://hercegnovi.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
           "title": "Избори: Пријављивање за гласање у иностранству 2026.",
           "electionYear": "2026",
-          "observedAt": "2026-09-14T22:51:41Z",
+          "observedAt": "2026-09-15T14:45:50Z",
           "emailStatus": "no-email-extracted"
         }
       }
@@ -6444,7 +6524,13 @@ export const COUNTRIES: VotingCountry[] = [
         "isResident": false,
         "coverageSourceEmail": "srb.emb.kenya@mfa.rs",
         "coveringStationId": "st-ke-emb-main",
-        "electionNoticeStatus": "not-published"
+        "electionNotice": {
+          "url": "https://nairobi.mfa.gov.rs/lat/mediji/aktivnosti/obavestenje-o-prijavi-za-glasanje-u-inostranstvu",
+          "title": "Obaveštenje o prijavi za glasanje u inostranstvu",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:45:50Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
