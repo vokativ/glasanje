@@ -2376,6 +2376,29 @@
       },
       "_electionNoticeNote": "Current registration notice explicitly names Mexico, Honduras, Costa Rica, Panama, Nicaragua, El Salvador and Guatemala. No mailbox extracted from its page text; this link does not replace the existing operator authorization of embajadaserbiaenmexico@gmail.com. See docs/approved-announcement-link-audit.md."
     },
+    "st-id-emb-main": {
+      "electionEmail": "consular.jakarta@mfa.rs",
+      "_operatorNote": "Maintainer explicitly selected and approved the first of four mailboxes printed in the official image notice on 2026-09-15. The notice applies to Indonesia, Singapore, Thailand, Cambodia, Vietnam, Malaysia, the Philippines, Brunei Darussalam and Timor-Leste.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026",
+        "sourceUrl": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "observedAt": "2026-09-15T14:41:27Z"
+      },
+      "electionNotice": {
+        "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+        "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+        "electionYear": "2026",
+        "observedAt": "2026-09-15T14:41:27Z",
+        "emailStatus": "email-extracted"
+      },
+      "_electionNoticeNote": "The notice body is an image. Visual inspection confirmed that it instructs applicants in nine named countries to use any of four printed mailboxes; the maintainer selected the first, consular.jakarta@mfa.rs."
+    },
     "st-il-emb-main": {
       "electionEmail": "srb.emb.israel@mfa.rs",
       "_operatorNote": "Operator-authorized recipient.",

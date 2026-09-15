@@ -852,13 +852,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Brunej Darusalam)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Брунеј Дарусалам)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1079,13 +1086,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Vijetnam)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Вијетнам)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -1957,11 +1971,18 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2100,13 +2121,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Istočni Timor)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Источни Тимор)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2459,13 +2487,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Kambodža)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Камбоџа)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3319,13 +3354,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Malezija)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Малезија)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5018,13 +5060,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Singapur)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Сингапур)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5370,13 +5419,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Tajland)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Тајланд)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -5915,13 +5971,20 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Indonezija) (pokriva Filipini)",
         "embassyCyr": "Амбасада Републике Србије (Индонезија) (покрива Филипини)",
         "email": "consular.jakarta@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://jakarta.mfa.gov.rs",
         "address": "Jl. HOS Cokroaminoto 109,Menteng 10310ЏАКАРТА ПУСАТИНДОНЕЗИЈА",
         "isResident": false,
         "coverageSourceEmail": "consular.jakarta@mfa.rs",
-        "coveringStationId": "st-id-emb-main"
+        "coveringStationId": "st-id-emb-main",
+        "electionNotice": {
+          "url": "https://jakarta.mfa.gov.rs/mediji/aktuelnosti",
+          "title": "ОБАВЕШТЕЊЕ О ПРИЈАВИ ЗА ГЛАСАЊЕ НА ПРЕДСТОЈЕЋИМ ПАРЛАМЕНТАРНИМ ИЗБОРИМА 25. ОКТОБРА 2026. ГОДИНЕ",
+          "electionYear": "2026",
+          "observedAt": "2026-09-15T14:41:27Z",
+          "emailStatus": "email-extracted"
+        }
       }
     ],
     "aliases": [

@@ -87,16 +87,16 @@ describe('Mission inquiry drafts', () => {
   });
 
   test('uses the resolved covering mission while retaining the selected country in the draft', () => {
-    const singapore = COUNTRY_BY_CODE.get('SG')!;
-    const station = singapore.stations[0];
-    const jakarta = COUNTRY_BY_CODE.get('ID')!.stations[0];
+    const afghanistan = COUNTRY_BY_CODE.get('AF')!;
+    const station = afghanistan.stations[0];
+    const tehran = COUNTRY_BY_CODE.get('IR')!.stations[0];
     expect(station.isResident).toBe(false);
-    const url = new URL(buildMissionInquiryUrl(station, singapore.label, 'latin')!);
+    const url = new URL(buildMissionInquiryUrl(station, afghanistan.label, 'latin')!);
     expect(url.protocol).toBe('mailto:');
-    expect(url.pathname).toBe(jakarta.email);
-    expect(url.searchParams.get('subject')).toContain('Singapur');
+    expect(url.pathname).toBe(tehran.email);
+    expect(url.searchParams.get('subject')).toContain('Avganistan');
     const body = url.searchParams.get('body')!;
-    expect(body).toContain('Država u kojoj boravim: Singapur.');
+    expect(body).toContain('Država u kojoj boravim: Avganistan.');
     expect(body).toContain('Ako je uputstvo već objavljeno');
     expect(body).toContain('člana 16.');
     expect(body).toContain('3. oktobar 2026.');
@@ -115,7 +115,7 @@ describe('Mission inquiry drafts', () => {
   });
 
   test('does not offer an inquiry for either approved state or an unusable recipient', () => {
-    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const station = COUNTRY_BY_CODE.get('AF')!.stations[0];
     for (const electionContactApproval of ['operator-approved', 'source-confirmed'] as const) {
       const approved = { ...station, electionContactApproval };
       expect(buildMissionInquiryUrl(approved, 'Singapur', 'latin')).toBeNull();
@@ -129,9 +129,9 @@ describe('Mission inquiry drafts', () => {
   });
 
   test('labels the general-contact inquiry as a draft the user sends themselves', () => {
-    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const station = COUNTRY_BY_CODE.get('AF')!.stations[0];
     const markup = renderToStaticMarkup(React.createElement(ScriptProvider, { initialScript: 'latin' },
-      React.createElement(MissionInquiryLink, { station, countryName: 'Singapur' }),
+      React.createElement(MissionInquiryLink, { station, countryName: 'Avganistan' }),
     ));
     expect(markup).toContain(`href="mailto:${station.email}?subject=`);
     expect(markup).toContain('Pitajte misiju za uputstvo');

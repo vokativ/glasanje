@@ -459,7 +459,7 @@ describe('Missions and Coverage Dataset', () => {
         ScriptProvider,
         null,
         React.createElement(StepVotingDestination, {
-          initialData: { countryCode: 'SG' },
+          initialData: { countryCode: 'AF' },
           onBack: () => undefined,
           onNext: () => undefined,
         }),
@@ -506,14 +506,14 @@ describe('Missions and Coverage Dataset', () => {
     });
     expect(coveringStation).toMatchObject({ isResident: true });
     expect(station.email).toBe(coveringStation!.email);
-    expect(station.electionContactApproval).toBe(
-      coveringStation!.electionContactApproval,
-    );
+    expect(station.electionContactApproval).toBe('operator-approved');
+    expect(coveringStation!.electionContactApproval).toBe('operator-approved');
     expect(station.isElectionContactConfirmed).toBe(
       coveringStation!.isElectionContactConfirmed,
     );
     expect(station.embassyCyr).toContain('Индонезија');
     expect(station.embassyCyr).toContain('Сингапур');
+    expect(station.electionNotice?.url).toBe('https://jakarta.mfa.gov.rs/mediji/aktuelnosti');
   });
 
   test('Ireland is covered by London embassy with correct email', () => {
@@ -727,7 +727,7 @@ describe('Missions and Coverage Dataset', () => {
   });
 
   test('exposes election-contact approval as station metadata', () => {
-    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const station = COUNTRY_BY_CODE.get('AF')!.stations[0];
 
     expect(station.electionContactApproval).toBe('unconfirmed');
     expect(station.isElectionContactConfirmed).toBe(false);
@@ -945,7 +945,7 @@ describe('Registration Email Status', () => {
   });
 
   test('marks an unconfirmed recipient explicitly while preserving Latin product brands in Cyrillic', () => {
-    const station = COUNTRY_BY_CODE.get('SG')!.stations[0];
+    const station = COUNTRY_BY_CODE.get('AF')!.stations[0];
     const markup = renderToStaticMarkup(
       React.createElement(
         ScriptProvider,
@@ -956,17 +956,17 @@ describe('Registration Email Status', () => {
             parentName: 'Милош',
             jmbg: '0101990710006',
             serbianAddress: 'Београд',
-            foreignAddress: 'Singapore',
+            foreignAddress: 'Kabul',
             stationName: station.embassyCyr,
-            desiredLocation: 'Singapur',
+            desiredLocation: 'Kabul',
             signingDate: '10.09.2026.',
             phone: '+381601234567',
             email: 'petar@example.com',
             signaturePngDataUrl: '',
           },
           station,
-          countryName: 'Singapur',
-          countryNameCyr: 'Сингапур',
+          countryName: 'Avganistan',
+          countryNameCyr: 'Авганистан',
           isWetInkSignature: false,
           onBack: () => undefined,
           onReset: () => undefined,
