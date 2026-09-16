@@ -69,10 +69,11 @@ export const RegistrationEmailStatusPage: React.FC = () => {
         <div className="coverage-legend">
           <span className="coverage-status coverage-status--confirmed">✓ {t('Sve adrese potvrđene')}</span>
           <span className="coverage-status coverage-status--partial">◐ {t('Deo adresa potvrđen')}</span>
+          <span className="coverage-status coverage-status--notice">⚠️ {t('Obaveštenje objavljeno')}</span>
           <span className="coverage-status coverage-status--unconfirmed">✕ {t('Bez potvrđene adrese')}</span>
         </div>
         <p className="form-hint" style={{ marginTop: '0.5rem' }}>
-          {t('Delimično znači da neka predstavništva imaju potvrđenu adresu, a druga još nemaju. Broj pokazuje koliko ih je potvrđeno od ukupnog broja — ne koliki deo države je pokriven.')}
+          {t('Delimično znači da neka predstavništva imaju potvrđenu adresu, a druga još nemaju. Žuta oznaka označava da je misija objavila izborno obaveštenje za 2026. godinu, ali bez posebne adrese za prijavu (ponuđen je opšti kontakt).')}
         </p>
         {/* Include /status explicitly: the document's base URL is /, so a bare
             fragment would navigate to the form. Preserve script on every link. */}
@@ -92,15 +93,33 @@ export const RegistrationEmailStatusPage: React.FC = () => {
               <h3 id={`coverage-letter-${group.countries[0].countryCode}`} className="coverage-letter">{group.letter}</h3>
               {group.countries.map(country => {
                 const { approved, total } = getElectionEmailCoverage([country]);
-                const status = approved === total ? 'confirmed' : approved > 0 ? 'partial' : 'unconfirmed';
+                const hasNoticeNoEmail = country.stations.some(
+                  (station) => getStationElectionStatus(station) === 'notice-no-email'
+                );
+                const status: 'confirmed' | 'partial' | 'notice' | 'unconfirmed' =
+                  approved === total
+                    ? 'confirmed'
+                    : approved > 0
+                    ? 'partial'
+                    : hasNoticeNoEmail
+                    ? 'notice'
+                    : 'unconfirmed';
                 return (
                   <details key={country.countryCode} id={`coverage-country-${country.countryCode}`} className="coverage-country">
                     <summary>
                       <CountryFlag countryCode={country.countryCode} />
                       <span className="coverage-country-name">{script === 'cyrillic' ? country.labelCyr : country.label}</span>
                       <span className={`coverage-status coverage-status--${status}`}>
-                        <span aria-hidden="true">{status === 'confirmed' ? '✓' : status === 'partial' ? '◐' : '✕'}</span>{' '}
-                        {status === 'confirmed' ? t('Potvrđeno') : status === 'partial' ? `${t('Delimično')} · ${approved}/${total}` : t('Nije potvrđeno')}
+                        <span aria-hidden="true">
+                          {status === 'confirmed' ? '✓' : status === 'partial' ? '◐' : status === 'notice' ? '⚠️' : '✕'}
+                        </span>{' '}
+                        {status === 'confirmed'
+                          ? t('Potvrđeno')
+                          : status === 'partial'
+                          ? `${t('Delimično')} · ${approved}/${total}`
+                          : status === 'notice'
+                          ? t('Obaveštenje objavljeno')
+                          : t('Nije potvrđeno')}
                       </span>
                     </summary>
                     <div className="coverage-country-details">

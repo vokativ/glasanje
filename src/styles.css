@@ -818,6 +818,10 @@ body {
   color: var(--color-warning);
   background: var(--color-warning-bg);
 }
+.coverage-status--notice {
+  color: #b45309;
+  background: #fef3c7;
+}
 
 .coverage-status--unconfirmed {
   color: var(--color-danger);

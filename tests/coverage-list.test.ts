@@ -35,6 +35,8 @@ test('the static list exposes every country and distinguishes partial mission co
   expect(summary('AT')).toContain('coverage-status--confirmed');
   expect(summary('SG')).toContain('coverage-status--confirmed');
   expect(summary('AF')).toContain('coverage-status--unconfirmed');
+  expect(summary('TR')).toContain('coverage-status--notice');
+  expect(summary('TR')).toContain('Obaveštenje objavljeno');
   expect(summary('BA')).toContain('coverage-status--confirmed');
   const croatia = COUNTRIES.find(country => country.countryCode === 'HR')!;
   const confirmed = croatia.stations.filter(station => station.electionContactApproval !== 'unconfirmed').length;
