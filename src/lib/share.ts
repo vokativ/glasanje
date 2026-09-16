@@ -1,11 +1,6 @@
-import { Script, translateStaticText } from './script';
-
-/**
- * Prepares local download, share, clipboard, and provider-compose values.
- * These helpers do not send data themselves, but returned text, files, and
- * compose URLs may contain personal information once a caller hands them to a
- * browser, native share target, clipboard, or mail provider.
- */
+import type { ElectionNotice } from '../data/missions';
+import { translateStaticText, type Script } from './script';
+import { getStationElectionStatus } from './stationElectionStatus';
 
 
 export interface EmailDispatchInfo {
@@ -22,6 +17,7 @@ export interface WebShareInfo {
 export interface RecipientPayloadInput {
   toEmail: string;
   electionContactApproval: 'source-confirmed' | 'operator-approved' | 'unconfirmed';
+  electionNotice?: ElectionNotice;
   isIdDocumentEmbedded: boolean;
   isWetInkSignature: boolean;
   subject: string;
@@ -48,6 +44,7 @@ function temporaryBlock(sections: string[], script: Script): string {
 export function buildRecipientPayloads({
   toEmail,
   electionContactApproval,
+  electionNotice,
   isIdDocumentEmbedded,
   isWetInkSignature,
   subject,
@@ -64,6 +61,7 @@ export function buildRecipientPayloads({
   // use a different script; transliterating the assembled message would corrupt
   // those values (and potentially the exact destination mailbox).
   const t = (text: string) => translateStaticText(script, text);
+  const stationStatus = getStationElectionStatus({ electionContactApproval, electionNotice });
   const standardBody = `${body}\n\n${t('S poštovanjem,')}\n${fullName}`;
   const idDocumentInstruction = t('Priložite sliku prve strane srpskog pasoša ili lične karte.');
   const composeAttachmentInstructions = [
@@ -71,11 +69,16 @@ export function buildRecipientPayloads({
       ? t('Priložite skeniranu ili fotografisanu svojeručno potpisanu prijavu.')
       : `${t('Priložite preuzeti ')}PDF${t(' formular.')}`,
     ...(!isIdDocumentEmbedded ? [idDocumentInstruction] : []),
+    ...(stationStatus === 'notice-no-email'
+      ? [t('Preporučujemo da u poruci zatražite potvrdu prijema poruke od misije.')]
+      : []),
   ];
   const mailtoBody = `${temporaryBlock(composeAttachmentInstructions, script)}\n\n${standardBody}`;
   const webShareInstructions = [
     `${t('U polje „Za“ unesite adresu:')}\n${toEmail}`,
-    ...(electionContactApproval === 'unconfirmed'
+    ...(stationStatus === 'notice-no-email'
+      ? [`${t('PAŽNJA:')} ${toEmail}${t(' je opšti kontakt misije. U obaveštenju za izbore 2026. nije navedena posebna i-mejl adresa. Preporučujemo da u poruci zatražite potvrdu prijema.')}`]
+      : stationStatus === 'unconfirmed'
       ? [`${t('PAŽNJA:')} ${toEmail}${t(' je opšti javno objavljeni kontakt misije i nije potvrđen za upis u birački spisak.')}`]
       : []),
     ...(!isIdDocumentEmbedded ? [idDocumentInstruction] : []),
@@ -98,6 +101,9 @@ export function buildRecipientPayloads({
     },
     manualText: `${temporaryBlock([
       `${t('Za:')} ${toEmail}`,
+      ...(stationStatus === 'notice-no-email'
+        ? [`${t('PAŽNJA:')} ${toEmail}${t(' je opšti kontakt misije (u obaveštenju za izbore 2026. nije navedena posebna i-mejl adresa). Preporučujemo da zatražite potvrdu prijema.')}`]
+        : []),
       `${t('Naslov:')} ${subject}`,
       `${t('Obavezni prilozi:')} ${requiredAttachments.join('; ')}.`,
     ], script)}\n\n${standardBody}`,

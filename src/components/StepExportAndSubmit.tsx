@@ -12,10 +12,12 @@ import {
   shareInvitation,
 } from '../lib/share';
 import { PollingStation } from '../data/missions';
+import { getStationElectionStatus } from '../lib/stationElectionStatus';
 import { useScript } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
 import { CountryFlag } from './CountryFlag';
+
 /**
  * Creates a PDF from the wizard's in-memory application data and prepares handoff helpers.
  * Download, mail links, clipboard writes, and native sharing leave the final attachment and
@@ -85,9 +87,14 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
 
   // Recipient text reflects the selected approval status; it does not prove a mission will
   // accept the message.
+  const stationStatus = getStationElectionStatus(station);
+
+  // Recipient text reflects the selected approval status; it does not prove a mission will
+  // accept the message.
   const { dispatchInfo, webShareInfo, manualText } = buildRecipientPayloads({
     toEmail: station.email,
     electionContactApproval: station.electionContactApproval,
+    electionNotice: station.electionNotice,
     isIdDocumentEmbedded,
     isWetInkSignature,
     subject,
@@ -216,7 +223,32 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         {t('Preuzmite PDF, zatim ga sami priložite u poruku ili ga prenesite u izabranu aplikaciju. Ova stranica samo priprema PDF i ne obavlja predaju.')}
       </p>
 
-      {station.electionContactApproval === 'unconfirmed' && (
+      {stationStatus === 'notice-no-email' && (
+        <div
+          role="region"
+          aria-label={t('Status izborne adrese')}
+          style={{
+            background: 'var(--color-warning-bg)',
+            border: '2px solid var(--color-warning)',
+            borderRadius: 'var(--radius-md)',
+            color: '#78350f',
+            marginBottom: '1.5rem',
+            padding: '1rem',
+          }}
+        >
+          <div style={{ fontWeight: 700, marginBottom: '0.35rem' }}>
+            {t('⚠️ Obaveštenje objavljeno bez posebne izborne i-mejl adrese')}
+          </div>
+          <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem' }}>
+            {t(
+              'Misija je objavila obaveštenje za izbore 2026, ali u njemu nije navedena posebna i-mejl adresa za prijem zahteva. Zahtev možete pokušati da pošaljete na opšti kontakt misije. Obavezno zatražite potvrdu prijema i pošaljite zahtev pre 3. oktobra 2026. u ponoć po vremenu u Srbiji.'
+            )}
+          </p>
+          <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} />
+        </div>
+      )}
+
+      {stationStatus === 'unconfirmed' && (
         <div
           role="alert"
           style={{
@@ -470,24 +502,38 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
         </div>
         <p
           style={{
-            color: station.electionContactApproval === 'unconfirmed'
-              ? 'var(--color-danger)'
-              : 'var(--color-success)',
+            color: stationStatus === 'approved'
+              ? 'var(--color-success)'
+              : stationStatus === 'notice-no-email'
+              ? 'var(--color-warning)'
+              : 'var(--color-danger)',
             fontSize: '0.9rem',
             fontWeight: 700,
             margin: '0.5rem 0',
           }}
         >
-          {station.electionContactApproval !== 'unconfirmed'
+          {stationStatus === 'approved'
             ? t('✓ Potvrđena adresa za izbore 2026.')
+            : stationStatus === 'notice-no-email'
+            ? t('⚠️ Obaveštenje bez posebne i-mejl adrese — ponuđen je opšti kontakt misije.')
             : t('Nije potvrđena adresa za izbore — ovo je samo opšti kontakt misije.')}
         </p>
-        <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing={station.electionContactApproval !== 'unconfirmed'} />
+        <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} showMissing={stationStatus === 'approved'} />
         <MissionInquiryLink station={station} countryName={selectedCountryName} />
-        {station.electionContactApproval === 'unconfirmed' && (
+        {stationStatus === 'notice-no-email' && (
+          <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
+            {t('Preporučujemo da u poruci zatražite potvrdu prijema i proverite status na birackispisak.gov.rs pre 3. oktobra 2026.')}
+          </p>
+        )}
+        {stationStatus === 'unconfirmed' && (
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.5rem' }}>
             {t('Možete sačekati potvrđeno zvanično obaveštenje ili sami proveriti ovaj sajt misije pre predaje.')}
           </p>
+        )}
+        {station.address && (
+          <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', margin: '0.5rem 0' }}>
+            <strong>{t('Adresa:')}</strong> {station.address}
+          </div>
         )}
         <div className="hub-email-box">
           <span className="hub-email-text">{station.email}</span>

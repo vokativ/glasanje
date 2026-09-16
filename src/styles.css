@@ -511,6 +511,11 @@ body {
 /* An unconfirmed label is deliberately a warning treatment, not evidence that
  * a destination or contact detail has been independently verified. */
 .mission-card--unconfirmed {
+  background-color: var(--color-error-bg);
+  border-color: #fecaca;
+}
+
+.mission-card--notice-no-email {
   background-color: var(--color-warning-bg);
   border-color: #f59e0b;
 }
@@ -518,13 +523,19 @@ body {
 .mission-warning {
   margin: 0.75rem 0;
   padding: 0.65rem 0.75rem;
-  border-left: 3px solid #d97706;
+  border-left: 3px solid var(--color-danger);
   border-radius: var(--radius-sm);
-  background-color: #fef3c7;
-  color: #78350f;
+  background-color: var(--color-error-bg);
+  color: var(--color-danger);
   font-size: 0.85rem;
   font-weight: 500;
   line-height: 1.45;
+}
+
+.mission-warning--notice-no-email {
+  border-left: 3px solid #d97706;
+  background-color: #fef3c7;
+  color: #78350f;
 }
 
 .mission-detail {

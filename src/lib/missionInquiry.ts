@@ -8,7 +8,7 @@ import { validateEmail } from './validators';
 // Use the already-resolved mission contact. This inquiry neither establishes
 // election-recipient approval nor includes the applicant's personal form data.
 export function buildMissionInquiryUrl(
-  station: Pick<PollingStation, 'email' | 'electionContactApproval'>,
+  station: Pick<PollingStation, 'email' | 'electionContactApproval' | 'electionNotice'>,
   countryName: string,
   script: Script,
 ): string | null {
@@ -21,8 +21,15 @@ export function buildMissionInquiryUrl(
   const body = [
     t('Poštovani,'),
     `${t('Državljanin/državljanka sam Republike Srbije. Država u kojoj boravim:')} ${countryName}.`,
-    t('Kada i gde će biti objavljeno uputstvo za prijavu za glasanje na izborima 25. oktobra 2026. godine? Na koju i-mejl adresu mogu da pošaljem potpisan zahtev i priloge? Ako je uputstvo već objavljeno, molim vas za link.'),
-    t('Prema obaveštenju MDULS, na osnovu člana 16. Zakona o jedinstvenom biračkom spisku, rok za podnošenje zahteva je 3. oktobar 2026. u ponoć po vremenu u Srbiji. Molim vas za uputstvo kako da podnesem zahtev u tom roku.'),
+    ...(station.electionNotice?.electionYear === '2026' && station.electionNotice.url
+      ? [
+          t('Upoznat/a sam sa zvaničnim obaveštenjem za izbore 2026. godine na vašem sajtu. Kako u tekstu obaveštenja nije navedena posebna i-mejl adresa za prijem zahteva, molim vas za informaciju da li potpisan zahtev i priloge mogu poslati na ovu adresu ili postoji druga adresa/način za dostavljanje?'),
+          t('Prema obaveštenju MDULS, na osnovu člana 16. Zakona o jedinstvenom biračkom spisku, rok za podnošenje zahteva je 3. oktobar 2026. u ponoć po vremenu u Srbiji. Molim vas za uputstvo kako da podnesem zahtev u tom roku.'),
+        ]
+      : [
+          t('Kada i gde će biti objavljeno uputstvo za prijavu za glasanje na izborima 25. oktobra 2026. godine? Na koju i-mejl adresu mogu da pošaljem potpisan zahtev i priloge? Ako je uputstvo već objavljeno, molim vas za link.'),
+          t('Prema obaveštenju MDULS, na osnovu člana 16. Zakona o jedinstvenom biračkom spisku, rok za podnošenje zahteva je 3. oktobar 2026. u ponoć po vremenu u Srbiji. Molim vas za uputstvo kako da podnesem zahtev u tom roku.'),
+        ]),
     t('Hvala i srdačan pozdrav.'),
   ].join('\r\n\r\n');
   return getWebmailLinks({ toEmail: email, subject, body }).mailto;

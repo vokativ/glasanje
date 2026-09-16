@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { latinToCyrillic, type Script, useScript } from '../lib/script';
 import { COUNTRY_BY_CODE, COUNTRIES, type VotingCountry } from '../data/missions';
+import { getStationElectionStatus } from '../lib/stationElectionStatus';
+import { CountryFlag } from './CountryFlag';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
-import { CountryFlag } from './CountryFlag';
+
 /**
  * Resolves a voting destination from the bundled mission dataset. Search and selection are local:
  * this step emits the chosen published station plus the applicant's address to the wizard, but
@@ -411,73 +413,101 @@ export const StepVotingDestination: React.FC<StepVotingDestinationProps> = ({
             </section>
           ))}
 
-        {currentCountry && currentStation && (
-          <div
-            className={`mission-card${
-              currentStation.electionContactApproval === 'unconfirmed'
-                ? ' mission-card--unconfirmed'
-                : ''
-            }`}
-          >
-            <div className="mission-title">
-              🏛️ {script === 'cyrillic' ? currentStation.embassyCyr : currentStation.embassy}
-            </div>
+        {currentCountry && currentStation && (() => {
+          const stationStatus = getStationElectionStatus(currentStation);
+          return (
+            <div
+              className={`mission-card${
+                stationStatus === 'notice-no-email'
+                  ? ' mission-card--notice-no-email'
+                  : stationStatus === 'unconfirmed'
+                  ? ' mission-card--unconfirmed'
+                  : ''
+              }`}
+            >
+              <div className="mission-title">
+                🏛️ {script === 'cyrillic' ? currentStation.embassyCyr : currentStation.embassy}
+              </div>
 
-            {!currentStation.isResident && (
-              <span className="mission-coverage-badge">
-                {t('Ovo predstavništvo je nadležno za birače u državi ')}
-                <strong className="country-label">
-                  <CountryFlag countryCode={currentCountry.countryCode} />
-                  <span>{script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}</span>
+              {!currentStation.isResident && (
+                <span className="mission-coverage-badge">
+                  {t('Ovo predstavništvo je nadležno za birače u državi ')}
+                  <strong className="country-label">
+                    <CountryFlag countryCode={currentCountry.countryCode} />
+                    <span>{script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}</span>
+                  </strong>
+                  {t(' na nerezidencijalnoj osnovi.')}
+                </span>
+              )}
+
+              {currentStation.address && (
+                <div className="mission-detail">
+                  <strong>{t('Adresa:')}</strong>
+                  <span>{currentStation.address}</span>
+                </div>
+              )}
+
+              <div className="mission-detail">
+                <strong>
+                  {stationStatus === 'approved'
+                    ? t('Kontakt za prijavu:')
+                    : stationStatus === 'notice-no-email'
+                    ? t('Opšti kontakt misije/konzulata:')
+                    : t('Objavljeni kontakt misije/konzulata:')}
                 </strong>
-                {t(' na nerezidencijalnoj osnovi.')}
-              </span>
-            )}
-
-            {currentStation.address && (
-              <div className="mission-detail">
-                <strong>{t('Adresa:')}</strong>
-                <span>{currentStation.address}</span>
+                <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
+                  {currentStation.email}
+                </span>
               </div>
-            )}
+              {stationStatus === 'approved' ? (
+                <p className="form-hint" style={{ color: 'var(--color-success)', fontWeight: 700 }}>
+                  {t('✓ Kontakt za prijavu za glasanje je potvrđen.')}
+                </p>
+              ) : stationStatus === 'notice-no-email' ? (
+                <div className="mission-warning mission-warning--notice-no-email" role="region" aria-label={t('Status izborne adrese')}>
+                  <p style={{ margin: 0, fontWeight: 700 }}>
+                    {t('⚠️ Obaveštenje objavljeno bez posebne i-mejl adrese')}
+                  </p>
+                  <p style={{ margin: '0.35rem 0 0', fontSize: '0.85rem' }}>
+                    {t(
+                      'Misija je objavila izborno obaveštenje za 2026, ali u tekstu nema posebne i-mejl adrese za prijavu. Zahtev možete pokušati da pošaljete na opšti kontakt misije, ali prihvatanje prijave na ovu adresu nije zvanično potvrđeno. Pre slanja proverite obaveštenje i priloge na zvaničnom sajtu misije ili pošaljite upit misiji.'
+                    )}
+                  </p>
+                </div>
+              ) : (
+                <p className="mission-warning" role="alert">
+                  {t(
+                    'Kontakt je objavila misija/MSP. Za ovo predstavništvo još nema potvrđene adrese za izbore 2026. Pre slanja proverite sajt misije ispod. '
+                  )}
+                  <strong>{t('Prihvatanje zahteva na ovu adresu nije potvrđeno.')}</strong>
+                </p>
+              )}
 
-            <div className="mission-detail">
-              <strong>{t('Objavljeni kontakt misije/konzulata:')}</strong>
-              <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>
-                {currentStation.email}
-              </span>
+              <ElectionNoticeLink
+                notice={currentStation.electionNotice}
+                status={currentStation.electionNoticeStatus}
+                showMissing={stationStatus === 'approved'}
+              />
+              <MissionInquiryLink
+                station={currentStation}
+                countryName={script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}
+              />
+              {currentStation.website && (
+                <div className="mission-detail">
+                  <strong>{t('Zvanični sajt:')}</strong>
+                  <a
+                    href={currentStation.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
+                  >
+                    {currentStation.website} ↗
+                  </a>
+                </div>
+              )}
             </div>
-            {currentStation.electionContactApproval !== 'unconfirmed' ? (
-              <p className="form-hint">{t('Kontakt za prijavu za glasanje je potvrđen.')}</p>
-            ) : (
-              <p className="mission-warning" role="alert">
-                {t(
-                  'Kontakt je objavila misija/MSP. Pre slanja proverite obaveštenje za izbore 2026. na zvaničnom sajtu ispod. '
-                )}
-                <strong>{t('Prihvatanje zahteva na ovu adresu nije potvrđeno.')}</strong>
-              </p>
-            )}
-
-            <ElectionNoticeLink notice={currentStation.electionNotice} status={currentStation.electionNoticeStatus} showMissing={currentStation.electionContactApproval !== 'unconfirmed'} />
-            <MissionInquiryLink
-              station={currentStation}
-              countryName={script === 'cyrillic' ? currentCountry.labelCyr : currentCountry.label}
-            />
-            {currentStation.website && (
-              <div className="mission-detail">
-                <strong>{t('Zvanični sajt:')}</strong>
-                <a
-                  href={currentStation.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}
-                >
-                  {currentStation.website} ↗
-                </a>
-              </div>
-            )}
-          </div>
-        )}
+          );
+        })()}
 
         <div className="form-group" style={{ marginTop: '1.25rem' }}>
           <label className="form-label" htmlFor="foreignAddress">
