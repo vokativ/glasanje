@@ -116,7 +116,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
           "title": "Амбасада Републике Србије у Тирани обавештава да је преседник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати дана 25. октобра 2026. године.",
           "electionYear": "2026",
-          "observedAt": "2026-09-15T14:45:50Z",
+          "observedAt": "2026-09-16T01:00:00Z",
           "emailStatus": "no-email-extracted"
         }
       }
@@ -1559,7 +1559,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
         "isResident": false,
         "coverageSourceEmail": "officesrbhav@gmail.com",
-        "coveringStationId": "st-cu-emb-main"
+        "coveringStationId": "st-cu-emb-main",
+        "electionNotice": {
+          "url": "https://havana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu-11-sep-2026-0",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu 11. sep 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-16T01:00:00Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2241,7 +2248,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
         "isResident": false,
         "coverageSourceEmail": "officesrbhav@gmail.com",
-        "coveringStationId": "st-cu-emb-main"
+        "coveringStationId": "st-cu-emb-main",
+        "electionNotice": {
+          "url": "https://havana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu-11-sep-2026-0",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu 11. sep 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-16T01:00:00Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -2904,7 +2918,14 @@ export const COUNTRIES: VotingCountry[] = [
         "isElectionContactConfirmed": false,
         "website": "https://havana.mfa.gov.rs",
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
-        "isResident": true
+        "isResident": true,
+        "electionNotice": {
+          "url": "https://havana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu-11-sep-2026-0",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu 11. sep 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-16T01:00:00Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -3756,7 +3777,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
           "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ",
           "electionYear": "2026",
-          "observedAt": "2026-09-12T19:24:40Z",
+          "observedAt": "2026-09-16T01:02:46Z",
           "emailStatus": "email-extracted"
         }
       }
@@ -6201,7 +6222,14 @@ export const COUNTRIES: VotingCountry[] = [
         "address": "5ta Avenida, No. 4406, entre 44 y 46,Miramar Playa,ХАВАНА,КУБА",
         "isResident": false,
         "coverageSourceEmail": "officesrbhav@gmail.com",
-        "coveringStationId": "st-cu-emb-main"
+        "coveringStationId": "st-cu-emb-main",
+        "electionNotice": {
+          "url": "https://havana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu-11-sep-2026-0",
+          "title": "Izbori: Prijavljivanje za glasanje u inostranstvu 11. sep 2026.",
+          "electionYear": "2026",
+          "observedAt": "2026-09-16T01:00:00Z",
+          "emailStatus": "no-email-extracted"
+        }
       }
     ],
     "aliases": [
@@ -6410,7 +6438,7 @@ export const COUNTRIES: VotingCountry[] = [
           "url": "https://hercegnovi.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu-14-sep-2026",
           "title": "Избори: Пријављивање за гласање у иностранству 2026.",
           "electionYear": "2026",
-          "observedAt": "2026-09-15T14:45:50Z",
+          "observedAt": "2026-09-16T01:00:00Z",
           "emailStatus": "no-email-extracted"
         }
       }

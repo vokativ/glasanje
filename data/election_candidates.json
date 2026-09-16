@@ -162,7 +162,7 @@
       "electionYear": "2026",
       "email": "consulate.bucharest@mfa.rs",
       "evidenceType": "html",
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/rumunija/ambasade-konzulati",
@@ -251,6 +251,29 @@
       "title": "Izbori: Prijavljivanje za glasanje u inostranstvu"
     },
     {
+      "candidateId": "22ae46a9fc60945ab23696c9605a265688d4b0094271fbac672e837f374a2452",
+      "countryCode": "MD",
+      "electionContext": "stranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Обавештавамо држављане Републике Србије који имају боравиште у Румунији да, преко Амбасаде Републике Србије у Букурешту, могу најкасније до 03. октобра 2026. године у поноћ (локално време у Републици Србији) поднети захтев да се у Јединствени бирачки списак упише податак да ће на предстојећим изборима гласати у Румунији у Амбасади Републике Србије у Букурешту. Захтев се може поднети лично у Амбасади Републике Србије у Букурешту , на адреси Str. General Eremia Grigorescu 12, Sector 1 или e-mailom : consulate.bucharest@mfa.rs и srb.emb.romania@mfa.rs Уз захтев за гласање у иностранству прилаже се копија важећег пасоша или личне карте Републике Србије. Пожељно је да лична карта буде очитана, како би била видљива адреса пребивалишта (исту можете очитати у Амбасади). Напомињемо да држављани Републике Србије имају право да поднесу захтев да се у Јединствени бирачки списак упише пода",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "consulate.bucharest@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-16T01:02:46Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/moldavija-republika/ambasade-konzulati",
+        "https://bucharest.mfa.gov.rs/",
+        "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine"
+      ],
+      "sourceHost": "bucharest.mfa.gov.rs",
+      "sourceId": "1c7b9c067369a7a90c4af9b67bd16a8269a2381c88337650b161adcb4d5f176c",
+      "sourceQuote": "Захтев се може поднети лично у Амбасади Републике Србије у Букурешту , на адреси Str. General Eremia Grigorescu 12, Sector 1 или e-mailom : consulate.bucharest@mfa.rs и srb.emb.romania@mfa.rs",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+      "stationId": "st-nonres-md",
+      "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ"
+    },
+    {
       "candidateId": "248010f2baf9f89f79ea0fd55bc950e4222bc3bee2225139d780bd8940a4e89f",
       "countryCode": "GB",
       "electionContext": "a najkasnije pet dana pre dana zaključenja jedinstvenog biračkog spiska, odnosno do 23 sata prema lokalnom vremenu u UK i Irskoj 3. oktobra 2026. godine (ponoć prema lokalnom vremenu u Republici Srbiji). Nakon navedenog vremena zahtevi neće moći da se procesuiraju, zbog čega apelujemo na zainteresovane građane da zahteve podnesu blagovremeno, odnosno što ranije. Pravo prijave za glasanje u inostranstvu imaju svi državljani Republike Srbije, koji su upisani u JBS, bez obzira po kom osnovu i koliko dugo borave u inostranstvu. Zahtevi se dostavljaju Ambasadi Republike Srbije u Londonu na e-mail: izbori.london@mfa.rs (alternativno se mogu dostaviti lično ili preporučenom poštom na adresu Ambasade - 28 Belgrave Square, London, SW1X 8QB).",
@@ -320,7 +343,7 @@
       "electionYear": "2026",
       "email": "consulate.bucharest@mfa.rs",
       "evidenceType": "html",
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/rumunija/ambasade-konzulati",
@@ -995,7 +1018,7 @@
       "electionYear": "2026",
       "email": "srb.emb.romania@mfa.rs",
       "evidenceType": "html",
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/rumunija/ambasade-konzulati",
@@ -1323,6 +1346,30 @@
       "title": "Обавештење о пријави за гласање у иностранству"
     },
     {
+      "candidateId": "97d3566edff26c5dcbea07e74e025e2505ee0d0ee768732765be6edfe44c070b",
+      "countryCode": "MD",
+      "electionContext": "kog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Obaveštavamo državljane Republike Srbije koji imaju boravište u Rumuniji da, preko Ambasade Republike Srbije u Bukureštu, mogu najkasnije do 03. oktobra 2026. godine u ponoć (lokalno vreme u Republici Srbiji) podneti zahtev da se u Jedinstveni birački spisak upiše podatak da će na predstojećim izborima glasati u Rumuniji u Ambasadi Republike Srbije u Bukureštu. Zahtev se može podneti lično u Ambasadi Republike Srbije u Bukureštu , na adresi Str. General Eremia Grigorescu 12, Sector 1 ili e-mailom : consulate.bucharest@mfa.rs i srb.emb.romania@mfa.rs Uz zahtev za glasanje u inostranstvu prilaže se kopija važećeg pasoša ili lične karte Republike Srbije. Poželjno je da lična karta bude očitana, kako bi bila vidljiva adresa prebivališta (istu možete očitati u Ambasadi). Napominjemo da državljani Republike Srbije imaju pravo da podnesu zahtev da se u Jedinstveni birački spisak upiše podatak da će na predsto",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "srb.emb.romania@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-16T01:02:46Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/moldavija-republika/ambasade-konzulati",
+        "https://bucharest.mfa.gov.rs/",
+        "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+        "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine"
+      ],
+      "sourceHost": "bucharest.mfa.gov.rs",
+      "sourceId": "55c52b1713edab635f5a1c2b862fdea87df5f30e8046eba447b197fc8033adae",
+      "sourceQuote": "Zahtev se može podneti lično u Ambasadi Republike Srbije u Bukureštu , na adresi Str. General Eremia Grigorescu 12, Sector 1 ili e-mailom : consulate.bucharest@mfa.rs i srb.emb.romania@mfa.rs",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+      "stationId": "st-nonres-md",
+      "title": "PARLAMENTARNI IZBORI 25.10.2026. GODINE"
+    },
+    {
       "candidateId": "97f9b625541bc15558b03adcaf491a18de447216014869028cbdb8d09c2283a5",
       "countryCode": "BG",
       "electionContext": "Министарство државне управе и локалне самоуправе (МДУЛС) издало је Обавештење за бираче који имају боравиште у иностранству о остваривању бирачког права на изборима. Обавештење је могуће прегледати на следећем линку: https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Држављани Р. Србије са бирачким правом подносе захтев за гласање y иностранству преко ДКП најкасније пет дана пре дана закључења Јединственог бирачког списка (ЈБС), односно до 03. октобра 2026. y поноћ (локално време y Р. Србији). Након наведеног времена захтеви неће моћи да се процесуирају кроз систем, зато је неопходно да грађани заинтересовани за гласање y иностранству захтеве поднесу благовремено, односно што раније. Држављани Р. Србије могу на основу ЈМБГ и броја личне карте електронски проверити да ли су уписани y Јединствени бирачки списак преко сајта МДУЛС, односно следећег линка: https://upit.birackispisak.gov.rs/ Формулар Захтева за гласање у иностранству ( Zahtev-za-glasanje-u-inostranstvu 2026.doc) можете преузети кликом на линк. Лице које je држављанин Р. Србије и има пребивалиште y Р. Србији a није уписано y Јединствени бирачки списак (ЈБС), неопходно је да поднесе и захтев за упис у ЈБС, како би исти био обрађен y оквиру система ЈБС. Пошто захтев буде решен, односно надлежни орган донесе решење о упису y ЈБС, онда је могуће процесуирање захтева за гласање y иностранству. Држављанин Р. Србије може поднети захтев за упис y ЈБС и директно преко портала еУправе уколико лице има налог на порталу еУправе и истом приступа квалификованим електронским сертификатом или путем мобилне апликације ConsentlD. Формулар Захтева за упис у ЈБС ( Zahtev-za-upis-u-JBS-1.doc ) можете преузети кликом на линк. Уз потписан Захтев за гласање y иностранству прилаже се копија важеће личне карте или пасоша. Уколико подносилац захтева има личну карту са чипом, пожељно је да приложи копију очитане личне карте, ради увида y адресу пребивалишта. Захтев можете доставити Амбасади путем мејла на адресу izbori.sofija@mfa.rs , путем поште или непосредно у Kонзуларном одељењу Амбасаде, сваког радног дана у периоду 09,30 – 16,00 часова.",
@@ -1521,7 +1568,7 @@
       "electionYear": "2026",
       "email": "srb.emb.romania@mfa.rs",
       "evidenceType": "html",
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/rumunija/ambasade-konzulati",
@@ -1882,6 +1929,29 @@
       "title": "Обавештење о изборима за народне посланике Народне скупштине Републике Србије"
     },
     {
+      "candidateId": "cda1519a03281684f039004706781e669009b1166f56062bbb9a66a0d18ef948",
+      "countryCode": "MD",
+      "electionContext": "ckog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Обавештавамо држављане Републике Србије који имају боравиште у Румунији да, преко Амбасаде Републике Србије у Букурешту, могу најкасније до 03. октобра 2026. године у поноћ (локално време у Републици Србији) поднети захтев да се у Јединствени бирачки списак упише податак да ће на предстојећим изборима гласати у Румунији у Амбасади Републике Србије у Букурешту. Захтев се може поднети лично у Амбасади Републике Србије у Букурешту , на адреси Str. General Eremia Grigorescu 12, Sector 1 или e-mailom : consulate.bucharest@mfa.rs и srb.emb.romania@mfa.rs Уз захтев за гласање у иностранству прилаже се копија важећег пасоша или личне карте Републике Србије. Пожељно је да лична карта буде очитана, како би била видљива адреса пребивалишта (исту можете очитати у Амбасади). Напомињемо да држављани Републике Србије имају право да поднесу захтев да се у Јединствени бирачки списак упише податак да ће на предстојећим",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "srb.emb.romania@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-16T01:02:46Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/moldavija-republika/ambasade-konzulati",
+        "https://bucharest.mfa.gov.rs/",
+        "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine"
+      ],
+      "sourceHost": "bucharest.mfa.gov.rs",
+      "sourceId": "1c7b9c067369a7a90c4af9b67bd16a8269a2381c88337650b161adcb4d5f176c",
+      "sourceQuote": "Захтев се може поднети лично у Амбасади Републике Србије у Букурешту , на адреси Str. General Eremia Grigorescu 12, Sector 1 или e-mailom : consulate.bucharest@mfa.rs и srb.emb.romania@mfa.rs",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+      "stationId": "st-nonres-md",
+      "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ"
+    },
+    {
       "candidateId": "cf56b96f18b2a9690dd1c4913481838c2d42468126c6fa6a22a4376fb0654342",
       "countryCode": "GW",
       "electionContext": "едставништва најкасније пет дана пре дана закључења јединственог бирачког списка, односно до 23 сата према локалном времену у Алжиру 3. октобра 2026. године (поноћ према локалном времену у Републици Србији). Након наведеног времена захтеви неће моћи да се процесуирају, због чега апелујемо на заинтересоване грађане да захтеве поднесу благовремено, односно што раније. Право пријаве за гласање у иностранству имају сви држављани Републике Србије, који су уписани у ЈБС, без обзира по ком основу и колико дуго бораве у иностранству. Захтеви се достављају Амбасади Републике Србије у Алжиру на е-маил: consulat@ambserbie-alger.com (алтернативно се могу доставити лично или препорученом поштом).",
@@ -2090,6 +2160,30 @@
       "sourceUrl": "https://luanda.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-za-narodne-poslanike-narodne-skupstine-republike-srbije-2026-godine",
       "stationId": "st-ao-emb-main",
       "title": "Избори за народне посланике Народне скупштине Републике Србије 2026. године"
+    },
+    {
+      "candidateId": "df94eddde0d2de159d716a159728590257e630e1a99e31e43169279f37079694",
+      "countryCode": "MD",
+      "electionContext": "transtvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/ Obaveštavamo državljane Republike Srbije koji imaju boravište u Rumuniji da, preko Ambasade Republike Srbije u Bukureštu, mogu najkasnije do 03. oktobra 2026. godine u ponoć (lokalno vreme u Republici Srbiji) podneti zahtev da se u Jedinstveni birački spisak upiše podatak da će na predstojećim izborima glasati u Rumuniji u Ambasadi Republike Srbije u Bukureštu. Zahtev se može podneti lično u Ambasadi Republike Srbije u Bukureštu , na adresi Str. General Eremia Grigorescu 12, Sector 1 ili e-mailom : consulate.bucharest@mfa.rs i srb.emb.romania@mfa.rs Uz zahtev za glasanje u inostranstvu prilaže se kopija važećeg pasoša ili lične karte Republike Srbije. Poželjno je da lična karta bude očitana, kako bi bila vidljiva adresa prebivališta (istu možete očitati u Ambasadi). Napominjemo da državljani Republike Srbije imaju pravo da podnesu zahtev da se u Jedinstveni birački spisak upiše",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "email": "consulate.bucharest@mfa.rs",
+      "evidenceType": "html",
+      "observedAt": "2026-09-16T01:02:46Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/moldavija-republika/ambasade-konzulati",
+        "https://bucharest.mfa.gov.rs/",
+        "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+        "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine"
+      ],
+      "sourceHost": "bucharest.mfa.gov.rs",
+      "sourceId": "55c52b1713edab635f5a1c2b862fdea87df5f30e8046eba447b197fc8033adae",
+      "sourceQuote": "Zahtev se može podneti lično u Ambasadi Republike Srbije u Bukureštu , na adresi Str. General Eremia Grigorescu 12, Sector 1 ili e-mailom : consulate.bucharest@mfa.rs i srb.emb.romania@mfa.rs",
+      "sourceSelection": "crawled",
+      "sourceUrl": "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+      "stationId": "st-nonres-md",
+      "title": "PARLAMENTARNI IZBORI 25.10.2026. GODINE"
     },
     {
       "candidateId": "e046638cb71c2f1f6ece2ce091522a1ce802cc490e1e8011a7758e6c12c8921c",
@@ -2425,7 +2519,7 @@
   ],
   "electionId": "2026-parliamentary",
   "electionYear": "2026",
-  "generatedAt": "2026-09-15T14:45:50Z",
+  "generatedAt": "2026-09-16T01:02:46Z",
   "notices": [
     {
       "electionContext": "Ambasada Republike Srbije u Tirani obaveštava da je presednik Republike Srbije Aleksandar Vučić doneo Odluku o raspisivanju izbora za narodne poslanike, koji će se održati dana 25. oktobra 2026. godine.",
@@ -2801,7 +2895,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-15T14:45:50Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -2821,7 +2915,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-15T14:45:50Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/brazil/ambasade-konzulati",
@@ -3768,6 +3862,49 @@
       "title": "САОПШТЕЊЕ ЗА ЈАВНОСТ, ИЗБОРИ У РЕПУБЛИЦИ СРБИЈИ"
     },
     {
+      "electionContext": "PARLAMENTARNI IZBORI 25.10.2026. GODINE",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "consulate.bucharest@mfa.rs",
+        "srb.emb.romania@mfa.rs"
+      ],
+      "observedAt": "2026-09-16T01:02:46Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/moldavija-republika/ambasade-konzulati",
+        "https://bucharest.mfa.gov.rs/",
+        "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+        "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine"
+      ],
+      "sourceId": "55c52b1713edab635f5a1c2b862fdea87df5f30e8046eba447b197fc8033adae",
+      "sourceUrl": "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+      "stationId": "st-nonres-md",
+      "title": "PARLAMENTARNI IZBORI 25.10.2026. GODINE"
+    },
+    {
+      "electionContext": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ",
+      "electionId": "2026-parliamentary",
+      "electionYear": "2026",
+      "emailStatus": "email-extracted",
+      "emails": [
+        "consulate.bucharest@mfa.rs",
+        "srb.emb.romania@mfa.rs"
+      ],
+      "observedAt": "2026-09-16T01:02:46Z",
+      "sourceChain": [
+        "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/drzave-pokrivene-na-nerezidencijalnoj-osnovi",
+        "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/moldavija-republika/ambasade-konzulati",
+        "https://bucharest.mfa.gov.rs/",
+        "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine"
+      ],
+      "sourceId": "1c7b9c067369a7a90c4af9b67bd16a8269a2381c88337650b161adcb4d5f176c",
+      "sourceUrl": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
+      "stationId": "st-nonres-md",
+      "title": "ПАРЛАМЕНТАРНИ ИЗБОРИ 25.10.2026. ГОДИНЕ"
+    },
+    {
       "electionContext": "Ministarstvo državne uprave i lokalne samouprave | OBAVEŠTAVAJU SE BIRAČI KOJI IMAJU BORAVIŠTE U INOSTRANSTVU O OSTVARIVANjU BIRAČKOG PRAVA NA IZBORIMA KOJI ĆE BITI ODRŽANI 25. OKTOBRA 2026. GODINE",
       "electionId": "2026-parliamentary",
       "electionYear": "2026",
@@ -3864,7 +4001,7 @@
         "consulate.bucharest@mfa.rs",
         "srb.emb.romania@mfa.rs"
       ],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/rumunija/ambasade-konzulati",
@@ -3886,7 +4023,7 @@
         "consulate.bucharest@mfa.rs",
         "srb.emb.romania@mfa.rs"
       ],
-      "observedAt": "2026-09-12T19:19:51Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/rumunija/ambasade-konzulati",
@@ -4109,7 +4246,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-15T14:45:50Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -4128,7 +4265,7 @@
       "electionYear": "2026",
       "emailStatus": "no-email-extracted",
       "emails": [],
-      "observedAt": "2026-09-15T14:45:50Z",
+      "observedAt": "2026-09-16T01:02:46Z",
       "sourceChain": [
         "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu/ambasade",
         "https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/turska/ambasade-konzulati",
@@ -4183,17 +4320,13 @@
     }
   ],
   "pendingStationIds": [
-    "st-fr-emb-main-paris-mfa-gov-rs",
-    "st-ke-emb-main",
-    "st-lb-emb-main",
     "st-me-emb-main",
+    "st-nonres-md",
     "st-pt-emb-main",
     "st-ro-emb-main",
-    "st-si-emb-main",
-    "st-sk-emb-main",
-    "st-tz-emb-main"
+    "st-si-emb-main"
   ],
-  "runId": "d78e9a3f551b7b0576103e8c",
+  "runId": "16f2e978620e7832ca9fb849",
   "schemaVersion": 1,
   "sources": {
     "02b0bdfecf9b2fe66d3cf890567f16149b06ee75bc26dcab09ffbd5650b880b2": {
@@ -4288,7 +4421,7 @@
     "1c7b9c067369a7a90c4af9b67bd16a8269a2381c88337650b161adcb4d5f176c": {
       "bodySha256": "10f551002f2fc32978266a71714b24625914147e97c33f7a3cd50ad2a51951d8",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-16T01:02:46Z",
       "finalUrl": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
       "sourceSelection": "crawled",
       "sourceUrl": "https://bucharest.mfa.gov.rs/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
@@ -4298,7 +4431,7 @@
     "27c3681993858dfa87293621e930e28cc133e8c93aeed08498cfac7aea7bfcf8": {
       "bodySha256": "79a2a9d4f27a1c9de819faef082336484d621f8a56c35bf1d3e365be5626701d",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-15T14:45:50Z",
+      "fetchedAt": "2026-09-16T01:02:46Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4465,7 +4598,7 @@
     "55c52b1713edab635f5a1c2b862fdea87df5f30e8046eba447b197fc8033adae": {
       "bodySha256": "bdec17ccd3b6ffe52895b06e1fc910265f4fffb4666951632237f480547c5632",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-12T19:19:51Z",
+      "fetchedAt": "2026-09-16T01:02:46Z",
       "finalUrl": "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
       "sourceSelection": "crawled",
       "sourceUrl": "https://bucharest.mfa.gov.rs/lat/mediji/najave-i-obavestenja/parlamentarni-izbori-25-10-2026-godine",
@@ -4524,7 +4657,7 @@
     "6158ea6f885100b2a72c8762b890075d5f4be12ec66a0dc55a1debd8da0d51b3": {
       "bodySha256": "fef0fad3a525f2e64eb2bb0462f86dd320a30cd97c9721e186efa252cd01ad3a",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-15T14:45:50Z",
+      "fetchedAt": "2026-09-16T01:02:46Z",
       "finalUrl": "https://brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://www.brasilia.mfa.gov.rs/lat/mediji/aktivnosti/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4735,7 +4868,7 @@
     "885742fc9722cbf8f141b436adc551ef5b91f59c0f362381646082e58b8027a1": {
       "bodySha256": "b07d2925507a1e3f7933c70bf40545b088fb1640c5566e57ff3a16ec439b3d46",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-15T14:45:50Z",
+      "fetchedAt": "2026-09-16T01:02:46Z",
       "finalUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/lat/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
@@ -4954,7 +5087,7 @@
     "b40884b2c699b27431128400dce81843733512755123bd6d951dffa9c5b21bef": {
       "bodySha256": "71fcae55f6431c1fad915916159cb8a8133bab0d36bed78f17882ec6f75285b6",
       "extractorVersion": "1",
-      "fetchedAt": "2026-09-15T14:45:50Z",
+      "fetchedAt": "2026-09-16T01:02:46Z",
       "finalUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
       "sourceSelection": "crawled",
       "sourceUrl": "https://ankara.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu",
