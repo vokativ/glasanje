@@ -17,6 +17,14 @@ export interface ElectionEmailCoverage {
   total: number;
 }
 
+/**
+ * Calculates verified election recipient coverage across all stations.
+ *
+ * Coverage Invariant:
+ * Uses positive `isElectionRecipientApproved` membership check (source-confirmed or operator-approved).
+ * Yellow fallback stations (notice-no-email) MUST NOT be counted here to keep the public recipient
+ * deployment gate invariant (exactly 166 usable recipients out of 221 total stations).
+ */
 export const getElectionEmailCoverage = (
   countries: VotingCountry[] = COUNTRIES,
 ): ElectionEmailCoverage => {
@@ -93,6 +101,11 @@ export const RegistrationEmailStatusPage: React.FC = () => {
               <h3 id={`coverage-letter-${group.countries[0].countryCode}`} className="coverage-letter">{group.letter}</h3>
               {group.countries.map(country => {
                 const { approved, total } = getElectionEmailCoverage([country]);
+                // Country-level presentation status reflects:
+                // - 'confirmed' (green ✓): all listed missions have confirmed election recipients
+                // - 'partial' (amber ◐): some missions have confirmed recipients, others do not
+                // - 'notice' (yellow ⚠️): no confirmed recipients, but mission(s) published a 2026 election notice
+                // - 'unconfirmed' (red ✕): no confirmed recipients and no election notice published
                 const hasNoticeNoEmail = country.stations.some(
                   (station) => getStationElectionStatus(station) === 'notice-no-email'
                 );

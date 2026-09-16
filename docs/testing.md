@@ -23,7 +23,7 @@ Complete each combination:
 | Dimension | Values |
 | --- | --- |
 | Script | Cyrillic, Latin |
-| Recipient | Approved, unconfirmed |
+| Station state | Approved (green), Notice without dedicated email (yellow/amber), Unconfirmed (red) |
 | Entry | Direct form, coverage page → selected country |
 
 Across these paths, exercise drawn and paper signatures, with and without an ID image. Include an embassy, an independent consulate and a resolved non-resident country. Use synthetic personal data and images visibly marked as test material.
@@ -42,9 +42,9 @@ Across these paths, exercise drawn and paper signatures, with and without an ID 
 Derive expectations from `src/data/missions.ts` or `data/missions_canonical.json`, not copied documentation tables.
 
 - Check alphabetical grouping, letter navigation, browser find, keyboard expansion and readable country/flag labels in both scripts.
-- Compare every country's status with its station approvals: all, some, or none. Partial describes mission-recipient availability, not geographic coverage.
-- Expand countries with several consulates. Preserve each office's email and evidence.
-- Decode every offered inquiry link: exact resolved recipient, selected country, selected script, configured deadline/source and no personal form data. Approved missions omit the inquiry.
+- Compare every country's status on `/status`: all approved (`confirmed`), some approved (`partial`), no approved but notice published (`notice`), or no approved and no notice (`unconfirmed`). Partial describes mission-recipient availability, not geographic coverage. Yellow/notice status distinguishes missions that published 2026 election announcements from those with no notice at all.
+- Expand countries with several consulates. Preserve each office's email, evidence and yellow/unconfirmed status.
+- Decode every offered inquiry link: exact resolved recipient, selected country, selected script, configured deadline/source and no personal form data. Approved missions omit the inquiry. For yellow missions, verify that the text acknowledges the published notice rather than asking when a notice will appear.
 - Follow continue/back links and retain Latin preference. Exercise invalid/duplicate country parameters, empty search results and location-only invitations without inferred jurisdiction.
 - Open privacy/help dialogs from each entry point. Check focus trapping, reverse Tab, Escape/backdrop closure, focus restoration and scrolling.
 

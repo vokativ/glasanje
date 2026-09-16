@@ -31,8 +31,8 @@ There is no application submission API or personal-data database. Crawling and d
 | Country browsing | `src/components/RegistrationEmailStatusPage.tsx` | List all countries and distinguish mission approval from polling-place availability |
 | Country/mission selection | `src/components/StepVotingDestination.tsx` | Resolve stable IDs within the chosen country; retain separate consulates |
 | Country decoration | `src/components/CountryFlag.tsx`, `public/assets/flags/` | Local SVGs keyed by country code; written names remain the accessible label |
+| Station election status | `src/lib/stationElectionStatus.ts` | Pure runtime helper deriving `approved`, `notice-no-email`, and `unconfirmed` presentation states without modifying stored approval data |
 | Evidence and inquiry links | `ElectionNoticeLink.tsx`, `MissionInquiryLink.tsx`, `src/lib/missionInquiry.ts` | Show maintained evidence or a user-initiated question without changing approval |
-| Signature and ID image | `src/components/StepSignatureAndDocument.tsx` | Validate/normalize image locally; distinguish drawn and paper signatures |
 | PDF assets and layout | `src/lib/pdf.ts` | Reuse public assets; generate each personal document locally |
 | Export and handoff | `src/components/StepExportAndSubmit.tsx`, `src/lib/share.ts` | Generate/download/share on the user's behalf only at the relevant UI action; sending stays with the user |
 | Privacy dialog | `src/components/PrivacyPolicyModal.tsx` | Explain data boundaries and readiness; own dialog focus and keyboard lifecycle |
@@ -104,9 +104,21 @@ Explicit relationship fields remain stored separately: the guard checks approval
 
 Discovery schedules by host but preserves country/station-specific tasks and MFA source chains. Its response cache avoids repeated HTTP fetches of shared notices. Exact mailbox attribution protects known separate recipients (including Rome/Malta); an unknown address on a multi-station task can still need review. Collection starts with the responsible mission, then maintained data propagates approved coverage. Extraction alone never approves dependents. Images and scanned PDFs still need direct visual inspection when text extraction misses the instructions.
 
-Coverage summaries count **station records**, including already resolved non-resident entries. All approved is green; some approved is amber/partial; none approved is red. Partial means that some listed missions have a confirmed election recipient while others do not. It does not mean a geographic percentage of the country is covered or that a polling station will open. Country grouping uses Serbian collation and treats Latin `Dž`, `Lj` and `Nj` as single initial letters. Native `<details>` keeps the entire country list searchable and keyboard operable.
+Coverage summaries count **station records**, including already resolved non-resident entries. Approved counts strictly use positive `isElectionRecipientApproved` membership (`source-confirmed` or `operator-approved`) to maintain the deployment gate invariant (166 usable recipients). The country-level summary on `/status` uses four distinct statuses:
+- `✓ Potvrđeno` (`coverage-status--confirmed`): all listed missions have confirmed election recipients.
+- `◐ Delimično · X/Y` (`coverage-status--partial`): some missions have confirmed recipients, others do not.
+- `⚠️ Obaveštenje objavljeno` (`coverage-status--notice`): no confirmed recipients, but mission(s) published an official 2026 election announcement without a dedicated email (`notice-no-email`).
+- `✕ Nije potvrđeno` (`coverage-status--unconfirmed`): no confirmed recipients and no election notice published.
 
-An inquiry link is offered only for an unconfirmed mission with a syntactically valid published email and a country name. Its text asks for instructions, the election recipient and the notice URL. It uses the already resolved contact and the applicant's selected country, which can differ from the mission's host country. It includes no personal form fields and performs no sending. The election date/deadline/source are maintained copy in `missionInquiry.ts`; review them deliberately at election rollover.
+Station cards within a country reflect three distinct visual and semantic states:
+- **Approved** (green): confirmed election address with green checkmark and verification hint.
+- **Notice without dedicated email** (amber/yellow): amber card (`mission-card--notice-no-email`) and warning callout (`mission-warning--notice-no-email`) offering the general contact as an unguaranteed fallback attempt, with explicit instructions to request confirmation of receipt and verify the voter roll before the 3 October statutory deadline.
+- **Unconfirmed** (red): red error card (`mission-card--unconfirmed`) and red warning banner (`mission-warning`) indicating no confirmed election recipient or notice.
+
+An inquiry link is offered for unconfirmed and yellow missions with a syntactically valid published email and a country name. Its text adapts dynamically to notice presence:
+- For missions with a published 2026 announcement (`notice-no-email`), the inquiry draft acknowledges the notice on the mission website and asks whether requests are accepted at the general contact or if another mailbox is designated.
+- For missions without a notice, it asks when instructions and recipients will be published.
+- Both variants maintain 100% script purity in Cyrillic and Latin by referencing "your website" and "this address" rather than embedding untranslated raw URLs or emails inline.
 
 A notice URL and recipient approval are independent facts. Render the exact current notice when present, including inherited covering-mission evidence. A recorded `not-published` status can coexist with an operator-approved recipient. Missing or inaccessible evidence does not automatically remove public coverage.
 

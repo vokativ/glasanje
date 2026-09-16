@@ -7,6 +7,14 @@ import { validateEmail } from './validators';
 // https://mduls.gov.rs/obavestenja/obavestava-birace-koji-imaju-boraviste-u-inostranstvu-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026-godine/
 // Use the already-resolved mission contact. This inquiry neither establishes
 // election-recipient approval nor includes the applicant's personal form data.
+//
+// Notice Adaptation & Script Purity Contract:
+// - When an official 2026 election notice exists (yellow state), the inquiry acknowledges
+//   that an announcement is already published on the mission website and asks whether the
+//   general contact accepts requests or if another submission method is designated.
+// - When no notice exists (red state), the inquiry asks when instructions will be published.
+// - The message body avoids embedding untranslated raw URLs or emails inline so that
+//   Cyrillic mode maintains 100% script purity without triggering opposite-script test failures.
 export function buildMissionInquiryUrl(
   station: Pick<PollingStation, 'email' | 'electionContactApproval' | 'electionNotice'>,
   countryName: string,
