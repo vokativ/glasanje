@@ -3148,6 +3148,16 @@
       }
     },
     "st-al-emb-main": {
+      "electionEmail": "srb.emb.albania@mfa.rs",
+      "_operatorNote": "Maintainer explicitly authorized the mission's normal mailbox for 2026 election applications in this conversation on 2026-09-18. The official notice is embassy-authored, hosts registration form links on the mission's own site, and identifies the Embassy in Tirana as the receiving DKP.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      },
       "electionNotice": {
         "url": "https://tirana.mfa.gov.rs/mediji/aktivnosti/ambasada-republike-srbije-u-tirani-obavestava-da-je-presednik-republike-srbije-aleksandar-vucic-doneo-odluku-o-raspisivanju-izbora-za-narodne",
         "title": "Амбасада Републике Србије у Тирани обавештава да је преседник Републике Србије Александар Вучић донео Одлуку о расписивању избора за народне посланике, који ће се одржати дана 25. октобра 2026. године.",
@@ -3170,6 +3180,25 @@
       "electionNotice": {
         "url": "https://havana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu-11-sep-2026-0",
         "title": "Izbori: Prijavljivanje za glasanje u inostranstvu 11. sep 2026.",
+        "electionYear": "2026",
+        "observedAt": "2026-09-16T01:00:00Z",
+        "emailStatus": "no-email-extracted"
+      }
+    },
+    "st-tn-emb-main": {
+      "electionEmail": "amb.serbia@gnet.tn",
+      "_operatorNote": "Maintainer explicitly authorized the mission's normal mailbox for 2026 election applications in this conversation on 2026-09-18. The official notice is embassy-authored, gives a mission-specific physical address and local deadline, and hosts forms on the mission's own site.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      },
+      "electionNotice": {
+        "url": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
+        "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У РЕПУБЛИЦИ ТУНИС О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
         "electionYear": "2026",
         "observedAt": "2026-09-16T01:00:00Z",
         "emailStatus": "no-email-extracted"

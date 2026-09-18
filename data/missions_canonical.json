@@ -71,7 +71,7 @@
           "embassy": "Ambasada Republike Srbije (Albanija)",
           "embassyCyr": "Амбасада Републике Србије (Албанија)",
           "email": "srb.emb.albania@mfa.rs",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://tirana.mfa.gov.rs",
           "address": "Rr. Donika Kastrioti 9/1 ТИРАНА АЛБАНИЈА",
@@ -5688,7 +5688,7 @@
           "embassy": "Ambasada Republike Srbije (Tunis)",
           "embassyCyr": "Амбасада Републике Србије (Тунис)",
           "email": "amb.serbia@gnet.tn",
-          "electionContactApproval": "unconfirmed",
+          "electionContactApproval": "operator-approved",
           "isElectionContactConfirmed": false,
           "website": "https://www.tunis.mfa.gov.rs",
           "address": "4, Rue du Lac Majeur, 1053 - Les Berges du Lac ТУНИС",
@@ -5697,7 +5697,7 @@
             "url": "https://tunis.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-republici-tunis-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra",
             "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У РЕПУБЛИЦИ ТУНИС О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. ГОДИНЕ",
             "electionYear": "2026",
-            "observedAt": "2026-09-12T19:24:40Z",
+            "observedAt": "2026-09-16T01:00:00Z",
             "emailStatus": "no-email-extracted"
           }
         }
