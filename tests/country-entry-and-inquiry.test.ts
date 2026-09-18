@@ -104,11 +104,11 @@ describe('Mission inquiry drafts', () => {
   });
 
   test('keeps a consulate’s own recipient and safely encodes Cyrillic and punctuation', () => {
-    const vukovar = COUNTRY_BY_CODE.get('HR')!.stations.find(station => station.id.includes('vukovar'))!;
-    expect(vukovar).toBeDefined();
-    const countryName = 'Хрватска & пример + Čačak';
-    const url = new URL(buildMissionInquiryUrl(vukovar, countryName, 'cyrillic')!);
-    expect(url.pathname).toBe(vukovar.email);
+    const hercegNovi = COUNTRY_BY_CODE.get('ME')!.stations.find(station => station.id.includes('hercegnovi'))!;
+    expect(hercegNovi).toBeDefined();
+    const countryName = 'Црна Гора & пример + Čačak';
+    const url = new URL(buildMissionInquiryUrl(hercegNovi, countryName, 'cyrillic')!);
+    expect(url.pathname).toBe(hercegNovi.email);
     expect([...url.searchParams.keys()]).toEqual(['subject', 'body']);
     expect(url.searchParams.get('subject')).toBe(`Упит о пријави за гласање 2026. — ${countryName}`);
     expect(url.searchParams.get('body')).toContain(`Држава у којој боравим: ${countryName}.`);

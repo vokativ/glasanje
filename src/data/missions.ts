@@ -6352,7 +6352,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Generalni konzulat Republike Srbije (Vukovar)",
         "embassyCyr": "Генерални конзулат Републике Србије (Вуковар)",
         "email": "generalni.konzulat@gk-srbije-vukovar.hr",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://vukovar.mfa.gov.rs",
         "address": "Ивана Гундулића 19ВУКОВАРХРВАТСКА",

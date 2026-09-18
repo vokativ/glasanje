@@ -2924,6 +2924,16 @@
       }
     },
     "st-hr-cons-vukovar": {
+      "electionEmail": "generalni.konzulat@gk-srbije-vukovar.hr",
+      "_operatorNote": "Maintainer explicitly authorized the consulate's normal mailbox for 2026 election applications in this conversation on 2026-09-18, applying the same maintained normal-mailbox decision used for Tripoli. The official notice identifies the General Consulate in Vukovar as the receiving office but does not print a submission email.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      },
       "electionNotice": {
         "url": "https://vukovar.mfa.gov.rs/mediji/najave-i-obavestenja/obavestenje-izbori-za-narodne-poslanike",
         "title": "OБАВЕШТЕЊЕ - ИЗБОРИ ЗА НАРОДНЕ ПОСЛАНИКЕ",

@@ -87,17 +87,17 @@ describe('Station Election Status (Yellow State)', () => {
   });
 
   test('buildMissionInquiryUrl adapts its question when an election notice exists', () => {
-    const vukovar = COUNTRY_BY_CODE.get('HR')!.stations.find((s) => s.id.includes('vukovar'))!;
-    expect(getStationElectionStatus(vukovar)).toBe('notice-no-email');
+    const hercegNovi = COUNTRY_BY_CODE.get('ME')!.stations.find((s) => s.id.includes('hercegnovi'))!;
+    expect(getStationElectionStatus(hercegNovi)).toBe('notice-no-email');
 
-    const latinInquiry = buildMissionInquiryUrl(vukovar, 'Hrvatska', 'latin');
+    const latinInquiry = buildMissionInquiryUrl(hercegNovi, 'Crna Gora', 'latin');
     expect(latinInquiry).not.toBeNull();
     const latinBody = new URL(latinInquiry!).searchParams.get('body')!;
     expect(latinBody).toContain('Upoznat/a sam sa zvaničnim obaveštenjem za izbore 2026.');
     expect(latinBody).toContain('da li potpisan zahtev i priloge mogu poslati na ovu adresu');
     expect(latinBody).not.toContain('Kada i gde će biti objavljeno uputstvo');
 
-    const cyrillicInquiry = buildMissionInquiryUrl(vukovar, 'Хрватска', 'cyrillic');
+    const cyrillicInquiry = buildMissionInquiryUrl(hercegNovi, 'Црна Гора', 'cyrillic');
     expect(cyrillicInquiry).not.toBeNull();
     const cyrillicBody = new URL(cyrillicInquiry!).searchParams.get('body')!;
     expect(cyrillicBody).toContain('Упознат/а сам са званичним обавештењем за изборе 2026.');
