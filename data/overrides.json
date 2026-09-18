@@ -3157,6 +3157,16 @@
       }
     },
     "st-cu-emb-main": {
+      "electionEmail": "officesrbhav@gmail.com",
+      "_operatorNote": "Maintainer explicitly authorized the mission's normal mailbox for 2026 election applications in this conversation on 2026-09-18. The official notice identifies the Embassy in Havana as the receiving mission and hosts registration form links; preserve this as an operator-approved normal-mailbox exception. Applies to covered dependents in the Dominican Republic, Jamaica, and Haiti.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      },
       "electionNotice": {
         "url": "https://havana.mfa.gov.rs/mediji/najave-i-obavestenja/izbori-prijavljivanje-za-glasanje-u-inostranstvu-11-sep-2026-0",
         "title": "Izbori: Prijavljivanje za glasanje u inostranstvu 11. sep 2026.",
