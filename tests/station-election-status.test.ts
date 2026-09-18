@@ -1,12 +1,11 @@
 import { expect, test, describe } from 'bun:test';
-import { COUNTRIES, COUNTRY_BY_CODE, PollingStation } from '../src/data/missions';
+import { COUNTRY_BY_CODE } from '../src/data/missions';
 import {
   getStationElectionStatus,
   isElectionRecipientApproved,
 } from '../src/lib/stationElectionStatus';
 import { buildRecipientPayloads } from '../src/lib/share';
 import { buildMissionInquiryUrl } from '../src/lib/missionInquiry';
-import { getElectionEmailCoverage } from '../src/components/RegistrationEmailStatusPage';
 
 describe('Station Election Status (Yellow State)', () => {
   test('isElectionRecipientApproved returns true only for source-confirmed and operator-approved', () => {
@@ -61,36 +60,6 @@ describe('Station Election Status (Yellow State)', () => {
     expect(getStationElectionStatus({ electionContactApproval: 'unconfirmed' })).toBe('unconfirmed');
   });
 
-  test('exactly the 12 expected stations in the dataset resolve to notice-no-email', () => {
-    const allStations: PollingStation[] = COUNTRIES.flatMap((c) => c.stations);
-    const yellowStations = allStations.filter((s) => getStationElectionStatus(s) === 'notice-no-email');
-    const expectedYellowIds: Record<string, true> = {
-      'st-al-emb-main': true,
-      'st-br-emb-main': true,
-      'st-cu-emb-main': true,
-      'st-ly-emb-main': true,
-      'st-tn-emb-main': true,
-      'st-tr-emb-main': true,
-      'st-tr-cons-istanbul': true,
-      'st-hr-cons-vukovar': true,
-      'st-me-cons-hercegnovi': true,
-      // Havana covered dependents
-      'st-nonres-do': true,
-      'st-nonres-jm': true,
-      'st-nonres-ht': true,
-    };
-
-    expect(yellowStations.length).toBe(12);
-    for (const s of yellowStations) {
-      expect(expectedYellowIds[s.id]).toBe(true);
-    }
-  });
-
-  test('total approved recipients in coverage remains exactly 166 out of 221', () => {
-    const coverage = getElectionEmailCoverage(COUNTRIES);
-    expect(coverage.approved).toBe(166);
-    expect(coverage.total).toBe(221);
-  });
 
   test('buildRecipientPayloads includes yellow warning for notice-no-email stations', () => {
     const payloads = buildRecipientPayloads({

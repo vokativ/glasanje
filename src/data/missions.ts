@@ -3145,7 +3145,7 @@ export const COUNTRIES: VotingCountry[] = [
         "embassy": "Ambasada Republike Srbije (Libija)",
         "embassyCyr": "Амбасада Републике Србије (Либија)",
         "email": "srb.emb.libya@mfa.rs",
-        "electionContactApproval": "unconfirmed",
+        "electionContactApproval": "operator-approved",
         "isElectionContactConfirmed": false,
         "website": "https://www.tripoli.mfa.gov.rs",
         "address": "Kvart Ben Ašur, Abdal Ben Salam P.O.Box 1087 ТРИПОЛИ ЛИБИЈА",

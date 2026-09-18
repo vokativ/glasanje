@@ -2746,6 +2746,16 @@
       "_operatorNote": "Maintainer confirmed Latvia consular coverage by Sweden. MFA Latvia directory explicitly names the embassy in Sweden for consular matters; preserve both existing station IDs and resolve them to Stockholm. Source: https://www.mfa.gov.rs/spoljna-politika/bilateralna-saradnja/letonija/ambasade-konzulati"
     },
     "st-ly-emb-main": {
+      "electionEmail": "srb.emb.libya@mfa.rs",
+      "_operatorNote": "Maintainer explicitly authorized the mission's normal mailbox for 2026 election applications in this conversation on 2026-09-18. The official notice identifies the Embassy in Tripoli as the receiving mission but does not print a submission email; preserve this as an operator-approved normal-mailbox exception.",
+      "_electionContactProvenance": {
+        "schemaVersion": 2,
+        "authorization": {
+          "type": "operator"
+        },
+        "electionId": "2026-parliamentary",
+        "electionYear": "2026"
+      },
       "electionNotice": {
         "url": "https://tripoli.mfa.gov.rs/mediji/aktivnosti/obavestenje-za-drzavljane-republike-srbije-koji-borave-u-drzavi-libiji-o-ostvarivanju-birackog-prava-na-izborima-koji-ce-biti-odrzani-25-oktobra-2026",
         "title": "ОБАВЕШТЕЊЕ ЗА ДРЖАВЉАНЕ РЕПУБЛИКЕ СРБИЈЕ КОЈИ БОРАВЕ У ДРЖАВИ ЛИБИЈИ О ОСТВАРИВАЊУ БИРАЧКОГ ПРАВА НА ИЗБОРИМА КОЈИ ЋЕ БИТИ ОДРЖАНИ 25. ОКТОБРА 2026. Г.",
