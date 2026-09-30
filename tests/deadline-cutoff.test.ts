@@ -120,19 +120,19 @@ describe('Admission decision pure logic (decideAdmission)', () => {
   });
 
   test('user engagement on step 2 preserves admission when background sync resolves post-deadline', () => {
-    let progressSignaled = false;
+    let progressFired = false;
     const handleProgress = () => {
-      progressSignaled = true;
+      progressFired = true;
     };
 
-    // Render StepPersonalInfo with onProgress callback
+    // 1. Initial mount: rendering alone must NOT fire onProgress
     const markup = renderToStaticMarkup(
       React.createElement(
         ScriptProvider,
         { initialScript: 'latin' },
         React.createElement(StepPersonalInfo, {
           initialData: {
-            fullName: 'Petar Petrović',
+            fullName: '',
             parentName: '',
             jmbg: '',
             serbianAddress: '',
@@ -147,28 +147,29 @@ describe('Admission decision pure logic (decideAdmission)', () => {
     );
 
     expect(markup).toContain('id="fullName"');
+    expect(progressFired).toBe(false); // Proves mounting alone does not signal engagement
 
-    // Invoking the progress callback simulates user interaction in StepPersonalInfo
-    handleProgress();
-    expect(progressSignaled).toBe(true);
-
-    // When engagement is signaled, decideAdmission preserves the form even post-deadline
-    const decisionWithEngagement = decideAdmission({
-      isStatusRoute: false,
-      hasProgress: progressSignaled,
-      serverTimeConfirmed: true,
-      nowMs: TARGET_DEADLINE_MS + 60_000,
-    });
-    expect(decisionWithEngagement).toBe('open');
-
-    // Pristine untouched visits without engagement close once server time confirms deadline
+    // Untouched visitor without user engagement closes once server confirms deadline
     const decisionWithoutEngagement = decideAdmission({
       isStatusRoute: false,
-      hasProgress: false,
+      hasProgress: progressFired,
       serverTimeConfirmed: true,
       nowMs: TARGET_DEADLINE_MS + 60_000,
     });
     expect(decisionWithoutEngagement).toBe('closed');
+
+    // 2. User interaction: when input change fires onProgress, progress is latched
+    handleProgress();
+    expect(progressFired).toBe(true);
+
+    // When engagement is signaled, decideAdmission preserves the form even post-deadline
+    const decisionWithEngagement = decideAdmission({
+      isStatusRoute: false,
+      hasProgress: progressFired,
+      serverTimeConfirmed: true,
+      nowMs: TARGET_DEADLINE_MS + 60_000,
+    });
+    expect(decisionWithEngagement).toBe('open');
   });
 
   test('computeNextStatusDelay calculates production boundary delays and self-re-arms correctly', () => {
