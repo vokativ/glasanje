@@ -85,8 +85,10 @@ const AppContent: React.FC = () => {
   serverSampleRef.current = serverSample;
   // User engagement tracking: latches active progress as soon as any input is edited
   const userEngagedRef = useRef(false);
+  const hasProgressRef = useRef(false);
   const markUserEngaged = useCallback(() => {
     userEngagedRef.current = true;
+    hasProgressRef.current = true;
   }, []);
 
   const [clockTime, setClockTime] = useState<{ nowMs: number; source: 'server' | 'local' }>(() =>
@@ -155,12 +157,10 @@ const AppContent: React.FC = () => {
     };
   }, []);
 
-  // Display clock update: only ticks when on wizard route (status page has no countdown).
-  // Refreshes immediately on visibilitychange, focus, or pageshow.
   // Display clock update:
   // - Always listens to visibilitychange, focus, and pageshow on all routes (including /status)
   // - On wizard routes, runs 1-second interval for live countdown
-  // - On /status, sets a one-shot timer to transition to archive mode exactly when the deadline passes
+  // - On /status, schedules transition timer against server-synchronized time and re-arms on focus/sample
   useEffect(() => {
     const updateClock = () => {
       setClockTime(readCurrentTime(serverSampleRef.current));
@@ -176,9 +176,11 @@ const AppContent: React.FC = () => {
     if (!isStatusPage) {
       intervalId = window.setInterval(updateClock, 1000);
     } else {
-      const msUntilDeadline = TARGET_DEADLINE_MS - Date.now();
-      if (msUntilDeadline > 0 && msUntilDeadline < 86_400_000) {
-        deadlineTimerId = window.setTimeout(updateClock, msUntilDeadline + 100);
+      const currentNow = readCurrentTime(serverSampleRef.current).nowMs;
+      const msUntilDeadline = TARGET_DEADLINE_MS - currentNow;
+      if (msUntilDeadline > 0) {
+        const delay = Math.min(msUntilDeadline + 100, 3600_000);
+        deadlineTimerId = window.setTimeout(updateClock, delay);
       }
     }
 
@@ -189,7 +191,7 @@ const AppContent: React.FC = () => {
       window.removeEventListener('focus', updateClock);
       window.removeEventListener('pageshow', updateClock);
     };
-  }, [isStatusPage]);
+  }, [isStatusPage, serverSample]);
 
   // Track progress status defensively to prevent unmounting active applications
   const hasProgress =
@@ -203,8 +205,10 @@ const AppContent: React.FC = () => {
       signatureAndDoc.signaturePngDataUrl ||
       signatureAndDoc.idDocumentDataUrl,
     );
-  const hasProgressRef = useRef(hasProgress);
-  hasProgressRef.current = hasProgress;
+  if (hasProgress) {
+    hasProgressRef.current = true;
+  }
+
 
   // Server-time synchronization: ALWAYS runs on mount in background.
   // Corrects countdown & advisory times, and guards against slow/manipulated device clocks.
@@ -231,7 +235,7 @@ const AppContent: React.FC = () => {
         const serverNow = readCurrentTime(sample).nowMs;
         const decision = decideAdmission({
           isStatusRoute: isStatusPage,
-          hasProgress: hasProgressRef.current,
+          hasProgress: userEngagedRef.current || hasProgressRef.current,
           serverTimeConfirmed: true,
           nowMs: serverNow,
         });
@@ -281,6 +285,7 @@ const AppContent: React.FC = () => {
   const handleReset = () => {
     if (window.confirm(t('Da li ste sigurni da želite da započnete novu prijavu?'))) {
       userEngagedRef.current = false;
+      hasProgressRef.current = false;
       setCurrentStep(1);
       setPersonalInfo({
         fullName: '',

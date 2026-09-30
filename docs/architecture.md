@@ -70,12 +70,12 @@ To avoid requiring manual midnight deployments, DNS flips, or fragile scheduled 
    - **Boundary / Post-deadline path**: Visitors arriving within 1 hour or after the deadline initialize as `'pending'` with a 3000ms fail-open fallback.
    - **Origin time synchronization**: On mount, a lightweight same-origin `HEAD /` request samples the HTTP `Date` header to detect client device clock skew. If network fails or times out, it fails open to `'open'`.
 3. **In-Progress Session Preservation**:
-   - A session with user-entered data (`currentStep > 1` or non-empty personal details / signatures) is **never closed or unmounted**.
+   - A session with user-entered data (`userEngaged` from any input edit, `currentStep > 2`, un-shortcut `currentStep > 1`, or non-empty personal details/signatures) is **never closed or unmounted**. Country-entry URL shortcuts (`/?country=XX`) start on step 2; if left untouched, post-deadline background synchronization can close them, but editing any field immediately latches progress synchronously, preventing closure.
    - When the deadline passes during an active session, a non-destructive advisory banner (`PostDeadlineNotice variant="advisory"`) appears above the stepper, permitting full completion and PDF download.
 4. **Archive Mode on `/status`**:
    - The `/status` route is always accessible immediately without waiting for server time synchronization.
-   - After the deadline, it switches to 2026 Archive presentation: new registration buttons and inquiry composer links are hidden, but all embassy listings, emails, phone numbers, and official election notices remain fully visible and searchable.
-
+   - For open status tabs, a lightweight boundary timer calculates time remaining against authoritative server-synchronized time and triggers the archive transition at the exact deadline instant without 1-Hz CPU polling. Tab visibility/focus/pageshow events re-evaluate immediately.
+   - In archive mode, new registration buttons and inquiry composer links are hidden, but all embassy listings, emails (including unconfirmed missions), phone numbers, and official election notices remain fully visible and searchable.
 ## Loading, memory and offline preparation
 
 `App.tsx` starts preparation in its mount effect, without blocking the initial screen. It calls the same dynamic-import loaders used by `React.lazy` for the signature and export screens, plus `preloadPdfResources()` for the nested PDF dependencies, official template and font. This happens on both routes. A later full-page navigation starts another application instance.
