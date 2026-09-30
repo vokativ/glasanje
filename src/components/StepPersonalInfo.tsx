@@ -20,12 +20,13 @@ interface StepPersonalInfoProps {
   initialData: PersonalInfoData;
   onBack: () => void;
   onNext: (data: PersonalInfoData) => void;
+  onProgress?: () => void;
 }
-
 export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
   initialData,
   onBack,
   onNext,
+  onProgress,
 }) => {
   const { script, t } = useScript();
   const [data, setData] = useState<PersonalInfoData>(initialData);
@@ -61,9 +62,9 @@ export const StepPersonalInfo: React.FC<StepPersonalInfoProps> = ({
   };
 
   const handleChange = (field: keyof PersonalInfoData, value: string) => {
+    onProgress?.();
     setData((prev) => ({ ...prev, [field]: value }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isFormValid) {

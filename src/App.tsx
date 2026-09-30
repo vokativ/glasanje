@@ -15,6 +15,7 @@ import {
   isDeadlinePassed,
   normalizePathname,
   shouldSkipPending,
+  TARGET_DEADLINE_MS,
 } from './lib/deadline';
 import { readCurrentTime, ServerTimeSample, synchronizeServerTime } from './lib/serverTime';
 import { StepVoterRegistry } from './components/StepVoterRegistry';
@@ -82,6 +83,11 @@ const AppContent: React.FC = () => {
   const [serverSample, setServerSample] = useState<ServerTimeSample | null>(null);
   const serverSampleRef = useRef<ServerTimeSample | null>(null);
   serverSampleRef.current = serverSample;
+  // User engagement tracking: latches active progress as soon as any input is edited
+  const userEngagedRef = useRef(false);
+  const markUserEngaged = useCallback(() => {
+    userEngagedRef.current = true;
+  }, []);
 
   const [clockTime, setClockTime] = useState<{ nowMs: number; source: 'server' | 'local' }>(() =>
     readCurrentTime(null),
@@ -151,20 +157,34 @@ const AppContent: React.FC = () => {
 
   // Display clock update: only ticks when on wizard route (status page has no countdown).
   // Refreshes immediately on visibilitychange, focus, or pageshow.
+  // Display clock update:
+  // - Always listens to visibilitychange, focus, and pageshow on all routes (including /status)
+  // - On wizard routes, runs 1-second interval for live countdown
+  // - On /status, sets a one-shot timer to transition to archive mode exactly when the deadline passes
   useEffect(() => {
-    if (isStatusPage) return;
-
     const updateClock = () => {
       setClockTime(readCurrentTime(serverSampleRef.current));
     };
 
-    const intervalId = setInterval(updateClock, 1000);
     window.addEventListener('visibilitychange', updateClock);
     window.addEventListener('focus', updateClock);
     window.addEventListener('pageshow', updateClock);
 
+    let intervalId: number | undefined;
+    let deadlineTimerId: number | undefined;
+
+    if (!isStatusPage) {
+      intervalId = window.setInterval(updateClock, 1000);
+    } else {
+      const msUntilDeadline = TARGET_DEADLINE_MS - Date.now();
+      if (msUntilDeadline > 0 && msUntilDeadline < 86_400_000) {
+        deadlineTimerId = window.setTimeout(updateClock, msUntilDeadline + 100);
+      }
+    }
+
     return () => {
-      clearInterval(intervalId);
+      window.clearInterval(intervalId);
+      window.clearTimeout(deadlineTimerId);
       window.removeEventListener('visibilitychange', updateClock);
       window.removeEventListener('focus', updateClock);
       window.removeEventListener('pageshow', updateClock);
@@ -173,6 +193,8 @@ const AppContent: React.FC = () => {
 
   // Track progress status defensively to prevent unmounting active applications
   const hasProgress =
+    userEngagedRef.current ||
+    currentStep > 2 ||
     (currentStep > 1 && !initialCountryCode) ||
     Boolean(
       personalInfo.fullName.trim() ||
@@ -258,8 +280,8 @@ const AppContent: React.FC = () => {
   // current in-memory application; it does not attest to any prior submission.
   const handleReset = () => {
     if (window.confirm(t('Da li ste sigurni da želite da započnete novu prijavu?'))) {
+      userEngagedRef.current = false;
       setCurrentStep(1);
-      setRegistryStepCompleted(false);
       setPersonalInfo({
         fullName: '',
         parentName: '',
@@ -411,6 +433,7 @@ const AppContent: React.FC = () => {
                 initialData={personalInfo}
                 onBack={() => setCurrentStep(1)}
                 onNext={handleStep2Complete}
+                onProgress={markUserEngaged}
               />
             )}
 

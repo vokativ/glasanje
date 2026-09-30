@@ -117,6 +117,26 @@ describe('Admission decision pure logic (decideAdmission)', () => {
     ).toBe('open');
   });
 
+  test('user engagement on step 2 preserves admission when background sync resolves post-deadline', () => {
+    // When user engagement is registered, hasProgress is true and admission stays open
+    const decisionWithEngagement = decideAdmission({
+      isStatusRoute: false,
+      hasProgress: true,
+      serverTimeConfirmed: true,
+      nowMs: TARGET_DEADLINE_MS + 60_000,
+    });
+    expect(decisionWithEngagement).toBe('open');
+
+    // Pristine untouched visits without engagement close once server time confirms deadline
+    const decisionWithoutEngagement = decideAdmission({
+      isStatusRoute: false,
+      hasProgress: false,
+      serverTimeConfirmed: true,
+      nowMs: TARGET_DEADLINE_MS + 60_000,
+    });
+    expect(decisionWithoutEngagement).toBe('closed');
+  });
+
   test('unconfirmed server time fails open to avoid false lockouts', () => {
     expect(
       decideAdmission({
@@ -319,8 +339,9 @@ describe('RegistrationEmailStatusPage archive mode', () => {
     // Unconfirmed covering mission email must be visible as public contact
     expect(html).toContain('konzularno@serbiatehran.com');
     expect(html).toContain('Javni kontakt misije:');
-    // Pre-composed inquiry composer link must be omitted in archive mode
-    expect(html).not.toContain('Pošaljite upit misiji: konzularno@serbiatehran.com');
+    // Pre-composed inquiry composer link and CTA must be omitted in archive mode
+    expect(html).not.toContain('Pitajte misiju za uputstvo');
+    expect(html).not.toContain('mailto:konzularno@serbiatehran.com');
   });
 
   test('isArchive=false renders active registration view with registration CTAs', () => {
@@ -335,6 +356,7 @@ describe('RegistrationEmailStatusPage archive mode', () => {
     expect(html).toContain('Potvrđene izborne i-mejl adrese');
     expect(html).toContain('Nazad na prijavu za glasanje');
     expect(html).toContain('Započnite prijavu za ovu državu');
+    expect(html).toContain('mailto:konzularno@serbiatehran.com');
   });
 });
 
