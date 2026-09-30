@@ -158,38 +158,53 @@ const AppContent: React.FC = () => {
   }, []);
 
   // Display clock update:
-  // - Always listens to visibilitychange, focus, and pageshow on all routes (including /status)
   // - On wizard routes, runs 1-second interval for live countdown
-  // - On /status, schedules transition timer against server-synchronized time and re-arms on focus/sample
+  // - On /status, self-rescheduling boundary timer wakes at deadline (or re-arms hourly if distant)
+  // - Listens to visibilitychange, focus, and pageshow on all routes to update and re-arm immediately
   useEffect(() => {
-    const updateClock = () => {
-      setClockTime(readCurrentTime(serverSampleRef.current));
-    };
-
-    window.addEventListener('visibilitychange', updateClock);
-    window.addEventListener('focus', updateClock);
-    window.addEventListener('pageshow', updateClock);
-
     let intervalId: number | undefined;
     let deadlineTimerId: number | undefined;
 
-    if (!isStatusPage) {
-      intervalId = window.setInterval(updateClock, 1000);
-    } else {
+    const scheduleStatusTimer = () => {
+      window.clearTimeout(deadlineTimerId);
       const currentNow = readCurrentTime(serverSampleRef.current).nowMs;
+      setClockTime({ nowMs: currentNow, source: serverSampleRef.current ? 'server' : 'local' });
+
       const msUntilDeadline = TARGET_DEADLINE_MS - currentNow;
       if (msUntilDeadline > 0) {
         const delay = Math.min(msUntilDeadline + 100, 3600_000);
-        deadlineTimerId = window.setTimeout(updateClock, delay);
+        deadlineTimerId = window.setTimeout(scheduleStatusTimer, delay);
       }
+    };
+
+    const updateWizardClock = () => {
+      setClockTime(readCurrentTime(serverSampleRef.current));
+    };
+
+    if (isStatusPage) {
+      scheduleStatusTimer();
+      window.addEventListener('visibilitychange', scheduleStatusTimer);
+      window.addEventListener('focus', scheduleStatusTimer);
+      window.addEventListener('pageshow', scheduleStatusTimer);
+    } else {
+      intervalId = window.setInterval(updateWizardClock, 1000);
+      window.addEventListener('visibilitychange', updateWizardClock);
+      window.addEventListener('focus', updateWizardClock);
+      window.addEventListener('pageshow', updateWizardClock);
     }
 
     return () => {
       window.clearInterval(intervalId);
       window.clearTimeout(deadlineTimerId);
-      window.removeEventListener('visibilitychange', updateClock);
-      window.removeEventListener('focus', updateClock);
-      window.removeEventListener('pageshow', updateClock);
+      if (isStatusPage) {
+        window.removeEventListener('visibilitychange', scheduleStatusTimer);
+        window.removeEventListener('focus', scheduleStatusTimer);
+        window.removeEventListener('pageshow', scheduleStatusTimer);
+      } else {
+        window.removeEventListener('visibilitychange', updateWizardClock);
+        window.removeEventListener('focus', updateWizardClock);
+        window.removeEventListener('pageshow', updateWizardClock);
+      }
     };
   }, [isStatusPage, serverSample]);
 

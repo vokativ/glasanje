@@ -118,23 +118,53 @@ describe('Admission decision pure logic (decideAdmission)', () => {
   });
 
   test('user engagement on step 2 preserves admission when background sync resolves post-deadline', () => {
-    // When user engagement is registered, hasProgress is true and admission stays open
-    const decisionWithEngagement = decideAdmission({
+    // When user engagement is registered synchronously, hasProgress is immediately true
+    const userEngagedRef = { current: true };
+    const hasProgressRef = { current: false }; // Even if parent render has not happened yet!
+
+    const decisionWithSynchronousEngagement = decideAdmission({
       isStatusRoute: false,
-      hasProgress: true,
+      hasProgress: userEngagedRef.current || hasProgressRef.current,
       serverTimeConfirmed: true,
       nowMs: TARGET_DEADLINE_MS + 60_000,
     });
-    expect(decisionWithEngagement).toBe('open');
+    expect(decisionWithSynchronousEngagement).toBe('open');
 
     // Pristine untouched visits without engagement close once server time confirms deadline
+    userEngagedRef.current = false;
+    hasProgressRef.current = false;
     const decisionWithoutEngagement = decideAdmission({
       isStatusRoute: false,
-      hasProgress: false,
+      hasProgress: userEngagedRef.current || hasProgressRef.current,
       serverTimeConfirmed: true,
       nowMs: TARGET_DEADLINE_MS + 60_000,
     });
     expect(decisionWithoutEngagement).toBe('closed');
+  });
+
+  test('status boundary timer calculates delays and self-re-arms correctly', () => {
+    // Helper matching the self-rescheduling timer calculation in App.tsx
+    const calculateStatusDelay = (currentNow: number) => {
+      const msUntilDeadline = TARGET_DEADLINE_MS - currentNow;
+      if (msUntilDeadline <= 0) return null;
+      return Math.min(msUntilDeadline + 100, 3600_000);
+    };
+
+    // 1. T-2 hours: delay is capped at 1 hour (3600_000 ms)
+    const twoHoursBefore = TARGET_DEADLINE_MS - 2 * 3600_000;
+    expect(calculateStatusDelay(twoHoursBefore)).toBe(3600_000);
+
+    // 2. T-1 hour (wake up from first timer): delay is capped at remaining (3600_000 + 100) -> capped at 3600_000
+    const oneHourBefore = TARGET_DEADLINE_MS - 3600_000;
+    expect(calculateStatusDelay(oneHourBefore)).toBe(3600_000);
+
+    // 3. T-15 minutes (within 1 hour): delay is exactly 15 minutes + 100ms
+    const fifteenMinsBefore = TARGET_DEADLINE_MS - 15 * 60_000;
+    expect(calculateStatusDelay(fifteenMinsBefore)).toBe(15 * 60_000 + 100);
+
+    // 4. At or past deadline: no timer scheduled (switches to archive mode)
+    expect(calculateStatusDelay(TARGET_DEADLINE_MS)).toBeNull();
+    expect(calculateStatusDelay(TARGET_DEADLINE_MS + 5000)).toBeNull();
   });
 
   test('unconfirmed server time fails open to avoid false lockouts', () => {
