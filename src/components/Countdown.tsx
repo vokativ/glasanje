@@ -1,42 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useScript } from '../lib/script';
+import {
+  TARGET_DEADLINE_MS,
+  calculateRemaining,
+  DEADLINE_DISPLAY_SR_CYR,
+  DEADLINE_DISPLAY_SR_LAT,
+} from '../lib/deadline';
 
-// Displays the published deadline as one UTC instant so the countdown cannot vary with a visitor's
-// browser time zone. Keep this conversion and the Serbian deadline copy below in sync when its source changes.
-export const TARGET_DEADLINE_MS = new Date('2026-10-03T22:00:00Z').getTime();
-
-interface TimeRemaining {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-  isExpired: boolean;
+export interface CountdownProps {
+  nowMs?: number;
+  timeSource?: 'server' | 'local';
 }
 
-export function calculateRemaining(targetMs: number): TimeRemaining {
-  const diff = targetMs - Date.now();
-  if (diff <= 0) {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
-  }
+export const Countdown: React.FC<CountdownProps> = ({ nowMs, timeSource }) => {
+  const [internalNow, setInternalNow] = useState<number>(() => Date.now());
+  const { script, t } = useScript();
 
-  const seconds = Math.floor((diff / 1000) % 60);
-  const minutes = Math.floor((diff / 1000 / 60) % 60);
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-  return { days, hours, minutes, seconds, isExpired: false };
-}
-
-export const Countdown: React.FC = () => {
-  const [time, setTime] = useState<TimeRemaining>(() => calculateRemaining(TARGET_DEADLINE_MS));
-  const { t } = useScript();
+  // If external nowMs is supplied (e.g. from App's synchronized clock), use it;
+  // otherwise run the internal 1-second interval.
+  const effectiveNow = nowMs ?? internalNow;
 
   useEffect(() => {
+    if (nowMs !== undefined) return;
     const timer = setInterval(() => {
-      setTime(calculateRemaining(TARGET_DEADLINE_MS));
+      setInternalNow(Date.now());
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [nowMs]);
+
+  const time = calculateRemaining(TARGET_DEADLINE_MS, effectiveNow);
+  const deadlineText = script === 'cyrillic' ? DEADLINE_DISPLAY_SR_CYR : DEADLINE_DISPLAY_SR_LAT;
 
   return (
     <div className="countdown-card">
@@ -44,7 +37,7 @@ export const Countdown: React.FC = () => {
         {t('Rok za prijavu za glasanje iz inostranstva')}
       </div>
       <div className="countdown-deadline">
-        {t('3. oktobar 2026. u 24:00 (ponoć po vremenu u Srbiji)')}
+        {deadlineText}
       </div>
 
       {!time.isExpired ? (
@@ -68,7 +61,9 @@ export const Countdown: React.FC = () => {
         </div>
       ) : (
         <div style={{ padding: '0.75rem 0', fontWeight: 'bold', color: '#fca5a5' }}>
-          {t('Zvanični rok za prijavu je istekao ili je u toku zaključenje biračkog spiska.')}
+          {timeSource === 'local'
+            ? t('Prema lokalnom vremenu rok je istekao ili je u toku zaključenje biračkog spiska.')
+            : t('Zvanični rok za prijavu je istekao ili je u toku zaključenje biračkog spiska.')}
         </div>
       )}
 

@@ -52,7 +52,11 @@ export const groupCoverageCountries = (script: Script, countries: VotingCountry[
   return groups;
 };
 
-export const RegistrationEmailStatusPage: React.FC = () => {
+export interface RegistrationEmailStatusPageProps {
+  isArchive?: boolean;
+}
+
+export const RegistrationEmailStatusPage: React.FC<RegistrationEmailStatusPageProps> = ({ isArchive = false }) => {
   const { script, t } = useScript();
   const coverage = useMemo(() => getElectionEmailCoverage(), []);
   const groups = useMemo(() => groupCoverageCountries(script), [script]);
@@ -61,10 +65,10 @@ export const RegistrationEmailStatusPage: React.FC = () => {
     <main>
       <section className="card" aria-labelledby="registration-email-status-title">
         <a href={script === 'latin' ? '/?script=latin' : '/'} className="btn btn-sm btn-navy" style={{ marginBottom: '1.25rem' }}>
-          ← {t('Nazad na prijavu za glasanje')}
+          ← {isArchive ? t('Početna stranica') : t('Nazad na prijavu za glasanje')}
         </a>
         <h2 id="registration-email-status-title" className="card-title">
-          {t('Potvrđene izborne i-mejl adrese')}
+          {isArchive ? t('Arhiva zvaničnih i-mejl adresa misija (Izbori 2026)') : t('Potvrđene izborne i-mejl adrese')}
         </h2>
         <p className="card-subtitle">
           {t('Misije imaju potvrđenu adresu za prijavu za glasanje za ')}
@@ -208,6 +212,12 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                                   {t('Izborna i-mejl adresa još nije potvrđena u ovom alatu.')}
                                 </p>
                                 <ElectionNoticeLink notice={station.electionNotice} status={station.electionNoticeStatus} />
+                                {station.email && (
+                                  <div className="mission-detail">
+                                    <strong>{t('Javni kontakt misije:')}</strong>
+                                    <span style={{ fontWeight: 700, color: 'var(--color-accent)' }}>{station.email}</span>
+                                  </div>
+                                )}
                               </>
                             )}
                             {station.website && (
@@ -220,16 +230,20 @@ export const RegistrationEmailStatusPage: React.FC = () => {
                                 {t('Zvanični sajt misije')} ↗
                               </a>
                             )}
-                            <MissionInquiryLink
-                              station={station}
-                              countryName={script === 'cyrillic' ? country.labelCyr : country.label}
-                            />
+                            {!isArchive && (
+                              <MissionInquiryLink
+                                station={station}
+                                countryName={script === 'cyrillic' ? country.labelCyr : country.label}
+                              />
+                            )}
                           </article>
                         );
                       })}
-                      <a href={`/?country=${country.countryCode}${script === 'latin' ? '&script=latin' : ''}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
-                        {t('Započnite prijavu za ovu državu')} →
-                      </a>
+                      {!isArchive && (
+                        <a href={`/?country=${country.countryCode}${script === 'latin' ? '&script=latin' : ''}`} className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
+                          {t('Započnite prijavu za ovu državu')} →
+                        </a>
+                      )}
                     </div>
                   </details>
                 );

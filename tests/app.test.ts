@@ -37,11 +37,8 @@ import {
   latinToCyrillic,
   translateStaticText,
 } from '../src/lib/script';
-import {
-  Countdown,
-  TARGET_DEADLINE_MS,
-  calculateRemaining,
-} from '../src/components/Countdown';
+import { Countdown } from '../src/components/Countdown';
+import { TARGET_DEADLINE_MS, calculateRemaining } from '../src/lib/deadline';
 
 
 type CoverageStation = (typeof COUNTRIES)[number]['stations'][number] & {

@@ -833,6 +833,123 @@ body {
   overflow-wrap: anywhere;
 }
 
+
+/* Post-Deadline Notice */
+.post-deadline-card {
+  text-align: center;
+  padding: 2.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.post-deadline-badge {
+  font-size: 2.75rem;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.post-deadline-title {
+  color: var(--color-primary);
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.post-deadline-lead {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.post-deadline-info-box {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  max-width: 640px;
+  margin: 0 auto 1.5rem auto;
+  text-align: left;
+}
+
+.post-deadline-info-heading {
+  margin: 0 0 0.75rem 0;
+  color: var(--color-primary);
+  font-size: 0.95rem;
+}
+
+.post-deadline-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.post-deadline-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.post-deadline-link:hover,
+.post-deadline-link:focus-visible {
+  color: var(--color-primary-dark);
+}
+
+.post-deadline-disclaimer {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  max-width: 640px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.post-deadline-footer {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.25rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.post-deadline-repo-note {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.post-deadline-repo-link {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Post-Deadline Advisory Banner */
+.post-deadline-advisory {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1.15rem;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-warning-bg);
+  border-left: 4px solid var(--color-warning);
+  color: #78350f;
+}
+
+.post-deadline-advisory-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.post-deadline-advisory-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 /* Small screens retain the numbered controls and the live current-step text
  * while hiding repeated labels that would otherwise crowd the progress bar. */
 /* Responsive */

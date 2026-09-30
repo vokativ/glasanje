@@ -32,6 +32,12 @@ firebase deploy --only hosting --project YOUR_VERIFIED_PROJECT_OR_ALIAS
 
 Keep a verified snapshot of the latest successful release until its replacement is independently verified. That snapshot is input to the next deployment, even though old pass counts are not maintained documentation.
 
+### Post-deadline cutover release safety rules
+
+- **Never run `firebase hosting:disable`**: Disabling hosting serves an unhelpful English 404 error ("Site Not Found"), breaks citizen trust, and takes down the `/status` embassy contact directory. The cutover is managed in the application and edge caching.
+- **Do not alter Cloudflare DNS or proxy settings on deadline night**: Avoid toggling proxy status, introducing edge redirects, or caching 301s.
+- **Freeze `public/sw.js` byte-for-byte**: Do not bump `CACHE_NAME` or edit precache assets in cutover deploys. `src/main.tsx` reloads on `controllerchange`; changing service worker bytes will force-reload active tabs and destroy in-memory user applications.
+- **Soak period and deployment freeze**: Deploy the deadline release 24–48 hours ahead of the deadline (`2026-10-03T22:00:00Z`). Freeze deployments from 2026-10-02T00:00:00Z until after the election deadline so visitors receive a thoroughly soaked build.
 ## Domain maintenance
 
 For each domain inspect authoritative nameservers, HTTPS certificates, response/redirect destination, application assets and `/status`. When changing redirects, test paths and queries, including `?script=latin` and country-entry parameters.
@@ -41,7 +47,7 @@ For new or repaired custom domains use the current [Firebase procedure](https://
 ## Preparing for another election
 
 - Verify the official form, election date, registration deadline and source links. Do not relabel old notices as current.
-- Review `src/components/Countdown.tsx`, `src/lib/missionInquiry.ts`, export/invitation copy, README and election ID/year in commands and provenance.
+- Review `src/lib/deadline.ts`, `src/lib/missionInquiry.ts`, export/invitation copy, README and election ID/year in commands and provenance.
 - Update versioned template references in `src/lib/pdf.ts` and `public/sw.js` together. Render every PDF page to check coordinates, glyphs and attachments; review public-asset cache versioning.
 - Refresh all three MFA directory categories deliberately. Preserve stable IDs, parent/dependent relationships, separate consulates and office exceptions.
 - Review recipients/notices with [maintained decisions](recipient-decisions.md). Preserve real source dates and recipient authorization; rollover must not silently downgrade coverage.

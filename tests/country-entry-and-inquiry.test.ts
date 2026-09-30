@@ -17,6 +17,8 @@ describe('Country links into the registration wizard', () => {
 
   test('country entry retains Latin for personal details and the return link to coverage', () => {
     const previousWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    const originalNow = Date.now;
+    Date.now = () => Date.parse('2026-10-01T12:00:00Z');
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
       value: { location: { pathname: '/', search: '?country=SG&script=latin' } },
@@ -26,6 +28,7 @@ describe('Country links into the registration wizard', () => {
       expect(markup).toContain('Korak 2: Lični podaci');
       expect(markup).toContain('href="/status?script=latin"');
     } finally {
+      Date.now = originalNow;
       if (previousWindow) Object.defineProperty(globalThis, 'window', previousWindow);
       else Reflect.deleteProperty(globalThis, 'window');
     }
@@ -43,6 +46,8 @@ describe('Country links into the registration wizard', () => {
     ['?country=SG&country=SG', false],
   ])('%s starts on the appropriate screen without checking the registry step', (search, skipsRegistry) => {
     const previousWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    const originalNow = Date.now;
+    Date.now = () => Date.parse('2026-10-01T12:00:00Z');
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
       value: { location: { pathname: '/', search } },
@@ -55,6 +60,7 @@ describe('Country links into the registration wizard', () => {
       expect(markup).not.toContain('<div class="step-dot">✓</div>');
       expect(markup.includes('href="https://upit.birackispisak.gov.rs/"')).toBe(!skipsRegistry);
     } finally {
+      Date.now = originalNow;
       if (previousWindow) Object.defineProperty(globalThis, 'window', previousWindow);
       else Reflect.deleteProperty(globalThis, 'window');
     }

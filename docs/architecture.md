@@ -32,6 +32,8 @@ There is no application submission API or personal-data database. Crawling and d
 | Country/mission selection | `src/components/StepVotingDestination.tsx` | Resolve stable IDs within the chosen country; retain separate consulates |
 | Country decoration | `src/components/CountryFlag.tsx`, `public/assets/flags/` | Local SVGs keyed by country code; written names remain the accessible label |
 | Station election status | `src/lib/stationElectionStatus.ts` | Pure runtime helper deriving `approved`, `notice-no-email`, and `unconfirmed` presentation states without modifying stored approval data |
+| Registration deadline and admission | `src/lib/deadline.ts`, `src/lib/serverTime.ts` | Single source of truth for the target deadline (`2026-10-03T22:00:00Z`), route normalization, pure admission logic, and origin HTTP Date sampling to mitigate clock skew |
+| Post-deadline notices | `src/components/PostDeadlineNotice.tsx` | Informative post-deadline screen with official MDULS guidance, voter registry lookup, `/status` archive, and repository link; non-destructive advisory banner for active drafts |
 | Evidence and inquiry links | `ElectionNoticeLink.tsx`, `MissionInquiryLink.tsx`, `src/lib/missionInquiry.ts` | Show maintained evidence or a user-initiated question without changing approval |
 | PDF assets and layout | `src/lib/pdf.ts` | Reuse public assets; generate each personal document locally |
 | Export and handoff | `src/components/StepExportAndSubmit.tsx`, `src/lib/share.ts` | Generate/download/share on the user's behalf only at the relevant UI action; sending stays with the user |
@@ -55,6 +57,24 @@ The application has two surfaces: `/` for the five-step form and `/status` for c
 Steps are registry guidance → personal details → destination → signature/document → export. The shell retains submitted step values for back navigation. Selecting a country resolves a station from that country's current list. A separate consulate has its own ID and recipient. The signature canvas is recreated when its step remounts, requiring a fresh drawn signature before continuing. Reset clears every application field, selection and document in memory; it cannot delete already downloaded files or clipboard contents.
 
 The final page always offers a registry reminder, including when a country link skipped step 1. It does not claim a request was sent or accepted.
+
+## Registration deadline lifecycle and post-deadline cutoff
+
+The official diaspora registration deadline for the October 25, 2026 elections is **October 3, 2026 at 24:00 (midnight) Belgrade time** (`2026-10-03T22:00:00Z`).
+
+To avoid requiring manual midnight deployments, DNS flips, or fragile scheduled jobs, the application manages the deadline lifecycle autonomously in the browser:
+
+1. **Single Source of Truth**: `src/lib/deadline.ts` defines `TARGET_DEADLINE_MS`.
+2. **Admission State (`'pending' | 'open' | 'closed'`)**:
+   - **Pre-deadline fast path**: Visitors arriving more than 1 hour before the deadline initialize synchronously as `'open'`. The wizard renders immediately with zero network delay or loading flash.
+   - **Boundary / Post-deadline path**: Visitors arriving within 1 hour or after the deadline initialize as `'pending'` with a 3000ms fail-open fallback.
+   - **Origin time synchronization**: On mount, a lightweight same-origin `HEAD /` request samples the HTTP `Date` header to detect client device clock skew. If network fails or times out, it fails open to `'open'`.
+3. **In-Progress Session Preservation**:
+   - A session with user-entered data (`currentStep > 1` or non-empty personal details / signatures) is **never closed or unmounted**.
+   - When the deadline passes during an active session, a non-destructive advisory banner (`PostDeadlineNotice variant="advisory"`) appears above the stepper, permitting full completion and PDF download.
+4. **Archive Mode on `/status`**:
+   - The `/status` route is always accessible immediately without waiting for server time synchronization.
+   - After the deadline, it switches to 2026 Archive presentation: new registration buttons and inquiry composer links are hidden, but all embassy listings, emails, phone numbers, and official election notices remain fully visible and searchable.
 
 ## Loading, memory and offline preparation
 

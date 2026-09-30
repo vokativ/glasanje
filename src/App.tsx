@@ -4,10 +4,19 @@
  * details, signatures, or documents beyond the open page, and reset must clear
  * every step's data together.
  */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Header } from './components/Header';
 import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
 import { Countdown } from './components/Countdown';
+import { PostDeadlineNotice } from './components/PostDeadlineNotice';
+import {
+  AdmissionState,
+  decideAdmission,
+  isDeadlinePassed,
+  normalizePathname,
+  shouldSkipPending,
+} from './lib/deadline';
+import { readCurrentTime, ServerTimeSample, synchronizeServerTime } from './lib/serverTime';
 import { StepVoterRegistry } from './components/StepVoterRegistry';
 import { StepPersonalInfo, PersonalInfoData } from './components/StepPersonalInfo';
 import {
@@ -64,10 +73,57 @@ const STEPS = [
 const AppContent: React.FC = () => {
   const { script, t } = useScript();
   const [initialCountryCode] = useState(getInitialCountryCode);
-  const [currentStep, setCurrentStep] = useState<number>(() => initialCountryCode ? 2 : 1);
+  const [currentStep, setCurrentStep] = useState<number>(() => (initialCountryCode ? 2 : 1));
   const [registryStepCompleted, setRegistryStepCompleted] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
   const [resourceStatus, setResourceStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+
+  // Server-time sample and display clock
+  const [serverSample, setServerSample] = useState<ServerTimeSample | null>(null);
+  const serverSampleRef = useRef<ServerTimeSample | null>(null);
+  serverSampleRef.current = serverSample;
+
+  const [clockTime, setClockTime] = useState<{ nowMs: number; source: 'server' | 'local' }>(() =>
+    readCurrentTime(null),
+  );
+
+  // Admission state: Pre-deadline visits (> 1 hour before deadline) skip pending immediately
+  const [admission, setAdmission] = useState<AdmissionState>(() => {
+    if (typeof window === 'undefined') return 'open';
+    if (shouldSkipPending(Date.now())) return 'open';
+    return 'pending';
+  });
+
+  // Normalized path ensures /status, /status/, /STATUS are handled consistently
+  const normalizedPath =
+    typeof window !== 'undefined' ? normalizePathname(window.location.pathname) : '/';
+  const isStatusPage = normalizedPath === '/status';
+  const emailCoverage = useMemo(() => getElectionEmailCoverage(), []);
+  const votingDestinationCoverage = useMemo(() => getVotingDestinationCoverage(), []);
+
+  // Form state
+  const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>({
+    fullName: '',
+    parentName: '',
+    jmbg: '',
+    serbianAddress: '',
+    phone: '',
+    email: '',
+  });
+
+  const [votingDestination, setVotingDestination] = useState<VotingDestinationData>(() => ({
+    countryCode: initialCountryCode,
+    stationId: null,
+    foreignAddress: '',
+    desiredLocation: getInitialDesiredLocationFromUrl(),
+  }));
+
+  const [signatureAndDoc, setSignatureAndDoc] = useState<SignatureAndDocumentData>({
+    signaturePngDataUrl: '',
+    isWetInkSignature: false,
+    idDocumentDataUrl: undefined,
+  });
+
   // Stable callback keeps a background readiness update from restarting the
   // modal's focus effect and moving focus away from the reader's current control.
   const closePrivacy = useCallback(() => setIsPrivacyOpen(false), []);
@@ -92,37 +148,91 @@ const AppContent: React.FC = () => {
       window.removeEventListener('online', prepare);
     };
   }, []);
-  // This intentionally small route split avoids a routing dependency for the
-  // standalone status surface; all other paths stay in the registration flow.
-  const isStatusPage = typeof window !== 'undefined' && window.location.pathname === '/status';
-  const emailCoverage = useMemo(() => getElectionEmailCoverage(), []);
-  const votingDestinationCoverage = useMemo(() => getVotingDestinationCoverage(), []);
 
+  // Display clock update: only ticks when on wizard route (status page has no countdown).
+  // Refreshes immediately on visibilitychange, focus, or pageshow.
+  useEffect(() => {
+    if (isStatusPage) return;
 
-  // The shell, rather than individual steps, owns data that must survive
-  // back-navigation. Sensitive fields remain memory-only until the user exports.
-  // Form state
-  const [personalInfo, setPersonalInfo] = useState<PersonalInfoData>({
-    fullName: '',
-    parentName: '',
-    jmbg: '',
-    serbianAddress: '',
-    phone: '',
-    email: '',
-  });
+    const updateClock = () => {
+      setClockTime(readCurrentTime(serverSampleRef.current));
+    };
 
-  const [votingDestination, setVotingDestination] = useState<VotingDestinationData>(() => ({
-    countryCode: initialCountryCode,
-    stationId: null,
-    foreignAddress: '',
-    desiredLocation: getInitialDesiredLocationFromUrl(),
-  }));
+    const intervalId = setInterval(updateClock, 1000);
+    window.addEventListener('visibilitychange', updateClock);
+    window.addEventListener('focus', updateClock);
+    window.addEventListener('pageshow', updateClock);
 
-  const [signatureAndDoc, setSignatureAndDoc] = useState<SignatureAndDocumentData>({
-    signaturePngDataUrl: '',
-    isWetInkSignature: false,
-    idDocumentDataUrl: undefined,
-  });
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('visibilitychange', updateClock);
+      window.removeEventListener('focus', updateClock);
+      window.removeEventListener('pageshow', updateClock);
+    };
+  }, [isStatusPage]);
+
+  // Track progress status defensively to prevent unmounting active applications
+  const hasProgress =
+    (currentStep > 1 && !initialCountryCode) ||
+    Boolean(
+      personalInfo.fullName.trim() ||
+      personalInfo.jmbg.trim() ||
+      personalInfo.serbianAddress.trim() ||
+      signatureAndDoc.signaturePngDataUrl ||
+      signatureAndDoc.idDocumentDataUrl,
+    );
+  const hasProgressRef = useRef(hasProgress);
+  hasProgressRef.current = hasProgress;
+
+  // Server-time synchronization: ALWAYS runs on mount in background.
+  // Corrects countdown & advisory times, and guards against slow/manipulated device clocks.
+  useEffect(() => {
+    let active = true;
+
+    // If initial admission is pending, enforce a 3000ms safety timeout that fails open to 'open'
+    const fallbackTimer =
+      admission === 'pending'
+        ? setTimeout(() => {
+            if (active) {
+              setAdmission((current) => (current === 'pending' ? 'open' : current));
+            }
+          }, 3000)
+        : undefined;
+
+    void synchronizeServerTime().then((sample) => {
+      if (!active) return;
+      clearTimeout(fallbackTimer);
+      if (sample) {
+        setServerSample(sample);
+        setClockTime(readCurrentTime(sample));
+
+        const serverNow = readCurrentTime(sample).nowMs;
+        const decision = decideAdmission({
+          isStatusRoute: isStatusPage,
+          hasProgress: hasProgressRef.current,
+          serverTimeConfirmed: true,
+          nowMs: serverNow,
+        });
+
+        if (decision === 'closed') {
+          // If no user progress was made and deadline is confirmed passed, close
+          setAdmission('closed');
+        } else if (admission === 'pending') {
+          setAdmission('open');
+        }
+      } else {
+        // Network failure / offline / timeout -> fail-open
+        if (admission === 'pending') {
+          setAdmission('open');
+        }
+      }
+    });
+
+    return () => {
+      active = false;
+      clearTimeout(fallbackTimer);
+    };
+  }, [isStatusPage]);
 
   const handleStep1Complete = () => {
     setRegistryStepCompleted(true);
@@ -182,22 +292,36 @@ const AppContent: React.FC = () => {
     script === 'cyrillic' ? currentCountry?.labelCyr ?? '' : currentCountry?.label ?? '';
   const countryNameCyr = currentCountry?.labelCyr ?? '';
 
-  // Compile the export model only after its dependent station has been resolved;
-  // the final step remains unavailable when that relationship is invalid.
-  const compiledApplicationData: ApplicationFormData = {
-    fullName: personalInfo.fullName,
-    parentName: personalInfo.parentName,
-    jmbg: personalInfo.jmbg,
-    serbianAddress: personalInfo.serbianAddress,
-    foreignAddress: votingDestination.foreignAddress,
-    stationName: currentStation?.embassyCyr ?? '',
-    desiredLocation: votingDestination.desiredLocation,
-    signingDate: formatSerbianDate(),
-    phone: personalInfo.phone,
-    email: personalInfo.email,
-    signaturePngDataUrl: signatureAndDoc.signaturePngDataUrl,
-    idDocumentDataUrl: signatureAndDoc.idDocumentDataUrl,
-  };
+  // Memoize compiled export model to avoid re-triggering StepExportAndSubmit callbacks on 1-sec ticks
+  const compiledApplicationData = useMemo<ApplicationFormData>(
+    () => ({
+      fullName: personalInfo.fullName,
+      parentName: personalInfo.parentName,
+      jmbg: personalInfo.jmbg,
+      serbianAddress: personalInfo.serbianAddress,
+      foreignAddress: votingDestination.foreignAddress,
+      stationName: currentStation?.embassyCyr ?? '',
+      desiredLocation: votingDestination.desiredLocation,
+      signingDate: formatSerbianDate(),
+      phone: personalInfo.phone,
+      email: personalInfo.email,
+      signaturePngDataUrl: signatureAndDoc.signaturePngDataUrl,
+      idDocumentDataUrl: signatureAndDoc.idDocumentDataUrl,
+    }),
+    [
+      personalInfo.fullName,
+      personalInfo.parentName,
+      personalInfo.jmbg,
+      personalInfo.serbianAddress,
+      personalInfo.phone,
+      personalInfo.email,
+      votingDestination.foreignAddress,
+      votingDestination.desiredLocation,
+      currentStation?.embassyCyr,
+      signatureAndDoc.signaturePngDataUrl,
+      signatureAndDoc.idDocumentDataUrl,
+    ],
+  );
 
   useEffect(() => {
     document.documentElement.lang = script === 'cyrillic' ? 'sr-Cyrl' : 'sr-Latn';
@@ -207,17 +331,31 @@ const AppContent: React.FC = () => {
         : 'Korak do glasa | Prijava za glasanje iz inostranstva',
     );
   }, [isStatusPage, script, t]);
-  const activeStep = STEPS[currentStep - 1];
 
+  const activeStep = STEPS[currentStep - 1];
 
   return (
     <div className="container">
       <Header onOpenPrivacy={() => setIsPrivacyOpen(true)} />
       {isStatusPage ? (
-        <RegistrationEmailStatusPage />
+        <RegistrationEmailStatusPage isArchive={isDeadlinePassed(clockTime.nowMs)} />
+      ) : admission === 'pending' ? (
+        <main role="status" aria-live="polite" style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+          <p>{t('Učitavanje…')}</p>
+        </main>
+      ) : admission === 'closed' ? (
+        <main>
+          <PostDeadlineNotice variant="closed" />
+        </main>
       ) : (
         <>
-          <Countdown />
+          {isDeadlinePassed(clockTime.nowMs) && (
+            <PostDeadlineNotice
+              variant="advisory"
+              timeConfirmed={clockTime.source === 'server'}
+            />
+          )}
+          <Countdown nowMs={clockTime.nowMs} timeSource={clockTime.source} />
           <a
             href={script === 'latin' ? '/status?script=latin' : '/status'}
             className="btn btn-sm btn-navy"
@@ -233,13 +371,10 @@ const AppContent: React.FC = () => {
             <span aria-hidden="true">→</span>
           </a>
 
-
           {/* Stepper Navigation */}
           <div className="stepper-context">
             <nav className="stepper-nav" aria-label={t('Faze popunjavanja')}>
               {STEPS.map((s) => {
-                // A country link skips the registry screen; it does not attest
-                // that the user checked their entry in the voter register.
                 const isCompleted = s.id < currentStep && (s.id !== 1 || registryStepCompleted);
                 const isActive = s.id === currentStep;
                 return (
@@ -349,7 +484,9 @@ const AppContent: React.FC = () => {
 };
 
 export const App: React.FC = () => (
-  <ScriptProvider initialScript={getInitialScript(typeof window === 'undefined' ? '' : window.location.search)}>
+  <ScriptProvider
+    initialScript={getInitialScript(typeof window === 'undefined' ? '' : window.location.search)}
+  >
     <AppContent />
   </ScriptProvider>
 );
