@@ -104,3 +104,18 @@ export function decideAdmission(input: AdmissionDecisionInput): 'status' | 'open
   }
   return 'open';
 }
+
+/**
+ * Computes the delay in milliseconds for the status page archive transition timer.
+ * Returns null if the deadline has already passed (no timer needed).
+ * If more than 1 hour remains, caps delay at 1 hour (3600_000ms) to ensure periodic re-checks.
+ * If 1 hour or less remains, schedules for exact remaining time plus a 100ms buffer.
+ */
+export function computeNextStatusDelay(
+  currentNow: number,
+  targetDeadlineMs: number = TARGET_DEADLINE_MS,
+): number | null {
+  const msUntilDeadline = targetDeadlineMs - currentNow;
+  if (msUntilDeadline <= 0) return null;
+  return Math.min(msUntilDeadline + 100, 3600_000);
+}

@@ -74,7 +74,7 @@ To avoid requiring manual midnight deployments, DNS flips, or fragile scheduled 
    - When the deadline passes during an active session, a non-destructive advisory banner (`PostDeadlineNotice variant="advisory"`) appears above the stepper, permitting full completion and PDF download.
 4. **Archive Mode on `/status`**:
    - The `/status` route is always accessible immediately without waiting for server time synchronization.
-   - For open status tabs, a lightweight boundary timer calculates time remaining against authoritative server-synchronized time and triggers the archive transition at the exact deadline instant without 1-Hz CPU polling. Tab visibility/focus/pageshow events re-evaluate immediately.
+   - For open status tabs, a lightweight boundary timer calculates time remaining against authoritative server-synchronized time and triggers the archive transition at the first scheduled callback at or immediately after the deadline (with a 100ms buffer), or immediately on the next resume/focus event, without 1-Hz CPU polling.
    - In archive mode, new registration buttons and inquiry composer links are hidden, but all embassy listings, emails (including unconfirmed missions), phone numbers, and official election notices remain fully visible and searchable.
 ## Loading, memory and offline preparation
 

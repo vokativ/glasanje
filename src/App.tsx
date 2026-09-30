@@ -11,6 +11,7 @@ import { Countdown } from './components/Countdown';
 import { PostDeadlineNotice } from './components/PostDeadlineNotice';
 import {
   AdmissionState,
+  computeNextStatusDelay,
   decideAdmission,
   isDeadlinePassed,
   normalizePathname,
@@ -170,9 +171,8 @@ const AppContent: React.FC = () => {
       const currentNow = readCurrentTime(serverSampleRef.current).nowMs;
       setClockTime({ nowMs: currentNow, source: serverSampleRef.current ? 'server' : 'local' });
 
-      const msUntilDeadline = TARGET_DEADLINE_MS - currentNow;
-      if (msUntilDeadline > 0) {
-        const delay = Math.min(msUntilDeadline + 100, 3600_000);
+      const delay = computeNextStatusDelay(currentNow, TARGET_DEADLINE_MS);
+      if (delay !== null) {
         deadlineTimerId = window.setTimeout(scheduleStatusTimer, delay);
       }
     };
