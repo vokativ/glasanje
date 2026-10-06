@@ -17,6 +17,7 @@ import { useScript } from '../lib/script';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
 import { CountryFlag } from './CountryFlag';
+import { FollowUpEntry } from './FollowUpEntry';
 
 /**
  * Creates a PDF from the wizard's in-memory application data and prepares handoff helpers.
@@ -568,6 +569,8 @@ export const StepExportAndSubmit: React.FC<StepExportAndSubmitProps> = ({
           {t('Ako niste upisani, od misije zatražite i obrazac za upis u birački spisak i podnesite ga zajedno sa zahtevom za glasanje u inostranstvu. Ovaj alat priprema samo zahtev za glasanje u inostranstvu.')}
         </p>
       </aside>
+      <FollowUpEntry compact />
+
 
       <div className="btn-row">
         <button type="button" onClick={onBack} className="btn btn-secondary">

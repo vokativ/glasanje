@@ -1,0 +1,535 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Overseas voting follow-up case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "current_location",
+    "election",
+    "original_application",
+    "registration",
+    "status"
+  ],
+  "properties": {
+    "current_location": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "IANA zone, resolved from the city if unknown"
+        }
+      },
+      "required": [
+        "country"
+      ]
+    },
+    "election": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "profile_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "verified"
+      ]
+    },
+    "original_application": {
+      "type": "object",
+      "properties": {
+        "submitted_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "ISO 8601 with offset if known"
+        },
+        "channel": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mission_contacted": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "requested_polling_place": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "receipt_evidence": {
+          "enum": [
+            "documented",
+            "user_reported",
+            "none",
+            "unknown"
+          ]
+        },
+        "forwarding_evidence": {
+          "enum": [
+            "documented",
+            "user_reported",
+            "none",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "receipt_evidence",
+        "forwarding_evidence"
+      ]
+    },
+    "registration": {
+      "type": "object",
+      "properties": {
+        "municipality": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "competent_authority": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authority_verified": {
+          "type": "boolean"
+        },
+        "register_stage": {
+          "enum": [
+            "before_closure",
+            "after_closure",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "authority_verified",
+        "register_stage"
+      ]
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "administration_has_case": {
+          "enum": [
+            "yes",
+            "no",
+            "unknown"
+          ]
+        },
+        "decision_stage": {
+          "enum": [
+            "none",
+            "acknowledgement",
+            "recording",
+            "preliminary_positive",
+            "final_positive",
+            "adverse",
+            "unknown"
+          ]
+        },
+        "decision_issuer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decision_received_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "remedy_instruction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "missing_decision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Identify the specific decision still due; acknowledgement/recording/preliminary positive is not final_positive or adverse."
+        },
+        "first_instance_appeal_pending": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "administration_has_case",
+        "decision_stage",
+        "first_instance_appeal_pending"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fact": {
+            "type": "string"
+          },
+          "source_type": {
+            "enum": [
+              "official_public",
+              "user_document",
+              "user_report",
+              "authorised_email"
+            ]
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "checked_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "confidence_note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reference": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Private thread/message/document reference; not a public case URL."
+          },
+          "content_available": {
+            "type": "boolean",
+            "description": "False for attachment metadata without readable content."
+          }
+        },
+        "required": [
+          "fact",
+          "source_type"
+        ]
+      }
+    },
+    "return_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "public_browsing": {
+          "type": "boolean"
+        },
+        "mail_search": {
+          "type": "boolean"
+        },
+        "mail_read": {
+          "type": "boolean"
+        },
+        "attachment_read": {
+          "type": "boolean"
+        },
+        "draft_read": {
+          "type": "boolean"
+        },
+        "draft_write": {
+          "type": "boolean"
+        },
+        "send": {
+          "type": "boolean"
+        },
+        "formal_filing": {
+          "type": "boolean"
+        },
+        "reminders": {
+          "type": "boolean"
+        },
+        "background_monitoring": {
+          "type": "boolean"
+        }
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "action",
+          "scope",
+          "granted"
+        ],
+        "properties": {
+          "action": {
+            "enum": [
+              "mail_search_read",
+              "attachment_read",
+              "draft_read",
+              "draft_save_update",
+              "send",
+              "formal_filing",
+              "representation",
+              "reminder",
+              "monitoring"
+            ]
+          },
+          "scope": {
+            "type": "string"
+          },
+          "granted": {
+            "type": "boolean"
+          },
+          "approval_reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "threads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "authority",
+          "reference"
+        ],
+        "properties": {
+          "authority": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "existing_draft_references": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sent_follow_up_references": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "content_available",
+          "can_attach"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "content_available": {
+            "type": "boolean"
+          },
+          "can_attach": {
+            "type": "boolean"
+          },
+          "approved_recipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "state"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "text_prepared",
+              "draft_saved",
+              "message_sent",
+              "receipt_confirmed",
+              "valid_filing_evidenced",
+              "failed",
+              "unknown"
+            ]
+          },
+          "reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "performed_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "approval_reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "continuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workflow_node": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outstanding_facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_action": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next_check_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resume_condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "monitoring_configured": {
+          "type": "boolean"
+        },
+        "monitoring_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "legal_deadlines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "description",
+              "verified"
+            ],
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "due_at": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "verified": {
+                "type": "boolean"
+              },
+              "source_reference": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "calculation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$id": "https://korakdoglasa.org/pracenje/case.schema.json",
+  "description": "Optional private continuation record, not website intake or permission to access mail. Null/unknown facts remain unknown. Do not publish records or store unnecessary identity documents."
+}

@@ -20,31 +20,34 @@ const ASSETS_TO_PRECACHE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_PRECACHE);
-    }).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_PRECACHE))
   );
 });
 
-// This worker owns the origin's Cache Storage: activating a new version deletes
-// every cache except `CACHE_NAME`, so unrelated caches must not share this origin.
+// Let the installed worker wait until existing pages close. Application drafts
+// are memory-only; skipWaiting/clients.claim would controllerchange-reload them.
+// Once no old controlled page remains, activation removes the previous cache.
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
+    caches.keys().then((keys) => Promise.all(
+      keys.map((key) => key !== CACHE_NAME ? caches.delete(key) : undefined)
+    ))
   );
 });
 
 self.addEventListener('fetch', (event) => {
   // Only cache GET requests
   if (event.request.method !== 'GET') return;
+  // Public procedure files can be revised independently of the application
+  // shell. Always revalidate them; never pin legal/contact guidance in Cache Storage.
+  const requestUrl = new URL(event.request.url);
+  if (
+    requestUrl.origin === self.location.origin &&
+    requestUrl.pathname.startsWith('/pracenje/')
+  ) {
+    event.respondWith(fetch(event.request, { cache: 'no-store' }));
+    return;
+  }
 
   // For HTML navigation requests, use network-first with offline fallback
   if (event.request.mode === 'navigate') {

@@ -1,0 +1,17 @@
+{
+  "profile_id": "EXAMPLE-DO-NOT-DEPLOY-AS-ACTIVE",
+  "status": "unconfigured",
+  "election_type": null,
+  "election_date": null,
+  "registration_deadline": null,
+  "register_closure": null,
+  "last_change_deadline": null,
+  "overseas_polling_decision_url": null,
+  "verified_sources": [],
+  "legal_reviewed_at": null,
+  "office_timezones": [
+    "Europe/Belgrade"
+  ],
+  "note": "Unconfigured example only, not an active election or deadline. Populate from current official election notices, verify scope and amendments, and preserve source URL/publication/check dates for every operative deadline. Previous-case dates are intentionally absent.",
+  "content_version": "0.2"
+}

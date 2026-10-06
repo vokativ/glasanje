@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "bun run build:follow-up",
     "dev": "vite",
     "check": "tsc --noEmit",
     "test": "bun test",
-    "build": "tsc && vite build",
+    "build:follow-up": "bun run scripts/build_follow_up.ts",
+    "build": "bun run build:follow-up && tsc && vite build",
     "preview": "vite preview",
     "scrape:mfa": "python3 scripts/scrape_mfa.py",
     "build:data": "python3 scripts/build_canonical_dataset.py",

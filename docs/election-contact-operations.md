@@ -4,6 +4,8 @@ Ovaj postupak održava javno dokazive adrese za prijave za glasanje iz inostrans
 
 Za kontekst, procenu dokaza i očuvanje objavljenih primalaca prvo pročitati [AGENTS.md](../AGENTS.md). Komande ispod opisuju automatsko prikupljanje i promociju; nisu obavezan dodatni AI krug za već izričito odobrenu odluku operatera. `source-confirmed` i `operator-approved` su oba upotrebljiva izborna primaoca. Neuspeh novog pokušaja ne povlači postojeće odobrenje.
 
+Praćenje pojedinačne već poslate prijave je odvojen javni postupak: [ručni vodič](https://korakdoglasa.org/pracenje/) i [uputstvo za korisnikovog asistenta](https://korakdoglasa.org/pracenje/agent.md). Njegovi izvori, obrasci i grane održavaju se u `content/follow-up/`, a način generisanja opisuje [arhitektura](architecture.md#follow-up-content-maintenance). Taj vodič ne pokreće crawler, ne odobrava nove primaoce i ne menja ove šeme. Korisnik može dati svom asistentu ograničenu dozvolu za privatnu prepisku; takva dozvola ne pripada ovom javnom operativnom toku. Odobrena izborna adresa misije nije dokaz prijema ili prihvatanja pojedinačne prijave.
+
 Jedan pokretani postupak ima jednog vlasnika: zaključavanje `data/.election_contacts.lock` drži ceo tok. Ako je drugi tok aktivan, komanda se prekida; ne pokretati paralelnu kopiju. Svaki uspešan ili neuspešan prolaz ima sopstveni, nepromenljivi trag u `data/election_runs/<runId>/`.
 
 ## Uobičajeni ograničeni prolaz

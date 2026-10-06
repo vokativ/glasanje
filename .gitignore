@@ -4,6 +4,9 @@
 /dist
 /tmp
 
+# Generated from content/follow-up for Vite development and production builds
+/public/pracenje
+
 # local Firebase and deployment configuration
 /.firebaserc
 /.firebase/

@@ -9,6 +9,7 @@ import { Header } from './components/Header';
 import { getElectionEmailCoverage, RegistrationEmailStatusPage } from './components/RegistrationEmailStatusPage';
 import { Countdown } from './components/Countdown';
 import { PostDeadlineNotice } from './components/PostDeadlineNotice';
+import { FollowUpEntry } from './components/FollowUpEntry';
 import {
   AdmissionState,
   computeNextStatusDelay,
@@ -387,6 +388,7 @@ const AppContent: React.FC = () => {
         </main>
       ) : admission === 'closed' ? (
         <main>
+          <FollowUpEntry />
           <PostDeadlineNotice variant="closed" />
         </main>
       ) : (
@@ -490,6 +492,7 @@ const AppContent: React.FC = () => {
                 />
               </React.Suspense>
             )}
+            {currentStep !== 5 && <FollowUpEntry compact />}
           </main>
         </>
       )}

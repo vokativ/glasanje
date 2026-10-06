@@ -1,0 +1,535 @@
+{
+  "version": "0.2",
+  "status": "case_specific_follow_up_requires_verified_election_and_legal_conditions",
+  "start": "START.01",
+  "call_return_parameter": "return_to",
+  "nodes": [
+    {
+      "id": "START.01",
+      "type": "intake",
+      "title": "Orient, detect actual tools and permissions, recover evidence, ask only material missing facts",
+      "templates": [],
+      "notes": "Minimal social prompt starts this task. Ask scoped private-mail permission only if absent; opening the URL does not grant it. Manual redacted correspondence is an equal supported path.",
+      "next": "VERIFY.01"
+    },
+    {
+      "id": "VERIFY.01",
+      "type": "action",
+      "title": "Verify election, mission, stage, competent authority, contacts and office hours",
+      "templates": [],
+      "notes": "Resolve critical uncertainty before legal filing. Public contact seeds are not authoritative case-specific routing.",
+      "next": "STATUS.01"
+    },
+    {
+      "id": "STATUS.01",
+      "type": "decision",
+      "question": "Has a decision been received?",
+      "edges": {
+        "yes": "DECISION.01",
+        "no": "STATUS.02",
+        "unknown": "TRACE.01"
+      },
+      "evidence_required": [
+        "decision document or accurate user-provided description"
+      ]
+    },
+    {
+      "id": "DECISION.01",
+      "type": "decision",
+      "question": "What stage and outcome does the received document actually establish?",
+      "edges": {
+        "final_positive": "DONE.01",
+        "acknowledgement": "PRELIMINARY.01",
+        "recording": "PRELIMINARY.01",
+        "preliminary_positive": "PRELIMINARY.01",
+        "adverse": "REMEDY.01",
+        "unknown": "LEGAL.01"
+      },
+      "evidence_required": [
+        "Full operative content, issuer and stage; do not classify a title alone"
+      ]
+    },
+    {
+      "id": "DONE.01",
+      "type": "end",
+      "title": "Save decision and check the specific polling-place arrangements",
+      "templates": [],
+      "notes": ""
+    },
+    {
+      "id": "STATUS.02",
+      "type": "decision",
+      "question": "Does the competent administration confirm it has the case?",
+      "edges": {
+        "yes": "DECISION.REQUEST",
+        "no": "STATUS.03",
+        "unknown": "TRACE.01"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "DECISION.REQUEST",
+      "type": "action",
+      "title": "Request the missing decision and delivery information",
+      "templates": [
+        "T02",
+        "T16"
+      ],
+      "notes": "Identify the specific missing decision; acknowledgement, recording and preliminary positive outcomes are not adverse. T16 obtains the full document and delivery evidence.",
+      "next": "REMEDY.02"
+    },
+    {
+      "id": "STATUS.03",
+      "type": "decision",
+      "question": "Has non-receipt actually been confirmed?",
+      "edges": {
+        "yes": "TRACE.MISSION",
+        "no": "TRACE.01",
+        "unknown": "TRACE.01"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "TRACE.MISSION",
+      "type": "action",
+      "title": "Trace original receipt/forwarding through mission and MFA",
+      "templates": [
+        "T01"
+      ],
+      "notes": "Confirmed administration non-receipt calls for original mission trace; MFA escalation is selected at FOLLOWUP.02, not automatic.",
+      "next": "FOLLOWUP.01"
+    },
+    {
+      "id": "TRACE.01",
+      "type": "action",
+      "title": "Trace status on both consular and register sides",
+      "templates": [
+        "T01",
+        "T02"
+      ],
+      "notes": "Unknown status requires both relevant traces; it does not establish non-receipt or a legal violation. Escalate proportionately after assessing evidence and urgency.",
+      "next": "FOLLOWUP.01"
+    },
+    {
+      "id": "FOLLOWUP.01",
+      "type": "action",
+      "title": "Create written follow-ups and local-time calling plan",
+      "templates": [
+        "T03",
+        "T04",
+        "T07"
+      ],
+      "notes": "Select T03 only for an actual call, T04 only for actual failed attempts, T07 only for a justified reminder. CALL.01 requires a valid return_to. Re-entry on a new reply is recorded at a wait node.",
+      "next": "FOLLOWUP.02"
+    },
+    {
+      "id": "REMEDY.01",
+      "type": "decision",
+      "question": "Is the adverse decision a municipal/city-administration decision?",
+      "edges": {
+        "yes": "APPEAL.01",
+        "no": "REMEDY.03",
+        "unknown": "LEGAL.01"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "REMEDY.03",
+      "type": "decision",
+      "question": "Is the adverse decision issued by MDULS?",
+      "edges": {
+        "yes": "COURT.01",
+        "no": "LEGAL.01",
+        "unknown": "LEGAL.01"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "APPEAL.01",
+      "type": "action",
+      "title": "Verify admissibility, receipt time, deadline, addressee and valid channel; prepare appeal",
+      "templates": [
+        "T12"
+      ],
+      "notes": "Published MDULS baseline is 24 hours from receipt; apply only after verifying current rules and the actual decision.",
+      "next": "FILE.GATE"
+    },
+    {
+      "id": "COURT.01",
+      "type": "action",
+      "title": "Obtain urgent legal assessment and preparation of the appropriate court action",
+      "templates": [
+        "T14"
+      ],
+      "notes": "Verify court requirements separately; do not reuse an administrative email-filing assumption.",
+      "next": "FILE.GATE"
+    },
+    {
+      "id": "REMEDY.02",
+      "type": "decision",
+      "question": "Is failure to issue the specific required decision legally established as overdue?",
+      "edges": {
+        "yes": "SILENCE.STAGE",
+        "no": "COMPLAINT.01",
+        "unknown": "LEGAL.01"
+      },
+      "evidence_required": [
+        "competent authority",
+        "receipt of request",
+        "specific decision due",
+        "applicable decision deadline",
+        "evidence deadline elapsed"
+      ]
+    },
+    {
+      "id": "SILENCE.01",
+      "type": "action",
+      "title": "Verify admissibility and prepare first-instance silence appeal if applicable",
+      "templates": [
+        "T11"
+      ],
+      "notes": "First-instance only; verify admissibility, competent authority, receipt, specific overdue decision and applicable deadline. Never reuse for second-instance silence after appeal.",
+      "next": "FILE.GATE"
+    },
+    {
+      "id": "LEGAL.01",
+      "type": "action",
+      "title": "Ask for explicit procedural guidance and urgent legal assistance",
+      "templates": [
+        "T08",
+        "T14"
+      ],
+      "notes": "Ask T08/T14 only for actual unresolved procedural/legal facts. Do not await replies if a deadline may run. Preserve outstanding facts and next external action; no repeat loop on unchanged evidence.",
+      "next": "COMPLAINT.01"
+    },
+    {
+      "id": "COMPLAINT.01",
+      "type": "action",
+      "title": "Independently assess documented handling irregularities by each authority",
+      "templates": [
+        "T09",
+        "T10"
+      ],
+      "notes": "Select T09/T10 only for documented possible handling irregularities and the correct authority, or select none. Complaints never replace or pause a remedy. Independent remedy lane may continue.",
+      "next": "COMPLAINT.02"
+    },
+    {
+      "id": "COMPLAINT.02",
+      "type": "decision",
+      "question": "Has an appropriate complaint been selected?",
+      "edges": {
+        "yes": "FILE.GATE",
+        "no": "WATCH.01",
+        "unknown": "WAIT.LEGAL"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "WATCH.01",
+      "type": "wait",
+      "title": "Preserve evidence and record concrete next check/action; await a new event",
+      "templates": [],
+      "notes": "Choose a case-specific check time and human owner. Any running legal deadline proceeds independently. A reminder plan is not configured monitoring.",
+      "resume_on": [
+        {
+          "event": "New status reply or decision received",
+          "next": "STATUS.01"
+        },
+        {
+          "event": "Verified new deadline evidence for the missing decision",
+          "next": "REMEDY.02"
+        },
+        {
+          "event": "Scheduled user return with updated facts",
+          "next": "VERIFY.01"
+        }
+      ]
+    },
+    {
+      "id": "FILE.01",
+      "type": "action",
+      "title": "Complete and sign the appropriate submission and evidence list",
+      "templates": [
+        "T15"
+      ],
+      "notes": "A complete signed filing is distinct from saved draft or sent mail. No unresolved critical placeholders; minimise evidence disclosure to each recipient.",
+      "next": "FILE.02"
+    },
+    {
+      "id": "FILE.02",
+      "type": "decision",
+      "question": "Is the applicable electronic submission channel and required form confirmed?",
+      "edges": {
+        "yes": "FILE.ELECTRONIC",
+        "no": "FILE.REGISTRY",
+        "unknown": "FILE.REGISTRY"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "FILE.REGISTRY",
+      "type": "action",
+      "title": "Ask receiving registry for channel/signature/receipt requirements",
+      "templates": [
+        "T13"
+      ],
+      "notes": "For a short deadline, arrange the backup in parallel, not after waiting for a reply.",
+      "next": "FILE.BACKUP"
+    },
+    {
+      "id": "FILE.BACKUP",
+      "type": "action",
+      "title": "Seek verified representative and lawful timely backup, subject to explicit approval",
+      "templates": [
+        "T14"
+      ],
+      "notes": "Verify authorisation, document form, actual receiving authority, timing and user-approved engagement. Seeking help does not establish available filing.",
+      "next": "FILE.BACKUP.READY"
+    },
+    {
+      "id": "FILE.ELECTRONIC",
+      "type": "action",
+      "title": "Submit through confirmed valid electronic route, within authorised scope",
+      "templates": [
+        "T15"
+      ],
+      "notes": "Reconfirm user approval for this exact signed document, recipients/channel and actual attachments before execution. Email sending alone is not legal filing validity.",
+      "next": "FILE.RECEIPT"
+    },
+    {
+      "id": "FILE.RECEIPT",
+      "type": "decision",
+      "question": "Is there reliable evidence of a valid timely submission?",
+      "edges": {
+        "yes": "FILE.SAVE",
+        "no": "FILE.CHECK",
+        "unknown": "FILE.CHECK"
+      },
+      "evidence_required": []
+    },
+    {
+      "id": "FILE.CHECK",
+      "type": "action",
+      "title": "Check registration and correct/complete filing through a verified lawful backup",
+      "templates": [
+        "T13",
+        "T14"
+      ],
+      "notes": "One bounded registration/channel check and applicable correction attempt; no repeated filing without checking prior submission. Missing acknowledgement does not itself prove non-receipt or invalidity.",
+      "next": "FILE.WAIT"
+    },
+    {
+      "id": "FILE.SAVE",
+      "type": "action",
+      "title": "Save timestamp, valid filing evidence and case number; identify next external check",
+      "templates": [],
+      "notes": "Keep appeal history and stage. Second-instance silence uses SILENCE.SECOND, never a repeated first-instance appeal.",
+      "next": "WATCH.01"
+    },
+    {
+      "id": "CALL.01",
+      "type": "subroutine",
+      "title": "Record call outcome in the authority thread and return to explicit caller ID",
+      "templates": [
+        "T03",
+        "T04"
+      ],
+      "notes": "Parameterized subroutine; return_to is mandatory and must exist. Answered -> T03; unanswered -> T04. Record actual attempts only. Return to caller once, not an unlimited retry loop."
+    },
+    {
+      "id": "PRELIMINARY.01",
+      "type": "action",
+      "title": "Save acknowledgement/recording/preliminary positive evidence and identify the still-missing decision",
+      "templates": [],
+      "notes": "Never route this outcome as adverse or assume final polling-place approval.",
+      "next": "DECISION.REQUEST"
+    },
+    {
+      "id": "FOLLOWUP.02",
+      "type": "decision",
+      "question": "Is further trace escalation justified by the missing evidence, prior response and urgency?",
+      "edges": {
+        "yes": "ESCALATE.01",
+        "no": "REMEDY.02",
+        "unknown": "WAIT.EVIDENCE"
+      },
+      "evidence_required": [
+        "Current trace gap and actual contacts/outcomes; verified relevant authority"
+      ]
+    },
+    {
+      "id": "ESCALATE.01",
+      "type": "action",
+      "title": "Select proportionate mission/MFA or register/MDULS trace escalation",
+      "templates": [
+        "T05",
+        "T06"
+      ],
+      "notes": "Choose only the relevant lane(s), verified recipients and necessary evidence; do not assert non-receipt unless confirmed. Approval before sending.",
+      "next": "REMEDY.02"
+    },
+    {
+      "id": "SILENCE.STAGE",
+      "type": "decision",
+      "question": "Which authority and procedural stage has the verified overdue decision?",
+      "edges": {
+        "first_instance": "SILENCE.01",
+        "second_instance_after_appeal": "SILENCE.SECOND",
+        "unknown": "LEGAL.01"
+      },
+      "evidence_required": [
+        "Issuer/competence, specific pending decision, appeal history and filing proof"
+      ]
+    },
+    {
+      "id": "SILENCE.SECOND",
+      "type": "action",
+      "title": "Obtain separate urgent assessment of litigation/other remedy for second-instance silence",
+      "templates": [
+        "T14"
+      ],
+      "notes": "Verify conditions of administrative litigation or other applicable remedy separately. T11 is not this remedy. No automatic court action.",
+      "next": "FILE.GATE"
+    },
+    {
+      "id": "FILE.GATE",
+      "type": "decision",
+      "question": "Is this specific submission legally/procedurally ready and expressly authorised?",
+      "edges": {
+        "yes": "FILE.01",
+        "no": "WAIT.LEGAL",
+        "awaiting_approval": "WAIT.APPROVAL",
+        "unknown": "WAIT.LEGAL"
+      },
+      "evidence_required": [
+        "Appropriate selected submission and authority",
+        "Applicable conditions and deadline verified; no critical unresolved legal facts",
+        "Complete truthful document and evidence",
+        "Explicit approval for filing/complaint and any representation; URL or read permission is insufficient"
+      ]
+    },
+    {
+      "id": "FILE.BACKUP.READY",
+      "type": "decision",
+      "question": "Is a timely lawful backup actually available and authorised?",
+      "edges": {
+        "yes": "FILE.REPRESENTATIVE",
+        "no": "FILE.BLOCKED",
+        "unknown": "FILE.BLOCKED"
+      },
+      "evidence_required": [
+        "Confirmed representative availability, proper authorisation/form, competent recipient/channel, timing and user approval"
+      ]
+    },
+    {
+      "id": "FILE.REPRESENTATIVE",
+      "type": "action",
+      "title": "Perform the specifically approved lawful backup and obtain actual filing evidence",
+      "templates": [
+        "T14"
+      ],
+      "notes": "Do not claim representative filing until confirmed. Agree immediate delivery of filing proof and any received decision with exact timestamps.",
+      "next": "FILE.RECEIPT"
+    },
+    {
+      "id": "WAIT.EVIDENCE",
+      "type": "wait",
+      "title": "Record the exact missing trace fact, next source/contact and bounded next check",
+      "templates": [],
+      "notes": "Finish reachable evidence work; preserve a possible legal deadline independently. No repeated unchanged trace loop.",
+      "resume_on": [
+        {
+          "event": "New reply/document resolves the trace gap",
+          "next": "STATUS.01"
+        },
+        {
+          "event": "User returns after the recorded check with actual outcomes",
+          "next": "FOLLOWUP.02"
+        }
+      ]
+    },
+    {
+      "id": "WAIT.LEGAL",
+      "type": "wait",
+      "title": "Name missing legal/filing conditions and request specific guidance or urgent legal help",
+      "templates": [
+        "T08",
+        "T14"
+      ],
+      "notes": "Give a concrete source/contact/action and check time. Mark inability to guarantee a filing/deadline if critical facts remain unknown; do not wait past a running deadline.",
+      "resume_on": [
+        {
+          "event": "New document or procedural advice supplies missing conditions",
+          "next": "VERIFY.01"
+        },
+        {
+          "event": "Specific submission becomes verified and ready",
+          "next": "FILE.GATE"
+        }
+      ]
+    },
+    {
+      "id": "WAIT.APPROVAL",
+      "type": "wait",
+      "title": "Present exact proposed document, recipients/channel and available attachments for approval",
+      "templates": [],
+      "notes": "No send, filing or representation before corresponding approval. Refusal ends that action; continue manual assistance if desired.",
+      "resume_on": [
+        {
+          "event": "User grants approval for the specific complete action",
+          "next": "FILE.GATE"
+        }
+      ]
+    },
+    {
+      "id": "FILE.BLOCKED",
+      "type": "wait",
+      "title": "State unavailable lawful timely route and seek urgent real legal assistance",
+      "templates": [
+        "T14"
+      ],
+      "notes": "Do not guarantee timely filing, use ordinary mail as a fake fallback, or repeatedly retry without a changed route. Record reachable contact/action and deadline risk.",
+      "resume_on": [
+        {
+          "event": "A new lawful available route and conditions are confirmed",
+          "next": "FILE.GATE"
+        }
+      ]
+    },
+    {
+      "id": "FILE.WAIT",
+      "type": "wait",
+      "title": "Preserve attempted filing and bounded check outcome; await evidence or a verified correction route",
+      "templates": [],
+      "notes": "Report sent, received, registered and validly filed distinctly. Set a specific next action/check; short deadlines require urgent parallel backup, not passive monitoring.",
+      "resume_on": [
+        {
+          "event": "Reliable receipt/filing evidence arrives",
+          "next": "FILE.RECEIPT"
+        },
+        {
+          "event": "New verified lawful correction or backup is available",
+          "next": "FILE.GATE"
+        },
+        {
+          "event": "Decision or status reply arrives",
+          "next": "STATUS.01"
+        }
+      ]
+    }
+  ],
+  "concurrent_lanes": [
+    "applicable documented complaint handling",
+    "timely verified legal remedy",
+    "evidence tracing without delaying a running deadline"
+  ],
+  "unknown_policy": "Unknown evidence/legal facts stay unknown. Wait nodes preserve specific external re-entry intent; no internal retry loop manufactures progress.",
+  "source_scope": "Adapted from original 0.1 procedure; stable IDs retained where possible. Not an active election calendar or autonomous filing authorisation.",
+  "execution_policy": {
+    "external_actions": "Explicit scoped approval before sends, filings or representation. Draft permission is separate. Verify actual attachment availability.",
+    "reentry": "Wait nodes end the current pass. resume_on edges are taken only on a new stated event or user return, never internal polling.",
+    "duplicate_prevention": "Review authorised existing threads, sent follow-ups and drafts before creating or sending another.",
+    "monitoring": "No background monitoring unless supported, approved and actually configured.",
+    "calls": "Bounded attempts in verified office hours; never delay written follow-up or a possible legal deadline."
+  }
+}

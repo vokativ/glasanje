@@ -1,0 +1,128 @@
+{
+  "version": "0.2",
+  "catalogue_review_date": "2026-10-06",
+  "meaning_of_review_date": "Original packet resource retrieval/reference review date; adaptation did not re-fetch or certify current legal texts, contacts or election dates.",
+  "sources": [
+    {
+      "id": "MFA-DIRECTORY",
+      "title": "MFA mission directory",
+      "url": "https://www.mfa.gov.rs/predstavnistva/predstavnistva-srbije-u-svetu",
+      "scope": "Mission discovery; directory may require country-specific pages; retrieved page did not expose a full list.",
+      "classification": "discovery",
+      "reverify_at_use": true
+    },
+    {
+      "id": "MFA-CONTACT",
+      "title": "MFA consular contacts",
+      "url": "https://www.mfa.gov.rs/lat/ministarstvo/kontakt",
+      "scope": "Official contact and office-hours starting point; recheck selected service.",
+      "classification": "current_contact",
+      "reverify_at_use": true
+    },
+    {
+      "id": "MDULS-JBS",
+      "title": "MDULS voter-register overview",
+      "url": "https://mduls.gov.rs/registri/jedinstveni-biracki-spisak/?script=lat",
+      "scope": "Competence by register stage, published remedy baseline, legal/technical contacts.",
+      "classification": "procedure",
+      "reverify_at_use": true
+    },
+    {
+      "id": "MDULS-CONTACT",
+      "title": "MDULS organisational contacts",
+      "url": "https://mduls.gov.rs/kontakti/?script=lat",
+      "scope": "Registry-sector, secretariat and inspectorate contact seeds; reverify per case.",
+      "classification": "current_contact",
+      "reverify_at_use": true
+    },
+    {
+      "id": "INSPECTORATE",
+      "title": "Administrative Inspectorate",
+      "url": "https://mduls.gov.rs/o-ministarstvu/upravna-inspekcija/?script=lat",
+      "scope": "Inspection authority and contact; representation is distinct from an appeal.",
+      "classification": "procedure",
+      "reverify_at_use": true
+    },
+    {
+      "id": "MDULS-BYLAWS",
+      "title": "MDULS bylaws catalogue",
+      "url": "https://mduls.gov.rs/propisi/podzakonska-akta/",
+      "scope": "Locate current register instructions and amendments; catalogue versions need comparison.",
+      "classification": "discovery",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-BYLAWS",
+      "title": "RIK bylaws catalogue",
+      "url": "https://www.rik.parlament.gov.rs/tekst/70/podzakonska-akta.php",
+      "scope": "Locate applicable voting/register instructions and election-specific decisions; identify version.",
+      "classification": "discovery",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-LAWS",
+      "title": "RIK laws catalogue",
+      "url": "https://www.rik.parlament.gov.rs/tekst/61/zakoni.php",
+      "scope": "Election law, voter-register law, ZUP and administrative-disputes law; follow current documents/amendments.",
+      "classification": "discovery",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-HOME",
+      "title": "RIK current election information",
+      "url": "https://www.rik.parlament.gov.rs/",
+      "scope": "Identify current election timetable and overseas polling-place decision. Do not infer an election deadline from the homepage alone.",
+      "classification": "discovery",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-INSTRUCTIONS-OLD",
+      "title": "RIK-hosted register instructions PDF",
+      "url": "https://www.rik.parlament.gov.rs/extfile/sr/364/3.%20Uputstvo%20za%20sprovodjenje%20Zakona%20o%20JBS.pdf",
+      "scope": "Retrieved PDF cites 15/2012 and 88/2018. Historical reference; not established as current after later amendments.",
+      "classification": "historical",
+      "reverify_at_use": true
+    },
+    {
+      "id": "ZUP",
+      "title": "ZUP on an official municipal site",
+      "url": "https://www.ni.rs/wp-content/uploads/2026/06/1-Zakon-o-opstem-upravnom-postupku-1.pdf",
+      "scope": "General procedure, representation, receipt, filing and silence-appeal research. Check special election provisions and current amendments.",
+      "classification": "law_reference",
+      "reverify_at_use": true
+    },
+    {
+      "id": "MDULS-EMAIL-2020",
+      "title": "MDULS emergency-era scanned-submission notice",
+      "url": "https://mduls.gov.rs/obavestenja/obavestenje-u-vezi-sa-postom-koju-adresirate-na-ministarstvo-drzavne-uprave-i-lokalne-samouprave/?script=lat",
+      "scope": "Published 23 March 2020 for the state of emergency; cannot establish current general email-filing validity.",
+      "classification": "historical_scoped",
+      "reverify_at_use": true
+    },
+    {
+      "id": "COURT-REGISTRY",
+      "title": "Administrative Court registry",
+      "url": "https://www.up.sud.rs/lat/pisarnica-suda/",
+      "scope": "Receiving office, address, hours and published email. Email address alone does not establish signature/filing validity.",
+      "classification": "current_contact",
+      "reverify_at_use": true
+    },
+    {
+      "id": "JBS-LOOKUP",
+      "title": "Public voter-register lookup",
+      "url": "https://upit.birackispisak.gov.rs/",
+      "scope": "Read current identity-field requirements before suggesting passport/ID login capability. Do not claim an official lookup was performed without actually doing it.",
+      "classification": "service",
+      "reverify_at_use": true
+    },
+    {
+      "id": "OMBUDSMAN",
+      "title": "Protector of Citizens complaint resources",
+      "url": "https://www.ombudsman.rs/index.php/prituzba",
+      "scope": "Optional separate complaint route; check eligibility, prior remedies and current form. Not a substitute for a timely election remedy.",
+      "classification": "optional",
+      "reverify_at_use": true
+    }
+  ],
+  "source_scope": "General follow-up research catalogue; no active election calendar, individual case or verified case-specific routing. Original 0.1 reference review retained; reverify official content at use."
+}

@@ -5,6 +5,7 @@ import { useScript, type Script } from '../lib/script';
 import { CountryFlag } from './CountryFlag';
 import { ElectionNoticeLink } from './ElectionNoticeLink';
 import { MissionInquiryLink } from './MissionInquiryLink';
+import { FollowUpEntry } from './FollowUpEntry';
 /**
  * Public, searchable inventory of country/mission approval, using generated data
  * only. Each non-resident station already carries its resolved recipient; this
@@ -23,7 +24,7 @@ export interface ElectionEmailCoverage {
  * Coverage Invariant:
  * Uses positive `isElectionRecipientApproved` membership check (source-confirmed or operator-approved).
  * Yellow fallback stations (notice-no-email) MUST NOT be counted here to keep the public recipient
- * deployment gate invariant (exactly 166 usable recipients out of 221 total stations).
+ * deployment gate invariant. Counts come from the current dataset, not a fixed quota.
  */
 export const getElectionEmailCoverage = (
   countries: VotingCountry[] = COUNTRIES,
@@ -63,6 +64,7 @@ export const RegistrationEmailStatusPage: React.FC<RegistrationEmailStatusPagePr
 
   return (
     <main>
+      <FollowUpEntry compact />
       <section className="card" aria-labelledby="registration-email-status-title">
         <a href={script === 'latin' ? '/?script=latin' : '/'} className="btn btn-sm btn-navy" style={{ marginBottom: '1.25rem' }}>
           ← {isArchive ? t('Početna stranica') : t('Nazad na prijavu za glasanje')}

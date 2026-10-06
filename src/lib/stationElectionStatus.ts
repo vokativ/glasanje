@@ -5,7 +5,7 @@ export type ElectionContactApproval = PollingStation['electionContactApproval'];
 /**
  * Derived presentation status for a mission in the UI:
  * - 'approved': Recipient email is explicitly approved ('source-confirmed' or 'operator-approved').
- *               Counts toward public recipient coverage (166 stations).
+ *               Counts toward public recipient coverage, not acceptance of a person's request.
  * - 'notice-no-email': Mission published an official announcement for the current election, but
  *                      did not provide a dedicated election submission email. The general consular
  *                      mailbox is offered as an unguaranteed fallback attempt, with explicit warnings
