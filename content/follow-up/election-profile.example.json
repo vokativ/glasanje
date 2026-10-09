@@ -13,5 +13,5 @@
     "Europe/Belgrade"
   ],
   "note": "Unconfigured example only, not an active election or deadline. Populate from current official election notices, verify scope and amendments, and preserve source URL/publication/check dates for every operative deadline. Previous-case dates are intentionally absent.",
-  "content_version": "0.2"
+  "content_version": "0.3"
 }

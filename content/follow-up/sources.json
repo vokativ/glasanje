@@ -1,5 +1,5 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "catalogue_review_date": "2026-10-06",
   "meaning_of_review_date": "Original packet resource retrieval/reference review date; adaptation did not re-fetch or certify current legal texts, contacts or election dates.",
   "sources": [
@@ -76,6 +76,54 @@
       "reverify_at_use": true
     },
     {
+      "id": "RIK-2026-OVERSEAS-PLACES",
+      "title": "RIK 2026 overseas polling-place decision",
+      "url": "https://www.rik.parlament.gov.rs/extfile/sr/files/additionalDocuments/715/680/%D0%9E%D0%94%D0%9B%D0%A3%D0%9A%D0%90%20%D0%9E%20%D0%9E%D0%94%D0%A0%D0%95%D0%82%D0%98%D0%92%D0%90%D0%8A%D0%A3%20%D0%91%D0%98%D0%A0%D0%90%D0%A7%D0%9A%D0%98%D0%A5%20%D0%9C%D0%95%D0%A1%D0%A2%D0%90%20%D0%A3%20%D0%98%D0%9D%D0%9E%D0%A1%D0%A2%D0%A0%D0%90%D0%9D%D0%A1%D0%A2%D0%92%D0%A3.pdf",
+      "scope": "Published 2026-10-05, decision 013-319/26-3, for parliamentary elections on 2026-10-25. Public overseas polling places, not individual assignment or mission-coverage mapping. Read with RIK-2026-OVERSEAS-AMENDMENT and check later amendments; visually inspect scanned pages.",
+      "classification": "election_reference",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-2026-OVERSEAS-HOURS",
+      "title": "RIK 2026 overseas voting-hours decision",
+      "url": "https://www.rik.parlament.gov.rs/extfile/sr/files/additionalDocuments/715/683/%D0%9E%D0%94%D0%9B%D0%A3%D0%9A%D0%90%20%D0%9E%20%D0%9E%D0%94%D0%A0%D0%95%D0%82%D0%98%D0%92%D0%90%D0%8A%D0%A3%20%D0%92%D0%A0%D0%95%D0%9C%D0%95%D0%9D%D0%90%20%D0%9F%D0%9E%D0%A7%D0%95%D0%A2%D0%9A%D0%90%20%D0%98%20%D0%97%D0%90%D0%92%D0%A0%D0%A8%D0%95%D0%A2%D0%9A%D0%90%20%D0%93%D0%9B%D0%90%D0%A1%D0%90%D0%8A%D0%90%20%D0%A3%20%D0%98%D0%9D%D0%9E%D0%A1%D0%A2%D0%A0%D0%90%D0%9D%D0%A1%D0%A2%D0%92%D0%A3.pdf",
+      "scope": "Published 2026-10-05, decision 013-411/26, for parliamentary elections on 2026-10-25. Country table gives local start AND end dates/times, potentially crossing midnight; not a single-date or Belgrade-time assumption. Visually inspect scanned table and check later changes.",
+      "classification": "election_reference",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-2026-OVERSEAS-AMENDMENT",
+      "title": "RIK 2026 overseas polling-place amendment",
+      "url": "https://www.rik.parlament.gov.rs/extfile/sr/files/additionalDocuments/718/125/%D0%9E%D0%94%D0%9B%D0%A3%D0%9A%D0%90%20%D0%9E%20%D0%98%D0%97%D0%9C%D0%95%D0%9D%D0%90%D0%9C%D0%90%20%D0%9E%D0%94%D0%9B%D0%A3%D0%9A%D0%95%20%D0%9E%20%D0%9E%D0%94%D0%A0%D0%95%D0%82%D0%98%D0%92%D0%90%D0%8A%D0%A3%20%D0%91%D0%98%D0%A0%D0%90%D0%A7%D0%9A%D0%98%D0%A5%20%D0%9C%D0%95%D0%A1%D0%A2%D0%90%20%D0%A3%20%D0%98%D0%9D%D0%9E%D0%A1%D0%A2%D0%A0%D0%90%D0%9D%D0%A1%D0%A2%D0%92%D0%A3.pdf",
+      "scope": "Published 2026-10-07, decision 013-319/26-7, for parliamentary elections on 2026-10-25. Amendments to RIK-2026-OVERSEAS-PLACES, not a standalone complete list or individual assignment. Read both together, visually inspect scanned pages and check later amendments.",
+      "classification": "election_reference",
+      "reverify_at_use": true
+    },
+    {
+      "id": "MDULS-INSTRUCTIONS-CURRENT",
+      "title": "MDULS current voter-register instructions",
+      "url": "https://mduls.gov.rs/wp-content/uploads/Uputstvo.pdf?script=lat",
+      "scope": "Point 8: competent municipal/city administration issues a separate polling-place decision and delivers it through the diplomatic-consular mission to inform the voter. Distinct from the voting invitation. Check current instruction and amendments at use.",
+      "classification": "procedure",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-MP-LAW",
+      "title": "Law on the Election of Members of Parliament",
+      "url": "https://www.rik.parlament.gov.rs/extfile/sr/41916/Zakon%20o%20izboru%20narodnih%20poslanika.pdf",
+      "scope": "Parliamentary elections, articles 85–86: voting invitation delivered no later than five days before voting; foreign voter invitation delivered through the diplomatic-consular mission. This is not the polling-place decision delivery deadline. Read with RIK-MP-LAW-AMENDMENT-2026 and check later amendments.",
+      "classification": "law_reference",
+      "reverify_at_use": true
+    },
+    {
+      "id": "RIK-MP-LAW-AMENDMENT-2026",
+      "title": "2026 amendments to the Law on the Election of Members of Parliament",
+      "url": "https://www.rik.parlament.gov.rs/extfile/sr/679013/ZAKON%20O%20IZMENAMA%20I%20DOPUNAMA%20ZAKONA%20O%20IZBORU%20NARODNIH%20POSLANIKA.pdf",
+      "scope": "2026 amendment to RIK-MP-LAW; articles 85–86 are unchanged. Read with the base law and check later amendments; no extension of parliamentary invitation rules to other elections without checking their applicable law.",
+      "classification": "law_reference",
+      "reverify_at_use": true
+    },
+    {
       "id": "RIK-INSTRUCTIONS-OLD",
       "title": "RIK-hosted register instructions PDF",
       "url": "https://www.rik.parlament.gov.rs/extfile/sr/364/3.%20Uputstvo%20za%20sprovodjenje%20Zakona%20o%20JBS.pdf",
@@ -124,5 +172,5 @@
       "reverify_at_use": true
     }
   ],
-  "source_scope": "General follow-up research catalogue; no active election calendar, individual case or verified case-specific routing. Original 0.1 reference review retained; reverify official content at use."
+  "source_scope": "General follow-up research catalogue with labelled official references for parliamentary elections on 2026-10-25; not an active election calendar, polling-place directory, individual case or verified case-specific routing. Original 0.1 reference review date and meaning retained; added references do not establish a fresh global legal review. Reverify official content at use."
 }
